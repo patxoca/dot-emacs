@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: meta-classe
+# key: class
+# --
+class $1${2:MetaClass}(type):
+    """
+    """
+
+    def __new__(cls, name, bases, attrs):
+        $0
+        return type.__new__(cls, name, bases, attrs)

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# -*- coding: utf-8 -*-
+# name: define test method
+# contributor: Alexis Roda
+# key: deftm
+# --
+def test_${1:name}(self):
+    $0

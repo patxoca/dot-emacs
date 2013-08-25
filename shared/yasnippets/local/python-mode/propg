@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+#name : propietat (getter)
+#key: prop
+# --
+@property
+def ${1:foo}(self):
+    """
+    """
+    return self._$1
+$0

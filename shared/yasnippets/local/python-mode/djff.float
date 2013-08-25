@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form float field
+# group: django
+# key: djff
+# --
+${1:name} = forms.FloatField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    initial="$2:None",
+    required=${3:$$(yas/choose-value '("False" "True"))},
+    min_value=${4:1},
+    max_value=${5:100},
+    widget=widgets.${6:TextInput$$(yas/choose-value django-widget-types)}(
+        attrs={
+            "style"    : "width: 8em",
+            "dojoType" : "dijit.form.NumberTextBox",
+            },
+        ),
+    help_text=_(u"$7"),
+    )
+$0

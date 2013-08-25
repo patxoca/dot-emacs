@@ -1,0 +1,11 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: bloc de codi
+# group: sphinx
+# key: cod
+# expand-env: ((yas/indent-line 'fixed))
+# --
+.. code-block:: ${1:$$(yas/choose-value '("python" "javascript" "html" "css" "cheetah" "bash"))}
+   :linenos:
+
+   $0

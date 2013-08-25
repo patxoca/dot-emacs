@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django block tag
+# group: django
+# key: djblock
+# --
+{% block $1 %}
+  {{ block.super }}
+  $0
+{% endblock $1 %}

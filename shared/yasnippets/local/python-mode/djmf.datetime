@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Model DateTimeField
+# group: django
+# key: djmf
+# --
+${1:name} = models.DateTimeField(
+    verbose_name=_(u"$1"),
+    auto_now=${False},
+    auto_now_add=${False},
+    null=${True},
+    blank=${True},
+    help_text=_(u"${doc}"),
+    )
+$0

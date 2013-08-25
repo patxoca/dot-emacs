@@ -1,0 +1,363 @@
+;;; =====================================================================
+;;; Fichero de configuracion de emacs
+;;; Personalizacion del c-mode y relacionados
+;;;
+;;; $Id$
+;;;
+
+;;; ======================================================================
+;;;
+;;;                               c-mode
+;;;
+;;; define la tecla ";" como electrica
+;;; f9        : compila
+;;; f7        : siguiente error
+;;; mayus-f7  : error anterior
+;;; H-h       : ejecuta c-hello-h
+;;; H-c       : ejecuta c-hello-c
+;;; H-f       : ejecuta c-hello-function
+;;;
+;;; fontifica las cadenas de la forma @@[A-Z ]+:
+
+(defconst c-gpl (concat	" * This program is free software; you can redistribute it and/or\n"
+			" * modify it under the terms of the GNU General Public License\n"
+			" * as published by the Free Software Foundation; either version 2\n"
+			" * of the License, or (at your option) any later version.\n"
+			" *\n"
+			" * This program is distributed in the hope that it will be useful,\n"
+			" * but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+			" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+			" * GNU General Public License for more details.\n"
+			" *\n"
+			" * You should have received a copy of the GNU General Public License along\n"
+			" * with this program; if not, write to the Free Software Foundation, Inc.,\n"
+			" * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.\n"
+			))
+
+;;; normaliza un nombre de fichero conviertiendo los caracteres
+;;; no alfanumericos, _ o . a _
+
+(defun c-norm-filename (id)
+  (let ((result id))
+    (while (string-match "[^A-Za-z0-9_.]" result)
+      (setq result (replace-match "_" nil nil result nil)))
+      result))
+
+(defun c-extra-norm-filename (id)
+  (let ((result id))
+    (while (string-match "[^A-Za-z0-9_]" result)
+      (setq result (replace-match "_" nil nil result nil)))
+      result))
+
+;;; busca el archivo PROJECT en el directorio actual y el
+;;; superior. Si existe devuelve la primera linea del
+;;; archivo, sino devuelve una cadena generica.
+
+(defun c-project-desc ()
+  (let ((project nil)
+	(result nil))
+    (if (file-exists-p "../PROJECT")
+		(setq project "../PROJECT"))
+    (if (file-exists-p "PROJECT")
+		(setq project "PROJECT"))
+    (if (not (null project))
+		(let ((buffer (find-file project)))
+		  (setq result (thing-at-point 'line))
+		  (if (equal (substring result -1 nil) "\n")
+			  (setq result (substring result 0 -1)))
+		  (kill-buffer buffer))
+      (setq result "foobar - programa per frobnicar"))
+    result))
+
+;;; Las funciones c-hello-xxxx generan comentarios estandar
+;;; para algunos elementos de un programa C
+
+;;; Inserta una cabecera estandar en los archivos .h compuesta por
+;;; la licencia GPL seguido por un #ifdef __ARCHIVO_H__ ...
+(defun c-hello-h ()
+  "Inserta una cabecera estandar en los archivos .h"
+  (interactive)
+  (let ((BUFFER-NAME (c-norm-filename (upcase (buffer-name)))))
+    (if (or (string-match "^.*\.H$" BUFFER-NAME)
+	    (string-match "^.*\.HH$" BUFFER-NAME))
+	(let ((save-point (point-marker)))
+	  (setq BUFFER-NAME (concat "__" (c-extra-norm-filename BUFFER-NAME) "__"))
+	  (goto-char (point-min))
+	  (insert "/* " (c-project-desc) "\n\n"
+			  " * Copyright (C) " (substring (current-time-string) 20 24) " Alexis Roda Villalonga (arv@si.urv.es)\n"
+			  " *\n"
+			  c-gpl
+			  " */\n"
+			  "\n"
+			  "/* $Id" ":$ */\n" ;;; esto es necesario para despistar al RCS
+			  "\n\n"
+			  "#ifndef " BUFFER-NAME "\n"
+			  "#define " BUFFER-NAME "\n\n\n\n")
+	  (goto-char (point-max))
+	  (insert "\n#endif /* " BUFFER-NAME " */\n")
+	  (goto-char (marker-position save-point))
+	  (set-marker save-point nil)))))
+
+;;; Inserta una cabecera estandar en los archivos .c compuesta por
+;;; la licencia GPL
+(defun c-hello-c ()
+  "Inserta una cabecera estandar en los archivos .c"
+  (interactive)
+  (progn
+	;;    (if (or (string-match "^.*\.C$" (c-norm-filename (upcase (buffer-name))))
+	;;		(string-match "^.*\.CC$" (c-norm-filename (upcase (buffer-name)))))
+		(let ((save-point (point-marker)))
+		  (goto-char (point-min))
+		  (insert "/* " (c-project-desc) "\n"
+				  "\n"
+				  " * Copyright (C) " (substring (current-time-string) 20 24) " Alexis Roda Villalonga (arv@si.urv.es)\n"
+				  " *\n"
+				  c-gpl
+				  " */\n"
+				  "\n"
+				  "/* $Id" ":$ */\n" ;;; esto es necesario para despistar al RCS
+				  "\n\n")
+		  (goto-char (marker-position save-point))
+		  (set-marker save-point nil))))
+
+(defun c-hello-section (text)
+  "Inserta un comentario para separar secciones del programa"
+  (interactive "MComentari: ")
+  (progn
+	(insert "/*********************************************************************************\n")
+	(insert " *\n")
+	(insert " *\n")
+	(insert " * ")
+	(let ((long (- 40 (/ (length text) 2))))
+	  (while (> long 0)
+		(insert " ")
+		(setq long (- long 1))
+		)
+	  )
+	(insert text) (insert "\n")
+	(insert " *\n")
+	(insert " *\n")
+	(insert " *********************************************************************************/\n")
+	(insert "\n\n")
+	)
+)
+
+;;; Estas funciones se utilizan para generar un comentario de una
+;;; funcion. El punto de insercion debe estar sobre la linea que
+;;; contiene el prototipo/definicion de la funcion.
+;;; Limitaciones:
+;;; - el prototipo/definicion de la funcion debe estar en una unica
+;;;   linea.
+;;; - el reconocimiento del tipo de los argumentos es muy rudimentario
+;;;   y puede fallar en algunos casos.
+
+(defun c-hello-function-aux (proto)
+  (if (string-match "^\\(.*\\)[ \n\t]+\\(\\*?[a-zA-Z_][a-zA-Z0-9_]+\\)[ \t\n]*(\\(.*\\));?$" proto)
+      (let ((r-type (string-trim (substring proto
+					    (match-beginning 1)
+					    (match-end 1))))
+	    (f-name (string-trim (substring proto
+					    (match-beginning 2)
+					    (match-end 2))))
+	    (arg-list (concat (string-trim (substring proto
+						      (match-beginning 3)
+						      (match-end 3)))
+			      ","))
+	    (class "")
+	    (member ""))
+	(beginning-of-line)
+	(if (string-match "^\\([a-zA-Z0-9]+\\)_\\([a-zA-Z0-9]+\\)_\\(.*\\)$" f-name)
+	    (progn
+	      (setq class (concat (capitalize (substring f-name
+							 (match-beginning 1)
+							 (match-end 1)))
+				  (capitalize (substring f-name
+							 (match-beginning 2)
+							 (match-end 2)))))
+	      (setq member (substring f-name
+				      (match-beginning 3)
+				      (match-end 3)))))
+	(if (string-match "^\\*" f-name)
+	    (progn
+	      (setq r-type (concat r-type " *"))
+	      (setq f-name (substring f-name 1))))
+	(insert "/*!\n"
+		" * @fname  " f-name "\n"
+		" * @class  " class "\n"
+		" * @member " member "\n"
+		" * @desc   \n")
+
+;;;     Procesa la lista de argumentos
+	(let ((end 0)
+	      (arg-type "")
+	      (arg-name ""))
+	  (while (string-match "\\([^,]+\\) +\\(\\*?[a-zA-Z0-9_]+\\)," arg-list end)
+	    (setq end (match-end 0))
+	    (setq arg-type (string-trim (substring arg-list (match-beginning 1) (match-end 1))))
+	    (setq arg-name (string-trim (substring arg-list (match-beginning 2) (match-end 2))))
+	    (if (string-match "^\\*" arg-name)
+		(progn
+		  (setq arg-type (concat arg-type " *"))
+		  (setq arg-name (substring arg-name 1))))
+	    (insert " *   @arg  (" arg-type ")" arg-name "\n")))
+
+;;;     Finaliza el comentario
+	(insert " * @return {" r-type "}\n"
+		" */\n")))
+  t)
+
+(defun c-hello-function ()
+   "Inserta un comentario estandar ante una funcion."
+   (interactive)
+   (c-hello-function-aux (string-get-current-line)))
+
+
+
+;;; Estas funciones crean un menu de raton (asignado en el hook
+;;; a H-down-mouse-1) con algunas construcciones C/C++ predefinidas
+;;; y algunas otras pijadas.
+
+;;; Realiza el trabajo sucio insertando el texto en el buffer.
+;;; Si nl es t lo inserta en una nueva linea.
+(defun cmc-insert (string nl)
+  (let ((start 0))
+    ;; si estamos al final de una linea insertamos un final de linea
+    (if (and nl (not (string-match "^[ \t\n]*$" (string-get-current-line))))
+	(progn
+	  (end-of-line)
+	  (newline))
+      ;; coloca la marca al inicio/final de la linea y guarda la posicion
+      (beginning-of-line))
+    (setq start (point))
+    (end-of-line)
+    ;; inserta la construccion
+    (insert string)
+    ;; indenta la region
+    (indent-region start (point) nil)
+    ))
+
+;;; Insertan el texto y despues recolocan el punto de insercion
+(defun cmc-insert-if ()
+  ""
+  (interactive)
+  (cmc-insert "if () {\n\n}" t)
+  (forward-line -2)
+  (end-of-line)
+  (backward-char 3))
+
+(defun cmc-insert-else ()
+  ""
+  (interactive)
+  (cmc-insert " else {\n\n}" nil)
+  (forward-line -1)
+  (end-of-line))
+
+(defun cmc-insert-else-if ()
+  ""
+  (interactive)
+  (cmc-insert " else if () {\n\n}" nil)
+  (forward-line -2)
+  (end-of-line)
+  (backward-char 3))
+
+(defun cmc-insert-case ()
+  ""
+  (interactive)
+  (cmc-insert "switch () {\ndefault:\n}" t)
+  (forward-line -2)
+  (end-of-line)
+  (backward-char 3))
+
+(defun cmc-insert-for ()
+  ""
+  (interactive)
+  (cmc-insert "for (;;) {\n\n}" t)
+  (forward-line -2)
+  (end-of-line)
+  (backward-char 5))
+
+(defun cmc-insert-while ()
+  (interactive)
+  (cmc-insert "while () {\n\n}" t)
+  (forward-line -2)
+  (end-of-line)
+  (backward-char 3))
+
+(defun cmc-insert-struct ()
+  (interactive)
+  (cmc-insert "typedef struct {\n\n};" t)
+  (forward-line -1)
+  (end-of-line))
+
+;;; Funcion encargada de construir el menu
+(defun c-menu-construct ()
+  "Crea un menu con construcciones C/C++"
+
+  (defvar my-cmodemap (make-sparse-keymap "Extension del C mode"))
+  (fset 'c-constructs my-cmodemap)
+
+  (define-key my-cmodemap [hello-function] '("Comentar funciŽón" . c-hello-function))
+  (define-key my-cmodemap [hello-h]        '("Comentar fichero .h" . c-hello-h))
+  (define-key my-cmodemap [nothing]        '("--" . separator-eval))
+  (define-key my-cmodemap [struct-block]   '("typedef struct { };" . cmc-insert-struct))
+  (define-key my-cmodemap [while-block]    '("while ( ) { }" . cmc-insert-while))
+  (define-key my-cmodemap [for-block]      '("for ( ; ; ) { }" . cmc-insert-for))
+  (define-key my-cmodemap [case-block]     '("switch ( ) { }" . cmc-insert-case))
+  (define-key my-cmodemap [else-if-block]  '("else if () { }" . cmc-insert-else-if))
+  (define-key my-cmodemap [else-block]     '("else { }" . cmc-insert-else))
+  (define-key my-cmodemap [if-block]       '("if ( ) { }" . cmc-insert-if)))
+
+
+;;; ===================================================================== ;;;
+;;;                                                                       ;;;
+;;;                                 H O O K                               ;;;
+;;;                                                                       ;;;
+;;; ===================================================================== ;;;
+
+(add-hook 'c-mode-hook
+	  '(lambda ()
+	     ;(load "gnome-doc.el")
+	     (local-set-key ";"       'c-electric-colon)
+	     (setq c-basic-offset 8)
+	     (define-key c-mode-map '[f9]    'compile)
+	     (define-key c-mode-map '[f7]    'next-error)
+	     (define-key c-mode-map '[S-f7]  'previous-error)
+	     (define-key c-mode-map '[(hyper h)]   'c-hello-h)
+	     (define-key c-mode-map '[(hyper c)]   'c-hello-c)
+	     (define-key c-mode-map '[(hyper f)]   'c-hello-function)
+	     ;;; fontifica las cadenas de la forma @@[A-Z ]+: util
+	     ;;; para resaltar observaciones
+	     (font-lock-add-keywords
+	      'c-mode
+	      '(("@@\\([A-Z ]+\\):" 1 font-lock-warning-face prepend)))
+	     (set-face-foreground 'font-lock-warning-face "black")
+	     (set-face-background 'font-lock-warning-face "orange")
+; 	     (set-face-foreground 'font-lock-variable-name-face "gray50")
+; 	     (set-face-foreground 'font-lock-type-face "gray50")
+; 	     (set-face-foreground 'font-lock-function-name-face "gray50")
+	     (turn-on-font-lock)
+))
+
+(add-hook 'c++-mode-hook
+	  '(lambda ()
+	     (setq c-basic-offset 8)
+	     (define-key c++-mode-map '[f9]    'compile)
+	     (define-key c++-mode-map '[f7]    'next-error)
+	     (define-key c++-mode-map '[S-f7]  'previous-error)
+	     (define-key c++-mode-map '[(hyper h)]   'c-hello-h)
+	     (define-key c++-mode-map '[(hyper c)]   'c-hello-c)
+	     (define-key c++-mode-map '[(hyper f)]   'c-hello-function)
+	     ;;; fontifica las cadenas de la forma @@[A-Z ]+: util
+	     ;;; para resaltar observaciones
+	     (font-lock-add-keywords
+	      'c++-mode
+	      '(("@@\\([A-Z ]+\\):" 1 font-lock-warning-face prepend)))
+	     (set-face-foreground 'font-lock-warning-face "black")
+	     (set-face-background 'font-lock-warning-face "orange")
+; 	     (set-face-foreground 'font-lock-variable-name-face "gray50")
+; 	     (set-face-foreground 'font-lock-type-face "gray50")
+; 	     (set-face-foreground 'font-lock-function-name-face "gray50")
+	     (turn-on-font-lock)
+	     (local-set-key ";" 'c-electric-colon)
+))
+

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# -*- coding: utf-8 -*-
+# name: defineix un breakpoint
+# contributor: Alexis Roda
+# key: pdb
+# --
+import pdb
+pdb.set_trace()
+$0

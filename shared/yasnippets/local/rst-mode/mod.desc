@@ -1,0 +1,12 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: .. module::
+# group: sphinx
+# key: mod
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+.. module:: $1
+   :platform: ${2:Mac, Windows, Unix}
+   :synopsis: $3
+
+   $0

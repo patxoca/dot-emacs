@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form choice field
+# group: django
+# key: djff
+# --
+${1:name} = forms.ChoiceField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    initial="$2",
+    choices=(("${3:key}", "${4:value}"), ),
+    required=${5:$$(yas/choose-value '("False" "True"))},
+    widget=widgets.${6:Select$$(yas/choose-value django-widget-types)},
+    help_text=_(u"$7"),
+    )
+$0

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form date field
+# group: django
+# key: djff
+# --
+${1:name} = forms.DateField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    input_formats=("%Y-%m-%d", ),
+    required=${8:$$(yas/choose-value '("False" "True"))},
+    help_text=_(u"${10:Seleccioneu una data del calendari o introduïu-la en format DD/MM/AAAA}"),
+    widget=widgets.DateInput(
+        attrs={
+            "style" : "width: 8em",
+            "dojoType" : "dijit.form.DateTextBox",
+            },
+        ),
+    )
+$0

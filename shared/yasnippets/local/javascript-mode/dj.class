@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# -*- coding: utf-8 -*-
+# name: dojo class
+# key: class
+# --
+dojo.provide("${1:namespace}.${2:package}");
+
+// dojo.require("other.package");
+${3:$(if (string= "null" text)
+       ""
+      (concat "dojo.require(\"" (downcase text) "\");"))}
+
+dojo.declare("$1.${2:$(capitalize text)}", ${3:baseclass},
+    {
+        constructor: function () {
+        },
+    });

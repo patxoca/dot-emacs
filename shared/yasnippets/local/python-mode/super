@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: super
+# key: super
+# --
+super(${1:`(or (arv-py-info-enclosing-class-name) "NoClassFound")`}, self).${2:`(or (arv-py-info-enclosing-def-name) "no_method_found")`}($0)

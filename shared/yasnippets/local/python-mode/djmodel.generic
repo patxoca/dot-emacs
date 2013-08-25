@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Model generic
+# group: django
+# key: djmodel
+# expand-env: ((yas/indent-line 'fixed))
+# --
+
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+
+class ${1:name}(${2:models.Model}):
+    """$1
+    """
+
+    $0
+
+    def __unicode__(self):
+        return u""
+
+    class Meta:
+        app_label = "${3:applabel}"
+        db_table = "${4:prefix_}${1:$(arv-uncamelize text "_")}"
+        permissions = (("${1:$(arv-substring (concat "read_" (downcase text)) 0 50)}", "Can read ${1:$(arv-uncamelize text " ")}"), )
+        verbose_name = "${1:$(arv-uncamelize text " ")}"
+        verbose_name_plural = "${1:$(arv-uncamelize text " ")}"
+

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form model choice field
+# group: django
+# key: djff
+# --
+${1:name} = forms.ModelChoiceField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    queryset=${2:app_models.${3:model}.objects.${4:all()}${5:.order_by("${6:nom}")}},
+    empty_label="",
+    required=${7:$$(yas/choose-value '("False" "True"))},
+    help_text=_(u"$8"),
+    widget=widgets.${9:Select$$(yas/choose-value django-widget-types)}(
+        attrs={
+            "style"    : "width: 26em",
+            "dojoType" : "dijit.form.FilteringSelect",
+            }
+        ),
+    )
+$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name : zope interface
+# key: zif
+# --
+class ${1:IInterface}(${2:Interface}):
+    """$3
+    """
+
+    $0

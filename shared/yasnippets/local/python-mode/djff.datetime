@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form datetime field
+# group: django
+# key: djff
+# --
+${1:name} = forms.DateTimeField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    initial=${2:datetime.datetime(${3:year}, ${4:month}, ${5:day})},
+    input_formats=("${6:%d/%m/%Y}", "${7:%d/%m/%y}"),
+    required=${8:$$(yas/choose-value '("False" "True"))},
+    widget=widgets.${9:DateTimeInput$$(yas/choose-value django-widget-types)},
+    help_text=_(u"$10"),
+    )
+$0

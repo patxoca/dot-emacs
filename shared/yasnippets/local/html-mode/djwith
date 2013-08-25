@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django with tag
+# group: django
+# key: djwith
+# --
+{% with $1=$2 %}
+  $0
+{% endwith %}

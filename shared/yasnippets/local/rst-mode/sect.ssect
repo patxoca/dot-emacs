@@ -1,0 +1,10 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: sub secció
+# group: sphinx
+# key: sect
+# --
+${1:Subsection title}
+${1:$(make-string (string-width text) ?\-)}
+
+$0

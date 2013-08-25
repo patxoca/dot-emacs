@@ -1,0 +1,34 @@
+Al activar el tema 'solarize' s'han esborrat algunes personalitzacions
+de 'faces':
+
+#+BEGIN_EXAMPLE
+'(default ((t (:inherit nil
+               :stipple nil
+               :background "black"
+               :foreground "white"
+               :inverse-video nil
+               :box nil
+               :strike-through nil
+               :overline nil
+               :underline nil
+               :slant normal
+               :weight normal
+               :height 105
+               :width normal
+               :foundry "unknown"
+               :family "DejaVu Sans Mono"))))
+'(compilation-error ((t (:inherit font-lock-warning-face :underline nil :weight normal))))
+'(cursor ((t (:background "orange"))))
+'(diff-added ((t (:inherit diff-changed-face :foreground "green"))))
+'(diff-changed ((t nil)))
+'(diff-file-header ((t (:background "blue" :weight bold))))
+'(diff-header ((((class color) (background dark)) (:background "blue"))))
+'(diff-removed ((t (:inherit diff-changed-face :foreground "red"))))
+'(font-lock-emphasized-face ((t (:foreground "yellow"))))
+'(font-lock-other-emphasized-face ((t (:foreground "red"))))
+'(highlight ((t (:background "dimgray" :foreground "white"))))
+'(mode-line ((t (:background "brown" :foreground "white" :box nil))))
+'(region ((t (:foreground "white" :background "darkcyan"))))
+'(rst-level-1-face ((t (:background "unspecified"))) t)
+#+END_EXAMPLE
+

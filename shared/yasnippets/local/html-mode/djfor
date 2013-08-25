@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django for tag
+# group: django
+# key: djfor
+# --
+{% for ${1:item} in ${2:list} %}
+  $0
+{% endfor %}

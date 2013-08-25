@@ -1,0 +1,7 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: referència creuada
+# group: sphinx
+# key: xref
+# --
+:${1:$$(yas/choose-value '("attr" "class" "const" "data" "envvar" "exc" "func" "meth" "mod" "obj" "option"))}:\`$2\` $0

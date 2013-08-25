@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# name: django Form char field
+# group: django
+# key: djff
+# --
+${1:name} = forms.CharField(
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    required=${3:$$(yas/choose-value '("False" "True"))},
+    min_length=${4:1},
+    max_length=${5:100},
+    help_text=_(u"$6"),
+    widget=widgets.${7:TextInput$$(yas/choose-value django-widget-types)}(
+        attrs={
+            "style"    : "width: 10em",
+            "dojoType" : "dijit.form.TextBox",
+            }
+        ),
+    )
+$0
