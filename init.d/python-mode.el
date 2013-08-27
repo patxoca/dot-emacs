@@ -41,6 +41,8 @@
               ;; nose
               (set (make-local-variable 'compile-command) "nosetests")
 
+              ;; company-mode (complete anything)
+              (company-mode t)
               ;; local keymap
               (local-set-key '[(super tab)] 'python-indent-shift-right)
               (local-set-key '[(super iso-lefttab)] 'python-indent-shift-left)
