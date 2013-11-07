@@ -34,7 +34,7 @@
  '(custom-safe-themes (quote ("e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(default-frame-alist (quote ((menu-bar-lines . 1) (tool-bar-lines . 0))))
  '(deft-auto-save-interval 10.0)
- '(deft-extension ".org")
+ '(deft-extension "org")
  '(deft-text-mode (quote org-mode))
  '(display-time-mode t nil (time))
  '(ecb-options-version "2.27")

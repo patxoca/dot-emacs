@@ -10,6 +10,9 @@
 
 ;;; Code:
 
+(require 'sphinx-doc)
+
+
 (defun arv-rst-underline-previous-line (caracter)
   (interactive "cCaracter: ")
   (let (l)
@@ -39,13 +42,14 @@
             ;; customize-face (suposo) te problemes quan la llista
             ;; d'atributs esta buida, sembla que ho interpreta com "no
             ;; canviar res" enlloc de "borrar tots els atributs"
-            (set-face-attribute 'rst-level-1-face nil :background "unspecified")
-            (set-face-attribute 'rst-level-2-face nil :background "unspecified")
-            (set-face-attribute 'rst-level-3-face nil :background "unspecified")
-            (set-face-attribute 'rst-level-4-face nil :background "unspecified")
-            (set-face-attribute 'rst-level-5-face nil :background "unspecified")
-            (set-face-attribute 'rst-level-6-face nil :background "unspecified")
+            (set-face-attribute 'rst-level-1 nil :background "unspecified")
+            (set-face-attribute 'rst-level-2 nil :background "unspecified")
+            (set-face-attribute 'rst-level-3 nil :background "unspecified")
+            (set-face-attribute 'rst-level-4 nil :background "unspecified")
+            (set-face-attribute 'rst-level-5 nil :background "unspecified")
+            (set-face-attribute 'rst-level-6 nil :background "unspecified")
             (local-set-key '[(control =)] 'arv-rst-underline-previous-line)
+            (local-set-key '[f9] 'arv-sphinx-build-latexpdf)
             ))
 
 ;;; rst-mode.el ends here
