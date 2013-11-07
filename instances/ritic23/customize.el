@@ -1,27 +1,15 @@
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
- '(cursor ((t (:background "orange"))))
- '(diff-added ((t (:inherit diff-changed-face :foreground "green"))))
- '(diff-changed ((t nil)))
- '(diff-file-header ((t (:background "blue" :weight bold))))
- '(diff-header ((((class color) (background dark)) (:background "blue"))))
- '(diff-removed ((t (:inherit diff-changed-face :foreground "red"))))
- '(font-lock-emphasized-face ((t (:foreground "yellow"))))
- '(font-lock-other-emphasized-face ((t (:foreground "red"))))
- '(highlight ((t (:background "dimgray" :foreground "white"))))
- '(mode-line ((t (:background "brown" :foreground "white" :box nil))))
- '(region ((t (:foreground "white" :background "darkcyan"))))
- '(rst-level-1-face ((t (:background "unspecified")))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(TeX-auto-save t)
  '(TeX-parse-self t)
  '(TeX-printer-list (quote (("Local" "dvips %s -o; gv %s.ps" "lpq") ("lw") ("ps"))))
@@ -32,7 +20,7 @@
  '(cperl-hairy t)
  '(cperl-indent-level 8)
  '(current-language-environment "UTF-8")
- '(default-frame-alist (quote ((foreground-color . "white") (background-color . "black") (menu-bar-lines . 0) (font . "monospace") (tool-bar-lines . 0))))
+ '(custom-enabled-themes (quote (adwaita)))
  '(display-time-mode t nil (time))
  '(ecb-options-version "2.27")
  '(ecb-source-path (quote ("~/zope/develop")))
@@ -58,7 +46,7 @@
  '(mouse-wheel-scroll-amount (quote (1 5)))
  '(mouse-yank-at-point t)
  '(next-line-add-newlines nil)
- '(partial-completion-mode t nil (complete))
+ '(partial-completion-mode t)
  '(pr-ps-printer-alist (quote ((default "lp" nil "-P" "HPLaserjet3005"))))
  '(printer-name "hp1220c")
  '(ps-n-up-printing 1)
@@ -73,7 +61,7 @@
  '(scroll-bar-mode nil)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
- '(show-trailing-whitespace nil)
+ '(show-trailing-whitespace t)
  '(srctool-todo-ignore-directories (quote (".emacs~" "CVS" "RCS" ".svn" "epydoc")))
  '(srctool-todo-labels (quote ("@TODO:" "@FIXME:" "@NOTE:")))
  '(svn-status-verbose nil)
