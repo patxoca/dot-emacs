@@ -16,6 +16,7 @@
 (require 'python)
 (require 'hippie-exp)
 (require 'he-utils)
+(require 'highlight-indentation)
 
 (require 'arv-py)
 
@@ -43,6 +44,8 @@
 
               ;; company-mode (complete anything)
               (company-mode t)
+              ;; ressalta els nivell d'indentacio
+              (highlight-indentation)
               ;; local keymap
               (local-set-key '[(super tab)] 'python-indent-shift-right)
               (local-set-key '[(super iso-lefttab)] 'python-indent-shift-left)

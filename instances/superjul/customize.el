@@ -6,6 +6,7 @@
  '(default ((t (:inherit default :height 113))))
  '(compilation-error ((t (:inherit font-lock-warning-face :underline nil :weight normal))))
  '(highlight ((t nil)))
+ '(highlight-indent-face ((t (:background "gray87"))))
  '(zencoding-preview-input ((t (:box 1)))))
 
 (custom-set-variables
