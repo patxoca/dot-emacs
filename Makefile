@@ -27,7 +27,10 @@ all: $(ELCS)
 	fi )
 
 clean:
-	@rm -f $(ELCS) $(TILDES) $(LOGS) TAGS
+	@rm -f $(TILDES) $(LOGS)
+
+distclean: clean
+	@rm -f $(ELCS) TAGS
 
 TAGS: $(ELS)
 	@etags $(ELS)
