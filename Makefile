@@ -5,7 +5,8 @@ DIRS=. my-lisp site-lisp init.d
 
 EMACS=/opt/emacs/24.3/bin/emacs
 EMACSLIB=$(HOME)/emacslib
-LISPDIRS=-L $(EMACSLIB)/site-lisp -L $(EMACSLIB)/my-lisp
+PKGS=$(shell find $(HOME)/.emacs.d/elpa -name \*-pkg.el -exec dirname '{}' ';')
+LISPDIRS=-L $(EMACSLIB)/site-lisp -L $(EMACSLIB)/site-lisp/eproject -L $(EMACSLIB)/my-lisp $(foreach dir, $(PKGS), -L $(dir))
 ELS = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.el))
 ELCS = $(foreach dir, $(DIRS), $(patsubst %.el,%.elc,$(wildcard $(dir)/*.el)))
 TILDES = $(foreach dir, $(DIRS), $(dir)/*~)
