@@ -8,10 +8,12 @@ dojo.provide("${1:namespace}.${2:package}");
 // dojo.require("other.package");
 ${3:$(if (string= "null" text)
        ""
-      (concat "dojo.require(\"" (downcase text) "\");"))}
+      (format "dojo.require(\\\"%s\\\");" (downcase text)))}
 
-dojo.declare("$1.${2:$(capitalize text)}", ${3:baseclass},
+dojo.declare(
+    "$1.${2:$(capitalize text)}", ${3:baseclass},
     {
-        constructor: function () {
+        constructor: function (params) {
+            $0;
         },
     });
