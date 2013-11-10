@@ -13,14 +13,13 @@
 
 ;;; Code:
 
-(autoload 'javascript-mode "javascript" "JavaScript editing mode." t)
+(require 'js2-mode)
 
-(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-(add-hook 'javascript-mode-hook
-          #'(lambda ()
-              ;; activa el resaltat d'espai en blanc al final de línia
-              (set-variable 'show-trailing-whitespace t)
-              ))
+;; (add-hook 'js2-mode-hook
+;;           #'(lambda ()
+;;               ...
+;;               ))
 
 ;;; javascript-mode.el ends here
