@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(highlight-indent-face ((t (:inherit fringe :background "gray87")))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -46,6 +46,7 @@
  '(mouse-wheel-scroll-amount (quote (1 5)))
  '(mouse-yank-at-point t)
  '(next-line-add-newlines nil)
+ '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(partial-completion-mode t)
  '(pr-ps-printer-alist (quote ((default "lp" nil "-P" "HPLaserjet3005"))))
  '(printer-name "hp1220c")
@@ -61,11 +62,13 @@
  '(scroll-bar-mode nil)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
- '(show-trailing-whitespace t)
+ '(show-trailing-whitespace nil)
  '(srctool-todo-ignore-directories (quote (".emacs~" "CVS" "RCS" ".svn" "epydoc")))
  '(srctool-todo-labels (quote ("@TODO:" "@FIXME:" "@NOTE:")))
  '(svn-status-verbose nil)
  '(tab-width 4)
+ '(template-auto-insert t)
+ '(template-confirm-insecure nil)
  '(time-stamp-format "%a, %02d/%02m/%02y %02H:%02M:%02S")
  '(tool-bar-mode nil nil (tool-bar))
  '(tooltip-mode t nil (tooltip))
