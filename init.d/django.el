@@ -26,7 +26,7 @@
                               "RadioSelect"
                               "Select"
                               "SelectMultiple"
-                              "TextArea"
+                              "Textarea"
                               "TextInput"
                               "TimeInput"))
 
