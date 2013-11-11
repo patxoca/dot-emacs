@@ -17,24 +17,9 @@
 (require 'hippie-exp)
 (require 'he-utils)
 (require 'highlight-indentation)
-(require 'smart-operator)
 
 (require 'arv-py)
 
-(defun arv-smart-operator-: ()
-  "El keymap de `smart-operator' oculta el keybinding local de
-':'. Aquesta funció permet obtindre el comportament desitjat en
-`python-mode', mantenint el comportament original en la resta de
-modes.
-
-La suposició de que el comportament original és el definit per la
-funció `smart-operator' és una mica restrictiu. Caldria recuperar
-la funció actualment associada a ':'."
-  (interactive)
-  (if (eq major-mode 'python-mode)
-      (call-interactively 'arv-py-electric-colon)
-    (smart-operator-:)))
-(define-key smart-operator-mode-map (kbd ":") 'arv-smart-operator-:)
 
 (add-hook 'python-mode-hook
           #'(lambda ()
@@ -61,7 +46,6 @@ la funció actualment associada a ':'."
               (company-mode t)
               ;; ressalta els nivell d'indentacio
               (highlight-indentation)
-              (smart-operator-mode 1)
               ;; local keymap
               (local-set-key '[(super tab)] 'python-indent-shift-right)
               (local-set-key '[(super iso-lefttab)] 'python-indent-shift-left)
