@@ -20,6 +20,9 @@
 
 (require 'arv-py)
 
+(eval-after-load "python"
+  '(progn
+     (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
 
 (add-hook 'python-mode-hook
           #'(lambda ()
