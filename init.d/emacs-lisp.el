@@ -17,6 +17,8 @@
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
+              ;; company-mode (complete anything)
+              (company-mode t)
               (local-set-key '[f9] (lambda ()
                                      (interactive)
                                      (ert t)))))
