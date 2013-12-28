@@ -38,8 +38,10 @@
                           #'autopair-python-triple-quote-action))
 
               ;; ressalta les línies on hi ha un breakpoint
-              (highlight-lines-matching-regexp "import pdb")
-              (highlight-lines-matching-regexp "pdb.set_trace()")
+              (highlight-lines-matching-regexp "^[[:space:]]*import i?pdb")
+              (highlight-lines-matching-regexp "^[[:space:]]*i?pdb.set_trace()")
+
+              (highlight-lines-matching-regexp "sefl")
 
               ;; recicla la comanda 'compile' per executar els tests amb
               ;; nose
