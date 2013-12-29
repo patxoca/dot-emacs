@@ -143,7 +143,8 @@ casos molt simples. S'anirà afinant sobre la marxa."
            (eolp)
            (not (python-syntax-comment-or-string-p))
            (not (looking-back "\\[[^]]*" bol))
-           (not (looking-back "{[^}]*" bol)))
+           (not (looking-back "{[^}]*" bol))
+           (not (looking-back "lambda.*" bol)))
           (newline-and-indent)))))
 
 (provide 'arv-py)
