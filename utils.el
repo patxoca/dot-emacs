@@ -103,7 +103,7 @@ se realiza en todo el buffer."
   (let* ((old-string (read-string "Replace: " (arv-region-or-symbol-at-point)))
          (new-string (read-string (concat "Replace " old-string " with: ") "")))
     (save-excursion
-      (beginning-of-buffer)
+      (goto-char (point-min))
       (query-replace old-string new-string))))
 
 (defun arv-kill-ring-save-word-at-point ()
@@ -196,9 +196,9 @@ substring, no produeix cap error si es sobrepassen.
    (if (let (window (get-buffer-window (current-buffer)))
          (set-window-dedicated-p window
                                  (not (window-dedicated-p window))))
-       ((progn )
-        (setq mode-line-format (append mode-line-format '("[D]")))
-        "Window '%s' is dedicated")
+       (progn
+         (setq mode-line-format (append mode-line-format '("[D]")))
+         "Window '%s' is dedicated")
      (setq mode-line-format (remove "[D]" mode-line-format))
      "Window '%s' is normal")
    (current-buffer)))
