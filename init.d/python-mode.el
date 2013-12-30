@@ -22,7 +22,9 @@
 
 (eval-after-load "python"
   '(progn
-     (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
+     (modify-syntax-entry ?_ "w" python-mode-syntax-table)
+     (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
+     ))
 
 (add-hook 'python-mode-hook
           #'(lambda ()
