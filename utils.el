@@ -218,6 +218,28 @@ substring, no produeix cap error si es sobrepassen.
 "
   (substring text (max 0 start) (min end (length text))))
 
+;; Toggle window dedication
+;; http://stackoverflow.com/questions/5151620
+;;
+;; He afegit un indicador a la modeline per ressaltar les finestres
+;; dedicades. El problema és que la modeline és una característica del
+;; buffer, no de la finestra i per tant l'indicador es mostrarà en
+;; qualsevol finestra, sigui o no dedicada, que mostri el buffer. En
+;; la pràctica, almenys per l'us que hi tinc pensat, no crec que
+;; suposi un problema.
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not"
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window
+                                 (not (window-dedicated-p window))))
+       ((progn )
+        (setq mode-line-format (append mode-line-format '("[D]")))
+        "Window '%s' is dedicated")
+     (setq mode-line-format (remove "[D]" mode-line-format))
+     "Window '%s' is normal")
+   (current-buffer)))
 
 
 ;;; utils.el ends here

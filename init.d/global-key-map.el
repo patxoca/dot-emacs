@@ -61,5 +61,6 @@
                                         ; potent aparentment)
 
 (global-set-key [f11] 'toggle-fullscreen)
+(global-set-key [pause] 'toggle-window-dedicated)
 
 ;;; global-key-map.el ends here
