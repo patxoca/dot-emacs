@@ -13,6 +13,7 @@
 ;;; Code:
 
 (require 'autopair)
+(require 'pylint)
 (require 'python)
 (require 'hippie-exp)
 (require 'he-utils)
@@ -51,13 +52,20 @@
 
               ;; company-mode (complete anything)
               (company-mode t)
+
               ;; ressalta els nivell d'indentacio
               (highlight-indentation)
+
+              ;; pylint/flymake-pylint
+              (pylint-add-menu-items)
+              (pylint-add-key-bindings)
+              (local-set-key '[(super l)] 'pylint)
+              (local-set-key '[f7] 'next-error)
+              (local-set-key '[f8] 'previous-error)
+
               ;; local keymap
               (local-set-key '[(super tab)] 'python-indent-shift-right)
               (local-set-key '[(super iso-lefttab)] 'python-indent-shift-left)
-              (local-set-key '[f7] 'flymake-goto-next-error)
-              (local-set-key '[f8] 'flymake-goto-prev-error)
               (local-set-key '[f9] (lambda ()
                                      (interactive)
                                      (call-interactively 'compile)))
