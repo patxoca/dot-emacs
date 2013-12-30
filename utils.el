@@ -47,33 +47,6 @@ Si 'filename' no es una ruta absoluta es considera relativa a
 ;; possiblement moltes d'aquestes funcions es podrien moure a algun
 ;; altre lloc
 
-(defun arv-string-trim (str &optional char)
-  "Elimina caracters al principi y final d'una cadena."
-  (let ((data (match-data))
-        (result 0))
-    (if (equal char nil)
-        (setq char " "))
-    (string-match (concat "^" char "*\\(.*[^" char "]\\)" char "*$") str)
-    (setq result (substring str
-                            (match-beginning 1)
-                            (match-end 1)))
-    (set-match-data data)
-    result))
-
-
-(defun string-starts-with-p (str prefix)
-  (let ((lp (length prefix))
-        (ls (length str)))
-    (and (<= lp ls)
-         (string= (substring str 0 lp) prefix))))
-
-(defun string-ends-with-p (str suffix)
-  (let ((lp (length suffix))
-        (ls (length str)))
-    (and (<= lp ls)
-         (string= (substring str (- ls lp) nil) suffix))))
-
-
 (defun unix-to-dos ()
   "Converteix un arxiu a format DOS."
   (interactive)
@@ -84,8 +57,6 @@ Si 'filename' no es una ruta absoluta es considera relativa a
   "Converteix un arxiu a format DOS."
   (interactive)
   (set-buffer-file-coding-system 'undecided-unix))
-
-
 
 
 ;; dos exemples de Xah Lee que permeten navegar facilment entre els
@@ -109,11 +80,13 @@ User buffers are those not starting with *."
     (while (and (string-match "^*" (buffer-name)) (< i 50))
       (setq i (1+ i)) (previous-buffer) )))
 
+
+;; versions "millorades" de funcions estàndard
+
 (defun arv-region-or-symbol-at-point ()
   "Devuelve la region o simbolo sobre el que esta situado el cursor.
 Si la marca esta activa devuelve la region y desactiva la marca, sino
 devuelve el simbolo sobre el que esta situado el cursor."
-  (interactive)
   (if mark-active
       (prog1
           (buffer-substring-no-properties (region-beginning) (region-end))
@@ -134,9 +107,17 @@ se realiza en todo el buffer."
       (query-replace old-string new-string))))
 
 (defun arv-kill-ring-save-word-at-point ()
-  "Copia el simbolo sobre el que esta situado el curso en el kill ring."
+  "Copia un text en el kill ring. El seu comportament varia
+depenent de si la marca està o no activa:
+
+* si està activa delega en `kill-ring-save' i es copia el text
+  seleccionat.
+
+* sinó es copia el símbol sobre el que està situat el cursor."
   (interactive)
-  (kill-new (arv-region-or-symbol-at-point)))
+    (if mark-active
+        (call-interactively 'kill-ring-save)
+      (kill-new (thing-at-point 'symbol))))
 
 
 ;; substitut per find-grep-dired
@@ -181,25 +162,6 @@ explicitament el punt en cas de ser necessari."
 
 ;; funcions utilitzades principalment als snippets
 
-(defun arv-camel-words (text)
-  "Retorna una llista amb les paraules de text.
-
-Es suposa que text es un identificador valid escrit en CamelCase,
-format per lletres i digits.
-"
-  (let* ((save case-fold-search)
-         (kernel (lambda (x)
-                   (let ((pos (string-match "^\\([A-Z][a-z0-9]*\\)"  x)))
-                     (if (null pos)
-                         nil
-                       (cons (match-string 0 x)
-                             (funcall kernel (substring x (match-end 0))))))))
-         (result))
-    (setq case-fold-search nil)
-    (setq result (funcall kernel text))
-    (setq case-fold-search save)
-    result))
-
 (defun arv-uncamelize (text sep)
   "Retorna text sense 'camelitzar'.
 
@@ -208,7 +170,7 @@ Si 'text' es 'CamelCase' i 'sep' es '-' retorna 'camel-case'.
 Es suposa que 'text' es un identificador valid escrit en
 CamelCase. 'sep' es un string.
 "
-  (mapconcat 'downcase (arv-camel-words text) sep))
+  (mapconcat 'downcase (s-split-words text) sep))
 
 (defun arv-substring (text start end)
   "Retorna un substring.

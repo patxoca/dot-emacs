@@ -315,10 +315,10 @@ Argument LABEL etiqueta utilitzada pel recordatori"
    (list (read-string "Recordatori: "
                       nil
                       '(insert-reminder-history . 0))))
-  (setq label (upcase (arv-string-trim label)))
-  (if (not (string-starts-with-p label srctool-todo-label-prefix))
+  (setq label (upcase (s-trim label)))
+  (if (not (s-starts-with-p srctool-todo-label-prefix  label))
       (setq label (concat srctool-todo-label-prefix label)))
-  (if (not (string-ends-with-p label srctool-todo-label-suffix))
+  (if (not (s-ends-with-p srctool-todo-label-suffix label))
       (setq label (concat label srctool-todo-label-suffix)))
   (insert (or comment-start "")
           " " label " "
@@ -523,7 +523,7 @@ arxius a processar."
         (list srctool-todo-ignore-extensions))
     (while (and (not found)
                 list)
-      (if (string-ends-with-p filename (car list))
+      (if (s-ends-with-p (car list) filename)
           (setq found t))
       (setq list (cdr list)))
     (not found)))

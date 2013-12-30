@@ -40,7 +40,7 @@
 (global-set-key [(control c) (control a) (g)] 'goto-line)
 (global-set-key '[(meta %)] 'arv-query-replace)
 (global-set-key [(control c) (control a) (meta 5)] 'query-replace-regexp)
-(global-set-key '[(hyper w)] 'arv-kill-ring-save-word-at-point)
+(global-set-key '[(meta w)] 'arv-kill-ring-save-word-at-point)
 
 (global-set-key '[(control tab)] 'dabbrev-expand)
 
