@@ -28,6 +28,20 @@
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
      ))
 
+;; defineix advices per obrir/tancar un projecte rope al obrir/tancar
+;; un projecte eproject
+(eval-after-load "eproject"
+  '(progn
+    (defadvice eproject-open (after open-rope-project a)
+      (if (file-exists-p (concat prj-directory ".ropeproject"))
+          (rope-open-project prj-directory)))
+    (defadvice eproject-close (before close-rope-project)
+      (if (file-exists-p (concat prj-directory ".ropeproject"))
+          (rope-close-project)))
+    (ad-activate 'eproject-open)
+    (ad-activate 'eproject-close)))
+
+
 (add-hook 'python-mode-hook
           #'(lambda ()
               ;; outline
