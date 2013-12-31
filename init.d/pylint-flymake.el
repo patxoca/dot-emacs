@@ -28,9 +28,4 @@
                '("\\.py\\'" flymake-pylint-init)))
 
 
-(add-hook 'python-mode-hook
-          #'(lambda ()
-              (local-set-key '[(super l)] 'flymake-mode)
-))
-
 ;;; pylint-flymake.el ends here
