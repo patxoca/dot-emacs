@@ -13,6 +13,7 @@
 ;;; Code:
 
 (require 'autopair)
+(require 'company)
 (require 'pylint)
 (require 'python)
 (require 'hippie-exp)
@@ -52,6 +53,7 @@
 
               ;; company-mode (complete anything)
               (company-mode t)
+              (local-set-key (kdb "s-SPC") 'company-ropemacs)
 
               ;; ressalta els nivell d'indentacio
               (highlight-indentation)
