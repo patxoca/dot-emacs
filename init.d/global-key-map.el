@@ -63,4 +63,10 @@
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key [pause] 'toggle-window-dedicated)
 
+;;; eproject
+(global-set-key '[(control c) (p) (o)] 'eproject-open)
+(global-set-key '[(control c) (p) (c)] 'eproject-close)
+(global-set-key '[(control c) (p) (a)] 'eproject-add)
+(global-set-key '[(control c) (p) (r)] 'eproject-remove)
+
 ;;; global-key-map.el ends here
