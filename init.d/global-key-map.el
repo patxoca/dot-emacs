@@ -69,4 +69,10 @@
 (global-set-key '[(control c) (p) (a)] 'eproject-add)
 (global-set-key '[(control c) (p) (r)] 'eproject-remove)
 
+;; En X11 C-z és més molest que altra cosa. El gestor de finestres
+;; ofereix mecanismes per minimitzar/enviar al fons la finestra des
+;; del teclat i en última instància es pot utilitzar C-x C-z
+(if (display-graphic-p)
+  (global-unset-key '[(control z)]))
+
 ;;; global-key-map.el ends here
