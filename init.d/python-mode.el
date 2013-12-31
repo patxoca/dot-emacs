@@ -67,7 +67,7 @@
 
               ;; company-mode (complete anything)
               (company-mode t)
-              (local-set-key (kbd "s-SPC") 'company-ropemacs)
+              (local-set-key (kbd "s-SPC") 'company-complete)
 
               ;; ressalta els nivell d'indentacio
               (highlight-indentation)
