@@ -19,6 +19,7 @@
           #'(lambda ()
               ;; company-mode (complete anything)
               (company-mode t)
+              (local-set-key (kbd "s-SPC") 'company-complete)
               (local-set-key '[f9] (lambda ()
                                      (interactive)
                                      (ert t)))))
