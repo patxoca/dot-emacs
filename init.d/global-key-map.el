@@ -75,11 +75,18 @@
 (if (display-graphic-p)
   (global-unset-key '[(control z)]))
 
-;;; els keybindings de ace-jump-mode em resulten dificils de recordar
-;;; i poc còmodes
+;; els keybindings de ace-jump-mode em resulten dificils de recordar
+;; i poc còmodes
 (global-set-key '[(control c) (j) (c)] 'ace-jump-char-mode)
 (global-set-key '[(control c) (j) (l)] 'ace-jump-line-mode)
 (global-set-key '[(control c) (j) (w)] 'ace-jump-word-mode)
 
+;; les combinacions "C-x o" i "C-u -1 C-x o" per moure's entre les
+;; finestres sont molt farragoses. Mai he utilitzat "S-<cursor>", les
+;; redefineixo per moure's entre finestres.
+(global-set-key '[(shift up)] 'windmove-up)
+(global-set-key '[(shift down)] 'windmove-down)
+(global-set-key '[(shift left)] 'windmove-left)
+(global-set-key '[(shift right)] 'windmove-right)
 
 ;;; global-key-map.el ends here
