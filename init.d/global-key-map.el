@@ -89,4 +89,8 @@
 (global-set-key '[(shift left)] 'windmove-left)
 (global-set-key '[(shift right)] 'windmove-right)
 
+;; expand-region
+
+(global-set-key '[(control ?.)] 'er/expand-region)
+
 ;;; global-key-map.el ends here
