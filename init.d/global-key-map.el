@@ -75,4 +75,11 @@
 (if (display-graphic-p)
   (global-unset-key '[(control z)]))
 
+;;; els keybindings de ace-jump-mode em resulten dificils de recordar
+;;; i poc còmodes
+(global-set-key '[(control c) (j) (c)] 'ace-jump-char-mode)
+(global-set-key '[(control c) (j) (l)] 'ace-jump-line-mode)
+(global-set-key '[(control c) (j) (w)] 'ace-jump-word-mode)
+
+
 ;;; global-key-map.el ends here
