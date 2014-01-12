@@ -9,6 +9,8 @@
 
 ;; pony-tpl-minor-mode begins
 
+(require 'sgml-mode)
+
 (defgroup pony-tpl nil
   "Djangification for Templates in Emacs"
   :group 'pony
@@ -137,6 +139,9 @@
   (if (> emacs-major-version 23)
       (font-lock-refresh-defaults))
   (set (make-local-variable 'indent-line-function) 'pony-indent)
-   (pony-load-snippets))
+  ;; (pony-load-snippets)
+  )
+
+(provide 'pony-tpl)
 
 ;; pony-tpl-minor-mode ends

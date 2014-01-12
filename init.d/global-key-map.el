@@ -69,6 +69,18 @@
 (global-set-key '[(control c) (p) (a)] 'eproject-add)
 (global-set-key '[(control c) (p) (r)] 'eproject-remove)
 
+;;; django
+;; aquest keybinding no m'acava de convencer per dos motius:
+;;
+;; * envaeix l'espai de keybindinds de eproject. No especialment greu
+;;   i en certa forma esta relacionat.
+;;
+;; * defineix globalment un keybinding que no té sentit en tots els
+;;   contexts. Malauradament no es pot determinar si te sentit en un
+;;   context fins que s'ha obert el projecte django.
+
+(global-set-key '[(control c) (p) (d)] 'arv/django-switch-to-project-buffer)
+
 ;; En X11 C-z és més molest que altra cosa. El gestor de finestres
 ;; ofereix mecanismes per minimitzar/enviar al fons la finestra des
 ;; del teclat i en última instància es pot utilitzar C-x C-z
