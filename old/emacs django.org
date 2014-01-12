@@ -1,0 +1,100 @@
+Aquest document conté les notes utilitzades per valorar les diferents
+opcions trobades per facilitar el treball amb projectes django des de
+emacs.
+
+La pàgina de partida és:
+
+https://code.djangoproject.com/wiki/Emacs
+
+2014011: La decisió final ha estat triar ~python-django~ per la gestió
+del projecte y el mòdul de plantilles de ~pony-mode~, mínimament
+modificat per /desacoplar-lo/ de la llibreria. Amb una mica de codi ha
+quedat una integració la mar d'apanyada.
+
+* python-django.el
+
+https://github.com/fgallina/python-django.el
+http://from-the-cloud.com/en/emacs/2013/01/28_emacs-as-a-django-ide-with-python-djangoel.html
+
+ * Documentació: poca
+
+ * Darrera actualització: fa un mes
+
+ * Snippets: no
+
+ * Extensions per python-mode: no
+
+ * Mode per editar templates: no
+
+ * Projecte: sí
+
+   - estructurat al voltant del projecte (django)
+
+   - un buffer mostra les apps que formen el projecte mitjançant un
+     arbre. Comandes per navegar-hi: anar a una app, a l'arrel del
+     projecte, a l'arrel del virtualenv, visitar el ~settings.py~ ...
+
+   - Comandes per executar tasques de gestió del projecte (~manage.py
+     xxx~). Només tasques predefinides. Una macro permet definir noves
+     tasques. Cada tasca s'executa en un buffer: comandes per
+     visitar-los, matar les tasques etc.
+
+   - integració del projecte amb ~dired~, ~find-file~, ~grep~ i
+     ~etags~
+
+   - accés a l'ajuda de ~manage.py~ i a la documentació online de
+     django corresponent a la versió utilitzada en el projecte.
+
+
+* django-mode
+
+https://github.com/myfreeweb/django-mode
+
+ * Documentació: poca
+
+ * Darrera actualització: fa 12 dies
+
+ * Snippets: sí però res destacable
+
+ * Extensions per python-mode:
+
+   - saltar a un template. No tinc clar si qualsevol string val o
+     només strings en certs contexts (~render_to_response()~ etc)
+
+   - saltar a un vista des de ~urls.py~. Requereix que ~urls.py~ i
+     ~views.py~ estiguin en el mateix directori. Suporta ~views~ com a
+     paquet enlloc de mòdul? Possiblemente ~rope-goto-definition~
+     ofereix una solució millor i menys restrictiva.
+
+   - saltar a un model. Ídem.
+
+   - inserir marques de traducció.
+
+ * Mode per editar templates: sí, derivat de ~nxml-mode~. Molt
+   senzill. Bàsicament defineix /syntax highlight/, /skeletons/,
+   tancament de tags oberts i inserir marques de traducció al voltant
+   de la regió (nomes ~trans~, no ~blocktrans~ i no escapa les dobles
+   cometes).
+
+ * Projecte: més o menys. Ofereix comandes per executar algunes
+   variants de ~manage.py~ però enlloc comenta res sobre el projecte.
+
+
+* pony-mode
+
+https://github.com/davidmiller/pony-mode
+http://www.deadpansincerity.com/docs/pony/
+
+ * Documentació: poca
+
+ * Darrera actualització: fa un mes
+
+ * Snippets: sí però res destacable. Defineix snippets per alguns
+   camps en models però poca cosa més.
+
+ * Extensions per python-mode: saltar a template
+
+ * Mode per editar templates: sí. Cap meravella, però una
+   implementació millor que la de ~django-mode~.
+
+ * Projecte: més o menys
