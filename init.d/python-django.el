@@ -39,7 +39,7 @@
 (require 'pony-tpl)
 (require 'python-django)
 (require 's)
-(require 'thing-at-point)
+(require 'thingatpt)
 
 ;; funcions de suport
 
