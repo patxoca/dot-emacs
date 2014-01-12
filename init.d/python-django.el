@@ -39,6 +39,7 @@
 (require 'pony-tpl)
 (require 'python-django)
 (require 's)
+(require 'thing-at-point)
 
 ;; funcions de suport
 
@@ -70,15 +71,26 @@ obert. Assumeix que hi ha UN ÚNIC PROJECTE obert."
           (buffer-list)))
 
 (defun arv/django-file-belongs-to-app-p (filename)
-  "Retorna t si `filename' correspon a un arxiu dins alguna de
-les aplicacions del projecte."
+  "Determina si `filename' correspon a un arxiu dins alguna de
+les aplicacions del projecte. En cas afirmatiu retorna el nom de
+la aplicació, nil en cas contrari.
+
+L'ordre en que s'examinen les aplicacions no està definit."
   (let ((tpl-dir (file-name-directory (expand-file-name filename)))
         (project-buffer (arv/django-get-project-buffer)))
+    (message "belongs-to-app: %s" tpl-dir)
     (if project-buffer
         (with-current-buffer project-buffer
-          (-any-p
-           (lambda (app) (s-starts-with-p (cdr app) tpl-dir))
-           (python-django-info-get-app-paths))))))
+          (car
+           (-first
+            (lambda (app) (s-starts-with-p (cdr app) tpl-dir))
+            (python-django-info-get-app-paths)))))))
+
+(defun arv/django-get-current-app ()
+  "Retorna el nom de l'aplicació que conté el buffer
+actiu. Retorna nil si el buffer no pertany a cap aplicació o no
+s'ha carregat cap projecte django."
+  (arv/django-file-belongs-to-app-p buffer-file-name))
 
 (defun arv/django-switch-to-project-buffer ()
   "Canvia el focus a la finestra que te el projecte django. Si
@@ -92,6 +104,67 @@ obrint-lo si cal."
         (select-window project-window)
       (switch-to-buffer project-buffer))))
 
+(defun arv-get-string-at-point ()
+  "Retorna la cadena en el punt, ni si el punt no està sobre una
+cadena."
+  (if (in-string-p)
+      (let ((start (save-excursion (while (in-string-p) (forward-char -1))
+                                   (1+ (point))))
+            (end  (save-excursion (while (in-string-p) (forward-char 1))
+                                  (1- (point)))))
+        (buffer-substring-no-properties start end))))
+
+(defun arv/django-jump-to-template ()
+  "Visita la plantilla en el punt.
+
+Cal que:
+
+* el punt es trobi sobre una cadena. La ruta de la plantilla es
+  determina pel valor de la cadena sobre la que es troba el punt.
+
+* la ruta de la plantilla sigui relativa al directori 'templates'
+  de l'aplicació (seguint el conveni django).
+
+* s'hagi carregat un projecte django per poder fer introspecció
+  de les aplicacions.
+
+La funció opera contruint una llista amb les aplicacions que
+contenen la plantilla. Per simplificar la creació de plantilles
+aquesta llista sempre contindrà el nom de l'aplicació
+actual (l'aplicació que conté l'arxiu des del que s'ha cridat a
+la funció) independenment de que contingui la plantilla. Si
+aquesta llista només conté una aplicació (l'actual) s'obre la
+plantilla directament (creant-la si és necessari). Si conté més
+d'una aplicació permet triar quina obrir."
+  (interactive)
+  (let ((filename (arv-get-string-at-point))
+        (project-buffer (arv/django-get-project-buffer))
+        (current-app (arv/django-get-current-app))
+        (candidates ()))
+    (cond
+     ((null filename)
+      (message "Point must be over an string."))
+     ((null project-buffer)
+      (message "No open django project."))
+     (t
+      (progn
+        (with-current-buffer project-buffer
+          (dolist (app (python-django-info-get-app-paths))
+            (let ((filename-full
+                   (concat
+                    (file-name-as-directory (cdr app))
+                    (file-name-as-directory "templates")
+                    filename)))
+              (if (or (equal (car app) current-app)
+                      (file-exists-p filename-full))
+                  (setq candidates (cons (cons (symbol-name (car app)) filename-full) candidates))))))
+        (find-file (cdr (assoc
+                         (if (= (length candidates) 1)
+                             (caar candidates)
+                           (completing-read
+                            "Choose app: "
+                            candidates nil t (symbol-name current-app)))
+                         candidates))))))))
 
 ;; configuració dels modes involucrats
 
@@ -99,8 +172,13 @@ obrint-lo si cal."
   '(progn
      (define-key python-django-mode-map (kbd "<left>") 'python-django-ui-move-up-tree)))
 
+(eval-after-load "python"
+  '(progn
+     (define-key python-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)))
+
 (eval-after-load "sgml-mode"
   '(progn
+     (define-key html-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)
      (add-hook 'html-mode-hook
                #'(lambda ()
                    (when (arv/django-file-belongs-to-app-p buffer-file-name)
