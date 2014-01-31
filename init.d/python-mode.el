@@ -91,7 +91,8 @@
                                 try-expand-tags
                                 try-expand-dabbrev-all-buffers) t))
               (local-set-key '[(:)] 'arv-py-electric-colon)
-              (local-set-key '[(control m)] 'newline-and-indent)))
+              (local-set-key '[(control m)] 'newline-and-indent)
+              (local-set-key '[(control c) (j) (i)] 'arv-py-nav-goto-first-import)))
 
 
 
