@@ -70,6 +70,26 @@ funció/mètode."
 	      (not (arv-py--is-toplevel-object-p)))
     (python-nav-beginning-of-defun 1)))
 
+(defun arv-py-nav-goto-first-import ()
+  "Mou el punt al començament del primer 'import' guardant el
+punt anterior en el `mark-ring'. Si no troba cap import deixa el
+punt al mateix lloc.
+
+Retorna la posició del punt si s'ha trobat cap 'import' o `nil'
+en cas contrari."
+  (interactive)
+  (let ((case-fold-search nil)
+        (matched nil))
+    (save-excursion
+      (goto-char (point-min))
+      (while (and
+              (setq matched (search-forward-regexp "\\<import\\>" nil t))
+              (python-syntax-comment-or-string-p))))
+    (when matched
+      (push-mark (point) t nil)
+      (goto-char matched)
+      (beginning-of-line))))
+
 
 ;;; Query program structure
 
