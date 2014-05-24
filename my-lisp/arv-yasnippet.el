@@ -48,6 +48,8 @@
   "$Id$"
   "Latest modification time and version number.")
 
+(require 's)
+
 ;;; Code:
 
 ;; funcions utilitzades principalment als snippets
