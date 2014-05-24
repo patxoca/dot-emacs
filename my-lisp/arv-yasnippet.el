@@ -74,11 +74,105 @@ substring, no produeix cap error si es sobrepassen.
   "s-chop-prefix + s-chop-suffix"
   (s-chop-suffix c (s-chop-prefix c s)))
 
+;;    _                                _       _
+;;   (_) __ ___   ____ _ ___  ___ _ __(_)_ __ | |_
+;;   | |/ _` \ \ / / _` / __|/ __| '__| | '_ \| __|
+;;   | | (_| |\ V / (_| \__ \ (__| |  | | |_) | |_
+;;  _/ |\__,_| \_/ \__,_|___/\___|_|  |_| .__/ \__|
+;; |__/                                 |_|
+
 (defun arv-yas-dojo-params-from-modules (text)
   ""
   (s-join ", " (mapcar (lambda (x)
                          (car (last (s-split "/" (arv-chop "\"" (arv-chop " " x))))))
                        (s-split "," text))))
+
+
+;;              _   _
+;;  _ __  _   _| |_| |__   ___  _ __
+;; | '_ \| | | | __| '_ \ / _ \| '_ \
+;; | |_) | |_| | |_| | | | (_) | | | |
+;; | .__/ \__, |\__|_| |_|\___/|_| |_|
+;; |_|    |___/
+
+(defun arv-yas-py-parse-parameters (text)
+ "Parseja els arguments d'una funcií/mètode.
+
+'foo, bar=value' -> (('foo') ('bar' 'value'))"
+   (mapcar '(lambda (x)
+              (mapcar 's-trim (split-string x "=")))
+           (split-string text ",")))
+
+
+(defun arv-yas-py-get-parameter-names (text &optional exclude)
+  "Retorna el nom dels paràmetres.
+
+Mira de netejar anomalies com parametres sense nom. Si
+s'especifica un valor diferent de `nil' per `exclude' s'exclouen
+el paràmetres '*args' i '**kw' si estan presents (es comprova que
+comencin per * no el nom concret).
+
+'foo, bar=value' -> ('foo', 'bar')
+'foo,, bar=value' -> ('foo', 'bar')
+'foo, bar=value, *args' -> ('foo', 'bar', '*args')
+
+Especificant `exclude':
+
+'foo, bar=value, *args' -> ('foo', 'bar')"
+  (delq nil
+        (mapcar '(lambda (x)
+                   (let ((name (nth 0 x)))
+                     (unless (or (string= name "")
+                                 (and (not (null exclude))
+                                      (s-starts-with-p "*" name)))
+                       name)))
+                (arv-yas-py-parse-parameters text))))
+
+
+(defun arv-yas-py-function-parameters-documentation (text)
+  "Retorna la documentació pels paràmetres d'una funció.
+
+Converteix:
+
+  foo, bar=1234, *args, **kw
+
+en:
+
+  :param foo:
+  :param bar:
+"
+  (let* ((indent (concat "\n" (make-string (current-column) 32))))
+    (mapconcat
+     '(lambda (x)
+        (concat ":param " x ":"))
+     (arv-yas-py-get-parameter-names text 't)
+     indent)))
+
+
+(defun arv-yas-py-constructor-store-arguments (text)
+  "Retorna l'assignació a atributs en el constructor.
+
+Converteix:
+
+  foo, bar=1234, *args, **kw
+
+en:
+
+  self._foo = foo
+  self._bar = bar
+  self._args = args
+  self._kw = kw
+"
+  (let* ((indent (concat "\n" (make-string (current-column) 32))))
+    (mapconcat
+     '(lambda (x)
+        (concat "self._" x " = " x))
+     (mapcar
+      '(lambda (x)
+         (s-chop-prefix "*" (s-chop-prefix "*" x)))
+      (arv-yas-py-get-parameter-names text))
+     indent)))
+
 
 (provide 'arv-yasnippet)
 
