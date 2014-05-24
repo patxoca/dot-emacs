@@ -86,7 +86,7 @@ substring, no produeix cap error si es sobrepassen.
 (defun arv-yas-dojo-params-from-modules (text)
   ""
   (s-join ", " (mapcar (lambda (x)
-                         (car (last (s-split "/" (arv-chop "\"" (arv-chop " " x))))))
+                         (car (last (s-split "/" (arv-chop "\"" (s-trim x))))))
                        (s-split "," text))))
 
 
