@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# -*- coding: utf-8 -*-
+# name: dojo AMD module
+# key: mod
+# --
+/************************************************************************
+ * Module: ${1:name}
+ * Description:
+ *
+ * Author: Alexis Roda
+ * e-mail: alexis.roda.villalonga@gmail.com
+ * $Id:$
+ ************************************************************************/
+
+define(
+  ["dojo/_base/declare", ${2:req}],
+  function (declare, ${2:$(arv-yas-dojo-params-from-modules text)}) {
+      return declare("$1", [${3:bases}], {
+          $0
+      });
+  }
+);
+

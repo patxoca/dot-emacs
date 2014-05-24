@@ -160,26 +160,6 @@ explicitament el punt en cas de ser necessari."
 		      args " {} \\\; ")))
 
 
-;; funcions utilitzades principalment als snippets
-
-(defun arv-uncamelize (text sep)
-  "Retorna text sense 'camelitzar'.
-
-Si 'text' es 'CamelCase' i 'sep' es '-' retorna 'camel-case'.
-
-Es suposa que 'text' es un identificador valid escrit en
-CamelCase. 'sep' es un string.
-"
-  (mapconcat 'downcase (s-split-words text) sep))
-
-(defun arv-substring (text start end)
-  "Retorna un substring.
-
-Esta versio de substring s'ajusta als limits i, a diferencia de
-substring, no produeix cap error si es sobrepassen.
-"
-  (substring text (max 0 start) (min end (length text))))
-
 ;; Toggle window dedication
 ;; http://stackoverflow.com/questions/5151620
 ;;
