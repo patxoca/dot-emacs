@@ -52,7 +52,7 @@
 
 ;; funcions utilitzades principalment als snippets
 
-(defun arv-uncamelize (text sep)
+(defun arv-yas-uncamelize (text sep)
   "Retorna text sense 'camelitzar'.
 
 Si 'text' es 'CamelCase' i 'sep' es '-' retorna 'camel-case'.
@@ -62,7 +62,7 @@ CamelCase. 'sep' es un string.
 "
   (mapconcat 'downcase (s-split-words text) sep))
 
-(defun arv-substring (text start end)
+(defun arv-yas-substring (text start end)
   "Retorna un substring.
 
 Esta versio de substring s'ajusta als limits i, a diferencia de
