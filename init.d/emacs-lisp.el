@@ -23,6 +23,8 @@
               (local-set-key (kbd "s-SPC") 'company-complete)
               (paredit-mode 1)
               (elisp-slime-nav-mode 1)
+              (when (require 'pretty-lambdada nil 'noerror)
+                (pretty-lambda-mode t))
               (local-set-key '[f9] (lambda ()
                                      (interactive)
                                      (ert t)))))
