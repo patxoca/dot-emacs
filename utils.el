@@ -13,26 +13,6 @@
 
 ;; funcions utilitzades durant l'arranc
 
-(defun startup-load-file (filename)
-  "Carrega un arxiu.
-
-Si 'filename' no es una ruta absoluta es considera relativa a
-'emacs-startup-dir'."
-  (load (if (file-name-absolute-p filename)
-            filename
-          (concat emacs-startup-dir "/" filename))))
-
-(defun startup-load-directory-in-order (dirname)
-  "Carrega els arxius .el d'un directori en ordre lexicogràfic."
-  (let* ((fullname (if (file-name-absolute-p dirname)
-                       dirname
-                     (concat emacs-startup-dir "/" dirname)))
-         (arxius   (mapcar
-                    'file-name-sans-extension
-                    (directory-files fullname t "\.elc\?$" nil))))
-    (mapc 'startup-load-file arxius)))
-
-
 ;; http://www.emacswiki.org/emacs/FullScreen#toc17
 (defun toggle-fullscreen ()
   "Toggle full screen on X11"

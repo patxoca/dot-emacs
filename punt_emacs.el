@@ -19,41 +19,60 @@
 (message "******************** Inici de l'archiu .emacs ********************")
 (message "******************************************************************")
 
+(defun arv/path-join (&rest parts)
+  (concat
+   (mapconcat 'file-name-as-directory (butlast parts) "")
+   (car (last parts))))
+
+(defun arv/startup-get-absolute-path (filename)
+  (if (file-name-absolute-p filename)
+      filename
+    (arv/path-join emacs-startup-dir filename)))
+
+(defun arv/startup-load-directory-in-order (dirname)
+  "Carrega els arxius .el d'un directori en ordre lexicogràfic."
+  (let* ((fullname (arv/startup-get-absolute-path dirname))
+         (arxius   (mapcar
+                    'file-name-sans-extension
+                    (directory-files fullname t "\.elc\?$" nil))))
+    (mapc (lambda (x) (load (arv/startup-get-absolute-path x))) arxius)))
+
+(defun arv/get-instance-name ()
+  (let ((instance-name (getenv "EMACS_INSTANCE"))
+        (sys-name (system-name)))
+    (if instance-name
+        instance-name
+      (substring sys-name 0 (string-match "\\." sys-name)))))
+
+
 (defvar emacs-startup-dir "~/emacslib"
   "Directori on l'usuari guarda el codi elisp.")
 
-(defvar instance-name (let ((instance-name (getenv "EMACS_INSTANCE"))
-                            (sys-name (system-name)))
-                        (if instance-name
-                            instance-name
-                          (substring sys-name 0 (string-match "\\." sys-name))))
+(defvar instance-name (arv/get-instance-name)
   "Nom de la instancia.")
 
-;; aquest el carreguem abans per poder utilitzar algunes funcions
-(load (concat emacs-startup-dir "/utils"))
-(load (concat emacs-startup-dir "/compat"))
 
+(dolist (dir '("site-lisp" "site-lisp/pylookup" "my-lisp"))
+  (add-to-list 'load-path (arv/startup-get-absolute-path dir)))
+
+
+;; aquest el carreguem abans per poder utilitzar algunes funcions
+(load (arv/startup-get-absolute-path "utils"))
+(load (arv/startup-get-absolute-path "compat"))
 
 
 ;; defineix l'arxiu de customització basant-se en la instancia
-(setq custom-file (concat emacs-startup-dir "/"
-                          "instances/"
-                          instance-name "/"
-                          "customize.el"))
+(setq custom-file
+      (arv/startup-get-absolute-path
+       (arv/path-join "instances" instance-name "customize.el")))
 
-
-(add-to-list 'load-path
-             (concat emacs-startup-dir "/site-lisp"))
-(add-to-list 'load-path
-             (concat emacs-startup-dir "/site-lisp/pylookup"))
-(add-to-list 'load-path
-             (concat emacs-startup-dir "/my-lisp"))
 
 ;;; @NOTE: alex 2011-12-24 13:08:20 : no se que pinta açò, no recordo
 ;;; haver-ho afegit però podria ser. M'he fixat que existia quan vaig
 ;;; instal·lar ELPA però no sé si estan relacionats.
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
 
 ;;; inicialitza ELPA si està instal·lat
 (if (and (not (fboundp 'package-initialize))
@@ -63,54 +82,22 @@
 (if (fboundp 'package-initialize)
   (package-initialize))
 
+
 ;;; carrega el codi d'inicialitzacio comú i específic de la instancia
-(startup-load-directory-in-order "instances/common/init.d")
-(startup-load-directory-in-order (concat "instances/"
-                                         instance-name
-                                         "/init.d"))
+(arv/startup-load-directory-in-order "instances/common/init.d")
+(arv/startup-load-directory-in-order (arv/path-join "instances" instance-name "init.d"))
 
 ;;; carrega les customitzacions de la instancia
-(startup-load-file custom-file)
+(load custom-file)
 
 ;;; si la instancia defineix codi de postinicialitzacio el carrega
-(let ((postload (concat emacs-startup-dir "/"
-                        "instances/"
-                        instance-name "/"
+(let ((postload (arv/path-join emacs-startup-dir
+                        "instances"
+                        instance-name
                         "postload.el")))
   (if (file-readable-p postload)
       (load postload))
 )
-
-;;; Nota: per llistar les fonts disponibles:
-;;;
-;;; (prin1-to-string (x-list-fonts "*"))
-;;; despres es poden fer uns pocs replace-regexp al resultat
-;;;  * <espai>\\" -> ^Q^J(set-face-font 'default "
-;;;  * \\" -> ")
-;;; i obtindrem un forma senzilla de provar l'apariencia de les fonts
-
-
-;;; font antigua
-;;; '(default ((t (:stipple nil :background "AntiqueWhite" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 88 :width normal :family "adobe-courier"))))
-
-;;; elimina efecte 3D a la mode line
-;;(set-face-attribute 'mode-line nil :box nil)
-
-
-
-
-
-;;; Activa autoguardado de sesiones
-;;; Debe estar tras cargar todos los archivos
-
-;;; @FIXME: 2005-11-30 : pymacs-load no funciona be si no s'executa
-;;; cap al final de la inicialitzacio d'emacs, apareix un missatge
-;;; "Emacs: Object vanished when helper was killed."
-;;; Al final ha resultat una incompatibilitat entre desktop i pymacs
-
-;; (load-library "desktop")
-;; (desktop-load-default)
-;; (desktop-read)
 
 
 
