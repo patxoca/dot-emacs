@@ -18,10 +18,9 @@
 
 Si 'filename' no es una ruta absoluta es considera relativa a
 'emacs-startup-dir'."
-  (let ((fullname (if (file-name-absolute-p filename)
-                      filename
-                    (concat emacs-startup-dir "/" filename))))
-    (load (concat emacs-startup-dir "/" fullname))))
+  (load (if (file-name-absolute-p filename)
+            filename
+          (concat emacs-startup-dir "/" filename))))
 
 (defun startup-load-directory-in-order (dirname)
   "Carrega els arxius .el d'un directori en ordre lexicogràfic."
