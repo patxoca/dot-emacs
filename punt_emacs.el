@@ -56,11 +56,6 @@
   (add-to-list 'load-path (arv/startup-get-absolute-path dir)))
 
 
-;; aquest el carreguem abans per poder utilitzar algunes funcions
-(load (arv/startup-get-absolute-path "utils"))
-(load (arv/startup-get-absolute-path "compat"))
-
-
 ;; defineix l'arxiu de customització basant-se en la instancia
 (setq custom-file
       (arv/startup-get-absolute-path
