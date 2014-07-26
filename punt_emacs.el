@@ -15,9 +15,35 @@
 
 ;;; Code:
 
-(message "******************************************************************")
-(message "******************** Inici de l'archiu .emacs ********************")
-(message "******************************************************************")
+
+
+
+(message "    ___ _ __ ___   __ _  ___ ___")
+(message "   / _ \\ '_ ` _ \\ / _` |/ __/ __|")
+(message "  |  __/ | | | | | (_| | (__\\__ \\")
+(message " (_)___|_| |_| |_|\\__,_|\\___|___/")
+
+
+(defun arv/get-instance-name ()
+  (or
+   (getenv "EMACS_INSTANCE")
+   (let ((sys-name (system-name)))
+     (substring sys-name 0 (string-match "\\." sys-name)))))
+
+
+;; variables
+
+(defvar emacs-startup-dir "~/emacslib"
+  "Directori on l'usuari guarda el codi elisp.")
+
+(defvar instance-name (arv/get-instance-name)
+  "Nom de la instancia.")
+
+(defvar arv/load-path '("site-lisp" "site-lisp/pylookup" "my-lisp")
+  "Directoris addicionals, relatius a `emacs-startup-dir', que s'inclouran en `load-path'")
+
+
+;; funcions auxiliars
 
 (defun arv/path-join (&rest parts)
   (concat
@@ -29,6 +55,11 @@
       filename
     (arv/path-join emacs-startup-dir filename)))
 
+(defun arv/startup-get-path-in-instance (filename &optional instance)
+  (let ((instance-name (or instance instance-name)))
+    (arv/startup-get-absolute-path
+     (arv/path-join "instances" instance-name filename))))
+
 (defun arv/startup-load-directory-in-order (dirname)
   "Carrega els arxius .el d'un directori en ordre lexicogràfic."
   (let* ((fullname (arv/startup-get-absolute-path dirname))
@@ -37,69 +68,44 @@
                     (directory-files fullname t "\.elc\?$" nil))))
     (mapc (lambda (x) (load (arv/startup-get-absolute-path x))) arxius)))
 
-(defun arv/get-instance-name ()
-  (let ((instance-name (getenv "EMACS_INSTANCE"))
-        (sys-name (system-name)))
-    (if instance-name
-        instance-name
-      (substring sys-name 0 (string-match "\\." sys-name)))))
+;; funcions per la inicialització
+
+(defun arv/startup-configure-load-path ()
+  (dolist (dir arv/load-path)
+    (add-to-list 'load-path (arv/startup-get-absolute-path dir))))
+
+(defun arv/startup-configure-custom-file ()
+  (setq custom-file (arv/startup-get-path-in-instance "customize.el"))
+  (load custom-file))
+
+(defun arv/startup-package-initialize ()
+  (if (and (not (fboundp 'package-initialize))
+           (file-readable-p (expand-file-name "~/.emacs.d/elpa/package.el")))
+      (load
+       (expand-file-name "~/.emacs.d/elpa/package.el")))
+  (if (fboundp 'package-initialize)
+      (package-initialize)))
+
+(defun arv/startup-initialize-instance ()
+  (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d" "common"))
+  (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d"))
+  (let ((postload (arv/startup-get-path-in-instance "postload.el")))
+    (if (file-readable-p postload)
+        (load postload))))
 
 
-(defvar emacs-startup-dir "~/emacslib"
-  "Directori on l'usuari guarda el codi elisp.")
+;; inicialització
 
-(defvar instance-name (arv/get-instance-name)
-  "Nom de la instancia.")
+(arv/startup-configure-load-path)
+(arv/startup-configure-custom-file)
+(arv/startup-package-initialize)
+(arv/startup-initialize-instance)
 
-
-(dolist (dir '("site-lisp" "site-lisp/pylookup" "my-lisp"))
-  (add-to-list 'load-path (arv/startup-get-absolute-path dir)))
-
-
-;; defineix l'arxiu de customització basant-se en la instancia
-(setq custom-file
-      (arv/startup-get-absolute-path
-       (arv/path-join "instances" instance-name "customize.el")))
-
-
-;;; @NOTE: alex 2011-12-24 13:08:20 : no se que pinta açò, no recordo
-;;; haver-ho afegit però podria ser. M'he fixat que existia quan vaig
-;;; instal·lar ELPA però no sé si estan relacionats.
+;;; codi afegit per emacs per activar comandes "perilloses" per usuaris nous
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 
-;;; inicialitza ELPA si està instal·lat
-(if (and (not (fboundp 'package-initialize))
-         (file-readable-p (expand-file-name "~/.emacs.d/elpa/package.el")))
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el")))
-(if (fboundp 'package-initialize)
-  (package-initialize))
-
-
-;;; carrega el codi d'inicialitzacio comú i específic de la instancia
-(arv/startup-load-directory-in-order "instances/common/init.d")
-(arv/startup-load-directory-in-order (arv/path-join "instances" instance-name "init.d"))
-
-;;; carrega les customitzacions de la instancia
-(load custom-file)
-
-;;; si la instancia defineix codi de postinicialitzacio el carrega
-(let ((postload (arv/path-join emacs-startup-dir
-                        "instances"
-                        instance-name
-                        "postload.el")))
-  (if (file-readable-p postload)
-      (load postload))
-)
-
-
-
-
-
-(message "******************************************************************")
-(message "********************** Fi de l'arxiu .emacs **********************")
-(message "******************************************************************")
+(message "*** end of .emacs ************************************************")
 
 ;;; punt_emacs.el ends here
