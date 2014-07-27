@@ -68,6 +68,28 @@
                     (directory-files fullname t "\.elc\?$" nil))))
     (mapc (lambda (x) (load (arv/startup-get-absolute-path x))) arxius)))
 
+(defun arv/startup-byte-recompile ()
+  ""
+  (interactive)
+  (dolist (dir arv/load-path)
+    (message (arv/startup-get-absolute-path dir))
+    (byte-recompile-directory (arv/startup-get-absolute-path dir) 0))
+  (dolist (dir (list "init.d" (arv/startup-get-path-in-instance "init.d" "common")))
+    (message (arv/startup-get-absolute-path dir))
+    (byte-recompile-directory (arv/startup-get-absolute-path dir) 0)))
+
+(defun -package-p (name)
+  "Return t if NAME is an available package."
+  (unless package-archive-contents
+    (package-refresh-contents))
+  (not (null (assoc name package-archive-contents))))
+
+(defun arv/require-package (pkg)
+  (when (and (-package-p pkg)
+             (not (package-installed-p pkg)))
+    (package-install pkg)))
+
+
 ;; funcions per la inicialització
 
 (defun arv/startup-configure-load-path ()
@@ -83,8 +105,7 @@
            (file-readable-p (expand-file-name "~/.emacs.d/elpa/package.el")))
       (load
        (expand-file-name "~/.emacs.d/elpa/package.el")))
-  (if (fboundp 'package-initialize)
-      (package-initialize)))
+  (package-initialize))
 
 (defun arv/startup-initialize-instance ()
   (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d" "common"))
