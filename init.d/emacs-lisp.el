@@ -14,6 +14,13 @@
 ;;; Code:
 
 
+(require 'company)
+(require 'eldoc)
+(require 'elisp-slime-nav)
+(require 'ert)
+(require 'lisp-mode)
+(require 'paredit)
+(require 'pretty-lambdada)
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
