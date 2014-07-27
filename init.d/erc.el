@@ -14,6 +14,7 @@
 
 (require 'erc)
 (require 'erc-stamp)
+(require 'easymenu)
 
 (setq browse-url-browser-function 'w3m)
 
@@ -38,7 +39,6 @@
                                   )))
 
 ; afegeix una opcio IRC al menu TOOL per iniciar erc
-(require 'easymenu)
 (easy-menu-add-item nil '("tools")
                     ["IRC" chatear t])
 
