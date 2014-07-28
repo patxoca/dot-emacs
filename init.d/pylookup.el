@@ -15,9 +15,9 @@
 
 (add-hook 'python-mode-hook
           #'(lambda()
-              (let ((pylookup-dir (concat emacs-startup-dir "/site-lisp/pylookup")))
-                (setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-                (setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
+              (let ((pylookup-dir (arv/startup-get-absolute-path "site-lisp/pylookup")))
+                (setq pylookup-program (arv/path-join pylookup-dir "pylookup.py"))
+                (setq pylookup-db-file (arv/path-join pylookup-dir "pylookup.db"))
                 (local-set-key [(control c) (h)] 'pylookup-lookup))))
 
 ;;; pylookup.el ends here

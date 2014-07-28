@@ -17,7 +17,6 @@
 
 ;;; Code:
 
-(load-file (concat emacs-startup-dir "/site-lisp/eproject/eproject.el"))
-
+(require 'eproject)
 
 ;;; eproject.el ends here

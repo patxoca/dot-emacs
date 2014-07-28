@@ -16,8 +16,6 @@
 
 (require 'pymacs)
 
-;; (setq pymacs-load-path (list (concat emacs-startup-dir "/shared/pymacs")))
-
 (defun fp-maybe-pymacs-reload ()
   "Recarrega automaticament els arxius .py guardats dins ~/emacslib."
 
@@ -49,6 +47,6 @@
 (autoload 'pymacs-load "pymacs" nil t)
 (autoload 'pymacs-autoload "pymacs")
 (eval-after-load "pymacs"
-  '(add-to-list 'pymacs-load-path (concat emacs-startup-dir "/shared/pymacs")))
+  '(add-to-list 'pymacs-load-path (arv/startup-get-absolute-path "shared/pymacs")))
 
 ;;; pymacs.el ends here
