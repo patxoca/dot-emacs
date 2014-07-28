@@ -31,8 +31,8 @@
 
 (eval-after-load "lisp-mode"
   '(progn
-     (local-set-key (kbd "s-SPC") 'company-complete)
-     (local-set-key '[f9] (lambda () (interactive) (ert t)))))
+     (define-key emacs-lisp-mode-map (kbd "s-SPC") 'company-complete)
+     (define-key emacs-lisp-mode-map '[f9] (lambda () (interactive) (ert t)))))
 
 (add-hook 'emacs-lisp-mode-hook
           #'(lambda ()
