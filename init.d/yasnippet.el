@@ -11,6 +11,7 @@
 
 (require 'yasnippet)
 (require 'arv-py)
+(require 'arv-yasnippet)
 
 (add-to-list 'yas-snippet-dirs
              (arv/startup-get-absolute-path "shared/yasnippets/local"))
