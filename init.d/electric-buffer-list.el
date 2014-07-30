@@ -16,6 +16,7 @@
         (".*Dired.*"             . font-lock-comment-face)       ; Dired
         ("^....[*]shell.*"       . font-lock-preprocessor-face)  ; shell buff
         (".*[*]scratch[*].*"     . font-lock-function-name-face) ; scratch buffer
+        ("^.*[*]svn-.*"          . font-lock-builtin-face)       ; svn buffers
         ("^....[*].*"            . font-lock-string-face)        ; "*" named buffers
         ("^..[*].*"              . font-lock-constant-face)      ; Modified
         ("^.[%].*"               . font-lock-keyword-face)))     ; Read only
@@ -29,6 +30,6 @@
          '(buffer-menu-buffer-font-lock-keywords t))
     (font-lock-fontify-buffer)))
 
-(add-hook 'electric-buffer-menu-mode-hook 'buffer-menu-custom-font-lock)
+(add-hook 'buffer-menu-mode-hook 'buffer-menu-custom-font-lock)
 
 ;;; electric-buffer-list.el ends here
