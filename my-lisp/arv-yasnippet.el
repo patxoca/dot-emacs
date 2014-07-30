@@ -101,8 +101,8 @@ substring, no produeix cap error si es sobrepassen.
  "Parseja els arguments d'una funcií/mètode.
 
 'foo, bar=value' -> (('foo') ('bar' 'value'))"
-   (mapcar '(lambda (x)
-              (mapcar 's-trim (split-string x "=")))
+   (mapcar (lambda (x)
+             (mapcar 's-trim (split-string x "=")))
            (split-string text ",")))
 
 
@@ -122,12 +122,12 @@ Especificant `exclude':
 
 'foo, bar=value, *args' -> ('foo', 'bar')"
   (delq nil
-        (mapcar '(lambda (x)
-                   (let ((name (nth 0 x)))
-                     (unless (or (string= name "")
-                                 (and (not (null exclude))
-                                      (s-starts-with-p "*" name)))
-                       name)))
+        (mapcar (lambda (x)
+                  (let ((name (nth 0 x)))
+                    (unless (or (string= name "")
+                                (and (not (null exclude))
+                                     (s-starts-with-p "*" name)))
+                      name)))
                 (arv-yas-py-parse-parameters text))))
 
 
@@ -145,8 +145,8 @@ en:
 "
   (let* ((indent (concat "\n" (make-string (current-column) 32))))
     (mapconcat
-     '(lambda (x)
-        (concat ":param " x ":"))
+     (lambda (x)
+       (concat ":param " x ":"))
      (arv-yas-py-get-parameter-names text 't)
      indent)))
 
@@ -167,11 +167,11 @@ en:
 "
   (let* ((indent (concat "\n" (make-string (current-column) 32))))
     (mapconcat
-     '(lambda (x)
-        (concat "self._" x " = " x))
+     (lambda (x)
+       (concat "self._" x " = " x))
      (mapcar
-      '(lambda (x)
-         (s-chop-prefix "*" (s-chop-prefix "*" x)))
+      (lambda (x)
+        (s-chop-prefix "*" (s-chop-prefix "*" x)))
       (arv-yas-py-get-parameter-names text))
      indent)))
 

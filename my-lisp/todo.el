@@ -104,7 +104,8 @@
 
 (defgroup srctools
   nil
-  "Utilitats que ajuden a gestionar el codi font")
+  "Utilitats que ajuden a gestionar el codi font"
+  :group 'srctools)
 
 
 (defun srctool-todo-set-labels (symbol value)
@@ -426,7 +427,8 @@ Argument EVENT event que ha provocat l'execucio de la funcio."
       (if (eq (current-buffer) todo-buffer)
           (switch-to-buffer-other-window buffer)
         (switch-to-buffer buffer))
-      (goto-line lineno))))
+      (goto-char (point-min))
+      (forward-line (1- lineno)))))
 
 (defun srctool-open-file-new-window ()
   "Obre l'arxiu corresponent a un recordatori.
@@ -439,7 +441,8 @@ corresponent."
          (lineno      (cadr tmp)))
     (let ((buffer (find-file-noselect filename)))
       (switch-to-buffer-other-window buffer)
-      (goto-line lineno))))
+      (goto-char (point-min))
+      (forward-line (1- lineno)))))
 
 
 ;;; definicio de tecles

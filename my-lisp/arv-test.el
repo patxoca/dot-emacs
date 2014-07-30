@@ -53,7 +53,7 @@
       (when content
         (insert content))
       (when point-marker
-        (beginning-of-buffer)
+        (goto-char (point-min))
         (when (search-forward point-marker)
           (delete-char (- (length point-marker)))))
       buffer)))
