@@ -1,4 +1,4 @@
-;;; ensure-packages.el --- garanteix que els paquests estan instal.lats
+;;; 00-ensure-packages.el --- garanteix que els paquests estan instal.lats
 
 ;; $Id$
 
@@ -41,6 +41,7 @@
 (arv/require-package 'php-mode)
 (arv/require-package 'pretty-lambdada)
 (arv/require-package 'pysmell)
+(arv/require-package 'pep8)
 (arv/require-package 'rainbow-mode)
 (arv/require-package 's)
 (arv/require-package 'smart-operator)
@@ -53,4 +54,4 @@
 
 
 
-;;; ensure-packages.el ends here
+;;; 00-ensure-packages.el ends here
