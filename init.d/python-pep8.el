@@ -10,6 +10,6 @@
 
 ;;; Code:
 (require `tramp)
-(require 'python-pep8)
+(require 'pep8)
 
 ;;; python-pep8.el ends here
