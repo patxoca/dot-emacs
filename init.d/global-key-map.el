@@ -96,6 +96,7 @@
 ;; keybindings per subversion: C-c s
 (global-set-key '[(control c) (s) (s)] 'svn-status)
 (global-set-key '[(control c) (s) (=)] 'svn-file-show-svn-diff)
+(global-set-key '[(control c) (s) (r)] 'svn-file-revert)
 
 ;; les combinacions "C-x o" i "C-u -1 C-x o" per moure's entre les
 ;; finestres sont molt farragoses. Mai he utilitzat "S-<cursor>", les
