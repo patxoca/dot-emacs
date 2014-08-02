@@ -23,7 +23,26 @@
   '(progn
      (modify-syntax-entry ?_ "w" python-mode-syntax-table)
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
-     ))
+
+     ;; keybindings locals
+     (define-key python-mode-map (kbd "s-SPC") 'company-complete)
+     (define-key python-mode-map '[(super l)] 'pylint)
+     (define-key python-mode-map '[f7] 'next-error)
+     (define-key python-mode-map '[f8] 'previous-error)
+     (define-key python-mode-map '[f9] (lambda ()
+                                         (interactive)
+                                         (call-interactively 'compile)))
+     (define-key python-mode-map '[(control tab)]
+       (make-hippie-expand-function
+        '(try-expand-dabbrev
+          try-expand-tags
+          try-expand-dabbrev-all-buffers) t))
+     (define-key python-mode-map '[(super tab)] 'python-indent-shift-right)
+     (define-key python-mode-map '[(super iso-lefttab)] 'python-indent-shift-left)
+     (define-key python-mode-map '[(:)] 'arv-py-electric-colon)
+     (define-key python-mode-map '[(control m)] 'newline-and-indent)
+     (define-key python-mode-map '[(control c) (j) (i)] 'arv-py-nav-goto-first-import)))
+
 
 ;; defineix advices per obrir/tancar un projecte rope al obrir/tancar
 ;; un projecte eproject
@@ -64,34 +83,13 @@
 
               ;; company-mode
               (company-mode t)
-              (local-set-key (kbd "s-SPC") 'company-complete)
 
               ;; ressalta els nivell d'indentacio
               (highlight-indentation)
 
               ;; pylint/flymake-pylint
               (pylint-add-menu-items)
-              (pylint-add-key-bindings)
-              (local-set-key '[(super l)] 'pylint)
-              (local-set-key '[f7] 'next-error)
-              (local-set-key '[f8] 'previous-error)
-
-              ;; local keymap
-              (local-set-key '[(super tab)] 'python-indent-shift-right)
-              (local-set-key '[(super iso-lefttab)] 'python-indent-shift-left)
-              (local-set-key '[f9] (lambda ()
-                                     (interactive)
-                                     (call-interactively 'compile)))
-              (local-set-key '[(control tab)]
-                             (make-hippie-expand-function
-                              '(try-expand-dabbrev
-                                try-expand-tags
-                                try-expand-dabbrev-all-buffers) t))
-              (local-set-key '[(:)] 'arv-py-electric-colon)
-              (local-set-key '[(control m)] 'newline-and-indent)
-              (local-set-key '[(control c) (j) (i)] 'arv-py-nav-goto-first-import)))
-
-
+              (pylint-add-key-bindings)))
 
 
 ;;; python-mode.el ends here

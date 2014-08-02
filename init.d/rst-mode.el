@@ -26,6 +26,10 @@
           (insert (make-string l caracter))
           (insert "\n\n")))))
 
+(eval-after-load "rst"
+    '(progn
+       (define-key rst-mode-map '[f9] 'arv-sphinx-build-latexpdf)
+       (define-key rst-mode-map '[(control =)] 'arv-rst-underline-previous-line)))
 
 (add-hook 'rst-mode-hook
           (lambda ()
@@ -42,8 +46,6 @@
             (set-face-attribute 'rst-level-4 nil :background "unspecified")
             (set-face-attribute 'rst-level-5 nil :background "unspecified")
             (set-face-attribute 'rst-level-6 nil :background "unspecified")
-            (local-set-key '[(control =)] 'arv-rst-underline-previous-line)
-            (local-set-key '[f9] 'arv-sphinx-build-latexpdf)
             ))
 
 ;;; rst-mode.el ends here
