@@ -115,5 +115,17 @@
 (global-set-key '[(control c) (r) (i)] 'srctool-insert-reminder)
 (global-set-key '[(control c) (r) (s)] 'srctool-show-reminders)
 
+;; buffer-move
+(global-set-key [(control shift up)]     'buf-move-up)
+(global-set-key [(control shift down)]   'buf-move-down)
+(global-set-key [(control shift left)]   'buf-move-left)
+(global-set-key [(control shift right)]  'buf-move-right)
+
+;; grin
+(global-set-key [f6] 'deft)
+
+;; find-file-in-project
+(global-set-key (kbd "C-x f") 'find-file-in-project)
+
 
 ;;; global-key-map.el ends here

@@ -23,7 +23,6 @@
                nil)))
      (setq ffip-project-file "eproject.cfg")))
 
-(global-set-key (kbd "C-x f") 'find-file-in-project)
 (setq ffip-limit 1024)
 
 ;;; find-file-in-project.el ends here
