@@ -10,7 +10,7 @@
 
 
 ;;; Code:
-(require 'autopair)
+
 (autopair-global-mode)
 
 

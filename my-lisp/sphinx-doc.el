@@ -48,11 +48,13 @@ el conte. Retorna nil si no el troba."
     (unless (null makefile)
       (compile (format "make -k -C %s %s" makefile target)))))
 
+;;;###autoload
 (defun arv-sphinx-build-latexpdf ()
    "Genera PDF"
    (interactive)
    (-arv-sphinx-build "latexpdf"))
 
+;;;###autoload
 (defun arv-sphinx-build-html ()
    "Genera HTML"
    (interactive)

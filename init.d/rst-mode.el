@@ -10,8 +10,6 @@
 
 ;;; Code:
 
-(require 'sphinx-doc)
-
 
 (defun arv-rst-underline-previous-line (caracter)
   (interactive "cCaracter: ")
@@ -28,10 +26,6 @@
           (insert (make-string l caracter))
           (insert "\n\n")))))
 
-(autoload 'rst-mode "rst" "reStructuredText editing mode." t)
-
-(add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode))
-(add-to-list 'auto-mode-alist '("\\.rest$" . rst-mode))
 
 (add-hook 'rst-mode-hook
           (lambda ()

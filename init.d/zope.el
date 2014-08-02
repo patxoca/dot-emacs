@@ -14,8 +14,6 @@
 ;; associa alguns tipus d'arxius utilitzats amb zope al mode mes
 ;; adient
 
-(require 'python)
-
 (add-to-list 'auto-mode-alist '("\\.pt$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.cpt$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.zpt$" . html-mode))

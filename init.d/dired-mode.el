@@ -12,7 +12,6 @@
 
 ;;; thanks to Robert Thorpe
 
-(require 'dired)
 
 (defun dired-follow-file ()
   "In dired, visit the file or directory on this line.
@@ -29,15 +28,16 @@ with one containing the contents of the directory.  Otherwise, invoke
   (interactive)
   (find-alternate-file ".."))
 
-(defun dired-setup-follow-file ()
-  (define-key dired-mode-map [(meta up)] 'arv-goto-parent-directory)
-  (substitute-key-definition
-   'dired-find-file 'dired-follow-file dired-mode-map)
-  (substitute-key-definition
-   'dired-up-directory 'arv-goto-parent-directory dired-mode-map)
-  (substitute-key-definition
-   'dired-advertised-find-file 'dired-follow-file dired-mode-map))
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map [(meta up)] 'arv-goto-parent-directory)
+     (substitute-key-definition
+      'dired-find-file 'dired-follow-file dired-mode-map)
+     (substitute-key-definition
+      'dired-up-directory 'arv-goto-parent-directory dired-mode-map)
+     (substitute-key-definition
+      'dired-advertised-find-file 'dired-follow-file dired-mode-map)))
 
-(add-hook 'dired-mode-hook 'dired-setup-follow-file)
+
 
 ;;; dired-mode.el ends here

@@ -10,8 +10,6 @@
 
 ;;; Code:
 
-(require 'css-mode)
-(require 'rainbow-mode)
 
 (add-hook 'css-mode-hook
           #'(lambda ()

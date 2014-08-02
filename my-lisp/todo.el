@@ -296,6 +296,7 @@ cap de seleccionat.")
 
 
 
+;;;###autoload
 (defun srctool-insert-reminder (label)
   "Insereix una marca de recordatori.
 
@@ -328,6 +329,7 @@ Argument LABEL etiqueta utilitzada pel recordatori"
           comment-end))
 
 
+;;;###autoload
 (defun srctool-show-reminders (directory)
   "Genera un llistat amb recordatoris.
 
@@ -443,11 +445,6 @@ corresponent."
       (switch-to-buffer-other-window buffer)
       (goto-char (point-min))
       (forward-line (1- lineno)))))
-
-
-;;; definicio de tecles
-(global-set-key [(control c) (control a) (control r) (i)] 'srctool-insert-reminder)
-(global-set-key [(control c) (control a) (control r) (s)] 'srctool-show-reminders)
 
 
 

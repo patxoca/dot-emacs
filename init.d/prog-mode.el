@@ -10,8 +10,14 @@
 
 ;;; Code:
 
+(eval-after-load "linum"
+  '(progn
+     (require 'relative-linum)))
+
+
 (add-hook 'prog-mode-hook
           #'(lambda ()
+              (linum-mode 1)
               (show-paren-mode 1)
               (set-variable 'show-trailing-whitespace t)
               ))

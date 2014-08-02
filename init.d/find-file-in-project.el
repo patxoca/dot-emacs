@@ -13,17 +13,17 @@
 
 ;;; Code:
 
-(require 'find-file-in-project)
-(require 'eproject)
 
+(eval-after-load "eproject"
+  '(progn
+     (setq ffip-project-root-function
+           (lambda ()
+             (if (boundp 'prj-directory)
+                 prj-directory
+               nil)))
+     (setq ffip-project-file "eproject.cfg")))
 
-(setq ffip-project-root-function
-      (lambda ()
-        (if (boundp 'prj-directory)
-            prj-directory
-          nil)))
 (global-set-key (kbd "C-x f") 'find-file-in-project)
-(setq ffip-project-file "eproject.cfg")
 (setq ffip-limit 1024)
 
 ;;; find-file-in-project.el ends here

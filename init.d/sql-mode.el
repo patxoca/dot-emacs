@@ -13,7 +13,6 @@
 
 ;;; Code:
 
-(require 'sql)
 (add-hook 'sql-mode-hook
           (lambda ()
             (message "sql-mode-hook")

@@ -12,14 +12,13 @@
 
 ;;; Code:
 
-(require 'nose-mode)
-
-(eval-after-load "nose"
-  '(nose-mode-setup-keymap))
 
 (eval-after-load "python"
-  '(add-hook 'python-mode-hook
-             'nose-mode-enable-if-test-module))
+  '(progn
+     (require 'nose-mode)
+     (nose-mode-setup-keymap)
+     (add-hook 'python-mode-hook
+               'nose-mode-enable-if-test-module)))
 
 
 ;;; 'python-nose.el ends here

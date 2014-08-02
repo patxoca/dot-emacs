@@ -10,9 +10,6 @@
 
 ;;; Code:
 
-(require 'rainbow-mode)
-(require 'zencoding-mode)
-
 
 (eval-after-load "zencoding-mode"
   '(progn

@@ -23,8 +23,6 @@
 ;;; History:
 ;;
 
-(require 'todo-util)
-
 ;;; Code:
 
 ;; (global-set-key '[home]             'beginning-of-line)
@@ -107,7 +105,15 @@
 (global-set-key '[(shift right)] 'windmove-right)
 
 ;; expand-region
-
 (global-set-key '[(control ?.)] 'er/expand-region)
+
+;; todo
+;; vells per compatibilitat
+(global-set-key '[(control c) (control a) (control r) (i)] 'srctool-insert-reminder)
+(global-set-key '[(control c) (control a) (control r) (s)] 'srctool-show-reminders)
+;; nous bindings
+(global-set-key '[(control c) (r) (i)] 'srctool-insert-reminder)
+(global-set-key '[(control c) (r) (s)] 'srctool-show-reminders)
+
 
 ;;; global-key-map.el ends here

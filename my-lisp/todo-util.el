@@ -10,6 +10,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun arv-switch-to-todo-or-visit-todo-file ()
   (interactive)
   (switch-to-buffer (or (get-buffer "TODO")

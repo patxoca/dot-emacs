@@ -12,13 +12,10 @@
 
 ;;; Code:
 
-(require 'autopair)
-(require 'company)
-(require 'pylint)
-(require 'python)
-(require 'hippie-exp)
-(require 'he-utils)
-(require 'highlight-indentation)
+(autoload 'company-complete "company" "" t nil)
+(autoload 'next-error "simple" "" t nil)
+(autoload 'previous-error "simple" "" t nil)
+(autoload 'highlight-indentation "highlight-indentation" "" t nil)
 
 (require 'arv-py)
 
@@ -65,7 +62,7 @@
               ;; nose
               (set (make-local-variable 'compile-command) "nosetests")
 
-              ;; company-mode (complete anything)
+              ;; company-mode
               (company-mode t)
               (local-set-key (kbd "s-SPC") 'company-complete)
 

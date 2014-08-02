@@ -8,7 +8,6 @@
 ;; (semblant al comportament de l'explorer de windows) i les assigna a
 ;; combinacions de tecles més accesibles.
 
-(require 'outline)
 
 (defun outline-body-p ()
   (save-excursion
@@ -63,20 +62,22 @@
           (t
            (show-subtree)))))
 
-(let ((map outline-mode-map))
-  (define-key map (kbd "s-<left>") 'outline-hide-more)
-  (define-key map (kbd "s-<right>") 'outline-show-more)
-  (define-key map (kbd "s-<up>") 'outline-previous-visible-heading)
-  (define-key map (kbd "s-<down>") 'outline-next-visible-heading))
+(eval-after-load "outline"
+  '(progn
+     (let ((map outline-mode-map))
+       (define-key map (kbd "s-<left>") 'outline-hide-more)
+       (define-key map (kbd "s-<right>") 'outline-show-more)
+       (define-key map (kbd "s-<up>") 'outline-previous-visible-heading)
+       (define-key map (kbd "s-<down>") 'outline-next-visible-heading))
 
-(let ((map outline-minor-mode-map))
-  (define-key map (kbd "s-<left>") 'outline-hide-more)
-  (define-key map (kbd "s-<right>") 'outline-show-more)
-  (define-key map (kbd "s-<up>") 'outline-previous-visible-heading)
-  (define-key map (kbd "s-<down>") 'outline-next-visible-heading)
-  ;; prova per moure blocs, no acava de funcionar
-  ;;(define-key map (kbd "S-s-<up>") 'outline-move-subtree-up)
-  ;;(define-key map (kbd "S-s-<down>") 'outline-move-subtree-down)
-)
+     (let ((map outline-minor-mode-map))
+       (define-key map (kbd "s-<left>") 'outline-hide-more)
+       (define-key map (kbd "s-<right>") 'outline-show-more)
+       (define-key map (kbd "s-<up>") 'outline-previous-visible-heading)
+       (define-key map (kbd "s-<down>") 'outline-next-visible-heading)
+       ;; prova per moure blocs, no acava de funcionar
+       ;;(define-key map (kbd "S-s-<up>") 'outline-move-subtree-up)
+       ;;(define-key map (kbd "S-s-<down>") 'outline-move-subtree-down)
+       )))
 
 
