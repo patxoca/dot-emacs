@@ -27,6 +27,8 @@
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
      (define-key python-mode-map '[(super l)] 'pylint)
+     (define-key python-mode-map '[(super L)] 'pep8)
+     (define-key python-mode-map '[(meta f1)] (lambda () (interactive) (info "(python.info) Python Module Index")))
      (define-key python-mode-map '[f7] 'next-error)
      (define-key python-mode-map '[f8] 'previous-error)
      (define-key python-mode-map '[f9] (lambda ()

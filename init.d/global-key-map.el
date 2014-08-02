@@ -25,12 +25,8 @@
 
 ;;; Code:
 
-;; (global-set-key '[home]             'beginning-of-line)
-;; (global-set-key '[(control home)]   'beginning-of-buffer)
-;; (global-set-key '[end]              'end-of-line)
-;; (global-set-key '[(control end)]    'end-of-buffer)
-;; (global-set-key '[f1]               'info)
-(global-set-key '[(control f1)]     (lambda () (interactive) (info "emacs")))
+(global-set-key '[(f1)] (lambda () (interactive) (info)))
+(global-set-key '[(control f1)] (lambda () (interactive) (info "emacs")))
 (global-set-key '[(super g)] 'goto-line)
 ;;; es un incordio tener que teclear yes para confirmar
 (global-set-key '[(control return)] "yes\C-m")
@@ -45,8 +41,10 @@
 (global-set-key [(control prior)] 'xah-previous-user-buffer) ; Ctrl+PageDown
 (global-set-key [(control next)] 'xah-next-user-buffer) ; Ctrl+PageUp
 
-(global-set-key [(super d)] 'delete-trailing-whitespace) ; super+d
-(global-set-key [(super t)] 'arv-switch-to-todo-or-visit-todo-file) ; super+d
+(global-set-key [(super d)] 'delete-trailing-whitespace)
+;; i3 defineix s-d per dmenu
+(global-set-key [(hyper d)] 'delete-trailing-whitespace)
+(global-set-key [(super t)] 'arv-switch-to-todo-or-visit-todo-file)
 
 (global-set-key [(control x) (control b)] 'electric-buffer-list)
                                         ; originalment 'list-buffers'.

@@ -46,6 +46,7 @@
   '(progn
      (define-key emacs-lisp-mode-map (kbd "s-SPC") 'company-complete)
      (define-key emacs-lisp-mode-map '[f9] (lambda () (interactive) (ert t)))
+     (define-key emacs-lisp-mode-map '[(meta f1)] (lambda () (interactive) (info "elisp")))
 
      (define-key emacs-lisp-mode-map (kbd "s-c") 'arv/startup-byte-recompile)
      (define-key emacs-lisp-mode-map (kbd "C-c e b") 'arv/eval-buffer)
