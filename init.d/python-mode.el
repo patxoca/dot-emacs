@@ -59,37 +59,37 @@
 
 
 (add-hook 'python-mode-hook
-          #'(lambda ()
-              ;; outline
-              (outline-minor-mode t)
-              (set
-               (make-local-variable 'outline-regexp)
-               "[\t ]*\\(class\\|def\\|if\\|elsif\\|else\\|while\\|for\\|try\\|except\\|finally\\)\\>")
+          (lambda ()
+            ;; outline
+            (outline-minor-mode t)
+            (set
+             (make-local-variable 'outline-regexp)
+             "[\t ]*\\(class\\|def\\|if\\|elsif\\|else\\|while\\|for\\|try\\|except\\|finally\\)\\>")
 
-              ;; autopair
-              (setq autopair-handle-action-fns
-                    (list #'autopair-default-handle-action
-                          #'autopair-python-triple-quote-action))
+            ;; autopair
+            (setq autopair-handle-action-fns
+                  (list #'autopair-default-handle-action
+                        #'autopair-python-triple-quote-action))
 
-              ;; ressalta les línies on hi ha un breakpoint
-              (highlight-lines-matching-regexp "^[[:space:]]*import i?pdb")
-              (highlight-lines-matching-regexp "^[[:space:]]*i?pdb.set_trace()")
+            ;; ressalta les línies on hi ha un breakpoint
+            (highlight-lines-matching-regexp "^[[:space:]]*import i?pdb")
+            (highlight-lines-matching-regexp "^[[:space:]]*i?pdb.set_trace()")
 
-              (highlight-lines-matching-regexp "sefl")
+            (highlight-lines-matching-regexp "sefl")
 
-              ;; recicla la comanda 'compile' per executar els tests amb
-              ;; nose
-              (set (make-local-variable 'compile-command) "nosetests")
+            ;; recicla la comanda 'compile' per executar els tests amb
+            ;; nose
+            (set (make-local-variable 'compile-command) "nosetests")
 
-              ;; company-mode
-              (company-mode t)
+            ;; company-mode
+            (company-mode t)
 
-              ;; ressalta els nivell d'indentacio
-              (highlight-indentation)
+            ;; ressalta els nivell d'indentacio
+            (highlight-indentation)
 
-              ;; pylint/flymake-pylint
-              (pylint-add-menu-items)
-              (pylint-add-key-bindings)))
+            ;; pylint/flymake-pylint
+            (pylint-add-menu-items)
+            (pylint-add-key-bindings)))
 
 
 ;;; python-mode.el ends here

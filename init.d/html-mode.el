@@ -16,8 +16,8 @@
      (define-key zencoding-mode-keymap '[(control ?j)] nil)))
 
 (add-hook 'html-mode-hook
-          #'(lambda ()
-              (rainbow-mode t)
-              (zencoding-mode t)))
+          (lambda ()
+            (rainbow-mode t)
+            (zencoding-mode t)))
 
 ;;; html-mode.el ends here

@@ -30,12 +30,12 @@
      (define-key emacs-lisp-mode-map '[f9] (lambda () (interactive) (ert t)))))
 
 (add-hook 'emacs-lisp-mode-hook
-          #'(lambda ()
-              (company-mode t)
-              (eldoc-mode t)
-              (paredit-mode 1)
-              (elisp-slime-nav-mode 1)
-              (pretty-lambda-mode t)
-              ))
+          (lambda ()
+            (company-mode t)
+            (eldoc-mode t)
+            (paredit-mode 1)
+            (elisp-slime-nav-mode 1)
+            (pretty-lambda-mode t)
+            ))
 
 ;;; 'emacs-lisp.el ends here

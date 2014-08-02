@@ -29,8 +29,8 @@
   '(progn
      (define-key html-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)
      (add-hook 'html-mode-hook
-               #'(lambda ()
-                   (when (arv/django-file-belongs-to-app-p buffer-file-name)
-                     (pony-tpl-mode))))))
+               (lambda ()
+                 (when (arv/django-file-belongs-to-app-p buffer-file-name)
+                   (pony-tpl-mode))))))
 
 ;;; 'python-django.el ends here

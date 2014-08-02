@@ -18,12 +18,12 @@
 (add-to-list 'auto-mode-alist '("\\.pm$" . cperl-mode))
 
 (add-hook 'cperl-mode-hook
-	  '(lambda()
-         ;; activa el resaltat d'espai en blanc al final de línia
-         (set-variable 'show-trailing-whitespace t)
-	     (setq cperl-indent-level 4)
-	     (setq cperl-hairy t)
-	     (turn-on-font-lock)))
+	  (lambda()
+        ;; activa el resaltat d'espai en blanc al final de línia
+        (set-variable 'show-trailing-whitespace t)
+        (setq cperl-indent-level 4)
+        (setq cperl-hairy t)
+        (turn-on-font-lock)))
 
 
 

@@ -16,10 +16,10 @@
 
 
 (add-hook 'prog-mode-hook
-          #'(lambda ()
-              (linum-mode 1)
-              (show-paren-mode 1)
-              (set-variable 'show-trailing-whitespace t)
-              ))
+          (lambda ()
+            (linum-mode 1)
+            (show-paren-mode 1)
+            (set-variable 'show-trailing-whitespace t)
+            ))
 
 ;;; prog-mode.el ends here

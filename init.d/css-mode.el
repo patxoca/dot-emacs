@@ -12,8 +12,8 @@
 
 
 (add-hook 'css-mode-hook
-          #'(lambda ()
-              (rainbow-mode t)
-              ))
+          (lambda ()
+            (rainbow-mode t)
+            ))
 
 ;;; css-mode.el ends here
