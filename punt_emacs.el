@@ -83,17 +83,6 @@ s'inclouran en `load-path'")
     (message (arv/startup-get-absolute-path dir))
     (byte-recompile-directory (arv/startup-get-absolute-path dir) 0)))
 
-(defun -package-p (name)
-  "Return t if NAME is an available package."
-  (unless package-archive-contents
-    (package-refresh-contents))
-  (not (null (assoc name package-archive-contents))))
-
-(defun arv/require-package (pkg)
-  (when (and (-package-p pkg)
-             (not (package-installed-p pkg)))
-    (package-install pkg)))
-
 
 ;; funcions per la inicialització
 
