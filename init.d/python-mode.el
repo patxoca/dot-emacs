@@ -19,6 +19,114 @@
 
 (require 'arv-py)
 
+
+;;                              pymacs
+
+(require 'pymacs)
+
+(defun fp-maybe-pymacs-reload ()
+  "Recarrega automaticament els arxius .py guardats dins ~/emacslib."
+
+  ;; @TODO: alex 2006-08-15 00:28:32 : no recordo el perque d'aquesta
+  ;; funcio, sembla una mena de reload al guardar, pero ignora el que
+  ;; hi ha dins de ~/prog, que tambe apareix a pymacs-load-path.
+  ;;
+  ;; Crec que le problema de ~/prog es que hi han coses que no tenen
+  ;; res a veure amb pymacs i per aixo l'ignoro, pero entonces esta
+  ;; funcio perd tota utilitat, no escric python dins emacslib!!
+  ;;
+  ;; Per fer-ho ben fet caldria fer customizable la variable
+  ;; pymacs-load-path i tindre en compte tots els elements de la
+  ;; llista al determinar si cal que pymacs recarregui l'arxiu
+
+  (let ((pymacsdir (expand-file-name emacs-startup-dir)))
+    (when (and (string-equal (file-name-directory buffer-file-name)
+                             pymacsdir)
+               (string-match "\\.py\\'" buffer-file-name))
+      (princ (concat "pymacs: recarregant " buffer-file-name))
+      (pymacs-load (substring buffer-file-name 0 -3)))))
+
+;; (add-hook 'after-save-hook 'fp-maybe-pymacs-reload)
+
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-autoload "pymacs")
+(eval-after-load "pymacs"
+  '(add-to-list 'pymacs-load-path (arv/startup-get-absolute-path "shared/pymacs")))
+
+
+;;                     rope refactoring library
+
+(eval-after-load "pymacs"
+  '(progn
+     (message "Loading ropemacs ...")
+     (condition-case ex
+         (progn
+           (pymacs-load "ropemacs" "rope-")
+           (message "ropemacs loaded"))
+       ('error (message "ropemacs failed")))))
+
+
+;;                         nose test runner
+
+(eval-after-load "python"
+  '(progn
+     (require 'nose-mode)
+     (nose-mode-setup-keymap)
+     (add-hook 'python-mode-hook
+               'nose-mode-enable-if-test-module)))
+
+
+;;                             pylookup
+
+(autoload 'pylookup-lookup "pylookup")
+(autoload 'pylookup-update "pylookup")
+
+(eval-after-load "python"
+  '(progn
+     (define-key python-mode-map [(control c) (h)] 'pylookup-lookup)))
+
+(add-hook 'python-mode-hook
+          (lambda()
+            (let ((pylookup-dir (arv/startup-get-absolute-path "site-lisp/pylookup")))
+              (setq pylookup-program (arv/path-join pylookup-dir "pylookup.py"))
+              (setq pylookup-db-file (arv/path-join pylookup-dir "pylookup.db"))
+              )))
+
+
+;;                             flymake
+
+(when (load "flymake" t)
+  (defun flymake-pylint-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "epylint" (list local-file))))
+
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pylint-init)))
+
+
+;;                            pydoc info
+
+(autoload 'info-lookup-add-help "info-look" "" nil nil)
+
+(eval-after-load "python"
+  (info-lookup-add-help
+   :mode 'python-mode
+   :parse-rule 'pydoc-info-python-symbol-at-point
+   :doc-spec
+   '(("(python)Index" pydoc-info-lookup-transform-entry)
+     ("(django14)Index" pydoc-info-lookup-transform-entry))))
+
+
+;;                              python
+
 (eval-after-load "python"
   '(progn
      (modify-syntax-entry ?_ "w" python-mode-syntax-table)
