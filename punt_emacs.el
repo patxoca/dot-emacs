@@ -40,7 +40,7 @@
   "Nom de la instancia.")
 
 (defvar arv/load-path '("site-lisp" "site-lisp/pylookup"
-                        "site-lisp/eproject" "my-lisp")
+                        "site-lisp/eproject" "lisp")
   "Directoris addicionals, relatius a `emacs-startup-dir', que
 s'inclouran en `load-path'")
 
