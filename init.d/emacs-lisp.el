@@ -55,7 +55,7 @@
      (define-key emacs-lisp-mode-map (kbd "C-c e e") 'toggle-debug-on-error)
      (define-key emacs-lisp-mode-map (kbd "C-c e f") 'emacs-lisp-byte-compile-and-load)
      (define-key emacs-lisp-mode-map (kbd "C-c e l") 'find-library)
-     (define-key emacs-lisp-mode-map (kbd "C-c e m") 'emacs-lisp-mode)
+     (define-key emacs-lisp-mode-map (kbd "C-c e m") 'macrostep-mode)
      (define-key emacs-lisp-mode-map (kbd "C-c e r") 'eval-region)
      (define-key emacs-lisp-mode-map (kbd "C-c e s") 'arv/scratch)
      (define-key emacs-lisp-mode-map (kbd "C-c e v") 'find-variable)
