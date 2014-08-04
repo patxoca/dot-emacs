@@ -52,7 +52,15 @@
 
 ;;;###autoload
 (defun arv/generate-lab-faces (name count &optional lightness saturation group-name)
-  ""
+  "Generate `count' faces named `<name>-01-face' to
+`<name>-nn-face' within the group `group-name'.
+
+`name' and `group-name' must be strings, not symbols.
+
+* `lightness' defaults to 45
+* `saturation' defaults to 40
+* `group-name' defaults to `<name>-faces'
+"
   (let ((group-name (intern (or group-name (concat name "-faces"))))
         (lightness (or lightness 45))
         (saturation (or saturation 40))

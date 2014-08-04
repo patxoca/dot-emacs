@@ -13,7 +13,7 @@
 
 (eval-after-load "ebuff-menu"
   '(progn
-     (arv/generate-lab-faces "electric-buffer" 15)
+     (arv/generate-lab-faces "electric-buffer" 15 75)
      (setq buffer-menu-buffer-font-lock-keywords
            '(
              (".*Dired.*"             . 'electric-buffer-01-face) ; Dired
