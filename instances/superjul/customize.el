@@ -5,8 +5,10 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit default :height 113))))
  '(compilation-error ((t (:inherit font-lock-warning-face :underline nil :weight normal))))
+ '(cursor ((t (:background "white"))))
  '(highlight ((t nil)))
- '(highlight-indent-face ((t (:background "gray27"))))
+ '(highlight-indent-face ((t (:background "#073642"))))
+ '(wg-mode-line-face ((t (:foreground "blue"))))
  '(zencoding-preview-input ((t (:box 1)))))
 
 (custom-set-variables
@@ -34,7 +36,7 @@
  '(cperl-hairy t)
  '(cperl-indent-level 8)
  '(current-language-environment "UTF-8")
- '(custom-enabled-themes (quote (solarized-dark)))
+ '(custom-enabled-themes (quote (tango-dark)))
  '(custom-safe-themes (quote ("e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(default-frame-alist (quote ((menu-bar-lines . 1) (tool-bar-lines . 0))))
  '(deft-auto-save-interval 10.0)
@@ -92,7 +94,7 @@
  '(python-indent-guess-indent-offset nil)
  '(python-pep8-options (quote ("--repeat" "--ignore=E203,E201,E202,E123")))
  '(ropemacs-enable-autoimport t)
- '(safe-local-variable-values (quote ((python-shell-interpreter-args . "/home/alex/prog/practicum2/trunk/project/manage.py shell") (python-shell-interpreter-args . "/home/alex/prog/practicum2/project/manage.py shell") (python-shell-completion-string-code . "';'.join(get_ipython().Completer.all_completions('''%s'''))
+ '(safe-local-variable-values (quote ((ispell-local-dictionay . "british") (ispell-local-dictionay . british) (python-shell-interpreter-args . "/home/alex/prog/practicum2/trunk/project/manage.py shell") (python-shell-interpreter-args . "/home/alex/prog/practicum2/project/manage.py shell") (python-shell-completion-string-code . "';'.join(get_ipython().Completer.all_completions('''%s'''))
 ") (python-shell-completion-module-string-code . "';'.join(module_completion('''%s'''))
 ") (python-shell-completion-setup-code . "from IPython.core.completerlib import module_completion") (python-shell-interpreter-args . "/home/alex/prog/practicum2/curs1415/project/manage.py shell") (python-shell-interpreter . "python") (ispell-dictionary . british) (ispell-local-dictionary . british) (encoding . utf-8))))
  '(scroll-bar-mode nil)
@@ -102,6 +104,7 @@
  '(show-trailing-whitespace nil)
  '(srctool-todo-ignore-directories (quote (".emacs~" "CVS" "RCS" ".svn" "epydoc")))
  '(srctool-todo-labels (quote ("@TODO:" "@FIXME:" "@NOTE:" "@FIXME210:")))
+ '(svn-status-default-log-arguments (quote ("-v" "--stop-on-copy")))
  '(svn-status-verbose nil)
  '(tab-width 4)
  '(template-auto-insert t)
@@ -115,5 +118,6 @@
  '(vc-annotate-color-map (quote ((20 . "#BC8383") (40 . "#CC9393") (60 . "#DFAF8F") (80 . "#D0BF8F") (100 . "#E0CF9F") (120 . "#F0DFAF") (140 . "#5F7F5F") (160 . "#7F9F7F") (180 . "#8FB28F") (200 . "#9FC59F") (220 . "#AFD8AF") (240 . "#BFEBBF") (260 . "#93E0E3") (280 . "#6CA0A3") (300 . "#7CB8BB") (320 . "#8CD0D3") (340 . "#94BFF3") (360 . "#DC8CC3"))))
  '(vc-annotate-very-old-color "#DC8CC3")
  '(w3m-session-crash-recovery nil)
+ '(wg-morph-on nil)
  '(zencoding-indentation 2))
 
