@@ -1,8 +1,0 @@
-# @TODO: un exemple de todo de varies linees en un arxiu de text per
-# fer proves en un arxiu de text per fer proves en un arxiu de text
-# per fer proves en un arxiu de text per fer proves en un arxiu de
-# text per fer proves
-#
-# @FIXME: i a continuacio un fixme tambe en varies linees per fer mes
-# proves
-
