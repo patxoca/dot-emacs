@@ -58,6 +58,7 @@
 
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key [pause] 'toggle-window-dedicated)
+(global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/novetats_emacs.org")))
 
 ;;; eproject
 (global-set-key '[(control c) (p) (o)] 'eproject-open)
