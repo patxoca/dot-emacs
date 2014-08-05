@@ -80,13 +80,15 @@ and appear in the string DELIMITERS.
 \"+foo+\" \"$+\" -> \"foo\"
 \"+foo-\" \"+-\" -> \"+foo-\"
 "
-  (let ((delimiters (delete "" (split-string delimiters "")))
-        (left-char (substring text 0 1))
-        (right-char (substring text (1- (length text)))))
-    (if (and (string= left-char right-char)
-             (member left-char delimiters))
-        (substring text 1 (1- (length text)))
-      text)))
+  (if (< (length text) 2)
+      text
+    (let ((delimiters (delete "" (split-string delimiters "")))
+          (left-char (substring text 0 1))
+          (right-char (substring text (1- (length text)))))
+      (if (and (string= left-char right-char)
+               (member left-char delimiters))
+          (substring text 1 (1- (length text)))
+        text))))
 
 (defun arv/string-replace-unwanted-chars (value predicate &optional replacement)
   "Returns a string built replacing the chars from the string
