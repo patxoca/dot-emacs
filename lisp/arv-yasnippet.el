@@ -72,9 +72,37 @@ substring, no produeix cap error si es sobrepassen.
 "
   (substring text (max 0 start) (min end (length text))))
 
-(defun arv-chop (c s)
-  "s-chop-prefix + s-chop-suffix"
-  (s-chop-suffix c (s-chop-prefix c s)))
+(defun arv/string-strip-delimiters (text delimiters)
+  "Strip trailing and leading chars from TEXT if they are equal
+and appear in the string DELIMITERS.
+
+\"+foo+\" \"$\" -> \"+foo+\"
+\"+foo+\" \"$+\" -> \"foo\"
+\"+foo-\" \"+-\" -> \"+foo-\"
+"
+  (let ((delimiters (delete "" (split-string delimiters "")))
+        (left-char (substring text 0 1))
+        (right-char (substring text (1- (length text)))))
+    (if (and (string= left-char right-char)
+             (member left-char delimiters))
+        (substring text 1 (1- (length text)))
+      text)))
+
+(defun arv/string-replace-unwanted-chars (value predicate &optional replacement)
+  "Returns a string built replacing the chars from the string
+VALUE for whom the function PREDICATE returns nil with the string
+REPLACEMENT.
+
+If REPLACEMENT is omitted or nil the empty string is used as the
+replacement."
+  (let ((replacement (or replacement "")))
+    (mapconcat (lambda (x) (cond
+                       ((string= x "") "")
+                       ((funcall predicate x) x)
+                       (t replacement)))
+               (split-string value "")
+               "")))
+
 
 ;;    _                                _       _
 ;;   (_) __ ___   ____ _ ___  ___ _ __(_)_ __ | |_
@@ -83,10 +111,22 @@ substring, no produeix cap error si es sobrepassen.
 ;;  _/ |\__,_| \_/ \__,_|___/\___|_|  |_| .__/ \__|
 ;; |__/                                 |_|
 
+(defun arv/js-make-identifier (text)
+  "Replace invalid chars from TEXT with an underscore in order to
+make a valid javascrip identifier."
+  (let ((result (arv/string-replace-unwanted-chars
+                 text (lambda (x) (string-match "[$a-zA-Z0-9_]" x)) "_")))
+    (if (string-match "^[$a-zA-Z_]" result)
+        result
+      (concat "_" result))))
+
 (defun arv-yas-dojo-params-from-modules (text)
-  ""
-  (s-join ", " (mapcar (lambda (x)
-                         (car (last (s-split "/" (arv-chop "\"" (s-trim x))))))
+  "Given the modules of and AMD `define' generates the names of
+the corresponding function parametres.
+
+'\"dojo/foo\", \"digit/a_plugin!parameters\"' -> 'foo, a_plugin'
+"
+  (s-join ", " (mapcar (lambda (x) (arv/js-make-identifier (car (last (s-split "/" (car (s-split "!" (arv/string-strip-delimiters (s-trim x) "'\""))))))))
                        (s-split "," text))))
 
 
