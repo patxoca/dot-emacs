@@ -120,7 +120,7 @@ make a valid javascrip identifier."
         result
       (concat "_" result))))
 
-(defun arv-yas-dojo-params-from-modules (text)
+(defun arv/yas-js-amd-params-from-modules (text)
   "Given the modules of and AMD `define' generates the names of
 the corresponding function parametres.
 
