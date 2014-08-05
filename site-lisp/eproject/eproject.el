@@ -749,8 +749,10 @@ do not belong to  project files"
         (push (cons 'eproject-mode map) minor-mode-map-alist)
         )
     (when f
-      (define-key map [M-right] 'eproject-nextfile)
-      (define-key map [M-left] 'eproject-prevfile)
+      ;; (define-key map [M-right] 'eproject-nextfile)
+      ;; (define-key map [M-left] 'eproject-prevfile)
+      (define-key map [C-next] 'eproject-nextfile)
+      (define-key map [C-prior] 'eproject-prevfile)
       (define-key map [C-f5] 'eproject-dired)
       (let ((n 0) fn s)
         (dolist (a prj-tools)
