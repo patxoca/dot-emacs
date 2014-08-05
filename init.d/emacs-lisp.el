@@ -34,6 +34,14 @@
     (if (memq current-mode lisp-mode)
         (funcall current-mode))))
 
+(defun arv/emacs-lisp-insert-grave ()
+  "Inserts `' within a string or just ` otherwise."
+  (interactive)
+  (if (nth 8 (syntax-ppss))
+      (progn
+        (insert "`'")
+        (backward-char 1))
+    (insert "`")))
 
 (eval-after-load "paredit"
   '(progn
@@ -47,7 +55,7 @@
      (define-key emacs-lisp-mode-map (kbd "s-SPC") 'company-complete)
      (define-key emacs-lisp-mode-map '[f9] (lambda () (interactive) (ert t)))
      (define-key emacs-lisp-mode-map '[(meta f1)] (lambda () (interactive) (info "elisp")))
-
+     (define-key emacs-lisp-mode-map (kbd "`") 'arv/emacs-lisp-insert-grave)
      (define-key emacs-lisp-mode-map (kbd "s-c") 'arv/startup-byte-recompile)
      (define-key emacs-lisp-mode-map (kbd "C-c e b") 'arv/eval-buffer)
      (define-key emacs-lisp-mode-map (kbd "C-c e c") 'cancel-debug-on-entry)
