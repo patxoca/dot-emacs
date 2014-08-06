@@ -47,7 +47,7 @@ s'inclouran en `load-path'")
       filename
     (arv/path-join emacs-startup-dir filename)))
 
-(defun arv/get-instance-name ()
+(defun arv/startup-get-instance-name ()
   (let ((candidate (or
                     (getenv "EMACS_INSTANCE")
                     (car (split-string (system-name) "\\.")))))
@@ -56,7 +56,7 @@ s'inclouran en `load-path'")
       "default")))
 
 (defun arv/startup-get-path-in-instance (filename &optional instance)
-  (let ((instance-name (or instance (arv/get-instance-name))))
+  (let ((instance-name (or instance (arv/startup-get-instance-name))))
     (arv/startup-get-absolute-path
      (arv/path-join "instances" instance-name filename))))
 
