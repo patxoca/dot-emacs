@@ -1,6 +1,6 @@
 ;;; -*- encoding: utf-8 -*-
 
-;;; punt_emacs.el --- arxiu de configuracio d'emacs
+;;; init.el --- arxiu de configuracio d'emacs
 ;;; (c) 1998-2005 Alexis Roda
 ;;; $Id$
 
@@ -24,20 +24,10 @@
 (message " (_)___|_| |_| |_|\\__,_|\\___|___/")
 
 
-(defun arv/get-instance-name ()
-  (or
-   (getenv "EMACS_INSTANCE")
-   (let ((sys-name (system-name)))
-     (substring sys-name 0 (string-match "\\." sys-name)))))
-
-
 ;; variables
 
 (defvar emacs-startup-dir "~/.emacs.d/conf.d"
   "Directori on l'usuari guarda el codi elisp.")
-
-(defvar instance-name (arv/get-instance-name)
-  "Nom de la instancia.")
 
 (defvar arv/load-path '("site-lisp" "site-lisp/pylookup"
                         "site-lisp/eproject" "lisp")
@@ -57,8 +47,16 @@ s'inclouran en `load-path'")
       filename
     (arv/path-join emacs-startup-dir filename)))
 
+(defun arv/get-instance-name ()
+  (let ((candidate (or
+                    (getenv "EMACS_INSTANCE")
+                    (car (split-string (system-name) "\\.")))))
+    (if (file-accessible-directory-p (arv/startup-get-path-in-instance "" candidate))
+        candidate
+      "default")))
+
 (defun arv/startup-get-path-in-instance (filename &optional instance)
-  (let ((instance-name (or instance instance-name)))
+  (let ((instance-name (or instance (arv/get-instance-name))))
     (arv/startup-get-absolute-path
      (arv/path-join "instances" instance-name filename))))
 
