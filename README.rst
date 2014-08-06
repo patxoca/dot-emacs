@@ -20,9 +20,6 @@ found in the instances's ``init.d`` are run in order.
 Notes
 =====
 
-``punt_emacs.el`` is the *dot-emacs* file (*punt* means *dot* in
-catalan).
-
 In order to use this config adjust the value of the variable
 ``emacs-startup-dir``. For historical reasons my config is stored in
 ``~/emacslib`` not in ``~/.emacs.d``.
