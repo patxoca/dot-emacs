@@ -33,7 +33,7 @@
 
 ;; variables
 
-(defvar emacs-startup-dir "~/emacslib"
+(defvar emacs-startup-dir "~/.emacs.d/conf.d"
   "Directori on l'usuari guarda el codi elisp.")
 
 (defvar instance-name (arv/get-instance-name)

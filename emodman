@@ -5,7 +5,7 @@
 
 # falta validar millor els parametres que rep el script
 
-EMACSLIB=~/emacslib
+EMACSLIB=~/.emacs.d/conf.d
 INSTANCIES=$EMACSLIB/instances
 INITD=$EMACSLIB/init.d
 EMACS=/usr/bin/emacs
