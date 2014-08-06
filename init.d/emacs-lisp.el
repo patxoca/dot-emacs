@@ -76,6 +76,7 @@
             (company-mode t)
             (eldoc-mode t)
             (paredit-mode 1)
+            (autopair-mode 0) ;; coflicts with paredit
             (elisp-slime-nav-mode 1)
             (pretty-lambda-mode t)
             ))
