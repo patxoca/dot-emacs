@@ -76,4 +76,12 @@
   (dolist (p required-packages)
     (-arv/require-package p)))
 
+;;;###autoload
+(defun arv/check-required-packages ()
+  "Check if `required.packages' is up to date."
+  (interactive)
+  (dolist (pkg package-alist)
+    (unless (member (car pkg) required-packages)
+      (message "Package missing: %s" (car pkg)))))
+
 ;;; 00-ensure-packages.el ends here
