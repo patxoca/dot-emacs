@@ -62,7 +62,8 @@ Si 'text' es 'CamelCase' i 'sep' es '-' retorna 'camel-case'.
 Es suposa que 'text' es un identificador valid escrit en
 CamelCase. 'sep' es un string.
 "
-  (mapconcat 'downcase (s-split-words text) sep))
+  (with-syntax-table (standard-syntax-table)
+    (mapconcat 'downcase (s-split-words text) sep)))
 
 (defun arv-yas-substring (text start end)
   "Retorna un substring.
