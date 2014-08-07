@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: author
+# key: author
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# --
+\`(arv/yas-author-name)\`

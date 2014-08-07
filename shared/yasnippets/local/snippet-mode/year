@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: year
+# key: year
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# --
+\`(arv/yas-year)\`
