@@ -65,6 +65,12 @@ CamelCase. 'sep' es un string.
   (with-syntax-table (standard-syntax-table)
     (mapconcat 'downcase (s-split-words text) sep)))
 
+(defun arv/yas-camelize (text)
+  "Retorna TEXT 'camelitzat'.
+"
+  (with-syntax-table (standard-syntax-table)
+    (mapconcat 'capitalize (s-split-words text) "")))
+
 (defun arv-yas-substring (text start end)
   "Retorna un substring.
 
@@ -106,6 +112,42 @@ replacement."
                (split-string value "")
                "")))
 
+
+;;                           _           _
+;;   __ _ ___ ___  ___  _ __| |_ ___  __| |
+;;  / _` / __/ __|/ _ \| '__| __/ _ \/ _` |
+;; | (_| \__ \__ \ (_) | |  | ||  __/ (_| |
+;;  \__,_|___/___/\___/|_|   \__\___|\__,_|
+
+(defun arv/yas-today (&optional fmt)
+  (let ((fmt (or fmt "%Y-%m-%d")))
+    (format-time-string fmt)))
+
+(defun arv/yas-year ()
+  (format-time-string "%Y"))
+
+(defun arv/yas-buffer-name ()
+  (buffer-name))
+
+(defun arv/yas-buffer-name-upcase ()
+  (upcase (arv/yas-buffer-name)))
+
+(defun arv/yas-buffer-name-sans ()
+  (file-name-sans-extension (arv/yas-buffer-name)))
+
+(defun arv/yas-buffer-name-sans-upcase ()
+  (upcase (arv/yas-buffer-name-sans)))
+
+(defun arv/yas-buffer-name-sans-camelcase ()
+  (arv/yas-camelize (arv/yas-buffer-name-sans)))
+
+;; @TODO: alex 2014-08-07 12:47:33 : both author name and email must
+;; be customizable.
+(defun arv/yas-author-name ()
+  "Alexis Roda")
+
+(defun arv/yas-author-email ()
+  "alexis.roda.villalonga@gmail.com")
 
 ;;    _                                _       _
 ;;   (_) __ ___   ____ _ ___  ___ _ __(_)_ __ | |_

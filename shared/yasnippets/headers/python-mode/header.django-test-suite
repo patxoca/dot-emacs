@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: django test suite
+# key: header
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# --
+# -*- coding: utf-8 -*-
+
+# $Id: $
+
+
+from django.contrib.auth.models import User
+from django.test import TestCase
+from django.test.client import RequestFactory
+from django.utils import unittest
+
+# from app import models as app_models
+
+
+class Test`(arv/yas-buffer-name-sans-camelcase)`(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_superuser("test", "", password="123456")
+        self.client.login(username="test", password="123456")
+
+    def test_$1(self):
+        $0
+

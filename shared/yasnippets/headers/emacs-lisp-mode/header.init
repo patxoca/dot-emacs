@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: elisp init module
+# key:  header
+# type: snippet
+# --
+;;; `(arv/yas-buffer-name)` --- $1
+
+;; $Id:$
+
+
+;;; Commentary:
+;;
+
+
+;;; History:
+;;
+
+
+;;; Code:
+
+(require '`(arv/yas-buffer-name-sans)`)
+
+$0
+
+;;; `(arv/yas-buffer-name)` ends here
