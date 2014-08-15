@@ -12,7 +12,7 @@
 
 ;;; Code:
 
-(autoload 'pony-tpl "pony-tpl" "" t nil)
+(autoload 'pony-tpl-mode "pony-tpl" "" t nil)
 (autoload 'arv/django-file-belongs-to-app-p "arv-python-django" "" t nil)
 
 ;; configuració dels modes involucrats
