@@ -7,8 +7,8 @@
  * Module: ${1:name}
  * Description:
  *
- * Author: Alexis Roda
- * e-mail: alexis.roda.villalonga@gmail.com
+ * Author: `(arv/yas-author-name)`
+ * e-mail: `(arv/yas-author-email)`
  * $Id:$
  ************************************************************************/
 
