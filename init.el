@@ -99,14 +99,13 @@ s'inclouran en `load-path'")
        (expand-file-name "~/.emacs.d/elpa/package.el")))
   (package-initialize))
 
-(defun arv/startup-initialize-instance ()
+(defun arv/startup-load-autoloads ()
   (dolist (dir arv/load-path)
-    (load-file (arv/startup-get-absolute-path (arv/path-join dir "loaddefs.el"))))
+    (load-file (arv/startup-get-absolute-path (arv/path-join dir "loaddefs.el")))))
+
+(defun arv/startup-initialize-instance ()
   (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d" "common"))
-  (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d"))
-  (let ((postload (arv/startup-get-path-in-instance "postload.el")))
-    (if (file-readable-p postload)
-        (load postload))))
+  (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d")))
 
 
 ;; inicialització
@@ -114,6 +113,7 @@ s'inclouran en `load-path'")
 (arv/startup-configure-load-path)
 (arv/startup-configure-custom-file)
 (arv/startup-package-initialize)
+(arv/startup-load-autoloads)
 (arv/startup-initialize-instance)
 
 ;;; codi afegit per emacs per activar comandes "perilloses" per usuaris nous
