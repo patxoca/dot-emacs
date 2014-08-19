@@ -18,4 +18,6 @@
 (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-completing-prompt))
 (yas-global-mode 1)
 
+(add-to-list 'auto-mode-alist '("\\.yas$" . snippet-mode))
+
 ;;; yasnippet.el ends here
