@@ -1,11 +1,13 @@
 # -*- mode: snippet -*-
 # name: python empty module
+# $Id$
 # key: header
 # type: snippet
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: e2f58f29-9fb4-4609-8d1f-9fbb19d58f76
 # --
 # -*- coding: utf-8 -*-
 
-# $Id$
+# $Id:\$
 
 $0

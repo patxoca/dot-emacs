@@ -1,13 +1,15 @@
 # -*- mode: snippet -*-
 # name: django form view (class based)
-# key:  header
+# $Id$
+# key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: e51d824d-97c2-4e59-9836-917cd6f66736
 # --
 # -*- coding: utf-8 -*-
 
-# $Id$
+# $Id:\$
 
 from django import forms
 from django.contrib.auth.decorators import login_required
@@ -54,5 +56,3 @@ class $2OkView(TemplateView) :
     """Mostra un missatge d'Ok.
     """
     template_name = "${1:$(car (last (split-string text "\\\\.")))}/${2:$(arv-yas-uncamelize text "_")}_ok.html"
-
-

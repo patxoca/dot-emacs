@@ -1,13 +1,15 @@
 # -*- mode: snippet -*-
 # name: django view (functional)
+# $Id$
 # key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 98bfd520-0821-46ca-82f5-9d42fd9624a9
 # --
 # -*- coding: utf-8 -*-
 
-# $Id$
+# $Id:\$
 
 from django import forms
 from django.contrib.auth.decorators import login_required

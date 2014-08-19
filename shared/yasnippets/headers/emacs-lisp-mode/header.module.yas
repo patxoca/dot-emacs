@@ -1,11 +1,14 @@
 # -*- mode: snippet -*-
 # name: elisp module
+# $Id$
 # key:  header
 # type: snippet
+# contributor:Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: d95cea9a-2a50-4811-9af8-ecc091642725
 # --
 ;;; `(arv/yas-buffer-name)` --- $1
 
-;; $Id$
+;; $Id:\$
 
 ;; Emacs List Archive Entry
 ;; Filename: `(arv/yas-buffer-name)`
@@ -50,7 +53,7 @@
 ;;
 
 (defvar `(arv/yas-buffer-name-sans)`-version-id
-  "$Id$"
+  "$Id:\$"
   "Latest modification time and version number.")
 
 ;;; Code:

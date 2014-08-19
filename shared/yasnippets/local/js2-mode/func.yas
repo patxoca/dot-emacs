@@ -1,6 +1,10 @@
-# -*- coding: utf-8 -*-
-#name: function ...(...)
-#key: func
+# -*- mode: snippet -*-
+# name: function ...(...)
+# $Id$
+# key: func
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 244249f684d-9546-4a77-b4c3-497df6abc475
 # --
 function ${1:name}($2) {
     // Sumari:

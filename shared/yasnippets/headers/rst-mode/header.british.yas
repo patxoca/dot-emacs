@@ -1,9 +1,12 @@
 # -*- mode: snippet -*-
 # name: english document
+# $Id$
 # key:  header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 4f596bdf-71f0-4286-9f08-a88a0f19abc1
+# --
 .. -*- ispell-local-dictionary: "british" -*-
 
 $0

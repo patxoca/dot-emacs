@@ -1,12 +1,14 @@
 # -*- mode: snippet -*-
 # name: header.python-test-suite
+# $Id$
 # key: header
 # type: snippet
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 19be4318-57e1-43d8-8370-bb25100f20da
 # --
 # -*- coding: utf-8 -*-
 
-# $Id$
+# $Id:\$
 
 
 import unittest
@@ -22,5 +24,3 @@ class Test${1:Name}(unittest.TestCase):
 
     def test_$0(self):
         pass
-
-

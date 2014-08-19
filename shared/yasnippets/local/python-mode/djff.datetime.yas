@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Form datetime field
+# $Id$
 # group: django
 # key: djff
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: b64ccaad-03dc-4d90-bb24-4139296fc34d
 # --
 ${1:name} = forms.DateTimeField(
     label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),

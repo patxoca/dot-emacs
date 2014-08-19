@@ -1,7 +1,9 @@
 # -*- mode: snippet; encoding: utf-8 -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: codi inline ``...``
+# $Id$
 # group: sphinx
 # key: cod
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 95bec852-9d3a-46c4-8be8-a218769f0f52
 # --
 \`\`$0\`\`

@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
 # name: python with GPL licencse
+# $Id$
 # key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: fbd2f943-5c71-4fd6-977f-a3811a175f60
 # --
 # -*- coding: utf-8 -*-
 
@@ -30,11 +32,11 @@
 
 """
 
-$Id$
+$Id:\$
 """
 
 try:
-    __version__ = int("$Id$".split(' ')[2])
+    __version__ = int("$Id:\$".split(' ')[2])
 except :
     __version__ = 0
 

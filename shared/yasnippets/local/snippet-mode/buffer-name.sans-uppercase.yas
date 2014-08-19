@@ -1,7 +1,9 @@
 # -*- mode: snippet -*-
 # name: buffer file name without extension uppercased
+# $Id$
 # key: bufnam
 # type: snippet
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 4a74febc-8da3-4098-9ad2-5443c3f9f475
 # --
 \`(arv/yas-buffer-name-sans-upcase)\`

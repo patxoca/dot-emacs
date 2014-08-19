@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Model OneToOneField
+# $Id$
 # group: django
 # key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: e963e2de-2880-4b89-ab43-6d881c9e656a
 # --
 ${1:name} = models.OneToOneField(
     "${1:$(capitalize text)}",

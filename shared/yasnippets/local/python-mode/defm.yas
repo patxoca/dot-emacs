@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
-# -*- coding: utf-8 -*-
 # name: defineix un mètode
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# $Id$
 # key: defm
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 05198011-8269-43dd-a108-2fb3ef23187b
 # --
 def ${1:name}(self, $2):
     """$3

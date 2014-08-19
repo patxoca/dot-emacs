@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Model DecimalField
+# $Id$
 # group: django
 # key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 281185b2-4fe3-4823-8f0c-11da10f26b55
 # --
 ${1:name} = models.DecimalField(
     verbose_name=_(u"$1"),

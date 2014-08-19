@@ -1,9 +1,11 @@
 # -*- mode: snippet; encoding: utf-8 -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: .. function::
+# $Id$
 # group: sphinx
 # key: func
 # expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: dac7e249-2482-4e5b-b440-40366de74ec6
 # --
 .. ${1:$$(yas/choose-value '("classmethod" "function" "method" "staticmethod"))}:: $2($3)
 

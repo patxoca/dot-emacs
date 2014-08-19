@@ -1,6 +1,10 @@
-# -*- coding: utf-8 -*-
-#name: Object.name = function (...)
-#key: func
+# -*- mode: snippet -*-
+# name: object.name = function (...)
+# $Id$
+# key: func
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 24478bb34ca-9934-4d13-adc4-90c183c0cda4
 # --
 ${1:Object}.${2:name} = function ($3) {
     // Sumari:

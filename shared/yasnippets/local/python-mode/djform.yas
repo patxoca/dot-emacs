@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-#contributor : Alexis Roda <alexis.roda.villalonga@gmail.com>
-#key : djform
-#name : django Form
-#group : django
+# key : djform
+# name : django Form
+# $Id$
+# group : django
+# contributor : Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: b2ab5d21-98da-4be4-8deb-7429c728ecbb
 # --
 class ${1:name}(${2:forms.Form}):
     """

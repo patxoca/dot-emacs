@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Model
+# $Id$
 # group: django
 # key: djmodel
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 93354808-25eb-4825-a23b-dced750998a0
 # --
 
 class ${1:name}(${2:models.Model}):

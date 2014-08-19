@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
-# -*- coding: utf-8 -*-
 # name: define function
-# contributor: Alexis Roda
+# $Id$
 # key: def
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: f54cb6ae-351a-4158-a7b0-3b6767369714
 # --
 def ${1:name}($2):
     """$3

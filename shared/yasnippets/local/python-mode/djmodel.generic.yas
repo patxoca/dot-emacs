@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Model generic
+# $Id$
 # group: django
 # key: djmodel
 # expand-env: ((yas/indent-line 'fixed))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 4d8ce087-da71-4544-9166-5f2bd795b701
 # --
 
 from django.db import models
@@ -25,4 +27,3 @@ class ${1:name}(${2:models.Model}):
         permissions = (("${1:$(arv-yas-substring (concat "read_" (downcase text)) 0 50)}", "Can read ${1:$(arv-yas-uncamelize text " ")}"), )
         verbose_name = "${1:$(arv-yas-uncamelize text " ")}"
         verbose_name_plural = "${1:$(arv-yas-uncamelize text " ")}"
-

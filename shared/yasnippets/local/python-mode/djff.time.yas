@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Form time field
+# $Id$
 # group: django
 # key: djff
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 72de5132-3834-444d-bb7a-3edeb67bba27
 # --
 ${1:name} = forms.TimeField(
     label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),

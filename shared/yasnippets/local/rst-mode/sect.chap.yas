@@ -1,8 +1,10 @@
 # -*- mode: snippet; encoding: utf-8 -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: capítol
+# $Id$
 # group: sphinx
 # key: sect
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 57066520-9820-4868-9b0e-1d64f2e8ea8d
 # --
 ${1:$(make-string (string-width text) ?\*)}
 ${1:Chapter title}

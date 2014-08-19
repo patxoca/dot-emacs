@@ -1,7 +1,10 @@
 # -*- mode: snippet -*-
-# -*- coding: utf-8 -*-
 # name: dojo AMD module
+# $Id$
 # key: mod
+# type: snippet
+# contributor:Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 241849c6fa9-2b07-48e3-8276-b27d6bfd9e4e
 # --
 /************************************************************************
  * Module: ${1:name}
@@ -9,7 +12,7 @@
  *
  * Author: `(arv/yas-author-name)`
  * e-mail: `(arv/yas-author-email)`
- * $Id$
+ * $Id:\$
  ************************************************************************/
 
 define(
@@ -20,4 +23,3 @@ define(
       });
   }
 );
-

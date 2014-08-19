@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django block tag
+# $Id$
 # group: django
 # key: djblock
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 29c9f7bb-daed-49c1-9efa-d5faf67973a9
 # --
 {% block $1 %}
   {{ block.super }}

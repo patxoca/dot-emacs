@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django if tag
+# $Id$
 # group: django
 # key: djif
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: bd6a12fc-f581-4bf6-891a-83e8328d0f59
 # --
 {% if $1 %}
   $0

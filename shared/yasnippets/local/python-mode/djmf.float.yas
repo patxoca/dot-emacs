@@ -1,8 +1,10 @@
 # -*- mode: snippet -*-
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # name: django Model FloatField
+# $Id$
 # group: django
 # key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: faa8a241-0aec-4af3-b4c2-36b26c9b470b
 # --
 ${1:name} = models.FloatField(
     verbose_name=_(u"$1"),
