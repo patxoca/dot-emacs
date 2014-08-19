@@ -7,7 +7,7 @@
 # --
 # -*- mode: snippet -*-
 # name: $1
-# $Id$
+# `(concat "$I" "d:$")`
 # key: ${2:`(car (split-string (arv/yas-buffer-name-sans) "\\\\."))`}
 # type: ${3:$$(yas-choose-value '("command" "snippet"))}
 # contributor:${4:`(arv/yas-author-name)`} <${5:`(arv/yas-author-email)`}>
