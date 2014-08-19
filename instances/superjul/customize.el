@@ -106,6 +106,7 @@
  '(mouse-wheel-scroll-amount (quote (1 5)))
  '(mouse-yank-at-point t)
  '(next-line-add-newlines nil)
+ '(org-startup-folded t)
  '(org-todo-keywords (quote ((sequence "TODO" "INPROCESS" "DONE"))))
  '(package-archives
    (quote
@@ -183,4 +184,3 @@
  '(w3m-session-crash-recovery nil)
  '(wg-morph-on nil)
  '(zencoding-indentation 2))
-

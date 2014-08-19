@@ -55,6 +55,32 @@ funció/mètode."
      (back-to-indentation)
      (looking-at "def[[:space:]]+"))))
 
+(defun arv-py--info-looking-at-import ()
+  "Determina si el punt està sobre una instrucció import. Retorna
+`t' en cas afirmatiu.
+
+La comprovació és molt senzilla i assumeix que la sintaxi és
+correcta: la línia conté la paraula `import' i no forma part de
+una cadena ni de un comentari."
+  (save-excursion
+    (beginning-of-line)
+    (and  (let ((case-fold-search nil))
+                (search-forward-regexp "\\<import\\>" (line-end-position) t))
+         (not (python-syntax-comment-or-string-p)))))
+
+(defun arv-py--info-looking-at-comment-only-line ()
+  "Determina si el punt està sobre una línia formada únicament
+per un comentari."
+  (save-excursion
+   (beginning-of-line)
+   (not (not (search-forward-regexp "^[[:space:]]*#.*$" (line-end-position) t)))))
+
+(defun arv-py--info-looking-at-empty-line ()
+  "Determina si el punt està sobre una línia en blanc."
+  (save-excursion
+   (beginning-of-line)
+   (not (not (search-forward-regexp "^[[:space:]]*$" (line-end-position) t)))))
+
 
 ;;; Navigation
 
@@ -70,10 +96,14 @@ funció/mètode."
 	      (not (arv-py--is-toplevel-object-p)))
     (python-nav-beginning-of-defun 1)))
 
+;;; D'acord amb el PEP8 els import s'agrupen en tres blocs: imports
+;;; del sistema (path, sys ...), de mòduls de tercers i de
+;;; l'aplicació. Els blocs es separen amb línies en blanc.
+
 (defun arv-py-nav-goto-first-import ()
-  "Mou el punt al començament del primer 'import' guardant el
-punt anterior en el `mark-ring'. Si no troba cap import deixa el
-punt al mateix lloc.
+  "Mou el punt al començament del primer 'import' dins el buffer
+actual. Guarda el punt anterior en el `mark-ring'. Si no troba
+cap import deixa el punt al mateix lloc.
 
 Retorna la posició del punt si s'ha trobat cap 'import' o `nil'
 en cas contrari."
@@ -88,7 +118,92 @@ en cas contrari."
     (when matched
       (push-mark (point) t nil)
       (goto-char matched)
-      (beginning-of-line))))
+      (beginning-of-line)
+      (point))))
+
+(defun arv-py-nav-goto-next-import (traverse-group)
+  "Mou el punt al següent import."
+  (let ((matched (save-excursion
+                   (while (progn
+                            (forward-line)
+                            (and (not (eobp))
+                                 (or (arv-py--info-looking-at-comment-only-line)
+                                     (and traverse-group
+                                          (arv-py--info-looking-at-empty-line))))))
+                   (if (arv-py--info-looking-at-import)
+                       (point)))))
+    (when matched
+      (goto-char matched)
+      (beginning-of-line)
+      (point))))
+
+(defun arv-py-nav-goto-last-import ()
+  "Mou el punt al final de l'últim import."
+  (interactive)
+  (while (arv-py-nav-goto-next-import t))
+  (end-of-line))
+
+(defun arv-py-nav-goto-last-import-in-block ()
+  "Mou el punt al final de l'últim import del bloc de imports
+actual. Cal que el punt estigui sobre una sentència `import'."
+  (interactive)
+  (while (arv-py-nav-goto-next-import nil))
+  (end-of-line))
+
+(defun arv-py--read-import-string (default)
+  "
+from foo import bar
+bar
+bar.baz
+
+import bar
+bar
+bar.baz
+
+import foo as bar
+bar
+bar.baz
+
+import bar.baz
+bar.baz
+bar.baz.spam
+
+from foo import spam as bar
+bar
+bar.baz
+"
+  ;; demanar import: a triar entre `(car (string-split default "\\."))' i `default'
+  ;;                 alternativament qualsevol identificador (pels alias)
+  ;;
+  ;; si import te almenys un punt utilitzar "import xxx.yyy"
+  ;; sino
+  ;;    demanar from: per defecte default menys ultim component si
+  ;;                  coincideix amb import
+  ;;    si import != (car default) demanar alias?
+
+  (let* ((parts (split-string default "\\."))
+         (import-candidate (car parts))
+         import-name
+         module-name
+         alias-name)
+    (setq import-name (completing-read "What to import? " (delete-dups (list default import-candidate))))
+    (if (string-match-p "\\." import-name)
+        (format "import %s" import-name)
+      (setq module-name (read-string (format "import %s from? " import-name)))
+      (if (string= import-candidate import-name)
+          (format "from %s import %s" module-name import-name)
+        (format "from %s import %s as %s" module-name import-name import-candidate)))))
+;;      (format "import %s" (mapconcat 'identity (nbutlast parts 1) ".")))))
+
+(defun arv-py-insert-import ()
+  ""
+  (interactive)
+  (let ((import-statement (arv-py--read-import-string (python-info-current-symbol))))
+    (save-excursion
+      (arv-py-nav-goto-first-import)
+      (arv-py-nav-goto-last-import)
+      (newline-and-indent)
+      (insert import-statement))))
 
 
 ;;; Query program structure
