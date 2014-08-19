@@ -7,7 +7,7 @@
 # --
 # -*- coding: utf-8 -*-
 
-# $Id: $
+# $Id$
 
 
 from django.contrib.auth.models import User

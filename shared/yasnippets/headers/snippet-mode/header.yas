@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
 # name: Snippet header
-# $Id:$
+# $Id$
 # key: header
 # type: snippet
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # --
 # -*- mode: snippet -*-
 # name: $1
-# $Id:$
+# $Id$
 # key: ${2:`(car (split-string (arv/yas-buffer-name-sans) "\\\\."))`}
 # type: ${3:$$(yas-choose-value '("command" "snippet"))}
 # contributor:${4:`(arv/yas-author-name)`} <${5:`(arv/yas-author-email)`}>

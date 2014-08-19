@@ -5,7 +5,7 @@
 # --
 ;;; `(arv/yas-buffer-name)` --- $1
 
-;; $Id:$
+;; $Id$
 
 ;; Emacs List Archive Entry
 ;; Filename: `(arv/yas-buffer-name)`
@@ -50,7 +50,7 @@
 ;;
 
 (defvar `(arv/yas-buffer-name-sans)`-version-id
-  "$Id:$"
+  "$Id$"
   "Latest modification time and version number.")
 
 ;;; Code:

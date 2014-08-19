@@ -30,11 +30,11 @@
 
 """
 
-$Id: $
+$Id$
 """
 
 try:
-    __version__ = int("$Id: $".split(' ')[2])
+    __version__ = int("$Id$".split(' ')[2])
 except :
     __version__ = 0
 
