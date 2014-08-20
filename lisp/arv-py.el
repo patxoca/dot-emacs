@@ -172,6 +172,7 @@ casos molt simples. S'anirà afinant sobre la marxa."
            (not (looking-back "{[^}]*" bol))
            (not (looking-back "lambda.*" bol)))
           (newline-and-indent)))))
+
 (provide 'arv-py)
 
 ;;; arv-py.el ends here
