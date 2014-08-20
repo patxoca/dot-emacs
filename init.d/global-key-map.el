@@ -59,6 +59,7 @@
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key [pause] 'toggle-window-dedicated)
 (global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/novetats_emacs.org")))
+(global-set-key (kbd "C-<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/todos_emacs24.org")))
 
 ;;; eproject
 (global-set-key '[(control c) (p) (o)] 'eproject-open)
@@ -126,6 +127,9 @@
 
 ;; find-file-in-project
 (global-set-key (kbd "C-x f") 'find-file-in-project)
+
+;; org
+(global-set-key (kbd "C-c l") 'org-store-link)
 
 
 ;;; global-key-map.el ends here
