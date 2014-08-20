@@ -31,6 +31,7 @@
   '(progn
      (org-add-link-type "ecfg" 'arv/org-ecfg-open)
      (add-hook 'org-store-link-functions 'arv/org-ecfg-store-link)
+     (define-key org-mode-map (kbd "C-c M-l") 'arv/org-ecfg-insert-link-at-point)
      ))
 
 

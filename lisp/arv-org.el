@@ -56,6 +56,17 @@ PATH must be absolute."
         (s-chop-prefix abs-startup-dir path)
       nil)))
 
+(defun arv/org-ecfg--link-at-point-get-range ()
+  "Returns a list with the start and end position for the link at
+point. A link is delimited by blanks and beggining/end of line."
+  (let ((start (save-excursion
+                 (skip-syntax-backward "^-" (line-beginning-position))
+                 (point)))
+        (end (save-excursion
+               (skip-syntax-forward "^-" (line-end-position))
+               (point))))
+    (list start end)))
+
 ;;;###autoload
 (defun arv/org-ecfg-open (path)
   "Visit the file within `emacs-startup-dir'."
@@ -70,6 +81,33 @@ PATH must be absolute."
        :type "ecfg"
        :link (concat "ecfg:" link)
        :description (format "%s" link)))))
+
+(defvar arv/org-ecfg-insert-link-at-point-history nil)
+
+;;;###autoload
+(defun arv/org-ecfg-insert-link-at-point (arg)
+  "Insert a ecfg link using the text around the point. By default
+the description part is the same as the text. Use the prefix
+command in order to edit the description."
+  (interactive "*P")
+  (let* ((range (if mark-active
+                    (list (point) (mark))
+                  (arv/org-ecfg--link-at-point-get-range)))
+         (text (apply 'buffer-substring-no-properties range))
+         (link (if (s-starts-with-p "ecfg:" text)
+                   text
+                 (concat "ecfg:" text)))
+         (description (if (s-starts-with-p "ecfg:" text)
+                          (mapconcat 'identity (cdr (s-split ":" text)) ":")
+                        text)))
+    (if mark-active
+        (deactivate-mark))
+    (if arg
+        (setq description (read-from-minibuffer "Description:" description
+                                                nil nil
+                                                'arv/org-ecfg-insert-link-at-point-history)))
+    (apply 'delete-region range)
+    (insert (format "[[%s][%s]]" link description))))
 
 
 
