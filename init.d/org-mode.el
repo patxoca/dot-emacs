@@ -26,5 +26,12 @@
          (lambda () (interactive) (find-file -org-refcard))))))
 
 
+;; define 'ecfg:' links
+(eval-after-load "org"
+  '(progn
+     (org-add-link-type "ecfg" 'arv/org-ecfg-open)
+     (add-hook 'org-store-link-functions 'arv/org-ecfg-store-link)
+     ))
+
 
 ;;; org-mode.el ends here
