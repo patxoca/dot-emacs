@@ -3,7 +3,7 @@
 ;; $Id;$
 
 ;;; Commentary:
-;; 
+;;
 
 (require 'python)
 
@@ -124,15 +124,15 @@ classe."
 
 ;;; outline-mode
 
-(defun arv-py-outline-level ()
-  "Retorna el outline-level corresponent a elements d'un programa
-python. És una prova de concepte per jugar amb outline (que te
-certes limitacions.)"
-  (interactive)
-  (let ((level (- (match-end 0) (match-beginning 0) (length (match-string 1)))))
-    (if (member (match-string 1) python-indent-dedenters)
-        (+ level (/ python-indent-offset 2))
-      level)))
+;; (defun arv-py-outline-level ()
+;;   "Retorna el outline-level corresponent a elements d'un programa
+;; python. És una prova de concepte per jugar amb outline (que te
+;; certes limitacions.)"
+;;   (interactive)
+;;   (let ((level (- (match-end 0) (match-beginning 0) (length (match-string 1)))))
+;;     (if (member (match-string 1) python-indent-dedenters)
+;;         (+ level (/ python-indent-offset 2))
+;;       level)))
 
 
 ;;; Assorted
@@ -154,7 +154,13 @@ salt de línia i sagnant la nova línia.
 La comprovació de quan cal inserir-i-sagnar només té en compte
 casos molt simples. S'anirà afinant sobre la marxa."
   (interactive "*P")
-  (python-indent-electric-colon arg)
+  (if (fboundp 'python-indent-electric-colon)
+      (python-indent-electric-colon arg)
+    ;; @FIXME: alex 2014-08-20 12:14:55 : emacs 24.3.93 removed
+    ;; `python-indent-electric-colon' which is subsumed by
+    ;; `python-indent-post-self-insert-function'. Just inserting a
+    ;; colon triggers a call.
+    (insert ":"))
   (when arv-py-electric-colon-insert-newline
     (let ((bol (save-excursion
                  (beginning-of-line)
@@ -166,7 +172,6 @@ casos molt simples. S'anirà afinant sobre la marxa."
            (not (looking-back "{[^}]*" bol))
            (not (looking-back "lambda.*" bol)))
           (newline-and-indent)))))
-
 (provide 'arv-py)
 
 ;;; arv-py.el ends here
