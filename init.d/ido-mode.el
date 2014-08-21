@@ -9,8 +9,6 @@
 
 ;;; Code:
 
-(require 'ido)
-
 (defun arv/ido-vertical-define-keys ()
   ;; more intuitive keybinds for vertical-mode
   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
