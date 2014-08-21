@@ -11,10 +11,10 @@
 
 (defun arv/ido-vertical-define-keys ()
   ;; more intuitive keybinds for vertical-mode
-  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
   (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
-  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
-  (define-key ido-completion-map (kbd "<up>") 'ido-prev-match))
+  (define-key ido-completion-map (kbd "<up>") 'ido-prev-match)
+  (define-key ido-completion-map (kbd "<left>") 'ido-prev-match-dir)
+  (define-key ido-completion-map (kbd "<right>") 'ido-next-match-dir))
 
 (ido-mode 1)
 
