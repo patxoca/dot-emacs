@@ -163,4 +163,10 @@ explicitament el punt en cas de ser necessari."
    (current-buffer)))
 
 
+(defun arv/generate-random-uuid ()
+  (with-temp-buffer
+    (shell-command "uuidgen -r" t)
+    (beginning-of-buffer)
+    (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+
 ;;; utils.el ends here
