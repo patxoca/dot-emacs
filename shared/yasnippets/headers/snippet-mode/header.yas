@@ -13,5 +13,6 @@
 # type: ${3:$$(yas-choose-value '("command" "snippet"))}
 # contributor: ${4:`(arv/yas-author-name)`} <${5:`(arv/yas-author-email)`}>
 # expand-env: (${6:(yas-indent-line 'fixed)})
-# uuid: `(shell-command "uuidgen -r" t)`# --
+# uuid: `(arv/generate-random-uuid)`
+# --
 $0
