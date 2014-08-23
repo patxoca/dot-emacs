@@ -28,6 +28,9 @@
   (ido-vertical-mode 1)
   (add-hook 'ido-setup-hook 'arv/ido-vertical-define-keys))
 
+(when (require 'ido-ubiquitous nil 'noerror)
+  (ido-ubiquitous-mode 1))
+
 ;; Inhibit switching to other directory when no matches are found in
 ;; the current directory.
 (customize-set-variable 'ido-auto-merge-work-directories-length -1)
