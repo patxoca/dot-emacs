@@ -95,6 +95,8 @@
   (when (and (not buffer-read-only)
              (not (eq major-mode 'fundamental-mode))
              (buffer-file-name)
+             (save-excursion (goto-char (point-min))
+                             (eobp)) ; empty buffer?
              (not (file-exists-p (buffer-file-name))))
     (let ((pos (point)))
       (insert arv/template-snippet-key)
