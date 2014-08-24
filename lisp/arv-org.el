@@ -110,6 +110,28 @@ command in order to edit the description."
     (insert (format "[[%s][%s]]" link description))))
 
 
+;; visit agenda file
+(defun arv/org--get-agenda-files ()
+  (if (listp org-agenda-files)
+      org-agenda-files
+    (let ((tmp nil)
+          (line nil))
+      (with-temp-buffer
+        (insert-file-contents org-agenda-files)
+        (goto-char (point-min))
+        (while (= 0 (progn
+                      (setq line (s-trim-right (thing-at-point 'line)))
+                      (when line
+                        (add-to-list 'tmp line))
+                      (forward-line)))))
+      tmp)))
+
+(defun arv/org-visit-agenda-file ()
+  ""
+  (interactive)
+  (find-file
+   (ido-completing-read "Agenda file:" (arv/org--get-agenda-files) nil t)))
+
 
 (provide 'arv-org)
 
