@@ -52,5 +52,9 @@
       '(("x" tags "TIPUS=\"error\"")
         ("v" todo "DONE|CANCELLED")))
 
+;; clock
+(eval-after-load "org"
+  '(progn
+     (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
 
 ;;; org-mode.el ends here
