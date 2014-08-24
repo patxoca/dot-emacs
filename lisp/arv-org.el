@@ -126,6 +126,7 @@ command in order to edit the description."
                       (forward-line)))))
       tmp)))
 
+;;;###autoload
 (defun arv/org-visit-agenda-file ()
   ""
   (interactive)
