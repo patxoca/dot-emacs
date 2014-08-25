@@ -135,6 +135,6 @@
 (global-set-key (kbd "C-c o f") 'arv/org-visit-agenda-file)
 
 ;; smex
-(global-set-key (kbd "M-x" 'smex))
+(global-set-key (kbd "M-x") 'smex)
 
 ;;; global-key-map.el ends here
