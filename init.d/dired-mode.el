@@ -36,7 +36,9 @@ with one containing the contents of the directory.  Otherwise, invoke
      (substitute-key-definition
       'dired-up-directory 'arv-goto-parent-directory dired-mode-map)
      (substitute-key-definition
-      'dired-advertised-find-file 'dired-follow-file dired-mode-map)))
+      'dired-advertised-find-file 'dired-follow-file dired-mode-map)
+
+     (set-face-attribute 'dired-directory nil :foreground "#729fcf")))
 
 
 
