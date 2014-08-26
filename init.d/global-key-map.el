@@ -56,8 +56,6 @@
                                         ; i una altra ibuffer (molt
                                         ; potent aparentment)
 
-(global-set-key [f11] 'toggle-fullscreen)
-(global-set-key [pause] 'toggle-window-dedicated)
 (global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/novetats_emacs.org")))
 (global-set-key (kbd "C-<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/todos_emacs24.org")))
 
@@ -136,5 +134,14 @@
 
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
+
+;; toggle map
+(global-set-key (kbd "C-c t c") 'column-number-mode)
+(global-set-key (kbd "C-c t d") 'toggle-window-dedicated)
+(global-set-key (kbd "C-c t f") 'auto-fill-mode)
+(global-set-key (kbd "C-c t F") 'toggle-fullscreen)
+(global-set-key (kbd "C-c t l") 'linum-mode)
+(global-set-key (kbd "C-c t L") 'line-number-mode)
+
 
 ;;; global-key-map.el ends here
