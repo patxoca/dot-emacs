@@ -60,6 +60,7 @@
      (define-key org-mode-map (kbd "=") (lambda () (interactive) (arv/org-emphasize ?=)))
      (define-key org-mode-map (kbd "~") (lambda () (interactive) (arv/org-emphasize ?~)))
      (define-key org-mode-map (kbd "+") (lambda () (interactive) (arv/org-emphasize ?+)))
+     (define-key org-mode-map (kbd "C-c M-q") 'arv/org-remove-reduntant-tags)
      (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
 
 ;;; org-mode.el ends here

@@ -139,6 +139,34 @@ command in order to edit the description."
       (org-emphasize char)
     (insert char)))
 
+
+(defun arv/--member-nested-one-level (e ll)
+  (while (and ll (not (member e (car ll))))
+    (setq ll (cdr ll)))
+  ll)
+
+;;;###autoload
+(defun arv/org-remove-reduntant-tags ()
+  "Walks the entire buffer removing redundant tags."
+  (interactive)
+  (when (eq major-mode 'org-mode)
+    (let ((seen-so-far nil))
+      (save-excursion
+        (org-map-entries
+         (lambda ()
+           (let ((alltags (split-string (or (org-entry-get (point) "ALLTAGS") "") ":"))
+                 (hdlevel (nth 1 (org-heading-components)))
+                 local)
+             (while (<= hdlevel (length seen-so-far))
+               (setq seen-so-far (cdr seen-so-far)))
+             (dolist (tag alltags)
+               (if (arv/--member-nested-one-level tag seen-so-far)
+                   (org-toggle-tag tag 'off)
+                 (setq local (cons tag local))))
+             (setq seen-so-far (cons local seen-so-far))))
+         t nil)))))
+
+
 (provide 'arv-org)
 
 ;;; arv-org.el ends here
