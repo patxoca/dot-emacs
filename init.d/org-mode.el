@@ -52,9 +52,14 @@
       '(("x" tags "TIPUS=\"error\"")
         ("v" todo "DONE|CANCELLED")))
 
-;; clock
 (eval-after-load "org"
   '(progn
+     (define-key org-mode-map (kbd "/") (lambda () (interactive) (arv/org-emphasize ?/)))
+     (define-key org-mode-map (kbd "*") (lambda () (interactive) (arv/org-emphasize ?*)))
+     (define-key org-mode-map (kbd "_") (lambda () (interactive) (arv/org-emphasize ?_)))
+     (define-key org-mode-map (kbd "=") (lambda () (interactive) (arv/org-emphasize ?=)))
+     (define-key org-mode-map (kbd "~") (lambda () (interactive) (arv/org-emphasize ?~)))
+     (define-key org-mode-map (kbd "+") (lambda () (interactive) (arv/org-emphasize ?+)))
      (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
 
 ;;; org-mode.el ends here

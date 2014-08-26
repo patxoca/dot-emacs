@@ -134,6 +134,11 @@ command in order to edit the description."
    (ido-completing-read "Agenda file:" (arv/org--get-agenda-files) nil t)))
 
 
+(defun arv/org-emphasize (char)
+  (if mark-active
+      (org-emphasize char)
+    (insert char)))
+
 (provide 'arv-org)
 
 ;;; arv-org.el ends here
