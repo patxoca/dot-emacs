@@ -62,28 +62,31 @@ User buffers are those not starting with *."
 
 ;; versions "millorades" de funcions estàndard
 
-(defun arv-region-or-symbol-at-point ()
-  "Devuelve la region o simbolo sobre el que esta situado el cursor.
-Si la marca esta activa devuelve la region y desactiva la marca, sino
-devuelve el simbolo sobre el que esta situado el cursor."
-  (if mark-active
-      (prog1
-          (buffer-substring-no-properties (region-beginning) (region-end))
-        (deactivate-mark))
-    (thing-at-point 'symbol)))
+(defun arv-query-replace (&optional arg)
+  "Replacement for `query-replace'.
 
-(defun arv-query-replace ()
-  "Similar a `query-replace', pero ofrece un valor inicial.
-Version simplificada de `query-replace' que ofrece como valor inicial
-para el texto a sustituir la region (si esta activa) o el simbolo
-situado bajo el cursor. A diferencia de `query-replace' la sustitucion
-se realiza en todo el buffer."
-  (interactive)
-  (let* ((old-string (read-string "Replace: " (arv-region-or-symbol-at-point)))
-         (new-string (read-string (concat "Replace " old-string " with: ") "")))
+* It proposes the symbol at point as the initial value for the
+  search string.
+
+* If the region is active it contraints the replacement,
+  otherwise operate on the whole buffer.
+
+* Without prefix argument performs `query-replace'.
+
+* With C-u performs `replace-string'.
+
+In any case point is preserved."
+  (interactive "*P")
+  (let* ((old-string (read-string "Replace: " (thing-at-point 'symbol)))
+         (new-string (read-string (concat "Replace " old-string " with: ") ""))
+         (start (if mark-active (min (mark) (point)) (point-min)))
+         (end   (if mark-active (max (mark) (point)) (point-max))))
     (save-excursion
-      (goto-char (point-min))
-      (query-replace old-string new-string))))
+      (if (not arg)
+          (query-replace old-string new-string nil start end)
+        (goto-char start)
+        (while (search-forward old-string end t)
+          (replace-match new-string))))))
 
 (defun arv-kill-ring-save-word-at-point ()
   "Copia un text en el kill ring. El seu comportament varia
