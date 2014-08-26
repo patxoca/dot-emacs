@@ -154,18 +154,21 @@ command in order to edit the description."
       (save-excursion
         (org-map-entries
          (lambda ()
-           (let ((alltags (split-string (or (org-entry-get (point) "ALLTAGS") "") ":"))
+           (let ((alltags (split-string (or (org-entry-get (point) "TAGS") "") ":"))
                  (hdlevel (nth 1 (org-heading-components)))
                  local)
              (while (<= hdlevel (length seen-so-far))
                (setq seen-so-far (cdr seen-so-far)))
              (dolist (tag alltags)
-               (if (arv/--member-nested-one-level tag seen-so-far)
-                   (org-toggle-tag tag 'off)
-                 (setq local (cons tag local))))
+               (unless (string= tag "")
+                 (if (arv/--member-nested-one-level tag seen-so-far)
+                     (org-toggle-tag tag 'off)
+                   (setq local (cons tag local)))))
              (setq seen-so-far (cons local seen-so-far))))
-         t nil)))))
-
+         t nil))))
+  ;; Something gets corrupted and tags are not displayed.
+  ;; Collapsing works around the issue
+  (org-shifttab 2))
 
 (provide 'arv-org)
 
