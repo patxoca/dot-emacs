@@ -17,7 +17,7 @@
 
 (add-hook 'prog-mode-hook
           (lambda ()
-            (linum-mode 1)
+            (linum-mode 0)
             (show-paren-mode 1)
             (set-variable 'show-trailing-whitespace t)
             ))
