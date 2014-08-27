@@ -142,6 +142,7 @@
 (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
 (global-set-key (kbd "C-c t l") 'linum-mode)
 (global-set-key (kbd "C-c t L") 'line-number-mode)
+(global-set-key (kbd "C-c t r") 'read-only-mode)
 (global-set-key (kbd "C-c t R") 'relative-linum-toggle)
 
 
