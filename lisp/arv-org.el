@@ -133,7 +133,7 @@ command in order to edit the description."
   (find-file
    (ido-completing-read "Agenda file:" (arv/org--get-agenda-files) nil t)))
 
-
+;;;###autoload
 (defun arv/org-emphasize (char)
   (if mark-active
       (org-emphasize char)
