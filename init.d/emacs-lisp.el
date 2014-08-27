@@ -26,11 +26,6 @@
   (interactive)
   (let ((current-mode major-mode))
     (switch-to-buffer-other-window (get-buffer-create "*scratch*"))
-    (goto-char (point-min))
-    (when (looking-at ";")
-      (forward-line 4)
-      (delete-region (point-min) (point)))
-    (goto-char (point-max))
     (if (memq current-mode lisp-mode)
         (funcall current-mode))))
 
