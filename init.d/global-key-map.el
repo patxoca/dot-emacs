@@ -95,13 +95,18 @@
 (global-set-key '[(control c) (s) (r)] 'svn-file-revert)
 (global-set-key '[(control c) (s) (s)] 'svn-status)
 
-;; les combinacions "C-x o" i "C-u -1 C-x o" per moure's entre les
-;; finestres sont molt farragoses. Mai he utilitzat "S-<cursor>", les
-;; redefineixo per moure's entre finestres.
-(global-set-key '[(shift up)] 'windmove-up)
-(global-set-key '[(shift down)] 'windmove-down)
-(global-set-key '[(shift left)] 'windmove-left)
-(global-set-key '[(shift right)] 'windmove-right)
+;; window motion
+(global-set-key (kbd "H-w") 'windmove-up)
+(global-set-key (kbd "H-s") 'windmove-down)
+(global-set-key (kbd "H-a") 'windmove-left)
+(global-set-key (kbd "H-d") 'windmove-right)
+
+;; buffer-move
+(global-set-key (kbd "H-s-w") 'buf-move-up)
+(global-set-key (kbd "H-s-s") 'buf-move-down)
+(global-set-key (kbd "H-s-a") 'buf-move-left)
+(global-set-key (kbd "H-s-d") 'buf-move-right)
+
 
 ;; expand-region
 (global-set-key '[(control ?.)] 'er/expand-region)
@@ -113,12 +118,6 @@
 ;; nous bindings
 (global-set-key '[(control c) (r) (i)] 'srctool-insert-reminder)
 (global-set-key '[(control c) (r) (s)] 'srctool-show-reminders)
-
-;; buffer-move
-(global-set-key [(control shift up)]     'buf-move-up)
-(global-set-key [(control shift down)]   'buf-move-down)
-(global-set-key [(control shift left)]   'buf-move-left)
-(global-set-key [(control shift right)]  'buf-move-right)
 
 ;; grin
 (global-set-key [f6] 'deft)
