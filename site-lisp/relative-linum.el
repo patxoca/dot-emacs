@@ -40,6 +40,8 @@
 ;; C-u 5 C-n
 
 (defvar relative-linum-format-string "%3d")
+(defvar relative-linum-enabled t)
+(make-variable-buffer-local 'relative-linum-enabled)
 
 (add-hook 'linum-before-numbering-hook 'relative-linum-get-format-string)
 
@@ -54,12 +56,29 @@
 (setq linum-format 'relative-linum-relative-line-numbers)
 
 (defun relative-linum-relative-line-numbers (line-number)
-  (let ((offset (- line-number relative-linum-current-line-number)))
+  (let ((offset (if relative-linum-enabled
+                    (- line-number relative-linum-current-line-number)
+                  line-number)))
     (propertize (format relative-linum-format-string offset) 'face 'linum)))
 
 (defadvice linum-update (around relative-linum-update)
   (let ((relative-linum-current-line-number (line-number-at-pos)))
     ad-do-it))
 (ad-activate 'linum-update)
+
+(defun relative-linum-toggle (&optional onoff)
+  "Toggle relative linum mode.
+
+ONOFF 1 enables relative numbering
+ONOFF 0 disables relative numbering
+ONOFF nil toggles relative numbering."
+  (interactive)
+  (cond
+   ((eq onoff 1)
+    (setq relative-linum-enabled t))
+   ((eq onoff 0)
+    (setq relative-linum-enabled nil))
+   ((null onoff)
+    (setq relative-linum-enabled (not relative-linum-enabled)))))
 
 (provide 'relative-linum)
