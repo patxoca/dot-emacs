@@ -153,7 +153,7 @@ command in order to edit the description."
 
 ;;;###autoload
 (defun arv/org-remove-reduntant-tags ()
-  "Walks the entire buffer removing redundant tags."
+  "Walks the tree-at-point removing redundant tags."
   (interactive)
   (when (eq major-mode 'org-mode)
     (save-excursion
@@ -169,6 +169,31 @@ command in order to edit the description."
   ;; happens in my real org file, in test.org (simplest) it works ok.
   ;; Collapsing works around the issue.
   (org-shifttab 2))
+
+;;;###autoload
+(defun arv/org-add-inherited-tags ()
+  "Add inherited tags to sutree-at-point."
+  (interactive)
+  (when (eq major-mode 'org-mode)
+    (save-excursion
+      (org-back-to-heading)
+      (let ((tags    (arv/org--get-tags))
+            (alltags (arv/org--get-parent-tags)))
+        (dolist (tag alltags)
+          (unless (member tag tags)
+            (org-toggle-tag tag 'on))))
+      nil 'tree)))
+
+;;;###autoload
+(defun arv/org-refile (&rest args)
+  "Link org-refile but updates tags."
+  (interactive)
+  (arv/org-add-inherited-tags)
+  (apply 'org-refile args)
+  (save-excursion
+    (org-refile '(16))                 ;goto insertion
+    (arv/org-remove-reduntant-tags)))
+
 
 (provide 'arv-org)
 
