@@ -25,6 +25,25 @@
 
 ;;; Code:
 
+;; disable some keybindings
+
+;; disable C-x o while I get used to the window motion keybindings
+(global-unset-key (kbd "C-x o"))
+
+;; ocasionally I press C-x C-c by accident, define a more complex
+;; keybinding to kill emacs
+(global-unset-key (kbd "C-x C-c"))
+(global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
+
+;; On X11 C-z serves no purpose since the wm defines keybindings to
+;; minimize windows. OTOH is very annoying when pressed by
+;; accident. In any case C-x C-z is still available.
+(if (display-graphic-p)
+  (global-unset-key (kbd "z")))
+
+
+;; other bindings
+
 (global-set-key '[(f1)] (lambda () (interactive) (info)))
 (global-set-key '[(control f1)] (lambda () (interactive) (info "emacs")))
 (global-set-key '[(super g)] 'goto-line)
@@ -73,12 +92,6 @@
 ;;   context fins que s'ha obert el projecte django.
 
 (global-set-key '[(control c) (p) (d)] 'arv/django-switch-to-project-buffer)
-
-;; En X11 C-z és més molest que altra cosa. El gestor de finestres
-;; ofereix mecanismes per minimitzar/enviar al fons la finestra des
-;; del teclat i en última instància es pot utilitzar C-x C-z
-(if (display-graphic-p)
-  (global-unset-key '[(control z)]))
 
 ;; els keybindings de ace-jump-mode em resulten dificils de recordar
 ;; i poc còmodes
