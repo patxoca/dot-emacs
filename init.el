@@ -108,6 +108,17 @@ s'inclouran en `load-path'")
   (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d")))
 
 
+;; altres
+
+(defun arv/load-org-dev-version ()
+  ""
+  (interactive)
+  (add-to-list 'load-path "/home/alex/prog/emacs/org/org-mode/lisp")
+  (load "/home/alex/prog/emacs/org/org-mode/lisp/org-loaddefs")
+  (require 'org)
+  (message "Loaded org %s" (org-version)))
+
+
 ;; inicialització
 
 (arv/startup-configure-load-path)
