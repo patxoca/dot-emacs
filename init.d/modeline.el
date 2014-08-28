@@ -37,9 +37,11 @@
         (org-capture-mode nil " C")
         (outline-minor-mode "outline")
         (paredit-mode)
+        (rainbow-mode "rainbow-mode")
         (ropemacs-mode "python-mode")
         (workgroups-mode)
-        (yas-minor-mode "yasnippet")))
+        (yas-minor-mode "yasnippet")
+        (zencoding-mode "zencoding-mode")))
 
 (defun arv/modeline--diminish-modes ()
   (dolist (item arv/modeline--diminished-modes)
