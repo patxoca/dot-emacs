@@ -34,6 +34,7 @@
         (elisp-slime-nav-mode)
         (google-this-mode)
         (hi-lock-mode)
+        (org-capture-mode nil " C")
         (outline-minor-mode "outline")
         (paredit-mode)
         (ropemacs-mode "python-mode")
