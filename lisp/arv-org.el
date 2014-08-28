@@ -140,34 +140,34 @@ command in order to edit the description."
     (insert char)))
 
 
-(defun arv/--member-nested-one-level (e ll)
-  (while (and ll (not (member e (car ll))))
-    (setq ll (cdr ll)))
-  ll)
+(defun arv/org--get-tags ()
+  (delete "" (split-string (or (org-entry-get (point) "TAGS") "") ":")))
+
+(defun arv/org--get-parent-tags ()
+  (save-excursion
+    (save-restriction
+      (widen)
+      (if (org-up-heading-safe)
+          (delete "" (split-string (or (org-entry-get (point) "ALLTAGS") "") ":"))
+        nil))))
 
 ;;;###autoload
 (defun arv/org-remove-reduntant-tags ()
   "Walks the entire buffer removing redundant tags."
   (interactive)
   (when (eq major-mode 'org-mode)
-    (let ((seen-so-far nil))
-      (save-excursion
-        (org-map-entries
-         (lambda ()
-           (let ((alltags (split-string (or (org-entry-get (point) "TAGS") "") ":"))
-                 (hdlevel (nth 1 (org-heading-components)))
-                 local)
-             (while (<= hdlevel (length seen-so-far))
-               (setq seen-so-far (cdr seen-so-far)))
-             (dolist (tag alltags)
-               (unless (string= tag "")
-                 (if (arv/--member-nested-one-level tag seen-so-far)
-                     (org-toggle-tag tag 'off)
-                   (setq local (cons tag local)))))
-             (setq seen-so-far (cons local seen-so-far))))
-         t nil))))
-  ;; Something gets corrupted and tags are not displayed.
-  ;; Collapsing works around the issue
+    (save-excursion
+      (org-map-entries
+       (lambda ()
+         (let ((tags    (arv/org--get-tags))
+               (alltags (arv/org--get-parent-tags)))
+           (dolist (tag tags)
+             (when (member tag alltags)
+               (org-toggle-tag tag 'off)))))
+       nil 'tree)))
+  ;; Something gets corrupted and tags are not displayed. That
+  ;; happens in my real org file, in test.org (simplest) it works ok.
+  ;; Collapsing works around the issue.
   (org-shifttab 2))
 
 (provide 'arv-org)
