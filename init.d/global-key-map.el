@@ -41,9 +41,6 @@
 (global-set-key [(control prior)] 'xah-previous-user-buffer) ; Ctrl+PageDown
 (global-set-key [(control next)] 'xah-next-user-buffer) ; Ctrl+PageUp
 
-(global-set-key [(super d)] 'delete-trailing-whitespace)
-;; i3 defineix s-d per dmenu
-(global-set-key [(hyper d)] 'delete-trailing-whitespace)
 (global-set-key [(super t)] 'arv-switch-to-todo-or-visit-todo-file)
 
 (global-set-key [(control x) (control b)] 'electric-buffer-list)
