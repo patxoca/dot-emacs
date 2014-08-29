@@ -52,6 +52,8 @@
       '(("x" tags "TIPUS=\"error\"")
         ("v" todo "DONE|CANCELLED")))
 
+
+;; keybindings
 (eval-after-load "org"
   '(progn
      (define-key org-mode-map (kbd "/") (lambda () (interactive) (arv/org-emphasize ?/)))
@@ -62,7 +64,21 @@
      (define-key org-mode-map (kbd "+") (lambda () (interactive) (arv/org-emphasize ?+)))
      (define-key org-mode-map (kbd "C-c M-q") 'arv/org-remove-reduntant-tags)
      (define-key org-mode-map (kbd "C-c q")   'arv/org-add-inherited-tags)
-     (define-key org-mode-map (kbd "C-c C-w") 'arv/org-refile)
+     (define-key org-mode-map (kbd "C-c C-w") 'arv/org-refile)))
+
+;; faces
+
+(eval-after-load "org"
+  '(progn
      (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "pink" :weight bold))
+        ("STRT" . (:foreground "yellow" :weight bold))
+        ("PAUS" . (:foreground "pale green" :weight bold))
+        ("WAIT" . (:foreground "orange" :weight bold))
+        ("DONE" . (:foreground "forest green" :weight bold))
+        ("CANC" . (:foreground "red" :weight bold))))
+
 
 ;;; org-mode.el ends here
