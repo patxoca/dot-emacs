@@ -49,6 +49,8 @@
 ;;; Code:
 
 (require 'color)
+(require 'subword)
+(require 'superword)
 
 ;;;###autoload
 (defun arv/generate-lab-faces (name count &optional lightness saturation group-name)
