@@ -39,7 +39,7 @@
 ;; minimize windows. OTOH is very annoying when pressed by
 ;; accident. In any case C-x C-z is still available.
 (if (display-graphic-p)
-  (global-unset-key (kbd "z")))
+  (global-unset-key (kbd "C-z")))
 
 
 ;; other bindings
