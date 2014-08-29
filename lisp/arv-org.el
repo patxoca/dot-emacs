@@ -195,6 +195,13 @@ command in order to edit the description."
     (arv/org-remove-reduntant-tags)))
 
 
+;;;###autoload
+(defun arv/org-archive-subtree (&rest args)
+  "Add inherited tags on archiving."
+  (interactive)
+  (arv/org-add-inherited-tags)
+  (apply 'org-archive-subtree args))
+
 (provide 'arv-org)
 
 ;;; arv-org.el ends here

@@ -64,6 +64,7 @@
      (define-key org-mode-map (kbd "+") (lambda () (interactive) (arv/org-emphasize ?+)))
      (define-key org-mode-map (kbd "C-c M-q") 'arv/org-remove-reduntant-tags)
      (define-key org-mode-map (kbd "C-c q")   'arv/org-add-inherited-tags)
+     (define-key org-mode-map (kbd "C-c $") 'arv/org-archive-subtree)
      (define-key org-mode-map (kbd "C-c C-w") 'arv/org-refile)))
 
 ;; faces
