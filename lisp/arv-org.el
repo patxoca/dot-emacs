@@ -186,7 +186,7 @@ command in order to edit the description."
 
 ;;;###autoload
 (defun arv/org-refile (&rest args)
-  "Link org-refile but updates tags."
+  "Like org-refile but updates tags."
   (interactive)
   (arv/org-add-inherited-tags)
   (apply 'org-refile args)
