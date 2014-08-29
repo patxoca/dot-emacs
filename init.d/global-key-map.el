@@ -154,5 +154,7 @@
 (global-set-key (kbd "C-c t r") 'read-only-mode)
 (global-set-key (kbd "C-c t R") 'relative-linum-toggle)
 
+;; word-mode
+(global-set-key (kbd"C-,") 'arv/wm-cycle)
 
 ;;; global-key-map.el ends here

@@ -79,6 +79,22 @@
              :foreground (apply 'color-rgb-to-hex (color-lab-to-srgb lightness a b)))
             ))))
 
+;;;###autoload
+(defun arv/wm-cycle ()
+  "Cycle word-mode:
+subword-mode -> superword-mode -> nothing -> subword-mode"
+  (interactive)
+  (cond
+   (subword-mode
+    (subword-mode 0)
+    (superword-mode 1))
+   (superword-mode
+    (subword-mode 0)
+    (superword-mode 0))
+   (t
+    (subword-mode 1)
+    (superword-mode 0))))
+
 
 (provide 'assorted)
 
