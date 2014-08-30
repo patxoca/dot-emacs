@@ -186,6 +186,13 @@ the corresponding function parametres.
                 (mapconcat (lambda (x) (format "- %s : " x)) params indent))
       "")))
 
+(defun arv/yas-js-function-store-parameters (text)
+  (let ((params (arv/yas-js-get-parameter-names text))
+        (indent (concat "\n" (make-string (current-column) 32))))
+    (if params
+        (concat indent
+                (mapconcat (lambda (x) (format "this._%s = %s;" x x)) params indent))
+      "")))
 
 ;;              _   _
 ;;  _ __  _   _| |_| |__   ___  _ __
