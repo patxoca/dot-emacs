@@ -38,8 +38,9 @@
 ;; On X11 C-z serves no purpose since the wm defines keybindings to
 ;; minimize windows. OTOH is very annoying when pressed by
 ;; accident. In any case C-x C-z is still available.
-(if (display-graphic-p)
-  (global-unset-key (kbd "C-z")))
+(when (display-graphic-p)
+  (global-unset-key (kbd "C-z"))
+  (global-set-key (kbd "C-z") 'shell))
 
 
 ;; other bindings
@@ -97,6 +98,7 @@
 ;; i poc còmodes
 (global-set-key '[(control c) (j) (c)] 'ace-jump-char-mode)
 (global-set-key '[(control c) (j) (l)] 'ace-jump-line-mode)
+(global-set-key (kbd "C-c j s") 'imenu)
 (global-set-key '[(control c) (j) (w)] 'ace-jump-word-mode)
 
 ;; keybindings per subversion: C-c s
@@ -143,6 +145,7 @@
 
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; toggle map
 (global-set-key (kbd "C-c t c") 'column-number-mode)
