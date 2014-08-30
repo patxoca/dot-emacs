@@ -42,6 +42,9 @@
          :empty-lines 1 :clock-in t :clock-resume t)
         ("f" "Todo followup" entry (clock)
          (file "templates/todo_followup.tmpl")
+         :empty-lines 1 :clock-in t :clock-resume t :prepend t)
+        ("s" "Sibling" entry (function (lambda () (org-up-heading-safe) (org-end-of-subtree t)))
+         (file "templates/sibling.tmpl")
          :empty-lines 1 :clock-in t :clock-resume t :prepend t)))
 
 
