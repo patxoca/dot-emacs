@@ -9,29 +9,7 @@
 ${1:Object}.prototype.${2:name} = function ($3) {
     // Sumari:
     //   $4
-    //${3:$(let* ((indent
-          (concat "\n" (make-string (- (current-column) 2) 32)))
-         (indent_ast
-          (concat indent "// "))
-         (args
-          (mapconcat
-           '(lambda (x)
-              (if (not (string= x ""))
-                  (concat "- " x " : ")))
-           (mapcar
-            '(lambda (x)
-               (replace-regexp-in-string "[[:blank:]]*$" ""
-                                         (replace-regexp-in-string "^[[:blank:]]*" "" (car x))))
-            (mapcar
-             '(lambda (x) (split-string x "="))
-             (split-string text ",")))
-           indent_ast)))
-    (if (string= args "")
-        ""
-      (mapconcat
-       'identity
-       (list "" "Arguments:" args)
-       indent_ast)))}
+    //${3:$(arv/yas-js-function-parameters-documentation text)}
     //
 
     $0
