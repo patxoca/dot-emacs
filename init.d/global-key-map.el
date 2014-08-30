@@ -106,16 +106,16 @@
 (global-set-key '[(control c) (s) (s)] 'svn-status)
 
 ;; window motion
-(global-set-key (kbd "H-w") 'windmove-up)
-(global-set-key (kbd "H-s") 'windmove-down)
-(global-set-key (kbd "H-a") 'windmove-left)
-(global-set-key (kbd "H-d") 'windmove-right)
+(global-set-key (kbd "H-e") 'windmove-up)
+(global-set-key (kbd "H-d") 'windmove-down)
+(global-set-key (kbd "H-s") 'windmove-left)
+(global-set-key (kbd "H-f") 'windmove-right)
 
 ;; buffer-move
-(global-set-key (kbd "H-s-w") 'buf-move-up)
-(global-set-key (kbd "H-s-s") 'buf-move-down)
-(global-set-key (kbd "H-s-a") 'buf-move-left)
-(global-set-key (kbd "H-s-d") 'buf-move-right)
+(global-set-key (kbd "H-s-e") 'buf-move-up)
+(global-set-key (kbd "H-s-d") 'buf-move-down)
+(global-set-key (kbd "H-s-s") 'buf-move-left)
+(global-set-key (kbd "H-s-f") 'buf-move-right)
 
 
 ;; expand-region
