@@ -114,10 +114,10 @@
 (global-set-key (kbd "H-f") 'windmove-right)
 
 ;; buffer-move
-(global-set-key (kbd "H-s-e") 'buf-move-up)
-(global-set-key (kbd "H-s-d") 'buf-move-down)
-(global-set-key (kbd "H-s-s") 'buf-move-left)
-(global-set-key (kbd "H-s-f") 'buf-move-right)
+(global-set-key (kbd "H-E") 'buf-move-up)
+(global-set-key (kbd "H-D") 'buf-move-down)
+(global-set-key (kbd "H-S") 'buf-move-left)
+(global-set-key (kbd "H-F") 'buf-move-right)
 
 
 ;; expand-region
