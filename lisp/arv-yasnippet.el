@@ -141,13 +141,11 @@ replacement."
 (defun arv/yas-buffer-name-sans-camelcase ()
   (arv/yas-camelize (arv/yas-buffer-name-sans)))
 
-;; @TODO: alex 2014-08-07 12:47:33 : both author name and email must
-;; be customizable.
 (defun arv/yas-author-name ()
-  "Alexis Roda")
+  user-full-name)
 
 (defun arv/yas-author-email ()
-  "alexis.roda.villalonga@gmail.com")
+  user-mail-address)
 
 ;;    _                                _       _
 ;;   (_) __ ___   ____ _ ___  ___ _ __(_)_ __ | |_
