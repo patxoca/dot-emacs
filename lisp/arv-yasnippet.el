@@ -127,7 +127,7 @@ replacement."
   (format-time-string "%Y"))
 
 (defun arv/yas-buffer-name ()
-  (buffer-name))
+  (file-name-nondirectory (buffer-file-name)))
 
 (defun arv/yas-buffer-name-upcase ()
   (upcase (arv/yas-buffer-name)))
