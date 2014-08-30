@@ -172,6 +172,20 @@ the corresponding function parametres.
   (s-join ", " (mapcar (lambda (x) (arv/js-make-identifier (car (last (s-split "/" (car (s-split "!" (arv/string-strip-delimiters (s-trim x) "'\""))))))))
                        (s-split "," text))))
 
+(defun arv/yas-js-get-parameter-names (text)
+  (mapcar (lambda (x) (s-trim x)) (delete "" (split-string text ","))))
+
+(defun arv/yas-js-function-parameters-documentation (text &optional header)
+  (let ((header (or header "Parameters"))
+        (params (arv/yas-js-get-parameter-names text))
+        (indent (concat "\n" (make-string (- (current-column) 2) 32) "// ")))
+    (if params
+        (concat indent
+                header
+                indent
+                (mapconcat (lambda (x) (format "- %s : " x)) params indent))
+      "")))
+
 
 ;;              _   _
 ;;  _ __  _   _| |_| |__   ___  _ __
