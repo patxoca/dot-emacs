@@ -5,7 +5,8 @@
 
 ;;; Commentary:
 ;;
-
+;; Customizations that don't fit anywhere else and are so simple to
+;; deserve its own module.
 
 ;;; History:
 ;;
@@ -16,5 +17,14 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Change window title
+(when window-system
+  (setq frame-title-format '("emacs %b (%f)")))
+
+;; smex
+(eval-after-load "smex"
+  '(progn
+     (setq smex-save-file (arv/path-join user-emacs-directory "smex-items"))
+     (smex-initialize)))
 
 ;;; assorted.el ends here
