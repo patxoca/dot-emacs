@@ -173,7 +173,7 @@ the corresponding function parametres.
                        (s-split "," text))))
 
 (defun arv/yas-js-get-parameter-names (text)
-  (mapcar (lambda (x) (s-trim x)) (delete "" (split-string text ","))))
+  (delete "" (mapcar (lambda (x) (s-trim x)) (split-string text ","))))
 
 (defun arv/yas-js-function-parameters-documentation (text &optional header)
   (let ((header (or header "Parameters"))
