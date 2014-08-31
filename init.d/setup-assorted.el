@@ -33,4 +33,8 @@
      (setq smex-save-file (arv/path-join user-emacs-directory "smex-items"))
      (smex-initialize)))
 
+
+;; face-remap
+(setq text-scale-mode-step 1.1)
+
 ;;; assorted.el ends here
