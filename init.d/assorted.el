@@ -21,6 +21,19 @@
 (when window-system
   (setq frame-title-format '("emacs %b (%f)")))
 
+
+;; guide-key
+(when (require 'guide-key nil t)
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (setq guide-key/idle-delay 0.75)
+  (guide-key-mode 1))
+
+
+;; popwin
+(require 'popwin)
+(popwin-mode 1)
+
+
 ;; smex
 (eval-after-load "smex"
   '(progn
