@@ -142,6 +142,7 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c o f") 'arv/org-visit-agenda-file)
+(global-set-key (kbd "C-c o s") 'org-sort)
 
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
