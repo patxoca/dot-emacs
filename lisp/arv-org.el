@@ -202,6 +202,15 @@ command in order to edit the description."
   (arv/org-add-inherited-tags)
   (apply 'org-archive-subtree args))
 
+
+;;;###autoload
+(defun arv/org-start ()
+  "Start org agenda within emacs server."
+  (interactive)
+  (server-start)
+  (org-agenda nil "a"))
+
+
 (provide 'arv-org)
 
 ;;; arv-org.el ends here
