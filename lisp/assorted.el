@@ -97,6 +97,19 @@ subword-mode -> superword-mode -> nothing -> subword-mode"
     (subword-mode 1)
     (superword-mode 0))))
 
+;;;###autoload
+(defun arv/goto-line ()
+  "Like `goto-line' but temporarily display absolute line
+numbers."
+  (interactive)
+  (let ((linum-enabled linum-mode))
+    (unwind-protect
+        (let ((relative-linum-enabled nil))
+          (linum-mode 1)
+          (call-interactively 'goto-line))
+      (unless linum-enabled
+        (linum-mode -1)))))
+
 
 (provide 'assorted)
 

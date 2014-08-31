@@ -47,7 +47,7 @@
 
 (global-set-key '[(f1)] (lambda () (interactive) (info)))
 (global-set-key '[(control f1)] (lambda () (interactive) (info "emacs")))
-(global-set-key '[(super g)] 'goto-line)
+(global-set-key '[(super g)] 'arv/goto-line)
 ;;; es un incordio tener que teclear yes para confirmar
 (global-set-key '[(control return)] "yes\C-m")
 
