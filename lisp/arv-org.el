@@ -109,6 +109,95 @@ command in order to edit the description."
     (apply 'delete-region range)
     (insert (format "[[%s][%s]]" link description))))
 
+;;; state change and clock
+;;
+;; I want the clock to automatically start/stop clocking whenever a
+;; task's state changes.
+;;
+;; Entering a state may trigger an action:
+;;
+;; - start: start clocking the current task. Clock-out the active task
+;;   if any.
+;;
+;; - stop: stop clocking, but only if the current task is the active
+;;   task. That's required in order to ensure that changing a task
+;;   from a /paused/ state to other /paused/ state (from PAUSE to WAIT
+;;   btw) does not clocks-out the active task,
+;;
+;; The mapping between states and actions is stored in the alist
+;; `arv/org-sctc-entering-state-clocking-actions'. If an state is
+;; missing or its associated action is nil then no action is performed
+;; when it's entered.
+;;
+;; In case a task is being paused as a consequence of other being
+;; started it will be put in the state defined in the variable
+;; `arv/org-sctc-paused-state'.
+;;
+;; In order to enable that functionalitty call `arv/org-sctc-setup'
+;; with no argument or nil. Passing an argument other than nil will
+;; disable it.
+
+(defvar arv/org-sctc-entering-state-clocking-actions
+  '(("STRT" . start)
+    ("PAUS" . stop)
+    ("WAIT" . stop))
+  "alist mapping states to actions.")
+
+(defvar arv/org-sctc-paused-state "PAUS"
+  "Stated for the task being paused.")
+
+
+(defvar arv/org-sctc--previous-active-task-marker nil)
+
+(defun arv/org-sctc--get-state-action (to)
+  (cdr (assoc to arv/org-sctc-entering-state-clocking-actions)))
+
+(defun arv/org-sctc--pause-other-task ()
+  (when arv/org-sctc--previous-active-task-marker
+    (unwind-protect
+        (save-excursion
+          (goto-char arv/org-sctc--previous-active-task-marker)
+          ;; IMPORTANT: calling org-todo may produce infinite
+          ;; recursion, be careful when changing the code!!
+          (org-todo arv/org-sctc-paused-state))
+      (progn
+        (set-marker arv/org-sctc--previous-active-task-marker nil)
+        (setq arv/org-sctc--previous-active-task-marker nil)
+        (remove-hook 'post-command-hook 'arv/org-sctc--pause-other-task)))))
+
+(defun arv/org-sctc--state-change (from to)
+  (when (and (null arv/org-sctc--previous-active-task-marker)
+             (not (string= from to)))
+    (let ((action (arv/org-sctc--get-state-action to)))
+      (unless (null action)
+        (cond
+         ((eq action 'start)
+          (when (org-clock-is-active)
+            (setq arv/org-sctc--previous-active-task-marker (copy-marker org-clock-marker))
+            (org-clock-out)
+            (add-hook 'post-command-hook 'arv/org-sctc--pause-other-task 'append))
+          (org-clock-in))
+         ((eq action 'stop)
+          (let ((org-state "DONE") ;; hackish, review!!
+                (org-clock-out-when-done t))
+            (org-clock-out-if-current)))
+         (t (user-error "Unknown action.")))))))
+
+(defun arv/org-sctc--state-change-callback (p)
+  (let ((type (plist-get p :type))
+        (from (plist-get p :from))
+        (to   (plist-get p :to)))
+    (when (eq type 'todo-state-change)
+      (arv/org-sctc--state-change from to))))
+
+;;;###autoload
+(defun arv/org-sctc-setup (&optional disable)
+  (if disable
+      (remove-hook 'org-trigger-hook 'arv/org-sctc--state-change-callback)
+    (add-hook 'org-trigger-hook 'arv/org-sctc--state-change-callback)))
+
+
+;;; assorted utilities
 
 ;; visit agenda file
 (defun arv/org--get-agenda-files ()
