@@ -199,28 +199,13 @@ command in order to edit the description."
 
 ;;; assorted utilities
 
-;; visit agenda file
-(defun arv/org--get-agenda-files ()
-  (if (listp org-agenda-files)
-      org-agenda-files
-    (let ((tmp nil)
-          (line nil))
-      (with-temp-buffer
-        (insert-file-contents org-agenda-files)
-        (goto-char (point-min))
-        (while (= 0 (progn
-                      (setq line (s-trim-right (thing-at-point 'line)))
-                      (when line
-                        (add-to-list 'tmp line))
-                      (forward-line)))))
-      tmp)))
-
 ;;;###autoload
 (defun arv/org-visit-agenda-file ()
   ""
   (interactive)
   (find-file
-   (ido-completing-read "Agenda file:" (arv/org--get-agenda-files) nil t)))
+   (ido-completing-read "Agenda file:" (org-agenda-files) nil t)))
+
 
 ;;;###autoload
 (defun arv/org-emphasize (char)
