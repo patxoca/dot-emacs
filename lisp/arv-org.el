@@ -199,6 +199,8 @@ command in order to edit the description."
 
 ;;; assorted utilities
 
+(autoload 'org-agenda-files "org" "" nil nil)
+
 ;;;###autoload
 (defun arv/org-visit-agenda-file ()
   ""
