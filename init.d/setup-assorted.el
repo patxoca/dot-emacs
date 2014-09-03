@@ -27,6 +27,11 @@
 (popwin-mode 1)
 
 
+;; Non-nil means a single space does not end a sentence. This is
+;; relevant for filling.
+(setq sentence-end-double-space nil)
+
+
 ;; smex
 (eval-after-load "smex"
   '(progn
