@@ -34,7 +34,7 @@
 (add-hook 'rst-mode-hook
           (lambda ()
             (auto-fill-mode 1)
-            (flyspell-mode 1)
+            (flyspell-mode 0)
             ;; activa el resaltat d'espai en blanc al final de línia
             (set-variable 'show-trailing-whitespace t)
             ;; customize-face (suposo) te problemes quan la llista
