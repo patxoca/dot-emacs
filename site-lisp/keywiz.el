@@ -196,6 +196,7 @@
   "Return random element from list X."
   (nth (random (length x)) x))
 
+;;;###autoload
 (defun keywiz (rescan)
   "Start the key sequence quiz.
 If RESCAN (the prefix) is non-nil, force a rescan of the key bindings.
@@ -232,7 +233,7 @@ to pause keywiz and enter a recursive edit in the *scratch* buffer."
       (setq keywiz-global-map (current-global-map)
 	    keywiz-local-map (current-local-map)))
     (setq start-time (keywiz-float-time))
-    
+
     (switch-to-buffer (get-buffer-create "*keywiz*"))
     (use-global-map keywiz-global-map)
     (use-local-map keywiz-local-map)
