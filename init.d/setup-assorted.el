@@ -37,4 +37,9 @@
 ;; face-remap
 (setq text-scale-mode-step 1.1)
 
+
+;; visible-bell flashes the frame instead of ringing a bell
+(setq visible-bell t)
+
+
 ;;; assorted.el ends here
