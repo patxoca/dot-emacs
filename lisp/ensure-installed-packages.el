@@ -20,6 +20,7 @@
     buffer-move
     company
     dash
+    diminish
     elisp-slime-nav
     expand-region
     feature-mode
