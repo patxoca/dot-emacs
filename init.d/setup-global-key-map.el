@@ -30,6 +30,25 @@
 ;; disable C-x o while I get used to the window motion keybindings
 (global-unset-key (kbd "C-x o"))
 
+;; disable arrow  keys
+;; (progn
+;;   (global-unset-key (kbd "<up>"))
+;;   (global-unset-key (kbd "<down>"))
+;;   (global-unset-key (kbd "<left>"))
+;;   (global-unset-key (kbd "<right>"))
+;;   (global-unset-key (kbd "C-<up>"))
+;;   (global-unset-key (kbd "C-<down>"))
+;;   (global-unset-key (kbd "C-<left>"))
+;;   (global-unset-key (kbd "C-<right>"))
+;;   (global-unset-key (kbd "M-<up>"))
+;;   (global-unset-key (kbd "M-<down>"))
+;;   (global-unset-key (kbd "M-<left>"))
+;;   (global-unset-key (kbd "M-<right>")))
+
+;; (progn
+;;   (global-set-key (kbd "M-n") 'forward-paragraph)
+;;   (global-set-key (kbd "M-p") 'backward-paragraph))
+
 ;; ocasionally I press C-x C-c by accident, define a more complex
 ;; keybinding to kill emacs
 (global-unset-key (kbd "C-x C-c"))
