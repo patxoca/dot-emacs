@@ -8,9 +8,6 @@
  '(cursor ((t (:background "white"))))
  '(highlight ((t nil)))
  '(highlight-indent-face ((t (:background "#303739"))))
- '(mode-line ((t (:background "#d3d7cf" :foreground "#2e3436" :box nil :height 0.85))))
- '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style released-button)))))
- '(mode-line-inactive ((t (:inherit mode-line :background "#555753" :foreground "#eeeeec" :box nil :weight light))))
  '(zencoding-preview-input ((t (:box 1)))))
 
 (custom-set-variables

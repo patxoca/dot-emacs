@@ -55,6 +55,20 @@
       (eval-after-load package
         (list 'diminish (list 'quote mode) replacement)))))
 
+;; faces
+(set-face-attribute 'mode-line nil
+                    :background "#d3d7cf"
+                    :foreground "#2e3436"
+                    :box nil
+                    :height 0.85)
+(set-face-attribute 'mode-line-highlight nil
+                    :box '(:line-width 1 :color "grey40" :style released-button))
+(set-face-attribute 'mode-line-inactive nil
+                    :inherit 'mode-line
+                    :background "#555753"
+                    :foreground "#eeeeec"
+                    :box nil
+                    :weight 'light)
 
 ;; hide line and column number
 (column-number-mode 0)
