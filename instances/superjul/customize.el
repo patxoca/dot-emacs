@@ -7,11 +7,12 @@
  '(compilation-error ((t (:inherit font-lock-warning-face :underline nil :weight normal))))
  '(cursor ((t (:background "white"))))
  '(highlight ((t nil)))
- '(highlight-indent-face ((t (:background "#073642"))))
+ '(highlight-indent-face ((t (:background "#303739"))))
  '(mode-line ((t (:background "#d3d7cf" :foreground "#2e3436" :box nil :height 0.85))))
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "#555753" :foreground "#eeeeec" :box nil :weight light))))
- '(wg-mode-line-face ((t (:foreground "blue"))))
+ '(org-document-title ((t (:foreground "pale turquoise" :weight bold :height 1.5))))
+ '(org-level-1 ((t (:inherit outline-1 :background "dim gray" :overline "gray" :weight bold :height 1.2))))
  '(zencoding-preview-input ((t (:box 1)))))
 
 (custom-set-variables
@@ -53,10 +54,6 @@
    (quote
     ("e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "dd4db38519d2ad7eb9e2f30bc03fba61a7af49a185edfd44e020aa5345e3dca7" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(default-frame-alist (quote ((menu-bar-lines . 1) (tool-bar-lines . 0))))
- '(deft-auto-save-interval 0.0)
- '(deft-directory "/home/alex/.emacs.d/deft/")
- '(deft-extension "org")
- '(deft-text-mode (quote org-mode))
  '(display-time-mode t nil (time))
  '(ecb-options-version "2.27")
  '(ecb-source-path (quote ("~/zope/develop")))
@@ -106,6 +103,7 @@
  '(mouse-wheel-scroll-amount (quote (1 5)))
  '(mouse-yank-at-point t)
  '(next-line-add-newlines nil)
+ '(org-directory "~/.emacs.d/org")
  '(org-startup-folded t)
  '(org-todo-keywords (quote ((sequence "TODO" "INPROCESS" "DONE"))))
  '(package-archives
@@ -182,5 +180,4 @@
      (360 . "#DC8CC3"))))
  '(vc-annotate-very-old-color "#DC8CC3")
  '(w3m-session-crash-recovery nil)
- '(wg-morph-on nil)
  '(zencoding-indentation 2))
