@@ -70,8 +70,15 @@
      (define-key org-mode-map (kbd "C-c $") 'arv/org-archive-subtree)
      (define-key org-mode-map (kbd "C-c C-w") 'arv/org-refile)))
 
-;; faces
 
+;; options
+(eval-after-load "org"
+  '(progn
+     (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+     (setq org-id-track-globally t)))
+
+
+;; faces
 (eval-after-load "org"
   '(progn
      (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
