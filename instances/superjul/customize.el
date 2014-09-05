@@ -11,8 +11,6 @@
  '(mode-line ((t (:background "#d3d7cf" :foreground "#2e3436" :box nil :height 0.85))))
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "#555753" :foreground "#eeeeec" :box nil :weight light))))
- '(org-document-title ((t (:foreground "pale turquoise" :weight bold :height 1.5))))
- '(org-level-1 ((t (:inherit outline-1 :background "dim gray" :overline "gray" :weight bold :height 1.2))))
  '(zencoding-preview-input ((t (:box 1)))))
 
 (custom-set-variables

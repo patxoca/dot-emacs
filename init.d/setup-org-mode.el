@@ -81,7 +81,17 @@
 ;; faces
 (eval-after-load "org"
   '(progn
-     (set-face-attribute 'org-mode-line-clock nil :background "green yellow")))
+     (set-face-attribute 'org-mode-line-clock nil :background "green yellow")
+     (set-face-attribute 'org-document-title nil
+                         :foreground "pale turquoise"
+                         :weight 'bold
+                         :height 1.5)
+     (set-face-attribute 'org-level-1 nil
+                         :inherit 'outline-1
+                         :background "dim gray"
+                         :overline "gray"
+                         :weight bold
+                         :height 1.2)))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "pink" :weight bold))
