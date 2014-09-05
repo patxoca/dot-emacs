@@ -92,8 +92,7 @@
                                         ; i una altra ibuffer (molt
                                         ; potent aparentment)
 
-(global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/novetats_emacs.org")))
-(global-set-key (kbd "C-<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/deft/todos_emacs24.org")))
+(global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/org/emacs_novetats.org")))
 
 ;;; eproject
 (global-set-key '[(control c) (p) (o)] 'eproject-open)
@@ -149,9 +148,6 @@
 ;; nous bindings
 (global-set-key '[(control c) (r) (i)] 'srctool-insert-reminder)
 (global-set-key '[(control c) (r) (s)] 'srctool-show-reminders)
-
-;; grin
-(global-set-key [f6] 'deft)
 
 ;; find-file-in-project
 (global-set-key (kbd "C-x f") 'find-file-in-project)
