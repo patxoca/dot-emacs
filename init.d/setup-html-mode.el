@@ -13,7 +13,13 @@
 
 (eval-after-load "zencoding-mode"
   '(progn
-     (define-key zencoding-mode-keymap '[(control ?j)] nil)))
+     (define-key zencoding-mode-keymap '[(control ?j)] nil)
+     (set-face-attribute 'zencoding-preview-input nil
+                         :box 1)
+     (set-face-attribute 'zencoding-preview-output nil
+                         :background "dim gray"
+                         :inherit 'default
+                         :box 1)))
 
 (add-hook 'html-mode-hook
           (lambda ()

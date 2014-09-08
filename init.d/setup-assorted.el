@@ -22,6 +22,23 @@
   (setq frame-title-format '("emacs %b (%f)")))
 
 
+;; emacs faces
+(set-face-attribute 'compilation-error nil
+                    :underline nil
+                    :weight 'normal)
+(set-face-attribute 'cursor  nil
+                    :background "white")
+(set-face-attribute 'default nil
+                    :height 113)
+
+
+;; highlight-indentation
+(eval-after-load "highlight-identation"
+  '(progn
+     (set-face-attribute 'highlight-indent-face nil
+                         :background "#303739")))
+
+
 ;; popwin
 (require 'popwin)
 (popwin-mode 1)

@@ -3,12 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit default :height 113))))
- '(compilation-error ((t (:inherit font-lock-warning-face :underline nil :weight normal))))
- '(cursor ((t (:background "white"))))
- '(highlight ((t nil)))
- '(highlight-indent-face ((t (:background "#303739"))))
- '(zencoding-preview-input ((t (:box 1)))))
+ )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
