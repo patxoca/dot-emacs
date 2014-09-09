@@ -37,7 +37,10 @@
 
 ;; capture
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "gtd.org" "Tasks")
+      '(("i" "Interrupcio" entry (file+headline "gtd.org" "Interrupcions")
+         (file "templates/interrupt.tmpl")
+         :empty-lines 1 :clock-in t :clock-resume nil)
+        ("t" "Todo" entry (file+headline "gtd.org" "Tasks")
          (file "templates/todo.tmpl")
          :empty-lines 1 :clock-in t :clock-resume t)
         ("f" "Todo followup" entry (clock)
@@ -78,6 +81,32 @@
      (setq org-id-track-globally t)))
 
 
+;;; workflow
+;;
+;; TODO(t) STRT(s!) PAUS(p@) HOLD(i!) WAIT(w@) | DONE(d!) CANC(c@)
+;;
+;; - TODO: no action taken, just created the note.
+;; - STRT: currently working on, there can be only one.
+;; - PAUS: paused, still not finished.
+;; - HOLD: interrupted, there can be only one.
+;; - WAIT: paused, waiting for external feedback.
+;; - DONE: finished, no further action is required.
+;; - CANC: canceled, no further action is required.
+
+(eval-after-load "org"
+  '(progn
+     (require 'arv-org)
+     (setq arv/org-interrupt-resumed-state "STRT")
+     (setq arv/org-interrupt-interrupted-state "HOLD")
+     (setq arv/org-interrupt-capture-key "i")
+     (setq arv/org-sctc-entering-state-clocking-actions
+           '(("STRT" . start)
+             ("PAUS" . stop)
+             ("WAIT" . stop)))
+     (setq arv/org-sctc-paused-state "PAUS")
+     (arv/org-sctc-setup)))
+
+
 ;; faces
 (eval-after-load "org"
   '(progn
@@ -96,10 +125,10 @@
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "pink" :weight bold))
         ("STRT" . (:foreground "yellow" :weight bold))
+        ("HOLD" . (:foreground "yellow" :weight bold))
         ("PAUS" . (:foreground "pale green" :weight bold))
         ("WAIT" . (:foreground "orange" :weight bold))
         ("DONE" . (:foreground "forest green" :weight bold))
         ("CANC" . (:foreground "red" :weight bold))))
-
 
 ;;; org-mode.el ends here

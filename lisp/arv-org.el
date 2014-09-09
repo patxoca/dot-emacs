@@ -137,13 +137,10 @@ command in order to edit the description."
 ;; with no argument or nil. Passing an argument other than nil will
 ;; disable it.
 
-(defvar arv/org-sctc-entering-state-clocking-actions
-  '(("STRT" . start)
-    ("PAUS" . stop)
-    ("WAIT" . stop))
+(defvar arv/org-sctc-entering-state-clocking-actions nil
   "alist mapping states to actions.")
 
-(defvar arv/org-sctc-paused-state "PAUS"
+(defvar arv/org-sctc-paused-state nil
   "Stated for the task being paused.")
 
 
@@ -195,6 +192,60 @@ command in order to edit the description."
   (if disable
       (remove-hook 'org-trigger-hook 'arv/org-sctc--state-change-callback)
     (add-hook 'org-trigger-hook 'arv/org-sctc--state-change-callback)))
+
+
+;;; Interruption handling
+;;
+;; I want to be able to track interruptions and resume interrupted
+;; tasks.
+;;
+;; Execute `arv/org-interrupt-interrupt-active-task' to put the active
+;; task in hold, pause the clock and start capturing.
+;;
+;; Execute `arv/org-interrupt-resume-last-active-task' to resume the
+;; last interrupted task, if any.
+
+(defvar arv/org-interrupt-resumed-state nil
+  "State to put the task on when resuming after an
+interruption.")
+
+(defvar arv/org-interrupt-interrupted-state nil
+  "State to put the task on when interrupted.")
+
+(defvar arv/org-interrupt-capture-key nil
+  "Key for the capture template used by the interruption.")
+
+(defvar arv/org-interrupt--last-active-task nil
+  "Private")
+
+;;;###autoload
+(defun arv/org-interrupt-interrupt-active-task ()
+  "Interrupts the active task (if any) and starts capturing an
+interruption.
+
+If there's an active task its ID is saved in the variable
+`arv/org-interrupt--last-active-task'."
+  (interactive)
+  (save-excursion
+   (when (org-clock-is-active)
+     (org-clock-goto)
+     (setq arv/org-interrupt--last-active-task (org-id-get-create))
+     (org-todo arv/org-interrupt-interrupted-state)))
+  (org-capture nil arv/org-interrupt-capture-key))
+
+;;;###autoload
+(defun arv/org-interrupt-resume-last-active-task ()
+  "If there's an interrupted task jump to it and start it again.
+
+Currently this function relies on the value of the variable
+`arv/org-interrupt--last-active-task' in order to locate the
+interrupted task. The value of this variable won't survive
+restarting emacs and won't be saved."
+  (interactive)
+  (when arv/org-interrupt--last-active-task
+    (org-id-goto arv/org-interrupt--last-active-task)
+    (setq arv/org-interrupt--last-active-task nil)
+    (org-todo arv/org-interrupt-resumed-state)))
 
 
 ;;; assorted utilities
