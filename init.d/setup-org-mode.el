@@ -90,7 +90,7 @@
                          :inherit 'outline-1
                          :background "dim gray"
                          :overline "gray"
-                         :weight bold
+                         :weight 'bold
                          :height 1.2)))
 
 (setq org-todo-keyword-faces
