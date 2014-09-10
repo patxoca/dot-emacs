@@ -118,12 +118,13 @@
 (autoload 'info-lookup-add-help "info-look" "" nil nil)
 
 (eval-after-load "python"
-  (info-lookup-add-help
-   :mode 'python-mode
-   :parse-rule 'pydoc-info-python-symbol-at-point
-   :doc-spec
-   '(("(python)Index" pydoc-info-lookup-transform-entry)
-     ("(django14)Index" pydoc-info-lookup-transform-entry))))
+  '(progn
+     (info-lookup-add-help
+      :mode 'python-mode
+      :parse-rule 'pydoc-info-python-symbol-at-point
+      :doc-spec
+      '(("(python)Index" pydoc-info-lookup-transform-entry)
+        ("(django14)Index" pydoc-info-lookup-transform-entry)))))
 
 
 ;;                               pep8
