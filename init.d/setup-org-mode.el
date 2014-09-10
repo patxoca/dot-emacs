@@ -98,7 +98,7 @@
      (setq org-todo-keywords
            '((sequence "TODO(t)" "STRT(s!)" "PAUS(p@)" "HOLD(i!)"
                        "WAIT(w@)" "|" "DONE(d!)" "CANC(c@)")))
-     (setq org-directory ~/.emacs.d/org)
+     (setq org-directory "~/.emacs.d/org")
      (setq org-startup-folded t)
      (require 'arv-org)
      (setq arv/org-interrupt-resumed-state "STRT")
