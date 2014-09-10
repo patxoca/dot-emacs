@@ -38,5 +38,6 @@
 (customize-set-variable 'ido-ignore-directories
  (quote ("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn/" "\\`\\.ropeproject/")))
 (customize-set-variable 'ido-max-work-directory-list 10)
+(setq ido-save-directory-list-file "~/.emacs.d/ido.last")
 
 ;;; 'ido-mode.el ends here

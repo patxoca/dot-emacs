@@ -66,6 +66,7 @@
      (condition-case ex
          (progn
            (pymacs-load "ropemacs" "rope-")
+           (setq ropemacs-enable-autoimport t)
            (message "ropemacs loaded"))
        ('error (message "ropemacs failed")))))
 
@@ -125,12 +126,20 @@
      ("(django14)Index" pydoc-info-lookup-transform-entry))))
 
 
+;;                               pep8
+
+(eval-after-load "pep8"
+  '(progn
+     (setq python-pep8-options '("--repeat" "--ignore=E203,E201,E202,E123"))))
+
+
 ;;                              python
 
 (eval-after-load "python"
   '(progn
      (modify-syntax-entry ?_ "w" python-mode-syntax-table)
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
+     (setq python-indent-guess-indent-offset nil)
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)

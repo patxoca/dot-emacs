@@ -13,6 +13,7 @@
 
 (eval-after-load "zencoding-mode"
   '(progn
+     (setq zencoding-indentation 2)
      (define-key zencoding-mode-keymap '[(control ?j)] nil)
      (set-face-attribute 'zencoding-preview-input nil
                          :box 1)

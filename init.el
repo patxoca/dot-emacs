@@ -97,6 +97,9 @@ s'inclouran en `load-path'")
            (file-readable-p (expand-file-name "~/.emacs.d/elpa/package.el")))
       (load
        (expand-file-name "~/.emacs.d/elpa/package.el")))
+  (setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("gnu" . "http://elpa.gnu.org/packages/")
+                           ("melpa stable" . "http://melpa-stable.milkbox.net/packages/")))
   (package-initialize))
 
 (defun arv/startup-load-autoloads ()
