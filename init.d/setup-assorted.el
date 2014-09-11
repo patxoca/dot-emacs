@@ -57,10 +57,8 @@
 
 
 ;; hl-line-mode
-(eval-after-load "hl-line"
-  '(progn
-     (global-hl-line-mode t)
-     (customize-set-value 'hl-line-face 'highlight)))
+(global-hl-line-mode t)
+(customize-set-value 'hl-line-face 'highlight)
 
 
 ;; popwin
@@ -113,7 +111,7 @@
 (setq compilation-message-face 'default)
 (setq current-language-environment "UTF-8")
 (setq ediff-split-window-function 'split-window-horizontally)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq inhibit-eol-conversion nil)
 (setq inhibit-startup-screen t)
 (setq mouse-yank-at-point t)
@@ -123,7 +121,7 @@
 (setq show-paren-mode t)
 (setq svn-status-default-log-arguments '("-v" "--stop-on-copy"))
 (setq svn-status-verbose nil)
-(setq tab-width 4)
+(setq-default tab-width 4)
 (setq text-scale-mode-step 1.1)
 (setq tooltip-mode t)
 (setq transient-mark-mode t)
