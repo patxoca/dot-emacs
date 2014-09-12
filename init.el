@@ -12,6 +12,14 @@
 ;;; optat per utilitzar un sistema semblant als scripts d'arranc del
 ;;; SystemV.
 
+;;; Variables d'entorn:
+;;
+;;  - EMACS_INSTANCE: nom de la instànica a arrancar. Si s'omet
+;;    utilitza el nom del host.
+;;
+;;  - EMACS_INSTALL: si està definida, no importa el valor, executa
+;;    emacs en mode instal·lació: descarrega i instal·la paquets,
+;;    compila i genera autoloads per la configuració.
 
 ;;; Code:
 
@@ -123,12 +131,26 @@ s'inclouran en `load-path'")
 
 
 ;; inicialització
+(defun arv/emacs-startup ()
+  "Starts emacs normally."
+  (arv/startup-configure-load-path)
+  (arv/startup-configure-custom-file)
+  (arv/startup-package-initialize)
+  (arv/startup-load-autoloads)
+  (arv/startup-initialize-instance))
 
-(arv/startup-configure-load-path)
-(arv/startup-configure-custom-file)
-(arv/startup-package-initialize)
-(arv/startup-load-autoloads)
-(arv/startup-initialize-instance)
+(defun arv/emacs-install ()
+  "Install this configuration dowloading required packages and
+bytecompiling and generating autoloads."
+  (arv/startup-configure-load-path)
+  (arv/startup-package-initialize)
+  (when (load-library "ensure-installed-packages")
+    (arv/ensure-required-packages)
+    (arv/startup-byte-recompile)))
+
+(if (getenv "EMACS_INSTALL")
+    (arv/emacs-install)
+  (arv/emacs-startup))
 
 ;;; codi afegit per emacs per activar comandes "perilloses" per usuaris nous
 (put 'narrow-to-page 'disabled nil)
