@@ -114,6 +114,8 @@
 (setq-default indent-tabs-mode nil)
 (setq inhibit-eol-conversion nil)
 (setq inhibit-startup-screen t)
+(setq mouse-buffer-menu-maxlen 25)
+(setq mouse-buffer-menu-mode-mult 10)
 (setq mouse-yank-at-point t)
 (setq next-line-add-newlines nil)
 (setq scroll-preserve-screen-position t)
