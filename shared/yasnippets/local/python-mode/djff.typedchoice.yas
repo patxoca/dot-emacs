@@ -7,7 +7,7 @@
 # uuid: 0c4158f2-5203-42c2-866f-783a79e7bb70
 # --
 ${1:name} = forms.TypedChoiceField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial=${2:""},
     choices=(("${3:key}", "${4:value}"), ),
     coerce=${5:coercion_callable},

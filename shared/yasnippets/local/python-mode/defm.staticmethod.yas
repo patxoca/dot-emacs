@@ -9,7 +9,7 @@
 def ${1:name}($2):
     """$3
 
-    ${2:$(arv-yas-py-function-parameters-documentation text)}
+    ${2:$(arv-yas-py-function-parameters-documentation yas-text)}
 
     ${4::raises: $5}
     ${6::returns: $7}

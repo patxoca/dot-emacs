@@ -7,6 +7,6 @@
 # uuid: 49593b97-a0b9-4a1b-a9a0-d97e64e3ed60
 # --
 ${1:Subsection title}
-${1:$(make-string (string-width text) ?\-)}
+${1:$(make-string (string-width yas-text) ?\-)}
 
 $0

@@ -27,7 +27,7 @@ from ${1:package} import models as app_models
 def ${2:`(arv/yas-buffer-name-sans)`}(request$3) :
     """
     """
-    template_name = "${1:$(car (last (split-string text "\\\\.")))}/$2.html"
+    template_name = "${1:$(car (last (split-string yas-text "\\\\.")))}/$2.html"
     $0
     return render_to_response(
         template_name,

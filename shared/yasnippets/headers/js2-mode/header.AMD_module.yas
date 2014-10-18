@@ -17,7 +17,7 @@
 
 define(
   ["dojo/_base/declare", ${2:req}],
-  function (declare, ${2:$(arv/yas-js-amd-params-from-modules text)}) {
+  function (declare, ${2:$(arv/yas-js-amd-params-from-modules yas-text)}) {
       return declare("$1", [${3:bases}], {
           $0
       });

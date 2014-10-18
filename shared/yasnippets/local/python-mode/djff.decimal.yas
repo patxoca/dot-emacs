@@ -7,7 +7,7 @@
 # uuid: fc9646d3-f9c1-4ea0-b865-5989113806f9
 # --
 ${1:name} = forms.DecimalField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial="${2:None}",
     required=${3:$$(yas/choose-value '("False" "True"))},
     min_value=${4:1},

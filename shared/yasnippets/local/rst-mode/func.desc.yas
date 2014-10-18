@@ -23,7 +23,7 @@
            (mapcar format-param
                    (mapcar string-trim
                            (mapcar '(lambda (x) (car (split-string x "=")))
-                                   (split-string text ","))))))
+                                   (split-string yas-text ","))))))
      (if (null args)
          ""
        (mapconcat 'identity args indent)))

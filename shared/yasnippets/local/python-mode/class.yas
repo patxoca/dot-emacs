@@ -12,7 +12,7 @@ class ${1:ClassName}(${2:object}):
     def __init__(self, $4):
         """${5:Constructor.}
 
-        ${4:$(arv-yas-py-function-parameters-documentation text)}
+        ${4:$(arv-yas-py-function-parameters-documentation yas-text)}
         """
-        ${4:$(arv-yas-py-constructor-store-arguments text)}
+        ${4:$(arv-yas-py-constructor-store-arguments yas-text)}
         $0

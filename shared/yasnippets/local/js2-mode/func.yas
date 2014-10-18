@@ -9,7 +9,7 @@
 function ${1:name}($2) {
     // Sumari:
     //   $3
-    //${2:$(arv/yas-js-function-parameters-documentation text)}
+    //${2:$(arv/yas-js-function-parameters-documentation yas-text)}
     //
 
     $0

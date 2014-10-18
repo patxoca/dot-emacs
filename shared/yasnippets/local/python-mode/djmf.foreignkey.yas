@@ -8,7 +8,7 @@
 # --
 ${1:name} = models.ForeignKey(
     "${2:ForeignTable}",
-    verbose_name=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    verbose_name=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     null=${False},
     blank=${False},
     related_name="${}",

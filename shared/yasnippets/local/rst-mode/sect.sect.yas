@@ -7,6 +7,6 @@
 # uuid: 43f0c047-6798-4b5f-8b9a-9ffc32e6652b
 # --
 ${1:Section title}
-${1:$(make-string (string-width text) ?\=)}
+${1:$(make-string (string-width yas-text) ?\=)}
 
 $0

@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- Mode: snippet -*-
 # name: django Model CharField
 # $Id$
 # group: django
@@ -7,7 +7,7 @@
 # uuid: a48ecfc3-0791-4af9-942c-55b03255100b
 # --
 ${1:name} = models.CharField(
-    verbose_name=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    verbose_name=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     max_length=${2:100},
     null=${True},
     blank=${True},

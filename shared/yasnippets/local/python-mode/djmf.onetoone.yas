@@ -7,7 +7,7 @@
 # uuid: e963e2de-2880-4b89-ab43-6d881c9e656a
 # --
 ${1:name} = models.OneToOneField(
-    "${1:$(capitalize text)}",
+    "${1:$(capitalize yas-text)}",
     verbose_name=_(u"$1"),
     null=${True},
     blank=${True},

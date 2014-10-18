@@ -9,8 +9,8 @@
 constructor: function ($3) {
     // Sumari:
     //   $4
-    //${3:$(arv/yas-js-function-parameters-documentation text)}
+    //${3:$(arv/yas-js-function-parameters-documentation yas-text)}
     //
-    ${3:$(arv/yas-js-function-store-parameters text)}
+    ${3:$(arv/yas-js-function-store-parameters yas-text)}
     $0
 },

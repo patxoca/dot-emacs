@@ -6,8 +6,8 @@
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # uuid: 213876c9-4b4d-4377-975e-e879e808296f
 # --
-${1:$(make-string (string-width text) ?\#)}
+${1:$(make-string (string-width yas-text) ?\#)}
 ${1:Part title}
-${1:$(make-string (string-width text) ?\#)}
+${1:$(make-string (string-width yas-text) ?\#)}
 
 $0

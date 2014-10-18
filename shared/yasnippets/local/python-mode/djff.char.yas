@@ -7,7 +7,7 @@
 # uuid: 1360c508-2e5a-423f-a440-ccd32f404cd5
 # --
 ${1:name} = forms.CharField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize text))}"),
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     required=${3:$$(yas/choose-value '("False" "True"))},
     min_length=${4:1},
     max_length=${5:100},

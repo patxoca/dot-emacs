@@ -36,7 +36,7 @@ class $2Form(forms.Form) :
 
 class ${2:`(arv/yas-buffer-name-sans-camelcase)`}View(FormView) :
 
-    template_name = "${1:$(car (last (split-string text "\\\\.")))}/${2:$(arv-yas-uncamelize text "_")}.html"
+    template_name = "${1:$(car (last (split-string yas-text "\\\\.")))}/${2:$(arv-yas-uncamelize yas-text "_")}.html"
     form_class = $2Form
 
     def form_valid(self, form) :
@@ -55,4 +55,4 @@ class ${2:`(arv/yas-buffer-name-sans-camelcase)`}View(FormView) :
 class $2OkView(TemplateView) :
     """Mostra un missatge d'Ok.
     """
-    template_name = "${1:$(car (last (split-string text "\\\\.")))}/${2:$(arv-yas-uncamelize text "_")}_ok.html"
+    template_name = "${1:$(car (last (split-string yas-text "\\\\.")))}/${2:$(arv-yas-uncamelize yas-text "_")}_ok.html"
