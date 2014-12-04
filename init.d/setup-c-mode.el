@@ -28,6 +28,7 @@
 
      (add-hook 'c-mode-common-hook
                (lambda ()
+                 (setq indent-tabs-mode nil)
                  (setq c-default-style "python")
                  (setq c-basic-offset 4)
                  ;; fontifica las cadenas de la forma @@[A-Z ]+: util
