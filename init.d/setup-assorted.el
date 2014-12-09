@@ -58,7 +58,10 @@
 
 ;; hl-line-mode
 (global-hl-line-mode t)
-(customize-set-value 'hl-line-face 'highlight)
+;;(customize-set-value 'hl-line-face 'highlight)
+(set-face-attribute 'hl-line nil
+                    :foreground "white"
+                    :background "black")
 
 
 ;; popwin
