@@ -62,6 +62,9 @@
   (global-set-key (kbd "C-z") 'shell))
 
 
+(global-set-key (kbd "M-u") 'arv/upcase-word)
+(global-set-key (kbd "M-l") 'arv/downcase-word)
+
 ;; other bindings
 
 (global-set-key '[(f1)] (lambda () (interactive) (info)))

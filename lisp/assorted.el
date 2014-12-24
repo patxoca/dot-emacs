@@ -111,6 +111,26 @@ numbers."
         (linum-mode -1)))))
 
 
+;; smarter up/downcase-word
+;; Idea stolen from: http://oremacs.com/2014/12/23/upcase-word-you-silly/
+
+;;;###autoload
+(defun arv/upcase-word (arg)
+  (interactive "P")
+  (save-excursion
+    (unless (looking-back "\\b")
+      (backward-word))
+    (call-interactively 'upcase-word)))
+
+;;;###autoload
+(defun arv/downcase-word (arg)
+  (interactive "P")
+  (save-excursion
+    (unless (looking-back "\\b")
+      (backward-word))
+    (call-interactively 'downcase-word)))
+
+
 (provide 'assorted)
 
 ;;; assorted.el ends here
