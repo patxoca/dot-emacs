@@ -50,54 +50,21 @@
   "$Id$"
   "Latest modification time and version number.")
 
-;;; Code:
-
-;; (defgroup euler nil
-;;   "Insert documentation here.")
-
-;; (defcustom euler-option nil
-;;   "Insert documentation here."
-;;   :group 'euler
-;;   :type  'string
-;;   :safe  'stringp)
-
-
-(defun euler--get-title (buffer)
-  (save-excursion
-    (goto-char (point-min))
-    (if (search-forward-regexp "<h2>\\([^<]*\\)</h2>" (point-max) t)
-        (match-string-no-properties 1)
-      "** no title **")))
-
-(defun euler--get-description (buffer)
-  (save-excursion
-    (goto-char (point-min))
-    (if (search-forward "<div class=\"problem_content\" role=\"problem\">" (point-max) t)
-        (let ((start (point))
-              (end (search-forward-regexp "^</div>" (point-max) t))
-              body)
-          (s-replace-all '(("" . "")
-                           ("<p>" . "")
-                           ("</p>" . "\n"))
-                         (buffer-substring-no-properties start (- end (length "</div>")))))
-        "** no description **")))
-
-(defun euler--remove-markup ()
-  (save-excursion
-    (goto-char (point-min))
-    (replace-regexp "<[^>]*>" "")))
-
 (defun euler--callback (status buffer problem-no)
-  (let ((title (euler--get-title (current-buffer)))
-        (description (euler--get-description (current-buffer))))
+  (let (text title)
+    (search-forward-regexp "^ +projecteuler.net")
+    (right-char 2)
+    (setq title (buffer-substring-no-properties (point) (point-at-eol)))
+    (delete-region (point-min) (point))
+    (insert (format "Problem %i: " problem-no))
+    (end-of-line)
+    (right-char 2)
+    (kill-line 4)
+    (setq text (buffer-substring-no-properties (point-min) (point-max)))
     (with-current-buffer buffer
       (set-visited-file-name (format "%04i-%s.py" problem-no (s-replace " " "_" title)))
-      (insert (format "Problem %s: %s\n" problem-no title))
-      (save-excursion
-        (insert description))
-      (euler--remove-markup)
       (python-mode)
-      (fill-region (point-min) (point-max))
+      (insert text)
       (comment-region (point-min) (point-max)))
     (switch-to-buffer buffer)
     (goto-char (point-max))))
@@ -106,7 +73,7 @@
 (defun euler-get-problem (problem-no)
   (interactive "P")
   (let ((b (generate-new-buffer (format "%03i.py" problem-no)))
-        (url (format "https://projecteuler.net/problem=%i" problem-no)))
+        (url (format "http://www.w3.org/services/html2txt?url=https://projecteuler.net/problem=%i&noinlinerefs=on&nonums=on" problem-no)))
     (url-retrieve url 'euler--callback (list b problem-no))
     ))
 
