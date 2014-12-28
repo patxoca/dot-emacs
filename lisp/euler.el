@@ -62,16 +62,18 @@
     (kill-line 4)
     (setq text (buffer-substring-no-properties (point-min) (point-max)))
     (with-current-buffer buffer
-      (set-visited-file-name (format "%04i-%s.py" problem-no (s-replace " " "_" title)))
+      (set-visited-file-name (format "%03i-%s.py" problem-no (s-replace " " "_" title)))
       (python-mode)
       (insert text)
-      (comment-region (point-min) (point-max)))
+      (comment-region (point-min) (point-max))
+      (goto-char (point-min))
+      (replace-regexp "^#   " "#"))
     (switch-to-buffer buffer)
     (goto-char (point-max))))
 
 ;;;###autoload
 (defun euler-get-problem (problem-no)
-  (interactive "P")
+  (interactive "nProblem number: ")
   (let ((b (generate-new-buffer (format "%03i.py" problem-no)))
         (url (format "http://www.w3.org/services/html2txt?url=https://projecteuler.net/problem=%i&noinlinerefs=on&nonums=on" problem-no)))
     (url-retrieve url 'euler--callback (list b problem-no))
