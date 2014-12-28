@@ -69,25 +69,23 @@
 
 ;; other bindings
 
-(global-set-key '[(f1)] (lambda () (interactive) (info)))
-(global-set-key '[(control f1)] (lambda () (interactive) (info "emacs")))
-(global-set-key '[(super g)] 'arv/goto-line)
+(global-set-key (kbd "<f1>") (lambda () (interactive) (info)))
+(global-set-key (kbd "C-<f1>") (lambda () (interactive) (info "emacs")))
+(global-set-key (kbd "s-g") 'arv/goto-line)
 ;;; es un incordio tener que teclear yes para confirmar
-(global-set-key '[(control return)] "yes\C-m")
+(global-set-key (kbd "C-<return>") "yes\C-m")
 
-(global-set-key [(control c) (control a) (g)] 'goto-line)
-(global-set-key '[(meta %)] 'arv-query-replace)
-(global-set-key [(control c) (control a) (meta 5)] 'query-replace-regexp)
-(global-set-key '[(meta w)] 'arv-kill-ring-save-word-at-point)
+(global-set-key (kbd "M-%") 'arv-query-replace)
+(global-set-key (kbd "M-w") 'arv-kill-ring-save-word-at-point)
 
-(global-set-key '[(control tab)] 'dabbrev-expand)
+(global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 
-(global-set-key [(control prior)] 'xah-previous-user-buffer) ; Ctrl+PageDown
-(global-set-key [(control next)] 'xah-next-user-buffer) ; Ctrl+PageUp
+(global-set-key (kbd "C-<prior>") 'xah-previous-user-buffer) ; Ctrl+PageDown
+(global-set-key (kbd "C-<next>") 'xah-next-user-buffer) ; Ctrl+PageUp
 
-(global-set-key [(super t)] 'arv-switch-to-todo-or-visit-todo-file)
+(global-set-key (kbd "s-t") 'arv-switch-to-todo-or-visit-todo-file)
 
-(global-set-key [(control x) (control b)] 'electric-buffer-list)
+(global-set-key (kbd "C-x C-b") 'electric-buffer-list)
                                         ; originalment 'list-buffers'.
                                         ;
                                         ; Una altra alternativa si
@@ -100,10 +98,10 @@
 (global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/org/emacs_novetats.org")))
 
 ;;; eproject
-(global-set-key '[(control c) (p) (o)] 'eproject-open)
-(global-set-key '[(control c) (p) (c)] 'eproject-close)
-(global-set-key '[(control c) (p) (a)] 'eproject-add)
-(global-set-key '[(control c) (p) (r)] 'eproject-remove)
+(global-set-key (kbd "C-c p o") 'eproject-open)
+(global-set-key (kbd "C-c p c") 'eproject-close)
+(global-set-key (kbd "C-c p a") 'eproject-add)
+(global-set-key (kbd "C-c p r") 'eproject-remove)
 
 ;;; django
 ;; aquest keybinding no m'acava de convencer per dos motius:
@@ -115,20 +113,20 @@
 ;;   contexts. Malauradament no es pot determinar si te sentit en un
 ;;   context fins que s'ha obert el projecte django.
 
-(global-set-key '[(control c) (p) (d)] 'arv/django-switch-to-project-buffer)
+(global-set-key (kbd "C-c p d") 'arv/django-switch-to-project-buffer)
 
 ;; els keybindings de ace-jump-mode em resulten dificils de recordar
 ;; i poc còmodes
-(global-set-key '[(control c) (j) (c)] 'ace-jump-char-mode)
-(global-set-key '[(control c) (j) (l)] 'ace-jump-line-mode)
+(global-set-key (kbd "C-c j c") 'ace-jump-char-mode)
+(global-set-key (kbd "C-c j l") 'ace-jump-line-mode)
 (global-set-key (kbd "C-c j s") 'imenu)
-(global-set-key '[(control c) (j) (w)] 'ace-jump-word-mode)
+(global-set-key (kbd "C-c j w") 'ace-jump-word-mode)
 
 ;; keybindings per subversion: C-c s
-(global-set-key '[(control c) (s) (=)] 'svn-file-show-svn-diff)
-(global-set-key '[(control c) (s) (l)] 'svn-status-show-svn-log)
-(global-set-key '[(control c) (s) (r)] 'svn-file-revert)
-(global-set-key '[(control c) (s) (s)] 'svn-status)
+(global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
+(global-set-key (kbd "C-c s l") 'svn-status-show-svn-log)
+(global-set-key (kbd "C-c s r") 'svn-file-revert)
+(global-set-key (kbd "C-c s s") 'svn-status)
 
 ;; window motion
 (global-set-key (kbd "H-e") 'windmove-up)
@@ -144,15 +142,11 @@
 
 
 ;; expand-region
-(global-set-key '[(control ?.)] 'er/expand-region)
+(global-set-key (kbd "C-.") 'er/expand-region)
 
 ;; todo
-;; vells per compatibilitat
-(global-set-key '[(control c) (control a) (control r) (i)] 'srctool-insert-reminder)
-(global-set-key '[(control c) (control a) (control r) (s)] 'srctool-show-reminders)
-;; nous bindings
-(global-set-key '[(control c) (r) (i)] 'srctool-insert-reminder)
-(global-set-key '[(control c) (r) (s)] 'srctool-show-reminders)
+(global-set-key (kbd "C-c r i") 'srctool-insert-reminder)
+(global-set-key (kbd "C-c r s") 'srctool-show-reminders)
 
 ;; find-file-in-project
 (global-set-key (kbd "C-x f") 'find-file-in-project)
