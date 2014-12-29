@@ -168,7 +168,7 @@ casos molt simples. S'anirà afinant sobre la marxa."
       (if (and
            (eolp)
            (not (python-syntax-comment-or-string-p))
-           (arv/current-line-starts-with-p "^\s*\\(if\\|elif\\|else\\|for\\|while\\|try\\|except\\|finally\\|with\\)")
+           (arv/current-line-starts-with-p "^\s*\\(class\\|def\\|if\\|elif\\|else\\|for\\|while\\|try\\|except\\|finally\\|with\\)")
 
            (not (looking-back "\\[[^]]*" bol))
            (not (looking-back "{[^}]*" bol))
