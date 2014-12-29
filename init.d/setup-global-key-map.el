@@ -18,7 +18,10 @@
 ;;             buffers oberts
 ;; C-c C-a g   equivalent a H-g, per teclats sense la tecla windows
 ;; C-c C-a M-5 invoca query-replace-regexp (M-5 es query-replace)
-
+;;
+;; IMPORTANT: helm initializes the C-c h keymap. In order to avoid
+;; conflicts 'setup-helm.el' should be loaded before
+;; 'setup-global-key-map.el'.
 
 ;;; History:
 ;;
@@ -159,8 +162,8 @@
 (global-set-key (kbd "C-c o s") 'org-sort)
 
 ;; smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;; toggle map
 (global-set-key (kbd "C-c t c") 'column-number-mode)
@@ -174,5 +177,15 @@
 
 ;; word-mode
 (global-set-key (kbd"C-,") 'arv/wm-cycle)
+
+;; helm
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c g S") 'helm-google-suggest)
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
+
 
 ;;; global-key-map.el ends here
