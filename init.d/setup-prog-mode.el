@@ -22,15 +22,15 @@
             (set-variable 'show-trailing-whitespace t)
             ;; hi-lock
             (hi-lock-mode 1)
-            (hi-lock-face-buffer "\\<FIXME" 'hi-red-b)
-            (hi-lock-face-buffer "\\<HACK" 'hi-red-b)
-            (hi-lock-face-buffer "\\<OPTIMIZE" 'hi-red-b)
-            (hi-lock-face-buffer "\\<REVIEW" 'hi-red-b)
-            (hi-lock-face-buffer "\\<TODO" 'hi-red-b)
+            (hi-lock-face-buffer "\\bFIXME:" 'hi-red-b)
+            (hi-lock-face-buffer "\\bHACK:" 'hi-red-b)
+            (hi-lock-face-buffer "\\bOPTIMIZE:" 'hi-red-b)
+            (hi-lock-face-buffer "\\bREVIEW:" 'hi-red-b)
+            (hi-lock-face-buffer "\\bTODO:" 'hi-red-b)
 
-            (hi-lock-face-buffer "\\<IMPORTANT" 'hi-green)
-            (hi-lock-face-buffer "\\<NOTE" 'hi-green)
-            (hi-lock-face-buffer "\\<WARNING" 'hi-green)
+            (hi-lock-face-buffer "\\bIMPORTANT:" 'hi-green)
+            (hi-lock-face-buffer "\\bNOTE:" 'hi-green)
+            (hi-lock-face-buffer "\\bWARNING:" 'hi-green)
             ))
 
 ;;; prog-mode.el ends here
