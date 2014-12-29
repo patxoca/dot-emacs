@@ -172,4 +172,10 @@ explicitament el punt en cas de ser necessari."
     (beginning-of-buffer)
     (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
 
+(defun arv/current-line-starts-with-p (r)
+  (save-excursion
+    (beginning-of-line)
+    (save-match-data
+      (looking-at r))))
+
 ;;; utils.el ends here
