@@ -67,12 +67,22 @@
      (define-key emacs-lisp-mode-map (kbd "C-h e V") 'apropos-value)
      (define-key emacs-lisp-mode-map (kbd "C-c e z") 'byte-recompile-directory)))
 
+;; disable autopair-mode, conflicts with paredit
+;;
+;; if emacs >= 24.4 electric-pair-mode is enabled instead of autopair
+;; (see ./setup-autopair.el), so this code is executed only if
+;; autopair is loaded.
+(eval-after-load "autopair"
+  '(progn
+     (add-hook 'emacs-lisp-mode-hook
+               (lambda ()
+                 (autopair-mode 0)))))
+
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (company-mode t)
             (eldoc-mode t)
             (paredit-mode 1)
-            (autopair-mode 0) ;; coflicts with paredit
             (elisp-slime-nav-mode 1)
             (pretty-lambda-mode t)
             ))

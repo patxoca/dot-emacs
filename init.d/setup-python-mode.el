@@ -177,6 +177,17 @@
     (ad-activate 'eproject-open)
     (ad-activate 'eproject-close)))
 
+;; enable triple quote in autopair
+;;
+;; if emacs >= 24.4 electric-pair-mode is enabled instead of autopair
+;; (see ./setup-autopair.el), so this code is executed only if
+;; autopair is loaded.
+(eval-after-load "autopair"
+  '(add-hook 'python-mode-hook
+             (lambda ()
+               (setq autopair-handle-action-fns
+                     (list #'autopair-default-handle-action
+                           #'autopair-python-triple-quote-action)))))
 
 (add-hook 'python-mode-hook
           (lambda ()
@@ -185,11 +196,6 @@
             (set
              (make-local-variable 'outline-regexp)
              "[\t ]*\\(class\\|def\\|if\\|elsif\\|else\\|while\\|for\\|try\\|except\\|finally\\)\\>")
-
-            ;; autopair
-            (setq autopair-handle-action-fns
-                  (list #'autopair-default-handle-action
-                        #'autopair-python-triple-quote-action))
 
             ;; ressalta les línies on hi ha un breakpoint
             (highlight-lines-matching-regexp "^[[:space:]]*import i?pdb")
