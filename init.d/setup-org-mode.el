@@ -121,9 +121,6 @@
                          :weight 'bold
                          :height 1.5)
      (set-face-attribute 'org-level-1 nil
-                         :inherit 'outline-1
-                         :background "dim gray"
-                         :overline "gray"
                          :weight 'bold
                          :height 1.2)))
 
