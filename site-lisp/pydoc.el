@@ -16,6 +16,9 @@
 
 ;;; Code:
 
+(require 'org)
+
+
 (defvar *pydoc-current* nil
  "Stores current pydoc command.")
 
@@ -56,7 +59,7 @@ opens the file."
   "Propertize urls so they are clickable."
   (goto-char (point-min))
 
-  (while (re-search-forward "https" nil t)
+  (while (re-search-forward "https?:" nil t)
     ;; this seems like a clumsy way to set this link, but it works.
     (let ((url (browse-url-url-at-point)))
       (re-search-backward "http")
@@ -364,6 +367,7 @@ we just colorize parameters in red."
 		    help-echo "mouse-1: click to return"))))
 
 
+;;;###autoload
 (defun pydoc (name)
   "Display pydoc information for NAME in a buffer named *pydoc*."
   (interactive "sName of function or module: ")
