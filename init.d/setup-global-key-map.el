@@ -67,7 +67,7 @@
 
 (global-set-key (kbd "M-u") 'arv/upcase-word)
 (global-set-key (kbd "M-l") 'arv/downcase-word)
-(global-set-key (kbd "s-y") 'copy-from-above-command)
+(global-set-key (kbd "s-y") 'arv/duplicate-line-dwim)
 
 
 ;; other bindings

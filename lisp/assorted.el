@@ -131,6 +131,60 @@ numbers."
       (backward-word))
     (call-interactively 'downcase-word)))
 
+;;;###autoload
+(defun arv/duplicate-line-dwim (arg)
+  "Duplicate current line.
+
+- Without prefix argument duplicate current line.
+
+- Positive prefix ARG means include previous ARG lines plus the
+  current one.
+
+- If ARG is negative include current line plus next ARG lines.
+
+- If the region is active duplicates all the complete lines in
+  the region. ARG is ignored.
+
+  As a convenience feature, if the start of the region is at the
+  end of a line that line is not included. Likewise, if the end
+  of the region is a the beginning of a line that line is not
+  included."
+  (interactive "P")
+  (let (start
+        end
+        where
+        text)
+    (cond
+     ((region-active-p)
+      (setq beg (save-excursion
+                  (goto-char (min (point) (mark)))
+                  (if (eolp)
+                    (forward-line))
+                  (line-beginning-position)))
+      (setq end (save-excursion
+                  (goto-char (max (point) (mark)))
+                  (unless (bolp)
+                    (forward-line))
+                  (line-beginning-position)))
+      (setq where end))
+     ((null arg)
+      (setq beg (line-beginning-position))
+      (setq end (line-beginning-position 2))
+      (setq where end))
+     ((< arg 0)
+      (setq beg (line-beginning-position))
+      (setq end (line-beginning-position (+ (- arg) 2)))
+      (setq where beg))
+     (t
+      (setq beg (line-beginning-position (+ (- arg) 1)))
+      (setq end (line-beginning-position 2))
+      (setq where end)))
+    (setq text (buffer-substring-no-properties beg end))
+    (goto-char where)
+    (insert text)
+    (goto-char where)
+    (back-to-indentation)))
+
 
 (provide 'assorted)
 
