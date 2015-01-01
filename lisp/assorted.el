@@ -186,6 +186,23 @@ numbers."
     (back-to-indentation)))
 
 
+;;;###autoload
+(defun arv/duplicate-region-and-comment (start stop)
+  "Duplicate the whole lines i region and comment them.
+Mostly equivalent to select region, copy, paste, select again and
+comment region, but the region is not copied to the kill ring and
+the text properties are removed."
+  (interactive "r")
+  (let* ((beg (progn (goto-char start) (line-beginning-position)))
+         (end (progn (goto-char stop) (line-end-position)))
+         (text (buffer-substring-no-properties beg end)))
+    (goto-char end)
+    (newline)
+    (insert text)
+    (comment-region beg end)
+    ))
+
+
 (provide 'assorted)
 
 ;;; assorted.el ends here
