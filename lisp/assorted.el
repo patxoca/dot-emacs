@@ -179,7 +179,7 @@ numbers."
 
 
 ;;;###autoload
-(defun arv/duplicate-region-and-comment (start stop)
+(defun arv/duplicate-region-and-comment-dwim (start stop)
   "Duplicate the whole lines i region and comment them.
 Mostly equivalent to select region, copy, paste, select again and
 comment region, but the region is not copied to the kill ring and
