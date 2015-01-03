@@ -32,6 +32,9 @@
 (message " (_)___|_| |_| |_|\\__,_|\\___|___/")
 
 
+(require 'cl-lib)
+
+
 ;; variables
 
 (defvar emacs-startup-dir "~/.emacs.d/conf.d"
