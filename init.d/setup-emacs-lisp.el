@@ -65,7 +65,11 @@
      (define-key emacs-lisp-mode-map (kbd "C-c e s") 'arv/scratch)
      (define-key emacs-lisp-mode-map (kbd "C-c e v") 'find-variable)
      (define-key emacs-lisp-mode-map (kbd "C-h e V") 'apropos-value)
-     (define-key emacs-lisp-mode-map (kbd "C-c e z") 'byte-recompile-directory)))
+     (define-key emacs-lisp-mode-map (kbd "C-c e z") 'byte-recompile-directory)
+
+     (font-lock-add-keywords 'emacs-lisp-mode '(("\\<ert-deftest\\>" . font-lock-keyword-face)))
+     (font-lock-add-keywords 'emacs-lisp-mode '(("\\<should\\>" . font-lock-keyword-face)))
+     (font-lock-add-keywords 'emacs-lisp-mode '(("\\<should-not\\>" . font-lock-keyword-face)))))
 
 ;; disable autopair-mode, conflicts with paredit
 ;;
