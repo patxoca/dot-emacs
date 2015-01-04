@@ -55,31 +55,32 @@ opens the file."
 		   help-echo "mouse-1: click to open")))))
 
 
-(defun pydoc-make-url-links ()
-  "Propertize urls so they are clickable."
-  (goto-char (point-min))
+;; (defun pydoc-make-url-links ()
+;;   "Propertize urls so they are clickable."
+;;   (goto-address-mode)
+  ;; (goto-char (point-min))
 
-  (while (re-search-forward "https?:" nil t)
-    ;; this seems like a clumsy way to set this link, but it works.
-    (let ((url (browse-url-url-at-point)))
-      (re-search-backward "http")
-      (re-search-forward url))
+  ;; (while (re-search-forward "http" nil t)
+  ;;   ;; this seems like a clumsy way to set this link, but it works.
+  ;;   (let ((url (browse-url-url-at-point)))
+  ;;     (re-search-backward "http")
+  ;;     (re-search-forward url))
 
-    (let ((map (make-sparse-keymap))
-	  (start (match-beginning 0))
-	  (end (match-end 0)))
+  ;;   (let ((map (make-sparse-keymap))
+  ;; 	  (start (match-beginning 0))
+  ;; 	  (end (match-end 0)))
 
-      (define-key map [mouse-1]
-	`(lambda ()
-	  (interactive)
-	  (browse-url ,(buffer-substring start end))))
+  ;;     (define-key map [mouse-1]
+  ;; 	`(lambda ()
+  ;; 	  (interactive)
+  ;; 	  (browse-url ,(buffer-substring start end))))
 
-      (set-text-properties
-       start end
-       `(local-map ,map
-		   font-lock-face (:foreground "blue"  :underline t)
-		   mouse-face highlight
-		   help-echo (format "mouse-1: click to open"))))))
+  ;;     (set-text-properties
+  ;;      start end
+  ;;      `(local-map ,map
+  ;; 		   font-lock-face (:foreground "blue"  :underline t)
+  ;; 		   mouse-face highlight
+  ;; 		   help-echo (format "mouse-1: click to open"))))))
 
 
 (defun pydoc-get-name ()
@@ -131,7 +132,7 @@ opens the file."
 (defun pydoc-colorize-class-methods ()
   (goto-char (point-min))
   ;; group1 is the method, group2 is the args
-  (while (re-search-forward "     |  \\([a-zA-Z0-9_]*\\)(\\(.*\\))" nil t)
+  (while (re-search-forward "^\\s-+|  \\([a-zA-Z0-9_]*\\)(\\(.*\\))" nil t)
 
     (let ((map (make-sparse-keymap))
 	  (start (match-beginning 1))
@@ -304,8 +305,8 @@ we just colorize parameters in red."
 (defun pydoc-linkify-classes ()
   "TODO: find class lines, and linkify them"
   (goto-char (point-min))
-  ;; first match is class name, second match is super class
-  (while (re-search-forward "    class \\(.*\\)(\\(.*\\))$" nil t)
+  ;; first match is class name, second match is optional super class
+  (while (re-search-forward "^\\s-+class \\(.*\\)(?\\(.*\\)?)?" nil t)
     ;; colorize the class
     (let ((map (make-sparse-keymap)))
 
@@ -316,7 +317,7 @@ we just colorize parameters in red."
 	   (find-file ,pydoc-file)
 	   (goto-char (point-min))
 	   ;; this might be fragile if people put other spaces in
-	   (re-search-forward (format "class %s("  ,(match-string 1)))))
+	   (re-search-forward (format "^class %s\\b"  ,(match-string 1)))))
 
       (set-text-properties
        (match-beginning 1)
@@ -367,7 +368,6 @@ we just colorize parameters in red."
 		    help-echo "mouse-1: click to return"))))
 
 
-;;;###autoload
 (defun pydoc (name)
   "Display pydoc information for NAME in a buffer named *pydoc*."
   (interactive "sName of function or module: ")
@@ -388,7 +388,8 @@ we just colorize parameters in red."
 
   (save-excursion
     (pydoc-get-name)
-    (pydoc-make-url-links)
+    (goto-address-mode)
+;;    (pydoc-make-url-links)
     (pydoc-make-file-link)
     (pydoc-make-package-links)
     (pydoc-linkify-classes)
