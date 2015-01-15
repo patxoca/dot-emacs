@@ -64,6 +64,14 @@
                     :background "black")
 
 
+;; overwrite mode
+(defadvice overwrite-mode (after overwrite-mode-adjust-cursor activate)
+  "Change cursor color when enabling/disabling overwrite mode."
+  (set-cursor-color (if overwrite-mode
+                        "purple"
+                      "white")))
+
+
 ;; popwin
 (require 'popwin)
 (popwin-mode 1)
