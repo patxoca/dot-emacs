@@ -158,7 +158,7 @@
           try-expand-tags
           try-expand-dabbrev-all-buffers) t))
      (define-key python-mode-map (kbd "s-<tab>") 'python-indent-shift-right)
-     (define-key python-mode-map '[(super iso-lefttab)] 'python-indent-shift-left)
+     (define-key python-mode-map (kbd "s-<iso-lefttab>") 'python-indent-shift-left)
      (define-key python-mode-map (kbd ":") 'pyx/electric-colon)
      (define-key python-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j s") 'arv/py-visit-setup-py)
