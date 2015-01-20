@@ -88,7 +88,7 @@
 
 (eval-after-load "python"
   '(progn
-     (define-key python-mode-map [(control c) (h)] 'pylookup-lookup)))
+     (define-key python-mode-map (kbd "C-c h") 'pylookup-lookup)))
 
 (add-hook 'python-mode-hook
           (lambda()
@@ -144,25 +144,25 @@
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
-     (define-key python-mode-map '[(super l)] 'pylint)
-     (define-key python-mode-map '[(super L)] 'pep8)
-     (define-key python-mode-map '[(meta f1)] (lambda () (interactive) (info "(python.info) Python Module Index")))
-     (define-key python-mode-map '[f7] 'next-error)
-     (define-key python-mode-map '[f8] 'previous-error)
-     (define-key python-mode-map '[f9] (lambda ()
+     (define-key python-mode-map (kbd "s-l") 'pylint)
+     (define-key python-mode-map (kbd "s-L") 'pep8)
+     (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
+     (define-key python-mode-map (kbd "<f7>") 'next-error)
+     (define-key python-mode-map (kbd "<f8>") 'previous-error)
+     (define-key python-mode-map (kbd "<f9>") (lambda ()
                                          (interactive)
                                          (call-interactively 'compile)))
-     (define-key python-mode-map '[(control tab)]
+     (define-key python-mode-map (kbd "C-<tab>")
        (make-hippie-expand-function
         '(try-expand-dabbrev
           try-expand-tags
           try-expand-dabbrev-all-buffers) t))
-     (define-key python-mode-map '[(super tab)] 'python-indent-shift-right)
+     (define-key python-mode-map (kbd "s-<tab>") 'python-indent-shift-right)
      (define-key python-mode-map '[(super iso-lefttab)] 'python-indent-shift-left)
-     (define-key python-mode-map '[(:)] 'pyx/electric-colon)
-     (define-key python-mode-map '[(control m)] 'newline-and-indent)
+     (define-key python-mode-map (kbd ":") 'pyx/electric-colon)
+     (define-key python-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j s") 'arv/py-visit-setup-py)
-     (define-key python-mode-map '[(control c) (j) (i)] 'arv-py-nav-goto-first-import)))
+     (define-key python-mode-map (kbd "C-c j i") 'arv-py-nav-goto-first-import)))
 
 
 ;; defineix advices per obrir/tancar un projecte rope al obrir/tancar
