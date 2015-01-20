@@ -18,7 +18,7 @@
 (autoload 'highlight-indentation "highlight-indentation" "" t nil)
 
 (require 'arv-py)
-
+(require 'pyx)
 
 ;;                              pymacs
 
@@ -159,7 +159,7 @@
           try-expand-dabbrev-all-buffers) t))
      (define-key python-mode-map '[(super tab)] 'python-indent-shift-right)
      (define-key python-mode-map '[(super iso-lefttab)] 'python-indent-shift-left)
-     (define-key python-mode-map '[(:)] 'arv-py-electric-colon)
+     (define-key python-mode-map '[(:)] 'pyx/electric-colon)
      (define-key python-mode-map '[(control m)] 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j s") 'arv/py-visit-setup-py)
      (define-key python-mode-map '[(control c) (j) (i)] 'arv-py-nav-goto-first-import)))

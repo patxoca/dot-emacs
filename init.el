@@ -41,7 +41,8 @@
   "Directori on l'usuari guarda el codi elisp.")
 
 (defvar arv/load-path '("site-lisp" "site-lisp/pylookup"
-                        "site-lisp/eproject" "lisp")
+                        "site-lisp/eproject" "lisp"
+                        "../site-lisp/pyx")
   "Directoris addicionals, relatius a `emacs-startup-dir', que
 s'inclouran en `load-path'")
 

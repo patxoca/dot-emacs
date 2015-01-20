@@ -134,46 +134,6 @@ classe."
 ;;         (+ level (/ python-indent-offset 2))
 ;;       level)))
 
-
-;;; Assorted
-
-(defcustom arv-py-electric-colon-insert-newline t
-  "No-nil indica a `arv-py-electric-colon' que al inserir un :
-cal inserir un salt de línia i sagnar la nova línia."
-  :group 'arv-py
-  :type  'boolean
-  :safe  'booleanp)
-
-
-(defun arv-py-electric-colon (arg)
-  "Insereix un salt de línia després de :.
-
-Aquesta funció amplia `python-indent-electric-colon' inserint un
-salt de línia i sagnant la nova línia.
-
-La comprovació de quan cal inserir-i-sagnar només té en compte
-casos molt simples. S'anirà afinant sobre la marxa."
-  (interactive "*P")
-  (if (fboundp 'python-indent-electric-colon)
-      (python-indent-electric-colon arg)
-    ;; @FIXME: alex 2014-08-20 12:14:55 : emacs 24.3.93 removed
-    ;; `python-indent-electric-colon' which is subsumed by
-    ;; `python-indent-post-self-insert-function'. Just inserting a
-    ;; colon triggers a call.
-    (insert ":"))
-  (when arv-py-electric-colon-insert-newline
-    (let ((bol (save-excursion
-                 (beginning-of-line)
-                 (point))))
-      (if (and
-           (eolp)
-           (not (python-syntax-comment-or-string-p))
-           (arv/current-line-starts-with-p "^\s*\\(class\\|def\\|if\\|elif\\|else\\|for\\|while\\|try\\|except\\|finally\\|with\\)")
-
-           (not (looking-back "\\[[^]]*" bol))
-           (not (looking-back "{[^}]*" bol))
-           (not (looking-back "lambda.*" bol)))
-          (newline-and-indent)))))
 
 (defun arv/py-visit-setup-py ()
   ""
