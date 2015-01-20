@@ -175,6 +175,14 @@ casos molt simples. S'anirà afinant sobre la marxa."
            (not (looking-back "lambda.*" bol)))
           (newline-and-indent)))))
 
+(defun arv/py-visit-setup-py ()
+  ""
+  (interactive)
+  (let ((parent (locate-dominating-file (buffer-file-name) "setup.py")))
+    (if (not parent)
+        (message "'setup.py' not found")
+      (find-file (concat (file-name-as-directory parent) "setup.py")))))
+
 (provide 'arv-py)
 
 ;;; arv-py.el ends here
