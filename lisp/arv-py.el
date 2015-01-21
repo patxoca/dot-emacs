@@ -143,6 +143,18 @@ classe."
         (message "'setup.py' not found")
       (find-file (concat (file-name-as-directory parent) "setup.py")))))
 
+(defun arv/py-insert-current-package-name ()
+  "Insert the current package name.
+
+The package name is the name of the directory that contains the
+'setup.py'."
+  (interactive)
+  (let ((parent (locate-dominating-file (buffer-file-name) "setup.py")))
+    (if (not parent)
+        (message "'setup.py' not found")
+      (insert (file-name-base (directory-file-name parent))))))
+
+
 (provide 'arv-py)
 
 ;;; arv-py.el ends here

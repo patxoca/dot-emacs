@@ -144,6 +144,7 @@
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
+     (define-key python-mode-map (kbd "C-c m i p n") 'arv/py-insert-current-package-name)
      (define-key python-mode-map (kbd "s-l") 'pylint)
      (define-key python-mode-map (kbd "s-L") 'pep8)
      (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
