@@ -144,10 +144,15 @@
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
+     (define-key python-mode-map (kbd "C-c m p") 'pylint)
+     (define-key python-mode-map (kbd "C-c m 8") 'pep8)
+     (define-key python-mode-map (kbd "C-c m w f") 'pyx/refactor-wrap-for)
+     (define-key python-mode-map (kbd "C-c m w i") 'pyx/refactor-wrap-if-else)
+     (define-key python-mode-map (kbd "C-c m w t") 'pyx/refactor-wrap-try-except)
+     (define-key python-mode-map (kbd "C-c m w w") 'pyx/refactor-wrap-while)
      (define-key python-mode-map (kbd "C-c m i p n") 'arv/py-insert-current-package-name)
-     (define-key python-mode-map (kbd "s-l") 'pylint)
-     (define-key python-mode-map (kbd "s-L") 'pep8)
      (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
+     ;; TODO: aquests tres possiblement siguin globals (?)
      (define-key python-mode-map (kbd "<f7>") 'next-error)
      (define-key python-mode-map (kbd "<f8>") 'previous-error)
      (define-key python-mode-map (kbd "<f9>") (lambda ()
@@ -216,8 +221,7 @@
             (highlight-indentation)
 
             ;; pylint/flymake-pylint
-            (pylint-add-menu-items)
-            (pylint-add-key-bindings)))
+            (pylint-add-menu-items)))
 
 
 ;;; python-mode.el ends here
