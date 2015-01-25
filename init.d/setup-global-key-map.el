@@ -30,9 +30,6 @@
 
 ;; disable some keybindings
 
-;; disable C-x o while I get used to the window motion keybindings
-(global-unset-key (kbd "C-x o"))
-
 ;; disable arrow  keys
 ;; (progn
 ;;   (global-unset-key (kbd "<up>"))
@@ -65,6 +62,7 @@
   (global-set-key (kbd "C-z") 'shell))
 
 
+(global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-u") 'arv/upcase-word)
 (global-set-key (kbd "M-l") 'arv/downcase-word)
 (global-set-key (kbd "s-y") 'arv/duplicate-line-dwim)

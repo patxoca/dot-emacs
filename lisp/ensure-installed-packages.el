@@ -17,6 +17,7 @@
 (defvar required-packages
   '(
     ace-jump-mode
+    ace-window
     buffer-move
     company
     dash
