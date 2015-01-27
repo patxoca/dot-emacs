@@ -62,9 +62,13 @@
   (global-set-key (kbd "C-z") 'shell))
 
 
+;; emacs overrides
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-u") 'arv/upcase-word)
 (global-set-key (kbd "M-l") 'arv/downcase-word)
+(global-set-key (kbd "M-;") 'endless/comment-line)
+
+
 (global-set-key (kbd "s-y") 'arv/duplicate-line-dwim)
 (global-set-key (kbd "C-M-y") 'arv/duplicate-region-and-comment-dwim)
 
