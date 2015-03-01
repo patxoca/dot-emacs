@@ -72,6 +72,10 @@
                       "white")))
 
 
+;; paradox
+(setq paradox-execute-asynchronously nil) ; t always, nil nevet, 'ask asks
+
+
 ;; popwin
 (require 'popwin)
 (popwin-mode 1)
