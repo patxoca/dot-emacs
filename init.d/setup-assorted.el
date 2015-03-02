@@ -22,6 +22,12 @@
   (setq frame-title-format '("emacs %b (%f)")))
 
 
+;; ace-window-mode
+(custom-set-faces
+ '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 4.0)))))
+
+
 ;; company
 (eval-after-load "company"
   '(progn
