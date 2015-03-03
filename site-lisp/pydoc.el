@@ -16,8 +16,10 @@
 
 ;;; Code:
 
-(require 'org)
 
+;; we use org-mode for python fontification
+(unless (featurep 'org)
+  (require 'org))
 
 (defvar *pydoc-current* nil
  "Stores current pydoc command.")
@@ -25,6 +27,23 @@
 
 (defvar *pydoc-last* nil
  "Stores the last pydoc command.")
+
+
+(defvar *pydoc-history* '()
+  "History for pydoc commands.")
+
+(defvar *pydoc-index* 0
+  "Current index in the history.")
+
+(defun pydoc-get-name ()
+  "Get NAME and store locally."
+  (goto-char (point-min))
+  ;; the name sometimes is just a word, sometimes there is a - with a string
+  ;; after it.
+  (when (re-search-forward "^NAME
+    \\([a-zA-Z0-9_]*\\(\\..*\\)?\\)\\( -\\)?"
+			   nil t)
+    (setq pydoc-name (match-string 1))))
 
 
 (defun pydoc-make-file-link ()
@@ -53,43 +72,6 @@ opens the file."
 		   font-lock-face (:foreground "blue"  :underline t)
 		   mouse-face highlight
 		   help-echo "mouse-1: click to open")))))
-
-
-;; (defun pydoc-make-url-links ()
-;;   "Propertize urls so they are clickable."
-;;   (goto-address-mode)
-  ;; (goto-char (point-min))
-
-  ;; (while (re-search-forward "http" nil t)
-  ;;   ;; this seems like a clumsy way to set this link, but it works.
-  ;;   (let ((url (browse-url-url-at-point)))
-  ;;     (re-search-backward "http")
-  ;;     (re-search-forward url))
-
-  ;;   (let ((map (make-sparse-keymap))
-  ;; 	  (start (match-beginning 0))
-  ;; 	  (end (match-end 0)))
-
-  ;;     (define-key map [mouse-1]
-  ;; 	`(lambda ()
-  ;; 	  (interactive)
-  ;; 	  (browse-url ,(buffer-substring start end))))
-
-  ;;     (set-text-properties
-  ;;      start end
-  ;;      `(local-map ,map
-  ;; 		   font-lock-face (:foreground "blue"  :underline t)
-  ;; 		   mouse-face highlight
-  ;; 		   help-echo (format "mouse-1: click to open"))))))
-
-
-(defun pydoc-get-name ()
-  "Get NAME and store locally."
-  (goto-char (point-min))
-  (when (re-search-forward "^NAME
-    \\([a-zA-Z0-9_]*\\(\\..*\\)?\\) -"
-			   nil t)
-    (setq pydoc-name (match-string 1))))
 
 
 (defun pydoc-make-package-links ()
@@ -130,6 +112,10 @@ opens the file."
 
 
 (defun pydoc-colorize-class-methods ()
+  "Colorize and linkify class methods.
+These tend to be something like:
+
+   | function_name(args)"
   (goto-char (point-min))
   ;; group1 is the method, group2 is the args
   (while (re-search-forward "^\\s-+|  \\([a-zA-Z0-9_]*\\)(\\(.*\\))" nil t)
@@ -164,7 +150,9 @@ opens the file."
 (defun pydoc-colorize-functions ()
   "Change color of function names and args.
 Also, make function names clickable so they open the source file
-at the function definition."
+at the function definition.
+
+These are in a special section called Functions."
   (goto-char (point-min))
   (when (re-search-forward "^Functions" nil t)
     ;; we use this regexp to find functions "    name(args)"
@@ -197,7 +185,7 @@ at the function definition."
 
 
 (defun pydoc-colorize-envvars ()
-  "Makes environment variables a green color"
+  "Makes environment variables a green color."
   (goto-char (point-min))
   (while (re-search-forward "\\$[a-zA-Z_]*\\>" nil t)
     (set-text-properties
@@ -208,12 +196,11 @@ at the function definition."
 
 (defun pydoc-colorize-strings ()
   "Make strings in single ' or \" a green color.
-This is not very robust."
+This is not very robust, e.g. it fails if quotes cross lines, or if they are used in mathematics."
   (goto-char (point-min))
   (while (re-search-forward
-	  (concat "\\('\\|\"\\)" ; opening quote
-		  "[^'\\|\"\\|\\n]*"  ; chars that are not a quote or line ending
-		  "\\('\\|\"\\)"); closing quote
+	  "\\('\\|\\\"\\)[^'\"|
+]*\\('\\|\\\"\\)"
 		  nil t)
     (set-text-properties
      (match-beginning 0)
@@ -303,7 +290,7 @@ we just colorize parameters in red."
 
 
 (defun pydoc-linkify-classes ()
-  "TODO: find class lines, and linkify them"
+  "Find class lines, and colorize and linkify them."
   (goto-char (point-min))
   ;; first match is class name, second match is optional super class
   (while (re-search-forward "^\\s-+class \\(.*\\)(?\\(.*\\)?)?" nil t)
@@ -346,26 +333,64 @@ we just colorize parameters in red."
 		    (format "mouse-1: pydoc %s" ,(match-string 2)))))))
 
 
-(defun pydoc-insert-back-link ()
-  "Insert link to previous buffer."
-  (goto-char (point-max))
-  (insert "
-[back]")
-  (let ((map (make-sparse-keymap)))
+(defun pydoc-linkify-data ()
+  "Find DATA block and then make links to entries.
+This is not perfect, as the data entries are not always in the file defined, e.g. when it is an __init__ file that imports *."
+  (goto-char (point-min))
+  (when (re-search-forward "^DATA" nil t)
+    (while (re-search-forward "\\([_A-Za-z0-9]*\\) =" nil t)
+      (let ((map (make-sparse-keymap))
+	    (start (match-beginning 1))
+	    (end (match-end 1))
+	    (token (match-string 1)))
 
-    ;; set file to be clickable to open the source
+	(define-key map [mouse-1]
+	  `(lambda ()
+	     (interactive)
+	     (find-file ,pydoc-file)
+	     (goto-char (point-min))
+	     (re-search-forward
+	      (format "^%s" ,token nil t))))
+
+	(set-text-properties
+	 start end
+	 `(local-map, map
+		      font-lock-face (:foreground "brown")
+		      mouse-face highlight
+		      help-echo (format "mouse-1: click to go to %s" ,token)))))))
+
+
+(defun pydoc-insert-back-link ()
+  "Insert link to next and previous pydoc buffers."
+  (goto-char (point-max))
+  (let ((map (make-sparse-keymap)))
     (define-key map [mouse-1]
       (lambda ()
 	(interactive)
-        (pydoc *pydoc-last*)))
+	(setq *pydoc-index* (mod (- *pydoc-index* 1) (length *pydoc-history*)))
+	(pydoc (elt *pydoc-history* *pydoc-index*))))
+    (insert
+     (propertize "[Back]"
+		 'local-map map
+		 'font-lock-face '(:foreground "blue"  :underline t)
+		 'mouse-face 'highlight
+		 'help-echo "mouse-1: click to return")))
 
-      (set-text-properties
-       (line-beginning-position)
-       (line-end-position)
-       `(local-map, map
-		    font-lock-face (:foreground "blue"  :underline t)
-		    mouse-face highlight
-		    help-echo "mouse-1: click to return"))))
+  (let ((map (make-sparse-keymap)))
+    (define-key map [mouse-1]
+      (lambda ()
+	(interactive)
+	(setq *pydoc-index* (mod (+ *pydoc-index* 1) (length *pydoc-history*)))
+	(pydoc (elt *pydoc-history* *pydoc-index*))))
+    (insert
+     (concat
+      "  "
+      (propertize "[Forward]"
+		  'local-map map
+		  'font-lock-face '(:foreground "blue"  :underline t)
+		  'mouse-face 'highlight
+		  'help-echo "mouse-1: click to return")))))
+
 
 
 ;;;###autoload
@@ -379,6 +404,13 @@ we just colorize parameters in red."
   (insert (shell-command-to-string (format "python -m pydoc %s" name)))
   (goto-char (point-min))
 
+  ;; store name at end of history if it is not in the history
+  ;; already. This isn't exactly a real history this way, since it
+  ;; won't add multiple instances, and revisiting a NAME will move you
+  ;; around in the history.
+  (add-to-list '*pydoc-history* name t)
+  (setq *pydoc-index* (-elem-index name *pydoc-history*))
+
   ;; save
   (when *pydoc-current*
       (setq *pydoc-last* *pydoc-current*))
@@ -390,7 +422,6 @@ we just colorize parameters in red."
   (save-excursion
     (pydoc-get-name)
     (goto-address-mode)
-;;    (pydoc-make-url-links)
     (pydoc-make-file-link)
     (pydoc-make-package-links)
     (pydoc-linkify-classes)
@@ -400,11 +431,12 @@ we just colorize parameters in red."
     (pydoc-colorize-strings)
     (pydoc-linkify-sphinx-directives)
     (pydoc-fontify-inline-code)
+    (pydoc-linkify-data)
     (pydoc-insert-back-link))
 
   ;; make read-only and press q to quit. add some navigation keys
   (setq buffer-read-only t)
-  (use-local-map (copy-keymap org-mode-map))
+  (use-local-map (copy-keymap text-mode-map))
   (local-set-key "q" #'(lambda () (interactive) (kill-buffer)))
   (local-set-key "n" #'(lambda () (interactive) (next-line)))
   (local-set-key "N" #'(lambda () (interactive) (forward-page)))
