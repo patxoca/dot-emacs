@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hera CRUD URLs
+# $Id:$
+# key: hera
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ()
+# uuid: 292c5540-ec5f-493b-8638-cf98e5780df8
+# --
+url("^$", views.crud_${1:model_name}, name="`(arv/py-insert-current-package-name)`_crud_$1"),
+url("^create/$", views.$1_create, name="`(arv/py-insert-current-package-name)`_$1_create"),
+url("^delete/$", views.$1_delete, name="`(arv/py-insert-current-package-name)`_$1_delete"),
+url("^update/$", views.$1_update, name="`(arv/py-insert-current-package-name)`_$1_update"),
