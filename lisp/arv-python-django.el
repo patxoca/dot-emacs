@@ -164,7 +164,7 @@ d'una aplicació permet triar quina obrir."
                              (caar candidates)
                            (completing-read
                             "Choose app: "
-                            candidates nil t (symbol-name current-app)))
+                            candidates nil t nil))
                          candidates))))))))
 
 (provide 'arv-python-django)
