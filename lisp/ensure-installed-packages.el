@@ -28,7 +28,6 @@
     figlet
     find-file-in-project
     grin
-    helm
     highlight-indentation
     ido-ubiquitous
     ido-vertical-mode
