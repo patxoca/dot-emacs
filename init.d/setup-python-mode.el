@@ -144,6 +144,7 @@
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
+     (define-key python-mode-map (kbd "C-c m d") 'pydoc)
      (define-key python-mode-map (kbd "C-c m p") 'pylint)
      (define-key python-mode-map (kbd "C-c m 8") 'pep8)
      (define-key python-mode-map (kbd "C-c m w f") 'pyx/refactor-wrap-for)
