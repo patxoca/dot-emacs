@@ -118,18 +118,20 @@ numbers."
 ;;;###autoload
 (defun arv/upcase-word (arg)
   (interactive "P")
-  (save-excursion
-    (unless (looking-back "\\b")
-      (backward-word))
-    (call-interactively 'upcase-word)))
+  (when (looking-at-p "\\sw")
+    (save-excursion
+      (unless (looking-back "\\b")
+        (backward-word))
+      (call-interactively 'upcase-word))))
 
 ;;;###autoload
 (defun arv/downcase-word (arg)
   (interactive "P")
-  (save-excursion
-    (unless (looking-back "\\b")
-      (backward-word))
-    (call-interactively 'downcase-word)))
+  (when (looking-at-p "\\sw")
+    (save-excursion
+      (unless (looking-back "\\b")
+        (backward-word))
+      (call-interactively 'downcase-word))))
 
 ;;;###autoload
 (defun arv/duplicate-line-dwim (arg)
