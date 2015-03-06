@@ -112,6 +112,11 @@
      (setq uniquify-buffer-name-style 'reverse)))
 
 
+;; web browser
+(setq browse-url-browser-function 'browse-url-generic)
+(setq browse-url-generic-program "firefox")
+
+
 (mouse-wheel-mode t)
 ;;@@ (setq mouse-wheel-scroll-amount'(1 5))
 (setq mouse-wheel-follow-mouse t)
@@ -121,7 +126,6 @@
 
 ;; assorted
 (setq ansi-color-for-comint-mode t)
-(setq browse-url-browser-function 'browse-url-firefox)
 (setq calendar-day-abbrev-array ["Dg" "Dl" "Dt" "Dc" "Dj" "Dv" "Ds"])
 (setq calendar-day-name-array ["Diumenge" "Dilluns" "Dimarts" "Dimecres"
                                "Dijous" "Divendres" "Dissabte"])

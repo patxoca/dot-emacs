@@ -16,7 +16,6 @@
 (require 'erc-stamp)
 (require 'easymenu)
 
-(setq browse-url-browser-function 'w3m)
 
 (defun chatear()
   "Chatejar al IRC amb ERC."
