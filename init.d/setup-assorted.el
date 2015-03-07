@@ -79,6 +79,7 @@
 
 
 ;; paradox
+(setq paradox-github-token t)
 (setq paradox-execute-asynchronously nil) ; t always, nil nevet, 'ask asks
 
 
