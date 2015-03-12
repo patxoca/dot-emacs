@@ -22,8 +22,8 @@ class ${1:name}(${2:models.Model}):
         return u""
 
     class Meta:
-        app_label = "${3:applabel}"
-        db_table = "${4:prefix_}${1:$(arv-yas-uncamelize yas-text "_")}"
+        app_label = "${3:`(arv/py-get-current-package-name)`}"
+        db_table = "${4:`(arv/py-get-current-package-name)`_}${1:$(arv-yas-uncamelize yas-text "_")}"
         permissions = (("${1:$(arv-yas-substring (concat "read_" (downcase yas-text)) 0 50)}", "Can read ${1:$(arv-yas-uncamelize yas-text " ")}"), )
         verbose_name = "${1:$(arv-yas-uncamelize yas-text " ")}"
         verbose_name_plural = "${1:$(arv-yas-uncamelize yas-text " ")}"
