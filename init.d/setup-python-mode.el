@@ -219,7 +219,8 @@
             (company-mode t)
 
             ;; ressalta els nivell d'indentacio
-            (when (fboundp 'highlight-indentation-mode)
+            (if (not (fboundp 'highlight-indentation-mode))
+                (message "ERROR: no es pot inicialitzar `highlight-indentation-mode'")
               (highlight-indentation-mode)
               (highlight-indentation-current-column-mode))
 
