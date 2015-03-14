@@ -10,9 +10,10 @@
 # name: $1
 # $Id:\$
 # key: ${2:`(car (split-string (arv/yas-buffer-name-sans) "\\\\."))`}
-# type: ${3:$$(yas-choose-value '("command" "snippet"))}
-# contributor: ${4:`(arv/yas-author-name)`} <${5:`(arv/yas-author-email)`}>
-# expand-env: (${6:(yas-indent-line 'fixed)})
+# group: $3
+# type: ${4:$$(yas-choose-value '("command" "snippet"))}
+# contributor: ${5:`(arv/yas-author-name)`} <${6:`(arv/yas-author-email)`}>
+# expand-env: (${7:(yas-indent-line 'fixed)})
 # uuid: `(arv/generate-random-uuid)`
 # --
 $0
