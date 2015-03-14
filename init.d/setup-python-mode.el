@@ -15,7 +15,6 @@
 (autoload 'company-complete "company" "" t nil)
 (autoload 'next-error "simple" "" t nil)
 (autoload 'previous-error "simple" "" t nil)
-(autoload 'highlight-indentation "highlight-indentation" "" t nil)
 
 (require 'arv-py)
 (require 'pyx)
@@ -220,7 +219,9 @@
             (company-mode t)
 
             ;; ressalta els nivell d'indentacio
-            (highlight-indentation)
+            (when (fboundp 'highlight-indentation-mode)
+              (highlight-indentation-mode)
+              (highlight-indentation-current-column-mode))
 
             ;; pylint/flymake-pylint
             (pylint-add-menu-items)))
