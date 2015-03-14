@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: :py:class:
+# $Id:$
+# key: sclass
+# type: snippet
+# group: sphinx
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: dbd64f26-b8f6-4b76-a716-6cf7c7a2ceaa
+# --
+:py:class:\`$1` $0
