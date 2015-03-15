@@ -37,12 +37,15 @@
 
 ;; variables
 
+(defvar emacs-local-site-lisp-dir "~/.emacs.d/site-lisp"
+  "Directori amb codi lisp de tercers no disponible en ELPA i que
+no vull/puc incloure en la configuració.")
+
 (defvar emacs-startup-dir "~/.emacs.d/conf.d"
   "Directori on l'usuari guarda el codi elisp.")
 
 (defvar arv/load-path '("site-lisp" "site-lisp/pylookup"
-                        "site-lisp/eproject" "lisp"
-                        "../site-lisp/pyx")
+                        "site-lisp/eproject" "lisp")
   "Directoris addicionals, relatius a `emacs-startup-dir', que
 s'inclouran en `load-path'")
 
@@ -80,15 +83,32 @@ s'inclouran en `load-path'")
                     (directory-files fullname t "\.elc\?$" nil))))
     (mapc (lambda (x) (load (arv/startup-get-absolute-path x))) arxius)))
 
+(defun arv/startup-get-site-lisp-subdirs ()
+  "Retorna una llista amb els subdirectoris de
+`emacs-local-site-lisp-dir'."
+  (mapcar (lambda (x) (arv/path-join emacs-local-site-lisp-dir x))
+          (cl-remove-if
+           (lambda (x)
+             (let ((abs-path (arv/path-join emacs-local-site-lisp-dir x)))
+               (or (string= x ".")
+                   (string= x "..")
+                   (not (file-accessible-directory-p abs-path)))))
+           (directory-files emacs-local-site-lisp-dir))))
+
+(defun arv/startup-get-all-user-lisp-dirs ()
+  "Retorna una llista amb les rutes absolutes de tots els
+directoris que contenen codi lisp sota el control de l'usuari."
+  (mapcar 'arv/startup-get-absolute-path
+          (append (arv/startup-get-site-lisp-subdirs) arv/load-path)))
+
 (defun arv/startup-byte-recompile ()
   ""
   (interactive)
-  (dolist (dir arv/load-path)
-    (let ((abs-dir (arv/startup-get-absolute-path dir)))
-      (message abs-dir)
-      (let ((generated-autoload-file (arv/path-join abs-dir "loaddefs.el")))
-        (update-directory-autoloads abs-dir))
-      (byte-recompile-directory abs-dir 0)))
+  (dolist (abs-dir (arv/startup-get-all-user-lisp-dirs))
+    (message abs-dir)
+    (let ((generated-autoload-file (arv/path-join abs-dir "loaddefs.el")))
+      (update-directory-autoloads abs-dir))
+    (byte-recompile-directory abs-dir 0))
   (dolist (dir (list "init.d" (arv/startup-get-path-in-instance "init.d" "common")))
     (message (arv/startup-get-absolute-path dir))
     (byte-recompile-directory (arv/startup-get-absolute-path dir) 0)))
@@ -97,8 +117,8 @@ s'inclouran en `load-path'")
 ;; funcions per la inicialització
 
 (defun arv/startup-configure-load-path ()
-  (dolist (dir arv/load-path)
-    (add-to-list 'load-path (arv/startup-get-absolute-path dir))))
+  (dolist (abs-dir (arv/startup-get-all-user-lisp-dirs))
+    (add-to-list 'load-path abs-dir)))
 
 (defun arv/startup-configure-custom-file ()
   (setq custom-file (arv/startup-get-path-in-instance "customize.el"))
@@ -115,8 +135,8 @@ s'inclouran en `load-path'")
   (package-initialize))
 
 (defun arv/startup-load-autoloads ()
-  (dolist (dir arv/load-path)
-    (load-file (arv/startup-get-absolute-path (arv/path-join dir "loaddefs.el")))))
+  (dolist (abs-dir (arv/startup-get-all-user-lisp-dirs))
+    (load-file (arv/path-join abs-dir "loaddefs.el"))))
 
 (defun arv/startup-initialize-instance ()
   (arv/startup-load-directory-in-order (arv/startup-get-path-in-instance "init.d" "common"))
