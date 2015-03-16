@@ -219,10 +219,7 @@
             (company-mode t)
 
             ;; ressalta els nivell d'indentacio
-            (if (not (fboundp 'highlight-indentation-mode))
-                (message "ERROR: no es pot inicialitzar `highlight-indentation-mode'")
-              (highlight-indentation-mode)
-              (highlight-indentation-current-column-mode))
+            (arv/highlight-indentation-mode 1)
 
             ;; pylint/flymake-pylint
             (pylint-add-menu-items)))

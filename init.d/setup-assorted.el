@@ -55,13 +55,6 @@
 (setq font-lock-maximum-decoration t)
 
 
-;; highlight-indentation
-(eval-after-load "highlight-identation"
-  '(progn
-     (set-face-attribute 'highlight-indent-face nil
-                         :background "#303739")))
-
-
 ;; hl-line-mode
 (global-hl-line-mode t)
 ;;(customize-set-value 'hl-line-face 'highlight)

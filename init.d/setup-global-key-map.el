@@ -169,6 +169,7 @@
 (global-set-key (kbd "C-c t d") 'toggle-window-dedicated)
 (global-set-key (kbd "C-c t f") 'auto-fill-mode)
 (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
+(global-set-key (kbd "C-c t h") 'arv/highlight-indentation-mode)
 (global-set-key (kbd "C-c t l") 'linum-mode)
 (global-set-key (kbd "C-c t L") 'line-number-mode)
 (global-set-key (kbd "C-c t r") 'read-only-mode)
