@@ -61,7 +61,7 @@ class CRUD$1View(AjaxListFormView, SelfDocViewMixin, CRUDMixin):
         Action(u"Esborrar",
                """Esborra els $2 seleccionats al llistat.
                """,
-               view="`(arv/py-insert-current-package-name)`_${1:$(arv-yas-uncamelize yas-text "_")}_delete"
+               #view="`(arv/py-insert-current-package-name)`_${1:$(arv-yas-uncamelize yas-text "_")}_delete"
            ),
         Action(u"Modificar",
                """Permet modificar el $2 seleccionat al llistat.
