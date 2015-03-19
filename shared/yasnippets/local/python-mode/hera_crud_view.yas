@@ -39,6 +39,7 @@ class CreateForm(BaseForm):
 
 class UpdateForm(BaseForm):
     class Meta:
+        model = app_models.${1:Model}
         exclude = ("pk", )
 
 
