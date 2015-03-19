@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hera CRUD view imports
+# $Id:$
+# key: hera
+# type: snippet
+# contributor: Alexis Roda <alex@superjul>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: c23ecda3-de06-4f3c-b86f-c7d69b5fd3a4
+# --
+from `(arv/py-insert-current-package-name)`.views.crud_${1:module_name} import crud_${2:$1}
+from `(arv/py-insert-current-package-name)`.views.crud_$1 import $2_create
+from `(arv/py-insert-current-package-name)`.views.crud_$1 import $2_update
