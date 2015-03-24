@@ -23,9 +23,14 @@
 
 
 ;; ace-window-mode
-(custom-set-faces
- '(aw-leading-char-face
-   ((t (:inherit ace-jump-face-foreground :height 4.0)))))
+(eval-after-load "ace-window"
+  '(progn
+     (custom-set-faces
+      '(aw-leading-char-face
+        ((t (:inherit ace-jump-face-foreground
+                      :height 4.0
+                      :foreground "red")))))
+     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?ñ))))
 
 
 ;; company
