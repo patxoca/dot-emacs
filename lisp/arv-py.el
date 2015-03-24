@@ -143,16 +143,6 @@ classe."
         (message "'setup.py' not found")
       (find-file (concat (file-name-as-directory parent) "setup.py")))))
 
-(defun arv/py-get-current-package-name ()
-  "Return the current package name.
-
-The package name is the name of the directory that contains the
-'setup.py'. If no 'setup.py' is found nil is returned."
-  (interactive)
-  (let ((parent (locate-dominating-file (buffer-file-name) "setup.py")))
-    (if (null parent)
-        nil
-      (file-name-base (directory-file-name parent)))))
 
 (defun arv/py-insert-current-package-name ()
   "Insert the current package name.
@@ -160,7 +150,7 @@ The package name is the name of the directory that contains the
 The package name is the name of the directory that contains the
 'setup.py'."
   (interactive)
-  (let ((name (arv/py-get-current-package-name)))
+  (let ((name (pyx/get-current-package-name)))
     (if (null name)
         (error "'setup.py' not found")
       (insert name))))
