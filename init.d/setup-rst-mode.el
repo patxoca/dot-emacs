@@ -16,13 +16,15 @@
   (let (l)
     (save-excursion
       (if (= (forward-line -1) 0)
-          (setq l (length (buffer-substring-no-properties (point)
+          (setq l (length (buffer-substring-no-properties (save-excursion
+                                                            (back-to-indentation)
+                                                            (point))
                                                           (save-excursion
                                                             (end-of-line)
                                                             (point)))))))
     (if l
         (progn
-          (beginning-of-line)
+          (back-to-indentation)
           (insert (make-string l caracter))
           (insert "\n\n")))))
 
