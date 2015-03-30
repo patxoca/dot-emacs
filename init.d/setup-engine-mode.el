@@ -51,5 +51,8 @@
   "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
   "w")
 
+(defengine wordreference
+  "http://www.wordreference.com/redirect/translation.aspx?w=%s&dict=enes"
+  "W")
 
 ;;; engine-mode.el ends here
