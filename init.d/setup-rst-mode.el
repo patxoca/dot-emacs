@@ -11,27 +11,29 @@
 ;;; Code:
 
 
-(defun arv-rst-underline-previous-line (caracter)
+(defun arv/rst-underline-header (caracter)
   (interactive "cCaracter: ")
-  (let (l)
-    (save-excursion
-      (if (= (forward-line -1) 0)
-          (setq l (length (buffer-substring-no-properties (save-excursion
-                                                            (back-to-indentation)
-                                                            (point))
-                                                          (save-excursion
-                                                            (end-of-line)
-                                                            (point)))))))
-    (if l
-        (progn
-          (back-to-indentation)
-          (insert (make-string l caracter))
-          (insert "\n\n")))))
+  (let ((l (length (buffer-substring-no-properties (progn
+                                                     (back-to-indentation)
+                                                     (point))
+                                                   (progn
+                                                     (end-of-line)
+                                                     (point)))))
+        (indentation-level (progn
+                             (back-to-indentation)
+                             (current-column))))
+    (when l
+      (end-of-line)
+      (insert "\n")
+      (insert (make-string indentation-level ?\s))
+      (insert (make-string l caracter))
+      (insert "\n\n")
+      (insert (make-string indentation-level ?\s)))))
 
 (eval-after-load "rst"
     '(progn
        (define-key rst-mode-map '[f9] 'arv-sphinx-build-latexpdf)
-       (define-key rst-mode-map '[(control =)] 'arv-rst-underline-previous-line)))
+       (define-key rst-mode-map '[(control =)] 'arv/rst-underline-header)))
 
 (add-hook 'rst-mode-hook
           (lambda ()

@@ -170,7 +170,7 @@
      (define-key python-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j S") 'arv/py-visit-setup-py)
      (define-key python-mode-map (kbd "C-c j i") 'arv-py-nav-goto-first-import)
-     (define-key python-mode-map (kbd "C-=") 'arv-rst-underline-previous-line)))
+     (define-key python-mode-map (kbd "C-=") 'arv/rst-underline-header)))
 
 
 ;; defineix advices per obrir/tancar un projecte rope al obrir/tancar
