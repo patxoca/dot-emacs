@@ -167,6 +167,7 @@
      (define-key python-mode-map (kbd "s-<tab>") 'python-indent-shift-right)
      (define-key python-mode-map (kbd "s-<iso-lefttab>") 'python-indent-shift-left)
      (define-key python-mode-map (kbd ":") 'pyx/electric-colon)
+     (define-key python-mode-map (kbd "`") 'pyx/electric-grave)
      (define-key python-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j S") 'arv/py-visit-setup-py)
      (define-key python-mode-map (kbd "C-c j i") 'arv-py-nav-goto-first-import)
