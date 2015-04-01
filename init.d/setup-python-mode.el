@@ -221,7 +221,7 @@
             (company-mode t)
 
             ;; ressalta els nivell d'indentacio
-            (arv/highlight-indentation-mode 1)
+            (arv/highlight-indentation-mode 0)
 
             ;; pylint/flymake-pylint
             (pylint-add-menu-items)))
