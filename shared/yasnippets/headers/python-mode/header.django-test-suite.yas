@@ -15,12 +15,11 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test.client import RequestFactory
-from django.utils import unittest
 
 # from app import models as app_models
 
 
-class Test`(arv/yas-buffer-name-sans-camelcase)`(TestCase):
+class `(arv/yas-buffer-name-sans-camelcase)`(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_superuser("test", "", password="123456")
