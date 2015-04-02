@@ -14,9 +14,9 @@
 
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.client import RequestFactory
+# from django.test.client import RequestFactory
 
-# from app import models as app_models
+# from `(pyx/get-current-package-name)` import models as app_models
 
 
 class `(arv/yas-buffer-name-sans-camelcase)`(TestCase):
