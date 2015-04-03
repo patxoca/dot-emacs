@@ -30,6 +30,7 @@
       (insert "\n\n")
       (insert (make-string indentation-level ?\s)))))
 
+
 (defun arv/rst-smart-grave ()
   "Tries to be smart about common ` usage patterns.
 
@@ -47,8 +48,24 @@ middle."
     (insert "````")
     (backward-char 2)))
 
+
+(defun arv/rst-smart-asterisk ()
+  "Tries to be smart about * usage.
+
+If there's only withespace before point it assumes that it's a
+list bullet and inserts '* ', otherwise it inserts '**' and
+leaves point in the middle."
+  (interactive)
+  (if (string-match-p "^\s*$"
+                      (buffer-substring-no-properties (line-beginning-position) (point)))
+      (insert "* ")
+    (insert "**")
+    (backward-char 1)))
+
+
 (eval-after-load "rst"
     '(progn
+       (define-key rst-mode-map (kbd "*") 'arv/rst-smart-asterisk)
        (define-key rst-mode-map (kbd "`") 'arv/rst-smart-grave)
        (define-key rst-mode-map '[f9] 'arv-sphinx-build-latexpdf)
        (define-key rst-mode-map '[(control =)] 'arv/rst-underline-header)))
