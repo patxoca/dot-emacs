@@ -19,6 +19,10 @@
 (require 'engine-mode)
 (engine-mode t)
 
+(defengine diec2
+  "dlc.iec.cat/results.asp?txtEntrada=%s"
+  "c")
+
 (defengine django
   "https://docs.djangoproject.com/search/?q=%s&release=11"
   "d")
