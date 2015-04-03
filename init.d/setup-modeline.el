@@ -32,7 +32,6 @@
         (company-mode)
         (eldoc-mode)
         (elisp-slime-nav-mode)
-        (google-this-mode)
         (guide-key-mode)
         (hi-lock-mode)
         (org-capture-mode nil " C")
