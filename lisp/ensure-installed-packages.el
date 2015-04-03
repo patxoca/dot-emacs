@@ -41,11 +41,12 @@
     nose
     nose-mode
     org
+    paradox
     paredit
+    pep8
     php-mode
     pretty-lambdada
     pysmell
-    pep8
     rainbow-mode
     s
     smart-operator
