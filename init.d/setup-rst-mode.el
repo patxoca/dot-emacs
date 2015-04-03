@@ -30,8 +30,26 @@
       (insert "\n\n")
       (insert (make-string indentation-level ?\s)))))
 
+(defun arv/rst-smart-grave ()
+  "Tries to be smart about common ` usage patterns.
+
+After : inserts `` (like in :xref:`whatever`) elsewhere inserts
+```` (inline code literal). In both cases point is left in the
+middle."
+  (interactive)
+  (if (save-excursion
+        (unless (bobp)
+         (backward-char)
+         (looking-at ":")))
+      (progn
+        (insert "``")
+        (backward-char 1))
+    (insert "````")
+    (backward-char 2)))
+
 (eval-after-load "rst"
     '(progn
+       (define-key rst-mode-map (kbd "`") 'arv/rst-smart-grave)
        (define-key rst-mode-map '[f9] 'arv-sphinx-build-latexpdf)
        (define-key rst-mode-map '[(control =)] 'arv/rst-underline-header)))
 
