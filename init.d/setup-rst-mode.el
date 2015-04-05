@@ -31,22 +31,38 @@
       (insert (make-string indentation-level ?\s)))))
 
 
+(defun arv/-rst-after-role-p ()
+  "Return t if point is after a role."
+  (save-excursion
+    (unless (bobp)
+      (backward-char)
+      (looking-at ":"))))
+
 (defun arv/rst-smart-grave ()
   "Tries to be smart about common ` usage patterns.
 
-After : inserts `` (like in :xref:`whatever`) elsewhere inserts
-```` (inline code literal). In both cases point is left in the
-middle."
+If point is after a role (like :xref:) inserts ``, elsewhere
+inserts ```` (inline code literal). Point is left in the middle.
+
+If the region is active surround it and point is left at the
+end."
   (interactive)
-  (if (save-excursion
-        (unless (bobp)
-         (backward-char)
-         (looking-at ":")))
-      (progn
-        (insert "``")
-        (backward-char 1))
-    (insert "````")
-    (backward-char 2)))
+  (let ((begin (point))
+        (end   (point))
+        (active (region-active-p))
+        (delimiter))
+    (when active
+      (setq begin (min (region-beginning) (region-end)))
+      (setq end   (max (region-beginning) (region-end))))
+    (goto-char begin)
+    (setq delimiter (if (arv/-rst-after-role-p)
+                        "`"
+                      "``"))
+    (insert delimiter)
+    (goto-char (+ end (length delimiter)))
+    (insert delimiter)
+    (unless active
+      (backward-char (length delimiter)))))
 
 
 (defun arv/rst-smart-asterisk ()
