@@ -33,10 +33,7 @@
 
 (defun arv/-rst-after-role-p ()
   "Return t if point is after a role."
-  (save-excursion
-    (unless (bobp)
-      (backward-char)
-      (looking-at ":"))))
+  (looking-back ":\\w+:" (line-beginning-position)))
 
 (defun arv/rst-smart-grave ()
   "Tries to be smart about common ` usage patterns.
