@@ -122,7 +122,15 @@
                          :height 1.5)
      (set-face-attribute 'org-level-1 nil
                          :weight 'bold
-                         :height 1.2)))
+                         :height 1.2)
+     (set-face-attribute 'org-block-begin-line nil
+                         :weight 'normal
+                         :background "#202020")
+     (set-face-attribute 'org-block nil
+                         :background "black")
+     (set-face-attribute 'org-block-end-line nil
+                         :weight 'normal
+                         :background "#202020")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "pink" :weight bold))
