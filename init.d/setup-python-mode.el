@@ -18,6 +18,8 @@
 
 (require 'arv-py)
 (require 'pyx)
+(require 'subword)
+(require 'superword)
 
 ;;                              pymacs
 
@@ -137,7 +139,6 @@
 
 (eval-after-load "python"
   '(progn
-     (modify-syntax-entry ?_ "w" python-mode-syntax-table)
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
      (setq python-indent-guess-indent-offset nil)
 
@@ -171,7 +172,9 @@
      (define-key python-mode-map (kbd "C-m") 'newline-and-indent)
      (define-key python-mode-map (kbd "C-c j S") 'arv/py-visit-setup-py)
      (define-key python-mode-map (kbd "C-c j i") 'arv-py-nav-goto-first-import)
-     (define-key python-mode-map (kbd "C-=") 'arv/rst-underline-header)))
+     (define-key python-mode-map (kbd "C-=") 'arv/rst-underline-header)
+     (define-key python-mode-map (kbd "C-,") 'arv/wm-cycle-2)
+     ))
 
 
 ;; defineix advices per obrir/tancar un projecte rope al obrir/tancar
@@ -224,7 +227,10 @@
             (arv/highlight-indentation-mode 0)
 
             ;; pylint/flymake-pylint
-            (pylint-add-menu-items)))
+            (pylint-add-menu-items)
+
+            (superword-mode 1)
+            ))
 
 
 ;;; python-mode.el ends here

@@ -99,6 +99,19 @@ subword-mode -> superword-mode -> nothing -> subword-mode"
     (superword-mode 0))))
 
 ;;;###autoload
+(defun arv/wm-cycle-2 ()
+  "Cycle word-mode:
+subword-mode <-> superword-mode"
+  (interactive)
+  (cond
+   (subword-mode
+    (subword-mode 0)
+    (superword-mode 1))
+   (t
+    (subword-mode 1)
+    (superword-mode 0))))
+
+;;;###autoload
 (defun arv/goto-line ()
   "Like `goto-line' but temporarily display absolute line
 numbers."
