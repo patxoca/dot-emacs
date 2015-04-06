@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: empty header
+# $Id:$
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 2471e869483-fb94-4c1d-9351-cdc83cf43161
+# --
+$0

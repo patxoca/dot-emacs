@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: C++ minimal header
+# key: header
+# binding: direct-keybinding
+# --
+// -*- coding: utf-8 -*-
+
+// $Id:$
