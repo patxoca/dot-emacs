@@ -103,7 +103,7 @@ funció."
     (save-excursion
       (arv-py-nav-beginning-of-def)
       (back-to-indentation)
-      (if (looking-at "def +\\(\\w+\\)\\>" )
+      (if (looking-at "def +\\([_[:alnum:]]+\\)")
         (setq result (match-string 1))))
     result))
 
@@ -117,7 +117,7 @@ classe."
     (save-excursion
       (arv-py-nav-beginning-of-class)
       (back-to-indentation)
-      (if (looking-at "class +\\(\\w+\\)\\>" )
+      (if (looking-at "class +\\([_[:alnum:]]+\\)" )
         (setq result (match-string 1))))
     result))
 
