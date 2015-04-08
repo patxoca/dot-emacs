@@ -45,6 +45,11 @@
                               company-files))))
 
 
+;; ediff
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+
 ;; emacs faces
 (set-face-attribute 'compilation-error nil
                     :underline nil
@@ -134,7 +139,6 @@
 (setq calendar-week-start-day 1)
 (setq compilation-message-face 'default)
 (setq current-language-environment "UTF-8")
-(setq ediff-split-window-function 'split-window-horizontally)
 (setq-default indent-tabs-mode nil)
 (setq inhibit-eol-conversion nil)
 (setq inhibit-startup-screen t)
