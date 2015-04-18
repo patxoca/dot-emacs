@@ -1143,7 +1143,7 @@ If there is no .svn directory, examine if there is CVS and run
                          (svn-wc-adm-dir-name)))
         (cvs-dir (format "%sCVS" (file-name-as-directory dir))))
     (cond
-     ((file-directory-p svn-dir)
+     ((svn-file-directory-p svn-dir)
       (setq arg (svn-status-possibly-negate-meaning-of-arg arg 'svn-status))
       (svn-status-1 dir arg))
      ((and (file-directory-p cvs-dir)
@@ -6046,12 +6046,12 @@ Return nil, if not in a svn working copy."
       (let* ((base-dir start-dir)
              (repository-root (svn-status-repo-for-path base-dir))
              (dot-svn-dir (concat base-dir (svn-wc-adm-dir-name)))
-             (in-tree (and repository-root (file-exists-p dot-svn-dir)))
+             (in-tree (and repository-root (svn-file-exists-p dot-svn-dir)))
              (dir-below (expand-file-name base-dir)))
         ;; (message "repository-root: %s start-dir: %s" repository-root start-dir)
         (if (and (<= (car svn-client-version) 1) (< (cadr svn-client-version) 3))
             (setq base-dir (svn-status-base-dir-for-ancient-svn-client start-dir)) ;; svn version < 1.3
-          (while (when (and dir-below (file-exists-p dot-svn-dir))
+          (while (when (and dir-below (svn-file-exists-p dot-svn-dir))
                    (setq base-dir (file-name-directory dot-svn-dir))
                    (string-match "\\(.+/\\).+/" dir-below)
                    (setq dir-below
@@ -6432,6 +6432,19 @@ working directory."
           (svn-admin-create-trunk-directory)))
     (setq svn-admin-last-repository-dir (read-string "Repository Url: ")))
   (svn-checkout svn-admin-last-repository-dir "."))
+
+(defun svn-file-directory-p (dir)
+  (setq dir (expand-file-name dir))
+  (if (file-directory-p dir)
+      t
+    (let* ((dir1 (directory-file-name (file-name-directory dir)))
+           (dir2 (directory-file-name (file-name-directory dir1))))
+      (if (equal dir1 dir2)
+          nil
+        (svn-file-directory-p (concat (file-name-as-directory dir2) ".svn"))))))
+
+(defun svn-file-exists-p (dir)
+  (svn-file-directory-p dir))
 
 ;; --------------------------------------------------------------------------------
 ;; svn status profiling
