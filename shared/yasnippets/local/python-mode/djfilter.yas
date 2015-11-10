@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: django filter
+# name: django query filter
 # $Id:$
 # key: djq
 # group: django
@@ -8,5 +8,5 @@
 # expand-env: ((yas-indent-line 'fixed))
 # uuid: 1a4c9e1b-9dd6-4d99-a431-45637c247405
 # --
-if filter["${1:nom_camp}"]:
+if filter_["${1:nom_camp}"]:
     q = q & Q($1=filter_["$1"])
