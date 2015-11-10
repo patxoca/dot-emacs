@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: django query filter
+# $Id:$
+# key: djqm
+# group: django
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 1a4c9e1b-9dd6-4d99-a431-45637c247405
+# --
+def get_query(self, filter_):
+    q = Q()
+    $0
+    return q
