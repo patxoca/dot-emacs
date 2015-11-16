@@ -9,4 +9,4 @@
 # uuid: 1ef253e2-879a-11e5-8ec2-2c44fd303805
 # --
 if filter_.get("${1:nom_camp}") is not None:
-    q = q & Q($1=filter_["$1"])
+    q = q & Q(${2:$1}=filter_["$1"])
