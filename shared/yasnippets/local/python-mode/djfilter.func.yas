@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: django query filter
+# name: django query method
 # $Id:$
 # key: djqm
 # group: django
