@@ -22,6 +22,13 @@
   (setq frame-title-format '("emacs %b (%f)")))
 
 
+;; abbrev-mode
+(eval-after-load "abbrev"
+  '(progn
+     (setq abbrev-file-name "~/.emacs.d/conf.d/shared/abbrev_defs")
+     (setq save-abbrevs t)
+     (setq default-abbrev-mode t)))
+
 ;; ace-window-mode
 (eval-after-load "ace-window"
   '(progn
