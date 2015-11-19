@@ -15,10 +15,12 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 # from django.test.client import RequestFactory
+# import pytest
 
 # from `(pyx/get-current-package-name)` import models as app_models
 
 
+# @pytest.mark.django_db(transaction=True)
 class `(arv/yas-buffer-name-sans-camelcase)`(TestCase):
 
     def setUp(self):
