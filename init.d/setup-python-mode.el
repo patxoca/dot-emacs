@@ -135,6 +135,18 @@
      (setq python-pep8-options '("--repeat" "--ignore=E203,E201,E202,E123"))))
 
 
+;;                              pylint
+(eval-after-load "pylint"
+  '(progn
+     ;; NOTE: 20151126 pylint 1.01 depen de tramp però no el
+     ;; requereix, resultant en l'error:
+     ;;
+     ;; pylint: Symbol's function definition is void: tramp-tramp-file-p
+     ;;
+     (defun require-tramp (&rest ignored)
+       (require 'tramp))
+     (add-function :before (symbol-function 'pylint) #'require-tramp)))
+
 ;;                              python
 
 (eval-after-load "python"
