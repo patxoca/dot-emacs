@@ -93,6 +93,16 @@
 (setq paradox-execute-asynchronously nil) ; t always, nil nevet, 'ask asks
 
 
+;; pop-to-mark
+;; http://endlessparentheses.com/faster-pop-to-mark-command.html
+(eval-after-load "simple"
+  '(progn
+     (defadvice pop-to-mark-command (around ensure-new-position activate)
+       (let ((p (point)))
+         (dotimes (i 10)
+           (when (= p (point)) ad-do-it))))
+     (setq set-mark-command-repeat-pop t)))
+
 ;; popwin
 (require 'popwin)
 (popwin-mode 1)
