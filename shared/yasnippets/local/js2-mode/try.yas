@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: try catch
+# $Id:$
+# key: try
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 28e0aed4-18e8-4312-8faa-ee9b89a3e0f6
+# --
+try {
+    $0;
+} catch (err) {
+    window.alert(err);
+}
