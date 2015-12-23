@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: full featured header
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: dc16d3fc-04e9-4194-9978-e2418af95eb8
+# --
+#+TITLE: $1
+#+AUTHOR: ${2:`(arv/yas-author-name)`}
+#+EMAIL: ${3:`(arv/yas-author-email)`}
+
+#+TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
+#+TODO: | CANCELED(c)
+
+#+FILETAGS: :foo:bar:
+#+TAGS: baz spam
+
+#+PROPERTY: propname_ALL op1 op2
+
+$0
