@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: bootstrap button
+# $Id:$
+# key: bb
+# group: django
+# type: snippet
+# contributor: Alexis Roda <alexis.roda@urv.cat>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 5f74a03e-c499-43b2-b4d7-8d7b2ef5232f
+# --
+BootstrapButton(
+    _("$1"),
+    onclick="controller.$2()",
+    icon=BootstrapButton.ICON_$3,
+    class_=BootstrapButton.${4:CLASS_DEFAULT},
+    perm=permissions.${5:some_perm}
+)
