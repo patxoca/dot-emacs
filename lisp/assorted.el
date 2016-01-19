@@ -230,6 +230,19 @@ If region is active, apply to active region instead."
     (forward-line 1)
     (back-to-indentation)))
 
+
+;; http://endlessparentheses.com/quickly-search-for-occurrences-of-the-symbol-at-point.html
+;;;###autoload
+(defun endless/isearch-symbol-with-prefix (p)
+  "Like isearch, unless prefix argument is provided.
+With a prefix argument P, isearch for the symbol at point."
+  (interactive "P")
+  (let ((current-prefix-arg nil))
+    (call-interactively
+     (if p #'isearch-forward-symbol-at-point
+       #'isearch-forward))))
+
+
 (provide 'assorted)
 
 ;;; assorted.el ends here

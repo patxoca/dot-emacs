@@ -59,6 +59,10 @@
 
 
 ;; emacs overrides
+(global-set-key [remap isearch-forward]
+                #'endless/isearch-symbol-with-prefix)
+
+
 (global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "M-u") 'arv/upcase-word)
 (global-set-key (kbd "M-l") 'arv/downcase-word)
