@@ -157,6 +157,19 @@
 (setq compilation-message-face 'default)
 (setq current-language-environment "UTF-8")
 (setq-default indent-tabs-mode nil)
+
+;; display-buffer-reuse-frames is a variable defined in `window.el'.
+;; Its value is nil
+;;
+;;   This variable is obsolete since 24.3;
+;;   use a `reusable-frames' alist entry in `display-buffer-alist'.
+;;
+;; Documentation:
+;; Non-nil means `display-buffer' should reuse frames.
+;; If the buffer in question is already displayed in a frame, raise
+;; that frame.
+(setq display-buffer-reuse-frames t)
+
 (setq inhibit-eol-conversion nil)
 (setq inhibit-startup-screen t)
 (setq mouse-buffer-menu-maxlen 25)
