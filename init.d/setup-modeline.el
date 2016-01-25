@@ -56,16 +56,16 @@
 
 ;; faces
 (set-face-attribute 'mode-line nil
-                    :background "#d3d7cf"
-                    :foreground "#2e3436"
+                    :background "red"
+                    :foreground "white"
                     :box nil
                     :height 0.85)
 (set-face-attribute 'mode-line-highlight nil
                     :box '(:line-width 1 :color "grey40" :style released-button))
 (set-face-attribute 'mode-line-inactive nil
                     :inherit 'mode-line
-                    :background "#555753"
-                    :foreground "#eeeeec"
+                    :background "orange"
+                    :foreground "black"
                     :box nil
                     :weight 'light)
 
