@@ -52,6 +52,13 @@
                               company-files))))
 
 
+;; cursor
+(eval-after-load "frame"
+  '(progn
+     (setq blink-cursor-blinks -1) ; cursor blinks forever
+     ))
+
+
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
