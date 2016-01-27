@@ -9,6 +9,7 @@
 #+AUTHOR: ${2:`(arv/yas-author-name)`}
 #+EMAIL: ${3:`(arv/yas-author-email)`}
 
+#+TODO: TODO STRT HOLD PAUS DONE(@)
 #+TODO: REPORT(r) BUG(b) KNOWNCAUSE(k) | FIXED(f)
 #+TODO: | CANCELED(c)
 
