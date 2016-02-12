@@ -164,6 +164,7 @@
      (define-key python-mode-map (kbd "C-c m w i") 'pyx/refactor-wrap-if-else)
      (define-key python-mode-map (kbd "C-c m w t") 'pyx/refactor-wrap-try-except)
      (define-key python-mode-map (kbd "C-c m w w") 'pyx/refactor-wrap-while)
+     (define-key python-mode-map (kbd "C-c m i s d ") 'pyx/add-setup-dependency)
      (define-key python-mode-map (kbd "C-c m i p n") 'arv/py-insert-current-package-name)
      (define-key python-mode-map (kbd "C-c m i u") (lambda () "Insert random UUID" (interactive) (insert (arv/generate-random-uuid))))
      (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
