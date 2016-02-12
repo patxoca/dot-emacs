@@ -157,6 +157,7 @@
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
      (define-key python-mode-map (kbd "C-c m d") 'pydoc)
+     (define-key python-mode-map (kbd "C-c m m") 'pyx/make)
      (define-key python-mode-map (kbd "C-c m p") 'pylint)
      (define-key python-mode-map (kbd "C-c m 8") 'pep8)
      (define-key python-mode-map (kbd "C-c m w f") 'pyx/refactor-wrap-for)
@@ -169,9 +170,7 @@
      ;; TODO: aquests tres possiblement siguin globals (?)
      (define-key python-mode-map (kbd "<f7>") 'next-error)
      (define-key python-mode-map (kbd "<f8>") 'previous-error)
-     (define-key python-mode-map (kbd "<f9>") (lambda ()
-                                         (interactive)
-                                         (call-interactively 'compile)))
+     (define-key python-mode-map (kbd "<f9>") 'pyx/make)
      (define-key python-mode-map (kbd "C-<tab>")
        (make-hippie-expand-function
         '(try-expand-dabbrev
