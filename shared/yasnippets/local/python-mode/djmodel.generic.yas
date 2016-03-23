@@ -8,8 +8,11 @@
 # uuid: 4d8ce087-da71-4544-9166-5f2bd795b701
 # --
 
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
+
+class $1QuerySet(models.QuerySet):
+    """QuerySet/Manager per \`\`$1\`\`.
+    """
+    pass
 
 
 class ${1:name}(${2:models.Model}):
@@ -17,6 +20,8 @@ class ${1:name}(${2:models.Model}):
     """
 
     $0
+
+    objects = $1QuerySet.as_manager()
 
     def __unicode__(self):
         return u""
