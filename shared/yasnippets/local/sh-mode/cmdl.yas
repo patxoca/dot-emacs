@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: command line parser
+# $Id:$
+# key: cmdl
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: b274de4c-7bff-4c8f-9ce7-1f330969da34
+# --
+function command_line {
+    # us: command_line "$@"
+    local opt
+    local OPTIND
+    while getopts "${1:opcions}" opt; do
+        case $opt in
+            ${2:opcio}) ${3:variable}="${4:valor}" ;;
+            "?") echo "Parametre incorrecte: $@."
+                 exit -1 ;;
+        esac
+    done
+}
+
+$0
