@@ -134,6 +134,9 @@
 (global-set-key (kbd "C-c s r") 'svn-file-revert)
 (global-set-key (kbd "C-c s s") 'svn-status)
 
+;; keybindings per magit: C-c g
+(global-set-key (kbd "C-c g s") 'magit-status)
+
 ;; window motion
 (global-set-key (kbd "H-e") 'windmove-up)
 (global-set-key (kbd "H-d") 'windmove-down)
