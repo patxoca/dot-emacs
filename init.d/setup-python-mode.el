@@ -47,6 +47,17 @@
       (princ (concat "pymacs: recarregant " buffer-file-name))
       (pymacs-load (substring buffer-file-name 0 -3)))))
 
+(defun arv/rope-goto-definition (prefix)
+  "Like `rope-goto-definition' but with prefix argument closes
+the buffer."
+  (interactive "p")
+  (if (= prefix 1)
+      (rope-goto-definition)
+    (let ((buffer (current-buffer)))
+      (rope-goto-definition)
+      (unless (string= (buffer-name buffer) (buffer-name (current-buffer)))
+        (kill-buffer buffer)))))
+
 ;; (add-hook 'after-save-hook 'fp-maybe-pymacs-reload)
 
 (autoload 'pymacs-apply "pymacs")
@@ -68,6 +79,7 @@
          (progn
            (pymacs-load "ropemacs" "rope-")
            (setq ropemacs-enable-autoimport t)
+           (define-key ropemacs-local-keymap (kbd "C-c g") 'arv/rope-goto-definition)
            (message "ropemacs loaded"))
        ('error (message "ropemacs failed")))))
 
