@@ -145,6 +145,7 @@
 ;; https://github.com/justbur/emacs-which-key
 (when (require 'which-key nil t)
   (which-key-mode 1)
+  (setq which-key-idle-delay 0.75)
   (setq which-key-sort-order 'which-key-descriptions-order)
   (which-key-setup-side-window-right))
 
