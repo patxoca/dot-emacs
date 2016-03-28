@@ -6,21 +6,24 @@
 # expand-env: ((yas-indent-line 'fixed))
 # uuid: b274de4c-7bff-4c8f-9ce7-1f330969da34
 # --
+${1:$(arv/yas-sh-getopt-var-declaration yas-text)}
+
 function command_line {
-    # us: command_line "$@"
     local opt
     local OPTIND
-    local usage="\$0 -h"
     while getopts "${1:opcions}" opt; do
         case $opt in
-            ${2:opcio}) ${3:variable}="${4:valor}" ;;
-            h) echo "$usage"
+            ${1:$(arv/yas-sh-getopt-case-options yas-text)}
+            h) echo "$USAGE"
                exit 0 ;;
             "?") echo "Parametre incorrecte: $@."
-                 echo $usage
+                 echo $USAGE
                  exit -1 ;;
         esac
     done
+    shift $((OPTIND-1))
+    echo "$@"
 }
 
+REST=$(command_line "$@")
 $0

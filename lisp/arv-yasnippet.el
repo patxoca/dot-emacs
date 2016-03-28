@@ -280,6 +280,55 @@ en:
      indent)))
 
 
+(defun arv/yas-sh-getopt-case-options (text)
+  "Retorna les opcions de 'case'.
+
+Converteix:
+
+    a:b
+
+en:
+
+    a) OPT_A=$OPTARG ;;
+    b) OPT_B=1 ;;
+"
+  (let ((indent (concat "\n" (make-string (current-column) 32)))
+        (result ()))
+    (while (not (string= text ""))
+      (let* ((char (char-to-string (aref text 0)))
+             (CHAR (upcase char)))
+        (if (and (> (length text) 1) (char-equal (aref text 1) ?:))
+            (progn
+              (setq text (substring text 2))
+              (setq result (cons (format "%s) OPT_%s=$OPTARG ;;" char CHAR) result)))
+          (setq result (cons (format "%s) OPT_%s=1 ;;" char CHAR) result))
+          (setq text (substring text 1))
+          )))
+    (concat indent
+            (mapconcat (lambda (x) x) (reverse result) indent))))
+
+(defun arv/yas-sh-getopt-var-declaration (text)
+  "Retorna les variables.
+
+Converteix:
+
+    a:b
+
+en:
+
+    OPT_A=
+    OPT_B=
+"
+  (let ((result ()))
+    (while (not (string= text ""))
+      (let* ((char (char-to-string (aref text 0)))
+             (CHAR (upcase char)))
+        (if (not (string-equal char ":"))
+            (setq result (cons (format "OPT_%s=" CHAR) result)))
+        (setq text (substring text 1))))
+    (mapconcat (lambda (x) x) (reverse result) "\n")))
+
+
 (provide 'arv-yasnippet)
 
 ;;; arv-yasnippet.el ends here
