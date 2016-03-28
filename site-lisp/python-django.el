@@ -450,10 +450,12 @@ Optional Argument SETTINGS defaults to the value of
           (python-django-info-calculate-process-environment))
          (exec-path (python-shell-calculate-exec-path)))
     (python-django-util-shell-command-or-error
-     (format "%s %s help%s"
+     ;; "--help" is better than "help" because it won't make the command end
+     ;; with failure on Django<1.4.
+     (format "%s %s %s--help"
              (executable-find python-shell-interpreter)
              python-django-project-manage.py
-             (or (and command (concat " " command)) "")))))
+             (if command (format "%s " command) "")))))
 
 (defun python-django-help (&optional command show-help)
   "Get help for given COMMAND.
@@ -663,15 +665,25 @@ non-nil the cached value is invalidated."
            (format "%s -c \"%s%s\""
                    (executable-find python-shell-interpreter)
                    python-django-info-imports-code
-                   (concat
-                    "app_paths = {}\n"
-                    "for app in settings.INSTALLED_APPS:\n"
-                    "    mod = __import__(app)\n"
-                    "    if '.' in app:\n"
-                    "        for sub in app.split('.')[1:]:\n"
-                    "            mod = getattr(mod, sub)\n"
-                    "    app_paths[app] = dirname(abspath(mod.__file__))\n"
-                    "print(json.dumps(app_paths), end='')"))))))
+                   "
+try:
+    from django.apps import apps
+except ImportError:
+    # Django<1.7 app loading.
+    import os.path
+    from django.utils.importlib import import_module
+    app_paths = {}
+    for app_string in settings.INSTALLED_APPS:
+        app_module = import_module(app_string)
+        app_path = os.path.dirname(app_module.__file__)
+        # Keep the last part (e.g: 'django.contrib.admin' -> 'admin')
+        app_label = app_string.rpartition('.')[2]
+        app_paths[app_label] = app_path
+else:
+    # Django>=1.7 app loading.
+    apps.populate(installed_apps=settings.INSTALLED_APPS)
+    app_paths = {app.label: app.path for app in apps.get_app_configs()}
+print(json.dumps(app_paths), end='')")))))
     python-django-info--get-app-paths-cache))
 
 (defun python-django-info-get-app-path (app &optional force)
@@ -679,6 +691,15 @@ non-nil the cached value is invalidated."
 Values retrieved by this function are cached so when FORCE is
 non-nil the cached value is invalidated."
   (cdr (assq (intern app) (python-django-info-get-app-paths force))))
+
+(defun python-django-info-get-installed-apps (&optional force)
+  "Get list of strings of installed app labels.
+Values retrieved by this function are cached so when FORCE is
+non-nil the cached value is invalidated."
+  (mapcar
+   (lambda (elt)
+     (symbol-name (car elt)))
+   (python-django-info-get-app-paths force)))
 
 (defun python-django-info-get-app-migrations (app)
   "Get APP's list of migrations."
@@ -863,16 +884,11 @@ PROMPT is a string to prompt user for filenames."
   (python-django-minibuffer-read-list
    'python-django-minibuffer-read-file-name prompt))
 
-(defun python-django-minibuffer-read-app (prompt &optional initial-input full)
+(defun python-django-minibuffer-read-app (prompt &optional initial-input)
   "Read django app from minibuffer.
 PROMPT is a string to prompt user for app.  Optional argument
-INITIAL-INPUT is the initial prompted value.  When FULL is
-non-nill the full module name for the installed app is prompted."
-  (let ((apps (mapcar (lambda (app)
-                        (if (not full)
-                            (car (last (split-string app "\\.")))
-                          app))
-                      (python-django-info-get-setting "INSTALLED_APPS")))
+INITIAL-INPUT is the initial prompted value."
+  (let ((apps (python-django-info-get-installed-apps))
         (current-buffer (current-buffer)))
     (minibuffer-with-setup-hook
         (lambda ()
@@ -885,13 +901,12 @@ non-nill the full module name for the installed app is prompted."
             (when (> (length app) 0)
               (throw 'app app))))))))
 
-(defun python-django-minibuffer-read-apps (prompt &optional initial-input full)
+(defun python-django-minibuffer-read-apps (prompt &optional initial-input)
   "Read django apps from minibuffer.
 PROMPT is a string to prompt user for app.  Optional argument
-INITIAL-INPUT is the initial prompted value.  When FULL is
-non-nill the full module name for the installed app is prompted."
+INITIAL-INPUT is the initial prompted value."
   (python-django-minibuffer-read-list
-   'python-django-minibuffer-read-app prompt full))
+   'python-django-minibuffer-read-app prompt))
 
 (defun python-django-minibuffer-read-database (prompt &optional initial-input)
   "Read django database router name from minibuffer.
@@ -950,27 +965,18 @@ the `python-django-mgmt--available-commands' cache."
        (set (make-local-variable 'python-django-mgmt--available-commands) nil))
   (cdr
    (or python-django-mgmt--available-commands
-       (let ((help-string (python-django-help)))
+       (let ((help-string (python-django-help))
+             (commands))
          (set (make-local-variable 'python-django-mgmt--available-commands)
-              (let ((help-string (python-django-help))
-                    (commands))
-                (with-temp-buffer
-                  (insert help-string)
-                  (goto-char (point-min))
-                  (delete-region
-                   (and (re-search-forward "Usage: manage.py")
-                        (line-beginning-position))
-                   (or (and
-                        (re-search-forward "Available subcommands:\n" nil t)
-                        (forward-line -1)
-                        (line-beginning-position))
-                       (point-max)))
-                  (goto-char (point-min))
-                  (re-search-forward "Available subcommands:\n")
-                  (while (re-search-forward " +\\([a-z0-9_]+\\)\n" nil t)
-                    (setq commands
-                          (cons (match-string-no-properties 1) commands)))
-                  (reverse commands))))))))
+              (with-temp-buffer
+                (insert help-string)
+                (goto-char (point-min))
+                (re-search-forward "Available subcommands:\n")
+                (delete-region (point-min) (point))
+                (while (re-search-forward " +\\([a-z0-9_]+\\)\n" nil t)
+                  (setq commands
+                        (cons (match-string-no-properties 1) commands)))
+                (reverse commands)))))))
 
 (defun python-django-mgmt-list-command-args (command)
   "List available arguments for COMMAND."
@@ -996,18 +1002,10 @@ the `python-django-mgmt--available-commands' cache."
   (let ((python-shell-interpreter-args command))
     (python-shell-make-comint (python-shell-parse-command) process-name)))
 
-(defun python-django-mgmt-make-comint-for-shell_plus (command process-name)
-  "Run COMMAND with PROCESS-NAME in generic Comint buffer."
-  (python-django-mgmt-make-comint-for-shell command process-name))
-
 (defun python-django-mgmt-make-comint-for-runserver (command process-name)
   "Run COMMAND with PROCESS-NAME in generic Comint buffer."
   (let ((python-shell-enable-font-lock nil))
     (python-django-mgmt-make-comint-for-shell command process-name)))
-
-(defun python-django-mgmt-make-comint-for-runserver_plus (command process-name)
-  "Run COMMAND with PROCESS-NAME in generic Comint buffer."
-  (python-django-mgmt-make-comint-for-runserver command process-name))
 
 (defun python-django-mgmt-make-comint-for-dbshell (command process-name)
   "Run COMMAND with PROCESS-NAME in generic Comint buffer."
@@ -1096,12 +1094,15 @@ With Optional Argument ARG cycle that many buffers."
   (python-django-mgmt-cycle-buffers-forward (- (or arg 1))))
 
 (defun python-django-mgmt-run-command (command
-                                       &optional args capture-ouput no-pop)
+                                       &optional args capture-ouput no-pop
+                                       make-comint-function)
   "Run management COMMAND with given ARGS.
 When optional argument CAPTURE-OUPUT is non-nil process output is
 not truncated by the `comint-truncate-buffer' output filter.  If
 optional argument NO-POP is provided the process buffer is not
-displayed automatically."
+displayed automatically.  When optional argument
+MAKE-COMINT-FUNCTION is non-nil use that function to create the
+comint process, defaults to `python-django-mgmt-make-comint'."
   (interactive
    (list
     (setq command
@@ -1124,16 +1125,13 @@ displayed automatically."
                    command args)))
          (buffer-name (format "*%s*" process-name))
          (current-buffer (current-buffer))
-         (make-comint-special-func-name
-          (intern
-           (format "python-django-mgmt-make-comint-for-%s" command)))
+         (make-comint-function (or make-comint-function
+                                   #'python-django-mgmt-make-comint))
          (full-command
           (format "%s %s %s"
                   python-django-project-manage.py
                   command args)))
-    (if (not (fboundp make-comint-special-func-name))
-        (python-django-mgmt-make-comint full-command process-name)
-      (funcall make-comint-special-func-name full-command process-name))
+    (funcall make-comint-function full-command process-name)
     (with-current-buffer buffer-name
       (python-util-clone-local-variables current-buffer)
       (and (not capture-ouput)
@@ -1200,25 +1198,178 @@ When called with universal argument you can filter the COMMAND to kill."
 
 ;;; Management shortcuts
 
-(defvar python-django-qmgmt-process-status-ok nil
-  "Non-nil if management command process ended successfully.
-This variable is set automatically and locally to the management
-command process buffer after the process finishes, making it
-available for user defined callbacks.  See
-`python-django-qmgmt-kill-and-msg-callback' as an example for how
-to use this variable to execute callback code only if process
-ended successfully.")
+(eval-and-compile
+  (defun python-django-qmgmt--make-fn-symbol (name)
+    "Return a quick management command defun symbol from NAME."
+    (intern (format "python-django-qmgmt-%s" name)))
+
+  (defun python-django-qmgmt--make-functions-symbol (name)
+    "Return a quick management command functions symbol from NAME."
+    (intern (format "python-django-qmgmt-%s-functions" name)))
+
+  (defun python-django-qmgmt--make-spec
+      (command &optional switches interactive-switches)
+    "Return human readable spec for COMMAND.
+
+The spec is the shell command with placeholders in it.  Example:
+
+  ./manage.py cmd --all --database=<database> --app=<app>
+
+Where \"--all\" is SWITCHES value, while database and app are
+generated from INTERACTIVE-SWITCHES."
+    (concat
+     (format "./manage.py %s " command)
+     (unless (zerop (length switches))
+       (format "%s " switches))
+     (when interactive-switches
+       (mapconcat
+        (lambda (arg)
+          (let* ((switch (nth 3 arg))
+                 (switch
+                  (cond
+                   ((eq (length switch) 0)
+                    "")
+                   ((eq ?= (car (last (append switch nil))))
+                    switch)
+                   (t (format "%s " switch))))
+                 (varname (symbol-name (nth 0 arg))))
+            (format "%s<%s>" switch varname)))
+        interactive-switches
+        " "))))
+
+  (defun python-django-qmgmt--make-docstring
+      (command &optional switches interactive-switches docstring)
+    "Return documentation string for auto-generated command.
+Arguments COMMAND, SWITCHES, INTERACTIVE-SWITCHES and DOCSTRING
+are used to generate the string."
+    (format
+     "%s\n\n%s"
+     ;; Show either the spec, or the docstring *and* the spec.
+     (concat
+      (unless (zerop (length docstring))
+        (concat docstring "\n\n"))
+      "Run: "
+      (python-django-qmgmt--make-spec
+       command switches interactive-switches))
+     (concat
+      "This is an interactive command defined via "
+      "`python-django-qmgmt-define' macro.\n"
+      "Parameter defaults can be overriden by "
+      "calling this command with `prefix-arg' .\n\n"
+      (when switches
+        (format "Default switches: \n\n  * %s\n\n" switches))
+      (when interactive-switches
+        (format
+         "Arguments: \n\n%s"
+         (mapconcat
+          (lambda (arg)
+            (let* ((default (nth 2 arg))
+                   (switch (nth 3 arg))
+                   (switch
+                    (cond
+                     ((eq (length switch) 0)
+                      nil)
+                     ((eq ?= (car (last (append switch nil))))
+                      switch)
+                     (t (format "%s " switch))))
+                   (force-ask (nth 4 arg)))
+              (concat
+               (format "  * %s:\n"
+                       (upcase (symbol-name (car arg))))
+               (format "    + Switch: %s\n" switch)
+               (format "    + Defaults: %s\n"
+                       (prin1-to-string default))
+               (format "    + Read SPEC: %s\n"
+                       (prin1-to-string (nth 1 arg)))
+               (format "    + Force prompt: %s\n"
+                       force-ask)
+               (format "    + Requires user interaction?: %s"
+                       (if (or force-ask (not default))
+                           "yes" "no")))))
+          interactive-switches "\n\n"))))))
+
+  (defun python-django-qmgmt--make-functions-docstring
+      (fn-symbol)
+    "Return documentation string for auto-generated functions variable.
+Argument FN-SYMBOL is the symbol of the command."
+    (format
+     "A function or list of called after `%s's bound process finishes.
+Functions defined here are called in order and must receive two
+arguments: The first must be a STATUS-OK which is non-nil if the
+process exited successfully and ARGS which is a plist with the
+switches and arguments given to it.  See
+`python-django-qmgmt-define' docstring for details." fn-symbol))
+
+  (defun python-django-qmgmt--make-interactive-form (interactive-switches)
+    "Return interactive form from INTERACTIVE-SWITCHES."
+    (mapcar
+     (lambda (arg)
+       ;; Interactive switch form: (VARNAME PROMPT DEFAULT SWITCH FORCE-ASK)
+       (let* ((default (nth 2 arg))
+              (switch (nth 3 arg))
+              (switch
+               (cond ((zerop (length switch))
+                      ;; This is a positional argument.  Skip prefix.
+                      "")
+                     ((eq ?= (car (last (append switch nil))))
+                      ;; Long switch (e.g "--database="), keep it as prefix.
+                      switch)
+                     ;; Shor switch (e.g "-d"), add space suffix.
+                     (t (format "%s " switch))))
+              (force-ask (nth 4 arg))
+              (read-func
+               (if (stringp (nth 1 arg))
+                   ;; Use string as prompt.
+                   `(read-string ,(nth 1 arg) default)
+                 ;; Execute form to read argument value.
+                 (nth 1 arg))))
+         `(concat
+           ,switch
+           (setq ,(car arg)
+                 (let ((default ,default))
+                   (if (or ,force-ask
+                           current-prefix-arg
+                           (not default))
+                       ,read-func
+                     default))))))
+     interactive-switches))
+
+  (defun python-django-qmgmt--add-binding (symbol &optional binding)
+    "Add keybinding to SYMBOL using BINDING."
+    (when binding
+      (ignore-errors
+        (define-key python-django-mode-map (concat "c" binding) symbol))))
+
+  (defun python-django-qmgmt--add-menu-item
+      (symbol submenu command &optional switches interactive-switches docstring)
+    "Add menu item for SYMBOL in SUBMENU to execute mangament COMMAND.
+Arguments SWITCHES, INTERACTIVE-SWITCHES and DOCSTRING are used
+to generate a descriptive item."
+    (let* ((spec (python-django-qmgmt--make-spec
+                  command switches interactive-switches))
+           (help (if (zerop (length docstring))  ; also handle empty string
+                     (format "Run ./manage.py %s" spec)
+                   (car (split-string docstring "\n")))))
+      (easy-menu-add-item
+       'python-django-menu nil (list submenu) "---")
+      (easy-menu-add-item
+       'python-django-menu (list submenu)
+       `[,spec
+         ,symbol
+         :help ,help
+         :active (member ,command (python-django-mgmt-list-commands))]
+       "---"))))
 
 (defmacro python-django-qmgmt-define (name doc-or-args
-                                           &optional args &rest iswitches)
+                                           &optional args &rest interactive-switches)
   "Define a quick management command.
 Argument NAME is a symbol and it is used to calculate the
 management command this command will execute, so it should have
 the form cmdname[-rest].  Argument DOC-OR-ARGS might be the
 docstring for the defined command or the list of arguments, when
 a docstring is supplied ARGS is used as the list of arguments
-instead.  The rest ISWITCHES is a list of interactive switches
-the user will be prompted for.
+instead.  The rest INTERACTIVE-SWITCHES is a list of interactive
+switches the user will be prompted for.
 
 This is a full example that will define how to execute Django's
 dumpdata for the current application quickly:
@@ -1245,27 +1396,38 @@ ARGS is a property list.  Valid keys are (all optional):
     truncated by the `comint-truncate-buffer' output filter.
 
     + :msg, when defined, commands that use the
-    `python-django-qmgmt-kill-and-msg-callback' show this instead
+    `python-django-qmgmt-kill-and-msg-function' show this instead
     of the buffer contents.
 
     + :no-pop, when non-nil, causes the process buffer to not be
     displayed.
 
     + :submenu, when defined, the quick management command is
-    added within that submenu tree.  If omitted the menu is added
+    added within that submenu tree.  If omitted the item is added
     to the root.
 
     + :switches, when defined, the new command is executed with
     these fixed switches.
 
+    + :make-comint-function, a function to be used to create the
+    comint process, defaults to `python-django-mgmt-make-comint'.
+
+    + :functions, If the value is a function, it is called with
+    two arguments.  If it is a list, the elements are called, in
+    order, with same two arguments each.  The first argument is
+    non-nil if the process ended successfully; the second
+    argument is a property-list containing passed ARGS and
+    INTERACTIVE-SWITCHES with symbols as keys.  E.g: '(app
+    \"auth\" :command \"test\").
+
 If you define any extra keys they will not be taken into account
 by this macro but you may well use them in your command's
 callback.
 
-ISWITCHES have the form (VARNAME PROMPT DEFAULT SWITCH
-FORCE-ASK), you can add 0 or more ISWITCHES depending on the
-number of parameters you need to pass to the management command.
-The description for each element of the list are:
+INTERACTIVE-SWITCHES have the form (VARNAME PROMPT DEFAULT SWITCH
+FORCE-ASK), you can add 0 or more INTERACTIVE-SWITCHES depending
+on the number of parameters you need to pass to the management
+command.  The description for each element of the list are:
 
     + VARNAME must be a unique symbol not used in other switch.
 
@@ -1296,205 +1458,95 @@ callbacks is to append -callback to the defined name, for
 instance if you defined a quick management command called syncdb,
 then you need to create a function named
 `python-django-qmgmt-syncdb-callback' and it will be called with
-an alist containing all ISWITCHES and ARGS with the
+an alist containing all INTERACTIVE-SWITCHES and ARGS with the
 additional :command key holding the executed command.  See the
-`python-django-qmgmt-kill-and-msg-callback' function for a nice
+`python-django-qmgmt-kill-and-msg-function' function for a nice
 example of a callback."
-  (declare
-   (indent defun))
-  (let* ((docstring (and (stringp doc-or-args) doc-or-args))
+  (declare (indent defun))
+  (let* ((docstring (when (stringp doc-or-args) doc-or-args))
          (args (if docstring args doc-or-args))
          (args (if (eq ?: (string-to-char (symbol-name (car args))))
                    args
-                 ;; args is not a plist, append it to iswitches and
+                 ;; args is not a plist, append it to interactive-switches and
                  ;; set args to nil.
-                 (setq iswitches (cons args iswitches))
+                 (setq interactive-switches (cons args interactive-switches))
                  nil))
-         (defun-name (intern (format "qmgmt-%s" name)))
-         (full-name (intern (format "python-django-%s" defun-name)))
-         (callback (intern (format "%s-callback" full-name)))
+         (fn-symbol (python-django-qmgmt--make-fn-symbol name))
+         (callback (intern (format "%s-callback" fn-symbol)))
          (command (car (split-string (format "%s" name) "-")))
          (binding (plist-get args :binding))
          (capture-output (plist-get args :capture-output))
+         (functions (plist-get args :functions))
          (no-pop (plist-get args :no-pop))
-         (quick-submenu (plist-get args :submenu))
+         (submenu (plist-get args :submenu))
          (switches (plist-get args :switches))
-         (keys (and binding (format "c%s" binding)))
-         (defargs (mapcar 'car iswitches))
-         (cmd-spec
-          ;; The spec is the shell command with placeholders in it.
-          ;; Example: ./manage.py dumpdata --database=<database>
-          ;; --indent=<indent> --format=<format> <app>
-          (concat
-           (format "./manage.py %s " command)
-           (and switches (format "%s " switches))
-           (and defargs
-                (mapconcat
-                 (lambda (arg)
-                   (let* ((switch (nth 3 arg))
-                          (switch
-                           (cond
-                            ((eq (length switch) 0)
-                             "")
-                            ((eq ?= (car (last (append switch nil))))
-                             switch)
-                            (t (format "%s " switch))))
-                          (varname (symbol-name (nth 0 arg))))
-                     (format "%s<%s>" switch varname)))
-                 iswitches
-                 " "))))
-         (interactive-code
-          (mapcar
-           (lambda (arg)
-             (let* ((default (nth 2 arg))
-                    (switch (nth 3 arg))
-                    (switch
-                     (cond ((eq (length switch) 0)
-                            "")
-                           ((eq ?= (car (last (append switch nil))))
-                            switch)
-                           (t (format "%s " switch))))
-                    (force-ask (nth 4 arg))
-                    (read-func
-                     (if (listp (nth 1 arg))
-                         (nth 1 arg)
-                       `(read-string ,(nth 1 arg) default))))
-               `(concat
-                 ,switch
-                 (setq ,(car arg)
-                       (let ((default ,default))
-                         (if (or ,force-ask
-                                 current-prefix-arg
-                                 (not default))
-                             ,read-func
-                           default))))))
-           iswitches))
-         (item-docstring
-          (if docstring
-              (car (split-string docstring "\n"))
-            (format "Run ./manage.py %s" cmd-spec)))
-         (full-docstring
-          (format "%s\n\n%s\n\n%s"
-                  cmd-spec
-                  (or docstring item-docstring)
-                  (concat
-                   "This is an interactive command defined by "
-                   "`python-django-qmgmt-define' macro.\n"
-                   "Users can override any parameter with defaults by "
-                   "calling this command with `prefix-arg' .\n\n"
-                   (and switches
-                        (format "Default switches: \n\n  * %s\n\n" switches))
-                   (and
-                    iswitches
-                    (format
-                     "Arguments: \n\n%s"
-                     (mapconcat
-                      (lambda (arg)
-                        (let* ((default (nth 2 arg))
-                               (switch (nth 3 arg))
-                               (switch
-                                (cond
-                                 ((eq (length switch) 0)
-                                  nil)
-                                 ((eq ?= (car (last (append switch nil))))
-                                  switch)
-                                 (t (format "%s " switch))))
-                               (force-ask (nth 4 arg)))
-                          (concat
-                           (format "  * %s:\n"
-                                   (upcase (symbol-name (car arg))))
-                           (format "    + Switch: %s\n" switch)
-                           (format "    + Defaults: %s\n"
-                                   (prin1-to-string default))
-                           (format "    + Read SPEC: %s\n"
-                                   (prin1-to-string (nth 1 arg)))
-                           (format "    + Force prompt: %s\n"
-                                   force-ask)
-                           (format "    + Requires user interaction?: %s"
-                                   (if (or force-ask (not default))
-                                       "yes" "no")))))
-                      iswitches "\n\n")))))))
+         (make-comint-function (plist-get args :make-comint-function))
+         (defargs (mapcar 'car interactive-switches))
+         ;; Abnormal hooks AKA functions
+         (functions-symbol (python-django-qmgmt--make-functions-symbol name))
+         (functions-docstring
+          (python-django-qmgmt--make-functions-docstring fn-symbol)))
     `(progn
-       (defun ,full-name ,defargs
-         ,full-docstring
+       (defvar ,functions-symbol nil
+         ,functions-docstring)
+       (setq ,functions-symbol ,functions)
+       (defun ,fn-symbol ,defargs
+         ,(python-django-qmgmt--make-docstring
+           command switches interactive-switches docstring)
          (interactive
-          (let ,defargs
-            (list ,@interactive-code)))
+          (list ,@(python-django-qmgmt--make-interactive-form
+                   interactive-switches)))
          (setq python-django-mgmt--previous-window-configuration
                (current-window-configuration))
          (let* ((cmd-args (concat ,switches (and ,switches " ")
-                                  (mapconcat 'symbol-value ',defargs " ")))
+                                  (mapconcat #'symbol-value ',defargs " ")))
                 (process (get-buffer-process
                           (python-django-mgmt-run-command
                            ,command cmd-args
-                           ,capture-output ,no-pop))))
+                           ,capture-output ,no-pop
+                           ,make-comint-function))))
            (message "Running: ./manage.py %s %s" ,command cmd-args)
-           (when (fboundp ',callback)
-             ;; There's a callback defined, we create another function
-             ;; by applying partially the existing callback and giving
-             ;; it an alist with all the user selected values as an
-             ;; argument.  Then the callback is executed when the
-             ;; process finishes correctly.
-             (set-process-sentinel
-              process
-              (apply-partially
-               #'(lambda (cb process status)
-                   (set-buffer (process-buffer process))
-                   (set (make-local-variable 'python-django-qmgmt-process-status-ok)
-                        (string= status "finished\n"))
-                   (funcall cb))
-               (apply-partially
-                ',callback
-                (append
-                 (cons
-                  ;; Add the executed command.
-                  (cons :command ,command)
-                  ;; Convert the args plist to an alist
-                  (mapcar (lambda (key)
-                            (cons key (plist-get ',args key)))
-                          (let ((lst)
-                                (i 0))
-                            ;; Collect all keys from args plist
-                            (while (< i (length ',args))
-                              (setq lst (cons (nth i ',args) lst))
-                              (setq i (+ i 2)))
-                            lst)))
-                 ;; Retrieve all switches.
-                 (mapcar
-                  #'(lambda (sym)
-                      (let ((val (symbol-value sym)))
-                        (cons
-                         sym
-                         (cond
-                          ((string-match "^--" val)
-                           (substring val (1+ (string-match "=" val))))
-                          ((string-match "^-" val)
-                           (substring val 3))
-                          (t val)))))
-                  ',defargs) nil)))))))
-       ;; Add the specified binding for this quick command.
-       (and ,binding
-            (ignore-errors
-              (define-key python-django-mode-map ,keys ',full-name)))
-       ;; Add menu stuff.
-       (easy-menu-add-item
-        'python-django-menu nil (list ,quick-submenu) "---")
-       (easy-menu-add-item
-        'python-django-menu (list ,quick-submenu)
-        [,cmd-spec
-         ,full-name
-         :help ,item-docstring
-         :active (member ,command (python-django-mgmt-list-commands))
-         ] "---")
+           (set-process-sentinel
+            process
+            (lambda (process status)
+              (when (and (not (process-live-p process))
+                         (buffer-live-p (process-buffer process)))
+                (with-current-buffer (process-buffer process)
+                  (run-hook-with-args
+                   ',functions-symbol
+                   (string= status "finished\n")
+                   (let ((plist ',args))
+                     (plist-put plist :command ,command)
+                     (mapc
+                      #'(lambda (sym)
+                          (message "[%s]" sym)
+                          (let* ((cmd-switch (symbol-value sym))
+                                 (value
+                                  (cond
+                                   ((string-match "^--" cmd-switch)
+                                    (substring
+                                     cmd-switch
+                                     (1+ (string-match "=" cmd-switch))))
+                                   ((string-match "^-" cmd-switch)
+                                    (substring cmd-switch 3))
+                                   (t cmd-switch))))
+                            (plist-put plist sym value)))
+                      ',defargs)
+                     plist))))))))
+       (python-django-qmgmt--add-binding #',fn-symbol ,binding)
+       (python-django-qmgmt--add-menu-item
+        #',fn-symbol ,submenu ,command ,switches ',interactive-switches ,docstring)
        ;; Just like defun, return the defined function.
-       #',full-name)))
+       #',fn-symbol)))
 
-(defun python-django-qmgmt-kill-and-msg-callback (args)
+(defun python-django-qmgmt-kill-and-msg-function (status-ok args)
   "Kill the process buffer and show message or output.
-Argument ARGS is an alist with the arguments passed to the
-management command."
-  (when python-django-qmgmt-process-status-ok
-    (let ((msg (or (cdr (assq :msg args))
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
+    (let ((msg (or (plist-get args :msg)
                    (buffer-substring-no-properties
                     (point-min) (point-max))))
           (buffer-name (buffer-name)))
@@ -1504,66 +1556,65 @@ management command."
 
 (python-django-qmgmt-define collectstatic
   "Collect static files."
-  (:submenu "Tools" :binding "ocs"))
-
-(defalias 'python-django-qmgmt-collectstatic-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+  (:submenu "Tools" :binding "ocs"
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
 (python-django-qmgmt-define clean_pyc
   "Remove all python compiled files from the project."
   (:submenu "Tools" :binding "ocp" :no-pop t
-            :msg "All *.pyc and *.pyo cleaned."))
+            :msg "All *.pyc and *.pyo cleaned."
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
-(defalias 'python-django-qmgmt-clean_pyc-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+(defun python-django-qmgmt-create_command-function (status-ok args)
+  "Callback for create_command quick management command.
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
+    (let* ((appname (plist-get args 'app))
+           (manage-directory
+            (file-name-directory
+             (with-current-buffer
+                 python-django-mgmt-parent-buffer
+               python-django-project-manage.py)))
+           (default-app-dir
+             (expand-file-name appname manage-directory))
+           (default-create-dir
+             (expand-file-name "management" default-app-dir))
+           (delete-safe
+            (and (file-exists-p default-app-dir)
+                 (equal (directory-files default-app-dir)
+                        '("." ".." "management")))))
+      ;; TODO: cleanup. Do not offer moving, the command does the right thing.
+      (when (y-or-n-p
+             (format "Created in app %s.  Move it? " default-app-dir))
+        (let ((newdir
+               (read-directory-name
+                "Move app to: " manage-directory nil t)))
+          (if (not (file-exists-p
+                    (expand-file-name "management" newdir)))
+              (rename-file default-create-dir newdir)
+            (message
+             "Directory structure already exists in %s" appname))
+          (and delete-safe (delete-directory default-app-dir t)))))
+    (kill-buffer)
+    (python-django-mgmt-restore-window-configuration)))
 
 (python-django-qmgmt-define create_command
   "Create management commands directory structure for app."
-  (:submenu "Tools" :binding "occ" :no-pop t)
+  (:submenu "Tools" :binding "occ" :no-pop t
+            :functions #'python-django-qmgmt-create_command-function)
   (app (python-django-minibuffer-read-app "App name: ")))
 
-(defun python-django-qmgmt-create_command-callback (args)
-  "Callback for create_command quick management command.
-Optional argument ARGS args for it."
-  (when python-django-qmgmt-process-status-ok
-   (let* ((appname (cdr (assoc 'app args)))
-          (manage-directory
-           (file-name-directory
-            (with-current-buffer
-                python-django-mgmt-parent-buffer
-              python-django-project-manage.py)))
-          (default-app-dir
-            (expand-file-name appname manage-directory))
-          (default-create-dir
-            (expand-file-name "management" default-app-dir))
-          (delete-safe
-           (and (file-exists-p default-app-dir)
-                (equal (directory-files default-app-dir)
-                       '("." ".." "management")))))
-     (when (y-or-n-p
-            (format "Created in app %s.  Move it? " default-app-dir))
-       (let ((newdir
-              (read-directory-name
-               "Move app to: " manage-directory nil t)))
-         (if (not (file-exists-p
-                   (expand-file-name "management" newdir)))
-             (rename-file default-create-dir newdir)
-           (message
-            "Directory structure already exists in %s" appname))
-         (and delete-safe (delete-directory default-app-dir t)))))
-   (kill-buffer)
-   (python-django-mgmt-restore-window-configuration)))
-
-(python-django-qmgmt-define startapp
-  "Create new Django app for current project."
-  (:submenu "Tools" :binding "osa" :no-pop t)
-  (app "App name: "))
-
-(defun python-django-qmgmt-startapp-callback (args)
+(defun python-django-qmgmt-startapp-function (status-ok args)
   "Callback for clean_pyc quick management command.
-Optional argument ARGS args for it."
-  (when python-django-qmgmt-process-status-ok
-    (let ((appname (cdr (assoc 'app args)))
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
+    (let ((appname (plist-get args 'app))
           (manage-directory
            (file-name-directory
             (with-current-buffer
@@ -1580,30 +1631,37 @@ Optional argument ARGS args for it."
     (kill-buffer)
     (python-django-mgmt-restore-window-configuration)))
 
+(python-django-qmgmt-define startapp
+  "Create new Django app for current project."
+  (:submenu "Tools" :binding "osa" :no-pop t
+            :functions #'python-django-qmgmt-startapp-function)
+  (app "App name: "))
+
 ;; Shell
 
 (python-django-qmgmt-define shell
   "Run a Python interpreter for this project."
-  (:submenu "Shell" :binding "ss"))
+  (:submenu "Shell" :binding "ss"
+            :make-comint-function #'python-django-mgmt-make-comint-for-shell))
 
 (python-django-qmgmt-define shell_plus
   "Like the 'shell' but autoloads all models."
-  (:submenu "Shell" :binding "sp"))
+  (:submenu "Shell" :binding "sp"
+            :make-comint-function #'python-django-mgmt-make-comint-for-shell))
 
 ;; Database
 
 (python-django-qmgmt-define syncdb
   "Sync database tables for all INSTALLED_APPS."
-  (:submenu "Database" :binding "dsy" :no-pop t)
+  (:submenu "Database" :binding "dsy" :no-pop t
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database="))
 
-(defalias 'python-django-qmgmt-syncdb-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define dbshell
   "Run the command-line client for specified database."
-  (:submenu "Database" :binding "dsh")
+  (:submenu "Database" :binding "dsh"
+            :make-comint-function #'python-django-mgmt-make-comint-for-dbshell)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database="))
 
@@ -1625,38 +1683,13 @@ Optional argument ARGS args for it."
   :type 'integer
   :safe 'integerp)
 
-(python-django-qmgmt-define dumpdata-all
-  "Save the contents of the database as a fixture for all apps."
-  (:submenu "Database" :binding "ddp" :no-pop t :capture-output t)
-  (database (python-django-minibuffer-read-database "Database: " default)
-            "default" "--database=")
-  (indent (number-to-string
-           (read-number "Indent Level: "
-                        (string-to-number default)))
-          (number-to-string python-django-qmgmt-dumpdata-default-indent)
-          "--indent=")
-  (format (python-django-minibuffer-read-from-list
-           "Dump to format: " python-django-qmgmt-dumpdata-formats default)
-          "json" "--format="))
-
-(python-django-qmgmt-define dumpdata-app
-  "Save the contents of the database as a fixture for the specified app."
-  (:submenu "Database" :binding "dda" :no-pop t :capture-output t)
-  (database (python-django-minibuffer-read-database "Database: " default)
-            "default" "--database=")
-  (indent (number-to-string
-           (read-number "Indent Level: "
-                        (string-to-number default))) "4" "--indent=")
-  (format (python-django-minibuffer-read-from-list
-           "Dump to format: " python-django-qmgmt-dumpdata-formats default)
-          "json" "--format=")
-  (app (python-django-minibuffer-read-app "Dumpdata for App: ")))
-
-(defun python-django-qmgmt-dumpdata-callback (args)
+(defun python-django-qmgmt-dumpdata-function (status-ok args)
   "Callback executed after dumpdata finishes.
-ARGS is an alist containing arguments passed to the quick
-management command."
-  (when python-django-qmgmt-process-status-ok
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
     (let ((file-name
            (catch 'file-name
              (while t
@@ -1695,40 +1728,72 @@ management command."
       (python-django-mgmt-restore-window-configuration)
       (message "Fixture saved to file `%s'." file-name))))
 
-(defalias 'python-django-qmgmt-dumpdata-app-callback
-  'python-django-qmgmt-dumpdata-callback)
-(defalias 'python-django-qmgmt-dumpdata-all-callback
-  'python-django-qmgmt-dumpdata-callback)
+(python-django-qmgmt-define dumpdata-all
+  "Save the contents of the database as a fixture for all apps."
+  (:submenu "Database" :binding "ddp" :no-pop t :capture-output t
+            :functions #'python-django-qmgmt-dumpdata-function)
+  (database (python-django-minibuffer-read-database "Database: " default)
+            "default" "--database=")
+  (indent (number-to-string
+           (read-number "Indent Level: "
+                        (string-to-number default)))
+          (number-to-string python-django-qmgmt-dumpdata-default-indent)
+          "--indent=")
+  (format (python-django-minibuffer-read-from-list
+           "Dump to format: " python-django-qmgmt-dumpdata-formats default)
+          "json" "--format="))
+
+(python-django-qmgmt-define dumpdata-app
+  "Save the contents of the database as a fixture for the specified app."
+  (:submenu "Database" :binding "dda" :no-pop t :capture-output t
+            :functions #'python-django-qmgmt-dumpdata-function)
+  (database (python-django-minibuffer-read-database "Database: " default)
+            "default" "--database=")
+  (indent (number-to-string
+           (read-number "Indent Level: "
+                        (string-to-number default))) "4" "--indent=")
+  (format (python-django-minibuffer-read-from-list
+           "Dump to format: " python-django-qmgmt-dumpdata-formats default)
+          "json" "--format=")
+  (app (python-django-minibuffer-read-app "Dumpdata for App: ")))
 
 (python-django-qmgmt-define flush
   "Execute 'sqlflush' on the given database."
-  (:submenu "Database" :binding "df" :msg "Flushed database")
+  (:submenu "Database" :binding "df" :msg "Flushed database"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database="))
 
-(defalias 'python-django-qmgmt-flush-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define loaddata
   "Install the named fixture(s) in the database."
-  (:submenu "Database" :binding "dl")
+  (:submenu "Database" :binding "dl"
+            :functions  #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database=")
   (fixtures (python-django-minibuffer-read-file-names "Fixtures: ")))
 
-(defalias 'python-django-qmgmt-loaddata-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define validate
   "Validate all installed models."
-  (:submenu "Database" :binding "dv"))
+  (:submenu "Database" :binding "dv"
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
-(defalias 'python-django-qmgmt-validate-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+(defun python-django-qmgmt-graph_models-function (status-ok args)
+  "Callback for graph_model quick management command.
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
+    (let ((open (y-or-n-p "Open generated graph? ")))
+      (kill-buffer)
+      (python-django-mgmt-restore-window-configuration)
+      (when open
+        (find-file (plist-get args 'filename))))))
 
 (python-django-qmgmt-define graph_models-all
   "Creates a Graph of models for all project apps."
-  (:submenu "Database" :switches "-ag"  :binding "dgg")
+  (:submenu "Database" :switches "-ag"  :binding "dgg"
+            :functions #'python-django-qmgmt-graph_models-function)
   (filename
    (expand-file-name
     (read-file-name "Filename for generated Graph: "
@@ -1739,7 +1804,8 @@ management command."
 
 (python-django-qmgmt-define graph_models-apps
   "Creates a Graph of models for given apps."
-  (:submenu "Database" :binding "dga")
+  (:submenu "Database" :binding "dga"
+            :functions #'python-django-qmgmt-graph_models-function)
   (apps (python-django-minibuffer-read-apps "Graph for App: "))
   (filename
    (expand-file-name
@@ -1749,36 +1815,17 @@ management command."
     python-django-project-root)
    "--output=" t))
 
-(defun python-django-qmgmt-graph_models-callback (args)
-  "Callback for graph_model quick management command.
-Optional argument ARGS args for it."
-  (when python-django-qmgmt-process-status-ok
-    (let ((open (y-or-n-p "Open generated graph? ")))
-      (kill-buffer)
-      (python-django-mgmt-restore-window-configuration)
-      (and open
-           (find-file (cdr (assoc 'filename args)))))))
-
-(defalias 'python-django-qmgmt-graph_models-all-callback
-  'python-django-qmgmt-graph_models-callback)
-(defalias 'python-django-qmgmt-graph_models-apps-callback
-  'python-django-qmgmt-graph_models-callback)
-
 ;; i18n
 
 (python-django-qmgmt-define makemessages-all
   "Create/Update translation string files."
-  (:submenu "i18n" :switches "--all" :binding "im"))
-
-(defalias 'python-django-qmgmt-makemessages-all-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+  (:submenu "i18n" :switches "--all" :binding "im"
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
 (python-django-qmgmt-define compilemessages-all
   "Compile project .po files to .mo."
-  (:submenu "i18n" :binding "ic"))
-
-(defalias 'python-django-qmgmt-compilemessages-all-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+  (:submenu "i18n" :binding "ic"
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
 ;; Dev Server
 
@@ -1802,13 +1849,15 @@ Optional argument ARGS args for it."
 
 (python-django-qmgmt-define runserver
   "Start development Web server."
-  (:submenu "Server" :binding "rr")
+  (:submenu "Server" :binding "rr"
+            :make-comint-function #'python-django-mgmt-make-comint-for-runserver)
   (bindaddr "Serve on [ip]:[port]: "
             python-django-qmgmt-runserver-default-bindaddr))
 
 (python-django-qmgmt-define runserver_plus
   "Start extended development Web server."
-  (:submenu "Server" :binding "rp")
+  (:submenu "Server" :binding "rp"
+            :make-comint-function #'python-django-mgmt-make-comint-for-runserver)
   (bindaddr "Serve on [ip]:[port]: "
             python-django-qmgmt-runserver-default-bindaddr))
 
@@ -1829,28 +1878,26 @@ Optional argument ARGS args for it."
 
 (python-django-qmgmt-define test-all
   "Run the test suite for the entire project."
-  (:submenu "Test" :binding "tp"))
-
-(defalias 'python-django-qmgmt-test-all-callback
-  'python-django-qmgmt-kill-and-msg-callback)
+  (:submenu "Test" :binding "tp"
+            :functions #'python-django-qmgmt-kill-and-msg-function))
 
 (python-django-qmgmt-define test-app
   "Run the test suite for the specified app."
-  (:submenu "Test" :binding "ta")
+  (:submenu "Test" :binding "ta"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (app (python-django-minibuffer-read-app "Test App: ")))
-
-(defalias 'python-django-qmgmt-test-app-callback
-  'python-django-qmgmt-kill-and-msg-callback)
 
 ;; South integration
 
-(defun python-django-qmgmt-open-migration-callback (args)
+(defun python-django-qmgmt-open-migration-function (status-ok args)
   "Callback for commands that create migrations.
-Argument ARGS is an alist with the arguments passed to the
-management command."
-  (when python-django-qmgmt-process-status-ok
+Argument STATUS-OK is non-nil if process exited successfully.
+Argument ARGS is a plist with the switches and arguments passed
+to the command.  See `python-django-qmgmt-define' docstring for
+details."
+  (when status-ok
     (let ((app (cdr (assq 'app args))))
-      (python-django-qmgmt-kill-and-msg-callback args)
+      (python-django-qmgmt-kill-and-msg-function status-ok args)
       (and (y-or-n-p "Open the created migration? ")
            (find-file
             (expand-file-name
@@ -1861,87 +1908,69 @@ management command."
 
 (python-django-qmgmt-define convert_to_south
   "Convert given app to South."
-  (:submenu "South" :binding "soc")
+  (:submenu "South" :binding "soc"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (app (python-django-minibuffer-read-app "Convert App: ")))
-
-(defalias 'python-django-qmgmt-convert_to_south-callback
-  'python-django-qmgmt-kill-and-msg-callback)
 
 (python-django-qmgmt-define datamigration
   "Create a new datamigration for the given app."
-  (:submenu "South" :binding "sod")
+  (:submenu "South" :binding "sod"
+            :functions #'python-django-qmgmt-open-migration-function)
   (app (python-django-minibuffer-read-app "Datamigration for App: "))
   (name "Datamigration name: "))
 
-(defalias 'python-django-qmgmt-datamigration-callback
-  'python-django-qmgmt-open-migration-callback)
-
 (python-django-qmgmt-define migrate-all
   "Run all migrations for all apps."
-  (:submenu "South" :switches "--all" :binding "somp")
+  (:submenu "South" :switches "--all" :binding "somp"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database="))
 
-(defalias 'python-django-qmgmt-migrate-all-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define migrate-app
   "Run all migrations for given app."
-  (:submenu "South" :binding "soma")
+  (:submenu "South" :binding "soma"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database=")
   (app (python-django-minibuffer-read-app "Migrate App: ")))
 
-(defalias 'python-django-qmgmt-migrate-app-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define migrate-list
   "Run all migrations for all apps."
-  (:submenu "South" :switches "--list" :binding "soml")
+  (:submenu "South" :switches "--list" :binding "soml"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database="))
 
-(defalias 'python-django-qmgmt-migrate-list-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define migrate-app-to
   "Run migrations for given app [up|down]-to given number."
-  (:submenu "South" :binding "somt")
+  (:submenu "South" :binding "somt"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (database (python-django-minibuffer-read-database "Database: " default)
             "default" "--database=")
-  (app (python-django-minibuffer-read-app "Migrate App: " nil t))
+  (app (python-django-minibuffer-read-app "Migrate App: "))
   (migration (python-django-minibuffer-read-migration "To migration: " app)))
-
-(defalias 'python-django-qmgmt-migrate-app-to-callback
-  'python-django-qmgmt-kill-and-msg-callback)
 
 (python-django-qmgmt-define schemamigration-initial
   "Create the initial schemamigration for the given app."
-  (:submenu "South" :switches "--initial" :binding "sosi")
+  (:submenu "South" :switches "--initial" :binding "sosi"
+            :functions #'python-django-qmgmt-kill-and-msg-function)
   (app (python-django-minibuffer-read-app
         "Initial schemamigration for App: ")))
 
-(defalias 'python-django-qmgmt-schemamigration-initial-callback
-  'python-django-qmgmt-kill-and-msg-callback)
-
 (python-django-qmgmt-define schemamigration
   "Create new empty schemamigration for the given app."
-  (:submenu "South" :switches "--empty" :binding "soss")
+  (:submenu "South" :switches "--empty" :binding "soss"
+            :functions #'python-django-qmgmt-open-migration-function)
   (app (python-django-minibuffer-read-app
         "Initial schemamigration for App: "))
   (name "Schemamigration name: "))
 
-(defalias 'python-django-qmgmt-schemamigration-callback
-  'python-django-qmgmt-open-migration-callback)
-
 (python-django-qmgmt-define schemamigration-auto
   "Create an automatic schemamigration for the given app."
-  (:submenu "South" :switches "--auto" :binding "sosa")
+  (:submenu "South" :switches "--auto" :binding "sosa"
+            :functions #'python-django-qmgmt-open-migration-function)
   (app (python-django-minibuffer-read-app
         "Auto schemamigration for App: ")))
-
-(defalias 'python-django-qmgmt-schemamigration-auto-callback
-  'python-django-qmgmt-open-migration-callback)
 
 
 ;;; Fast commands
@@ -2025,13 +2054,11 @@ default to a sane value."
   "Jump to APP's directory."
   (interactive
    (list
-    (python-django-minibuffer-read-app "Jump to app: " nil t)))
-  (let ((app (assq (intern app)
-                   (python-django-info-get-app-paths))))
-    (when app
-      (goto-char (point-min))
-      (re-search-forward (format " %s" (car app)))
-      (python-django-ui-move-to-closest-icon))))
+    (python-django-minibuffer-read-app "Jump to app: ")))
+  (when (python-django-info-get-app-path app)
+    (goto-char (point-min))
+    (re-search-forward (format " %s" app))
+    (python-django-ui-move-to-closest-icon)))
 
 (defun python-django-cmd-jump-to-media (which)
   "Jump to a WHICH media directory."
@@ -2136,10 +2163,11 @@ The function receives one argument, the status buffer."
   "Create section Alist for current project."
   (list
    (cons
-    "Apps" (mapcar
-            (lambda (app)
-              (cons app (python-django-info-get-app-path app)))
-            (python-django-info-get-setting "INSTALLED_APPS")))
+    "Apps"
+    (mapcar
+     (lambda (app)
+       (cons app (python-django-info-get-app-path app)))
+     (python-django-info-get-installed-apps)))
    (cons
     "Media"
     (list
