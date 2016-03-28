@@ -110,10 +110,6 @@
            (when (= p (point)) ad-do-it))))
      (setq set-mark-command-repeat-pop t)))
 
-;; popwin
-(require 'popwin)
-(popwin-mode 1)
-
 
 ;; Non-nil means a single space does not end a sentence. This is
 ;; relevant for filling.
@@ -143,6 +139,14 @@
 ;; web browser
 (setq browse-url-browser-function 'browse-url-generic)
 (setq browse-url-generic-program "firefox")
+
+
+;; which key
+;; https://github.com/justbur/emacs-which-key
+(when (require 'which-key nil t)
+  (which-key-mode 1)
+  (setq which-key-sort-order 'which-key-descriptions-order)
+  (which-key-setup-side-window-right))
 
 
 (mouse-wheel-mode t)
