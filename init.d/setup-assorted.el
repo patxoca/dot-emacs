@@ -146,7 +146,7 @@
 (when (require 'which-key nil t)
   (which-key-mode 1)
   (setq which-key-idle-delay 0.75)
-  (setq which-key-sort-order 'which-key-descriptions-order)
+  (setq which-key-sort-order 'which-key-description-order)
   (which-key-setup-side-window-right))
 
 
