@@ -153,6 +153,11 @@
 ;; expand-region
 (global-set-key (kbd "C-.") 'er/expand-region)
 
+
+;; multi-line
+(global-set-key (kbd "C-c C-D") 'multi-line)
+
+
 ;; todo
 (global-set-key (kbd "C-c r i") 'srctool-insert-reminder)
 (global-set-key (kbd "C-c r s") 'srctool-show-reminders)

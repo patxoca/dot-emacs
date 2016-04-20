@@ -87,6 +87,10 @@
                     :background "black")
 
 
+;; multi-line
+(require 'multi-line nil t)
+
+
 ;; overwrite mode
 (defadvice overwrite-mode (after overwrite-mode-adjust-cursor activate)
   "Change cursor color when enabling/disabling overwrite mode."
