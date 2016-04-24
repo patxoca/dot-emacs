@@ -187,7 +187,7 @@ the buffer."
      (define-key python-mode-map (kbd "C-<tab>")
        (make-hippie-expand-function
         '(try-expand-dabbrev
-          try-expand-tags
+          ;;; try-expand-tags
           try-expand-dabbrev-all-buffers) t))
      (define-key python-mode-map (kbd "s-<tab>") 'python-indent-shift-right)
      (define-key python-mode-map (kbd "s-<iso-lefttab>") 'python-indent-shift-left)
