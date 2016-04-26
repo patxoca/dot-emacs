@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Actualitzar requirements.txt
+# $Id:$
+# key: par
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda@urv.cat>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 3db410af-fb40-4c82-99a4-d3d0d858f15c
+# --
+Actualitzar versions en 'requirements.txt'.
