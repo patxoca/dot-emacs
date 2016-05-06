@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: xfail test stub
+# $Id:$
+# key: dtf
+# group: testing
+# type: snippet
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 9b9232f9-4da5-4199-a180-1f1d89198ad4
+# --
+@pytest.mark.xfail
+def test_${1:long_name}(self):
+    self.fail("Not implemented")
+$0

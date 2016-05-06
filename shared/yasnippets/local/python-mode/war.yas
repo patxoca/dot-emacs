@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: with self.assertRaises
+# $Id:$
+# key: war
+# group: testing
+# type: snippet
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: b26a0f79-bfac-49c9-9834-b60b72025dea
+# --
+with self.assertRaises(${1:Exceptions}):
+    $0
