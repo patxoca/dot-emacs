@@ -71,7 +71,7 @@
 (set-face-attribute 'cursor  nil
                     :background "white")
 (set-face-attribute 'default nil
-                    :height 113)
+                    :height 109)
 
 
 ;; font-lock
