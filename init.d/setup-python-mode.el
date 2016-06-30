@@ -17,73 +17,11 @@
 (autoload 'previous-error "simple" "" t nil)
 
 (require 'arv-py)
+(require 'elpy)
 (require 'pyx)
 (require 'subword)
 (require 'superword)
 
-;;                              pymacs
-
-(require 'pymacs)
-
-(defun fp-maybe-pymacs-reload ()
-  "Recarrega automaticament els arxius .py guardats dins ~/emacslib."
-
-  ;; @TODO: alex 2006-08-15 00:28:32 : no recordo el perque d'aquesta
-  ;; funcio, sembla una mena de reload al guardar, pero ignora el que
-  ;; hi ha dins de ~/prog, que tambe apareix a pymacs-load-path.
-  ;;
-  ;; Crec que le problema de ~/prog es que hi han coses que no tenen
-  ;; res a veure amb pymacs i per aixo l'ignoro, pero entonces esta
-  ;; funcio perd tota utilitat, no escric python dins emacslib!!
-  ;;
-  ;; Per fer-ho ben fet caldria fer customizable la variable
-  ;; pymacs-load-path i tindre en compte tots els elements de la
-  ;; llista al determinar si cal que pymacs recarregui l'arxiu
-
-  (let ((pymacsdir (expand-file-name emacs-startup-dir)))
-    (when (and (string-equal (file-name-directory buffer-file-name)
-                             pymacsdir)
-               (string-match "\\.py\\'" buffer-file-name))
-      (princ (concat "pymacs: recarregant " buffer-file-name))
-      (pymacs-load (substring buffer-file-name 0 -3)))))
-
-(defun arv/rope-goto-definition (prefix)
-  "Like `rope-goto-definition' but with prefix argument closes
-the buffer."
-  (interactive "p")
-  (if (= prefix 1)
-      (rope-goto-definition)
-    (let ((buffer (current-buffer)))
-      (rope-goto-definition)
-      (unless (string= (buffer-name buffer) (buffer-name (current-buffer)))
-        (kill-buffer buffer)))))
-
-;; (add-hook 'after-save-hook 'fp-maybe-pymacs-reload)
-
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(autoload 'pymacs-autoload "pymacs")
-(eval-after-load "pymacs"
-  '(add-to-list 'pymacs-load-path (arv/startup-get-absolute-path "shared/pymacs")))
-
-
-;;                     rope refactoring library
-
-(eval-after-load "pymacs"
-  '(progn
-     (message "Loading ropemacs ...")
-     (condition-case ex
-         (progn
-           (pymacs-load "ropemacs" "rope-")
-           (setq ropemacs-enable-autoimport t)
-           (define-key ropemacs-local-keymap (kbd "C-c g") 'arv/rope-goto-definition)
-           (message "ropemacs loaded"))
-       ('error (message "ropemacs failed")))))
-
-
 ;;                         nose test runner
 
 (eval-after-load "python"
@@ -165,6 +103,8 @@ the buffer."
   '(progn
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
      (setq python-indent-guess-indent-offset nil)
+
+     (elpy-enable)
 
      ;; keybindings locals
      (define-key python-mode-map (kbd "s-SPC") 'company-complete)
