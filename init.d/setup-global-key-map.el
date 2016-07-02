@@ -103,23 +103,17 @@
 
 (global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/org/emacs_novetats.org")))
 
-;;; eproject
-(global-set-key (kbd "C-c p o") 'eproject-open)
-(global-set-key (kbd "C-c p c") 'eproject-close)
-(global-set-key (kbd "C-c p a") 'eproject-add)
-(global-set-key (kbd "C-c p r") 'eproject-remove)
-
 ;;; django
 ;; aquest keybinding no m'acava de convencer per dos motius:
 ;;
-;; * envaeix l'espai de keybindinds de eproject. No especialment greu
-;;   i en certa forma esta relacionat.
+;; * envaeix l'espai de keybindinds de projectile. No especialment
+;;   greu i en certa forma esta relacionat.
 ;;
 ;; * defineix globalment un keybinding que no té sentit en tots els
 ;;   contexts. Malauradament no es pot determinar si te sentit en un
 ;;   context fins que s'ha obert el projecte django.
 
-(global-set-key (kbd "C-c p d") 'arv/django-switch-to-project-buffer)
+(global-set-key (kbd "C-c p D") 'arv/django-switch-to-project-buffer)
 
 ;; els keybindings de ace-jump-mode em resulten dificils de recordar
 ;; i poc còmodes
