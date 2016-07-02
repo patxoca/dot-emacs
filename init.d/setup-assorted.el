@@ -48,7 +48,6 @@
      (setq company-backends '(company-elisp
                               company-nxml
                               company-css
-                              company-ropemacs
                               company-files))))
 
 
