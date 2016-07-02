@@ -18,6 +18,7 @@
 
 (require 'arv-py)
 (require 'elpy)
+(require 'pytest)
 (require 'pyx)
 (require 'subword)
 (require 'superword)
@@ -119,6 +120,15 @@
      (define-key python-mode-map (kbd "C-c m i s d ") 'pyx/add-setup-dependency)
      (define-key python-mode-map (kbd "C-c m i p n") 'arv/py-insert-current-package-name)
      (define-key python-mode-map (kbd "C-c m i u") (lambda () "Insert random UUID" (interactive) (insert (arv/generate-random-uuid))))
+     ;; py.test
+     (define-key python-mode-map (kbd "C-c m t a") 'pytest-all)
+     (define-key python-mode-map (kbd "C-c m t m") 'pytest-module)
+     (define-key python-mode-map (kbd "C-c m t .") 'pytest-one)
+     (define-key python-mode-map (kbd "C-c m t d") 'pytest-directory)
+     (define-key python-mode-map (kbd "C-c m t p a") 'pytest-pdb-all)
+     (define-key python-mode-map (kbd "C-c m t p m") 'pytest-pdb-module)
+     (define-key python-mode-map (kbd "C-c m t p .") 'pytest-pdb-one)
+
      (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
      ;; TODO: aquests tres possiblement siguin globals (?)
      (define-key python-mode-map (kbd "<f7>") 'next-error)
