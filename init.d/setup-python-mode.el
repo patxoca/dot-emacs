@@ -23,16 +23,6 @@
 (require 'subword)
 (require 'superword)
 
-;;                         nose test runner
-
-(eval-after-load "python"
-  '(progn
-     (require 'nose-mode)
-     (nose-mode-setup-keymap)
-     (add-hook 'python-mode-hook
-               'nose-mode-enable-if-test-module)))
-
-
 ;;                             pylookup
 
 (autoload 'pylookup-lookup "pylookup")
@@ -189,10 +179,6 @@
             (highlight-lines-matching-regexp "^[[:space:]]*i?pdb.set_trace()")
 
             (highlight-lines-matching-regexp "sefl")
-
-            ;; recicla la comanda 'compile' per executar els tests amb
-            ;; nose
-            (set (make-local-variable 'compile-command) "nosetests")
 
             ;; company-mode
             (company-mode t)
