@@ -23,6 +23,15 @@
 (require 'subword)
 (require 'superword)
 
+;;                             elpy
+
+(eval-after-load "elpy"
+  '(progn
+     (setq elpy-modules
+           '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv
+             elpy-module-sane-defaults elpy-module-yasnippet))))
+
+
 ;;                             pylookup
 
 (autoload 'pylookup-lookup "pylookup")
