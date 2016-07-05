@@ -186,6 +186,13 @@ numbers."
       (setq beg (line-beginning-position (+ (- arg) 1)))
       (setq end (line-beginning-position 2))
       (setq where end)))
+    (save-excursion
+      (goto-char end)
+      (when (eobp)
+        (newline)
+        (setq end (1+ end))
+        (unless (= where beg)
+          (setq where end))))
     (setq text (buffer-substring-no-properties beg end))
     (goto-char where)
     (insert text)
