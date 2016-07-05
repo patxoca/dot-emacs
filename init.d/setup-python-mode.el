@@ -97,6 +97,15 @@
        (require 'tramp))
      (add-function :before (symbol-function 'pylint) #'require-tramp)))
 
+
+;;                              pytest
+(eval-after-load "pytest"
+  '(progn
+     (setq pytest-mode-keymap-prefix "C-c m t")
+     (define-key python-mode-map (kbd "C-c m t a") 'pytest-all)
+     (add-hook 'python-mode-hook 'pytest-mode-enable-if-test-module)))
+
+
 ;;                              python
 
 (eval-after-load "python"
@@ -119,14 +128,6 @@
      (define-key python-mode-map (kbd "C-c m i s d ") 'pyx/add-setup-dependency)
      (define-key python-mode-map (kbd "C-c m i p n") 'arv/py-insert-current-package-name)
      (define-key python-mode-map (kbd "C-c m i u") (lambda () "Insert random UUID" (interactive) (insert (arv/generate-random-uuid))))
-     ;; py.test
-     (define-key python-mode-map (kbd "C-c m t a") 'pytest-all)
-     (define-key python-mode-map (kbd "C-c m t m") 'pytest-module)
-     (define-key python-mode-map (kbd "C-c m t .") 'pytest-one)
-     (define-key python-mode-map (kbd "C-c m t d") 'pytest-directory)
-     (define-key python-mode-map (kbd "C-c m t p a") 'pytest-pdb-all)
-     (define-key python-mode-map (kbd "C-c m t p m") 'pytest-pdb-module)
-     (define-key python-mode-map (kbd "C-c m t p .") 'pytest-pdb-one)
 
      (define-key python-mode-map (kbd "M-<f1>") (lambda () (interactive) (info "(python.info) Python Module Index")))
      ;; TODO: aquests tres possiblement siguin globals (?)
