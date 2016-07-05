@@ -19,6 +19,7 @@
 
 (eval-after-load "ace-jump-mode"
   '(progn
+     (setq ace-jump-mode-scope 'window)
      (defadvice ace-jump-char-category (around adv-ace-jump-support-umlauts activate)
        (unless (= (char-syntax (ad-get-arg 0)) ?w)
          ad-do-it)
