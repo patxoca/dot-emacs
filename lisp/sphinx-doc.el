@@ -46,7 +46,9 @@ el conte. Retorna nil si no el troba."
   "Intenta executar 'make <target>'"
   (let ((makefile (-arv-sphinx-locate-makefile)))
     (unless (null makefile)
-      (compile (format "make -k -C %s %s" makefile target)))))
+      (compilation-start (format "make -k -C %s %s" makefile target)
+                         t
+                         (lambda (mode) "*sphix-doctest*")))))
 
 ;;;###autoload
 (defun arv-sphinx-build-latexpdf ()
@@ -59,6 +61,12 @@ el conte. Retorna nil si no el troba."
    "Genera HTML"
    (interactive)
    (-arv-sphinx-build "html"))
+
+;;;###autoload
+(defun arv-sphinx-run-doctest ()
+   "Executa els doctest"
+   (interactive)
+   (-arv-sphinx-build "doctest"))
 
 (provide 'sphinx-doc)
 
