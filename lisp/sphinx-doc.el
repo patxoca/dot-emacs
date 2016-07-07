@@ -48,7 +48,7 @@ el conte. Retorna nil si no el troba."
     (unless (null makefile)
       (compilation-start (format "make -k -C %s %s" makefile target)
                          t
-                         (lambda (mode) "*sphix-doctest*")))))
+                         (lambda (mode) "*sphinx*")))))
 
 ;;;###autoload
 (defun arv-sphinx-build-latexpdf ()
