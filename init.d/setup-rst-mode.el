@@ -80,7 +80,8 @@ leaves point in the middle."
     '(progn
        (define-key rst-mode-map (kbd "*") 'arv/rst-smart-asterisk)
        (define-key rst-mode-map (kbd "`") 'arv/rst-smart-grave)
-       (define-key rst-mode-map '[f9] 'arv-sphinx-build-latexpdf)
+       (define-key rst-mode-map (kbd "<f9>") 'arv-sphinx-build-latexpdf)
+       (define-key rst-mode-map (kbd "C-<f9>") 'arv-sphinx-run-doctest)
        (define-key rst-mode-map '[(control =)] 'arv/rst-underline-header)))
 
 (add-hook 'rst-mode-hook
