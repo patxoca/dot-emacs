@@ -102,7 +102,8 @@
 (eval-after-load "pytest"
   '(progn
      (setq pytest-mode-keymap-prefix "C-c m t")
-     (define-key python-mode-map (kbd "C-c m t a") 'pytest-all)
+     (define-key python-mode-map (kbd "<f12>") 'pytest-all)
+     (define-key pytest-mode-map (kbd "<f12>") 'pytest-one)
      (elpy-use-ipython)
      (add-hook 'python-mode-hook 'pytest-mode-enable-if-test-module)))
 
