@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Test Case
+# $Id:$
+# key: ct
+# group: testing
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 82c180d6-d24a-4d3a-b8a7-034212aa8658
+# --
+class Test${Name}(TestCase):
+
+    def setUp(self):
+        pass
+
+    dt$0
