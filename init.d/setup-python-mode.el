@@ -25,8 +25,22 @@
 
 ;;                             elpy
 
+(defun arv/elpy-nav-forward_block ()
+  ""
+  (interactive "^")
+  (back-to-indentation)
+  (elpy-nav-forward-block))
+
+(defun arv/elpy-nav-backward_block ()
+  ""
+  (interactive "^")
+  (back-to-indentation)
+  (elpy-nav-backward-block))
+
 (eval-after-load "elpy"
   '(progn
+     (define-key elpy-mode-map (kbd "C-<down>") 'arv/elpy-nav-forward_block)
+     (define-key elpy-mode-map (kbd "C-<up>") 'arv/elpy-nav-backward_block)
      (setq elpy-modules
            '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv
              elpy-module-sane-defaults elpy-module-yasnippet))))
