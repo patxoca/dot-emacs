@@ -41,6 +41,8 @@
   '(progn
      (define-key elpy-mode-map (kbd "C-<down>") 'arv/elpy-nav-forward_block)
      (define-key elpy-mode-map (kbd "C-<up>") 'arv/elpy-nav-backward_block)
+     (define-key elpy-mode-map (kbd "C-<left>") nil)
+     (define-key elpy-mode-map (kbd "C-<right>") nil)
      (setq elpy-modules
            '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv
              elpy-module-sane-defaults elpy-module-yasnippet))))
