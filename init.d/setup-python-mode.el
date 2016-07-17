@@ -121,6 +121,9 @@
      (setq pytest-mode-keymap-prefix "C-c m t")
      (define-key python-mode-map (kbd "<f12>") 'pytest-all)
      (define-key pytest-mode-map (kbd "<f12>") 'pytest-one)
+     ;; WARNING: defining `pytest-cmd-flags' as safe for any string is
+     ;; potentially dangerous, it leaves the door open to malicious
+     ;; values like " ; rm -Rf $HOME/ #"
      (put 'pytest-cmd-flags 'safe-local-variable 'stringp)
      (add-hook 'python-mode-hook 'pytest-mode-enable-if-test-module)))
 
