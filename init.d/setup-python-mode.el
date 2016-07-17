@@ -121,6 +121,7 @@
      (setq pytest-mode-keymap-prefix "C-c m t")
      (define-key python-mode-map (kbd "<f12>") 'pytest-all)
      (define-key pytest-mode-map (kbd "<f12>") 'pytest-one)
+     (put 'pytest-cmd-flags 'safe-local-variable 'stringp)
      (add-hook 'python-mode-hook 'pytest-mode-enable-if-test-module)))
 
 
