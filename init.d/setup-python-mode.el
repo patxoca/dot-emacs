@@ -43,6 +43,7 @@
      (define-key elpy-mode-map (kbd "C-<up>") 'arv/elpy-nav-backward_block)
      (define-key elpy-mode-map (kbd "C-<left>") nil)
      (define-key elpy-mode-map (kbd "C-<right>") nil)
+     (elpy-use-ipython)
      (setq elpy-modules
            '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv
              elpy-module-sane-defaults elpy-module-yasnippet))))
@@ -120,7 +121,6 @@
      (setq pytest-mode-keymap-prefix "C-c m t")
      (define-key python-mode-map (kbd "<f12>") 'pytest-all)
      (define-key pytest-mode-map (kbd "<f12>") 'pytest-one)
-     (elpy-use-ipython)
      (add-hook 'python-mode-hook 'pytest-mode-enable-if-test-module)))
 
 
