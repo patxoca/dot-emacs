@@ -120,6 +120,7 @@
   '(progn
      (setq pytest-mode-keymap-prefix "C-c m t")
      (define-key python-mode-map (kbd "<f12>") 'pytest-all)
+     (define-key python-mode-map (kbd "C-<f12>") 'pytest-rerun-last)
      (define-key pytest-mode-map (kbd "<f12>") 'pytest-one)
      ;; WARNING: defining `pytest-cmd-flags' as safe for any string is
      ;; potentially dangerous, it leaves the door open to malicious
