@@ -71,7 +71,9 @@
                     :background "white")
 (set-face-attribute 'default nil
                     :height 109)
-
+(set-face-attribute 'eldoc-highlight-function-argument nil
+                    :underline t :foreground "green"
+                    :weight 'bold)
 
 ;; font-lock
 (global-font-lock-mode t)
