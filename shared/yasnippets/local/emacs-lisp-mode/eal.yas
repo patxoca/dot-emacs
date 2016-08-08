@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: eval-after-load
+# $Id:$
+# key: eal
+# group:
+# type: snippet
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: bbb70bd0-dd16-438d-b547-a9cf41b563c3
+# --
+(eval-after-load "${1:module}"
+  '(progn
+     $0))
