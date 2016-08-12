@@ -27,6 +27,16 @@
   (interactive)
   (compile (format "cd %s && go build -v" (projectile-project-root)) 't))
 
+(defun arv/goinstall ()
+  "runs 'go install' on current package."
+  (interactive)
+  (compile (format "cd %s && go install" (file-name-directory (buffer-file-name))) 't))
+
+(defun arv/gotest ()
+  "runs 'go test' on current package."
+  (interactive)
+  (compile (format "cd %s && go test" (file-name-directory (buffer-file-name))) 't))
+
 (eval-after-load "go-mode"
   '(progn
      (setq gofmt-command "goimports")
@@ -47,7 +57,8 @@
      (define-key go-mode-map (kbd "<f7>") 'next-error)
      (define-key go-mode-map (kbd "<f8>") 'previous-error)
      (define-key go-mode-map (kbd "<f9>") 'arv/gobuild)
-     (define-key go-mode-map (kbd "C-<f9>") 'gofmt)
+     (define-key go-mode-map (kbd "C-<f9>") 'arv/gotest)
+     (define-key go-mode-map (kbd "M-<f9>") 'arv/goinstall)
      ))
 
 (add-hook 'go-mode-hook
