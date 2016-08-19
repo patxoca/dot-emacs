@@ -31,6 +31,9 @@
 (when (require 'ido-ubiquitous nil 'noerror)
   (ido-ubiquitous-mode 1))
 
+(custom-set-faces
+ '(ido-first-match ((t (:foreground "green")))))
+
 ;; Inhibit switching to other directory when no matches are found in
 ;; the current directory.
 (customize-set-variable 'ido-auto-merge-work-directories-length -1)
