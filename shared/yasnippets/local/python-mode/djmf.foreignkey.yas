@@ -13,5 +13,5 @@ ${1:name} = models.ForeignKey(
     blank=${False},
     related_name="${}",
     help_text=_(u"${doc}"),
-    )
+)
 $0

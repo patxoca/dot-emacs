@@ -14,5 +14,5 @@ ${1:name} = models.ManyToManyField(
     related_name="${}",
     db_table="${}",
     help_text=_(u"${doc}"),
-    )
+)
 $0

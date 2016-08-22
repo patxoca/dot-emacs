@@ -9,5 +9,5 @@
 ${1:name} = models.NullBooleanField(
     verbose_name=_(u"$1"),
     help_text=_(u"${doc}"),
-    )
+)
 $0

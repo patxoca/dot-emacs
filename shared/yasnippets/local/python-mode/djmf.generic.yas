@@ -11,5 +11,5 @@ ${1:name} = models.${CharField}(
     null=${True},
     blank=${True},
     help_text=_(u"${doc}"),
-    )
+)
 $0

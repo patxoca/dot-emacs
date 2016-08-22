@@ -17,8 +17,8 @@ ${1:name} = forms.DecimalField(
     help_text=_(u"$8"),
     widget=widgets.${9:TextInput$$(yas/choose-value django-widget-types)}(
         attrs={
-            "style"    : "width: 8em",
-            "dojoType" : "dijit.form.NumberTextBox",
+            "style": "width: 8em",
+            "dojoType": "dijit.form.NumberTextBox",
         },
     ),
 )

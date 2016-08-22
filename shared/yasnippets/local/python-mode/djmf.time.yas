@@ -13,5 +13,5 @@ ${1:name} = models.TimeField(
     null=${True},
     blank=${True},
     help_text=_(u"${doc}"),
-    )
+)
 $0

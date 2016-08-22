@@ -14,8 +14,8 @@ ${1:name} = forms.FloatField(
     max_value=${5:100},
     widget=widgets.${6:TextInput$$(yas/choose-value django-widget-types)}(
         attrs={
-            "style"    : "width: 8em",
-            "dojoType" : "dijit.form.NumberTextBox",
+            "style": "width: 8em",
+            "dojoType": "dijit.form.NumberTextBox",
         },
     ),
     help_text=_(u"$7"),

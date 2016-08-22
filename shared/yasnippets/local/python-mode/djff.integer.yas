@@ -15,8 +15,8 @@ ${1:name} = forms.IntegerField(
     help_text=_(u"$6"),
     widget=widgets.${7:TextInput$$(yas/choose-value django-widget-types)}(
         attrs={
-            "style"    : "width: 8em",
-            "dojoType" : "dijit.form.NumberTextBox",
+            "style": "width: 8em",
+            "dojoType": "dijit.form.NumberTextBox",
         },
     ),
 )

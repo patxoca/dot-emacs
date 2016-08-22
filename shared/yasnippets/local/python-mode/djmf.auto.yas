@@ -12,5 +12,5 @@ ${1:name} = models.AutoField(
     null=${False},
     blank=${False},
     help_text=_(u"Clau primaria."),
-    )
+)
 $0
