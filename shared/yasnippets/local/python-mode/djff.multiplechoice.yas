@@ -13,5 +13,5 @@ ${1:name} = forms.MultipleChoiceField(
     required=${5:$$(yas/choose-value '("False" "True"))},
     widget=widgets.${6:SelectMultiple$$(yas/choose-value django-widget-types)},
     help_text=_(u"$7"),
-    )
+)
 $0

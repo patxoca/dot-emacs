@@ -13,5 +13,5 @@ ${1:name} = forms.DateTimeField(
     required=${8:$$(yas/choose-value '("False" "True"))},
     widget=widgets.${9:DateTimeInput$$(yas/choose-value django-widget-types)},
     help_text=_(u"$10"),
-    )
+)
 $0

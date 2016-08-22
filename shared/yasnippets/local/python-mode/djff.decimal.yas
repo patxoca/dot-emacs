@@ -19,7 +19,7 @@ ${1:name} = forms.DecimalField(
         attrs={
             "style"    : "width: 8em",
             "dojoType" : "dijit.form.NumberTextBox",
-            },
-        ),
-    )
+        },
+    ),
+)
 $0

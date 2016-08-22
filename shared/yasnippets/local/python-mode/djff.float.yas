@@ -16,8 +16,8 @@ ${1:name} = forms.FloatField(
         attrs={
             "style"    : "width: 8em",
             "dojoType" : "dijit.form.NumberTextBox",
-            },
-        ),
+        },
+    ),
     help_text=_(u"$7"),
-    )
+)
 $0

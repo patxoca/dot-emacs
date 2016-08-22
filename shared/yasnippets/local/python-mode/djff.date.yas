@@ -15,7 +15,7 @@ ${1:name} = forms.DateField(
         attrs={
             "style" : "width: 8em",
             "dojoType" : "dijit.form.DateTextBox",
-            },
-        ),
-    )
+        },
+    ),
+)
 $0

@@ -16,7 +16,7 @@ ${1:name} = forms.ModelChoiceField(
         attrs={
             "style"    : "width: 26em",
             "dojoType" : "dijit.form.FilteringSelect",
-            }
-        ),
-    )
+        }
+    ),
+)
 $0

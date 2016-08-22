@@ -16,5 +16,5 @@ ${1:name} = forms.BooleanField(
         },
     ),
     help_text=_(u"$5"),
-    )
+)
 $0

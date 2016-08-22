@@ -15,8 +15,8 @@ ${1:name} = forms.TimeField(
         attrs={
             "style"    : "width: 8em",
             "dojoType" : "dijit.form.TimeTextBox",
-            }
-        ),
+        }
+    ),
     help_text=_(u"$10"),
-    )
+)
 $0

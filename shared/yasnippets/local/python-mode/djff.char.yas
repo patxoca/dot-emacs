@@ -16,7 +16,7 @@ ${1:name} = forms.CharField(
         attrs={
             "style"    : "width: 10em",
             "dojoType" : "dijit.form.TextBox",
-            }
-        ),
-    )
+        }
+    ),
+)
 $0
