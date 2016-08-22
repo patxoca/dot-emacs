@@ -8,7 +8,7 @@
 # --
 ${1:name} = forms.ModelChoiceField(
     label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
-    queryset=${2:app_models.${3:model}.objects.${4:all()}${5:.order_by("${6:nom}")}},
+    queryset=${2:models.${3:model}.objects.${4:all()}${5:.order_by("${6:nom}")}},
     empty_label="",
     required=${7:$$(yas/choose-value '("False" "True"))},
     help_text=_(u"$8"),
