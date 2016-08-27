@@ -9,6 +9,6 @@
 # uuid: 25825e45-4ee1-4b68-ab70-f1215760737f
 # --
 parser.add_argument("${2:--opt}", dest="${2:$(s-replace "-" "_" (replace-regexp-in-string "^-+" "" yas/text))}", action="${3:store$$(yas-choose-value '("append" "append_const" "count" "store" "store_const" "store_true"))}",
-                    default=${4:None}, type=${5:string},
+                    default=${4:None}, type=${5:str},
                     help=u"$6")
 $0
