@@ -70,7 +70,7 @@
 (set-face-attribute 'cursor  nil
                     :background "white")
 (set-face-attribute 'default nil
-                    :height 109)
+                    :height 106)
 (set-face-attribute 'eldoc-highlight-function-argument nil
                     :underline t :foreground "green"
                     :weight 'bold)
