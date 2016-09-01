@@ -28,6 +28,7 @@
 (eval-after-load "sgml-mode"
   '(progn
      (define-key html-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)
+     (define-key html-mode-map (kbd "%") 'arv/django-autopair-template-tag)
      (add-hook 'html-mode-hook
                (lambda ()
                  (when (arv/django-file-belongs-to-app-p buffer-file-name)
