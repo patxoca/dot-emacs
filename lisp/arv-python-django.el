@@ -167,6 +167,32 @@ d'una aplicació permet triar quina obrir."
                             candidates nil t nil))
                          candidates))))))))
 
+;;;###autoload
+(defun arv/django-insert-template-name ()
+  "Insereix el nom de la plantilla.
+
+El nom es calcula a partir del nom de la app actual i el nom del
+buffer, sense extensió."
+  (interactive)
+  (let ((name (pyx/get-current-package-name)))
+    (insert name
+            "/"
+            (file-name-sans-extension (file-name-base (buffer-file-name)))
+            ".html")))
+
+;;;###autoload
+(defun arv/django-autopair-template-tag ()
+  "Facilita introduir blocs '{% %}'."
+  (interactive "")
+  (let ((within-block (save-excursion
+                        (backward-char)
+                        (looking-at "{"))))
+    (insert "%")
+    (when within-block
+      (insert "  %")
+      (backward-char 2))))
+
+
 (provide 'arv-python-django)
 
 ;;; 'arv-python-django.el ends here
