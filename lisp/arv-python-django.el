@@ -91,6 +91,20 @@ actiu. Retorna nil si el buffer no pertany a cap aplicació o no
 s'ha carregat cap projecte django."
   (arv/django-file-belongs-to-app-p buffer-file-name))
 
+(defun arv/django-get-app-names ()
+  ""
+  (with-current-buffer (arv/django-get-project-buffer)
+    (sort (python-django-info-get-installed-apps) 'string-lessp)))
+
+(defun arv/django--get-app-path (app-name)
+  ""
+    (with-current-buffer (arv/django-get-project-buffer)
+      (python-django-info-get-app-path app-name)))
+
+(defun arv/django-get-project-root ()
+  (with-current-buffer (arv/django-get-project-buffer)
+    python-django-project-root))
+
 ;;;###autoload
 (defun arv/django-switch-to-project-buffer ()
   "Canvia el focus a la finestra que te el projecte django. Si
@@ -191,6 +205,60 @@ buffer, sense extensió."
     (when within-block
       (insert "  %")
       (backward-char 2))))
+
+(defun arv/django--ido-select-app ()
+  (ido-completing-read "App: " (arv/django-get-app-names) nil t))
+
+
+(defun arv/django--visit-file (dir-rel-path at-app-root)
+  (let* ((app-name (arv/django--ido-select-app))
+         (app-root (arv/django--get-app-path app-name)))
+    (if at-app-root
+        (setq app-root (file-name-directory app-root)))
+    (setq app-root (concat app-root "/" dir-rel-path))
+    (ido-file-internal ido-default-file-method nil app-root))
+  )
+
+(defun arv/django-visit-app ()
+  "Permet selecionar app i obrir un arxiu dins l'arrel de la app."
+  (interactive)
+  (arv/django--visit-file "." nil))
+
+(defun arv/django-visit-app-test-module ()
+  "Permet selecionar app i obrir un arxiu de test."
+  (interactive)
+  (arv/django--visit-file "tests" nil))
+
+(defun arv/django-visit-app-view-module ()
+  "Permet selecionar app i obrir un arxiu de views."
+  (interactive)
+  (arv/django--visit-file "views" nil))
+
+(defun arv/django-visit-app-template-file ()
+  "Permet selecionar app i obrir un arxiu de template."
+  (interactive)
+  (arv/django--visit-file "tests" nil))
+
+(defun arv/django-visit-project ()
+  ""
+  (interactive)
+  (ido-file-internal ido-default-file-method nil (arv/django-get-project-root)))
+
+
+(defvar arv/django-mode-map (make-sparse-keymap "arv/django-mode") "arv/django-mode keymap")
+
+(defun arv/django-mode-setup-keymap ()
+  "Setup a default keymap."
+  (define-key arv/django-mode-map (kbd "C-c d v a") 'arv/django-visit-app)
+  (define-key arv/django-mode-map (kbd "C-c d v t") 'arv/django-visit-app-test-module)
+  (define-key arv/django-mode-map (kbd "C-c d v v") 'arv/django-visit-app-view-module)
+  (define-key arv/django-mode-map (kbd "C-c d v T") 'arv/django-visit-app-template-file)
+  (define-key arv/django-mode-map (kbd "C-c d v p") 'arv/django-visit-project)
+)
+
+(define-minor-mode arv/django-mode
+  "Minor mode for working with django." nil " arv/django" arv/django-mode-map
+  (arv/django-mode-setup-keymap))
 
 
 (provide 'arv-python-django)
