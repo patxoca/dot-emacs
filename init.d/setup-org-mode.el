@@ -105,9 +105,9 @@
      (setq arv/org-interrupt-interrupted-state "HOLD")
      (setq arv/org-interrupt-capture-key "i")
      (setq arv/org-sctc-entering-state-clocking-actions
-           '(("STRT" . start)
-             ("PAUS" . stop)
-             ("WAIT" . stop)))
+           '(("STRT" . nil)
+             ("PAUS" . nil)
+             ("WAIT" . nil)))
      (setq arv/org-sctc-paused-state "PAUS")
      (arv/org-sctc-setup)))
 
