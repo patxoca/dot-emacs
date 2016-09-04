@@ -42,6 +42,15 @@
 
 ;; funcions de suport
 
+(defun arv/django--vector-to-list (v)
+  "Converteix recursivament un vector de vectors en una llista de llistes."
+  (interactive)
+  (mapcar (lambda (x)
+            (if (vectorp x)
+                (arv/django--vector-to-list x)
+              x))
+          v))
+
 (defun arv/django-open-default-project ()
   "Obre el projecte django definit per les variables d'entorn
 `DJANGO_PROJECT' i `DJANGO_SETTINGS_MODULE', si estan
@@ -128,6 +137,47 @@ cadena."
                                   (1- (point)))))
         (buffer-substring-no-properties start end))))
 
+(defvar arv/django--app-models-cache nil
+  "llista associativa: app-label -> dades-model.")
+
+(defun arv/django--app-models-cache-populate-maybe (force)
+  ""
+  (if (or force
+          (null arv/django--app-models-cache))
+      (let ((apps-list (json-read-from-string
+                        (python-django-util-shell-command-or-error
+                         (format "%s -c \"%s%s\""
+                                 (executable-find python-shell-interpreter)
+                                 python-django-info-imports-code
+                                 (concat
+                                  "from django.apps import apps\n"
+                                  "models = {}\n"
+                                  "for app_label, model_dict in apps.all_models.items():\n"
+                                  "    app_models = []\n"
+                                  "    for model_name, model_class in model_dict.items():\n"
+                                  "        meta = model_class._meta\n"
+                                  "        app_models.append((\n"
+                                  "            app_label + '.' + meta.model_name,\n"
+                                  "            app_label + '.' + meta.object_name\n"
+                                  "        ))\n"
+                                  "    models[app_label] = app_models\n"
+                                  "print(json.dumps(models), end='')"))))))
+        (setq arv/django--app-models-cache
+              (mapcar (lambda (x) (cons (symbol-name (car x)) (arv/django--vector-to-list (cdr x))))
+                      apps-list))))
+  )
+
+(defun arv/django-get-app-models (app &optional force)
+  "Retorna el nom dels models definits per `app'."
+  (arv/django--app-models-cache-populate-maybe force)
+  (cdr (assoc app arv/django--app-models-cache)))
+
+(defun arv/django-get-models (&optional force)
+  "Retorna el nom del tots els models."
+  (arv/django--app-models-cache-populate-maybe force)
+  (reduce 'append (mapcar (lambda (x) (arv/django-get-app-models x))
+                          (arv/django-get-app-names))))
+
 ;;;###autoload
 (defun arv/django-jump-to-template ()
   "Visita la plantilla en el punt.
@@ -209,6 +259,8 @@ buffer, sense extensió."
 (defun arv/django--ido-select-app ()
   (ido-completing-read "App: " (arv/django-get-app-names) nil t))
 
+(defun arv/django--ido-select-model ()
+  (ido-completing-read "Model: " (mapcar 'cadr (arv/django-get-models)) nil t))
 
 (defun arv/django--visit-file (dir-rel-path at-app-root)
   (let* ((app-name (arv/django--ido-select-app))
@@ -237,27 +289,64 @@ buffer, sense extensió."
 (defun arv/django-visit-app-template-file ()
   "Permet selecionar app i obrir un arxiu de template."
   (interactive)
-  (arv/django--visit-file "tests" nil))
+  (arv/django--visit-file "templates" nil))
+
+(defun arv/django-visit-app-model-module ()
+  "Permet selecionar app i obrir un arxiu de models."
+  (interactive)
+  (arv/django--visit-file "models" nil))
 
 (defun arv/django-visit-project ()
   ""
   (interactive)
   (ido-file-internal ido-default-file-method nil (arv/django-get-project-root)))
 
+;; TODO: es pot navegar a la documentacions dels models en
+;; http://localhost:8000/admin/docs/models
+;;
+;; Seria bonic accedir a la docu d'un model concret, utilitzant
+;; completació http://localhost:8000/admin/docs/models/app.nommodelminuscules
+;;
+;; Hi ha documentació per template tags, template filters, models i
+;; vistes. Només els models i vistes semblen interessants.
+
+(defun arv/django-admindocs-browse ()
+  ""
+  (interactive)
+  (eww "http://localhost:8000/admin/docs"))
+
+(defun arv/django-admindocs-browse-model-docs ()
+  ""
+  (interactive)
+  (let ((model-name (downcase (arv/django--ido-select-model))))
+    (if model-name
+        (eww (concat "http://localhost:8000/admin/docs/models/" model-name)))))
+
+;;; TODO: quan treballo en un projecte django molta de la
+;;; funcionalitat del mode resulta útil en tots els buffers, no sols
+;;; des de buffers python-mode. Mirar con definir un minor-mode
+;;; global.
 
 (defvar arv/django-mode-map (make-sparse-keymap "arv/django-mode") "arv/django-mode keymap")
 
 (defun arv/django-mode-setup-keymap ()
   "Setup a default keymap."
+  ;; documentations
+  (define-key arv/django-mode-map (kbd "C-c d d a") 'arv/django-admindocs-browse)
+  (define-key arv/django-mode-map (kbd "C-c d d m") 'arv/django-admindocs-browse-model-docs)
+  ;; insert something
+  (define-key arv/django-mode-map (kbd "C-c d i t") 'arv/django-insert-template-name)
+  ;; file navigation
   (define-key arv/django-mode-map (kbd "C-c d v a") 'arv/django-visit-app)
-  (define-key arv/django-mode-map (kbd "C-c d v t") 'arv/django-visit-app-test-module)
-  (define-key arv/django-mode-map (kbd "C-c d v v") 'arv/django-visit-app-view-module)
-  (define-key arv/django-mode-map (kbd "C-c d v T") 'arv/django-visit-app-template-file)
+  (define-key arv/django-mode-map (kbd "C-c d v m") 'arv/django-visit-app-model-module)
   (define-key arv/django-mode-map (kbd "C-c d v p") 'arv/django-visit-project)
+  (define-key arv/django-mode-map (kbd "C-c d v t") 'arv/django-visit-app-test-module)
+  (define-key arv/django-mode-map (kbd "C-c d v T") 'arv/django-visit-app-template-file)
+  (define-key arv/django-mode-map (kbd "C-c d v v") 'arv/django-visit-app-view-module)
 )
 
 (define-minor-mode arv/django-mode
-  "Minor mode for working with django." nil " arv/django" arv/django-mode-map
+  "Minor mode for working with django." nil " django" arv/django-mode-map
   (arv/django-mode-setup-keymap))
 
 
