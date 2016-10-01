@@ -250,6 +250,19 @@ With a prefix argument P, isearch for the symbol at point."
        #'isearch-forward))))
 
 
+;;;###autoload
+(defun zap-up-to-char (arg char)
+  "Kill up to but not including ARGth occurrence of CHAR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if CHAR not found."
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     (read-char "Zap up to char: " t)))
+  (zap-to-char arg char)
+  (insert char)
+  (when (> arg 0)
+    (forward-char -1)))
+
+
 (provide 'assorted)
 
 ;;; assorted.el ends here
