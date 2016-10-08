@@ -123,6 +123,9 @@
 (global-set-key (kbd "C-c j s") 'imenu)
 (global-set-key (kbd "C-c j w") 'ace-jump-word-mode)
 
+;; embrace
+(global-set-key (kbd "C--") 'embrace-commander)
+
 ;; keybindings per subversion: C-c s
 (global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
 (global-set-key (kbd "C-c s l") 'svn-status-show-svn-log)
