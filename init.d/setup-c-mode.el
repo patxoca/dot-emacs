@@ -20,6 +20,8 @@
 
 ;;; Code:
 
+(autoload 'company-complete "company" "" t nil)
+
 (eval-after-load "cc-mode"
   '(progn
      (define-key c-mode-base-map '[f7]  'next-error)
@@ -31,6 +33,8 @@
                  (setq indent-tabs-mode nil)
                  (setq c-default-style "python")
                  (setq c-basic-offset 4)
+                 ;; company-mode
+                 (company-mode t)
                  ;; fontifica las cadenas de la forma @@[A-Z ]+: util
                  ;; para resaltar observaciones
                  (font-lock-add-keywords
