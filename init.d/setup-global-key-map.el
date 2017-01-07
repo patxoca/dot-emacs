@@ -153,7 +153,7 @@
 
 
 ;; multi-line
-(global-set-key (kbd "C-c C-D") 'multi-line)
+(global-set-key (kbd "C-c r m") 'multi-line)
 
 
 ;; todo
