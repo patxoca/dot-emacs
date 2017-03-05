@@ -59,6 +59,14 @@
         ("v" todo "DONE|CANCELLED")))
 
 
+;; babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)
+   (sh . t)
+   ))
+
 ;; keybindings
 (eval-after-load "org"
   '(progn
