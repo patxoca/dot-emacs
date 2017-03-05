@@ -7,7 +7,7 @@
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # uuid: 46c00aef-5a5c-4bbd-86ff-f3644d7b0b74
 # --
-.. code-block:: ${1:$$(yas/choose-value '("python" "javascript" "html" "css" "cheetah" "bash"))}
+.. code-block:: ${1:$$(yas/choose-value '("python" "javascript" "html" "css" "cheetah" "bash" "rst"))}
    :linenos:
 
    $0
