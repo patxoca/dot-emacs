@@ -18,7 +18,7 @@
 
 (require 'sass-mode)
 
-(defvar sass-project-root nill "Arrel del projecte.")
+(defvar sass-project-root nil "Arrel del projecte.")
 (defvar sass-project-main-file nil "Arxius arrel del projecte.")
 (defvar sass-project-output-file nil "Arxiu de sortida.")
 
