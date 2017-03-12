@@ -296,6 +296,11 @@ buffer, sense extensió."
   (interactive)
   (arv/django--visit-file "models" nil))
 
+(defun arv/django-visit-app-static-dir ()
+  "Permet selecionar app i obrir un arxiu de static."
+  (interactive)
+  (arv/django--visit-file "static" nil))
+
 (defun arv/django-visit-project ()
   ""
   (interactive)
@@ -340,9 +345,13 @@ buffer, sense extensió."
   (define-key arv/django-mode-map (kbd "C-c d v a") 'arv/django-visit-app)
   (define-key arv/django-mode-map (kbd "C-c d v m") 'arv/django-visit-app-model-module)
   (define-key arv/django-mode-map (kbd "C-c d v p") 'arv/django-visit-project)
+  (define-key arv/django-mode-map (kbd "C-c d v s") 'arv/django-visit-app-static-dir)
   (define-key arv/django-mode-map (kbd "C-c d v t") 'arv/django-visit-app-test-module)
   (define-key arv/django-mode-map (kbd "C-c d v T") 'arv/django-visit-app-template-file)
   (define-key arv/django-mode-map (kbd "C-c d v v") 'arv/django-visit-app-view-module)
+  ;; project related
+  (define-key arv/django-mode-map (kbd "C-c d p") 'arv/django-switch-to-project-buffer)
+
 )
 
 (define-minor-mode arv/django-mode
