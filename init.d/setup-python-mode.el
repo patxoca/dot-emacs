@@ -136,6 +136,10 @@
      (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
      (setq python-indent-guess-indent-offset nil)
 
+     ;; activates source tracking when debugging with pdb from a shell
+     ;; buffer
+     (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
+
      (elpy-enable)
 
      ;; keybindings locals
