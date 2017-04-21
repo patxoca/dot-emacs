@@ -197,7 +197,7 @@
 (setq scroll-step 1)
 (setq show-paren-mode t)
 (setq svn-status-default-log-arguments '("-v" "--stop-on-copy"))
-(setq svn-status-verbose nil)
+(setq svn-status-verbose t)
 (setq-default tab-width 4)
 (setq text-scale-mode-step 1.1)
 (setq tooltip-mode t)
