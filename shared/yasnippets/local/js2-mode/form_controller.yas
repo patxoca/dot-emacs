@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: hera form controller
+# $Id:$
+# key: fc
+# group:
+# type: snippet
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: d20af070-408d-4905-8618-b723b429597b
+# --
+/************************************************************************
+ * Module: `(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`
+ *
+ * Description:
+ *
+ * Author: Alexis Roda
+ * e-mail: alexis.roda@urv.cat
+ * $Id:$
+ ************************************************************************/
+
+define(
+    ["dojo/_base/declare", "hera_django/FormController"],
+    function (declare, FormController) {
+        return declare(FormController, {
+            form_id: "form_id"
+        });
+    }
+);
