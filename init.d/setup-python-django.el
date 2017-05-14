@@ -23,7 +23,8 @@
 
 (eval-after-load "python"
   '(progn
-     (define-key python-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)))
+     (define-key python-mode-map (kbd "C-c j t") 'arv/django-jump-to-template)
+     (define-key python-mode-map (kbd "C-c j j") 'arv/django-jump-to-javascript-controller)))
 
 (eval-after-load "sgml-mode"
   '(progn

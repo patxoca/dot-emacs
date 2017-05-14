@@ -232,6 +232,44 @@ d'una aplicació permet triar quina obrir."
                          candidates))))))))
 
 ;;;###autoload
+(defun arv/django-jump-to-javascript-controller ()
+  ""
+  (interactive)
+  (let ((filename (arv-get-string-at-point))
+        (realname)
+        (project-buffer (arv/django-get-project-buffer))
+        (current-app (arv/django-get-current-app))
+        (candidates ()))
+    (cond
+     ((null filename)
+      (message "Point must be over an string."))
+     ((null project-buffer)
+      (message "No open django project."))
+     (t
+      (progn
+        (setq realname (let ((parts (s-split "/" filename)))
+                         (concat
+                          (s-join "/" (append (list (car parts) "js") (cdr parts)))
+                          ".js")))
+        (with-current-buffer project-buffer
+          (dolist (app (python-django-info-get-app-paths))
+            (let ((filename-full
+                   (concat
+                    (file-name-as-directory (cdr app))
+                    (file-name-as-directory "static")
+                    realname)))
+              (if (or (equal (car app) current-app)
+                      (file-exists-p filename-full))
+                  (setq candidates (cons (cons (symbol-name (car app)) filename-full) candidates))))))
+        (find-file (cdr (assoc
+                         (if (= (length candidates) 1)
+                             (caar candidates)
+                           (completing-read
+                            "Choose app: "
+                            candidates nil t nil))
+                         candidates))))))))
+
+;;;###autoload
 (defun arv/django-insert-template-name ()
   "Insereix el nom de la plantilla.
 
@@ -261,6 +299,13 @@ buffer, sense extensió."
 
 (defun arv/django--ido-select-model ()
   (ido-completing-read "Model: " (mapcar 'cadr (arv/django-get-models)) nil t))
+
+(defun arv/django-hera-notes ()
+  "Executa `hera_notes'."
+  (interactive)
+  (compilation-start "hera_manage tasks --emacs"
+                     t
+                     (lambda (mode) "*notes*")))
 
 (defun arv/django--visit-file (dir-rel-path at-app-root)
   (let* ((app-name (arv/django--ido-select-app))
