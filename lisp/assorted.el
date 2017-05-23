@@ -52,6 +52,7 @@
 (require 'color)
 (require 'subword)
 (require 'superword)
+(require 'swiper)
 
 ;;;###autoload
 (defun arv/generate-lab-faces (name count &optional lightness saturation group-name)
@@ -248,6 +249,16 @@ With a prefix argument P, isearch for the symbol at point."
     (call-interactively
      (if p #'isearch-forward-symbol-at-point
        #'isearch-forward))))
+
+
+;;;###autoload
+(defun arv/swiper-symbol-with-prefix (p)
+  "Like swiper, unless prefix argument is provided.
+With a prefix argument P, isearch for the symbol at point."
+  (interactive "P")
+  (let ((current-prefix-arg nil))
+    (if p (swiper (thing-at-point 'symbol t))
+      (swiper))))
 
 
 ;;;###autoload

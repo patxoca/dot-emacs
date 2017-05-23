@@ -59,8 +59,10 @@
 
 
 ;; emacs overrides
-(global-set-key [remap isearch-forward]
-                #'endless/isearch-symbol-with-prefix)
+;; (global-set-key [remap isearch-forward]
+;;                 #'endless/isearch-symbol-with-prefix)
+;; let's give a try to swiper
+(global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
 
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
