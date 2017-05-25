@@ -2,7 +2,7 @@
 
 SHELL=/bin/bash
 SRC_DIRS=lisp site-lisp init.d
-EMACS=/opt/emacs/24.4/bin/emacs
+EMACS=/opt/emacs/25.2.1/bin/emacs
 
 
 all:
