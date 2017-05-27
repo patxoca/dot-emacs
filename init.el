@@ -129,9 +129,9 @@ directoris que contenen codi lisp sota el control de l'usuari."
            (file-readable-p (expand-file-name "~/.emacs.d/elpa/package.el")))
       (load
        (expand-file-name "~/.emacs.d/elpa/package.el")))
-  (setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                            ("melpa stable" . "http://melpa-stable.milkbox.net/packages/")
+                           ;; ("melpa" . "https://melpa.org/packages/")
                            ("elpy" . "http://jorgenschaefer.github.io/packages/")))
   (package-initialize))
 
