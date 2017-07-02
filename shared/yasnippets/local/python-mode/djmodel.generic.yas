@@ -24,7 +24,7 @@ class ${1:name}(${2:models.Model}):
     objects = $1QuerySet.as_manager()
 
     def __unicode__(self):
-        return u""
+        return ""
 
     class Meta:
         app_label = "${3:`(pyx/get-current-package-name)`}"

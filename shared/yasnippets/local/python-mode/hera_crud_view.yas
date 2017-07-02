@@ -7,6 +7,8 @@
 
 # $Id:$
 
+from __future__ import unicode_literals
+
 
 from django import forms
 from django.forms import widgets
@@ -48,22 +50,22 @@ class CRUD$1View(AjaxListFormView, SelfDocViewMixin, CRUDMixin):
     doc = """
     """
 
-    titol = u"Gestió de ${2:model}"
+    titol = "Gestió de ${2:model}"
 
     uuid = "`(arv/generate-random-uuid)`"
 
     accions = [
-        Action(u"Crear",
+        Action("Crear",
                """Permet crear un $2.
                """,
                view="`(arv/py-insert-current-package-name)`_${1:$(arv-yas-uncamelize yas-text "_")}_create"
            ),
-        Action(u"Esborrar",
+        Action("Esborrar",
                """Esborra els $2 seleccionats al llistat.
                """,
                #view="`(arv/py-insert-current-package-name)`_${1:$(arv-yas-uncamelize yas-text "_")}_delete"
            ),
-        Action(u"Modificar",
+        Action("Modificar",
                """Permet modificar el $2 seleccionat al llistat.
                """,
                view="`(arv/py-insert-current-package-name)`_${1:$(arv-yas-uncamelize yas-text "_")}_update"
@@ -89,12 +91,12 @@ class $1CreateView(CreateView, SelfDocViewMixin):
 
     """
 
-    titol = u"Crear $2"
+    titol = "Crear $2"
 
     uuid = "`(arv/generate-random-uuid)`"
 
     accions = [
-        Action(u"Guardar",
+        Action("Guardar",
                """Valida les dades i crea el $2.
                """)
     ]
@@ -110,12 +112,12 @@ class $1UpdateView(CreateView, SelfDocViewMixin):
 
     """
 
-    titol = u"Modificar $2"
+    titol = "Modificar $2"
 
     uuid = "`(arv/generate-random-uuid)`"
 
     accions = [
-        Action(u"Guardar",
+        Action("Guardar",
                """Valida les dades i actualitza el $2.
                """)
     ]

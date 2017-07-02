@@ -7,11 +7,11 @@
 # uuid: 50ce672a-8d5b-4a53-983c-6fe3e6e168f3
 # --
 ${1:name} = forms.ModelChoiceField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     queryset=${2:models.${3:model}.objects.${4:all()}${5:.order_by("${6:nom}")}},
     empty_label="",
     required=${7:$$(yas/choose-value '("False" "True"))},
-    help_text=_(u"$8"),
+    help_text=_("$8"),
     widget=widgets.${9:Select$$(yas/choose-value django-widget-types)}(
         attrs={
             "style": "width: 26em",

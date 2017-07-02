@@ -7,14 +7,14 @@
 # uuid: fc9646d3-f9c1-4ea0-b865-5989113806f9
 # --
 ${1:name} = forms.DecimalField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial="${2:None}",
     required=${3:$$(yas/choose-value '("False" "True"))},
     min_value=${4:1},
     max_value=${5:100},
     max_digits=${6:8},
     decimal_places=${7:2},
-    help_text=_(u"$8"),
+    help_text=_("$8"),
     widget=widgets.${9:TextInput$$(yas/choose-value django-widget-types)}(
         attrs={
             "style": "width: 8em",

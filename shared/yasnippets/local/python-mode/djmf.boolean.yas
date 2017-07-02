@@ -7,9 +7,9 @@
 # uuid: adc15091-1431-4c7f-a395-1ebb0f89f0c0
 # --
 ${1:name} = models.BooleanField(
-    verbose_name=_(u"$1"),
+    verbose_name=_("$1"),
     null=${True},
     blank=${True},
-    help_text=_(u"${doc}"),
+    help_text=_("${doc}"),
 )
 $0

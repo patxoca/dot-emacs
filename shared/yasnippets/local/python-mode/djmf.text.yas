@@ -7,9 +7,9 @@
 # uuid: 464d81dc-303f-4c09-a93b-d2d6f22356ee
 # --
 ${1:name} = models.TextField(
-    verbose_name=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     null=${True},
     blank=${True},
-    help_text=_(u"${doc}"),
+    help_text=_("${doc}"),
 )
 $0

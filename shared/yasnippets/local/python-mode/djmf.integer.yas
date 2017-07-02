@@ -7,9 +7,9 @@
 # uuid: 2fce4977-bf50-44b6-a315-40c376ac68bf
 # --
 ${1:name} = models.IntegerField(
-    verbose_name=_(u"$1"),
+    verbose_name=_("$1"),
     null=${True},
     blank=${True},
-    help_text=_(u"${doc}"),
+    help_text=_("${doc}"),
 )
 $0

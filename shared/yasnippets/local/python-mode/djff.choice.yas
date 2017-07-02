@@ -7,7 +7,7 @@
 # uuid: 93e7bcb9-56d4-4c76-bcc9-7b6f21f54f12
 # --
 ${1:name} = forms.ChoiceField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial="$2",
     choices=(("${3:key}", "${4:value}"), ),
     required=${5:$$(yas/choose-value '("False" "True"))},
@@ -17,6 +17,6 @@ ${1:name} = forms.ChoiceField(
             "dojoType": "dijit.form.FilteringSelect",
         }
     ),
-    help_text=_(u"${7:Seleccioneu un element de la llista}"),
+    help_text=_("${7:Seleccioneu un element de la llista}"),
 )
 $0

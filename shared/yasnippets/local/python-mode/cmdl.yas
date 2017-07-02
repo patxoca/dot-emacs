@@ -9,10 +9,10 @@
 # uuid: 25825e45-4ee1-4b68-ab70-f1215760737f
 # --
 def parse_command_line():
-    parser = argparse.ArgumentParser(description=u"$1")
+    parser = argparse.ArgumentParser(description="$1")
     parser.add_argument("${2:--opt}", dest="${2:$(s-replace "-" "" yas/text)}", action="${3:store$$(yas-choose-value '("append" "append_const" "count" "store" "store_const" "store_true"))}",
                         default=${4:None}, type=${5:string},
-                        help=u"$6")
+                        help="$6")
     return parser.parse_args()
 
 

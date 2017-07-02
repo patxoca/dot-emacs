@@ -7,10 +7,10 @@
 # uuid: 83e794e4-fb16-4285-b9bf-e19009606632
 # --
 ${1:name} = forms.NullBooleanField(
-    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial=${2:$$(yas/choose-value '("False" "True"))},
     required=${3:$$(yas/choose-value '("False" "True"))},
     widget=widgets.${4:NullBooleanSelect$$(yas/choose-value django-widget-types)},
-    help_text=_(u"$5"),
+    help_text=_("$5"),
 )
 $0

@@ -7,11 +7,11 @@
 # uuid: 31a50b10-e688-4ce4-86be-8a22e210ee08
 # --
 ${1:name} = models.TimeField(
-    verbose_name=_(u"$1"),
+    verbose_name=_("$1"),
     auto_now=${False},
     auto_now_add=${False},
     null=${True},
     blank=${True},
-    help_text=_(u"${doc}"),
+    help_text=_("${doc}"),
 )
 $0
