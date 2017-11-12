@@ -84,15 +84,15 @@ les aplicacions del projecte. En cas afirmatiu retorna el nom de
 la aplicació, nil en cas contrari.
 
 L'ordre en que s'examinen les aplicacions no està definit."
-  (let ((tpl-dir (file-name-directory (expand-file-name filename)))
-        (project-buffer (arv/django-get-project-buffer)))
-    (message "belongs-to-app: %s" tpl-dir)
-    (if project-buffer
-        (with-current-buffer project-buffer
-          (car
-           (-first
-            (lambda (app) (s-starts-with-p (cdr app) tpl-dir))
-            (python-django-info-get-app-paths)))))))
+  (if filename
+      (let ((tpl-dir (file-name-directory (expand-file-name filename)))
+            (project-buffer (arv/django-get-project-buffer)))
+        (if project-buffer
+            (with-current-buffer project-buffer
+              (car
+               (-first
+                (lambda (app) (s-starts-with-p (cdr app) tpl-dir))
+                (python-django-info-get-app-paths))))))))
 
 (defun arv/django-get-current-app ()
   "Retorna el nom de l'aplicació que conté el buffer
