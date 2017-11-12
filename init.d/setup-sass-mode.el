@@ -16,6 +16,7 @@
 
 ;;; Code:
 
+(require 'format-spec)
 (require 'sass-mode)
 
 (defvar sass-project-root nil "Arrel del projecte.")
