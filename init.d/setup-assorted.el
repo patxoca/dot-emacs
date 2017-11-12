@@ -40,6 +40,15 @@
      (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?ñ))))
 
 
+;; assembler
+(eval-after-load "asm-mode"
+  '(progn
+     (define-key asm-mode-map '[f7]  'next-error)
+     (define-key asm-mode-map '[f8]  'previous-error)
+     (define-key asm-mode-map '[f9]  'compile)
+     ))
+
+
 ;; company
 (eval-after-load "company"
   '(progn

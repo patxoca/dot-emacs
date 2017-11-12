@@ -60,4 +60,7 @@
   "http://www.wordreference.com/redirect/translation.aspx?w=%s&dict=enes"
   :keybinding "W")
 
+(defengine z80heaven
+  "http://z80-heaven.wikidot.com/instructions-set:%s"
+  :keybinding "z")
 ;;; engine-mode.el ends here
