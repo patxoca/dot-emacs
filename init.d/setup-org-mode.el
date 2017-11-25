@@ -65,7 +65,23 @@
  '((emacs-lisp . t)
    (python . t)
    (sh . t)
+   (plantuml . t)
    ))
+
+;; ob-plantuml: plantuml diagrams in org documents
+;;
+;; Example:
+;;
+;; #+BEGIN_SRC plantuml :file tryout.png
+;;   Alice -> Bob: synchronous call
+;;   Alice ->> Bob: asynchronous call
+;; #+END_SRC
+
+(eval-after-load "ob-plantuml"
+  '(progn
+     (setq org-plantuml-jar-path
+           (expand-file-name "~/local/apps/plantuml/plantuml.jar"))))
+
 
 ;; keybindings
 (eval-after-load "org"
