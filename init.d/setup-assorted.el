@@ -84,6 +84,13 @@
                     :underline t :foreground "green"
                     :weight 'bold)
 
+;; En terminals en mode text el color de fons del tema dificulta la
+;; lectura. En eixe cas s'estableix un fons negre.
+(unless (display-graphic-p)
+  (set-face-attribute 'default nil
+                      :background "black"
+                      :foreground "white"))
+
 ;; font-lock
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
@@ -92,9 +99,13 @@
 ;; hl-line-mode
 (global-hl-line-mode t)
 ;;(customize-set-value 'hl-line-face 'highlight)
-(set-face-attribute 'hl-line nil
+(if (display-graphic-p)
+    (set-face-attribute 'hl-line nil
                     :foreground "white"
                     :background "black")
+  (set-face-attribute 'hl-line nil
+                    :foreground "black"
+                    :background "yellow"))
 
 
 ;; multi-line
@@ -149,6 +160,10 @@
   '(progn
      (setq uniquify-buffer-name-style 'reverse)))
 
+;; vue-mode
+(require 'mmm-mode)
+(require 'vue-mode)
+(mmm-add-mode-ext-class nil "\\.vue\\'" 'vue-mode)
 
 ;; web browser
 (setq browse-url-browser-function 'browse-url-generic)
