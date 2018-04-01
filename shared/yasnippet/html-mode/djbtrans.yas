@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: django block translation
+# $Id: djbtrans.yas 589 2015-01-23 19:33:53Z alex $
+# group: django
+# key: djbtrans
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 42f86961-5d84-439e-9432-9966aaca2bdb
+# --
+{% blocktrans %}
+  $0
+{% endblocktrans %}

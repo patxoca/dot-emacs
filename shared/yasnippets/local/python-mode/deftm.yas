@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: define test method
-# $Id$
-# key: deftm
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
-# uuid: f51c80c1-5762-4a2c-ac38-aac8bd873feb
-# --
-def test_${1:name}(self):
-    $0

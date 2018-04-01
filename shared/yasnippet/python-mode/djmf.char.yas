@@ -1,0 +1,16 @@
+# -*- Mode: snippet -*-
+# name: django Model CharField
+# $Id: djmf.char.yas 760 2017-07-02 16:18:16Z alex $
+# group: django
+# key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: a48ecfc3-0791-4af9-942c-55b03255100b
+# --
+${1:name} = models.CharField(
+    verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    max_length=${2:100},
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

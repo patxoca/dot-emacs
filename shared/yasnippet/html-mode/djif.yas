@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: django if tag
+# $Id: djif.yas 436 2014-08-19 19:35:35Z alex $
+# group: django
+# key: djif
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: bd6a12fc-f581-4bf6-891a-83e8328d0f59
+# --
+{% if $1 %}
+  $0
+{% else %}
+{% endif %}

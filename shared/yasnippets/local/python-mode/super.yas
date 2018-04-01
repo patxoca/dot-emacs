@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: super
-# $Id$
-# key: super
-# type: snippet
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
-# uuid: 244295c2ea3-901a-4ef2-95e5-c357cbbf0f3c
-# --
-super(${1:`(or (arv-py-info-enclosing-class-name) "NoClassFound")`}, self).${2:`(or (arv-py-info-enclosing-def-name) "no_method_found")`}($0)

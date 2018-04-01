@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: django Model generic field
+# $Id: djmf.generic.yas 760 2017-07-02 16:18:16Z alex $
+# group: django
+# key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 744a715a-bc4b-494a-a745-c4da3fbd05d9
+# --
+${1:name} = models.${CharField}(
+    verbose_name=_("$1"),
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

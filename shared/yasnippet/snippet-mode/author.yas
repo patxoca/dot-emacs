@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: author
+# $Id: author.yas 436 2014-08-19 19:35:35Z alex $
+# key: author
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: aaf18064-1ddb-4781-b64f-5b5ff3b7d160
+# --
+\`(arv/yas-author-name)\`

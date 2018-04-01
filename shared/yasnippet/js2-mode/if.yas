@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: if () {}
+# $Id: if.yas 436 2014-08-19 19:35:35Z alex $
+# key: if
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 24297643e34-048f-4e6c-8328-f452522afc2d
+# --
+if (${1:test}) {
+   $0;
+}

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: constructor: function (...)
+# $Id: func.constructor.yas 547 2014-10-18 17:15:01Z alex $
+# key: func
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 2444ed3188f-eca8-4e1d-b823-967212784ec4
+# --
+constructor: function ($3) {
+    // Sumari:
+    //   $4
+    //${3:$(arv/yas-js-function-parameters-documentation yas-text)}
+    //
+    ${3:$(arv/yas-js-function-store-parameters yas-text)}
+    $0
+},

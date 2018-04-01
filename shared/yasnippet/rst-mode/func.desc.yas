@@ -1,0 +1,36 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# name: .. function::
+# $Id: func.desc.yas 547 2014-10-18 17:15:01Z alex $
+# group: sphinx
+# key: func
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: dac7e249-2482-4e5b-b440-40366de74ec6
+# --
+.. ${1:$$(yas/choose-value '("classmethod" "function" "method" "staticmethod"))}:: $2($3)
+
+   ${3:$
+   (let* ((indent (concat "\n" (make-string (current-column) 32)))
+          (string-trim
+           (lambda (x)
+             (replace-regexp-in-string "[[:blank:]]*$" ""
+                (replace-regexp-in-string "^[[:blank:]]*" ""
+                  (replace-regexp-in-string "\\\\[\\\\|\\\\]" "" x)))))
+          (format-param
+           (lambda (x) (unless (string= x "")
+                         (concat ":param " x ":"))))
+          (args
+           (mapcar format-param
+                   (mapcar string-trim
+                           (mapcar '(lambda (x) (car (split-string x "=")))
+                                   (split-string yas-text ","))))))
+     (if (null args)
+         ""
+       (mapconcat 'identity args indent)))
+   }
+
+   ${4::raises: $5}
+   ${6::returns: $7}
+   ${8::rtype: $9}
+
+   $0

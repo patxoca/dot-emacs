@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: english document
+# $Id: header.british.yas 436 2014-08-19 19:35:35Z alex $
+# key:  header
+# type: snippet
+# expand-env: ((yas-indent-line 'fixed))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 4f596bdf-71f0-4286-9f08-a88a0f19abc1
+# --
+.. -*- ispell-local-dictionary: "british" -*-
+
+$0

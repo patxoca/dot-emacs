@@ -1,0 +1,13 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# name: part d'un document
+# $Id: sect.part.yas 547 2014-10-18 17:15:01Z alex $
+# group: sphinx
+# key: sect
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 213876c9-4b4d-4377-975e-e879e808296f
+# --
+${1:$(make-string (string-width yas-text) ?\#)}
+${1:Part title}
+${1:$(make-string (string-width yas-text) ?\#)}
+
+$0

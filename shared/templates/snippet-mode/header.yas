@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Snippet header
+# $Id: header.yas 608 2015-03-14 19:38:39Z alex $
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 823a66b5-5b76-4130-9e2d-0f780211f2cc
+# --
+# -*- mode: snippet -*-
+# name: $1
+# $Id:\$
+# key: ${2:`(car (split-string (arv/yas-buffer-name-sans) "\\\\."))`}
+# group: $3
+# type: ${4:$$(yas-choose-value '("command" "snippet"))}
+# contributor: ${5:`(arv/yas-author-name)`} <${6:`(arv/yas-author-email)`}>
+# expand-env: (${7:(yas-indent-line 'fixed)})
+# uuid: `(arv/generate-random-uuid)`
+# --
+$0

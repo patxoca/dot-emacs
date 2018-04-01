@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: django translation
-# $Id$
-# group: django
-# key: djtrans
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
-# uuid: c00af944-64c3-4ac2-b481-38920f34a6fc
-# --
-{% trans "$0" %}

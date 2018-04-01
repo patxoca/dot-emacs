@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: defineix un mètode sense docstring
-# $Id$
-# key: defm
-# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
-# uuid: f901eb74-093b-45da-90cf-72a81483be07
-# --
-def ${1:name}(self, $2):
-    $0

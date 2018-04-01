@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: elisp init module
+# $Id: header.init.yas 445 2014-08-20 11:55:23Z alex $
+# key:  header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 24561a5a9ba-a935-484c-a5a2-c3e40effa42f
+# --
+;;; `(arv/yas-buffer-name)` --- ${1:customization for ${2:`(arv/yas-buffer-name-sans)`}}
+
+;; $Id:\$
+
+
+;;; Commentary:
+;;
+
+;;; Local keybindings:
+;;
+;; C-M-q: does some amazing stuff
+
+;;; History:
+;;
+
+
+;;; Code:
+
+(require '`(arv/yas-buffer-name-sans)`)
+
+$0
+
+;;; `(arv/yas-buffer-name)` ends here

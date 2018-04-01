@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: django Model AutoField
+# $Id: djmf.auto.yas 760 2017-07-02 16:18:16Z alex $
+# group: django
+# key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 721f910b-b2d3-4cce-a525-c865ccdb3d3f
+# --
+${1:name} = models.AutoField(
+    verbose_name=_("$1"),
+    primary_key=${True},
+    null=${False},
+    blank=${False},
+    help_text=_("Clau primaria."),
+)
+$0

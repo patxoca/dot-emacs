@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Class.prototype.name = function (...)
+# $Id: func.asmethodwithprototype.yas 547 2014-10-18 17:15:01Z alex $
+# key: func
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 24454e9cc23-6434-4c1a-9664-c7b800c456b9
+# --
+${1:Object}.prototype.${2:name} = function ($3) {
+    // Sumari:
+    //   $4
+    //${3:$(arv/yas-js-function-parameters-documentation yas-text)}
+    //
+
+    $0
+};

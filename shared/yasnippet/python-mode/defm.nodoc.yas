@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: defineix un mètode sense docstring
+# $Id: defm.nodoc.yas 436 2014-08-19 19:35:35Z alex $
+# key: defm
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: f901eb74-093b-45da-90cf-72a81483be07
+# --
+def ${1:name}(self, $2):
+    $0

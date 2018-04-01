@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: django Model DecimalField
+# $Id: djmf.decimal.yas 760 2017-07-02 16:18:16Z alex $
+# group: django
+# key: djmf
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 281185b2-4fe3-4823-8f0c-11da10f26b55
+# --
+${1:name} = models.DecimalField(
+    verbose_name=_("$1"),
+    max_digits=${2:10},
+    decimal_places=${3:2},
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

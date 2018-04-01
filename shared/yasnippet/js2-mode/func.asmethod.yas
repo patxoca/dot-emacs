@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: object.name = function (...)
+# $Id: func.asmethod.yas 547 2014-10-18 17:15:01Z alex $
+# key: func
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 24478bb34ca-9934-4d13-adc4-90c183c0cda4
+# --
+${1:Object}.${2:name} = function ($3) {
+    // Sumari:
+    //   $4
+    //${3:$(arv/yas-js-function-parameters-documentation yas-text)}
+    //
+
+    $0
+};

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: django Form datetime field
+# $Id: djff.datetime.yas 760 2017-07-02 16:18:16Z alex $
+# group: django
+# key: djff
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: b64ccaad-03dc-4d90-bb24-4139296fc34d
+# --
+${1:name} = forms.DateTimeField(
+    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    initial=${2:datetime.datetime(${3:year}, ${4:month}, ${5:day})},
+    input_formats=("${6:%d/%m/%Y}", "${7:%d/%m/%y}"),
+    required=${8:$$(yas/choose-value '("False" "True"))},
+    widget=widgets.${9:DateTimeInput$$(yas/choose-value django-widget-types)},
+    help_text=_("$10"),
+)
+$0

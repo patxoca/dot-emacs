@@ -1,0 +1,13 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# name: capítol
+# $Id: sect.chap.yas 547 2014-10-18 17:15:01Z alex $
+# group: sphinx
+# key: sect
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 57066520-9820-4868-9b0e-1d64f2e8ea8d
+# --
+${1:$(make-string (string-width yas-text) ?\*)}
+${1:Chapter title}
+${1:$(make-string (string-width yas-text) ?\*)}
+
+$0

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: propietat (getter i setter)
+# $Id: propsg.yas 436 2014-08-19 19:35:35Z alex $
+# key: prop
+# expand-env: ((yas/indent-line 'fixed))
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 5451c6f4-ea98-4995-95d0-9352850df898
+# --
+@property
+def ${1:propname}(self):
+    return self._$1
+
+@$1.setter
+def $1(self, value):
+    self._$1 = value
+
+$0

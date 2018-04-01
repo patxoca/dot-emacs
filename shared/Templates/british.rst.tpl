@@ -1,2 +1,0 @@
-.. -*- ispell-local-dictionary: "british" -*-
-

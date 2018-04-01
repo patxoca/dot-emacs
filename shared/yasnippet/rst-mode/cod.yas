@@ -1,0 +1,9 @@
+# -*- mode: snippet; encoding: utf-8 -*-
+# name: codi inline ``...``
+# $Id: cod.yas 436 2014-08-19 19:35:35Z alex $
+# group: sphinx
+# key: cod
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 95bec852-9d3a-46c4-8be8-a218769f0f52
+# --
+\`\`$0\`\`

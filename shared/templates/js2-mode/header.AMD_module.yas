@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: dojo AMD module
+# $Id: header.AMD_module.yas 547 2014-10-18 17:15:01Z alex $
+# key: mod
+# type: snippet
+# contributor:Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 241849c6fa9-2b07-48e3-8276-b27d6bfd9e4e
+# --
+/************************************************************************
+ * Module: ${1:name}
+ * Description:
+ *
+ * Author: `(arv/yas-author-name)`
+ * e-mail: `(arv/yas-author-email)`
+ * $Id:\$
+ ************************************************************************/
+
+define(
+  ["dojo/_base/declare", ${2:req}],
+  function (declare, ${2:$(arv/yas-js-amd-params-from-modules yas-text)}) {
+      return declare("$1", [${3:bases}], {
+          $0
+      });
+  }
+);
