@@ -186,16 +186,41 @@ directament en la configuració.
 
 ** TODO [#C] normalitzar rutes de fitxers                              :idea:
 
-En alguns llocs utiltizo rutes calculades dinàmicament i en d'altres
-literals. Pot ser tot dinàmic?
+En alguns llocs utilitzo rutes calculades dinàmicament i en d'altres
+literals. Problemes:
 
-Definir /helpers/ per acurtar i /dotar de significat/ a les rutes, per
-exemple:
+- dificulta moure la configuració a un altre directori. Probablement
+  no té importància ja que únicament limita el directori utilitzat
+  dins =~/.emacs.d= i =conf.d= sembla perfectament vàlid.
+
+- més important és que al fixar els separadors en la ruta no
+  funcionarà en windows. Tampoc és que utilitzi molt emacs en windows
+  ni que necessiti un entorn completament configurat, però estaria bé.
+
+Pot ser tot dinàmic?
+
+Definir /helpers/ per simplificar i /dotar de significat/ a les rutes,
+per exemple:
 
 #+begin_src emacs-lisp :tangle no
   (defun arv/path-emacs-conf (&rest components)
     (apply arv/path-concat (cons arv/emacs-conf dir components)))
 #+end_src
+
+El lloc on és més dificil (incòmode) utilitzar rutes calculades és en
+la clausula =:load-path= de =use-package=. Hi ha algunes limitacions,
+[[https://github.com/jwiegley/use-package#extending-the-load-path][revisar la documentació]].
+
+[[http://howardism.org/Technical/Emacs/literate-devops.html][Ací]] hi ha un exemple interessant: defineix una variable a nivell de
+document /org/ que després s'utilitza en un bloc de codi. Em queda el
+dubte si es pot generalitzar o està limitat a blocs /sh/. La idea
+seria definir variables per =conf.d= i =emacs.d= i escriure
+=:load-path "$CONFD/foobar". Falta per resoldre el tema del separador.
+
+Pensant-ho millor, no sé si açò funcionaria (suposant que sigui
+possible). L'execució depèn d'elements definits en el document i no
+tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
+el bloc de codi en el context del document sembla bastant diferent.
 
 ** TODO [#C] Revisar configuració backends de company           :enhancement:
    :PROPERTIES:
@@ -348,7 +373,23 @@ Mirar si és possible fer que continui la instal·lació i al final
 informi, de manera visible, que certs paquets no s'han pogut
 instal·lar.
 
+** TODO repensar comandes sh :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 15:05]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*helpers%20sh][helpers sh]]
+   :END:
 
+Al incorporar el paquet =emacs-lorem-ipsum= he detectat que no es pot
+instal·lar executant el bloc de codi sh des del document.
+
+El problema és que =elisp_clone_git= i =elisp_compile_package= son
+funcions i no estan definides en el context en que s'avalua el bloc de
+codi.
+
+Convertir-les en scripts, dins el directori =scripts= sembla que
+resoldria el problema. Caldria ajustar els blocs existents, prefixant
+les comandes amb =./scripts/xxxx= i extreure tambés les variable din
+l'arxiu =./scripts/config= (que seria /sourced/ pels scripts).
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
@@ -467,3 +508,60 @@ buffer. =selected-window= sembla que és el que necessito.
 Dins =./old-cfg/instances/common/init.d= hi ha mòduls amb codi elisp.
 Defineix algunes comandes que s'utilitzen el el keybindings i
 probablement brossa. Mirar que fer amb ells.
+
+** DONE revisar paquets instal·lats                                    :task:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 06:05]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Introducci%C3%B3][Introducció]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 15:33] \\
+     r810
+
+Paquets /interessants/ que només apareixen a la configuració vella.
+
+Els paquests estan enllaçats a la seva descripció. Perquè els links
+funcionin cal haver executat prèviament =M-x package-list-packages=.
+
+- [[elisp:(describe-package 'ansi)][ansi-0.4.1]]: no ho entenc, probablement dependència (PD)
+- [[elisp:(describe-package 'cm-mode)][cm-mode-1.6]]: no l'utilitzo, PD
+- [[elisp:(describe-package 'commander)][commander-0.7.0]]: parser línia ordres, PD
+- [[elisp:(describe-package 'company-go)][company-go-20150303]]
+- [[elisp:(describe-package 'embrace)][embrace-0.1.3]]
+- [[elisp:(describe-package 'epl)][epl-0.8]]: sanititza =package.el=, PD
+- [[elisp:(describe-package 'f)][f-1.18.1]]
+- [[elisp:(describe-package 'feature-mode)][feature-mode-0.4]]: mode per editar tests BDD, mai no l'he
+  utilitzat (NU)
+- figlet
+- [[elisp:(describe-package 'flymake)][flymake-0.4.16]]: seguir amb el /builtin/ o passar a =flycheck=
+- flymake-go-2013.3.14: melpa (inestable)
+- git-rebase-mode-1.0.0: integrat en =magit=
+- [[elisp:(describe-package 'go-eldoc)][go-eldoc-0.30]]
+- [[elisp:(describe-package 'go-mode)][go-mode-1.5.0]]
+- [[elisp:(describe-package 'haml-mode)][haml-mode-3.1.9]]: dependència de =sass-mode=, NU
+- [[elisp:(describe-package 'hydra)][hydra-0.13.6]]
+- [[elisp:(describe-package 'json-mode)][json-mode-1.7.0]]: emacs inclou un mode =json=, no utilitzo tant
+  =json= com per justificar un nou mode i aquest no aporta gran cosa
+  directament (integra altres paquets). Sembla abandonat (AB).
+- [[elisp:(describe-package 'json-reformat)][json-reformat-0.0.6]]: emacs inclou /pretty printer/ per =json=
+- [[elisp:(describe-package 'json-snatcher)][json-snatcher-1.0.0]]: interessant però NU
+- [[elisp:(describe-package 'let-alist)][let-alist-1.0.5]]: macro curiosa, actualment builtin (BI)
+- [[elisp:(describe-package 'load-relative)][load-relative-1.2]]: interessant per treballar en paquets amb
+  múltiples mòduls però sembla una mica abandonat i em preocupa
+  hipotecar-me.
+- [[elisp:(describe-package 'loc-changes)][loc-changes-1.2]]: interessant, PD
+- lorem-ipsum-0.1: melpa (inestable), abandonat, probablement
+  millor clonar repo (https://github.com/jschaf/emacs-lorem-ipsum.git)
+- [[elisp:(describe-package 'mmm-mode)][mmm-mode-0.5.4]]: PD, potser de vue-mode que NU
+- noflet-0.0.15: melpa, macro màgica, PD
+- [[elisp:(describe-package 'paradox)][paradox-2.5.1]]: millor interacció amb el gestor de paquets, no ho
+  utilitzo tant per justificar-ho.
+- [[elisp:(describe-package 'pkg-info)][pkg-info-0.6]]: PD
+- [[elisp:(describe-package 'projectile)][projectile-0.14.0]]: no l'utilitzo. Potencial com framework sobre
+  el que desenvolupar paquets que treballin sobre /el projecte/. Fa
+  temps que es publica una release.
+- [[elisp:(describe-package 'seq)][seq-2.20]]: BI
+- [[elisp:(describe-package 'spinner)][spinner-1.7.3]]: PD (de paradox?)
+- [[elisp:(describe-package 'test-simple)][test-simple-1.2.0]]: framework per tests, AB, mirar alternatives
+  millor mantingudes.
+- workgroups-0.2.0: AB i NU

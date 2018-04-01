@@ -505,6 +505,19 @@ Integració d'emacs amb un navegador web extern.
   (add-hook 'Buffer-menu-mode-hook 'buffer-menu-custom-font-lock)
 #+end_src
 
+*** =embrace=
+
+https://github.com/cute-jumper/embrace.el
+
+Facilita manipular (afegir, modificar, eliminar) parelles de
+/parèntesis/.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package embrace
+    :ensure t
+    :commands embrace-commander)
+#+end_src
+
 *** =calendar=                                                      :builtin:
 
 #+begin_src emacs-lisp :tangle yes
@@ -727,6 +740,34 @@ https://github.com/magnars/expand-region.el
     :commands er/expand-region)
 #+end_src
 
+*** =f=
+
+https://github.com/rejeep/f.el
+
+Una API moderna per treballar amb arxius i directoris des d'emacs.
+
+Pel tipus de paquet (biblioteca de funcions) s'hauria d'instal·lar com
+una dependència i no directament, però alguns dels meus paquets (no en
+elpa) la utilitzen.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package f
+    :ensure t)
+#+end_src
+
+*** =figlet=                                                         :manual:
+
+https://gist.github.com/digash/392649
+
+Insereix text gran. Requereix la comanda externa =figlet=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package figlet
+    :ensure nil
+    :load-path "conf.d/site-lisp"
+    :commands (figlet banner))
+#+end_src
+
 *** =flymake=                                                       :builtin:
 
 Aparentment he estat utilitzant =flycheck=. Vaig a donar-li una
@@ -936,6 +977,29 @@ buffers i arxius.
     :after ido
     :config
     (ido-ubiquitous-mode 1))
+#+end_src
+
+*** =lorem-ipsum=                                                    :manual:
+
+https://github.com/jschaf/emacs-lorem-ipsum
+
+No està disponible als repositoris estable. No és un tipus de codi que
+hagi de canviar/millorar en el futur així que es clona:
+
+#+begin_src sh :tangle yes
+  elisp_clone_git https://github.com/jschaf/emacs-lorem-ipsum.git
+  elisp_compile_package emacs-lorem-ipsum
+#+end_src
+
+#+RESULTS:
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package lorem-ipsum
+    :ensure nil
+    :load-path "site-lisp/emacs-lorem-ipsum"
+    :commands (lorem-ipsum-insert-paragraphs
+               lorem-ipsum-insert-sentences
+               lorem-ipsum-insert-list))
 #+end_src
 
 *** =magit=
@@ -3901,6 +3965,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; insert map
 
+  (global-set-key (kbd "C-c i l") 'lorem-ipsum-insert-paragraphs)
+  (global-set-key (kbd "C-c i L") 'lorem-ipsum-insert-sentences)
+  (global-set-key (kbd "C-c i f") 'figlet)
   (global-set-key (kbd "C-c i u") 'arv/insert-random-uuid)
 
   ;; jump map
