@@ -276,14 +276,9 @@ Depenent de l'ús principal de la comanda, el prefix =C-u= poc
 activar/inhibir el canvi de buffer. En la comanda =occur= original el
 significat de =C-u= no sembla gaire pràctic.
 
-** TODO Ajustar face de =ace-jump-mode=                                 :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 22:07]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
-   :END:
-
-En una terminal, la lletra que permet triar la finestra no és gaire
-visible.
+Crec que el que vull és algo tipus =swiper= (que al moure el cursor
+mostri la linea seleccionada en el buffer) però que sigui persistent:
+cerco, trobo, modifico, torno a la cerca.
 
 ** TODO revisar =diminish=                                      :enhancement:
    :PROPERTIES:
@@ -607,3 +602,15 @@ Assignar-ho a una tecla fàcil de recordar i utilitzar.
 
 En la mateixa línia, potser la idea es podria generalitzar per tancar
 certs buffers (una llista configurable, una expressió regular ...).
+
+** DONE Ajustar face de =ace-jump-mode=                                 :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-31 ds 22:07]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 18:11] \\
+     r813
+
+En una terminal, la lletra que permet triar la finestra no és gaire
+visible.
