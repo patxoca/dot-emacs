@@ -27,14 +27,6 @@ Fent proves amb el valor de =INFOPATH= soc incapaç de reproduir el
 comportament problemàtic. Alguna cosa ha canviat que ha resolt el
 problema.
 
-** TODO [#A] netejar keybinding                                         :bug:
-
-Al migrar la configuració he eliminat alguna funcionalitat i algunes
-tecles fallaran amb =Symbol's function definition is void=.
-
-Mirar lo complicat que seria escanejar els keymaps buscant tecles per
-le que =fboundp= avalua a =nil=.
-
 ** TODO moure funcionalitat                                     :enhancement:
 
 Algunes configuracions activen funcionalitats o fan canvis /globals/
@@ -336,6 +328,16 @@ Una altra possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=qu
              :upgrade t))
 #+end_src
 
+** TODO millorar =figlet=                                              :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 19:39]
+   :REFERER:
+   :END:
+
+El paquet =figlet= únicament genera text dins un comentari. Afegir
+comanda per genera text sense comentari.
+
+Revisar el codi, crec que havia alguna cosa més que volia canviar.
 
 
 * Completat
@@ -614,3 +616,14 @@ certs buffers (una llista configurable, una expressió regular ...).
 
 En una terminal, la lletra que permet triar la finestra no és gaire
 visible.
+
+** DONE [#A] netejar keybinding                                         :bug:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 19:45] \\
+     r814
+
+Al migrar la configuració he eliminat alguna funcionalitat i algunes
+tecles fallaran amb =Symbol's function definition is void=.
+
+Mirar lo complicat que seria escanejar els keymaps buscant tecles per
+le que =fboundp= avalua a =nil=.

@@ -3909,7 +3909,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
-  (global-set-key (kbd "C-S-S") 'isearch-forward)
+  (global-set-key (kbd "C-S-s") 'isearch-forward)
 
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 
@@ -3936,11 +3936,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 
-  (global-set-key (kbd "C-<prior>") 'xah-previous-user-buffer) ; Ctrl+PageDown
-  (global-set-key (kbd "C-<next>") 'xah-next-user-buffer) ; Ctrl+PageUp
-
-  (global-set-key (kbd "s-t") 'arv-switch-to-todo-or-visit-todo-file)
-
   (global-set-key (kbd "C-x C-b") 'electric-buffer-list)
                                           ; originalment 'list-buffers'.
                                           ;
@@ -3950,8 +3945,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
                                           ;
                                           ; i una altra ibuffer (molt
                                           ; potent aparentment)
-
-  (global-set-key (kbd "<help>") (lambda () (interactive) (find-file-other-window "~/.emacs.d/org/emacs_novetats.org")))
 
   ;;; django
   ;; aquest keybinding no m'acava de convencer per dos motius:
@@ -3990,23 +3983,11 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; keybindings per magit: C-c g
   (global-set-key (kbd "C-c g s") 'magit-status)
 
-  ;; window motion
-  (global-set-key (kbd "H-e") 'windmove-up)
-  (global-set-key (kbd "H-d") 'windmove-down)
-  (global-set-key (kbd "H-s") 'windmove-left)
-  (global-set-key (kbd "H-f") 'windmove-right)
-
   ;; expand-region
   (global-set-key (kbd "C-.") 'er/expand-region)
 
-
   ;; multi-line
   (global-set-key (kbd "C-c r m") 'multi-line)
-
-
-  ;; todo
-  (global-set-key (kbd "C-c r i") 'srctool-insert-reminder)
-  (global-set-key (kbd "C-c r s") 'srctool-show-reminders)
 
   ;; find-file-in-project
   (global-set-key (kbd "C-x f") 'find-file-in-project)
@@ -4015,7 +3996,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c o f") 'arv/org-visit-agenda-file)
   (global-set-key (kbd "C-c o s") 'org-sort)
 
   ;; smex
@@ -4026,15 +4006,12 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c t c") 'column-number-mode)
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
-  (global-set-key (kbd "C-c t h") 'arv/highlight-indentation-mode)
   (global-set-key (kbd "C-c t l") 'linum-mode)
   (global-set-key (kbd "C-c t L") 'line-number-mode)
   (global-set-key (kbd "C-c t r") 'read-only-mode)
-  (global-set-key (kbd "C-c t R") 'relative-linum-toggle)
 
   ;; word-mode
   (global-set-key (kbd"C-,") 'arv/wm-cycle)
-
 #+end_src
 
 * Experimental
