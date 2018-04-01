@@ -271,16 +271,6 @@ Assignar-ho a una tecla fàcil de recordar i utilitzar.
 En la mateixa línia, potser la idea es podria generalitzar per tancar
 certs buffers (una llista configurable, una expressió regular ...).
 
-** TODO revisar codi elisp vell                                         :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:17]
-   :REFERER:
-   :END:
-
-Dins =./old-cfg/instances/common/init.d= hi ha mòduls amb codi elisp.
-Defineix algunes comandes que s'utilitzen el el keybindings i
-probablement brossa. Mirar que fer amb ells.
-
 ** TODO integrar =ox-twbs=                                      :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 01:21]
@@ -464,3 +454,16 @@ completa/.
 
 El valor de =ido-default-buffer-method= determina com canviar el
 buffer. =selected-window= sembla que és el que necessito.
+
+** DONE revisar codi elisp vell                                         :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-31 ds 01:17]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 05:39] \\
+     r809
+
+Dins =./old-cfg/instances/common/init.d= hi ha mòduls amb codi elisp.
+Defineix algunes comandes que s'utilitzen el el keybindings i
+probablement brossa. Mirar que fer amb ells.

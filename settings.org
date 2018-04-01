@@ -2913,6 +2913,23 @@ començament de la paraula.
       (comment-region beg end)))
 #+end_src
 
+*** =arv/generate-random-uuid= i =arv/insert-random-uuid=
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/generate-random-uuid ()
+    (with-temp-buffer
+      (shell-command "uuidgen -r" t)
+      (beginning-of-buffer)
+      (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/insert-random-uuid ()
+    "Insert random UUID"
+    (interactive)
+    (insert (arv/generate-random-uuid)))
+#+end_src
+
 *** =arv/goto-line=
 
 Com =goto-line= però activa =linum-mode= per facilitar identificar la
@@ -2932,6 +2949,67 @@ No ho utilitzo gaire.
             (call-interactively 'goto-line))
         (unless linum-enabled
           (linum-mode -1)))))
+#+end_src
+
+*** =arv/kill-ring-save-word-at-point=
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/kill-ring-save-word-at-point ()
+    "Copia un text en el kill ring. El seu comportament varia
+  depenent de si la marca està o no activa:
+
+  - si està activa delega en `kill-ring-save' i es copia el text
+    seleccionat.
+
+  - sinó es copia el símbol sobre el que està situat el cursor."
+    (interactive)
+    (if mark-active
+        (call-interactively 'kill-ring-save)
+      (kill-new (thing-at-point 'symbol))))
+#+end_src
+
+*** =arv/query-replace=
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/query-replace (&optional arg)
+    "Replacement for `query-replace'.
+
+  - It proposes the symbol at point as the initial value for the
+    search string.
+
+  - If the region is active it contraints the replacement,
+    otherwise operate on the whole buffer.
+
+  - Without prefix argument performs `query-replace'.
+
+  - With C-u performs `replace-string'.
+
+  In any case point is preserved."
+    (interactive "*P")
+    (let* ((old-string (read-string "Replace: " (thing-at-point 'symbol)))
+           (new-string (read-string (concat "Replace " old-string " with: ") ""))
+           (start (if mark-active (min (mark) (point)) (point-min)))
+           (end   (if mark-active (max (mark) (point)) (point-max))))
+      (save-excursion
+        (if (not arg)
+            (query-replace old-string new-string nil start end)
+          (goto-char start)
+          (while (search-forward old-string end t)
+            (replace-match new-string))))))
+#+end_src
+
+*** conversió de format DOS <-> UNIX
+
+#+begin_src emacs-lisp :tangle yes
+  (defun unix-to-dos ()
+    "Converteix el contingut del buffer actiu a format DOS."
+    (interactive)
+    (set-buffer-file-coding-system 'undecided-dos nil))
+
+  (defun dos-to-unix ()
+    "Converteix el contingut del buffer actiu a format DOS."
+    (interactive)
+    (set-buffer-file-coding-system 'undecided-unix))
 #+end_src
 
 *** =endless/comment-line-or-region=
@@ -3787,8 +3865,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;;; es un incordio tener que teclear yes para confirmar
   (global-set-key (kbd "C-<return>") "yes\C-m")
 
-  (global-set-key (kbd "M-%") 'arv-query-replace)
-  ;;@@ (global-set-key (kbd "M-w") 'arv-kill-ring-save-word-at-point)
+  (global-set-key (kbd "M-%") 'arv/query-replace)
+  (global-set-key (kbd "M-w") 'arv/kill-ring-save-word-at-point)
 
   (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 
@@ -3820,6 +3898,12 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;;   context fins que s'ha obert el projecte django.
 
   (global-set-key (kbd "C-c p D") 'arv/django-switch-to-project-buffer)
+
+  ;; insert map
+
+  (global-set-key (kbd "C-c i u") 'arv/insert-random-uuid)
+
+  ;; jump map
 
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
   (global-set-key (kbd "C-c j l") 'avy-goto-line)
@@ -3871,7 +3955,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; toggle map
   (global-set-key (kbd "C-c t c") 'column-number-mode)
-  (global-set-key (kbd "C-c t d") 'toggle-window-dedicated)
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
   (global-set-key (kbd "C-c t h") 'arv/highlight-indentation-mode)
@@ -3883,10 +3966,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; word-mode
   (global-set-key (kbd"C-,") 'arv/wm-cycle)
 
-  ;; originalment aquesta estava definida en python-mode però realment
-  ;; té més sentit que sigui global
-
-  ;; ("C-c m i u" (lambda () "Insert random UUID" (interactive) (insert (arv/generate-random-uuid))))
 #+end_src
 
 * Experimental
