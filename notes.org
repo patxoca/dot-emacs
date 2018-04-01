@@ -11,7 +11,7 @@
 # Aquesta secció és el target d'una plantilla de captura. Si es canvia
 # el text del títol caldrà ajustar la plantilla.
 
-** TODO [#B] error amb la comanda =m= en buffers /info/                 :bug:
+** TODO error amb la comanda =m= en buffers /info/                      :bug:
 
 En buffers /info/ la comanda =m= (=Info-menu=) normalment congela
 /emacs/ al cap d'uns segons de mostrar la llista de candidats. =C-g=
@@ -35,42 +35,7 @@ tecles fallaran amb =Symbol's function definition is void=.
 Mirar lo complicat que seria escanejar els keymaps buscant tecles per
 le que =fboundp= avalua a =nil=.
 
-** TODO [#A] estudiar =use-package=                             :enhancement:
-
-- incorporar =:diminish=
-
-- per paquets instal·lats manualment, aparentment permet especificar
-  la ruta.
-
-- messurar l'impacte en el temps d'arranc de =:ensure t=. Si cal,
-  definir una variable d'entorn que influeixi en el comportament. En
-  la [[http://pages.sachachua.com/.emacs.d/Sacha.html#org0477c97][configuració de Sacha Chua]] he vist que es pot definir un valor
-  global per defecte per =:ensure=.
-
-- incorporar =:commands=
-
-:after :bind :bind* :bind-keymap :bind-keymap* :commands :config
-:defer :defines :delight :demand :diminish :disabled :ensure
-:functions :if :init :interpreter :load-path :mode :no-require :pin
-:preface :requires :unless :when
-
-En [[https://www.youtube.com/watch?v=2TSKxxYEbII&t=530][aquest vídeo]] es comenta que es pot aprofitar el =:load-path= per
-accelerar la càrrega i eliminar =package-initialize= (i probablement
-inutilitzant tot =package.el=). Interpreto que =package-initialize=
-carrega almenys els =autoloads=, ralentitzant l'arranc, mentre que
-=use-package= + =:load-path= és /lazy/.
-
-Haver de gestionar tots els paquets manualment em tira enrere, per la
-gestió de dependències principalment.
-
-- estudiar =package.el= per entendre millor que fa
-  =package-initialize=
-
-- mirar si existeix cap estensió de =use-package= que permeti fer
-  /checkouts/ de repositòris VCS, diguem en =~/.emacs.d/site-lisp~,
-  configuri el path etc.
-
-** TODO [#A] moure funcionalitat                                        :bug:
+** TODO moure funcionalitat                                     :enhancement:
 
 Algunes configuracions activen funcionalitats o fan canvis /globals/
 que no els corresponen.
@@ -108,7 +73,7 @@ Si realment són globals mirar de moure-les al /hook/ d'un mode tipus
   També modifica =comint-output-filter-functions=. Potser es podrien
   moure a una nova secció /Configuració/.
 
-** TODO [#C] revisar compilació de la configuració                     :task:
+** TODO revisar compilació de la configuració                          :task:
 
 #+begin_src text :tangle no
   Compiling file /home/aroda/.emacs.d/conf.d/settings.el at Thu Mar 29 19:35:20 2018
@@ -165,7 +130,7 @@ Si realment són globals mirar de moure-les al /hook/ d'un mode tipus
   settings.el:1820:1:Warning: the function ‘arv/-’ is not known to be defined.
 #+end_src
 
-** TODO [#C] analitzar arranc                                   :enhancement:
+** TODO analitzar arranc                                               :task:
 
 Al activar el mode verbós he identificat aquests dos com els més
 lents. La resta estan per baix de 0.1 segons.
@@ -178,13 +143,13 @@ lents. La resta estan per baix de 0.1 segons.
 Mirar que és carrega durant l'arranc per veure si alguna cosa sobra
 etc.
 
-** TODO [#C] abreviatures en =abbrev=                                  :idea:
+** TODO abreviatures en =abbrev=                                       :idea:
 
 Actualment les abreviatures es guarden en un arxiu. Per la forma en
 que les utilitzo (molt poc) probablement sigui preferible definir-les
 directament en la configuració.
 
-** TODO [#C] normalitzar rutes de fitxers                              :idea:
+** TODO normalitzar rutes de fitxers                            :enhancement:
 
 En alguns llocs utilitzo rutes calculades dinàmicament i en d'altres
 literals. Problemes:
@@ -222,7 +187,7 @@ possible). L'execució depèn d'elements definits en el document i no
 tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
 el bloc de codi en el context del document sembla bastant diferent.
 
-** TODO [#C] Revisar configuració backends de company           :enhancement:
+** TODO Revisar configuració backends de company                :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-03-30 dv 00:28]
    :REFERER: [[file:settings.org::*=company=][=company=]]
@@ -253,19 +218,7 @@ emacs lisp.
           (funcall real-grin)))))
 #+end_src
 
-** TODO revisar =uniquify=                                      :enhancement:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 03:14]
-   :REFERER: [[file:settings.org::*=uniquify=][=uniquify=]]
-   :END:
-
-El funcionament d'=uniquify= no m'agrada: al obrir =/tmp/foo.py= i
-=~/tmp/foo.py= els noms assignats als buffers són =foo.py\= i
-=foo.py\aroda= respectivament, em resulten una mica confusos.
-
-La variable =uniquify-strip-common-suffix= podria ajudar.
-
-** TODO [#C] Revisar estructura                                        :idea:
+** TODO Revisar estructura                                             :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-03-30 dv 03:37]
    :REFERER: [[file:settings.org::*=xref-js2=][=xref-js2=]]
@@ -273,28 +226,6 @@ La variable =uniquify-strip-common-suffix= podria ajudar.
 
 No tinc clar si és bona idea tindre paquets en dos seccions separades
 (/paquets/ i /modes/).
-
-** TODO Afegir keybinding                                              :idea:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 10:42]
-   :REFERER: [[file:settings.org::*=paredit=][=paredit=]]
-   :END:
-
-És habitual obrir un buffer =*Help*=, consultar i tancar. Tancar-lo
-hauria de ser àgil (ara utilitzo =C-x k help RET=).
-
-#+begin_src emacs-lisp :tangle no
-  (defun arv/close-help-buffer-maybe ()
-    (interactive)
-    (let ((buffer (get-buffer "*Help*")))
-      (when buffer
-        (kill-buffer buffer))))
-#+end_src
-
-Assignar-ho a una tecla fàcil de recordar i utilitzar.
-
-En la mateixa línia, potser la idea es podria generalitzar per tancar
-certs buffers (una llista configurable, una expressió regular ...).
 
 ** TODO integrar =ox-twbs=                                      :enhancement:
    :PROPERTIES:
@@ -336,7 +267,16 @@ per buscar i revisar en el codi.
 Es podria definir una nova comanda que demani el nombre de línies de
 context.
 
-** TODO Ajustar face de =ace-jump-mode=                         :enhancement:
+Crec que no és necessari afegir context. És suficient amb seleccionar
+automàticament el buffer =*occur*=. Una vegada en el buffer =*occur*=
+les comandes =o= i =C-o= funcionen com és habitual i permeten veure el
+context que es necessiti.
+
+Depenent de l'ús principal de la comanda, el prefix =C-u= poc
+activar/inhibir el canvi de buffer. En la comanda =occur= original el
+significat de =C-u= no sembla gaire pràctic.
+
+** TODO Ajustar face de =ace-jump-mode=                                 :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 22:07]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
@@ -345,7 +285,7 @@ context.
 En una terminal, la lletra que permet triar la finestra no és gaire
 visible.
 
-** TODO revisar =diminish=                                              :bug:
+** TODO revisar =diminish=                                      :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 22:13]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
@@ -358,7 +298,7 @@ desaparegut.
 Potser és moment de moure la configuració de =diminish= als
 corresponents =use-package=.
 
-** TODO gestionar paquets absents durant la instal·lació        :enhancement:
+** TODO gestionar paquets absents durant la instal·lació                :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-01 dg 00:48]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
@@ -373,7 +313,7 @@ Mirar si és possible fer que continui la instal·lació i al final
 informi, de manera visible, que certs paquets no s'han pogut
 instal·lar.
 
-** TODO repensar comandes sh :bug:
+** TODO repensar comandes sh                                            :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-01 dg 15:05]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*helpers%20sh][helpers sh]]
@@ -390,6 +330,19 @@ Convertir-les en scripts, dins el directori =scripts= sembla que
 resoldria el problema. Caldria ajustar els blocs existents, prefixant
 les comandes amb =./scripts/xxxx= i extreure tambés les variable din
 l'arxiu =./scripts/config= (que seria /sourced/ pels scripts).
+
+Una altra possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-use-package=]], que integra
+[[https://github.com/quelpa/quelpa][=quelpa=]] amb =use-package=. Per exemple:
+
+#+begin_src emacs-lisp :tangle no
+  (use-package abc-mode
+    :quelpa ((abc-mode :fetcher github
+                       :repo "mkjunker/abc-mode")
+             :upgrade t))
+#+end_src
+
+
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
@@ -565,3 +518,92 @@ funcionin cal haver executat prèviament =M-x package-list-packages=.
 - [[elisp:(describe-package 'test-simple)][test-simple-1.2.0]]: framework per tests, AB, mirar alternatives
   millor mantingudes.
 - workgroups-0.2.0: AB i NU
+
+** DONE [#A] estudiar =use-package=                             :enhancement:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 16:09] \\
+     Canvis fets:
+
+     =:diminish= té el seu propi TODO
+
+     El temps d'arranc és ràpid, no vull perdre més temps en aquest punt.
+     Metre puga tiraré de =package.el=, dependències.
+
+     Ja s'utilitzen les /clausules/ rellevant excepte per =:bind=, però el
+     tema de configurar el teclat encara no el tinc perfilat del tot.
+- incorporar =:diminish=
+
+- per paquets instal·lats manualment, aparentment permet especificar
+  la ruta.
+
+- messurar l'impacte en el temps d'arranc de =:ensure t=. Si cal,
+  definir una variable d'entorn que influeixi en el comportament. En
+  la [[http://pages.sachachua.com/.emacs.d/Sacha.html#org0477c97][configuració de Sacha Chua]] he vist que es pot definir un valor
+  global per defecte per =:ensure=.
+
+- incorporar =:commands=
+
+:after :bind :bind* :bind-keymap :bind-keymap* :commands :config
+:defer :defines :delight :demand :diminish :disabled :ensure
+:functions :if :init :interpreter :load-path :mode :no-require :pin
+:preface :requires :unless :when
+
+En [[https://www.youtube.com/watch?v=2TSKxxYEbII&t=530][aquest vídeo]] es comenta que es pot aprofitar el =:load-path= per
+accelerar la càrrega i eliminar =package-initialize= (i probablement
+inutilitzant tot =package.el=). Interpreto que =package-initialize=
+carrega almenys els =autoloads=, ralentitzant l'arranc, mentre que
+=use-package= + =:load-path= és /lazy/.
+
+Haver de gestionar tots els paquets manualment em tira enrere, per la
+gestió de dependències principalment.
+
+- estudiar =package.el= per entendre millor que fa
+  =package-initialize=
+
+- mirar si existeix cap estensió de =use-package= que permeti fer
+  /checkouts/ de repositòris VCS, diguem en =~/.emacs.d/site-lisp~,
+  configuri el path etc.
+** CANC revisar =uniquify=                                      :enhancement:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-30 dv 03:14]
+   :REFERER: [[file:settings.org::*=uniquify=][=uniquify=]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2018-04-01 dg 16:56] \\
+     He confirmat que el funcionament és el mateix en la configuració
+     original per tant serà un problema de percepció.
+
+El funcionament d'=uniquify= no m'agrada: al obrir =/tmp/foo.py= i
+=~/tmp/foo.py= els noms assignats als buffers són =foo.py\= i
+=foo.py\aroda= respectivament, em resulten una mica confusos.
+
+La variable =uniquify-strip-common-suffix= podria ajudar.
+
+** CANC Afegir keybinding                                              :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-30 dv 10:42]
+   :REFERER: [[file:settings.org::*=paredit=][=paredit=]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2018-04-01 dg 16:58] \\
+     =C-x k he RET= és suficientment àgil, no cal estressar-se, i
+     conneixent-me definiré la comanda i mai la utilitzaré.
+
+     En relació a tancar varis buffers, =ibuffer= ofereix prestacions
+     interessants.
+
+És habitual obrir un buffer =*Help*=, consultar i tancar. Tancar-lo
+hauria de ser àgil (ara utilitzo =C-x k help RET=).
+
+#+begin_src emacs-lisp :tangle no
+  (defun arv/close-help-buffer-maybe ()
+    (interactive)
+    (let ((buffer (get-buffer "*Help*")))
+      (when buffer
+        (kill-buffer buffer))))
+#+end_src
+
+Assignar-ho a una tecla fàcil de recordar i utilitzar.
+
+En la mateixa línia, potser la idea es podria generalitzar per tancar
+certs buffers (una llista configurable, una expressió regular ...).
