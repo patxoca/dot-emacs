@@ -52,21 +52,16 @@
 ;; prèviament.
 
 (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org"))
-      (settings-sh (arv/path-concat arv/emacs-conf-dir "settings.sh"))
-      (execute-settings-sh nil))
-
-  ;; si cal genera l'arxiu "settings.sh"
-  (unless (file-exists-p settings-sh)
-    (org-babel-tangle-file settings-org settings-sh "sh")
-    (chmod settings-sh #o700)
-    (setq execute-settings-sh t))
+      (settings-sh (arv/path-concat arv/emacs-conf-dir "settings.sh")))
 
   ;; executa els blocs de codi emacs-lisp de "settings.org",
   ;; extraient-los prèviament si és necessari.
   (org-babel-load-file settings-org)
 
-  ;; si cal executa "settings.sh"
-  (when execute-settings-sh
+  ;; si cal genera l'arxiu "settings.sh" i l'executa
+  (unless (file-exists-p settings-sh)
+    (org-babel-tangle-file settings-org settings-sh "sh")
+    (chmod settings-sh #o700)
     (start-process "env-setup" "*env-setup*" settings-sh)
     (switch-to-buffer "*env-setup*")))
 
