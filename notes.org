@@ -189,27 +189,6 @@ Revisar si ha hagut cap canvi en la configuració dels /backends/. No
 m'agrada activar-los globalment, seria millor activar els rellevants
 per cada mode en el corresponent /hook/.
 
-** TODO revisar funció =grin=                                   :enhancement:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 00:53]
-   :REFERER: [[file:settings.org::*=grin=][=grin=]]
-   :END:
-
-Preferiria una implementació amb una clausura, en la línia del codi
-següent, però no acabo de tindre clar el tema del /lexical binding/ en
-emacs lisp.
-
-#+begin_src emacs-lisp :tangle no
-  (use-package grin
-    :ensure t
-    :config
-    (let ((real-grin (symbol-function 'grin)))
-      (defun grin ()
-        (interactive)
-        (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
-          (funcall real-grin)))))
-#+end_src
-
 ** TODO Revisar estructura                                             :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-03-30 dv 03:37]
@@ -627,3 +606,27 @@ tecles fallaran amb =Symbol's function definition is void=.
 
 Mirar lo complicat que seria escanejar els keymaps buscant tecles per
 le que =fboundp= avalua a =nil=.
+
+** DONE revisar funció =grin=                                   :enhancement:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-30 dv 00:53]
+   :REFERER: [[file:settings.org::*=grin=][=grin=]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 21:00] \\
+     r815.
+
+Preferiria una implementació amb una clausura, en la línia del codi
+següent, però no acabo de tindre clar el tema del /lexical binding/ en
+emacs lisp.
+
+#+begin_src emacs-lisp :tangle no
+  (use-package grin
+    :ensure t
+    :config
+    (let ((real-grin (symbol-function 'grin)))
+      (defun grin ()
+        (interactive)
+        (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
+          (funcall real-grin)))))
+#+end_src

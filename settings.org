@@ -801,22 +801,10 @@ https://bitbucket.org/dariusp686/emacs-grin/src
 =grin= és una utilitat tipus =grep=, escrita en python. Es pot
 descarregar des de https://pypi.python.org/pypi/grin.
 
-La implementació per defecte de la funció =grin= realitza la cerca en
-el directori actual, el que no resulta massa pràctic. La funció
-definida ací demana el directori on fer la cerca.
-
 #+begin_src emacs-lisp :tangle yes
   (use-package grin
     :ensure t
-    :commands grin
-    :config
-    (unless (boundp 'arv/grin--real-grin)
-      (setq arv/grin--real-grin (symbol-function 'grin))
-
-      (defun grin ()
-        (interactive)
-        (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
-          (funcall arv/grin--real-grin)))))
+    :commands grin)
 #+end_src
 
 *** =hi-lock=                                                       :builtin:
@@ -3017,6 +3005,19 @@ No ho utilitzo gaire.
           (linum-mode -1)))))
 #+end_src
 
+*** =arv/grin=
+
+La implementació per defecte de la funció =grin= realitza la cerca en
+el directori actual, el que no resulta massa pràctic. La funció
+definida ací demana el directori on fer la cerca.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/grin ()
+    (interactive)
+    (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
+      (grin)))
+#+end_src
+
 *** =arv/kill-ring-save-word-at-point=
 
 #+begin_src emacs-lisp :tangle yes
@@ -3974,6 +3975,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; embrace
   (global-set-key (kbd "C--") 'embrace-commander)
+
+  ;; grin
+  (global-set-key (kbd "C-ç") 'arv/grin)
 
   ;; keybindings per subversion: C-c s
   (global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
