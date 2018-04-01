@@ -4,32 +4,17 @@
 ;;; (c) 1998-2018 Alexis Roda
 ;;; $Id$
 
-;;; Commentary: arxiu de configuracio d'Emacs, l'arxiu .emacs es un
-;;; enllaç simbolic a aquest
+;;; Commentary: arxiu de configuracio d'Emacs.
 
-;;; Per facilitar mantindre una única configuració d'emacs per tots
-;;; els sistemes en que l'utilitzo de manera més o menys intensiva he
-;;; optat per utilitzar un sistema semblant als scripts d'arranc del
-;;; SystemV.
-
-;;; Variables d'entorn:
-;;
-;;  - EMACS_INSTANCE: nom de la instànica a arrancar. Si s'omet
-;;    utilitza el nom del host.
-;;
-;;  - EMACS_INSTALL: si està definida, no importa el valor, executa
-;;    emacs en mode instal·lació: descarrega i instal·la paquets,
-;;    compila i genera autoloads per la configuració.
-
-;;; Code:
+;; Aquest arxiu prepara l'entorn per executar la configuració que hi ha
+;; en "settings.org".
 
 
+;; La inicialització del sistema de paquets es fa en "settings.org".
+;; Aquesta "inicialització" comentada l'ha afegida "package.el" i és
+;; necessari mantindre-la per evitar que torni a afegir-la.
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
+;; (package-initialize)
 
 (message "    ___ _ __ ___   __ _  ___ ___")
 (message "   / _ \\ '_ ` _ \\ / _` |/ __/ __|")
