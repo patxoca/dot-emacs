@@ -767,7 +767,10 @@ Insereix text gran. Requereix la comanda externa =figlet=.
   (use-package figlet
     :ensure nil
     :load-path "conf.d/site-lisp"
-    :commands (figlet banner))
+    :commands (figlet
+               figlet-no-comment
+               banner
+               banner-no-comment))
 #+end_src
 
 *** =flymake=                                                       :builtin:
@@ -3969,6 +3972,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c i l") 'lorem-ipsum-insert-paragraphs)
   (global-set-key (kbd "C-c i L") 'lorem-ipsum-insert-sentences)
   (global-set-key (kbd "C-c i f") 'figlet)
+  (global-set-key (kbd "C-c i F") 'figlet-no-comment)
   (global-set-key (kbd "C-c i u") 'arv/insert-random-uuid)
 
   ;; jump map

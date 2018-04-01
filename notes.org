@@ -198,13 +198,19 @@ per cada mode en el corresponent /hook/.
 No tinc clar si és bona idea tindre paquets en dos seccions separades
 (/paquets/ i /modes/).
 
-** TODO integrar un interpret                                   :enhancement:
+** TODO integrar un REPL javascript                             :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 01:34]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*javascript][javascript]]
    :END:
 
 Integrar un interpret (nodejs?) en la configuració.
+
+- https://github.com/abicky/nodejs-repl.el, disponible a melpa stable.
+
+- [[https://github.com/abicky/nodejs-repl.el][aquest article]], encara que vell, sembla interessant.
+
+- [[https://github.com/NicolasPetton/Indium][Indium]] és un IDE per javascript. Té molt bona pinta.
 
 ** TODO Investigar /rope/                                              :task:
    :PROPERTIES:
@@ -297,17 +303,6 @@ Una altra possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=qu
                        :repo "mkjunker/abc-mode")
              :upgrade t))
 #+end_src
-
-** TODO millorar =figlet=                                              :idea:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 19:39]
-   :REFERER:
-   :END:
-
-El paquet =figlet= únicament genera text dins un comentari. Afegir
-comanda per genera text sense comentari.
-
-Revisar el codi, crec que havia alguna cosa més que volia canviar.
 
 
 * Completat
@@ -633,3 +628,17 @@ emacs lisp.
 
 Mirar com afegir =ox-twbs= a la pantalla d'exportació (=C-c C-e=),
 preferiblement en el grup HTML.
+
+** DONE millorar =figlet=                                              :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 19:39]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-02 dl 01:08] \\
+     r817
+
+El paquet =figlet= únicament genera text dins un comentari. Afegir
+comanda per genera text sense comentari.
+
+Revisar el codi, crec que havia alguna cosa més que volia canviar.
