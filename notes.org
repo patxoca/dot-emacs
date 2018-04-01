@@ -198,15 +198,6 @@ per cada mode en el corresponent /hook/.
 No tinc clar si és bona idea tindre paquets en dos seccions separades
 (/paquets/ i /modes/).
 
-** TODO integrar =ox-twbs=                                      :enhancement:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:21]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*error%20en%20HTML][error en HTML]]
-   :END:
-
-Mirar com afegir =ox-twbs= a la pantalla d'exportació (=C-c C-e=),
-preferiblement en el grup HTML.
-
 ** TODO integrar un interpret                                   :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 01:34]
@@ -630,3 +621,15 @@ emacs lisp.
         (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
           (funcall real-grin)))))
 #+end_src
+
+** DONE integrar =ox-twbs=                                      :enhancement:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-31 ds 01:21]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*error%20en%20HTML][error en HTML]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 22:16] \\
+     r816
+
+Mirar com afegir =ox-twbs= a la pantalla d'exportació (=C-c C-e=),
+preferiblement en el grup HTML.

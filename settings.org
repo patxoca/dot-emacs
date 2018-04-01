@@ -1911,10 +1911,15 @@ https://github.com/marsmining/ox-twbs
 Exporta a HTML + bootstrap. No mata però és més agradable visualment
 que el format per defecte.
 
+Cal importar el paquet perquè es registri i que aparegui en la
+pantalla d'exportació (=C-c C-e=). Malauradament no hi ha cap /event/
+que permeti retardar l'operació així que espera uns segons
+d'inactivitat per carregar-lo.
+
 #+begin_src emacs-lisp :tangle yes
   (use-package ox-twbs
     :ensure t
-    :commands org-twbs-export-to-html)
+    :defer 4)
 #+end_src
 
 **** Funcions d'utilitat
