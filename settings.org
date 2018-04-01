@@ -168,14 +168,17 @@ clonar.
 
 #+begin_src sh :tangle yes
   function elisp_clone_git {
-
-      echo "Clonant '$1'"
+      local dummy=$(basename "$1")
+      local name=${dummy%.git}
 
       if [ ! -d $EMACS_USER_SITELISP ] ; then
           mkdir -p $EMACS_USER_SITELISP
       fi
       cd $EMACS_USER_SITELISP
-      git clone --quiet "$1"
+      if [ ! -d "$name" ] ; then
+          echo "Clonant '$1' en '$name'"
+          git clone --quiet "$1" "$name"
+      fi
   }
 #+end_src
 
