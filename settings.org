@@ -56,8 +56,8 @@ corresponent =use-package=. No m'acaba d'agradar.
 
 Pel que fa als keymaps /locals/ hi ha varies opcions:
 
-- en =use-package= únicament es poden modificar tecles ja
-definides pel pròpi paquet.
+- en =use-package= únicament es poden modificar tecles ja definides
+  pel pròpi paquet.
 
 - en =use-package= es pot modificar el /keymap/ local, sempre que el
   comandes siguin locals.
