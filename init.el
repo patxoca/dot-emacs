@@ -1,7 +1,7 @@
 ;;; -*- encoding: utf-8 -*-
 
 ;;; init.el --- arxiu de configuracio d'emacs
-;;; (c) 1998-2005 Alexis Roda
+;;; (c) 1998-2018 Alexis Roda
 ;;; $Id$
 
 ;;; Commentary: arxiu de configuracio d'Emacs, l'arxiu .emacs es un
