@@ -893,7 +893,11 @@ tema.
     (customize-set-value 'ido-ignore-directories
                          '("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\`\\.svn/" "\\`\\.ropeproject/"))
     (customize-set-value 'ido-max-work-directory-list 10)
-    (setq ido-save-directory-list-file "~/.emacs.d/ido.last"))
+    (setq ido-save-directory-list-file "~/.emacs.d/ido.last")
+
+    ;; Mostra el buffer en la finestra activa encara que sigui visible
+    ;; en un altre frame.
+    (setq ido-default-buffer-method 'select-window))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes

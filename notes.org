@@ -343,20 +343,6 @@ desaparegut.
 Potser és moment de moure la configuració de =diminish= als
 corresponents =use-package=.
 
-** TODO revisar =C-x b=                                                 :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 23:22]
-   :REFERER: [[help:ido-default-buffer-method]]
-   :END:
-
-Quan treballo amb múltiples frames, =C-x b= pot canviar de frame si el
-buffer és visible en ell. Aquest comportament m'ha sobtat i ha
-interferit en el que volia fer, treballar en un buffer /a pantalla
-completa/.
-
-El valor de =ido-default-buffer-method= determina com canviar el
-buffer. =selected-window= sembla que és el que necessito.
-
 ** TODO gestionar paquets absents durant la instal·lació        :enhancement:
    :PROPERTIES:
    :PUB_DATE: [2018-04-01 dg 00:48]
@@ -461,3 +447,20 @@ saltar, encara que el frame actiu només tingui dos finestres.
 
 Crec recordar que es podia configurar per oferir saltar únicament a
 les finestres del frame actiu.
+
+** DONE revisar =C-x b=                                                 :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-31 ds 23:22]
+   :REFERER: [[help:ido-default-buffer-method]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-01 dg 04:30] \\
+     r808: es configura.
+
+Quan treballo amb múltiples frames, =C-x b= pot canviar de frame si el
+buffer és visible en ell. Aquest comportament m'ha sobtat i ha
+interferit en el que volia fer, treballar en un buffer /a pantalla
+completa/.
+
+El valor de =ido-default-buffer-method= determina com canviar el
+buffer. =selected-window= sembla que és el que necessito.
