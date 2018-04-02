@@ -769,7 +769,7 @@ Insereix text gran. Requereix la comanda externa =figlet=.
     :load-path "conf.d/site-lisp"
     :config
     (setq figlet-font-dir "/usr/share/figlet")
-    (setq figlet-default-font "big")
+    (setq figlet-default-font "standard")
     :commands (figlet
                figlet-no-comment
                banner
