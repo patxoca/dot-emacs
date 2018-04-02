@@ -83,10 +83,11 @@ sigui preferible a definir un valor fix en la configuració.
         user-mail-address "alexis.roda.villalonga@gmail.com")
 #+end_src
 
-* Configuració
+* Inicialització
 ** Funcions auxiliars
 
-Funcions utilitzades en la pròpia configuració.
+Funcions utilitzades en la pròpia configuració. Aquestes funcions no
+poden dependre de biblioteques de tercers.
 
 *** =arv/bind-keys=
 
@@ -149,7 +150,7 @@ Genera /faces/:
                  ))))
 #+end_src
 
-*** helpers sh
+** helpers sh
 
 Elements utilitzats en al configuració de l'entorn.
 
@@ -212,22 +213,17 @@ funcionar. Rep com argument el nom del paquet.
   }
 #+end_src
 
-** Metaconfiguració
+** Instàncies múltiples
 
-Al exportar la configuració, cada vegada demana confirmació per
-avaluar el bloc de codi /plantuml/, resulta molest.
+Ocasionalment l'entorn en que s'utilitza aquesta configuració pot ser
+lleugerament diferent i pot requerir petites variacions, per exemple
+la configuració de la impressora.
 
-#+begin_src emacs-lisp :tangle yes
-  (setq org-confirm-babel-evaluate
-        (lambda (lang body)
-          (not (member lang '("plantuml")))))
-#+end_src
-
-** Múltiples instàncies
-
-Està suportat que cada /sistema/ tingui una configuració diferent. Un
-sistema s'identifica mitjançant el valor de la variable d'entorn
-=EMACS_INSTANCE= i si no s'especifica s'utilitza el nom de /host/.
+Per suportar aquesta necessitat cada /sistema/ pot tindre una
+configuració diferent. Un sistema s'identifica mitjançant el valor de
+la variable d'entorn =EMACS_INSTANCE= o, si no està definida, el nom
+de /host/ (sense el domini). El nom del sistema és accessible en la
+constant =arv/instance-name=.
 
 #+begin_src emacs-lisp :tangle yes
   (defconst arv/emacs-customize-dir
@@ -247,8 +243,7 @@ sistema s'identifica mitjançant el valor de la variable d'entorn
     (load custom-file))
 #+end_src
 
-** Inicialització d'emacs
-*** Definir repositoris de paquets
+** Repositoris de paquets
 
 #+begin_src emacs-lisp :tangle yes
   (package-initialize)
@@ -267,7 +262,7 @@ sistema s'identifica mitjançant el valor de la variable d'entorn
 Utilitzar =M-x package-refresh-contents= per recarregar la llista de
 paquets.
 
-*** =use-package=
+** =use-package=
 
 La variable =use-package-always-pin= permet configurar el repositori
 que s'utilitzarà quan un paquet no especifica la clausula =:pin=.
@@ -292,7 +287,7 @@ respecte al repositori a utilitzar i preveig problemes si el fixo
   (require 'use-package)
 #+end_src
 
-*** =auto-compile=                                               :desactivat:
+** =auto-compile=                                                :desactivat:
 
 No acava de funcionar (provat amb =psvn.el=), probablement per la meva
 ignorancia, i ralentitza l'arranc. El desactivo fins que pugar
@@ -315,7 +310,7 @@ En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
   (setq load-prefer-newer t)
 #+end_src
 
-*** Configurar directori =site-lisp= local
+** Directori =site-lisp= local
 
 El subdirectori =site-lisp= de la configuració s'utilitza per guardar
 paquets no disponibles en els repositoris (elpa o git).
@@ -341,7 +336,7 @@ Encara que =use-package= permet definir /autoloads/ l'ús de
 =loaddef.el= és recomanable i no penalitza el temps d'arranc de manera
 apreciable.
 
-*** Biblioteques addicionals
+** Biblioteques addicionals
 
 Biblioteques de funcions utilitzades en la configuració
 
@@ -364,6 +359,7 @@ Col·lecció de funcions per manipular cadenes.
     :ensure t)
 #+end_src
 
+* Configuració
 ** Interfície d'usuari
 
 #+begin_src emacs-lisp :tangle yes
@@ -1876,6 +1872,16 @@ de codi.
        (if (string-greaterp org-version "8.3")
            (cons '(shell . t) langs)
          (cons '(sh . t) langs)))))
+#+end_src
+
+Al exportar un document cada vegada demana confirmació per avaluar els
+blocs de codi /plantuml/, resulta molest.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load 'ob-core
+    (setq org-confirm-babel-evaluate
+          (lambda (lang body)
+            (not (member lang '("plantuml"))))))
 #+end_src
 
 **** =emacs-htmlize=                                                 :manual:
