@@ -55,16 +55,16 @@ the current directory."
   :group 'figlet
   :type '(choice (const nil) string))
 
-(defconst figlet-font-file-regexp "\\.flf$")
-(defconst figlet-match-font-name-regexp "^\\([^.]*\\)\\.flf$")
+(defconst figlet--font-file-regexp "\\.flf$")
+(defconst figlet--match-font-name-regexp "^\\([^.]*\\)\\.flf$")
 
 (defun figlet--font-name-for-file (filename)
-  (string-match figlet-match-font-name-regexp filename)
+  (string-match figlet--match-font-name-regexp filename)
   (match-string 1 filename))
 
 (defun figlet--font-names ()
   (mapcar 'figlet--font-name-for-file
-          (directory-files figlet-font-dir nil figlet-font-file-regexp)))
+          (directory-files figlet-font-dir nil figlet--font-file-regexp)))
 
 (defun figlet--read-font (prompt)
   (let* ((figlet-fonts (figlet--font-names))
