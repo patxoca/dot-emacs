@@ -83,9 +83,9 @@ the current directory."
          (end nil))
      (apply #'call-process
             `("figlet" nil ,(current-buffer) nil
-              ,@(if (null figlet-font-dir) `()
+              ,@(when figlet-font-dir
                   `("-d" ,(expand-file-name figlet-font-dir)))
-              ,@(if (null font) `()
+              ,@(when font
                   `("-f" ,font))
               ,string))
      (figlet--ensure-bolp)
@@ -101,7 +101,7 @@ the current directory."
                     nil)))
 
 (defun figlet--interactive (cpa)
-  (if cpa
+  (if (and cpa figlet-font-dir)
       (let ((font (figlet--read-font "FIGlet Font: "))
             (text (read-string "FIGlet Text: ")))
         (list text font))
