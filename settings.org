@@ -44,6 +44,47 @@ d'instal·lació en blocs de codi i /executar/ l'arxiu org?
 En relació a això, definir unes recomanacions pel que fa als blocs de
 codi de forma que la instal·lació sigui automatitzable.
 
+** Blocs de codi sh
+
+Un dels objectius és automatitzar la configuració inicial de l'entorn.
+Una de les eines utilitzades per aconsseguir-ho són el blocs de codi
+/sh/.
+
+Els bloc /sh/ s'utilitzen en dos contexts:
+
+- s'insereixen en un arxiu per formar un únic script. Aquest script
+  serà executat automàticament durant el primer arranc d'emacs.
+
+- s'avaluen individualment des del propi document. Per exemple, quan
+  s'afegeix un nou paquet a la configuració i cal instal·lar-lo
+  avaluant el bloc de codi.
+
+Cal tindre molta cura al escriure aquests blocs de codi per tal de
+garantir que funcionin en els dos contexts. Cada bloc de codi pot
+assumir que el directori de treball és =~/.emacs.d/conf.d= i en
+finalitzar ha de restaurar el directori de treball (utilitzant =pushd=
+i =popd= enlloc de =cd=, per exemple).
+
+El directori =scripts= conté alguns scripts per simplificar les
+tasques més habituals:
+
+- =clone_git=: =clone-git URL= clona un repositori git dins el
+  directori =~/.emacs.d/site-lisp=. Si el repositori ja està clonat no
+  fa res.
+
+- =compile_package=: =compile_package NOM= compila els fitxers emacs
+  lisp del directori =~/.emacs.d/site-lisp/<NOM>= i actualitza
+  =~/.emacs.d/site-lisp/loaddefs.el=.
+
+# Capçalera de l'arxiu generat a partir dels blocs de codi sh:
+
+#+begin_src sh :tangle yes :exports none
+  #!/bin/bash
+
+  cd ~/.emacs.d/conf.d
+
+#+end_src
+
 ** Tecles i /keymaps/ personalitzats
 
 Cal definir els keymaps i regles generals per organitzar les
@@ -148,69 +189,6 @@ Genera /faces/:
                   name nil
                   :foreground (apply 'color-rgb-to-hex (color-lab-to-srgb lightness a b)))
                  ))))
-#+end_src
-
-** helpers sh
-
-Elements utilitzats en al configuració de l'entorn.
-
-#+begin_src sh :tangle yes
-  #!/bin/bash
-
-  export EMACS_USER_DIR=~/.emacs.d
-  export EMACS_CONF_DIR=~/.emacs.d/conf.d
-  export EMACS_USER_SITELISP=$EMACS_USER_DIR/site-lisp
-  export EMACS_CONF_SITELISP=$EMACS_CONF_DIR/site-lisp
-#+end_src
-
-És habitual clonar un repositori /git/ dins =site-lisp=. Aquesta
-funció automatitza el procés. Rep com argument la URL del repositori a
-clonar.
-
-#+begin_src sh :tangle yes
-  function elisp_clone_git {
-      local dummy=$(basename "$1")
-      local name=${dummy%.git}
-
-      if [ ! -d $EMACS_USER_SITELISP ] ; then
-          mkdir -p $EMACS_USER_SITELISP
-      fi
-      cd $EMACS_USER_SITELISP
-      if [ ! -d "$name" ] ; then
-          echo "Clonant '$1' en '$name'"
-          git clone --quiet "$1" "$name"
-      fi
-  }
-#+end_src
-
-Una vegada clonat cal generar els autoloads i compilar. El procés de
-compilar (correctament) codi elisp se m'escapa. Aquesta funció sembla
-funcionar. Rep com argument el nom del paquet.
-
-#+begin_src sh :tangle yes
-  function elisp_compile_package {
-      local d=$EMACS_USER_SITELISP/$1
-      local load_path
-
-      echo "Compilant '$1'"
-
-      # WARNING: és IMPRESCINCIBLE que $load_path acabi amb :. En cas
-      # contrari substituirà el valor de la variable lisp load-path
-      # enlloc d'ampliar-lo.
-      for p in $EMACS_USER_SITELISP/* $EMACS_CONF_SITELISP ; do
-          load_path="$load_path$p:"
-      done
-
-      emacs --batch \
-            --eval "(let ((generated-autoload-file \"$EMACS_USER_SITELISP/loaddefs.el\")) \
-                       (update-directory-autoloads \"$d\"))"
-
-      EMACSLOADPATH=$load_path emacs --batch \
-            --eval "(progn \
-                       (package-initialize) \
-                       (byte-recompile-directory \"$d\" 0 t))" \
-            >& $1/compile.log
-  }
 #+end_src
 
 ** Instàncies múltiples
@@ -986,11 +964,9 @@ No està disponible als repositoris estable. No és un tipus de codi que
 hagi de canviar/millorar en el futur així que es clona:
 
 #+begin_src sh :tangle yes
-  elisp_clone_git https://github.com/jschaf/emacs-lorem-ipsum.git
-  elisp_compile_package emacs-lorem-ipsum
+  ./scripts/clone_git https://github.com/jschaf/emacs-lorem-ipsum.git
+  ./scripts/compile_package emacs-lorem-ipsum
 #+end_src
-
-#+RESULTS:
 
 #+begin_src emacs-lisp :tangle yes
   (use-package lorem-ipsum
@@ -1774,7 +1750,7 @@ Per instal·lar:
 
 #+begin_src sh :tangle yes
   [ -d ~/.local/src ] || mkdir -p ~/.local/src
-  cd ~/.local/src
+  pushd ~/.local/src
   if [ ! -d org-mode ] ; then
       echo "Descarregant i instal·lant 'org-mode'."
       git --quiet clone https://code.orgmode.org/bzg/org-mode.git
@@ -1784,6 +1760,7 @@ Per instal·lar:
       make
       make install
   fi
+  popd
 #+end_src
 
 Per actualitzar la versió instal·lada:
@@ -1890,8 +1867,8 @@ L'exportació a HTML en org 9.1.8 requereix que estigui instal·lat
 =emacs-htmlize=, el problema és que no apareix a ELPA (melpa?):
 
 #+begin_src sh :tangle yes
-  elisp_clone_git https://github.com/hniksic/emacs-htmlize.git
-  elisp_compile_package emacs-htmlize
+  ./scripts/clone_git https://github.com/hniksic/emacs-htmlize.git
+  ./scripts/compile_package emacs-htmlize
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -2223,8 +2200,8 @@ https://github.com/patxoca/arv-py
 Funcions d'utilitat per treballar amb codi python.
 
 #+begin_src sh :tangle yes
-  elisp_clone_git https://github.com/patxoca/arv-py.git
-  elisp_compile_package arv-py
+  ./scripts/clone_git https://github.com/patxoca/arv-py.git
+  ./scripts/compile_package arv-py
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -2377,8 +2354,8 @@ Integra el paquet python =pytest= dins emacs. La implementació
 original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo un [[https://github.com/patxoca/pytest-el][fork]] propi.
 
 #+begin_src sh :tangle yes
-  elisp_clone_git https://github.com/patxoca/pytest-el.git
-  elisp_compile_package pytest-el
+  ./scripts/clone_git https://github.com/patxoca/pytest-el.git
+  ./scripts/compile_package pytest-el
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -2513,8 +2490,8 @@ Biblioteca que implementa funcions que faciliten la navegació dins un
 projecte django. Depèn de =python-django=.
 
 #+begin_src sh :tangle yes
-  elisp_clone_git https://github.com/patxoca/arv-py-django.git
-  elisp_compile_package arv-py-django
+  ./scripts/clone_git https://github.com/patxoca/arv-py-django.git
+  ./scripts/compile_package arv-py-django
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes

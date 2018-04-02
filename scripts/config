@@ -1,0 +1,4 @@
+export EMACS_USER_DIR=~/.emacs.d
+export EMACS_CONF_DIR=~/.emacs.d/conf.d
+export EMACS_USER_SITELISP=$EMACS_USER_DIR/site-lisp
+export EMACS_CONF_SITELISP=$EMACS_CONF_DIR/site-lisp

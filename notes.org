@@ -276,26 +276,38 @@ Mirar si és possible fer que continui la instal·lació i al final
 informi, de manera visible, que certs paquets no s'han pogut
 instal·lar.
 
-** TODO repensar comandes sh                                            :bug:
+** TODO descobrir paquets                                              :note:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 15:05]
-   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*helpers%20sh][helpers sh]]
+   :PUB_DATE: [2018-04-02 dl 13:01]
+   :REFERER:
    :END:
 
-Al incorporar el paquet =emacs-lorem-ipsum= he detectat que no es pot
-instal·lar executant el bloc de codi sh des del document.
+Per no oblidar-ho:
 
-El problema és que =elisp_clone_git= i =elisp_compile_package= son
-funcions i no estan definides en el context en que s'avalua el bloc de
-codi.
+- https://emacsmirror.net/: The Emacsmirror is a growing collection of
+  Emacs Lisp packages. All mirrored packages are available as Git
+  repositories.
 
-Convertir-les en scripts, dins el directori =scripts= sembla que
-resoldria el problema. Caldria ajustar els blocs existents, prefixant
-les comandes amb =./scripts/xxxx= i extreure tambés les variable din
-l'arxiu =./scripts/config= (que seria /sourced/ pels scripts).
+- https://github.com/emacs-tw/awesome-emacs: Awesome Emacs, a
+  community driven list of useful Emacs packages, utilities and
+  libraries. Most of the following packages are available in MELPA. We
+  recommend installing packages with it.
 
-Una altra possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-use-package=]], que integra
-[[https://github.com/quelpa/quelpa][=quelpa=]] amb =use-package=. Per exemple:
+** TODO elimina blocs sh?                                              :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-02 dl 18:09]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Blocs%20de%20codi%20sh][Blocs de codi sh]]
+   :END:
+
+Si estic configurant emacs perquè collons utilitzo sh?!
+
+El problema amb l'enfoc actual és que el codi emacs lisp s'executa en
+cada arranc i pot incorporar nous paquets/elements mentre que el codi
+sh només s'executa el primer arranc. Si s'afegeix un bloc sh cal
+executar-lo manualment.
+
+Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-use-package=]], que integra [[https://github.com/quelpa/quelpa][=quelpa=]] amb
+=use-package=. Per exemple:
 
 #+begin_src emacs-lisp :tangle no
   (use-package abc-mode
@@ -303,6 +315,7 @@ Una altra possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=qu
                        :repo "mkjunker/abc-mode")
              :upgrade t))
 #+end_src
+
 
 
 * Completat
@@ -642,3 +655,23 @@ El paquet =figlet= únicament genera text dins un comentari. Afegir
 comanda per genera text sense comentari.
 
 Revisar el codi, crec que havia alguna cosa més que volia canviar.
+** DONE repensar comandes sh                                            :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 15:05]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*helpers%20sh][helpers sh]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-02 dl 19:03] \\
+     r826
+
+Al incorporar el paquet =emacs-lorem-ipsum= he detectat que no es pot
+instal·lar executant el bloc de codi sh des del document.
+
+El problema és que =elisp_clone_git= i =elisp_compile_package= son
+funcions i no estan definides en el context en que s'avalua el bloc de
+codi.
+
+Convertir-les en scripts, dins el directori =scripts= sembla que
+resoldria el problema. Caldria ajustar els blocs existents, prefixant
+les comandes amb =./scripts/xxxx= i extreure tambés les variable din
+l'arxiu =./scripts/config= (que seria /sourced/ pels scripts).

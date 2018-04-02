@@ -1,0 +1,16 @@
+#!/bin/bash
+
+HERE=$(dirname $0)
+. $HERE/config
+
+dummy=$(basename "$1")
+name=${dummy%.git}
+
+if [ ! -d $EMACS_USER_SITELISP ] ; then
+    mkdir -p $EMACS_USER_SITELISP
+fi
+cd $EMACS_USER_SITELISP
+if [ ! -d "$name" ] ; then
+    echo "Clonant '$1' en '$name'"
+    git clone --quiet "$1" "$name"
+fi
