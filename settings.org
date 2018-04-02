@@ -4156,6 +4156,19 @@ una oportunitat a =ibuffer=.
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
+** Backups
+
+Els arxius de backup creats durant l'edició són més una molèstia que
+altra cosa. Vaig a provar que tal em funciona guardar-los tots en un
+lloc.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (let ((backup-dir (arv/path-concat user-emacs-directory "backups" "files")))
+    (unless (file-directory-p backup-dir)
+      (make-directory backup-dir t))
+    (setq backup-directory-alist `(("." . ,backup-dir))))
+#+END_SRC
+
 * Per mirar
 
 - =define-compilation-mode=: en alguns mòduls utilitzo buffers de
