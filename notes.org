@@ -316,6 +316,17 @@ Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-u
              :upgrade t))
 #+end_src
 
+** TODO gestió del directori =site-lisp=                                :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-02 dl 21:55]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Directori%20=site-lisp=][Directori =site-lisp=]]
+   :END:
+
+Implementar scripts per automatitzar la gestió dels paquets en
+=~/.emacs.d/site-lisp=:
+
+- pull + compilar
+- esborrar un paquet
 
 
 * Completat

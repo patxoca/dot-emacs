@@ -2,47 +2,94 @@
 #+OPTIONS: toc:4 h:4
 #+STARTUP: overview
 
+#+begin_abstract
+Aquesta és la tercera encarnació de la configuració d'emacs. Els
+objectius que es volen aconsseguir són:
+
+- reduir el temps de càrrega.
+
+- prendre el control del caos en que havia esdevingut la segona
+  encarnació i mantindre una baixa entropia.
+
+- automatitzar el desplegament de la configuració a nous sistemes.
+
+Però la veritat és que és divertit 😊.
+#+end_abstract
+
 * Instal·lació
 
-La instal·lació està bastant automatitzada.
+En teoria aquesta configuració hauria de funcionar amb emacs 24.4 o
+posterior. En la pràctica només està provada amb emacs 25.2.1 i
+25.3.1.
 
-Al executar /emacs/ es generaran els fitxers =settings.el= i
-=settings.sh=. El primer conté la configuració d'/emacs/ i el segon
-comandes /sh/ per configurar l'entorn de treball.
+#+begin_src sh :tangle no
+  mkdir ~/.emacs.d
+  cd ~/.emacs.d
+  git clone https://github.com/patxoca/dot-emacs.git conf.d
+  ln -s conf.d/init.el .
+  emacs
+#+end_src
+
+#+begin_warning
+Actualment és *imprescindible* que el directori on es clona el
+repositori sigui =conf.d=. Aquest valor està fixat en algunes parts de
+la configuració.
+#+end_warning
+
+Al executar /emacs/ sobre una copia de treball neta es generaran els
+fitxers =settings.el= i =settings.sh=. El primer conté la configuració
+d'/emacs/ i el segon comandes /sh/ per configurar l'entorn. A
+continuació es carregarà =settings.el= i per acabar s'executarà
+=settings.sh=.
+
+El primer arranc pot trigar uns minuts, mentre es descarreguen i
+instal·len tots els paquets.
+
+En arrancs posteriors el fitxer =settings.el= s'actualitzarà
+automàticament si s'ha fet cap canvi en aquest document.
+
+El fitxer =settings.sh= mai s'actualitza, cal esborrar-lo i es
+generarà i executarà novament en el següent arranc.
 
 * Introducció
 
-La configuració d'emacs es guarda en un subdirectori de
-=user-emacs-directory=. La constant =arv/emacs-conf-dir= permet
-obtindre la ruta d'aquest directori.
+En aquest apartat es dona una visió general de la configuració i es
+detallen algunes guies/recomanacions per ajudar a mantindre la
+consistència i un nivell baix de caos.
 
-Per utilitzar un directori de configuració diferent cal definir la
-variable d'entorn =EMACS_CONFIG_DIR=.
+** Versió de org
 
-Aquesta configuració requereix emacs 24.4 o posterior.
+La configuració depèn de que /org/ estigui instal·lat, concretament el
+mòdul /babel/, per extreure (/tangle/) els blocs de codi i generar
+l'arxiu de configuració /real/ (=settings.el=).
 
-Explicar ací l'ùs d'una versió actualitzada de /org/ i que la
-configuració hauria d'utilitzar elements compatibles amb /org/ 8.2.10
-(inclosa en emacs 25.3)
+Cal que aquesta configuració /sigui compatible/, almenys pel que
+respecta a l'extracció dels blocs de codi, amb la versió de /org/ que
+s'utilitzarà durant el /bootstrap/. En cas de problemes caldrà
+actualitzar la versió de /org/.
 
-El directori =site-lisp= s'utilitza per guardar codi extern no
-disponible en ELPA. S'ha de minimitzar l'ús en la mesura del possible.
-Si s'afegeixen nous mòduls cal actualitzar els /autoloads/:
+Durant el primer arranc es descarregarà el codi font de /org/ i
+s'instal·larà baix la jerarquia de directoris =~/.local=. En els
+arrancs subseqüents s'utilitzarà la nova versió.
 
-#+begin_src emacs-lisp :tangle no
-  (let* ((site-lisp-path (arv/path-concat arv/emacs-conf-dir "site-lisp"))
-         (generated-autoload-file (arv/path-concat site-lisp-path "loaddefs.el")))
-    (update-directory-autoloads site-lisp-path))
-#+end_src
+** Configuració de paquets
 
-La configuració d'alguns paquets requereix instal·lar comandes
-externes. Açò es documenta en cada paquet però al estar /desperdigat/
-pot ser difícil de trobar. Mirar com es pot fer que aquesta informació
-es pugui localitzar ràpidament. Es viable incloure les comandes
-d'instal·lació en blocs de codi i /executar/ l'arxiu org?
+La configuració dels paquets només pot incloure modificació d'elements
+definits pel propi paquet. No pot definir tecles globals, no pot
+activar cap funcionalitat etc.
 
-En relació a això, definir unes recomanacions pel que fa als blocs de
-codi de forma que la instal·lació sigui automatitzable.
+La idea és mantindre la localitat separant responsabilitats.
+
+Actualment alguns paquets no ho compleixen.
+
+** Configuració de modes
+
+Un mode en essència és un paquet però en aquest punt encara no he
+decidit com organitzar-ho.
+
+Tampoc he decidit si tots paquets han d'anar a la mateixa secció o
+poden apareixer en la secció del mode en que s'utilitzen (com està
+ara).
 
 ** Blocs de codi sh
 
@@ -50,20 +97,37 @@ Un dels objectius és automatitzar la configuració inicial de l'entorn.
 Una de les eines utilitzades per aconsseguir-ho són el blocs de codi
 /sh/.
 
-Els bloc /sh/ s'utilitzen en dos contexts:
+Els bloc /sh/ s'utilitzen en varis contexts:
 
-- s'insereixen en un arxiu per formar un únic script. Aquest script
-  serà executat automàticament durant el primer arranc d'emacs.
+- s'insereixen en un arxiu per formar un únic script =settings.sh=.
+  Aquest script serà executat automàticament durant el primer arranc
+  d'emacs.
 
 - s'avaluen individualment des del propi document. Per exemple, quan
   s'afegeix un nou paquet a la configuració i cal instal·lar-lo
   avaluant el bloc de codi.
 
-Cal tindre molta cura al escriure aquests blocs de codi per tal de
-garantir que funcionin en els dos contexts. Cada bloc de codi pot
-assumir que el directori de treball és =~/.emacs.d/conf.d= i en
-finalitzar ha de restaurar el directori de treball (utilitzant =pushd=
-i =popd= enlloc de =cd=, per exemple).
+- en un sistema ja configurat en el que s'ha esborrat l'arxiu
+  =settings.sh=. És igual que el punt 1 però l'entorn ja està
+  configurat.
+
+Cal tindre cura al escriure aquests blocs de codi per tal de garantir
+que funcionin en tots els contexts:
+
+- cal preservar l'entorn d'execució: si es modifica l'entorn
+  d'execució, en la modalitat /script/ (contexts 1 i 3), els canvis
+  afectaran als blocs que s'executin a continuació.
+
+  En particular cal preservar el directori de treball. El codi pot
+  assumir que el directori de treball és =~/.emacs.d/conf.d=. Al
+  finalitzar ha de restaurar el directori de treball (utilitzant
+  =pushd= i =popd= enlloc de =cd=, per exemple).
+
+- cal que sigui independent: el codi ha de funcionar tant si s'executa
+  en modalitat /script/ com en modalitat /bloc/.
+
+- cal que sigui idempotent: el codi pot executar-se més d'una vegada i
+  ha de funcionar corretament tant la primera com la resta.
 
 El directori =scripts= conté alguns scripts per simplificar les
 tasques més habituals:
@@ -112,6 +176,12 @@ comandos personals els configuro sota el prefix C-c C-a i segueixo el
 conveni de que els moduls que escric defineixen el seu propi
 "subespai" de tecles (p.e. todo.el utilitza C-c C-a C-r).
 #+END_QUOTE
+
+** Directori =site-lisp=
+
+Desenvolupar.
+
+Dos directoris =site-lisp=, que ficar en cadascun, no abusar. Gestió.
 
 * Informació personal
 
