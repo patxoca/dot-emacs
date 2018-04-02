@@ -315,24 +315,31 @@ En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
   (setq load-prefer-newer t)
 #+end_src
 
-*** Configurar directoris addicionals amb codi elisp
+*** Configurar directori =site-lisp= local
 
-Fins que trobi una solució general, en la configuració de cada paquet
-instal·lat manualment s'actualitza =load-path=.
+El subdirectori =site-lisp= de la configuració s'utilitza per guardar
+paquets no disponibles en els repositoris (elpa o git).
+
+Tot i que no és habitual, els paquets poden necessitar canvis
+esporàdics per resoldre errors, mantindre la compatibilitat etc. Per
+facilitar-me la vida l'arxiu =loaddefs.el= es genera si no existeix o
+està desactualitzat respecte als corresponents =.el=.
 
 #+begin_src emacs-lisp :tangle yes
-  (add-to-list 'load-path (arv/path-concat arv/emacs-conf-dir "site-lisp"))
-#+end_src
-
-Falta carregar els autoloads.
-
-#+begin_src emacs-lisp :tangle yes
-  (let* ((site-lisp-path (arv/path-concat arv/emacs-conf-dir "site-lisp"))
+  (let* ((site-lisp-path (expand-file-name (arv/path-concat arv/emacs-conf-dir "site-lisp")))
          (generated-autoload-file (arv/path-concat site-lisp-path "loaddefs.el")))
-    (unless (file-exists-p generated-autoload-file)
+    (unless (and (file-exists-p generated-autoload-file)
+                 (null (cl-remove-if
+                        (lambda (x) (or (string= generated-autoload-file x)
+                                   (file-newer-than-file-p generated-autoload-file x)))
+                        (directory-files site-lisp-path t "\\.el$"))))
       (update-directory-autoloads site-lisp-path))
     (load generated-autoload-file))
 #+end_src
+
+Encara que =use-package= permet definir /autoloads/ l'ús de
+=loaddef.el= és recomanable i no penalitza el temps d'arranc de manera
+apreciable.
 
 *** Biblioteques addicionals
 
