@@ -1,8 +1,11 @@
 ;;; figlet.el --- FIGlet definitions for Emacs.
+
 ;;;; Copyright (c) 2007 Martin Giese. All rights reserved.
+;;;; Copyright (c) 2018 Alexis Roda. All rights reserved.
 ;;;;
 ;;;; Author: Martin Giese
 ;;;; Author: Dimitry Gashinsky
+;;;; Author: Alexis Roda
 ;;;; Id: 295eb73b-9e95-46a6-9cce-366436f9712f
 ;;;;
 
@@ -68,19 +71,31 @@ the current directory."
          (font-alist (mapcar (lambda (x) (list x)) figlet-fonts)))
     (completing-read prompt font-alist)))
 
-(defun figlet--call (font string)
-  (push-mark)
-  (apply #'call-process
-         `("figlet" nil ,(current-buffer) nil
-           ,@(if (null figlet-font-dir) `()
-               `("-d" ,(expand-file-name figlet-font-dir)))
-           ,@(if (null font) `()
-               `("-f" ,font))
-           ,string))
-  (exchange-point-and-mark))
+(defun figlet--ensure-bolp ()
+    (unless (bolp)
+      (end-of-line)
+      (newline)))
 
-(defun figlet--comment-region ()
-  (comment-region (region-beginning) (region-end)
+(defun figlet--call (font string &optional post-process)
+  (figlet--ensure-bolp)
+  (ignore
+   (let ((begin (point))
+         (end nil))
+     (apply #'call-process
+            `("figlet" nil ,(current-buffer) nil
+              ,@(if (null figlet-font-dir) `()
+                  `("-d" ,(expand-file-name figlet-font-dir)))
+              ,@(if (null font) `()
+                  `("-f" ,font))
+              ,string))
+     (figlet--ensure-bolp)
+     (setq end (point))
+     (delete-trailing-whitespace begin end)
+     (when post-process
+       (funcall post-process begin end)))))
+
+(defun figlet--comment-region (begin end)
+  (comment-region begin end
                   (if (member major-mode '(emacs-lisp-mode lisp-mode scheme-mode))
                       3
                     nil)))
@@ -98,17 +113,14 @@ the current directory."
   "Insert string S as a FIGlet as a comment.
 Optional argument FONT font, nil for default."
   (interactive (figlet--interactive current-prefix-arg))
-  (save-excursion
-    (figlet--call (if (null font) figlet-default-font font) s)
-    (figlet--comment-region)))
+  (figlet--call (or font figlet-default-font) s #'figlet--comment-region))
 
 ;;;###autoload
 (defun figlet-no-comment (s &optional font)
   "Insert string S as a FIGlet without comment.
 Optional argument FONT font, nil for default."
   (interactive  (figlet--interactive current-prefix-arg))
-  (save-excursion
-    (figlet--call (if (null font) figlet-default-font font) s)))
+  (figlet--call (or font figlet-default-font) s))
 
 ;;;###autoload
 (defun banner (s)
@@ -121,6 +133,24 @@ Optional argument FONT font, nil for default."
   "Insert string S as a no comment FIGlet using the banner font."
   (interactive "sFIGlet Banner Text: ")
   (figlet-no-comment s "banner"))
+
+;;;###autoload
+(defun figlet-display-fonts ()
+  "Display the font gallery in a buffer."
+  (interactive)
+  (let ((buffer (get-buffer-create "*figlet-fonts*")))
+    (with-current-buffer buffer
+      (setq buffer-read-only nil)
+      (erase-buffer)
+      (dolist (font (figlet--font-names) nil)
+        (insert "Font: " font)
+        (newline 2)
+        (figlet-no-comment "Lazy dog." font)
+        (newline 2))
+      (set-buffer-modified-p nil)
+      (setq buffer-read-only t)
+      (goto-char (point-min)))
+    (set-window-buffer nil buffer)))
 
 (provide 'figlet)
 
