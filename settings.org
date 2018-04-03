@@ -1823,7 +1823,7 @@ Per instal·lar:
   pushd ~/.local/src
   if [ ! -d org-mode ] ; then
       echo "Descarregant i instal·lant 'org-mode'."
-      git --quiet clone https://code.orgmode.org/bzg/org-mode.git
+      git clone --quiet https://code.orgmode.org/bzg/org-mode.git
       cd org-mode
       make local.mk
       sed -i -r -e 's!^prefix\s+=.*$!prefix = $(HOME)/.local/share!' local.mk
