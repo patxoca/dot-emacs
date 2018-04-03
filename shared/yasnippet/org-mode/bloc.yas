@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: org bloc
+# $Id:$
+# key: <
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 64d0a19e-ce7d-4a97-b3e6-6e9902a863c3
+# --
+#+begin_${1:env} ${2:params}
+$0
+#+end_$1
