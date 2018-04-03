@@ -62,7 +62,7 @@
   (unless (file-exists-p settings-sh)
     (org-babel-tangle-file settings-org settings-sh "sh")
     (chmod settings-sh #o700)
-    (start-process "env-setup" "*env-setup*" settings-sh)
+    (start-process "env-setup" "*env-setup*" "/bin/bash" "-c" settings-sh)
     (switch-to-buffer "*env-setup*")))
 
 
