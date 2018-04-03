@@ -328,6 +328,15 @@ Implementar scripts per automatitzar la gestió dels paquets en
 - pull + compilar
 - esborrar un paquet
 
+** TODO eliminar confirmació al matar buffers                     :annoyance:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-03 dt 00:29]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Bugs,%20mol%C3%A8sties,%20millores%20etc.][Bugs, molèsties, millores etc.]]
+   :END:
+
+En ibuffer, després de marcar varis buffers amb =d= l'execució (=x=)
+demana confirmació. Mirar si es pot configurar per no demanar-la.
+
 ** TODO highlight-thing-at-point                                       :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-04-03 dt 14:15]
