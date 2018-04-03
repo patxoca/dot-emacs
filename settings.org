@@ -974,8 +974,9 @@ tema.
   (use-package ido
     :commands (ido-mode ido-everywhere)
     :config
-    (custom-set-faces
-     '(ido-first-match ((t (:background "pale green" :foreground "black")))))
+    (set-face-attribute 'ido-first-match nil
+                        :background "pale green"
+                        :foreground "black")
 
     ;; Inhibit switching to other directory when no matches are found in
     ;; the current directory.
