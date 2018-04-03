@@ -1,0 +1,6 @@
+#!/bin/bash
+
+HERE=$(dirname $0)
+. $HERE/config
+
+compile_directory $EMACS_CONF_SITELISP $EMACS_CONF_SITELISP/loaddefs.el

@@ -3,23 +3,4 @@
 HERE=$(dirname $0)
 . $HERE/config
 
-PKG_DIR=$EMACS_USER_SITELISP/$1
-
-echo "Compilant '$1'"
-
-# WARNING: és IMPRESCINCIBLE que $load_path acabi amb :. En cas
-# contrari substituirà el valor de la variable lisp load-path enlloc
-# d'ampliar-lo.
-for p in $EMACS_USER_SITELISP/* $EMACS_CONF_SITELISP ; do
-    load_path="$load_path$p:"
-done
-
-emacs --batch \
-      --eval "(let ((generated-autoload-file \"$EMACS_USER_SITELISP/loaddefs.el\")) \
-                 (update-directory-autoloads \"$PKG_DIR\"))"
-
-EMACSLOADPATH=$load_path emacs --batch \
-      --eval "(progn \
-                 (package-initialize) \
-                 (byte-recompile-directory \"$PKG_DIR\" 0 t))" \
-      >& $PKG_DIR/compile.log
+compile_directory $EMACS_USER_SITELISP/$1 $EMACS_USER_SITELISP/loaddefs.el

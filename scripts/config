@@ -1,4 +1,50 @@
+# -*- mode: sh -*-
+
 export EMACS_USER_DIR=~/.emacs.d
 export EMACS_CONF_DIR=~/.emacs.d/conf.d
 export EMACS_USER_SITELISP=$EMACS_USER_DIR/site-lisp
 export EMACS_CONF_SITELISP=$EMACS_CONF_DIR/site-lisp
+
+# -- funcions -----------------------------------------------------------------
+
+function get_packages_name {
+    local p
+
+    for p in $EMACS_USER_SITELISP/* ; do
+        if [ -d $p -a -n "$(ls $p/*.el 2> /dev/null)" ] ; then
+            basename $p
+        fi
+    done
+}
+
+function get_load_path {
+    local lp
+    local p
+
+    for p in $(get_packages_name) ; do
+        lp="$lp$EMACS_USER_SITELISP/$p:"
+    done
+
+    echo "${lp}$EMACS_CONF_SITELISP"
+}
+
+function compile_directory {
+    local pkg_dir=$1
+    local loaddefs=$2
+    # WARNING: és IMPRESCINCIBLE que el valor acabi amb :. En cas
+    # contrari substituirà el valor de la variable lisp load-path
+    # enlloc d'ampliar-lo.
+    local load_path=$(get_load_path):
+
+    echo "Compilant '$1'"
+
+    emacs --batch \
+          --eval "(let ((generated-autoload-file \"$loaddefs\")) \
+                    (update-directory-autoloads \"$pkg_dir\"))"
+
+    EMACSLOADPATH=$load_path emacs --batch \
+          --eval "(progn \
+                    (package-initialize) \
+                    (byte-recompile-directory \"$pkg_dir\" 0 t))" \
+          >& $pkg_dir/compile.log
+}
