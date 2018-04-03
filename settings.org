@@ -22,6 +22,9 @@ En teoria aquesta configuració hauria de funcionar amb emacs 24.4 o
 posterior. En la pràctica només està provada amb emacs 25.2.1 i
 25.3.1.
 
+Dependències: =git=, =make= i =makeinfo= (per instal·lar org). En
+ubuntu el paquet /texinfo/ proveeix la comanda =makeinfo=.
+
 #+begin_src sh :tangle no
   mkdir ~/.emacs.d
   cd ~/.emacs.d
