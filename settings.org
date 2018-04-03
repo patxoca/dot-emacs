@@ -1239,6 +1239,8 @@ cap funcionalitat.
 
 *** =psvn=                                                           :manual:
 
+http://www.xsteve.at/prg/emacs/psvn.el
+
 Integració amb el control de versions /subversion/.
 
 #+begin_src emacs-lisp :tangle yes
