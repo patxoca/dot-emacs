@@ -380,6 +380,20 @@ Implementar comandes =arv/camelize-symbol-at-point= i
 
 El mòdul =arv-yas= (crec) té implementacions.
 
+** TODO renombrar comandes de =settings.org= ?                         :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-04 dc 21:34]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
+   :END:
+
+En algunes configuracions he vist funcions prefixades amb =my/=. No
+segueixo eixa convenció però potser seria bona idea pels simbols
+definits en =settings-org=, una especie d'espai de noms local/privat i
+independent dels mòduls.
+
+A més d'evitar conflictes de noms permet identificar els elements
+/privats/. No sé si cap d'aquestes consideracions és molt realista.
+
 
 * Completat
 
