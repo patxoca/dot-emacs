@@ -79,8 +79,7 @@ the current directory."
 (defun figlet--call (font string &optional post-process)
   (figlet--ensure-bolp)
   (ignore
-   (let ((begin (point))
-         (end nil))
+   (let ((begin (point)))
      (apply #'call-process
             `("figlet" nil ,(current-buffer) nil
               ,@(when figlet-font-dir
@@ -89,10 +88,9 @@ the current directory."
                   `("-f" ,font))
               ,string))
      (figlet--ensure-bolp)
-     (setq end (point))
-     (delete-trailing-whitespace begin end)
+     (delete-trailing-whitespace begin (point))
      (when post-process
-       (funcall post-process begin end)))))
+       (funcall post-process begin (point))))))
 
 (defun figlet--comment-region (begin end)
   (comment-region begin end

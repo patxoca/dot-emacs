@@ -338,7 +338,7 @@ buscar.
 He trobat la funció =highlight-symbol-at-point= (=M-s h .=) però en sh
 sembla que no acaba de funcionar com vull. Investigar-ho.
 
-** TODO elpy-goto-definition no funciona :bug:
+** TODO elpy-goto-definition no funciona                                :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-04 dc 09:41]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
@@ -351,7 +351,7 @@ no funciona.
 =company= no ha funcionat bé durant una estona, però probablement
 sigui perquè /jedi/ estava fred.
 
-** TODO =arv/django-mode= no s'activa :bug:
+** TODO =arv/django-mode= no s'activa                                   :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-04 dc 09:44]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
@@ -360,7 +360,7 @@ sigui perquè /jedi/ estava fred.
 Al obrir arxius que pertanyen a un projecte django el mode
 =arv/django-mode= no s'activa i les tecles =C-c d ...= no funcionen.
 
-** TODO ressaltar finestra activa :idea:
+** TODO ressaltar finestra activa                                      :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-04-04 dc 14:17]
    :REFERER:
@@ -369,18 +369,7 @@ Al obrir arxius que pertanyen a un projecte django el mode
 Mirar si és possible ressaltar la finestra activa (o des-ressaltar la
 resta, amb un fons lleugerament més fosc p.e.).
 
-** TODO error en figlet :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 16:18]
-   :REFERER:
-   :END:
-
-En =ol2_candof_core=, =test_bloqueig_emails_candidatures_laborals.py=,
-al inserir un comentari figlet sobre la secció d'operacions també es
-comenten les dos primeres línies de la classe que va a continuació i
-s'insereix un salt de línia en =def set\nUp=.
-
-** TODO comandes camelize i uncamelize :idea:
+** TODO comandes camelize i uncamelize                                 :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-04-04 dc 17:11]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_oferta_evha/ol2_oferta_evha/tests/test_ol2_candof.py::GaranteixEmailAlActivarNofiticacionsDeNovesCandidatures]]
@@ -764,3 +753,17 @@ Implementar scripts per automatitzar la gestió dels paquets en
 
 - pull + compilar
 - esborrar un paquet
+
+** DONE error en figlet                                                 :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-04 dc 16:18]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-04 dc 21:06] \\
+     r842
+
+En =ol2_candof_core=, =test_bloqueig_emails_candidatures_laborals.py=,
+al inserir un comentari figlet sobre la secció d'operacions també es
+comenten les dos primeres línies de la classe que va a continuació i
+s'insereix un salt de línia en =def set\nUp=.
