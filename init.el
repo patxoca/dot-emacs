@@ -51,6 +51,10 @@
 ;; si es vol processar la configuració sense haver de carregar org
 ;; prèviament.
 
+;; NOTE: el script "scripts/update_conf_from_svn" és solapa amb la
+;; funcionalitat següent. Si es fa cap canvi ací caldrà reflectir-lo
+;; allí.
+
 (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org"))
       (settings-sh (arv/path-concat arv/emacs-conf-dir "settings.sh")))
 

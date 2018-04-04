@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Descarrega la configuració des de SVN i recompila/regenera el que
+# calgui.
+
+HERE=$(dirname $0)
+. $HERE/config
+
+cd $EMACS_CONF_DIR
+
+svn update
+
+compile_directory $EMACS_CONF_SITELISP $EMACS_CONF_SITELISP/loaddefs.el
+
+# NOTE: Hi ha una mica de solapament entre aquest script i "init.el".
+# Una alternativa podria ser substituir el codi de més avall per un
+# simple:
+#
+# rm -f settings.el settings.sh
+# emacs -nw
+#
+# -nw perquè carrega una mica més ràpid en mode terminal.
+#
+# Però no m'agrada que emacs quedi obert. Pel moment es queda el
+# solapament. Si és problemàtic ja mirarè com unificar-ho.
+
+# regenera settings.el
+read -d '' PROGN_ELISP <<"EOF"
+(progn
+  (require 'org)
+  (org-babel-tangle-file "settings.org" "settings.el" "emacs-lisp"))
+EOF
+rm -f settings.el
+emacs --batch --eval "$PROGN_ELISP"
+
+# regenera settings.sh
+read -d '' PROGN_SH <<"EOF"
+(progn
+  (require 'org)
+  (org-babel-tangle-file "settings.org" "settings.sh" "sh"))
+EOF
+rm -f settings.sh
+emacs --batch --eval "$PROGN_SH"
+if [ -f settings.sh ] ; then
+    /bin/bash settings.sh
+fi
