@@ -4192,6 +4192,53 @@ Açò anirà en alguna secció /global/.
   (winner-mode t)
 #+end_src
 
+** =arv/camelize=
+
+De vegades vull convertir =foo_bar= en =FooBar= i al revés:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun x-my/camelize ()
+    (interactive)
+    (when (looking-at-p "\\sw")
+      (let* ((begin (save-excursion
+                      (while (and (not (bobp)) (looking-back "\\sw\\|\\s_"))
+                        (backward-word))
+                      (point)))
+             (end (save-excursion
+                    (while (and (not (eobp)) (looking-at "\\sw\\|\\s_"))
+                      (forward-word))
+                    (point)))
+             (text (buffer-substring-no-properties begin end))
+             (replacement (with-syntax-table (standard-syntax-table)
+                            (if (string-match-p "^\\sw+$" text)
+                                ;; CamelCase -> camel_case
+                                (mapconcat 'downcase (s-split-words text) "_")
+                              ;; camel_case -> CamelCase
+                              (mapconcat 'capitalize (s-split-words text) "")
+                              ))))
+        (save-excursion
+          (goto-char begin)
+          (delete-region begin end)
+          (insert replacement)
+          )
+        )))
+#+end_src
+
+- en programes python funciona correctament però no en emacs-lisp
+  (falla si el cursor està sobre un guió). Suposo que hauria
+  d'investigar les /syntax table/.
+
+- el separador està fixat al codi. Igual es podria configurar en cada
+  mode.
+
+Pel moment és suficientment bó. Si resulta útil acabaré de polir-la.
+
+En certa forma açò és una generalització de =capitalize=:
+
+#+begin_src emacs-lisp :tangle yes
+  (global-set-key (kbd "M-c") 'x-my/camelize)
+#+end_src
+
 
 * Per mirar
 
