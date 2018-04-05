@@ -391,17 +391,6 @@ cap definició especial, almenys en =grin.el=.
 
 Probablement no tingui relació però ara no utilitzo =projectile=.
 
-** TODO error en =my/camelize=                                          :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-05 dj 12:50]
-   :REFERER:
-   :END:
-
-La comanda falla amb identificadors tipus =none=: són només alpha i
-els identifica com /CamelCase/, la conversió /camel_case/ els deixa
-igual.
-
-En aquesta cas voldria convertir-lo en =None=.
 
 * Completat
 
@@ -825,3 +814,18 @@ sigui perquè /jedi/ estava fred.
 
 Al obrir arxius que pertanyen a un projecte django el mode
 =arv/django-mode= no s'activa i les tecles =C-c d ...= no funcionen.
+
+** DONE error en =my/camelize=                                          :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-05 dj 12:50]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-05 dj 18:01] \\
+     r847
+
+La comanda falla amb identificadors tipus =none=: són només alpha i
+els identifica com /CamelCase/, la conversió /camel_case/ els deixa
+igual.
+
+En aquesta cas voldria convertir-lo en =None=.

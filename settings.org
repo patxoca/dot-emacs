@@ -4199,7 +4199,7 @@ De vegades vull convertir =foo_bar= en =FooBar= i al revés:
 #+begin_src emacs-lisp :tangle yes
   (defun x-my/camelize ()
     (interactive)
-    (when (looking-at-p "\\sw")
+    (when (looking-at-p "\\sw\\|\\s_")
       (let* ((begin (save-excursion
                       (while (and (not (bobp)) (looking-back "\\sw\\|\\s_"))
                         (backward-word))
@@ -4210,7 +4210,8 @@ De vegades vull convertir =foo_bar= en =FooBar= i al revés:
                     (point)))
              (text (buffer-substring-no-properties begin end))
              (replacement (with-syntax-table (standard-syntax-table)
-                            (if (string-match-p "^\\sw+$" text)
+                            (if (and (string-match-p "^\\sw+$" text)
+                                     (s-mixedcase-p text))
                                 ;; CamelCase -> camel_case
                                 (mapconcat 'downcase (s-split-words text) "_")
                               ;; camel_case -> CamelCase
@@ -4224,14 +4225,9 @@ De vegades vull convertir =foo_bar= en =FooBar= i al revés:
         )))
 #+end_src
 
-- en programes python funciona correctament però no en emacs-lisp
-  (falla si el cursor està sobre un guió). Suposo que hauria
-  d'investigar les /syntax table/.
-
-- el separador està fixat al codi. Igual es podria configurar en cada
-  mode.
-
-Pel moment és suficientment bó. Si resulta útil acabaré de polir-la.
+El separador està fixat al codi però pel moment és suficientment bó.
+El provaré en =python-mode= per veure que tal. Si resulta útil acabaré
+de polir-la.
 
 En certa forma açò és una generalització de =capitalize=:
 
