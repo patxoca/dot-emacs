@@ -338,28 +338,6 @@ buscar.
 He trobat la funció =highlight-symbol-at-point= (=M-s h .=) però en sh
 sembla que no acaba de funcionar com vull. Investigar-ho.
 
-** TODO elpy-goto-definition no funciona                                :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 09:41]
-   :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
-   :END:
-
-En =python-mode=, per una banda la tecla =M-.= està definida com
-"xref-find-definitions" i executant directament =elpy-goto-definition=
-no funciona.
-
-=company= no ha funcionat bé durant una estona, però probablement
-sigui perquè /jedi/ estava fred.
-
-** TODO =arv/django-mode= no s'activa                                   :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 09:44]
-   :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
-   :END:
-
-Al obrir arxius que pertanyen a un projecte django el mode
-=arv/django-mode= no s'activa i les tecles =C-c d ...= no funcionen.
-
 ** TODO ressaltar finestra activa                                      :idea:
    :PROPERTIES:
    :PUB_DATE: [2018-04-04 dc 14:17]
@@ -394,6 +372,36 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
+** TODO comportament estrany de variables locals                        :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-05 dj 11:13]
+   :REFERER:
+   :END:
+
+En Hera, quan es carrega =.dir-locals= demana confirmació de les
+variables no segures. =!= sembla que les accepta (al menys les
+inicialitza) però el canvi no es persisteix en =custom-file=.
+
+Comportament estrany: al obrir explícitament =.dir-locals= s'esborren
+algunes variables de l'arxiu =custom-file=. Si després s'obre
+=xxx/setup.py= (p.e.) pregunta i n'afegeixen algunes, altres no.
+
+Accepta =grin-cmd= com variable segura, però no em consta que tingui
+cap definició especial, almenys en =grin.el=.
+
+Probablement no tingui relació però ara no utilitzo =projectile=.
+
+** TODO error en =my/camelize=                                          :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-05 dj 12:50]
+   :REFERER:
+   :END:
+
+La comanda falla amb identificadors tipus =none=: són només alpha i
+els identifica com /CamelCase/, la conversió /camel_case/ els deixa
+igual.
+
+En aquesta cas voldria convertir-lo en =None=.
 
 * Completat
 
@@ -781,3 +789,39 @@ En =ol2_candof_core=, =test_bloqueig_emails_candidatures_laborals.py=,
 al inserir un comentari figlet sobre la secció d'operacions també es
 comenten les dos primeres línies de la classe que va a continuació i
 s'insereix un salt de línia en =def set\nUp=.
+
+** DONE =elpy-goto-definition= no funciona                              :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-04 dc 09:41]
+   :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-05 dj 08:23] \\
+     El problema és que no estava instal·lat el paquet =jedi= (en versions
+     anteriors no calia, funcionava amb =rope=).
+
+     Segon [[help:xref-find-definitions][l'ajuda]] el bindind de =M-.= sembla correcte.
+
+En =python-mode=, per una banda la tecla =M-.= està definida com
+=xref-find-definitions= i executant directament =elpy-goto-definition=
+no funciona.
+
+=company= no ha funcionat bé durant una estona, però probablement
+sigui perquè /jedi/ estava fred.
+
+** DONE =arv/django-mode= no s'activa                                   :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-04 dc 09:44]
+   :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-05 dj 08:30] \\
+     Ara no recordo quin però un mòdul requeria =arv-django= quan el nom és
+     =arv-py-django= (suposo que en algun punt durant la migració vaig
+     canviar noms), el =require= fallava i la inicialització fallava abans
+     de carregar =arv/django-mode=.
+
+     Corregint el =require= ja funciona.
+
+Al obrir arxius que pertanyen a un projecte django el mode
+=arv/django-mode= no s'activa i les tecles =C-c d ...= no funcionen.
