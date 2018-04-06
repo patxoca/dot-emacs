@@ -4216,10 +4216,18 @@ fer desapareixer.
                                   "*Buffer List*"
                                   "*Compile-Log*"
                                   "*Completions*"
+                                  "*grep*"
                                   "*Help*"
                                   "*hera-events*"
                                   "*Occur*"
-                                  "*pytest*")))
+                                  "*pytest*"
+                                  "*svn-diff*"
+                                  "*svn-info*"
+                                  "*svn-info-output*"
+                                  "*svn-log*"
+                                  "*svn-log-edit*"
+                                  "*svn-property-edit*"
+                                  )))
 #+end_src
 
 Açò anirà en alguna secció /global/.
