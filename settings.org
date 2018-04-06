@@ -1027,6 +1027,9 @@ buffers i arxius.
     :ensure t
     :after ido
     :config
+    (use-package info
+      :commands Info-menu)
+    (push 'Info-menu ido-cr+-function-blacklist)
     (ido-ubiquitous-mode 1))
 #+end_src
 

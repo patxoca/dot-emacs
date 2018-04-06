@@ -11,22 +11,6 @@
 # Aquesta secció és el target d'una plantilla de captura. Si es canvia
 # el text del títol caldrà ajustar la plantilla.
 
-** TODO error amb la comanda =m= en buffers /info/                      :bug:
-
-En buffers /info/ la comanda =m= (=Info-menu=) normalment congela
-/emacs/ al cap d'uns segons de mostrar la llista de candidats. =C-g=
-recupera el control.
-
-Mirar si té a veure en algun del paquets =ido=.
-
-Havia una mena d'error al inicialitzar =INFOPATH=, el directori
-personal anava al final amb el que era ignorat. No veig com açò podria
-confondre a /info/ però després de canviar-ho sembla estable.
-
-Fent proves amb el valor de =INFOPATH= soc incapaç de reproduir el
-comportament problemàtic. Alguna cosa ha canviat que ha resolt el
-problema.
-
 ** TODO moure funcionalitat                                     :enhancement:
 
 Algunes configuracions activen funcionalitats o fan canvis /globals/
@@ -836,3 +820,28 @@ El mòdul =arv-yas= (crec) té implementacions.
 
 En ibuffer, després de marcar varis buffers amb =d= l'execució (=x=)
 demana confirmació. Mirar si es pot configurar per no demanar-la.
+
+** DONE error amb la comanda =m= en buffers /info/                      :bug:
+
+   - State "DONE"       from "TODO"       [2018-04-06 dv 22:06] \\
+     r854
+
+     He obert [[https://github.com/DarwinAwardWinner/ido-completing-read-plus/issues/151][una incidència]] a github.
+
+     Provisionalment afegeixo la funció =Ido-menu= a la llista negra
+     =ido-cr+-function-blacklist=. En aquesta pantalla no em treu la
+     son perdre la funcionalitat de =ido=.
+
+En buffers /info/ la comanda =m= (=Info-menu=) normalment congela
+/emacs/ al cap d'uns segons de mostrar la llista de candidats. =C-g=
+recupera el control.
+
+Mirar si té a veure en algun del paquets =ido=.
+
+Havia una mena d'error al inicialitzar =INFOPATH=, el directori
+personal anava al final amb el que era ignorat. No veig com açò podria
+confondre a /info/ però després de canviar-ho sembla estable.
+
+Fent proves amb el valor de =INFOPATH= soc incapaç de reproduir el
+comportament problemàtic. Alguna cosa ha canviat que ha resolt el
+problema.
