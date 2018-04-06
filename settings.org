@@ -4209,7 +4209,17 @@ fer desapareixer.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package winner
-    :commands winner-mode)
+    :commands winner-mode
+    :config
+    (setq winner-ring-size 50)
+    (setq winner-boring-buffers '("*Apropos*"
+                                  "*Buffer List*"
+                                  "*Compile-Log*"
+                                  "*Completions*"
+                                  "*Help*"
+                                  "*hera-events*"
+                                  "*Occur*"
+                                  "*pytest*")))
 #+end_src
 
 Açò anirà en alguna secció /global/.
