@@ -2068,10 +2068,15 @@ Cal revisar el paquet =arv/org=. Fins aleshores es desactiva.
 
 Veure [[info:org#Capture%20templates][Capture templates]] per detalls.
 
+
 #+begin_src emacs-lisp :tangle yes
   (setq org-capture-templates
-        `(("t"
-           "Todo emacs"
+        `(
+
+          ;; Aquesta serveix per capturar notes relacionades amb la configuració d'emacs:
+
+          ("t"
+           "TODO emacs"
            entry
            (file+headline "~/.emacs.d/conf.d/notes.org" "Bugs, molèsties, millores etc.")
            ,(concat "** TODO %^{Heading} %^g\n"
@@ -2080,8 +2085,25 @@ Veure [[info:org#Capture%20templates][Capture templates]] per detalls.
                     "   :REFERER: %a\n"
                     "   :END:\n\n"
                     "%?")
+           :empty-lines 1)
+
+          ;; Aquesta la utilitzo per capturar notes quan treballo en Hera. Potser
+          ;; es podria generalitzar a notes per projecte.
+
+          ("p"
+           "TODO Hera"
+           entry
+           (file+headline ,(arv/path-concat (getenv "HERA_ROOT") "doc_dev" "TODO.org") "TODOs")
+           ,(concat "** TODO %^{Heading} %^g\n"
+                    "   :PROPERTIES:\n"
+                    "   :PUB_DATE: %U\n"
+                    "   :REFERER: %a\n"
+                    "   :END:\n\n"
+                    "%?")
+           :prepend
            :empty-lines 1)))
 #+end_src
+
 
 **** Configuracions desactivades
 
