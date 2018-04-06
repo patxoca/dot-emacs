@@ -1534,7 +1534,7 @@ de directori.
   (add-hook 'after-save-hook 'arv/sass-compile-on-save)
 #+end_src
 
-*** emacs-lisp
+*** emacs-lisp, ielm
 **** =elisp-slime-nav=
 
 https://github.com/purcell/elisp-slime-nav
@@ -1634,6 +1634,14 @@ https://github.com/purcell/elisp-slime-nav
               (paredit-mode 1)
               (elisp-slime-nav-mode 1)
               (prettify-symbols-mode 1)))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'ielm-mode-hook
+            (lambda ()
+              (company-mode t)
+              (eldoc-mode 1)
+              (elisp-slime-nav-mode 1)))
 #+end_src
 *** go                                                      :desactivat:brut:
 
