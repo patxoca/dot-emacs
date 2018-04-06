@@ -2898,14 +2898,6 @@ Prefereixo utilitzar espais pel sagnat, conserven el format.
   (customize-set-variable 'tab-width 4)
 #+end_src
 
-Variables i valors que es consideren segurs quan s'utilitzen en
-variables locals al buffer:
-
-#+begin_src emacs-lisp :tangle yes
-  (customize-set-value 'safe-local-variable-values
-                       '((encoding . utf-8)))
-#+end_src
-
 Algunes comandes, que es consideren /perilloses/ pels /novatos/, estan
 desactivades. A aquestes alçades crec que puc activar-les totes:
 

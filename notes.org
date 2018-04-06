@@ -336,25 +336,6 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
-** TODO comportament estrany de variables locals                        :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-05 dj 11:13]
-   :REFERER:
-   :END:
-
-En Hera, quan es carrega =.dir-locals= demana confirmació de les
-variables no segures. =!= sembla que les accepta (al menys les
-inicialitza) però el canvi no es persisteix en =custom-file=.
-
-Comportament estrany: al obrir explícitament =.dir-locals= s'esborren
-algunes variables de l'arxiu =custom-file=. Si després s'obre
-=xxx/setup.py= (p.e.) pregunta i n'afegeixen algunes, altres no.
-
-Accepta =grin-cmd= com variable segura, però no em consta que tingui
-cap definició especial, almenys en =grin.el=.
-
-Probablement no tingui relació però ara no utilitzo =projectile=.
-
 
 * Completat
 
@@ -845,3 +826,25 @@ confondre a /info/ però després de canviar-ho sembla estable.
 Fent proves amb el valor de =INFOPATH= soc incapaç de reproduir el
 comportament problemàtic. Alguna cosa ha canviat que ha resolt el
 problema.
+
+** DONE comportament estrany de variables locals                        :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-05 dj 11:13]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-06 dv 23:28] \\
+     r856.
+
+En Hera, quan es carrega =.dir-locals= demana confirmació de les
+variables no segures. =!= sembla que les accepta (al menys les
+inicialitza) però el canvi no es persisteix en =custom-file=.
+
+Comportament estrany: al obrir explícitament =.dir-locals= s'esborren
+algunes variables de l'arxiu =custom-file=. Si després s'obre
+=xxx/setup.py= (p.e.) pregunta i n'afegeixen algunes, altres no.
+
+Accepta =grin-cmd= com variable segura, però no em consta que tingui
+cap definició especial, almenys en =grin.el=.
+
+Probablement no tingui relació però ara no utilitzo =projectile=.
