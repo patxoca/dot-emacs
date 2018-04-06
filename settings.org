@@ -1462,10 +1462,6 @@ desactivada, per accelerar la migració.
   (use-package cc-mode
     :commands (c-mode c++-mode)
     :config
-    (define-key c-mode-base-map '[f7]  'next-error)
-    (define-key c-mode-base-map '[f8]  'previous-error)
-    (define-key c-mode-base-map '[f9]  'compile)
-
     (add-hook 'c-mode-common-hook
               (lambda ()
                 (setq indent-tabs-mode nil)
@@ -1683,8 +1679,6 @@ desactivada, per accelerar la migració.
        (define-key go-mode-map (kbd "C-c j r") 'go-goto-return-values)
        (define-key go-mode-map (kbd "M-.") 'godef-jump)
        ;; compilation
-       (define-key go-mode-map (kbd "<f7>") 'next-error)
-       (define-key go-mode-map (kbd "<f8>") 'previous-error)
        (define-key go-mode-map (kbd "<f9>") 'arv/gobuild)
        (define-key go-mode-map (kbd "C-<f9>") 'arv/gotest)
        (define-key go-mode-map (kbd "M-<f9>") 'arv/goinstall)
@@ -2258,12 +2252,7 @@ següent:
 
 **** Combinacions de tecles
 
-#+begin_src emacs-lisp :tangle yes
-  (arv/bind-keys prog-mode-map
-                 '(("<f7>" next-error)
-                   ("<f8>" previous-error)
-                   ("<f9>" compile)))
-#+end_src
+Cap tecla definida.
 
 **** /Hook/
 
@@ -4027,6 +4016,10 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "<f1>") (lambda () (interactive) (info)))
   (global-set-key (kbd "C-<f1>") (lambda () (interactive) (info "emacs")))
+  (global-set-key (kbd "<f7>") 'next-error)
+  (global-set-key (kbd "<f8>") 'previous-error)
+  (global-set-key (kbd "<f9>") 'compile)
+
   (global-set-key (kbd "s-g") 'arv/goto-line)
   ;;; es un incordio tener que teclear yes para confirmar
   (global-set-key (kbd "C-<return>") "yes\C-m")
