@@ -232,19 +232,6 @@ Crec que el que vull és algo tipus =swiper= (que al moure el cursor
 mostri la linea seleccionada en el buffer) però que sigui persistent:
 cerco, trobo, modifico, torno a la cerca.
 
-** TODO revisar =diminish=                                      :enhancement:
-   :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 22:13]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
-   :END:
-
-Fent proves a =wst= he vist que la modeline mostrava varis /lighters/
-de modes menors. Activant =diminish= (=(require 'diminish)=) han
-desaparegut.
-
-Potser és moment de moure la configuració de =diminish= als
-corresponents =use-package=.
-
 ** TODO gestionar paquets absents durant la instal·lació                :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-01 dg 00:48]
@@ -335,6 +322,24 @@ independent dels mòduls.
 
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
+
+** TODO revisar snippets :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-07 ds 13:09]
+   :REFERER: [[file:~/prog/di/project/myapp/models.py::)]]
+   :END:
+
+Al expandir el /snippet/ =djmf= dóna error:
+
+#+begin_src txt
+yas--snippet-parse-create: Wrong type argument: char-or-string-p, (pyx/get-current-package-name)
+#+end_src
+
+L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
+és incorrecta.
+
+Crec que vaig renombrar algunes funcions. També és possible que
+=arv-py= no estigui carregat en aquest punt? improbable.
 
 
 * Completat
@@ -848,3 +853,23 @@ Accepta =grin-cmd= com variable segura, però no em consta que tingui
 cap definició especial, almenys en =grin.el=.
 
 Probablement no tingui relació però ara no utilitzo =projectile=.
+
+** DONE revisar =diminish=                                      :enhancement:
+   :PROPERTIES:
+   :PUB_DATE: [2018-03-31 ds 22:13]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-04-08 dg 22:04] \\
+     En =wst= vaig activar temporalment /melpa/ i alguns paquets
+     instal·lats eren no-estables. Tornant a /melpa stable/ i reinstal·lant
+     des de zero el comportament és l'esperat.
+
+     S'aprofita per moure la configuració de =diminish= als corresponents
+     =use-package=.
+Fent proves a =wst= he vist que la modeline mostrava varis /lighters/
+de modes menors. Activant =diminish= (=(require 'diminish)=) han
+desaparegut.
+
+Potser és moment de moure la configuració de =diminish= als
+corresponents =use-package=.

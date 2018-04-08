@@ -464,7 +464,8 @@ resulta útil com una mena d'autocorrector.
     :config
     (customize-set-value 'abbrev-file-name
                          (arv/path-concat arv/emacs-conf-dir "shared" "abbrev_defs"))
-    (customize-set-value 'save-abbrevs t))
+    (customize-set-value 'save-abbrevs t)
+    :diminish "")
 #+end_src
 
 La variable =abbrev-mode= és buffer local amb el que no es pot
@@ -607,7 +608,8 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
     (setq company-backends '(company-elisp
                              company-nxml
                              company-css
-                             company-files)))
+                             company-files))
+    :diminish "")
 #+end_src
 
 *** =compilation=                                                   :builtin:
@@ -624,59 +626,10 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
 
 *** =diminish=
 
-En algun moment aço es mourà als =(use-package)= dels modes.
-
-La variable =arv/diminished-modes= enumera els modes que es
-/disminuiran/. Cada element de la llista té el format:
-
-#+begin_src
-  (MODE PACKAGE REPLACEMENT)
-#+end_src
-
-On:
-
-- =MODE=, simbol obligatori: és el mode
-- =PACKAGE=, cadena opcional: nom del paquet, per defecte =MODE=
-  eliminant el sufix =-mode=.
-- =REPLACEMENT=, cadena opcional: text a mostra en la /modeline/, per
-  defecte la cadena buida.
-
-#+begin_src emacs-lisp :tangle yes
-  (setq arv/diminished-modes
-        '((abbrev-mode)
-          (company-mode)
-          (eldoc-mode)
-          (elisp-slime-nav-mode)
-          (emmet-mode "emmet-mode")
-          (hi-lock-mode)
-          (js2-refactor-mode)
-          (org-capture-mode nil " C")
-          (outline-minor-mode "outline")
-          (paredit-mode)
-          (rainbow-mode "rainbow-mode")
-          (ropemacs-mode "python-mode")
-          (tern-mode)
-          (which-key-mode)
-          (yas-minor-mode "yasnippet")))
-#+end_src
-
-Instrumentem /disminuir/ els modes quan es carrega el paquet
-corresponent:
-
 #+begin_src emacs-lisp :tangle yes
   (use-package diminish
     :ensure t
-    :commands diminish
-    :config
-    (dolist (item arv/diminished-modes)
-      (let ((mode (car item))
-            (package (or (cadr item)
-                         (s-chop-suffix "-mode" (symbol-name (car item)))))
-            (replacement (or (cl-third item) "")))
-        ;; cal retrasar diminish fins que el corresponent paquet s'hagi
-        ;; carregat i el mode es defineix.
-        (eval-after-load package
-          (list 'diminish (list 'quote mode) replacement)))))
+    :commands diminish)
 #+end_src
 
 *** =dired=                                                         :builtin:
@@ -716,7 +669,8 @@ fitxer. Personalment prefereixo evitar la proliferació de buffers.
     (set-face-attribute 'eldoc-highlight-function-argument nil
                         :underline nil
                         :foreground "yellow"
-                        :weight 'bold))
+                        :weight 'bold)
+    :diminish "")
 #+end_src
 
 *** =electric-pair=                                                 :builtin:
@@ -870,23 +824,26 @@ descarregar des de https://pypi.python.org/pypi/grin.
 *** =hi-lock=                                                       :builtin:
 
 #+begin_src emacs-lisp :tangle yes
-  (defface arv/hi-green
-    '((((min-colors 88)) (:weight bold :foreground "black" :background "light green"))
-      (t (:weight bold :background "green")))
-    "Face for hi-lock mode."
-    :group 'hi-lock-faces)
+  (use-package hi-lock
+    :diminish ""
+    :config
+    (defface arv/hi-green
+      '((((min-colors 88)) (:weight bold :foreground "black" :background "light green"))
+        (t (:weight bold :background "green")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces)
 
-  (defface arv/hi-orange
-    '((((min-colors 88)) (:weight bold :foreground "black" :background "orange"))
-      (t (:weight bold :background "orange")))
-    "Face for hi-lock mode."
-    :group 'hi-lock-faces)
+    (defface arv/hi-orange
+      '((((min-colors 88)) (:weight bold :foreground "black" :background "orange"))
+        (t (:weight bold :background "orange")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces)
 
-  (defface arv/hi-red
-    '((((min-colors 88)) (:weight bold :background "red1"))
-      (t (:weight bold :background "red")))
-    "Face for hi-lock mode."
-    :group 'hi-lock-faces)
+    (defface arv/hi-red
+      '((((min-colors 88)) (:weight bold :background "red1"))
+        (t (:weight bold :background "red")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces))
 #+end_src
 
 *** =highlight-indentation=
@@ -1268,7 +1225,8 @@ Afegeix un fons de color als noms dels colors.
 #+begin_src emacs-lisp :tangle yes
   (use-package rainbow-mode
     :ensure t
-    :commands rainbow-mode)
+    :commands rainbow-mode
+    :diminish "")
 #+end_src
 
 *** =smex=
@@ -1373,7 +1331,8 @@ https://github.com/justbur/emacs-which-key
     :config
     (setq which-key-idle-delay 0.75)
     (setq which-key-sort-order 'which-key-description-order)
-    (which-key-setup-side-window-right))
+    (which-key-setup-side-window-right)
+    :diminish "")
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -1410,7 +1369,8 @@ Mai vaig aconseguir integrar-lo en el meu workflow i el paquet ja no
     (add-to-list 'yas-snippet-dirs
                  (arv/path-concat arv/emacs-conf-dir "shared" "yasnippet"))
     (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-completing-prompt))
-    (add-to-list 'auto-mode-alist '("\\.yas$" . snippet-mode)))
+    (add-to-list 'auto-mode-alist '("\\.yas$" . snippet-mode))
+    :diminish yas-minor-mode)
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -1545,7 +1505,8 @@ https://github.com/purcell/elisp-slime-nav
 #+begin_src emacs-lisp :tangle yes
   (use-package elisp-slime-nav
     :ensure t
-    :commands elisp-slime-nav-mode)
+    :commands elisp-slime-nav-mode
+    :diminish "")
 #+end_src
 
 **** =macrostep=
@@ -1563,7 +1524,8 @@ https://github.com/purcell/elisp-slime-nav
 #+begin_src emacs-lisp :tangle yes
   (use-package paredit
     :ensure t
-    :commands paredit-mode)
+    :commands paredit-mode
+    :diminish "")
 #+end_src
 
 **** Funcions d'utilitat
@@ -1728,7 +1690,8 @@ meu cas d'us no aporta res.
     ;; quan es confirma el resultat, en un flash.
     (set-face-attribute 'emmet-preview-output nil
                         :background "green"
-                        :box nil))
+                        :box nil)
+    :diminish "")
 #+end_src
 
 **** /Hook/
@@ -1750,7 +1713,8 @@ Integra la comanda externa =tern= dins emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package tern
     :ensure t
-    :commands tern-mode)
+    :commands tern-mode
+    :diminish "")
 #+end_src
 
 **** =company-tern=
@@ -1777,7 +1741,8 @@ Refactorització de codi js.
   (use-package js2-refactor
     :ensure t
     :after js2-mode
-    :commands js2-refactor-mode)
+    :commands js2-refactor-mode
+    :diminish "")
 #+end_src
 
 **** =js2-mode=
