@@ -4257,10 +4257,12 @@ sembla abandonat.
                turn-on-diff-hl-mode)
     :config
     (use-package psvn
+      :defer t
       :config
       (defadvice svn-status-update-modeline (after svn-update-diff-hl activate)
         (diff-hl-update)))
     (use-package magit
+      :defer t
       :config
       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
 #+end_src
