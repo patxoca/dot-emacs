@@ -4246,11 +4246,15 @@ https://github.com/dgutov/diff-hl
 =diff-hl-mode= highlights uncommitted changes on the left side of the
 window, allows you to jump between and revert them selectively.
 
-Cal activar-lo amb =M-x diff-hl-mode=.
+[[https://github.com/syohex/emacs-git-gutter][git-gutter]] és una alternativa en cas que aquest no em convenci, però
+sembla abandonat.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package diff-hl
     :ensure t
+    :commands (diff-hl-margin-mode
+               global-diff-hl-mode
+               turn-on-diff-hl-mode)
     :config
     (use-package psvn
       :config
@@ -4261,10 +4265,12 @@ Cal activar-lo amb =M-x diff-hl-mode=.
       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
 #+end_src
 
-Pel moment s'activa únicament en modes de programació:
+Açò anirà en algun /hook/ o configuració global:
 
 #+begin_src emacs-lisp :tangle yes
-  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (global-diff-hl-mode)
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode))
 #+end_src
 
 * Per mirar
