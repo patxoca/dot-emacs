@@ -4239,6 +4239,33 @@ En certa forma açò és una generalització de =capitalize=:
   (global-set-key (kbd "M-c") 'x-my/camelize)
 #+end_src
 
+** =diff-hl-mode=
+
+https://github.com/dgutov/diff-hl
+
+=diff-hl-mode= highlights uncommitted changes on the left side of the
+window, allows you to jump between and revert them selectively.
+
+Cal activar-lo amb =M-x diff-hl-mode=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package diff-hl
+    :ensure t
+    :config
+    (use-package psvn
+      :config
+      (defadvice svn-status-update-modeline (after svn-update-diff-hl activate)
+        (diff-hl-update)))
+    (use-package magit
+      :config
+      (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+#+end_src
+
+Pel moment s'activa únicament en modes de programació:
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+#+end_src
 
 * Per mirar
 
