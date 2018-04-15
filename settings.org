@@ -4275,6 +4275,56 @@ Açò anirà en algun /hook/ o configuració global:
     (diff-hl-margin-mode))
 #+end_src
 
+** repetició de comandes
+
+Pot resultar pràctic però no acabo de trobar un ús.
+
+- [[https://github.com/myuhe/smartrep.el][smartrep.el]]: support sequential operation which omit prefix key.
+  Latest commit f0ff5a6 on 9 May 2015.
+
+  #+begin_src emacs-lisp :tangle no
+    (smartrep-define-key
+     global-map "M-g"
+     '(("n" . next-line)
+       ("p" . previous-line)))
+  #+end_src
+
+- [[https://github.com/abo-abo/hydra][hydra]]: make Emacs bindings that stick around. Latest commit 62e0f37
+  on 27 Feb 2018.
+
+  #+begin_src emacs-lisp :tangle no
+    (use-package hydra
+      :ensure t
+      :config
+      (defhydra hydra-zoom (global-map "C-c r")
+        "multi-line"
+        ("m" multi-line)))
+  #+end_src
+
+- configuració de Sacha Chuar: based on
+  http://oremacs.com/2015/01/14/repeatable-commands/ . Modified to
+  accept =nil= as the first value if you don't want the keymap to run
+  a command by default, and to use =kbd= for the keybinding
+  definitions.
+
+  #+begin_src emacs-lisp :tangle no
+    (defun my/def-rep-command (alist)
+      "Return a lambda that calls the first function of ALIST.
+    It sets the transient map to all functions of ALIST,
+    allowing you to repeat those functions as needed."
+      (let ((keymap (make-sparse-keymap))
+            (func (cdar alist)))
+        (mapc (lambda (x)
+                (when x
+                  (define-key keymap (kbd (car x)) (cdr x))))
+              alist)
+        (lambda (arg)
+          (interactive "p")
+          (when func
+            (funcall func arg))
+          (set-transient-map keymap t))))
+  #+end_src
+
 * Per mirar
 
 - =define-compilation-mode=: en alguns mòduls utilitzo buffers de
