@@ -624,6 +624,42 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
     (customize-set-value 'compilation-message-face 'default))
 #+end_src
 
+*** =diff-hl-mode=
+
+https://github.com/dgutov/diff-hl
+
+=diff-hl-mode= highlights uncommitted changes on the left side of the
+window, allows you to jump between and revert them selectively.
+
+[[https://github.com/syohex/emacs-git-gutter][git-gutter]] és una alternativa en cas que aquest no em convenci, però
+sembla abandonat.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package diff-hl
+    :ensure t
+    :commands (diff-hl-margin-mode
+               global-diff-hl-mode
+               turn-on-diff-hl-mode)
+    :config
+    (use-package psvn
+      :defer t
+      :config
+      (defadvice svn-status-update-modeline (after svn-update-diff-hl activate)
+        (diff-hl-update)))
+    (use-package magit
+      :defer t
+      :config
+      (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
+#+end_src
+
+Açò anirà en algun /hook/ o configuració global:
+
+#+begin_src emacs-lisp :tangle yes
+  (global-diff-hl-mode)
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode))
+#+end_src
+
 *** =diminish=
 
 #+begin_src emacs-lisp :tangle yes
@@ -4234,42 +4270,6 @@ En certa forma açò és una generalització de =capitalize=:
 
 #+begin_src emacs-lisp :tangle yes
   (global-set-key (kbd "M-c") 'x-my/camelize)
-#+end_src
-
-** =diff-hl-mode=
-
-https://github.com/dgutov/diff-hl
-
-=diff-hl-mode= highlights uncommitted changes on the left side of the
-window, allows you to jump between and revert them selectively.
-
-[[https://github.com/syohex/emacs-git-gutter][git-gutter]] és una alternativa en cas que aquest no em convenci, però
-sembla abandonat.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package diff-hl
-    :ensure t
-    :commands (diff-hl-margin-mode
-               global-diff-hl-mode
-               turn-on-diff-hl-mode)
-    :config
-    (use-package psvn
-      :defer t
-      :config
-      (defadvice svn-status-update-modeline (after svn-update-diff-hl activate)
-        (diff-hl-update)))
-    (use-package magit
-      :defer t
-      :config
-      (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)))
-#+end_src
-
-Açò anirà en algun /hook/ o configuració global:
-
-#+begin_src emacs-lisp :tangle yes
-  (global-diff-hl-mode)
-  (unless (display-graphic-p)
-    (diff-hl-margin-mode))
 #+end_src
 
 ** repetició de comandes
