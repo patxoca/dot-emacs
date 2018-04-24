@@ -533,35 +533,6 @@ Integració d'emacs amb un navegador web extern.
     (customize-set-value 'browse-url-generic-program "firefox"))
 #+end_src
 
-*** =ebuff-menu=                                                    :builtin:
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "ebuff-menu"
-    (arv/generate-lab-faces "electric-buffer" 15 75)
-    (setq buffer-menu-buffer-font-lock-keywords
-          '(
-            (".*Dired.*"             . 'electric-buffer-01-face) ; Dired
-            ("^....[*]shell.*"       . 'electric-buffer-02-face) ; shell buff
-            (".*[*]scratch[*].*"     . 'electric-buffer-03-face) ; scratch buffer
-            ("^.*[*]svn-.*"          . 'electric-buffer-04-face) ; svn buffers
-            ("^....[*].*"            . 'electric-buffer-05-face) ; "*" named buffers
-            ("^..[*].*"              . 'electric-buffer-06-face) ; Modified
-            ("^.[%].*"               . 'electric-buffer-07-face) ; Read only
-            ("^....[*]Man .*Man.*"   . 'electric-buffer-08-face) ; Man page
-            )))
-
-  (defun buffer-menu-custom-font-lock  ()
-    (let ((font-lock-unfontify-region-function
-           (lambda (start end)
-             (remove-text-properties start end '(font-lock-face nil)))))
-      (font-lock-unfontify-buffer)
-      (set (make-local-variable 'font-lock-defaults)
-           '(buffer-menu-buffer-font-lock-keywords t))
-      (font-lock-fontify-buffer)))
-
-  (add-hook 'Buffer-menu-mode-hook 'buffer-menu-custom-font-lock)
-#+end_src
-
 *** =embrace=
 
 https://github.com/cute-jumper/embrace.el
@@ -960,6 +931,20 @@ la configuració de un mode.
 
 La definició de colors probablement pertany a la configuració del
 tema.
+
+*** =ibuffer=                                                       :builtin:
+
+=ibuffer= resulta especialment útil quan cal gestionar molts buffers.
+
+Fins ara he estat utilitzant =ebuff-menu= i, al ser /elèctric/,
+resulta una mica més àgil si hi ha pocs buffers.
+
+Encara falta provar =buffer-menu=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ibuffer
+    :commands ibuffer)
+#+end_src
 
 *** =ido=                                                           :builtin:
 
@@ -4033,15 +4018,10 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "C-<tab>") 'dabbrev-expand)
 
-  (global-set-key (kbd "C-x C-b") 'electric-buffer-list)
-                                          ; originalment 'list-buffers'.
-                                          ;
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
                                           ; Una altra alternativa si
                                           ; aquesta no em convenç és
                                           ; buffer-menu
-                                          ;
-                                          ; i una altra ibuffer (molt
-                                          ; potent aparentment)
 
   ;;; django
   ;; aquest keybinding no m'acava de convencer per dos motius:
@@ -4169,18 +4149,6 @@ Vull veure com afecta al dia a dia. Variacions:
 
   (global-set-key (kbd "C-x 2") #'x-arv/vsplit-next-buffer)
   (global-set-key (kbd "C-x 3") #'x-arv/hsplit-next-buffer)
-#+end_src
-
-** Provar =ibuffer=
-
-No estic descontent amb =electric-buffer-list= però vaig a donar-li
-una oportunitat a =ibuffer=.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package ibuffer
-    :commands ibuffer)
-
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
 ** Backups
