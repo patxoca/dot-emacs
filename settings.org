@@ -4156,14 +4156,16 @@ Vull veure com afecta al dia a dia. Variacions:
     (interactive "P")
     (let ((new-window (split-window-below)))
       (unless prefix
-        (switch-to-next-buffer new-window))))
+        (with-selected-window new-window
+          (ido-switch-buffer)))))
 
   (defun x-arv/hsplit-next-buffer (prefix)
     "Split the window horizontally and display the next buffer."
     (interactive "P")
     (let ((new-window (split-window-right)))
       (unless prefix
-        (switch-to-next-buffer new-window))))
+        (with-selected-window new-window
+          (ido-switch-buffer)))))
 
   (global-set-key (kbd "C-x 2") #'x-arv/vsplit-next-buffer)
   (global-set-key (kbd "C-x 3") #'x-arv/hsplit-next-buffer)
