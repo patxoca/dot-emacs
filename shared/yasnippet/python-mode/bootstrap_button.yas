@@ -9,7 +9,7 @@
 # uuid: 5f74a03e-c499-43b2-b4d7-8d7b2ef5232f
 # --
 BootstrapButton(
-    _("$1"),
+    _(u"$1"),
     onclick="controller.$2()",
     icon=BootstrapButton.ICON_$3,
     class_=BootstrapButton.${4:CLASS_DEFAULT},

@@ -7,11 +7,11 @@
 # uuid: 96b27788-723b-41f5-86b9-889498ae17ce
 # --
 ${1:name} = models.DateField(
-    verbose_name=_("$1"),
+    verbose_name=_(u"$1"),
     auto_now=${False},
     auto_now_add=${False},
     null=${True},
     blank=${True},
-    help_text=_("${doc}"),
+    help_text=_(u"${doc}"),
 )
 $0

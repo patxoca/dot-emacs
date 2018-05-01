@@ -7,10 +7,10 @@
 # uuid: eb395453-6677-41cd-b1b6-56a1d821798a
 # --
 ${1:name} = models.EmailField(
-    verbose_name=_("$1"),
+    verbose_name=_(u"$1"),
     max_length=${2:75},
     null=${True},
     blank=${True},
-    help_text=_("${doc}"),
+    help_text=_(u"${doc}"),
 )
 $0

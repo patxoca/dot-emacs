@@ -8,9 +8,9 @@
 # --
 ${1:name} = models.OneToOneField(
     "${1:$(capitalize yas-text)}",
-    verbose_name=_("$1"),
+    verbose_name=_(u"$1"),
     null=${True},
     blank=${True},
-    help_text=_("${doc}"),
+    help_text=_(u"${doc}"),
 )
 $0

@@ -7,10 +7,10 @@
 # uuid: 721f910b-b2d3-4cce-a525-c865ccdb3d3f
 # --
 ${1:name} = models.AutoField(
-    verbose_name=_("$1"),
+    verbose_name=_(u"$1"),
     primary_key=${True},
     null=${False},
     blank=${False},
-    help_text=_("Clau primaria."),
+    help_text=_(u"Clau primaria."),
 )
 $0

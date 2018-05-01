@@ -7,9 +7,9 @@
 # uuid: 744a715a-bc4b-494a-a745-c4da3fbd05d9
 # --
 ${1:name} = models.${CharField}(
-    verbose_name=_("$1"),
+    verbose_name=_(u"$1"),
     null=${True},
     blank=${True},
-    help_text=_("${doc}"),
+    help_text=_(u"${doc}"),
 )
 $0

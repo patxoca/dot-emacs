@@ -7,7 +7,7 @@
 # uuid: 72de5132-3834-444d-bb7a-3edeb67bba27
 # --
 ${1:name} = forms.TimeField(
-    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial=${2:datetime.time(${3:hour}, ${4:minute}, ${5:second})},
     input_formats=("${6:%H:%M:%S}", "${7:%H:%M}"),
     required=${8:$$(yas/choose-value '("False" "True"))},
@@ -17,6 +17,6 @@ ${1:name} = forms.TimeField(
             "dojoType": "dijit.form.TimeTextBox",
         }
     ),
-    help_text=_("$10"),
+    help_text=_(u"$10"),
 )
 $0

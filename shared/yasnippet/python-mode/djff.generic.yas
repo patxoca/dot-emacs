@@ -7,10 +7,10 @@
 # uuid: dec2ea25-111e-4fd1-860d-cca53b09c507
 # --
 ${1:name} = forms.${2:CharField}(
-    label=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    label=_(u"${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
     initial=${3:"default"},
     required=${4:$$(yas/choose-value '("False" "True"))},
     widget=widgets.${5:TextInput(yas/choose-value django-widget-types)},
-    help_text=_("${6}"),
+    help_text=_(u"${6}"),
 )
 $0
