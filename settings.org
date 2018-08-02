@@ -2370,7 +2370,8 @@ Pel seu funcionament requereix una comanda externa:
   pip install pycodestyle
 #+end_src
 
-Originalment es deia =pep8=.
+La configuració detecta si =pycodestyle= està disponible. En cas
+negatiu utiliza la comanda =pep8=.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package python-pep8
@@ -2378,7 +2379,8 @@ Originalment es deia =pep8=.
     :load-path "conf.d/site-lisp"
     :commands (python-pep8 pep8)
     :config
-    (customize-set-value 'python-pep8-command "pycodestyle")
+    (when (executable-find "pycodestyle")
+      (customize-set-value 'python-pep8-command "pycodestyle"))
     (customize-set-value 'python-pep8-options '("--repeat" "--max-line-length=150")))
 #+end_src
 
