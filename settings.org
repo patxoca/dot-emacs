@@ -1221,6 +1221,19 @@ http://www.xsteve.at/prg/emacs/psvn.el
 
 Integració amb el control de versions /subversion/.
 
+Aquesta comanda desfà un /hunk/. Es pot obtindre el mateix efecte amb
+la comanda =diff-apply-hunk= però demana confirmació sobre si es vol
+aplicar el /hunk/ a la inversa.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/diff-undo-hunk ()
+    "Desfà un hunk."
+    (interactive)
+    (diff-apply-hunk t))
+#+end_src
+
+Configura el mode.
+
 #+begin_src emacs-lisp :tangle yes
   (use-package psvn
     :load-path "conf.d/site-lisp"
@@ -1231,7 +1244,11 @@ Integració amb el control de versions /subversion/.
     (customize-set-value 'svn-status-default-log-arguments
                          '("-v" "--stop-on-copy"))
     (customize-set-value 'svn-status-verbose t)
-    (customize-set-value 'svn-status-hide-unmodified t))
+    (customize-set-value 'svn-status-hide-unmodified t)
+    (arv/bind-keys
+     svn-status-diff-mode-map
+     '(("a" diff-apply-hunk)
+       ("u" my/diff-undo-hunk))))
 #+end_src
 
 *** =rainbow=
