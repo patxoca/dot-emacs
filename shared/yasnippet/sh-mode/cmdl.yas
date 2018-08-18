@@ -7,8 +7,9 @@
 # uuid: b274de4c-7bff-4c8f-9ce7-1f330969da34
 # --
 ${1:$(arv/yas-sh-getopt-var-declaration yas-text)}
+CMD_ARGS=
 
-function command_line {
+function parse_command_line {
     local opt
     local OPTIND
     while getopts "${1:opcions}" opt; do
@@ -22,8 +23,8 @@ function command_line {
         esac
     done
     shift $((OPTIND-1))
-    echo "$@"
+    CMD_ARGS="$@"
 }
 
-REST=$(command_line "$@")
+parse_command_line "$@"
 $0
