@@ -1433,6 +1433,14 @@ Mai vaig aconseguir integrar-lo en el meu workflow i el paquet ja no
     (yas-global-mode 1)
 #+end_src
 
+En la [[https://github.com/joaotavora/yasnippet/blob/5a29fe67d70de3749e30ebb37206395b4d1a51a8/NEWS][release 0.13]] es van eliminar tots els snippets del paquet, s'han
+mogut al paquet =yasnippet-snippets=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package yasnippet-snippets
+    :ensure t)
+#+end_src
+
 ** Modes
 
 Aquesta secció inclou la configuració dels /modes/ que utilitzo
