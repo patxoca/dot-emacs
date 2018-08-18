@@ -3008,6 +3008,19 @@ Per classificar:
   (setq visible-bell nil)
 #+end_src
 
+*** Backups
+
+El 99% del temps els arxius de backup creats durant l'edició són més
+una molèstia que altra cosa. Es mouen a un directori de backup per si
+cal recuperar-los.
+
+#+begin_src emacs-lisp :tangle yes
+  (let ((backup-dir (arv/path-concat user-emacs-directory "backups" "files")))
+    (unless (file-directory-p backup-dir)
+      (make-directory backup-dir t))
+    (setq backup-directory-alist `(("." . ,backup-dir))))
+#+end_src
+
 *** Faces
 
 #+begin_src emacs-lisp :tangle yes
@@ -3229,6 +3242,60 @@ definida ací demana el directori on fer la cerca.
           (goto-char start)
           (while (search-forward old-string end t)
             (replace-match new-string))))))
+#+end_src
+
+*** Partir finestres
+
+Idea treta del vídeo [[https://www.youtube.com/watch?v=nKCKuRuvAOw&t=252][Emacs microhabit - Switching windows]] de Sacha
+Chua: parteix una finestra horitzontal/verticalment i mostra un buffer
+diferent en la nova finestra.
+
+La versió de Sacha Chua selecciona automàticament el buffer, no m'he
+pogut acostumar. Aquesta versió permet triar el buffer (o arxiu) que
+es mostrarà en la nova finestra.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/split-windows-bellow (prefix)
+    "Parteix la finestra verticalment i tria el buffer a mostrar.
+
+  Al partir una finestra permet seleccionar quin buffer es mostrarà
+  en la nova finestra. Amb un prefix conserva el comportament
+  original.
+
+  Per llegir el buffer utilitza `ido-switch-buffer' amb el que els
+  keybindings estàndard estan disponibles. Especialment útils són:
+
+  - `C-f': permet seleccionar un arxiu enlloc d'un buffer.
+
+  - `C-g': cancel·la la selecció, mostrant el mateix buffer en les
+    dos finestres."
+
+    (interactive "P")
+    (let ((new-window (split-window-below)))
+      (unless prefix
+        (with-selected-window new-window
+          (ido-switch-buffer)))))
+
+  (defun arv/split-windows-right (prefix)
+    "Parteix la finestra horitzontalment i tria el buffer a mostar.
+
+  Al partir una finestra permet seleccionar quin buffer es mostrarà
+  en la nova finestra. Amb un prefix conserva el comportament
+  original.
+
+  Per llegir el buffer utilitza `ido-switch-buffer' amb el que els
+  keybindings estàndard estan disponibles. Especialment útils són:
+
+  - `C-f': permet seleccionar un arxiu enlloc d'un buffer.
+
+  - `C-g': cancel·la la selecció, mostrant el mateix buffer en les
+    dos finestres."
+
+    (interactive "P")
+    (let ((new-window (split-window-right)))
+      (unless prefix
+        (with-selected-window new-window
+          (ido-switch-buffer)))))
 #+end_src
 
 *** conversió de format DOS <-> UNIX
@@ -4073,6 +4140,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; emacs overrides
   ;; (global-set-key (kbd "C-s") #'endless/isearch-symbol-with-prefix)
+  (global-set-key (kbd "C-x 2") #'arv/split-windows-bellow)
+  (global-set-key (kbd "C-x 3") #'arv/split-windows-right)
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
@@ -4229,62 +4298,6 @@ s'accepta, el contingut es distribueix on correspongui.
 Allí on tingui sentit, el nom dels elements haurien de començar amb el
 prefix =x-arv= per identificar que son experimentals. Probablement amb
 la API pública (comandes?) sigui suficient.
-
-** Partir finestres
-
-Idea treta del vídeo [[https://www.youtube.com/watch?v=nKCKuRuvAOw&t=252][Emacs microhabit - Switching windows]] de Sacha
-Chua.
-
-Al partir una finestra automàticament es selecciona un buffer diferent
-(el següent) en la nova finestra. Amb un prefix conserva el
-comportament original.
-
-Vull veure com afecta al dia a dia. Variacions:
-
-- utilitzar una altra funció per seleccionar el buffer (un buffer no
-  visualitzat per exemple).
-
-- permetre triar el buffer que es visualitza en la nova finestra,
-  d'entre els existents.
-
-- permetre visitar un fitxer.
-
-- permetre triar si el canvi/visita es fa en la nova finestra
-  (comportament actual) o en l'actual. Útil?
-
-#+begin_src emacs-lisp :tangle yes
-  (defun x-arv/vsplit-next-buffer (prefix)
-    "Split the window vertically and display the next buffer."
-    (interactive "P")
-    (let ((new-window (split-window-below)))
-      (unless prefix
-        (with-selected-window new-window
-          (ido-switch-buffer)))))
-
-  (defun x-arv/hsplit-next-buffer (prefix)
-    "Split the window horizontally and display the next buffer."
-    (interactive "P")
-    (let ((new-window (split-window-right)))
-      (unless prefix
-        (with-selected-window new-window
-          (ido-switch-buffer)))))
-
-  (global-set-key (kbd "C-x 2") #'x-arv/vsplit-next-buffer)
-  (global-set-key (kbd "C-x 3") #'x-arv/hsplit-next-buffer)
-#+end_src
-
-** Backups
-
-Els arxius de backup creats durant l'edició són més una molèstia que
-altra cosa. Vaig a provar que tal em funciona guardar-los tots en un
-lloc.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (let ((backup-dir (arv/path-concat user-emacs-directory "backups" "files")))
-    (unless (file-directory-p backup-dir)
-      (make-directory backup-dir t))
-    (setq backup-directory-alist `(("." . ,backup-dir))))
-#+END_SRC
 
 ** =winner-mode=
 
