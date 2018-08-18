@@ -2299,6 +2299,7 @@ Cap tecla definida.
 
 **** /Hook/
 
+#+name: target-prog-mode-hook
 #+begin_src emacs-lisp :tangle yes
   ;; (eval-after-load "linum"
   ;;   '(progn
@@ -4211,7 +4212,7 @@ Estaria bé afegir alarmes per comprovar si ja hi ha una solució.
   que amb la versió 25: sembla que només ressalta els elements que hi
   ha al obrir l'arxiu, no els que s'afegeixen posteriorment.
 
-  Veure comentari/solució en el [[*/Hook/][hook que configura hi-lock]].
+  Veure comentari/solució en el [[target-prog-mode-hook][hook que configura =hi-lock=]].
 
   El parxe sembla /correcte/ però no estic segur. Investigar-ho amb
   més calma.
