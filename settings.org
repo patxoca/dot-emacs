@@ -4286,7 +4286,7 @@ Estaria bé afegir alarmes per comprovar si ja hi ha una solució.
   El parxe sembla /correcte/ però no estic segur. Investigar-ho amb
   més calma.
 
-* Experimental
+* Incubadora
 
 Noves funcionalitats que estic provant. Si em convencen es mouen a
 l'apartat /Configuració/.
