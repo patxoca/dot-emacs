@@ -2311,6 +2311,23 @@ Cap tecla definida.
               (set-variable 'show-trailing-whitespace t)
 
               ;; hi-lock
+
+              ;; HACK: 20180818, no tinc clara la causa però, si no
+              ;; s'activa font-lock, hi-lock no ressalta els nous
+              ;; elements, només els existens en obrir l'arxiu. Açò
+              ;; sembla consistent amb el que diu la documentació:
+              ;;
+              ;;   In buffers where Font Lock mode is enabled, patterns
+              ;;   are highlighted using font lock. In buffers where
+              ;;   Font Lock mode is disabled, patterns are applied
+              ;;   using overlays; in this case, the highlighting will
+              ;;   not be updated as you type.
+              ;;
+              ;; font-lock s'activa globalment. La teoria és que el hook
+              ;; s'executa abans que s'hagi activat font-lock.
+
+              (font-lock-mode 1)
+
               (hi-lock-mode 1)
               (hi-lock-face-buffer "\\bFIXME:" 'arv/hi-red)
               (hi-lock-face-buffer "\\bHACK:" 'arv/hi-orange)
@@ -4189,6 +4206,15 @@ Estaria bé afegir alarmes per comprovar si ja hi ha una solució.
               'elpy
             nil))))
   #+end_src
+
+- 20180818: amb emacs 26 el comportament de =hi-lock= no és el mateix
+  que amb la versió 25: sembla que només ressalta els elements que hi
+  ha al obrir l'arxiu, no els que s'afegeixen posteriorment.
+
+  Veure comentari/solució en el [[*/Hook/][hook que configura hi-lock]].
+
+  El parxe sembla /correcte/ però no estic segur. Investigar-ho amb
+  més calma.
 
 * Experimental
 
