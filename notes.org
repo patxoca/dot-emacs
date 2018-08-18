@@ -2,7 +2,7 @@
 #+AUTHOR: Alexis Roda
 #+EMAIL: alexis.roda.villalonga@gmail.com
 
-#+TODO: TODO DONE(@)
+#+TODO: TODO(@) DONE(@)
 #+TODO: | CANC(c@)
 
 
@@ -235,21 +235,6 @@ Crec que el que vull és algo tipus =swiper= (que al moure el cursor
 mostri la linea seleccionada en el buffer) però que sigui persistent:
 cerco, trobo, modifico, torno a la cerca.
 
-** TODO gestionar paquets absents durant la instal·lació                :bug:
-   :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 00:48]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
-   :END:
-
-Si falta cap paquet durant la instal·lació aquesta aborta. Amb /pypi/
-mai m'ha passat però amb /ELPA/ sembla habitual (primer =rainbow-mode=
-va desapareixer d'un dia per l'altre i ara =magit= depen d'un paquet
-no disponible).
-
-Mirar si és possible fer que continui la instal·lació i al final
-informi, de manera visible, que certs paquets no s'han pogut
-instal·lar.
-
 ** TODO descobrir paquets                                              :note:
    :PROPERTIES:
    :PUB_DATE: [2018-04-02 dl 13:01]
@@ -309,6 +294,10 @@ sembla que no acaba de funcionar com vull. Investigar-ho.
    :REFERER:
    :END:
 
+   - State "TODO"       from "TODO"       [2018-08-18 ds 20:13] \\
+     Ho vaig investigar fa algun temps, de memòria: no és possible
+     tindre finestres amb color de fons diferent dins el mateix frame.
+
 Mirar si és possible ressaltar la finestra activa (o des-ressaltar la
 resta, amb un fons lleugerament més fosc p.e.).
 
@@ -344,6 +333,17 @@ L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
 Crec que vaig renombrar algunes funcions. També és possible que
 =arv-py= no estigui carregat en aquest punt? improbable.
 
+** TODO molestia en els canvis d'estat en =org-mode=              :annoyance:
+   :PROPERTIES:
+   :PUB_DATE: [2018-08-18 ds 20:15]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*revisar%20snippets][revisar snippets]]
+   :END:
+
+Al fer un canvi d'estat que requereix un missatge aquest s'insereix
+separat per una línia de la capçalera i enganxat al text principal,
+abans era al revés, enganxat a la capçalera i separat del text.
+
+Prefereixo el comportament anterior o separat en els dos costats.
 
 * Completat
 
@@ -870,9 +870,30 @@ Probablement no tingui relació però ara no utilitzo =projectile=.
 
      S'aprofita per moure la configuració de =diminish= als corresponents
      =use-package=.
+
 Fent proves a =wst= he vist que la modeline mostrava varis /lighters/
 de modes menors. Activant =diminish= (=(require 'diminish)=) han
 desaparegut.
 
 Potser és moment de moure la configuració de =diminish= als
 corresponents =use-package=.
+
+** DONE gestionar paquets absents durant la instal·lació                :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-01 dg 00:48]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2018-08-18 ds 20:09] \\
+     No m'ha tornat a passar. La causa podria ser que vaig configurar
+     =use-package-always-pin= i es forçava l'us d'un repositori en que els
+     paquets no estaven disponibles.
+
+Si falta cap paquet durant la instal·lació aquesta aborta. Amb /pypi/
+mai m'ha passat però amb /ELPA/ sembla habitual (primer =rainbow-mode=
+va desapareixer d'un dia per l'altre i ara =magit= depen d'un paquet
+no disponible).
+
+Mirar si és possible fer que continui la instal·lació i al final
+informi, de manera visible, que certs paquets no s'han pogut
+instal·lar.
