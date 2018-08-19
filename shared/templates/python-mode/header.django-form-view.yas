@@ -11,6 +11,9 @@
 
 # $Id:\$
 
+from __future__ import print_function
+from __future__ import unicode_literals
+
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
