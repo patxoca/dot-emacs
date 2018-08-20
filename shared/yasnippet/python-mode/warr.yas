@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: with self.assertRaisesRegexp
+# $Id:$
+# key: warr
+# group: testing
+# type: snippet
+# contributor: Alexis <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 8b40c92e-858e-47a6-a780-81edd5b8c0c9
+# --
+with self.assertRaisesRegexp(${1:Exceptions}, r"${2:regexp}"):
+    $0
