@@ -2659,8 +2659,7 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
 
 Configuracions per facilitar el treball en projectes django:
 
-- gestió del projecte (en el sentit de django) i execució de comandes
-  de gestió (=python-django=).
+- introspecció: obtindre les apps, els models etc. (=emacs-djira=).
 
 - operacions amb les /apps/: visitar un model, una vista, consultar la
   documentació etc. (=arv-py-django=).
@@ -2672,7 +2671,7 @@ Configuracions per facilitar el treball en projectes django:
 https://github.com/patxoca/arv-py-django.git
 
 Biblioteca que implementa funcions que faciliten la navegació dins un
-projecte django. Depèn de =python-django=.
+projecte django.
 
 #+begin_src sh :tangle yes
   ./scripts/clone_git https://github.com/patxoca/arv-py-django.git
@@ -2684,8 +2683,33 @@ projecte django. Depèn de =python-django=.
     :ensure nil
     :load-path "site-lisp/arv-py-django"
     :commands (arv/django-mode
-               arv/django-switch-to-project-buffer
-               arv/django-file-belongs-to-app-p))
+               arv/django-jump-to-template
+               arv/django-jump-to-javascript-controller
+               arv/django-jump-to-template
+               arv/django-autopair-template-tag))
+#+end_src
+
+**** =emacs-djira=                                                   :manual:
+
+https://github.com/patxoca/emacs-djira
+
+Biblioteca que permet accedir a la api definida per =djira= ([[https://github.com/patxoca/djira][github]]).
+Aquest paquet substitueix a =python-django=, que ja no és mantingut.
+
+Pel seu funcionament requereix que django estigui executant-se i que
+tingui instal·lada l'aplicació =djira=.
+
+
+#+begin_src sh :tangle yes
+  ./scripts/clone_git https://github.com/patxoca/emacs-djira.git
+  ./scripts/compile_package emacs-djira
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package emacs-djira
+    :ensure nil
+    :load-path "site-lisp/emacs-djira"
+    :commands (djira-buffer-belongs-in-app-p))
 #+end_src
 
 **** =pony-tpl=                                                      :manual:
@@ -2705,29 +2729,9 @@ configuració en la que s'han eliminat les dependències de =pony-mode=.
     :commands pony-tpl-mode)
 #+end_src
 
-**** =python-django=                                                 :manual:
-
-https://github.com/fgallina/python-django.el
-
-El codi sembla abandonat. S'ha incorporat una versió local dins el
-directori =site-lisp= de la configuració. Resol problemes de
-compatibilitat amb versions /recents/ (en relació al paquet) de
-django.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package python-django
-    :ensure nil
-    :load-path "conf.d/site-lisp"
-    :commands python-django-open-project)
-#+end_src
-
 **** Configuració
 
 #+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "python-django"
-    (arv/bind-keys python-django-mode-map
-                   '(("<left>" python-django-ui-move-up-tree))))
-
   (with-eval-after-load "python"
     (arv/bind-keys python-mode-map
                    '(("C-c j t" arv/django-jump-to-template)
@@ -2739,7 +2743,7 @@ django.
                      ("%" arv/django-autopair-template-tag)))
     (add-hook 'html-mode-hook
               (lambda ()
-                (when (arv/django-file-belongs-to-app-p buffer-file-name)
+                (when (djira-buffer-belongs-in-app-p (current-buffer))
                   (pony-tpl-mode)))))
 #+end_src
 
@@ -4186,18 +4190,6 @@ redundants o mai les he arribat a incorporar en el /workflow/.
                                           ; Una altra alternativa si
                                           ; aquesta no em convenç és
                                           ; buffer-menu
-
-  ;;; django
-  ;; aquest keybinding no m'acava de convencer per dos motius:
-  ;;
-  ;; * envaeix l'espai de keybindinds de projectile. No especialment
-  ;;   greu i en certa forma esta relacionat.
-  ;;
-  ;; * defineix globalment un keybinding que no té sentit en tots els
-  ;;   contexts. Malauradament no es pot determinar si te sentit en un
-  ;;   context fins que s'ha obert el projecte django.
-
-  (global-set-key (kbd "C-c p D") 'arv/django-switch-to-project-buffer)
 
   ;; insert map
 
