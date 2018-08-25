@@ -595,6 +595,17 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
     (customize-set-value 'compilation-message-face 'default))
 #+end_src
 
+*** =dash=
+
+https://github.com/magnars/dash.el
+
+A modern list api for Emacs. No 'cl required.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package dash
+    :config (dash-enable-font-lock))
+#+end_src
+
 *** =diff-hl-mode=
 
 https://github.com/dgutov/diff-hl
