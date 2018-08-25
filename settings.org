@@ -1637,7 +1637,8 @@ https://github.com/purcell/elisp-slime-nav
                      ("C-c m v" find-variable)
                      ("C-c m ?" elisp-slime-nav-describe-elisp-thing-at-point)
                      ("C-h e V" apropos-value)
-                     ("C-c m z" byte-recompile-directory)))
+                     ("C-c m z" byte-recompile-directory)
+                     ("C-c C-z" ielm)))
 
     (let ((keywords '(("\\<ert-deftest\\>" . font-lock-keyword-face)
                       ("\\<should\\>" . font-lock-keyword-face)
