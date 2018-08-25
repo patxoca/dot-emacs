@@ -2669,18 +2669,12 @@ projecte django. Depèn de =python-django=.
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package arv-django
+  (use-package arv-py-django
     :ensure nil
     :load-path "site-lisp/arv-py-django"
     :commands (arv/django-mode
-               arv/django-switch-to-project-buffer))
-
-  ;; TODO: aquest autoload apareixia en "setup-python-django.el" però no
-  ;; tinc clar que sigui necessari. Es manté fins que puga fer alguna
-  ;; prova. En funció del resultat caldrà afegir-lo a la clausula
-  ;; ":commands" anterior o eliminar-lo.
-
-  (autoload 'arv/django-file-belongs-to-app-p "arv-django" "" t nil)
+               arv/django-switch-to-project-buffer
+               arv/django-file-belongs-to-app-p))
 #+end_src
 
 **** =pony-tpl=                                                      :manual:
