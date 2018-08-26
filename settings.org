@@ -2659,7 +2659,7 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
 
 Configuracions per facilitar el treball en projectes django:
 
-- introspecció: obtindre les apps, els models etc. (=emacs-djira=).
+- introspecció: obtindre les apps, els models etc. (=djira-el=).
 
 - operacions amb les /apps/: visitar un model, una vista, consultar la
   documentació etc. (=arv-py-django=).
@@ -2689,9 +2689,9 @@ projecte django.
                arv/django-autopair-template-tag))
 #+end_src
 
-**** =emacs-djira=                                                   :manual:
+**** =djira-el=                                                   :manual:
 
-https://github.com/patxoca/emacs-djira
+https://github.com/patxoca/djira-el
 
 Biblioteca que permet accedir a la api definida per =djira= ([[https://github.com/patxoca/djira][github]]).
 Aquest paquet substitueix a =python-django=, que ja no és mantingut.
@@ -2701,14 +2701,14 @@ tingui instal·lada l'aplicació =djira=.
 
 
 #+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/patxoca/emacs-djira.git
-  ./scripts/compile_package emacs-djira
+  ./scripts/clone_git https://github.com/patxoca/djira-el.git
+  ./scripts/compile_package djira-el
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package emacs-djira
+  (use-package djira
     :ensure nil
-    :load-path "site-lisp/emacs-djira"
+    :load-path "site-lisp/djira-el"
     :commands (djira-buffer-belongs-in-app-p))
 #+end_src
 
