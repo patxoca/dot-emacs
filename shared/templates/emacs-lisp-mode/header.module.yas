@@ -6,7 +6,7 @@
 # contributor:Alexis Roda <alexis.roda.villalonga@gmail.com>
 # uuid: d95cea9a-2a50-4811-9af8-ecc091642725
 # --
-;;; `(arv/yas-buffer-name)` --- ${1:additional functionality for ${2:`(arv/yas-buffer-name-sans)`}}
+;;; `(arv/yas-buffer-name)` --- ${1:additional functionality for ${2:`(arv/yas-buffer-name-sans)`}}  -*- lexical-binding: t; -*-
 
 ;; $Id:\$
 
@@ -20,6 +20,7 @@
 ;; Description:
 ;; URL:
 ;; Compatibility: Emacs24
+;; Package-Requires: ((dash "2.12.0") (emacs "24") (s "1.12.0"))
 
 ;; COPYRIGHT NOTICE
 ;;
