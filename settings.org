@@ -1594,6 +1594,20 @@ https://github.com/purcell/elisp-slime-nav
     :commands macrostep-mode)
 #+end_src
 
+**** =package-lint=
+
+https://github.com/purcell/package-lint
+
+This library provides a linter for the metadata in Emacs Lisp files
+which are intended to be packages.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package package-lint
+    :ensure t
+    :commands (package-lint-current-buffer
+               package-lint-buffer))
+#+end_src
+
 **** =paredit=
 
 #+begin_src emacs-lisp :tangle yes
