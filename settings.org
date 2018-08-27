@@ -2676,31 +2676,31 @@ Configuracions per facilitar el treball en projectes django:
 - introspecció: obtindre les apps, els models etc. (=djira-el=).
 
 - operacions amb les /apps/: visitar un model, una vista, consultar la
-  documentació etc. (=arv-py-django=).
+  documentació etc. (=django-el=).
 
 - edició de plantilles (=pony-tpl=).
 
-**** =arv-py-django=                                                 :manual:
+**** =django-el=                                                     :manual:
 
-https://github.com/patxoca/arv-py-django.git
+https://github.com/patxoca/django-el.git
 
 Biblioteca que implementa funcions que faciliten la navegació dins un
 projecte django.
 
 #+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/patxoca/arv-py-django.git
-  ./scripts/compile_package arv-py-django
+  ./scripts/clone_git https://github.com/patxoca/django-el.git
+  ./scripts/compile_package django-el
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package arv-py-django
+  (use-package django-el
     :ensure nil
-    :load-path "site-lisp/arv-py-django"
-    :commands (arv/django-mode
-               arv/django-jump-to-template
-               arv/django-jump-to-javascript-controller
-               arv/django-jump-to-template
-               arv/django-autopair-template-tag))
+    :load-path "site-lisp/django-el"
+    :commands (django-el-mode
+               django-el-jump-to-template
+               django-el-jump-to-javascript-controller
+               django-el-jump-to-template
+               django-el-autopair-template-tag))
 #+end_src
 
 **** =djira-el=                                                   :manual:
@@ -2748,13 +2748,13 @@ configuració en la que s'han eliminat les dependències de =pony-mode=.
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "python"
     (arv/bind-keys python-mode-map
-                   '(("C-c j t" arv/django-jump-to-template)
-                     ("C-c j j" arv/django-jump-to-javascript-controller))))
+                   '(("C-c j t" django-el-jump-to-template)
+                     ("C-c j j" django-el-jump-to-javascript-controller))))
 
   (with-eval-after-load "sgml-mode"
     (arv/bind-keys html-mode-map
-                   '(("C-c j t" arv/django-jump-to-template)
-                     ("%" arv/django-autopair-template-tag)))
+                   '(("C-c j t" django-el-jump-to-template)
+                     ("%" django-el-autopair-template-tag)))
     (add-hook 'html-mode-hook
               (lambda ()
                 (when (djira-buffer-belongs-in-app-p (current-buffer))
