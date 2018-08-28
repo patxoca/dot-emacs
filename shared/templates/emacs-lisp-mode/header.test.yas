@@ -6,7 +6,7 @@
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # uuid: adb02021-d0e4-4925-b4d1-3087d04d94bd
 # --
-;;; `(arv/yas-buffer-name)` --- ${1:tests for ${2:`(arv/yas-buffer-name-sans)`}}
+;;; `(arv/yas-buffer-name)` --- ${1:tests for ${2:`(replace-regexp-in-string "\\(^tests?-\\)\\|\\(-tests?\\)" "" (buffer-name))`}}       -*- lexical-binding: t; -*-
 
 (require 'ert)
 
