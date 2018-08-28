@@ -2700,7 +2700,9 @@ projecte django.
                django-el-jump-to-template
                django-el-jump-to-javascript-controller
                django-el-jump-to-template
-               django-el-autopair-template-tag))
+               django-el-autopair-template-tag)
+    :config
+    (global-set-key (kbd "C-c d") django-el-mode-map))
 #+end_src
 
 **** =djira-el=                                                   :manual:
