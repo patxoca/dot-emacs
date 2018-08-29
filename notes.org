@@ -354,6 +354,18 @@ abans era al revés, enganxat a la capçalera i separat del text.
 
 Prefereixo el comportament anterior o separat en els dos costats.
 
+** TODO inserir prefix automàticament en codi emacs lisp               :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2018-08-28 dt 12:27]
+   :REFERER:
+   :END:
+
+http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
+
+És una idea interessant, caldria adaptar-la a la meva forma de
+treballar: definir una variable local al buffer + algun automatisme
+(yasnippet, tecla?).
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
