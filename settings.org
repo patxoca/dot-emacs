@@ -2696,13 +2696,11 @@ projecte django.
   (use-package django-el
     :ensure nil
     :load-path "site-lisp/django-el"
+    :init (setq django-el-prefix-key "C-c d")
     :commands (django-el-mode
-               django-el-jump-to-template
                django-el-jump-to-javascript-controller
                django-el-jump-to-template
-               django-el-autopair-template-tag)
-    :config
-    (global-set-key (kbd "C-c d") django-el-mode-map))
+               django-el-autopair-template-tag))
 #+end_src
 
 **** =djira-el=                                                   :manual:
