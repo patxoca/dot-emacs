@@ -333,6 +333,15 @@ L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
 Crec que vaig renombrar algunes funcions. També és possible que
 =arv-py= no estigui carregat en aquest punt? improbable.
 
+** TODO error en x-my/camelize                                          :bug:
+   :PROPERTIES:
+   :PUB_DATE: [2018-04-18 dc 08:25]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=arv/camelize=][=arv/camelize=]]
+   :END:
+
+En =org-mode= al intentar convertir "l'xxx" en "L'xxx" prement =M-c=
+s'obté "Lxxx".
+
 ** TODO molestia en els canvis d'estat en =org-mode=              :annoyance:
    :PROPERTIES:
    :PUB_DATE: [2018-08-18 ds 20:15]
