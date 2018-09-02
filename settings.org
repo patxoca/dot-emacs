@@ -2393,7 +2393,8 @@ Funcions d'utilitat per treballar amb codi python.
                pyx/refactor-wrap-while
                pyx/refactor-wrap-with
                pyx/smart-grave
-               pyx/visit-setup-py))
+               pyx/visit-setup-py
+               pyx/visit-test-module))
 #+end_src
 
 **** =elpy=
@@ -2625,8 +2626,9 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
        (":" pyx/electric-colon)
        ("`" pyx/smart-grave)
        ("C-m" newline-and-indent)
-       ("C-c j S" pyx/visit-setup-py)
        ("C-c j i" pyx/nav-goto-first-import)
+       ("C-c j S" pyx/visit-setup-py)
+       ("C-c j T" pyx/visit-test-module)
        ("C-=" arv/rst-underline-header)
        ("C-," arv/wm-cycle-2)
        ))
