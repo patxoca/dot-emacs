@@ -199,6 +199,8 @@ Integrar un interpret (nodejs?) en la configuració.
 
 - [[https://github.com/NicolasPetton/Indium][Indium]] és un IDE per javascript. Té molt bona pinta.
 
+- [[https://github.com/ananthakumaran/tide][TypeScript Interactive Development Environment for Emacs]]
+
 ** TODO Investigar /rope/                                              :task:
    :PROPERTIES:
    :PUB_DATE: [2018-03-31 ds 01:37]
