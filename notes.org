@@ -317,7 +317,7 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
-** TODO revisar snippets :bug:
+** TODO revisar snippets                                                :bug:
    :PROPERTIES:
    :PUB_DATE: [2018-04-07 ds 13:09]
    :REFERER: [[file:~/prog/di/project/myapp/models.py::)]]
