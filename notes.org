@@ -368,6 +368,16 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
+
+* Paquets extra
+
+Llista de paquets que he anat trobant i que m'han cridat l'atenció
+però que ara mateix no puc/vull provar. Ordenats cronològicament:
+
+- [[https://gitlab.com/jgkamat/rmsbolt][RMSBolt]]: semblant a [[https://godbolt.org/][compiler explorer]], però s'executa dins emacs.
+  Permet veure el codi esamblador o /bytecode/ generat per un
+  programa.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
