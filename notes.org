@@ -378,6 +378,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament:
   Permet veure el codi esamblador o /bytecode/ generat per un
   programa.
 
+- [[https://github.com/wasamasa/eyebrowse][eyebrowse]] i [[https://github.com/seudut/perspeen][perspeen]] faciliten definir /workspaces/ i canviar entre
+  ells.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
