@@ -2600,6 +2600,20 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     (elpy-enable))
 #+end_src
 
+**** =sphinx-doc=
+
+https://github.com/naiquevin/sphinx-doc.el
+
+=sphinx-doc= is an emacs minor mode for inserting docstring skeleton
+for Python functions and methods. The structure of the docstring is as
+per the requirement of the Sphinx documentation generator.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package sphinx-doc
+    :ensure t
+    :commands sphinx-doc-mode)
+#+end_src
+
 **** Combinacions de tecles
 
 #+begin_src emacs-lisp :tangle yes
@@ -2665,6 +2679,9 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
                 ;; pylint/flymake-pylint
                 ;; (pylint-add-menu-items)
                 ;; (flymake-mode 1)
+
+                ;; sphinx-doc
+                (sphinx-doc-mode t)
 
                 (superword-mode 1)
                 (pytest-mode-enable-if-test-module)
