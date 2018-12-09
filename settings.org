@@ -1277,6 +1277,8 @@ Configura el mode.
                          '("-v" "--stop-on-copy"))
     (customize-set-value 'svn-status-verbose t)
     (customize-set-value 'svn-status-hide-unmodified t)
+    (add-hook 'svn-status-diff-mode-hook
+              #'(lambda () (diff-auto-refine-mode t)))
     (arv/bind-keys
      svn-status-diff-mode-map
      '(("a" diff-apply-hunk)
