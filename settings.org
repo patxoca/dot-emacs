@@ -425,7 +425,13 @@ Col·lecció de funcions per manipular cadenes.
 ** Tema
 
 #+begin_src emacs-lisp :tangle yes
-  (load-theme 'tango-dark)
+  ;; (load-theme 'tango-dark)
+
+  (use-package doom-themes
+    :ensure t)
+
+  (load-theme 'doom-one)
+
   ;; (set-face-attribute 'compilation-error nil
   ;;                     :underline nil
   ;;                     :weight 'normal)
