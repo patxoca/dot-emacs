@@ -4512,6 +4512,24 @@ i el paràgraf resultat ara es pot ajustar satisfactoriament amb =M-q=:
 En funció de l'ús que en fàci potser valdria la pena definir una
 comanda equivalment a =M-Q M-q=.
 
+** Desactivar tecles del cursor
+
+L'objectiu és acostumar-me a no utilitzar les tecles del cursor pels
+desplaçaments i no haver de moure la ma fora de la /fila principal/.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun comanda-desactivada ()
+    (interactive)
+    (let ((visible-bell t))
+      (ding)))
+
+  (global-set-key (kbd "<up>") #'comanda-desactivada)
+  (global-set-key (kbd "<down>") #'comanda-desactivada)
+  (global-set-key (kbd "<left>") #'comanda-desactivada)
+  (global-set-key (kbd "<right>") #'comanda-desactivada)
+#+end_src
+
+
 * Descartat
 
 Funcionalitats experimental que no he acosseguit /interioritzar/.
