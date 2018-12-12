@@ -410,6 +410,23 @@ Col·lecció de funcions per manipular cadenes.
     :ensure t)
 #+end_src
 
+** Compatibilitat
+
+Necessito suportar Emacs 24 per alguns casos en que no vull compilar
+una versió més recent. Aquesta secció defineix funcions que faciliten
+mantindre la compatibilitat.
+
+Emacs 24 no defineix =string-greaterp= (ni =string>=), curiosament sí
+defineix =string-lessp= i =string<=.
+
+#+begin_src emacs-lisp :tangle yes
+  (unless (fboundp 'string-greaterp)
+    (defun string-greaterp (a b)
+      (not (or (string= a b)
+               (string< a b)))))
+#+end_src
+
+
 * Configuració
 ** Interfície d'usuari
 
