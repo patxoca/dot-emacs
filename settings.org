@@ -4529,23 +4529,6 @@ i el paràgraf resultat ara es pot ajustar satisfactoriament amb =M-q=:
 En funció de l'ús que en fàci potser valdria la pena definir una
 comanda equivalment a =M-Q M-q=.
 
-** Desactivar tecles del cursor
-
-L'objectiu és acostumar-me a no utilitzar les tecles del cursor pels
-desplaçaments i no haver de moure la ma fora de la /fila principal/.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun comanda-desactivada ()
-    (interactive)
-    (let ((visible-bell t))
-      (ding)))
-
-  (global-set-key (kbd "<up>") #'comanda-desactivada)
-  (global-set-key (kbd "<down>") #'comanda-desactivada)
-  (global-set-key (kbd "<left>") #'comanda-desactivada)
-  (global-set-key (kbd "<right>") #'comanda-desactivada)
-#+end_src
-
 
 * Descartat
 
@@ -4583,6 +4566,27 @@ http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-l
 
 #+begin_src emacs-lisp :tangle no
   (global-set-key (kbd "C-a") #'my/smarter-move-beginning-of-line)
+#+end_src
+
+** Desactivar tecles del cursor
+
+Porto massa anys utilitzant les tecles del cursor i he desenvolupat
+habits per mourem ràpidament amb elles. El canvi em trenca massa el
+ritme de treball i resulta frustrant.
+
+L'objectiu és acostumar-me a no utilitzar les tecles del cursor pels
+desplaçaments i no haver de moure la ma fora de la /fila principal/.
+
+#+begin_src emacs-lisp :tangle no
+  (defun comanda-desactivada ()
+    (interactive)
+    (let ((visible-bell t))
+      (ding)))
+
+  (global-set-key (kbd "<up>") #'comanda-desactivada)
+  (global-set-key (kbd "<down>") #'comanda-desactivada)
+  (global-set-key (kbd "<left>") #'comanda-desactivada)
+  (global-set-key (kbd "<right>") #'comanda-desactivada)
 #+end_src
 
 * Per mirar
