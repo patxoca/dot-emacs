@@ -426,7 +426,6 @@ defineix =string-lessp= i =string<=.
                (string< a b)))))
 #+end_src
 
-
 * Configuració
 ** Interfície d'usuari
 
@@ -4528,7 +4527,6 @@ i el paràgraf resultat ara es pot ajustar satisfactoriament amb =M-q=:
 
 En funció de l'ús que en fàci potser valdria la pena definir una
 comanda equivalment a =M-Q M-q=.
-
 
 * Descartat
 
