@@ -537,12 +537,19 @@ https://github.com/abo-abo/avy
 
 =avy= agilitza el desplaçament dins un buffer.
 
+Per defecte =avy= permet saltar a qualsevol finestra dins el frame
+actual. No acostumo a saltar entre finestres i tendeix a generar
+seqüències llargues de fins tres lletres, especialment en pantalles
+grans. Per aquest motiu ho restringeixo a salts dins el buffer actiu.
+
 #+begin_src emacs-lisp :tangle yes
   (use-package avy
     :ensure t
     :commands (avy-goto-char-2
                avy-goto-line
-               avy-goto-word-1))
+               avy-goto-word-1)
+    :config
+    (setq avy-all-windows nil))
 #+end_src
 
 *** =browse-url=                                                    :builtin:
