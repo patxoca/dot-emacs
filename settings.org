@@ -3288,6 +3288,25 @@ definida ací demana el directori on fer la cerca.
       (kill-new (thing-at-point 'symbol))))
 #+end_src
 
+*** =arv/open-line-after-and-indent=, =arv/open-line-before-and-indent=
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/open-line-before-and-indent (n)
+    "Insereix una línia abans de l'actual i indenta. Amb un prefix
+  numèric N insereix N línies."
+    (interactive "*p")
+    (open-line n)
+    (indent-according-to-mode))
+
+  (defun arv/open-line-after-and-indent (n)
+    "Insereix una línia després de l'actual i indenta. Amb un
+  prefix numèric N insereix N línies."
+    (interactive "*p")
+    (end-of-line)
+    (newline n)
+    (indent-according-to-mode))
+#+end_src
+
 *** =arv/query-replace=
 
 #+begin_src emacs-lisp :tangle yes
@@ -4216,6 +4235,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; (global-set-key (kbd "C-s") #'endless/isearch-symbol-with-prefix)
   (global-set-key (kbd "C-x 2") #'arv/split-windows-bellow)
   (global-set-key (kbd "C-x 3") #'arv/split-windows-right)
+
+  (global-set-key (kbd "C-o") #'arv/open-line-before-and-indent)
+  (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
