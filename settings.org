@@ -3391,6 +3391,149 @@ es mostrarà en la nova finestra.
           (ido-switch-buffer)))))
 #+end_src
 
+*** conversió d'entitats HTML <-> caràcter
+
+Modificacions menors al codi trobat en:
+
+https://stackoverflow.com/questions/24085067/is-there-an-emacs-package-for-html-escaping
+
+- afegit =save-excursion=
+
+- fer explícit que cal concondància majúscules/minúscules en les
+  cerques.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq ar-html2uml
+    '(
+      ("&AElig;" "Æ")
+      ("&Aacute;" "Á")
+      ("&Acirc;" "Â")
+      ("&Agrave;" "À")
+      ("&Aring;" "Å")
+      ("&Atilde;" "Ã")
+      ("&Auml;" "Ä")
+      ("&Ccedil;" "Ç")
+      ("&ETH;" "Ð")
+      ("&Eacute;" "É")
+      ("&Ecirc;" "Ê")
+      ("&Egrave;" "È")
+      ("&Euml;" "Ë")
+      ("&Iacute;" "Í")
+      ("&Icirc;" "Î")
+      ("&Igrave;" "Ì")
+      ("&Iuml;" "Ï")
+      ("&Ntilde;" "Ñ")
+      ("&Oacute;" "Ó")
+      ("&Ocirc;" "Ô")
+      ("&Ograve;" "Ò")
+      ("&Oslash;" "Ø")
+      ("&Otilde;" "Õ")
+      ("&Ouml;" "Ö")
+      ("&Ouml;" "Ö")
+      ("&THORN;" "Þ")
+      ("&Uacute;" "Ú")
+      ("&Ucirc;" "Û")
+      ("&Ugrave;" "Ù")
+      ("&Uuml;" "Ü")
+      ("&Yacute;" "Ý")
+      ("&aacute;" "á")
+      ("&acirc;" "â")
+      ("&acute;" "\x{00B4}")
+      ("&aelig;" "æ")
+      ("&agrave;" "à")
+      ("&aring;" "å")
+      ("&atilde;" "ã")
+      ("&auml;" "ä")
+      ("&brvbar;" "\x{00A6}")
+      ("&ccedil;" "ç")
+      ("&cedil;" "\x{00B8}")
+      ("&cent;" "¢")
+      ("&copy;" "©")
+      ("&curren;" "\x{00A4}")
+      ("&deg;" "°")
+      ("&divide;" "÷")
+      ("&eacute;" "é")
+      ("&ecirc;" "ê")
+      ("&egrave;" "è")
+      ("&eth;" "ð")
+      ("&euml;" "ë")
+      ("&frac12;" "\x{00BD}")
+      ("&frac14;" "\x{00BC}")
+      ("&frac34;" "\x{00BE}")
+      ("&iacute;" "í")
+      ("&icirc;" "î")
+      ("&iexcl;" "¡")
+      ("&igrave;" "ì")
+      ("&iquest;" "¿")
+      ("&iuml;" "ï")
+      ("&laquo;" "«")
+      ("&macr;" "¯")
+      ("&micro;" "µ")
+      ("&middot;" "·")
+      ;; ("&nbsp;" " ")
+      ("&not;" "¬")
+      ("&ntilde;" "ñ")
+      ("&oacute;" "ó")
+      ("&ocirc;" "ô")
+      ("&ograve;" "ò")
+      ("&ordf;" "ª")
+      ("&ordm;" "º")
+      ("&oslash;" "ø")
+      ("&otilde;" "õ")
+      ("&ouml;" "ö")
+      ("&para;" "¶")
+      ("&plusmn;" "±")
+      ("&pound;" "£")
+      ("&raquo;" "»")
+      ("&reg;" "®")
+      ("&sect;" "§")
+      ("&shy;" "­")
+      ("&sup1;" "¹")
+      ("&sup2;" "²")
+      ("&sup3;" "³")
+      ("&szlig;" "ß")
+      ("&thorn;" "þ")
+      ("&times;" "×")
+      ("&uacute;" "ú")
+      ("&ucirc;" "û")
+      ("&ugrave;" "ù")
+      ("&uml;" "\x{00A8}")
+      ("&uuml;" "ü")
+      ("&yacute;" "ý")
+      ("&yen;" "¥")
+      ("&yuml;" "ÿ")
+      ))
+
+  (defun ar-uml2html ()
+    "Translate chars into html entities"
+    (interactive "*")
+    (let ((liste ar-html2uml)
+          (case-fold-search nil)
+          erg)
+      (save-excursion
+        (dolist (ele liste)
+          (goto-char (point-min))
+          (while (search-forward (cadr ele) nil t 1)
+            (setq erg (car ele))
+            ;; Replacing with code starting from & upcases
+            ;; Emacs bug?
+            (replace-match "")
+            (insert erg))))))
+
+  (defun ar-html2uml ()
+    "Translate html entities into text"
+    (interactive "*")
+    (let ((liste ar-html2uml)
+          (case-fold-search nil))
+      (save-excursion
+        (dolist (ele liste)
+          (goto-char (point-min))
+          (while (search-forward (car ele) nil t 1)
+            (replace-match "")
+            (insert (cadr ele)))))))
+
+#+end_src
+
 *** conversió de format DOS <-> UNIX
 
 #+begin_src emacs-lisp :tangle yes
