@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: html 5 document
+# $Id: $
+# group: html
+# key: !
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: d043dacc-33a9-4e12-81e2-254cac8c3a25
+# --
+<!DOCTYPE html>
+<html>
+
+  <head>
+  </head>
+
+  <body>
+    $0
+  </body>
+
+</html>
