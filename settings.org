@@ -475,6 +475,18 @@ d'haver-ho provat en un /xterm/ amb 256 colors.
                         :foreground "white"))
 #+end_src
 
+La forma en que =doom-one= defineix les faces de =diff-hl= té
+problemes quan el frame es parteix en dos verticalment, en la finestra
+de la dreta no es visualitza correctament. Funciona millor si
+s'utilitza un color solid enlloc de ressaltar només la vora.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "diff-hl"
+    (set-face-attribute 'diff-hl-change nil :background "#da8548")
+    (set-face-attribute 'diff-hl-delete nil :background "#ff6c6b")
+    (set-face-attribute 'diff-hl-insert nil :background "#98be65"))
+#+end_src
+
 ** Paquets
 
 Aquesta secció inclou la configuració de paquets d'us general.
