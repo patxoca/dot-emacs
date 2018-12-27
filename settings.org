@@ -446,7 +446,11 @@ defineix =string-lessp= i =string<=.
   (use-package doom-themes
     :ensure t)
 
-  (load-theme 'doom-one)
+  ;; doom-one té alguns problemes de visualització en terminals
+  ;; (svn-diff resulta il·legible)
+  (if (display-graphic-p)
+      (load-theme 'doom-one)
+    (load-theme 'tango-dark))
 
   ;; (set-face-attribute 'compilation-error nil
   ;;                     :underline nil
