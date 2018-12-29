@@ -482,9 +482,9 @@ s'utilitza un color solid enlloc de ressaltar només la vora.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "diff-hl"
-    (set-face-attribute 'diff-hl-change nil :background "#da8548")
-    (set-face-attribute 'diff-hl-delete nil :background "#ff6c6b")
-    (set-face-attribute 'diff-hl-insert nil :background "#98be65"))
+    (set-face-attribute 'diff-hl-change nil :foreground "blue3" :background "#333355")
+    (set-face-attribute 'diff-hl-delete nil :foreground "red3" :background "#553333")
+    (set-face-attribute 'diff-hl-insert nil :foreground "green4" :background "#335533"))
 #+end_src
 
 ** Paquets
