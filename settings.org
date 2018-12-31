@@ -2209,7 +2209,7 @@ es podria generalitzar a notes per projecte.
                      "   :REFERER: %a\n"
                      "   :END:\n\n"
                      "%?")
-            :prepend
+            :prepend t
             :empty-lines 1)
           org-capture-templates))
 #+end_src
