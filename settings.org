@@ -2,6 +2,9 @@
 #+OPTIONS: toc:4 h:4
 #+STARTUP: overview
 
+#+LANGUAGE: ca
+#+LATEX_CLASS: informe
+
 #+begin_abstract
 Aquesta és la tercera encarnació de la configuració d'emacs. Els
 objectius que es volen aconsseguir són:
