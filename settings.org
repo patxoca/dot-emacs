@@ -490,6 +490,32 @@ s'utilitza un color solid enlloc de ressaltar només la vora.
     (set-face-attribute 'diff-hl-insert nil :foreground "green4" :background "#335533"))
 #+end_src
 
+El color per defecte per la mode-line dificulta diferenciar les
+finestres.
+
+#+begin_src emacs-lisp :tangle yes
+  (set-face-attribute 'mode-line nil
+                      :box nil
+                      :background "#00ad50"
+                      :foreground "black"
+                      :height 0.85)
+  (set-face-attribute 'mode-line-highlight nil
+                      :box nil
+                      :background "orange"
+                      :foreground "black")
+  (set-face-attribute 'mode-line-inactive nil
+                      :inherit 'mode-line
+                      :box nil
+                      :background "#004f24"
+                      :foreground "#999999"
+                      :weight 'light)
+#+end_src
+
+El color que he triat no em convenç però almenys facilita veure el
+límit de les finestres. Una altra combinació utilitza el mateix groc
+que utilitzo a i3 per ressaltar la finestra activa, actiu =#ffcc00= i
+inactiu =#aa8900=.
+
 ** Paquets
 
 Aquesta secció inclou la configuració de paquets d'us general.
@@ -1120,18 +1146,6 @@ hagi de canviar/millorar en el futur així que es clona:
 *** =modeline=                                                      :builtin:
 
 #+begin_src emacs-lisp :tangle yes
-  (set-face-attribute 'mode-line nil
-                      :box nil
-                      :height 0.85)
-  (set-face-attribute 'mode-line-highlight nil
-                      :box nil
-                      :background "orange"
-                      :foreground "black")
-  (set-face-attribute 'mode-line-inactive nil
-                      :inherit 'mode-line
-                      :box nil
-                      :weight 'light)
-
   ;; oculta el número de la columna
   (column-number-mode 0)
   ;; (line-number-mode 0)
