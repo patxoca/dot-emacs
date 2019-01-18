@@ -953,8 +953,8 @@ urgència en fer el canvi. Açò és més un recordatori.
       :group 'hi-lock-faces)
 
     (defface arv/hi-red
-      '((((min-colors 88)) (:weight bold :background "red1"))
-        (t (:weight bold :background "red")))
+      '((((min-colors 88)) (:weight bold :background "red1" :foreground "white"))
+        (t (:weight bold :background "red" :foreground "white")))
       "Face for hi-lock mode."
       :group 'hi-lock-faces))
 #+end_src

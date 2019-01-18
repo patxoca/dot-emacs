@@ -368,6 +368,22 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
+** TODO Agrupar definicions de colors?                                 :idea:
+   :PROPERTIES:
+   :PUB_DATE: [2019-01-18 dv 08:33]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
+   :END:
+
+El color de =arv/hi-red= (aplicat a etiquetes =FIXME:=) no es
+visualitza bé en el tema =doom-one=.
+
+Possiblement hagi definicions de colors desperdigades per tota la
+configuració. De cara a ajustar-les quan canvio el tema sembla bona
+idea agrupar-les en la secció =tema=, per contra també sembla bona
+idea agrupar la definició del color al activar el paquet.
+
+Mirar que es pot fer.
+
 
 * Paquets extra
 
