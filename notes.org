@@ -384,7 +384,6 @@ idea agrupar la definició del color al activar el paquet.
 
 Mirar que es pot fer.
 
-
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -396,6 +395,8 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament:
 
 - [[https://github.com/wasamasa/eyebrowse][eyebrowse]] i [[https://github.com/seudut/perspeen][perspeen]] faciliten definir /workspaces/ i canviar entre
   ells.
+
+- [[https://pawelbx.github.io/emacs-theme-gallery/][galeria de temes]], no exactament un paquet
 
 * Completat
 
