@@ -2127,6 +2127,20 @@ d'inactivitat per carregar-lo.
       (insert char)))
 #+end_src
 
+Afegeix automàticament la data en que es creen les entrades =TODO=:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/org-add-creation-date (&rest ignore)
+    "Log TODO creation time in the property drawer under the key 'CREATED'."
+    (when (and (org-get-todo-state)
+               (not (org-entry-get nil "CREATED")))
+      (org-entry-put nil "CREATED" (format-time-string (cdr org-time-stamp-formats)))))
+
+  (advice-add 'org-insert-todo-heading :after #'arv/org-add-creation-date)
+  (advice-add 'org-insert-todo-heading-respect-content :after #'arv/org-add-creation-date)
+  (advice-add 'org-insert-todo-subheading :after #'arv/org-add-creation-date)
+#+end_src
+
 **** Faces
 
 Perquè el valor de =org-todo-keyword-faces= tingui efecte sembla que
