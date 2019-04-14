@@ -2218,7 +2218,7 @@ d'emacs:
            (file+headline "~/.emacs.d/conf.d/notes.org" "Bugs, molèsties, millores etc.")
            ,(concat "** TODO %^{Heading} %^g\n"
                     "   :PROPERTIES:\n"
-                    "   :PUB_DATE: %U\n"
+                    "   :CREATED: %U\n"
                     "   :REFERER: %a\n"
                     "   :END:\n\n"
                     "%?")
@@ -2236,7 +2236,7 @@ es podria generalitzar a notes per projecte.
             (file+headline ,(arv/path-concat (getenv "HERA_ROOT") "doc_dev" "TODO.org") "TODOs")
             ,(concat "** TODO %^{Heading} %^g\n"
                      "   :PROPERTIES:\n"
-                     "   :PUB_DATE: %U\n"
+                     "   :CREATED: %U\n"
                      "   :REFERER: %a\n"
                      "   :END:\n\n"
                      "%?")
