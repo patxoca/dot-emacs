@@ -384,6 +384,17 @@ idea agrupar la definició del color al activar el paquet.
 
 Mirar que es pot fer.
 
+** TODO investigar/provar =truncate-lines=                             :idea:
+   :PROPERTIES:
+   :CREATED:  [2019-04-15 dl 11:31]
+   :END:
+
+https://www.emacswiki.org/emacs/TruncateLines
+
+En alguns buffer preferiria truncar les línies llargues. No tinc un
+criteri clar d'on sí. Tinc clar que en modes de programació no, però
+normalment les línies ja son curtes.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
