@@ -168,7 +168,7 @@ el bloc de codi en el context del document sembla bastant diferent.
 
 ** TODO Revisar configuració backends de company                :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 00:28]
+   :CREATED: [2018-03-30 dv 00:28]
    :REFERER: [[file:settings.org::*=company=][=company=]]
    :END:
 
@@ -178,7 +178,7 @@ per cada mode en el corresponent /hook/.
 
 ** TODO Revisar estructura                                             :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 03:37]
+   :CREATED: [2018-03-30 dv 03:37]
    :REFERER: [[file:settings.org::*=xref-js2=][=xref-js2=]]
    :END:
 
@@ -187,7 +187,7 @@ No tinc clar si és bona idea tindre paquets en dos seccions separades
 
 ** TODO integrar un REPL javascript                             :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:34]
+   :CREATED: [2018-03-31 ds 01:34]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*javascript][javascript]]
    :END:
 
@@ -203,7 +203,7 @@ Integrar un interpret (nodejs?) en la configuració.
 
 ** TODO Investigar /rope/                                              :task:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:37]
+   :CREATED: [2018-03-31 ds 01:37]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=python=][=python=]]
    :END:
 
@@ -213,7 +213,7 @@ https://github.com/python-rope/rope
 
 ** TODO Patró de cerca/revisió                                         :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 03:00]
+   :CREATED: [2018-03-31 ds 03:00]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*apropos][apropos]]
    :END:
 
@@ -239,7 +239,7 @@ cerco, trobo, modifico, torno a la cerca.
 
 ** TODO descobrir paquets                                              :note:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-02 dl 13:01]
+   :CREATED: [2018-04-02 dl 13:01]
    :REFERER:
    :END:
 
@@ -256,7 +256,7 @@ Per no oblidar-ho:
 
 ** TODO elimina blocs sh?                                              :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-02 dl 18:09]
+   :CREATED: [2018-04-02 dl 18:09]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Blocs%20de%20codi%20sh][Blocs de codi sh]]
    :END:
 
@@ -279,7 +279,7 @@ Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-u
 
 ** TODO highlight-thing-at-point                                       :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-03 dt 14:15]
+   :CREATED: [2018-04-03 dt 14:15]
    :REFERER: [[file:~/.bashrc::export%20INFOPATH="~/.local/share/info:$INFOPATH"]]
    :END:
 
@@ -292,7 +292,7 @@ sembla que no acaba de funcionar com vull. Investigar-ho.
 
 ** TODO ressaltar finestra activa                                      :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 14:17]
+   :CREATED: [2018-04-04 dc 14:17]
    :REFERER:
    :END:
 
@@ -305,7 +305,7 @@ resta, amb un fons lleugerament més fosc p.e.).
 
 ** TODO renombrar comandes de =settings.org= ?                         :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 21:34]
+   :CREATED: [2018-04-04 dc 21:34]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
    :END:
 
@@ -319,7 +319,7 @@ A més d'evitar conflictes de noms permet identificar els elements
 
 ** TODO revisar snippets                                                :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-07 ds 13:09]
+   :CREATED: [2018-04-07 ds 13:09]
    :REFERER: [[file:~/prog/di/project/myapp/models.py::)]]
    :END:
 
@@ -337,7 +337,7 @@ Crec que vaig renombrar algunes funcions. També és possible que
 
 ** TODO error en x-my/camelize                                          :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-18 dc 08:25]
+   :CREATED: [2018-04-18 dc 08:25]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=arv/camelize=][=arv/camelize=]]
    :END:
 
@@ -346,7 +346,7 @@ s'obté "Lxxx".
 
 ** TODO molestia en els canvis d'estat en =org-mode=              :annoyance:
    :PROPERTIES:
-   :PUB_DATE: [2018-08-18 ds 20:15]
+   :CREATED: [2018-08-18 ds 20:15]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*revisar%20snippets][revisar snippets]]
    :END:
 
@@ -358,7 +358,7 @@ Prefereixo el comportament anterior o separat en els dos costats.
 
 ** TODO inserir prefix automàticament en codi emacs lisp               :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-08-28 dt 12:27]
+   :CREATED: [2018-08-28 dt 12:27]
    :REFERER:
    :END:
 
@@ -370,7 +370,7 @@ treballar: definir una variable local al buffer + algun automatisme
 
 ** TODO Agrupar definicions de colors?                                 :idea:
    :PROPERTIES:
-   :PUB_DATE: [2019-01-18 dv 08:33]
+   :CREATED: [2019-01-18 dv 08:33]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
    :END:
 
@@ -415,7 +415,7 @@ També falla al moure un ítem d'una llista, només mou la primera línia:
   bar bar bar bar bar bar bar bar bar bar bar bar bar bar
 ** CANC compilar configuració                                   :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 18:23]
+   :CREATED: [2018-03-31 ds 18:23]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Per%20mirar][Per mirar]]
    :END:
 
@@ -455,7 +455,7 @@ documentació de la instal·lació.
   explicar =C-c C-v t= (=org-babel-tangle=).
 ** DONE =rainbow-mode=                                                  :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 00:49]
+   :CREATED: [2018-04-01 dg 00:49]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
    :END:
 
@@ -474,7 +474,7 @@ Si no hi ha alternativa, clonar-lo dins =~/.emacs.d/site-lisp=:
     https://github.com/emacsmirror/rainbow-mode.git
 ** DONE =ace-window= i múltiples frames                                 :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 00:52]
+   :CREATED: [2018-04-01 dg 00:52]
    :REFERER:
    :END:
 
@@ -489,7 +489,7 @@ les finestres del frame actiu.
 
 ** DONE revisar =C-x b=                                                 :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 23:22]
+   :CREATED: [2018-03-31 ds 23:22]
    :REFERER: [[help:ido-default-buffer-method]]
    :END:
 
@@ -506,7 +506,7 @@ buffer. =selected-window= sembla que és el que necessito.
 
 ** DONE revisar codi elisp vell                                         :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:17]
+   :CREATED: [2018-03-31 ds 01:17]
    :REFERER:
    :END:
 
@@ -519,7 +519,7 @@ probablement brossa. Mirar que fer amb ells.
 
 ** DONE revisar paquets instal·lats                                    :task:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 06:05]
+   :CREATED: [2018-04-01 dg 06:05]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Introducci%C3%B3][Introducció]]
    :END:
 
@@ -620,7 +620,7 @@ gestió de dependències principalment.
   configuri el path etc.
 ** CANC revisar =uniquify=                                      :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 03:14]
+   :CREATED: [2018-03-30 dv 03:14]
    :REFERER: [[file:settings.org::*=uniquify=][=uniquify=]]
    :END:
 
@@ -636,7 +636,7 @@ La variable =uniquify-strip-common-suffix= podria ajudar.
 
 ** CANC Afegir keybinding                                              :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 10:42]
+   :CREATED: [2018-03-30 dv 10:42]
    :REFERER: [[file:settings.org::*=paredit=][=paredit=]]
    :END:
 
@@ -665,7 +665,7 @@ certs buffers (una llista configurable, una expressió regular ...).
 
 ** DONE Ajustar face de =ace-jump-mode=                                 :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 22:07]
+   :CREATED: [2018-03-31 ds 22:07]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
    :END:
 
@@ -688,7 +688,7 @@ le que =fboundp= avalua a =nil=.
 
 ** DONE revisar funció =grin=                                   :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-30 dv 00:53]
+   :CREATED: [2018-03-30 dv 00:53]
    :REFERER: [[file:settings.org::*=grin=][=grin=]]
    :END:
 
@@ -712,7 +712,7 @@ emacs lisp.
 
 ** DONE integrar =ox-twbs=                                      :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 01:21]
+   :CREATED: [2018-03-31 ds 01:21]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*error%20en%20HTML][error en HTML]]
    :END:
 
@@ -724,7 +724,7 @@ preferiblement en el grup HTML.
 
 ** DONE millorar =figlet=                                              :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 19:39]
+   :CREATED: [2018-04-01 dg 19:39]
    :REFERER:
    :END:
 
@@ -737,7 +737,7 @@ comanda per genera text sense comentari.
 Revisar el codi, crec que havia alguna cosa més que volia canviar.
 ** DONE repensar comandes sh                                            :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 15:05]
+   :CREATED: [2018-04-01 dg 15:05]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*helpers%20sh][helpers sh]]
    :END:
 
@@ -758,7 +758,7 @@ l'arxiu =./scripts/config= (que seria /sourced/ pels scripts).
 
 ** DONE gestió del directori =site-lisp=                                :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-02 dl 21:55]
+   :CREATED: [2018-04-02 dl 21:55]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Directori%20=site-lisp=][Directori =site-lisp=]]
    :END:
 
@@ -773,7 +773,7 @@ Implementar scripts per automatitzar la gestió dels paquets en
 
 ** DONE error en figlet                                                 :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 16:18]
+   :CREATED: [2018-04-04 dc 16:18]
    :REFERER:
    :END:
 
@@ -787,7 +787,7 @@ s'insereix un salt de línia en =def set\nUp=.
 
 ** DONE =elpy-goto-definition= no funciona                              :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 09:41]
+   :CREATED: [2018-04-04 dc 09:41]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
    :END:
 
@@ -806,7 +806,7 @@ sigui perquè /jedi/ estava fred.
 
 ** DONE =arv/django-mode= no s'activa                                   :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 09:44]
+   :CREATED: [2018-04-04 dc 09:44]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_candof_empresa/ol2_candof_empresa/views/descarregar_adjunts.py::model%20=%20Estudiant]]
    :END:
 
@@ -823,7 +823,7 @@ Al obrir arxius que pertanyen a un projecte django el mode
 
 ** DONE error en =my/camelize=                                          :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-05 dj 12:50]
+   :CREATED: [2018-04-05 dj 12:50]
    :REFERER:
    :END:
 
@@ -838,7 +838,7 @@ En aquesta cas voldria convertir-lo en =None=.
 
 ** DONE comandes camelize i uncamelize                                 :idea:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-04 dc 17:11]
+   :CREATED: [2018-04-04 dc 17:11]
    :REFERER: [[file:~/projectes/bt2/impl/ol2_oferta_evha/ol2_oferta_evha/tests/test_ol2_candof.py::GaranteixEmailAlActivarNofiticacionsDeNovesCandidatures]]
    :END:
 
@@ -852,7 +852,7 @@ El mòdul =arv-yas= (crec) té implementacions.
 
 ** CANC eliminar confirmació al matar buffers                     :annoyance:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-03 dt 00:29]
+   :CREATED: [2018-04-03 dt 00:29]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Bugs,%20mol%C3%A8sties,%20millores%20etc.][Bugs, molèsties, millores etc.]]
    :END:
 
@@ -890,7 +890,7 @@ problema.
 
 ** DONE comportament estrany de variables locals                        :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-05 dj 11:13]
+   :CREATED: [2018-04-05 dj 11:13]
    :REFERER:
    :END:
 
@@ -912,7 +912,7 @@ Probablement no tingui relació però ara no utilitzo =projectile=.
 
 ** DONE revisar =diminish=                                      :enhancement:
    :PROPERTIES:
-   :PUB_DATE: [2018-03-31 ds 22:13]
+   :CREATED: [2018-03-31 ds 22:13]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
    :END:
 
@@ -933,7 +933,7 @@ corresponents =use-package=.
 
 ** DONE gestionar paquets absents durant la instal·lació                :bug:
    :PROPERTIES:
-   :PUB_DATE: [2018-04-01 dg 00:48]
+   :CREATED: [2018-04-01 dg 00:48]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
    :END:
 
