@@ -2742,6 +2742,8 @@ per the requirement of the Sphinx documentation generator.
        ("C-c j T" pyx/visit-test-module)
        ("C-=" arv/rst-underline-header)
        ("C-," arv/wm-cycle-2)
+       ("C->" indent-rigidly-right-to-tab-stop)
+       ("C-<" indent-rigidly-left-to-tab-stop)
        ))
     (define-key python-mode-map (kbd "C-<tab>")
       (make-hippie-expand-function
@@ -2769,6 +2771,10 @@ per the requirement of the Sphinx documentation generator.
 
                 ;; company-mode
                 (company-mode t)
+
+                ;; afecta a indent-rigidly-(left|righ)-to-tab-stop
+                (setq python-indent-offset 4)
+                (setq tab-width python-indent-offset)
 
                 ;; ressalta els nivell d'indentacio
                 ;; (arv/highlight-indentation-mode 0)
