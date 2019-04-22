@@ -395,6 +395,27 @@ En alguns buffer preferiria truncar les línies llargues. No tinc un
 criteri clar d'on sí. Tinc clar que en modes de programació no, però
 normalment les línies ja son curtes.
 
+** TODO Definir =arv/ffap-ffip-dwin=                                   :idea:
+   :PROPERTIES:
+   :CREATED: [2019-04-22 dl 16:28]
+   :REFERER: [[file:~/.emacs.d/conf.d/customize/turing.el::(require]]
+   :END:
+
+De vegades (normalment en org) vull visitar un arxiu que el nom
+apareix en el buffer (normalment en el resultat d'avaluar un bloc de
+codi), =find-file-at-point= és perfecte.
+
+=C-x f= és un bon binding però el tinc assignat a
+=find-file-in-project= (que no utilitzo en django però pot ser útil en
+altres projectes).
+
+Potser seria útil una comanda que primer intenta =ffap= i si no
+correspon a un arxiu (no existeix) executa =ffip=.
+
+- [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20find-file-at-point%20(&optional%20filename)][=find-file-at-point=]]
+
+- [[file:~/.emacs.d/elpa/find-file-in-project-20190408.325/find-file-in-project.el::(defun%20find-file-in-project%20(&optional%20open-another-window)][=find-file-in-project=]]
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
