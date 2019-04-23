@@ -416,6 +416,19 @@ correspon a un arxiu (no existeix) executa =ffip=.
 
 - [[file:~/.emacs.d/elpa/find-file-in-project-20190408.325/find-file-in-project.el::(defun%20find-file-in-project%20(&optional%20open-another-window)][=find-file-in-project=]]
 
+** TODO Investigar paquet =delsel=                              :enhancement:
+   :PROPERTIES:
+   :CREATED:  <2019-04-23 dt 23:58>
+   :END:
+
+De vegades em quedo enganxat amb el minibufer, que no accepta C-g
+perquè to té el focus. Cal fer clic i resulta molest.
+
+El nom d'aquesta variable =minibuffer-keyboard-quit= suggereix que pot
+haver una solució millor.
+
+https://www.emacswiki.org/emacs/delsel.el
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
