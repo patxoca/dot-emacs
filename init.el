@@ -22,6 +22,18 @@
 (message " (_)___|_| |_| |_|\\__,_|\\___|___/")
 (message " ")
 
+
+;; accelera la càrrega
+
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)
+             (garbage-collect)) t)
+
+
 (defun arv/path-concat (&rest components)
   (concat
    (mapconcat 'file-name-as-directory (butlast components) "")
