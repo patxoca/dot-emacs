@@ -443,6 +443,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament:
 
 - [[https://pawelbx.github.io/emacs-theme-gallery/][galeria de temes]], no exactament un paquet
 
+- [[https://github.com/flycheck/flycheck-pos-tip][flycheck-pos-tip]]: This Flycheck extension shows errors under point
+  in pos-tip popups.
+
+- [[https://github.com/Fuco1/flow-js2-mode][flow-js2-mode]]: this package adds support for [[https://flow.org][Flow]], a static
+  typechecking extension for javascript, to js2-mode, a popular
+  javascript editing mode for Emacs.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
