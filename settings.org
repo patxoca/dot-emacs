@@ -1490,6 +1490,16 @@ Mai vaig aconseguir integrar-lo en el meu workflow i el paquet ja no
                     :background "#2fadff")
 #+end_src
 
+*** =xt-mouse=                                                      :builtin:
+
+Afegeix suport mínim pel ratolí quan emacs s'executa en una terminal:
+
+#+begin_src emacs-lisp :tangle yes
+  (unless (display-graphic-p)
+    (use-package xt-mouse
+      :config (xterm-mouse-mode)))
+#+end_src
+
 *** =yasnippet=
 
 #+begin_src emacs-lisp :tangle yes
