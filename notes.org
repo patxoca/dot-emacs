@@ -2,7 +2,7 @@
 #+AUTHOR: Alexis Roda
 #+EMAIL: alexis.roda.villalonga@gmail.com
 
-#+TODO: TODO(@) DONE(@)
+#+TODO: TODO(@) PAUS(@) DONE(@)
 #+TODO: | CANC(c@)
 
 
@@ -395,11 +395,15 @@ En alguns buffer preferiria truncar les línies llargues. No tinc un
 criteri clar d'on sí. Tinc clar que en modes de programació no, però
 normalment les línies ja son curtes.
 
-** TODO Definir =arv/ffap-ffip-dwin=                                   :idea:
+** PAUS Definir =arv/ffap-ffip-dwin=                                   :idea:
    :PROPERTIES:
    :CREATED: [2019-04-22 dl 16:28]
    :REFERER: [[file:~/.emacs.d/conf.d/customize/turing.el::(require]]
    :END:
+
+   - State "PAUS"       from "TODO"       [2019-04-28 dg 22:09] \\
+     La funció [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20ffap-guesser%20()][ffap-guesser]] obté la ruta en el punt i la retorna o
+     retorna =nil=. A partir d'ací sembla fàcil.
 
 De vegades (normalment en org) vull visitar un arxiu que el nom
 apareix en el buffer (normalment en el resultat d'avaluar un bloc de
@@ -429,6 +433,23 @@ haver una solució millor.
 
 https://www.emacswiki.org/emacs/delsel.el
 
+** TODO Revisar vídeo                                                  :idea:
+   :PROPERTIES:
+   :CREATED: [2019-04-28 dg 21:42]
+   :REFERER: [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(ffap-read-file-or-url]]
+   :END:
+
+[[https://www.youtube.com/watch?v=CTOhosGQ2f0][Aquest vídeo de youtube]] té algunes idees interessant pel que fa a la
+definició de tecles.
+
+Per veure si val la pena el canvi necessitaria estadístiques de les
+comandes que utilitzo. Ja ho vaig intentar fa temps amb [[https://github.com/dacap/keyfreq][keyfreq]] però
+tenia problemes al obrir varies instàncies d'emacs al mateix temps.
+
+He vist que es pot configurar =keyfreq-file= per especificar l'arxiu
+on es guarden les estadístiques; generar un nom basat en el PID del
+procés sembla que eliminaria el problema. Caldria estudiar el format i
+veure si després es poden fusioar fàcilment.
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
