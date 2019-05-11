@@ -2110,6 +2110,24 @@ versió 8.0.131.
      (expand-file-name "~/.local/lib/plantuml/plantuml.jar")))
 #+end_src
 
+**** =org=
+
+Defineix el comportament quan s'edita un bloc plegat.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq org-catch-invisible-edits 'show-and-error)
+#+end_src
+
+Les opcions disponibles es troben a l'[[help:org-catch-invisible-edits][ajuda]].
+
+Defineix el nombre de línies en blanc necessaries per mantindre una
+línia en blanc entre seccions col·lapsades. Personalment prefeixo que
+les capçaleres apareguin juntes.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq org-cycle-separator-lines 0)
+#+end_src
+
 **** =ox-twbs=
 
 https://github.com/marsmining/ox-twbs
