@@ -453,7 +453,8 @@ veure si després es poden fusioar fàcilment.
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
-però que ara mateix no puc/vull provar. Ordenats cronològicament:
+però que ara mateix no puc/vull provar. Ordenats cronològicament
+(descubriments més recents al final):
 
 - [[https://gitlab.com/jgkamat/rmsbolt][RMSBolt]]: semblant a [[https://godbolt.org/][compiler explorer]], però s'executa dins emacs.
   Permet veure el codi esamblador o /bytecode/ generat per un
@@ -470,6 +471,15 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament:
 - [[https://github.com/Fuco1/flow-js2-mode][flow-js2-mode]]: this package adds support for [[https://flow.org][Flow]], a static
   typechecking extension for javascript, to js2-mode, a popular
   javascript editing mode for Emacs.
+
+- [[https://github.com/victorhge/iedit][iedit]]: This package includes Emacs minor modes (iedit-mode and
+  iedit-rectangle-mode) based on a API library (iedit-lib) and allows
+  you to edit one occurrence of some text in a buffer (possibly
+  narrowed) or region, and simultaneously have other occurrences
+  edited in the same way, with visual feedback as you type.
+
+  Pel que he vist en [[https://www.youtube.com/watch?v=XAHVwhTsF-g][aquest vídeo]] sembla més potent del que penssava
+  (crec que ja el vaig trobar fa temps i el vaig descartar).
 
 * Completat
 
