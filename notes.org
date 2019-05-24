@@ -185,7 +185,7 @@ per cada mode en el corresponent /hook/.
 No tinc clar si és bona idea tindre paquets en dos seccions separades
 (/paquets/ i /modes/).
 
-** TODO integrar un REPL javascript                             :enhancement:
+** TODO Entorn per desenvolupar en javascript                   :enhancement:
    :PROPERTIES:
    :CREATED: [2018-03-31 ds 01:34]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*javascript][javascript]]
@@ -195,11 +195,12 @@ Integrar un interpret (nodejs?) en la configuració.
 
 - https://github.com/abicky/nodejs-repl.el, disponible a melpa stable.
 
-- [[https://github.com/abicky/nodejs-repl.el][aquest article]], encara que vell, sembla interessant.
-
 - [[https://github.com/NicolasPetton/Indium][Indium]] és un IDE per javascript. Té molt bona pinta.
 
 - [[https://github.com/ananthakumaran/tide][TypeScript Interactive Development Environment for Emacs]]
+
+- [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][Setting up Emacs for JavaScript (part #1)]] i [[https://emacs.cafe/emacs/javascript/setup/2017/05/09/emacs-setup-javascript-2.html][Setting up Emacs for
+  JavaScript (part #2)]]
 
 ** TODO Investigar /rope/                                              :task:
    :PROPERTIES:
