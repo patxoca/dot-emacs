@@ -2464,6 +2464,8 @@ Cap tecla definida.
               (show-paren-mode 1)
               (set-variable 'show-trailing-whitespace t)
 
+              (flyspell-prog-mode)
+
               ;; hi-lock
 
               ;; HACK: 20180818, no tinc clara la causa però, si no
