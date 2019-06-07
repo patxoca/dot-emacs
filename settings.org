@@ -3228,6 +3228,37 @@ o sobreescriptura.
 Comandes que proveeixen funcionalitat a l'usuari (i poden estar
 lligades a combinacions de tecles).
 
+*** =arv/alternar-mida-font=
+
+De vegades és interessant augmentar temporalment la mida de la font
+(una visita amb qui cal revisar codi). Fins ara utilitzava =C-+= i
+=C--= però no funciona bé amb =company-mode=, cal fer-ho buffer a
+buffer i cada buffer acaba amb una mida de lletra diferent.
+
+Aquesta funció alterna entre una mida per defecte i una de gran.
+
+Pel moment les mides estan fixades al cos de la funció. És fràgil. He
+provat guardant la mida inicial i comparant amb aquest valor per
+determinar l'estat però no funciona. El valor guardat és 100 (el
+assigant en la secció [[*Faces][Faces]]) però el llegit posteriormente en la
+funció és 98. No sé si el tema o algun paquet canvia el valor o si és
+algun tipus d'arrodoniment de la mida. Fins que esbrini una solució
+millor és queda fixat i s'utilitza un /flag/ bi-estat per seguir la
+pista de l'esta.
+
+#+begin_src emacs-lisp :tangle yes
+  (defvar arv/big-font-enabled nil)
+
+  (defun arv/alternar-mida-font ()
+    "Alterna entre font 'normal' i 'gran'."
+    (interactive)
+    (set-face-attribute 'default nil
+                        :height (if arv/big-font-enabled
+                                    98
+                                  140))
+    (setq arv/big-font-enabled (not arv/big-font-enabled)))
+#+end_src
+
 *** =arv/downcase-word= i =arv/upcase-word=
 
 Converteix a majúscules/minúscules la paraula en el punt. A diferència
@@ -4590,6 +4621,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; toggle map
   (global-set-key (kbd "C-c t c") 'column-number-mode)
+  (global-set-key (kbd "C-c t B") 'arv/alternar-mida-font)
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
   (global-set-key (kbd "C-c t l") 'linum-mode)
