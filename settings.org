@@ -3441,6 +3441,17 @@ definida ací demana el directori on fer la cerca.
             (replace-match new-string))))))
 #+end_src
 
+*** =arv/visit-emacs-config=
+
+Visita aquest arxiu de configuració:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun arv/visit-emacs-config ()
+    "Visita l'arxiu de configuració d'emacs."
+    (interactive)
+    (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org")))
+      (find-file settings-org)))
+#+end_src
 *** Partir finestres
 
 Idea treta del vídeo [[https://www.youtube.com/watch?v=nKCKuRuvAOw&t=252][Emacs microhabit - Switching windows]] de Sacha
@@ -4535,6 +4546,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; jump map
 
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
+  (global-set-key (kbd "C-c j e") 'arv/visit-emacs-config)
   (global-set-key (kbd "C-c j l") 'avy-goto-line)
   (global-set-key (kbd "C-c j s") 'imenu)
   (global-set-key (kbd "C-c j w") 'avy-goto-word-1)
