@@ -462,6 +462,48 @@ Al activar =flyspell-prog-mode= (imagino que és la causa) la
 combinació =C-.= (=er/expand-region=) no funciona. Enlloc d'expandir
 la regió corregeix la paraula.
 
+** TODO estudiar =smerge=                                       :enhancement:
+   :PROPERTIES:
+   :CREATED:  [2019-06-08 ds 19:13]
+   :END:
+
+Molt ocasionalment he de resoldre conflictes en subversion. El paquet
+[[help:smerge-mode][=smerge=]] sembla que simplifica el procés però dubto que puga recordar
+els keybinding.
+
+Aquest podria ser un us per =hydra=? He trobat aquesta definició en un
+[[https://irreal.org/blog/?p=5651][post de Irreal]]:
+
+#+begin_src emacs-lisp
+  (defhydra hydra-smerge
+    (:color red :hint nil
+            :pre (smerge-mode 1))
+  "
+  ^Move^ ^Keep^ ^Diff^ ^Pair^
+  ------------------------------------------------------
+  _n_ext _b_ase _R_efine _<_: base-mine
+  _p_rev _m_ine _E_diff _=_: mine-other
+  ^ ^ _o_ther _C_ombine _>_: base-other
+  ^ ^ _a_ll _r_esolve
+  _q_uit _RET_: current
+  "
+    ("RET" smerge-keep-current)
+    ("C" smerge-combine-with-next)
+    ("E" smerge-ediff)
+    ("R" smerge-refine)
+    ("a" smerge-keep-all)
+    ("b" smerge-keep-base)
+    ("m" smerge-keep-mine)
+    ("n" smerge-next)
+    ("o" smerge-keep-other)
+    ("p" smerge-prev)
+    ("r" smerge-resolve)
+    ("<" smerge-diff-base-mine)
+    ("=" smerge-diff-mine-other)
+    (">" smerge-diff-base-other)
+    ("q" nil :color blue))
+#+end_src
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
