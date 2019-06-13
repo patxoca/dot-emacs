@@ -504,6 +504,13 @@ Aquest podria ser un us per =hydra=? He trobat aquesta definició en un
     ("q" nil :color blue))
 #+end_src
 
+** TODO estudiar =project=                                             :idea:
+
+Aniria be disposar del concepte de /projecte/ en emacs. No em cal res
+sofisticat.
+
+Emacs inclou el paquet [[file:/opt/emacs/26.2.90/share/emacs/26.2.90/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
