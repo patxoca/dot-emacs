@@ -452,11 +452,14 @@ on es guarden les estadístiques; generar un nom basat en el PID del
 procés sembla que eliminaria el problema. Caldria estudiar el format i
 veure si després es poden fusioar fàcilment.
 
-** TODO key shadowing al activar =flyspell-prog-mode= :annoyance:
+** DONE key shadowing al activar =flyspell-prog-mode=             :annoyance:
    :PROPERTIES:
    :CREATED: [2019-05-25 ds 23:11]
    :REFERER: [[file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_forms.py::)]]
    :END:
+
+   - State "DONE"       from "TODO"       [2019-06-13 dj 21:18] \\
+     Resolt en r955.
 
 Al activar =flyspell-prog-mode= (imagino que és la causa) la
 combinació =C-.= (=er/expand-region=) no funciona. Enlloc d'expandir
