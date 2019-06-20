@@ -650,6 +650,7 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
     :config
     (setq company-minimum-prefix-length 1)
     (setq company-idle-delay 0.5)
+    (setq company-tooltip-align-annotations t)
     (setq company-backends '(company-elisp
                              company-nxml
                              company-css
