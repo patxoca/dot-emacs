@@ -1491,15 +1491,18 @@ Mai vaig aconseguir integrar-lo en el meu workflow i el paquet ja no
                     :background "#2fadff")
 #+end_src
 
-*** =xt-mouse=                                                      :builtin:
+*** =xt-mouse=                                           :builtin:desactivat:
 
 Afegeix suport mínim pel ratolí quan emacs s'executa en una terminal:
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (unless (display-graphic-p)
     (use-package xt-mouse
       :config (xterm-mouse-mode)))
 #+end_src
+
+20190629: no aprofito la funcionalitat i en contrapartida perdo la
+possibilitat que oferix X de seleccionar amb el ratoli.
 
 *** =yasnippet=
 
