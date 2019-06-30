@@ -3491,6 +3491,31 @@ Visita aquest arxiu de configuració:
     (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org")))
       (find-file settings-org)))
 #+end_src
+
+*** Comentari dins rectangle
+
+http://pragmaticemacs.com/emacs/comment-boxes/
+
+Semblant a [[help:comment-box][=comment-box=]], fa que el retangle tingui una amplada mínima
+igual a =fill-column=.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun bjm-comment-box (b e)
+    "Draw a box comment around the region but arrange for the
+  region to extend to at least the fill column. Place the point
+  after the comment box."
+
+    (interactive "r")
+
+    (let ((e (copy-marker e t)))
+      (goto-char b)
+      (end-of-line)
+      (insert-char ?  (- fill-column (current-column)))
+      (comment-box b e 1)
+      (goto-char e)
+      (set-marker e nil)))
+#+end_src
+
 *** Partir finestres
 
 Idea treta del vídeo [[https://www.youtube.com/watch?v=nKCKuRuvAOw&t=252][Emacs microhabit - Switching windows]] de Sacha
@@ -4634,6 +4659,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; word-mode
   (global-set-key (kbd"C-,") 'arv/wm-cycle)
+
+  (global-set-key (kbd "C-c b b") 'bjm-comment-box)
+
 #+end_src
 
 * Parxes
