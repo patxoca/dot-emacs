@@ -1569,19 +1569,18 @@ secció. Un avantatge de =:bind= és que defineix automàticament
                         ))
 #+end_src
 
-*** C                                                       :desactivat:brut:
+*** C
 
-Aquest mode actualment no l'utilitzo. S'inclou la configuració,
-desactivada, per accelerar la migració.
+Configuració del c-mode.
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
   (use-package cc-mode
     :commands (c-mode c++-mode)
     :config
     (add-hook 'c-mode-common-hook
               (lambda ()
                 (setq indent-tabs-mode nil)
-                (setq c-default-style "python")
+                (setq c-default-style "k&r")
                 (setq c-basic-offset 4)
                 ;; company-mode
                 (company-mode t))))
