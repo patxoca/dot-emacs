@@ -512,7 +512,18 @@ Aquest podria ser un us per =hydra=? He trobat aquesta definició en un
 Aniria be disposar del concepte de /projecte/ en emacs. No em cal res
 sofisticat.
 
-Emacs inclou el paquet [[file:/opt/emacs/26.2.90/share/emacs/26.2.90/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
+Emacs inclou el paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
+
+** TODO estudiar "notifications" :idea:
+   :PROPERTIES:
+   :CREATED: [2019-07-21 dg 10:53]
+   :END:
+
+El paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/notifications.el.gz::;;;%20notifications.el%20---%20Client%20interface%20to%20desktop%20notifications.][notifications.el]] defineix una interfície que permet
+interactuar amb les notificacions de l'entorn (gràfic).
+
+Es podria utilizar per mostrar el resultat d'executar els tests,
+compilar ...
 
 * Paquets extra
 
