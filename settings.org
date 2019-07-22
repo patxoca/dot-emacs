@@ -1570,6 +1570,27 @@ secció. Un avantatge de =:bind= és que defineix automàticament
 #+end_src
 
 *** C
+**** gtk-doc
+
+https://github.com/federicomenaquintero/gnome-emacs-utils
+
+Funcions variades per facilitar el desenvolupament de/amb gnome.
+M'interessa la funcionalitat per generar comentaris de les funcions.
+
+#+begin_src sh :tangle yes
+  ./scripts/clone_git https://github.com/federicomenaquintero/gnome-emacs-utils
+  ./scripts/compile_package gnome-emacs-utils
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package gtk-doc
+    :ensure nil
+    :load-path "site-lisp/gnome-emacs-utils"
+    :commands (gtk-doc-insert
+               gtk-doc-insert-section))
+#+end_src
+
+**** cc-mode
 
 Configuració del c-mode.
 
@@ -1584,6 +1605,17 @@ Configuració del c-mode.
                 (setq c-basic-offset 4)
                 ;; company-mode
                 (company-mode t))))
+#+end_src
+
+**** Combinacions de tecles
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "cc-mode"
+    (arv/bind-keys
+     c-mode-map
+     '(("C-c m d f" gtk-doc-insert)
+       ("C-c m d s" gtk-doc-insert-section)
+       )))
 #+end_src
 
 *** css
