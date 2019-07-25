@@ -3072,6 +3072,19 @@ l'arxiu del buffer actual) i en els directoris pare.
     (arv/-sphinx-build "doctest"))
 #+end_src
 
+***** cpctelera
+
+Apanyo ràpid per facilitar compilar AGD.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun cpct_make ()
+    "Executa make dins un projecte de la cpctelera."
+    (interactive)
+    (arv/-sphinx-build ""))
+
+  (define-key c-mode-map (kbd "<f9>") #'cpct_make)
+#+end_src
+
 **** Definicions de tecles
 
 #+begin_src emacs-lisp :tangle yes
