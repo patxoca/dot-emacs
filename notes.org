@@ -525,6 +525,19 @@ interactuar amb les notificacions de l'entorn (gràfic).
 Es podria utilizar per mostrar el resultat d'executar els tests,
 compilar ...
 
+** TODO estudiar =ibuffer-vc=                                   :enhancement:
+   :PROPERTIES:
+   :CREATED: [2019-08-07 dc 11:35]
+   :END:
+
+https://github.com/purcell/ibuffer-vc
+
+Interpreto que permet agrupar en =ibuffer= els buffers segons el
+repositori de control de revisions al que pertanyen i operar sobre un
+grup com un tot (per tancar-los p.e.). Podría ser útil al treballar en
+/Hera/.
+
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
