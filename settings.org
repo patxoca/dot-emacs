@@ -4735,13 +4735,13 @@ L'origen d'aquesta hydra és un [[https://irreal.org/blog/?p=5651][post de Irrea
   (defhydra hydra-smerge
     (:color red :hint nil :pre (smerge-mode 1))
     "
-  ^Move^ ^Keep^ ^Diff^ ^Pair^
+  ^Move^    ^Keep^    ^Diff^    ^Pair^
   ------------------------------------------------------
-  _n_ext _b_ase _R_efine _<_: base-mine
-  _p_rev _m_ine _E_diff _=_: mine-other
-  ^ ^ _o_ther _C_ombine _>_: base-other
-  ^ ^ _a_ll _r_esolve
-  _q_uit _RET_: current
+  _n_ext    _b_ase    _R_efine  _<_: base-mine
+  _p_rev    _m_ine    _E_diff   _=_: mine-other
+  ^ ^       _o_ther   _C_ombine _>_: base-other
+  ^ ^       _a_ll     _r_esolve
+  _q_uit    _RET_: current
   "
     ("RET" smerge-keep-current)
     ("C" smerge-combine-with-next)
@@ -4760,7 +4760,7 @@ L'origen d'aquesta hydra és un [[https://irreal.org/blog/?p=5651][post de Irrea
     ("q" nil :color blue))
 
   (global-set-key (kbd "C-c h s") 'hydra-smerge/body)
- #+end_src
+#+end_src
 
 * Parxes
 
