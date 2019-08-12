@@ -452,7 +452,7 @@ defineix =string-lessp= i =string<=.
   ;; doom-one té alguns problemes de visualització en terminals
   ;; (svn-diff resulta il·legible)
   (if (display-graphic-p)
-      (load-theme 'doom-one)
+      (load-theme 'wombat)
     (load-theme 'tango-dark))
 
   ;; (set-face-attribute 'compilation-error nil
@@ -1026,7 +1026,9 @@ Ressalta la línia on es troba el cursor actualment.
                             :background "black")
       (set-face-attribute 'hl-line nil
                           :foreground "black"
-                          :background "yellow")))
+                          :background "yellow"))
+    (set-face-attribute 'hl-line nil
+                        :underline nil))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
