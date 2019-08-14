@@ -2627,7 +2627,10 @@ Pel seu funcionament requereix algunes comandes externes:
                            ;; elpy-module-highlight-indentation
                            elpy-module-pyvenv
                            elpy-module-sane-defaults
-                           elpy-module-yasnippet)))
+                           elpy-module-yasnippet))
+
+    (define-key elpy-mode-map (kbd "C-c C-g") nil)
+    (define-key elpy-mode-map (kbd "C-c M-g") 'elpy-pdb-map))
 #+end_src
 
 La comanda =flake8= es pot configurar des de l'arxiu
