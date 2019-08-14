@@ -4737,7 +4737,7 @@ control de revisions.
 
 L'origen d'aquesta hydra és un [[https://irreal.org/blog/?p=5651][post de Irreal]].
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
   (defhydra hydra-smerge
     (:color red :hint nil :pre (smerge-mode 1))
     "
