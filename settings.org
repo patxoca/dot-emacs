@@ -447,6 +447,7 @@ defineix =string-lessp= i =string<=.
   ;; (load-theme 'tango-dark)
 
   (use-package doom-themes
+    :disabled
     :ensure t)
 
   ;; doom-one té alguns problemes de visualització en terminals
