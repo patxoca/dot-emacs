@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Descarrega la configuració des de SVN i recompila/regenera el que
+# Descarrega la configuració des de GIT i recompila/regenera el que
 # calgui.
 
 HERE=$(dirname $0)
@@ -8,7 +8,7 @@ HERE=$(dirname $0)
 
 cd $EMACS_CONF_DIR
 
-svn update
+git pull
 
 compile_directory $EMACS_CONF_SITELISP $EMACS_CONF_SITELISP/loaddefs.el
 
