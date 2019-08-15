@@ -468,6 +468,10 @@ defineix =string-lessp= i =string<=.
   ;; (set-face-attribute 'eldoc-highlight-function-argument nil
   ;;                     :underline t :foreground "green"
   ;;                     :weight 'bold)
+
+  (set-face-attribute 'button nil
+                      :foreground "#8ac6f2"
+                      :underline t)
 #+end_src
 
 En terminals en mode text el color de fons del tema dificulta la
