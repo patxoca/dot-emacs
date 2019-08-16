@@ -553,6 +553,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 - [[https://github.com/syohex/emacs-company-jedi][company-jedi]]: backend per company. Actualment ja em funciona la
   completació en python, =elpy=?
 
+- [[https://github.com/JackCrawley/pygen][pygen]]: Pygen is a package that allows the user to automatically
+  generate Python code.
+
+  El que es veu en els screencasts té molt bona pinta, malauradament
+  l'autor ha deixat emacs i no s'actualtiza des de finals de 2017.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
