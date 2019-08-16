@@ -3328,6 +3328,18 @@ pista de l'esta.
     (setq arv/big-font-enabled (not arv/big-font-enabled)))
 #+end_src
 
+*** =my/bash-terminal=
+
+No m'acostumo a utilitzar la comanda =shell=, la meva teoria és que no
+permet utilizar les tecles nadiues. Provaré una temporada amb =term=.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/bash-terminal ()
+    "Obre una terminal executant bash."
+    (interactive)
+    (term "/bin/bash"))
+#+end_src
+
 *** =arv/downcase-word= i =arv/upcase-word=
 
 Converteix a majúscules/minúscules la paraula en el punt. A diferència
@@ -4615,7 +4627,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; accident. In any case C-x C-z is still available.
   (when (display-graphic-p)
     (global-unset-key (kbd "C-z"))
-    (global-set-key (kbd "C-z") 'shell))
+    (global-set-key (kbd "C-z") 'my/bash-terminal))
 
 
   ;; emacs overrides
