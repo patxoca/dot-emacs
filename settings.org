@@ -523,6 +523,26 @@ límit de les finestres. Una altra combinació utilitza el mateix groc
 que utilitzo a i3 per ressaltar la finestra activa, actiu =#ffcc00= i
 inactiu =#aa8900=.
 
+Els colors per defecte de =term= no em convencen. Aquesta combinació
+em convenç més:
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "term"
+    (custom-set-faces
+
+     '(term-color-black ((t (:foreground "#242424" :background "#242424"))))
+     '(term-color-red ((t (:foreground "#ef2929" :background "#ff1313"))))
+     '(term-color-green ((t (:foreground "#8ae234" :background "#4e9a06"))))
+     '(term-color-yellow ((t (:foreground "#fce94f" :background "#c4a000"))))
+     '(term-color-blue ((t (:foreground "#729fcf" :background "#3465a4"))))
+     '(term-color-magenta ((t (:foreground "#ad7fa8" :background "#75507b"))))
+     '(term-color-cyan ((t (:foreground "#34e2e2" :background "#06989a"))))
+     '(term-color-white ((t (:foreground "#eeeeec" :background "#d3d7cf"))))
+
+     '(term-default-fg-color ((t (:inherit term-color-white))))
+     '(term-default-bg-color ((t (:inherit term-color-black))))))
+#+end_src
+
 ** Paquets
 
 Aquesta secció inclou la configuració de paquets d'us general.
