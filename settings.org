@@ -444,51 +444,31 @@ defineix =string-lessp= i =string<=.
 ** Tema
 
 #+begin_src emacs-lisp :tangle yes
-  ;; (load-theme 'tango-dark)
-
-  (use-package doom-themes
-    :disabled
-    :ensure t)
-
-  ;; doom-one té alguns problemes de visualització en terminals
-  ;; (svn-diff resulta il·legible)
-  ;; (if (display-graphic-p)
-  ;;     (load-theme 'wombat)
-  ;;   (load-theme 'tango-dark))
-
   (load-theme 'wombat)
+
+  (set-face-attribute 'default nil
+                      :height 100)
+
+  (set-face-attribute 'button nil
+                      :foreground "#8ac6f2"
+                      :underline t)
 
   ;; (set-face-attribute 'compilation-error nil
   ;;                     :underline nil
   ;;                     :weight 'normal)
   ;; (set-face-attribute 'cursor  nil
   ;;                     :background "white")
-  (set-face-attribute 'default nil
-                      :height 100)
+
   ;; (set-face-attribute 'eldoc-highlight-function-argument nil
   ;;                     :underline t :foreground "green"
   ;;                     :weight 'bold)
 
-  (set-face-attribute 'button nil
-                      :foreground "#8ac6f2"
-                      :underline t)
 #+end_src
 
-En terminals en mode text el color de fons del tema dificulta la
-lectura. En eixe cas s'estableix un fons negre. No estic segur
-d'haver-ho provat en un /xterm/ amb 256 colors.
-
-#+begin_src emacs-lisp :tangle yes
-  (unless (display-graphic-p)
-    (set-face-attribute 'default nil
-                        :background "black"
-                        :foreground "white"))
-#+end_src
-
-La forma en que =doom-one= defineix les faces de =diff-hl= té
-problemes quan el frame es parteix en dos verticalment, en la finestra
-de la dreta no es visualitza correctament. Funciona millor si
-s'utilitza un color solid enlloc de ressaltar només la vora.
+En alguns temes (detectat en =doom-one=) la definició de les faces de
+=diff-hl= té problemes quan el frame es parteix en dos verticalment,
+en la finestra de la dreta no es visualitza correctament. Funciona
+millor si s'utilitza un color solid enlloc de ressaltar només la vora.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "diff-hl"
@@ -498,7 +478,10 @@ s'utilitza un color solid enlloc de ressaltar només la vora.
 #+end_src
 
 El color per defecte per la mode-line dificulta diferenciar les
-finestres.
+finestres. El color que he triat no em convenç però almenys facilita
+veure el límit de les finestres. Una altra combinació utilitza el
+mateix groc que utilitzo a i3 per ressaltar la finestra activa, actiu
+=#ffcc00= i inactiu =#aa8900=.
 
 #+begin_src emacs-lisp :tangle yes
   (set-face-attribute 'mode-line nil
@@ -517,11 +500,6 @@ finestres.
                       :foreground "#999999"
                       :weight 'light)
 #+end_src
-
-El color que he triat no em convenç però almenys facilita veure el
-límit de les finestres. Una altra combinació utilitza el mateix groc
-que utilitzo a i3 per ressaltar la finestra activa, actiu =#ffcc00= i
-inactiu =#aa8900=.
 
 Els colors per defecte de =term= no em convencen. Aquesta combinació
 em convenç més:
