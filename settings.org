@@ -3251,7 +3251,8 @@ Per classificar:
 
   (setq next-line-add-newlines nil)
   (setq scroll-preserve-screen-position t)
-  (setq scroll-step 1)
+  (customize-set-value 'scroll-step 1)
+  (customize-set-value 'scroll-conservatively 10000)
   (setq tooltip-mode t)
   (setq transient-mark-mode t)
   (setq visible-bell nil)
