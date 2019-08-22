@@ -455,6 +455,9 @@ defineix =string-lessp= i =string<=.
 
 ** Tema
 
+Crec que la millor forma d'organitzar la configuració des les /faces/
+és concentrar-les en una única secció, facilita el canvi de tema.
+
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'wombat)
 
@@ -531,6 +534,15 @@ em convenç més:
 
      '(term-default-fg-color ((t (:inherit term-color-white))))
      '(term-default-bg-color ((t (:inherit term-color-black))))))
+#+end_src
+
+El color que utilitza =transient= per ressaltar les opcions /actives/
+no destaca gaire.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "transient"
+    (custom-set-faces
+     '(transient-argument ((t (:foreground "green" :weight bold))))))
 #+end_src
 
 ** Paquets
