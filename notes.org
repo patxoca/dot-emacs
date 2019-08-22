@@ -559,6 +559,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   El que es veu en els screencasts té molt bona pinta, malauradament
   l'autor ha deixat emacs i no s'actualtiza des de finals de 2017.
 
+- [[https://github.com/alphapapa/prism.el][prism]]: Disperse Lisp forms into a spectrum of colors by depth
+
+  Sembla que ajuda a identificar (distingir) expressions elisp en
+  funció de la seva profundidat. Pot resultar útil al estudiar
+  funcions complexes.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
