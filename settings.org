@@ -364,6 +364,18 @@ En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
   (setq load-prefer-newer t)
 #+end_src
 
+** =transient=
+
+https://github.com/magit/transient
+
+Facilita contruir línies de comandes interactivament (s'utilitza en
+=magit=).
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package transient
+    :ensure t)
+#+end_src
+
 ** Directori =site-lisp= local
 
 El subdirectori =site-lisp= de la configuració s'utilitza per guardar
@@ -908,15 +920,14 @@ No tinc clar si activar-lo ací és preferible a fer-ho en algun hook.
 
 *** =grin=
 
-https://bitbucket.org/dariusp686/emacs-grin/src
-
 =grin= és una utilitat tipus =grep=, escrita en python. Es pot
 descarregar des de https://pypi.python.org/pypi/grin.
 
+La integració amb emacs està basada en [[https://bitbucket.org/dariusp686/emacs-grin/src][emacs-grin]].
+
 #+begin_src emacs-lisp :tangle yes
   (use-package grin
-    :ensure t
-    :commands grin)
+    :load-path "site-lisp")
 #+end_src
 
 Al estar escrita en python pot donar problemes si s'executa dins un
@@ -3475,19 +3486,6 @@ No ho utilitzo gaire.
             (call-interactively 'goto-line))
         (unless linum-enabled
           (linum-mode -1)))))
-#+end_src
-
-*** =arv/grin=
-
-La implementació per defecte de la funció =grin= realitza la cerca en
-el directori actual, el que no resulta massa pràctic. La funció
-definida ací demana el directori on fer la cerca.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun arv/grin ()
-    (interactive)
-    (let ((default-directory (ido-read-directory-name "Directory: " nil nil t)))
-      (grin)))
 #+end_src
 
 *** =arv/kill-ring-save-word-at-point=
