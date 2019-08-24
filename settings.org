@@ -3500,6 +3500,21 @@ No ho utilitzo gaire.
           (linum-mode -1)))))
 #+end_src
 
+*** =my/json-prettify=
+
+https://coderwall.com/p/2vnxaw/beautify-json-in-emacs
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/json-prettify ()
+    (interactive)
+    (let ((b (if mark-active (min (point) (mark)) (point-min)))
+          (e (if mark-active (max (point) (mark)) (point-max))))
+      (shell-command-on-region
+       b e
+       "python -mjson.tool"
+       (current-buffer) t)))
+#+end_src
+
 *** =arv/kill-ring-save-word-at-point=
 
 #+begin_src emacs-lisp :tangle yes
