@@ -805,6 +805,17 @@ parèntesi tancat.
   (electric-pair-mode 1)
 #+end_src
 
+Es desactiva en el minibuffer, vull valorar si és més una moléstia o
+una ajuda:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/inhibit-electric-pair-mode-in-modeline (char)
+    (minibufferp))
+
+  (setq electric-pair-inhibit-predicate
+        #'my/inhibit-electric-pair-mode-in-modeline)
+#+end_src
+
 *** =engine-mode=
 
 https://github.com/hrs/engine-mode
