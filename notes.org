@@ -565,6 +565,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   funció de la seva profundidat. Pot resultar útil al estudiar
   funcions complexes.
 
+- [[https://github.com/tonini/overseer.el][overseer]]: Overseer integrates this tool into emacs and let's you
+  using it inside your lovely editor.
+
+  No tinc clares les avantages respecte a executar =ert= directament.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
