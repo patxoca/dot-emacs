@@ -82,6 +82,7 @@
 ;;;###autoload (autoload 'arv/grin "grin" nil t)
 (define-transient-command arv/grin ()
   "Run grin."
+  :value '("-i")
   ["Arguments (C-x l for extra options)"
    (1 "-i" "Ignore case" "-i")
    (5 "-s" "do NOT skip .hidden files" "-s")
