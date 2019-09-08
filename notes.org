@@ -570,6 +570,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   No tinc clares les avantages respecte a executar =ert= directament.
 
+- [[https://github.com/dajva/rg.el][rg]]: Use [[https://github.com/BurntSushi/ripgrep][ripgrep]] in Emacs.
+
+  Alternativa a =grep=, =grin=, =ag= etc. Aparentment més ràpida i amb
+  molta funcionalitat.
+
 * Altres recursos
 
 ** elisp
