@@ -1918,6 +1918,20 @@ desactivada, per accelerar la migració.
               (go-eldoc-setup)))
 #+end_src
 
+*** haskell
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package haskell-mode
+    :ensure t
+    :config
+    (define-key haskell-mode-map (kbd "C->") (lambda () (interactive) (insert " -> ")))
+    (define-key haskell-mode-map (kbd "C-<") (lambda () (interactive) (insert " <- "))))
+#+end_src
+
+*No revisat*: a [[https://sachachua.com/blog/2019/08/2019-08-26-emacs-news/][Sacha Chua 2019-08-26 Emacs news]] he trobat un enllaç a
+[[https://github.com/soupi/minimal-haskell-emacs][minimal haskell emacs]] (a minimal emacs configuration for haskell
+programming).
+
 *** html
 **** =emmet= (anteriorment =zencoding=)
 
