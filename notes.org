@@ -570,6 +570,14 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   No tinc clares les avantages respecte a executar =ert= directament.
 
+* Altres recursos
+
+** elisp
+
+- [[https://github.com/bbatsov/emacs-lisp-style-guide][emacs lisp style guide]]: This Emacs Lisp style guide recommends best
+  practices so that real-world Emacs Lisp programmers can write code
+  that can be maintained by other real-world Emacs Lisp programmers.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
