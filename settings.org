@@ -3602,6 +3602,11 @@ Visita aquest arxiu de configuració:
     (interactive)
     (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org")))
       (find-file settings-org)))
+
+  (defun arv/visit-emacs-config-directory ()
+    "Visita el directori de configuració d'emacs."
+    (interactive)
+    (find-file arv/emacs-conf-dir))
 #+end_src
 
 *** Comentari dins rectangle
@@ -4723,6 +4728,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
   (global-set-key (kbd "C-c j e") 'arv/visit-emacs-config)
+  (global-set-key (kbd "C-c j E") 'arv/visit-emacs-config-directory)
   (global-set-key (kbd "C-c j l") 'avy-goto-line)
   (global-set-key (kbd "C-c j s") 'imenu)
   (global-set-key (kbd "C-c j w") 'avy-goto-word-1)
