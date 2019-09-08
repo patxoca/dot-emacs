@@ -3633,6 +3633,8 @@ igual a =fill-column=.
       (set-marker e nil)))
 #+end_src
 
+[[https://github.com/lewang/rebox2/blob/master/rebox2.el][rebox2]] és una alternativa aparentment més flexible.
+
 *** Partir finestres
 
 Idea treta del vídeo [[https://www.youtube.com/watch?v=nKCKuRuvAOw&t=252][Emacs microhabit - Switching windows]] de Sacha
