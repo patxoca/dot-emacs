@@ -603,6 +603,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   Anotat per fer un seguiment de la seva evolució.
 
+- [[https://savannah.gnu.org/projects/oo-browser/][oo-browser]]: The OO-Browser is a multi-windowed, interactive
+  object-oriented class browser similar in use to the well-known
+  Smalltalk browsers. It is unique in a number of respects foremost of
+  which is that it works well with a multiplicity of object-oriented
+  languages.
+
+
 * Altres recursos
 
 ** elisp
