@@ -1,5 +1,6 @@
 settings.el
 settings.sh
 site-lisp/loaddefs.el
+site-lisp/compile.log
 *~
 *.elc
