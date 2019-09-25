@@ -482,6 +482,56 @@ repositori de control de revisions al que pertanyen i operar sobre un
 grup com un tot (per tancar-los p.e.). Podría ser útil al treballar en
 /Hera/.
 
+** TODO revisar procés d'instal·lació                                   :bug:
+   :PROPERTIES:
+   :CREATED: [2019-09-25 dc 20:32]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
+   :END:
+
+Al instal·lar emacs 26.3 des de codi font en un entorn minimalista
+(una VM per fer unes proves) s'han detectat alguns detalls que han
+allargat la instal·lació més del desitjable:
+
+- al instal·lar el paquet emacs (24.x) des del repositori d'ubuntu el
+  paquet =transient= es queixava de la versió. Sobre açò no es pot fer
+  gran cosa (?).
+
+- s'ha compilat emacs amb un conjunt mínim de dependències i algunes
+  funcions no estan disponibles.
+
+  Resolt definint funcions /dummy/.
+
+- revisar el procés de instal·lació de org. Instal·lar-lo clonat el
+  repositori git requereix instal·lar =texinfo=. La versió d'org
+  (9.1.9) inclosa amb Emacs 26.3 sembla suficient per processar la
+  configuració.
+
+  S'ha instal·lat org des de ELPA. =org-version= diu 9.1.9 però indica
+  la ruta de =elpa=. A veure com es comporta.
+
+  Un altre detall que s'ha detectat i que potser caldria revisar és
+  que org s'instal·la des de el script =settings.sh= que, si no
+  m'equivoco, s'executa després de =settings.el=.
+
+- errors variats durant l'arranc.
+
+  #+begin_src text
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+    Configuring package company...done
+    For information about GNU Emacs and the GNU system, type C-h C-a.
+    File mode specification error: (void-function org--check-org-structure-template-alist)
+    Setting up indent for shell type bash
+    Indentation variables are now local.
+    Indentation setup for shell type bash
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+  #+end_src
 
 * Paquets extra
 
