@@ -533,6 +533,17 @@ allargat la instal·lació més del desitjable:
     (Searching for program El fitxer o directori no existeix ispell)
   #+end_src
 
+- el script =update-from-git= descarrega i instal·la org si no està
+  instal·lat localment.
+
+  Pel que respecta a org la solució més elegant probablement seria
+  comprovar la versió mínima requerida (9 probablement) i si no està
+  disponible mostrar un error i avortar (?). Açò impediria arrancar
+  emacs per instal·lar org?. És complicat instal·lar-lo amb =emacs
+  -Q=? Potser =init.el= comprova la versió mínima i si no està
+  disponible arranca emacs sense fer cap processament? Val la pena
+  complicar-se tant la vida si habitualment faig servir Emacs 26.x?
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
