@@ -427,19 +427,29 @@ Col·lecció de funcions per manipular cadenes.
 
 ** Compatibilitat
 
-Necessito suportar Emacs 24 per alguns casos en que no vull compilar
-una versió més recent. Aquesta secció defineix funcions que faciliten
-mantindre la compatibilitat.
+Aquesta secció defineix funcions que faciliten mantindre la
+compatibilitat entre diferents instal·lacios d'Emacs.
 
-Emacs 24 no defineix =string-greaterp= (ni =string>=), curiosament sí
-defineix =string-lessp= i =string<=.
+- Emacs 24 no defineix =string-greaterp= (ni =string>=), curiosament
+  sí defineix =string-lessp= i =string<=.
 
-#+begin_src emacs-lisp :tangle yes
-  (unless (fboundp 'string-greaterp)
-    (defun string-greaterp (a b)
-      (not (or (string= a b)
-               (string< a b)))))
-#+end_src
+  #+begin_src emacs-lisp :tangle yes
+    (unless (fboundp 'string-greaterp)
+      (defun string-greaterp (a b)
+	(not (or (string= a b)
+		 (string< a b)))))
+  #+end_src
+
+- Si compilo emacs en un entorn minimalista les funcions següents no
+  estan definides:
+
+  #+begin_src emacs-lisp :tangle yes
+    (unless (fboundp 'scroll-bar-mode)
+      (defun scroll-bar-mode (x)))
+
+    (unless (fboundp 'mouse-wheel-mode)
+      (defun mouse-wheel-mode (x)))
+  #+end_src
 
 * Configuració
 ** Interfície d'usuari
@@ -2098,7 +2108,7 @@ Mentre ho esbrino els mòduls es carreguen manualment.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load 'org
-    (when (string-greaterp org-version "9")
+    (when (string-greaterp org-version "9.2")
       (require 'org-tempo)))
 #+end_src
 
