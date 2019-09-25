@@ -2565,11 +2565,11 @@ Cap tecla definida.
               (show-paren-mode 1)
               (set-variable 'show-trailing-whitespace t)
 
-              (flyspell-prog-mode)
+              ;; (flyspell-prog-mode)
               ;; flyspell defineix C-, i C-. que ja tinc assignades i
               ;; interioritzades.
-              (define-key flyspell-mode-map (kbd "C-,") nil)
-              (define-key flyspell-mode-map (kbd "C-.") nil)
+              ;; (define-key flyspell-mode-map (kbd "C-,") nil)
+              ;; (define-key flyspell-mode-map (kbd "C-.") nil)
 
               ;; hi-lock
 
