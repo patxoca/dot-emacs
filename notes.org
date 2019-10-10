@@ -544,6 +544,27 @@ allargat la instal·lació més del desitjable:
   disponible arranca emacs sense fer cap processament? Val la pena
   complicar-se tant la vida si habitualment faig servir Emacs 26.x?
 
+** TODO provar /close and kill buffer in pane/                  :enhancement:
+   :PROPERTIES:
+   :CREATED:  [2019-10-10 dj 09:13]
+   :END:
+
+https://www.emacswiki.org/emacs/KillingBuffers
+
+Aparentment permet tancar una finestra temporal (=Help=, =Completions=
+etc). No estic segur de si la forma en que determina l'altra finestra
+és suficientement robusta.
+
+#+BEGIN_SRC emacs-lisp
+  (defun close-and-kill-next-pane ()
+    "If there are multiple windows, then close the other pane and kill the buffer in it also."
+    (interactive)
+    (other-window 1)
+    (kill-this-buffer)
+    (if (not (one-window-p))
+        (delete-window)))
+#+END_SRC
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
