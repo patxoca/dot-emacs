@@ -700,6 +700,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   practices so that real-world Emacs Lisp programmers can write code
   that can be maintained by other real-world Emacs Lisp programmers.
 
+- estudiar paquet [[info:elisp#Generators][generadors]]
+
+- estudiar paquet [[info:cl#Top][cl-lib]]
+
+- estudiar paquet [[info:elisp#Sequence Functions][seq]]
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
