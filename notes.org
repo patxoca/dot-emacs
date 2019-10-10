@@ -544,10 +544,20 @@ allargat la instal·lació més del desitjable:
   disponible arranca emacs sense fer cap processament? Val la pena
   complicar-se tant la vida si habitualment faig servir Emacs 26.x?
 
-** TODO provar /close and kill buffer in pane/                  :enhancement:
+** PAUS provar /close and kill buffer in pane/                  :enhancement:
    :PROPERTIES:
    :CREATED:  [2019-10-10 dj 09:13]
    :END:
+
+   - State "PAUS"       from "TODO"       [2019-10-10 dj 19:31] \\
+     Es confirma que no és gaire fiable al triar la finestra que tancarà.
+     Alternatives:
+
+     - utilitzar alguna cosa semblant a la funció [[help:ace-window][=ace-window=]] per
+       seleccionar la finestra manualment i tancar-la.
+
+     - definir una opció personalitzable que emmagatzemi una llista de
+       noms de buffer que es segur tancar.
 
 https://www.emacswiki.org/emacs/KillingBuffers
 
