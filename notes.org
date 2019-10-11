@@ -549,6 +549,11 @@ allargat la instal·lació més del desitjable:
    :CREATED:  [2019-10-10 dj 09:13]
    :END:
 
+   - State "PAUS"       from "PAUS"       [2019-10-11 dv 11:49] \\
+     Si es crida =ace-window= amb el prefix 16 (C-u C-u) es tanca la
+     finestra seleccionat.
+
+     Suposo que podré incorporar-ho als meus hàbits.
    - State "PAUS"       from "TODO"       [2019-10-10 dj 19:31] \\
      Es confirma que no és gaire fiable al triar la finestra que tancarà.
      Alternatives:
