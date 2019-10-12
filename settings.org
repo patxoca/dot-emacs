@@ -210,17 +210,17 @@ poden dependre de biblioteques de tercers i no proveeixen
 funcionalitat utilitzable directament per l'usuari, únicament per la
 configuració. Les comandes d'usuari van en la secció [[id:02df8b30-de79-489f-b4c9-13162d5d2784][Comandes]].
 
-**** =arv/bind-keys=
+**** =my/bind-keys=
 
 No tinc clar quin /keymap/ es afectat per la clausula =:bind= de
 =use-package=, la qüestió és que en alguns casos (configuració de
 =paredit= p.e.) no acaba de funcionar com espero.
 
-La funció =arv/bind-keys= intenta fer menys verbosa la definició de
+La funció =my/bind-keys= intenta fer menys verbosa la definició de
 les tecles quan no queda més remei que fer-ho manualment.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun arv/bind-keys (map key-definitions)
+  (defun my/bind-keys (map key-definitions)
     (dolist (item key-definitions)
       (let ((key (car item))
             (command (cadr item)))
@@ -230,9 +230,9 @@ les tecles quan no queda més remei que fer-ho manualment.
 Exemple:
 
 #+begin_src emacs-lisp :tangle no
-  (arv/bind-keys some-mode-map
-                 '(("C-c f" do-foo)
-                   ("C-c b" do-bar)))
+  (my/bind-keys some-mode-map
+                '(("C-c f" do-foo)
+                  ("C-c b" do-bar)))
 #+end_src
 
 **** =arv/generate-lab-faces=
@@ -787,10 +787,10 @@ fitxer. Personalment prefereixo evitar la proliferació de buffers.
     (find-alternate-file ".."))
 
   (with-eval-after-load "dired"
-    (arv/bind-keys dired-mode-map
-                   '(("M-<up>" arv/dired-up-directory)
-                     ("^" arv/dired-up-directory)
-                     ("C-m" dired-find-alternate-file)))
+    (my/bind-keys dired-mode-map
+                  '(("M-<up>" arv/dired-up-directory)
+                    ("^" arv/dired-up-directory)
+                    ("C-m" dired-find-alternate-file)))
 
     (set-face-attribute 'dired-directory nil :foreground "#729fcf"))
 #+end_src
@@ -1167,13 +1167,13 @@ enlloc d'horitzontalment:
     (add-hook 'ido-setup-hook
               (lambda ()
                 ;; more intuitive keybinds for vertical-mode
-                (arv/bind-keys ido-completion-map
-                               '(("<down>" ido-next-match)
-                                 ("<up>" ido-prev-match)
-                                 ("<left>" ido-prev-match-dir)
-                                 ("<right>" ido-next-match-dir)
-                                 ("M-<left>" ido-prev-work-directory)
-                                 ("M-<right>" ido-next-work-directory))))))
+                (my/bind-keys ido-completion-map
+                              '(("<down>" ido-next-match)
+                                ("<up>" ido-prev-match)
+                                ("<left>" ido-prev-match-dir)
+                                ("<right>" ido-next-match-dir)
+                                ("M-<left>" ido-prev-work-directory)
+                                ("M-<right>" ido-next-work-directory))))))
 #+end_src
 
 També m'agrada utilitzar =ido= allí on sigui possible, malauradament
@@ -1337,21 +1337,21 @@ combinacions de tecles més accesibles.
              (show-subtree)))))
 
   (with-eval-after-load "outline"
-    (arv/bind-keys outline-mode-map
-                   '(("S-<left>" arv/outline-hide-more)
-                     ("S-<right>" arv/outline-show-more)
-                     ("S-<up>" outline-previous-visible-heading)
-                     ("S-<down>" outline-next-visible-heading)))
+    (my/bind-keys outline-mode-map
+                  '(("S-<left>" arv/outline-hide-more)
+                    ("S-<right>" arv/outline-show-more)
+                    ("S-<up>" outline-previous-visible-heading)
+                    ("S-<down>" outline-next-visible-heading)))
 
-    (arv/bind-keys outline-minor-mode-map
-                   '(("S-<left>" arv/outline-hide-more)
-                     ("S-<right>" arv/outline-show-more)
-                     ("S-<up>" outline-previous-visible-heading)
-                     ("S-<down>" outline-next-visible-heading))
-                   ;; prova per moure blocs, no acava de funcionar
-                   ;;(define-key map (kbd "S-s-<up>") 'outline-move-subtree-up)
-                   ;;(define-key map (kbd "S-s-<down>") 'outline-move-subtree-down)
-      ))
+    (my/bind-keys outline-minor-mode-map
+                  '(("S-<left>" arv/outline-hide-more)
+                    ("S-<right>" arv/outline-show-more)
+                    ("S-<up>" outline-previous-visible-heading)
+                    ("S-<down>" outline-next-visible-heading))
+                  ;; prova per moure blocs, no acava de funcionar
+                  ;;(define-key map (kbd "S-s-<up>") 'outline-move-subtree-up)
+                  ;;(define-key map (kbd "S-s-<down>") 'outline-move-subtree-down)
+                  ))
 #+end_src
 
 *** =projectile=                                                 :desactivat:
@@ -1415,7 +1415,7 @@ Configura el mode.
     (customize-set-value 'svn-status-hide-unmodified t)
     (add-hook 'svn-status-diff-mode-hook
               #'(lambda () (diff-auto-refine-mode t)))
-    (arv/bind-keys
+    (my/bind-keys
      svn-status-diff-mode-map
      '(("a" diff-apply-hunk)
        ("u" my/diff-undo-hunk))))
@@ -1684,7 +1684,7 @@ Configuració del c-mode.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "cc-mode"
-    (arv/bind-keys
+    (my/bind-keys
      c-mode-map
      '(("C-c m d f" gtk-doc-insert)
        ("C-c m d s" gtk-doc-insert-section)
@@ -1824,28 +1824,28 @@ which are intended to be packages.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "lisp-mode"
-    (arv/bind-keys emacs-lisp-mode-map
-                   '(("s-SPC" company-complete)
-                     ("<f9>" (lambda () (interactive) (ert t)))
-                     ("M-<f1>" (lambda () (interactive) (info "elisp")))
-                     ("`" arv/emacs-lisp-insert-grave)
-                     ("s-c" arv/startup-byte-recompile)
-                     ("C-c m b" eval-buffer)
-                     ("C-c m c" cancel-debug-on-entry)
-                     ("C-c m d" debug-on-entry)
-                     ("C-c m e" toggle-debug-on-error)
-                     ("C-c m f" find-function)
-                     ("C-c m F" emacs-lisp-byte-compile-and-load)
-                     ("C-c m l" find-library)
-                     ("C-c m m" macrostep-mode)
-                     ("C-c m p" paredit-mode)
-                     ("C-c m r" eval-region)
-                     ("C-c m s" arv/scratch)
-                     ("C-c m v" find-variable)
-                     ("C-c m ?" elisp-slime-nav-describe-elisp-thing-at-point)
-                     ("C-h e V" apropos-value)
-                     ("C-c m z" byte-recompile-directory)
-                     ("C-c C-z" ielm)))
+    (my/bind-keys emacs-lisp-mode-map
+                  '(("s-SPC" company-complete)
+                    ("<f9>" (lambda () (interactive) (ert t)))
+                    ("M-<f1>" (lambda () (interactive) (info "elisp")))
+                    ("`" arv/emacs-lisp-insert-grave)
+                    ("s-c" arv/startup-byte-recompile)
+                    ("C-c m b" eval-buffer)
+                    ("C-c m c" cancel-debug-on-entry)
+                    ("C-c m d" debug-on-entry)
+                    ("C-c m e" toggle-debug-on-error)
+                    ("C-c m f" find-function)
+                    ("C-c m F" emacs-lisp-byte-compile-and-load)
+                    ("C-c m l" find-library)
+                    ("C-c m m" macrostep-mode)
+                    ("C-c m p" paredit-mode)
+                    ("C-c m r" eval-region)
+                    ("C-c m s" arv/scratch)
+                    ("C-c m v" find-variable)
+                    ("C-c m ?" elisp-slime-nav-describe-elisp-thing-at-point)
+                    ("C-h e V" apropos-value)
+                    ("C-c m z" byte-recompile-directory)
+                    ("C-c C-z" ielm)))
 
     (let ((keywords '(("\\<ert-deftest\\>" . font-lock-keyword-face)
                       ("\\<should\\>" . font-lock-keyword-face)
@@ -1854,11 +1854,11 @@ which are intended to be packages.
       (font-lock-add-keywords 'lisp-interaction-mode keywords)))
 
   (with-eval-after-load "paredit"
-    (arv/bind-keys paredit-mode-map
-                   '(("C-<right>" nil)
-                     ("C-<left>" nil)
-                     ("M-<right>" paredit-forward-slurp-sexp)
-                     ("M-<left>" paredit-forward-barf-sexp))))
+    (my/bind-keys paredit-mode-map
+                  '(("C-<right>" nil)
+                    ("C-<left>" nil)
+                    ("M-<right>" paredit-forward-slurp-sexp)
+                    ("M-<left>" paredit-forward-barf-sexp))))
 #+end_src
 
 **** /Hook/
@@ -2368,8 +2368,8 @@ que no. En funció d'això s'aplica un estil.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "org"
-    (arv/bind-keys org-mode-map
-                   '(("M-<f1>" my/org-refcard))))
+    (my/bind-keys org-mode-map
+                  '(("M-<f1>" my/org-refcard))))
 #+end_src
 
 Cal revisar el paquet =arv/org=. Fins aleshores es desactiva.
@@ -2702,12 +2702,12 @@ Pel seu funcionament requereix algunes comandes externes:
       (back-to-indentation)
       (elpy-nav-backward-block))
 
-    (arv/bind-keys elpy-mode-map
-                   '(("C-<down>" arv/elpy-nav-forward_block)
-                     ("C-<up>" arv/elpy-nav-backward_block)
-                     ("C-<left>" nil)
-                     ("C-<right>" nil)
-                     ("C-c m d" elpy-doc)))
+    (my/bind-keys elpy-mode-map
+                  '(("C-<down>" arv/elpy-nav-forward_block)
+                    ("C-<up>" arv/elpy-nav-backward_block)
+                    ("C-<left>" nil)
+                    ("C-<right>" nil)
+                    ("C-c m d" elpy-doc)))
 
     (customize-set-value 'elpy-syntax-check-command "flake8")
 
@@ -2849,8 +2849,8 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     (setq pytest-mode-keymap-prefix "C-c m t")
 
     :config
-    (arv/bind-keys pytest-mode-map
-                   '(("<f12>" pytest-one)))
+    (my/bind-keys pytest-mode-map
+                  '(("<f12>" pytest-one)))
 
     ;; WARNING: definir `pytest-cmd-flags' com segura per qualsevol
     ;; cadena és potencialment perillós, deixa la porta oberta a valors
@@ -2895,7 +2895,7 @@ per the requirement of the Sphinx documentation generator.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "python"
-    (arv/bind-keys
+    (my/bind-keys
      python-mode-map
      '(("C-c m 8" python-pep8)
        ("C-c m m" pyx/make)
@@ -3049,14 +3049,14 @@ configuració en la que s'han eliminat les dependències de =pony-mode=.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "python"
-    (arv/bind-keys python-mode-map
-                   '(("C-c j t" django-el-jump-to-template)
-                     ("C-c j j" django-el-jump-to-javascript-controller))))
+    (my/bind-keys python-mode-map
+                  '(("C-c j t" django-el-jump-to-template)
+                    ("C-c j j" django-el-jump-to-javascript-controller))))
 
   (with-eval-after-load "sgml-mode"
-    (arv/bind-keys html-mode-map
-                   '(("C-c j t" django-el-jump-to-template)
-                     ("%" django-el-autopair-template-tag)))
+    (my/bind-keys html-mode-map
+                  '(("C-c j t" django-el-jump-to-template)
+                    ("%" django-el-autopair-template-tag)))
     (add-hook 'html-mode-hook
               (lambda ()
                 (when (djira-buffer-belongs-in-app-p (current-buffer))
@@ -3196,7 +3196,7 @@ Apanyo ràpid per facilitar compilar AGD.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "rst"
-    (arv/bind-keys
+    (my/bind-keys
      rst-mode-map
      '(("*" arv/rst-smart-asterisk)
        ("`" arv/rst-smart-grave)
