@@ -2104,6 +2104,20 @@ Per actualitzar la versió instal·lada:
   make install
 #+end_src
 
+**** Ajuda
+
+Mostra la referència ràpida de =org-mode= (=orgcard.pdf=) si està
+disponible (dins el subdirectori =etc=).
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/org-refcard ()
+    "Mostra la referència ràpida de org-mode."
+    (interactive)
+    (let ((org-refcard (arv/path-concat arv/emacs-conf-dir "etc" "orgcard.pdf")))
+      (when (file-readable-p org-refcard)
+        (find-file org-refcard))))
+#+end_src
+
 **** Mòduls extra
 
 /org/ no carrega tots els mòduls disponibles. Segons la documentació
@@ -2250,6 +2264,22 @@ les capçaleres apareguin juntes.
   (setq org-cycle-separator-lines 0)
 #+end_src
 
+**** =org-id=
+
+Al emmagatzemar l'enllaç a una secció amb =C-c l= s'utilitza el títol
+de la secció. Si es modifica el títol de la secció els enllaços es
+trenquen.
+
+Amb aquesta configuració =C-c l= assigna un ID únic globalment a la
+secció.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package org-id
+    :config
+    (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
+          org-id-track-globally t))
+#+end_src
+
 **** =ox-twbs=
 
 https://github.com/marsmining/ox-twbs
@@ -2335,6 +2365,12 @@ que no. En funció d'això s'aplica un estil.
 #+end_src
 
 **** Configuració de tecles                                      :desactivat:
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "org"
+    (arv/bind-keys org-mode-map
+                   '(("M-<f1>" my/org-refcard))))
+#+end_src
 
 Cal revisar el paquet =arv/org=. Fins aleshores es desactiva.
 
@@ -2423,16 +2459,6 @@ Açò és part de la configuració original que mai vaig acabar d'integrar
 en el meu workflow. Es manté per si de cas.
 
 #+begin_src emacs-lisp :tangle no
-  (defvar -refcard-directory-root (arv/path-join data-directory "refcards"))
-  (defvar -org-refcard (arv/path-join -refcard-directory-root "orgcard.pdf"))
-
-  (when (file-readable-p -org-refcard)
-    (eval-after-load "org"
-      '(progn
-         (define-key org-mode-map (kbd "M-<f1>")
-           (lambda () (interactive) (find-file -org-refcard))))))
-
-
   ;; define 'ecfg:' links
   (eval-after-load "org"
     '(progn
@@ -2464,13 +2490,6 @@ en el meu workflow. Es manté per si de cas.
   (setq org-agenda-custom-commands
         '(("x" tags "TIPUS=\"error\"")
           ("v" todo "DONE|CANCELLED")))
-
-
-  ;; options
-  (eval-after-load "org"
-    '(progn
-       (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
-       (setq org-id-track-globally t)))
 
 
   ;;; workflow
