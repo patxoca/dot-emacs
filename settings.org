@@ -189,24 +189,28 @@ Desenvolupar.
 
 Dos directoris =site-lisp=, que ficar en cadascun, no abusar. Gestió.
 
-* Informació personal
+* Configuració
+** /Lexical binding/
 
-L'adreça d'e-mail pot variar depenent del sistema. Per defecte
-s'inicialitza a partir de la variable d'entorn =EMAIL=. Probablement
-sigui preferible a definir un valor fix en la configuració.
+El /lexical binding/ permet utilitzar clausures.
 
 #+begin_src emacs-lisp :tangle yes
-  (setq user-full-name "Alexis Roda"
-        user-mail-address "alexis.roda.villalonga@gmail.com")
+  ;; -*- lexical-binding: t -*-
 #+end_src
 
-* Inicialització
-** Funcions auxiliars
+** Inicialització
+
+Aquesta secció definex la base sobre la que s'implementen la resta de
+les seccions.
+
+*** Funcions auxiliars
 
 Funcions utilitzades en la pròpia configuració. Aquestes funcions no
-poden dependre de biblioteques de tercers.
+poden dependre de biblioteques de tercers i no proveeixen
+funcionalitat utilitzable directament per l'usuari, únicament per la
+configuració. Les comandes d'usuari van en la secció [[id:02df8b30-de79-489f-b4c9-13162d5d2784][Comandes]].
 
-*** =arv/bind-keys=
+**** =arv/bind-keys=
 
 No tinc clar quin /keymap/ es afectat per la clausula =:bind= de
 =use-package=, la qüestió és que en alguns casos (configuració de
@@ -231,7 +235,7 @@ Exemple:
                    ("C-c b" do-bar)))
 #+end_src
 
-*** =arv/generate-lab-faces=
+**** =arv/generate-lab-faces=
 
 Genera /faces/:
 
@@ -267,7 +271,7 @@ Genera /faces/:
                  ))))
 #+end_src
 
-** Instàncies múltiples
+*** Instàncies múltiples
 
 Ocasionalment l'entorn en que s'utilitza aquesta configuració pot ser
 lleugerament diferent i pot requerir petites variacions, per exemple
@@ -297,13 +301,11 @@ constant =arv/instance-name=.
     (load custom-file))
 #+end_src
 
-** Repositoris de paquets
+*** Repositoris de paquets
 
 #+begin_src emacs-lisp :tangle yes
   (package-initialize)
-#+end_src
 
-#+begin_src emacs-lisp :tangle yes
   (setq package-archives
         '(("gnu"          . "https://elpa.gnu.org/packages/")
           ("melpa stable" . "https://melpa-stable.milkbox.net/packages/")
@@ -316,7 +318,7 @@ constant =arv/instance-name=.
 Utilitzar =M-x package-refresh-contents= per recarregar la llista de
 paquets.
 
-** =use-package=
+*** =use-package=
 
 La variable =use-package-always-pin= permet configurar el repositori
 que s'utilitzarà quan un paquet no especifica la clausula =:pin=.
@@ -341,7 +343,7 @@ respecte al repositori a utilitzar i preveig problemes si el fixo
   (require 'use-package)
 #+end_src
 
-** =auto-compile=                                                :desactivat:
+*** =auto-compile=                                               :desactivat:
 
 No acava de funcionar (provat amb =psvn.el=), probablement per la meva
 ignorancia, i ralentitza l'arranc. El desactivo fins que pugar
@@ -364,7 +366,7 @@ En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
   (setq load-prefer-newer t)
 #+end_src
 
-** =transient=
+*** =transient=
 
 https://github.com/magit/transient
 
@@ -376,7 +378,7 @@ Facilita contruir línies de comandes interactivament (s'utilitza en
     :ensure t)
 #+end_src
 
-** Directori =site-lisp= local
+*** Directori =site-lisp= local
 
 El subdirectori =site-lisp= de la configuració s'utilitza per guardar
 paquets no disponibles en els repositoris (elpa o git).
@@ -402,9 +404,9 @@ Encara que =use-package= permet definir /autoloads/ l'ús de
 =loaddef.el= és recomanable i no penalitza el temps d'arranc de manera
 apreciable.
 
-** Biblioteques addicionals
+*** Biblioteques addicionals
 
-Biblioteques de funcions utilitzades en la configuració
+Biblioteques de funcions utilitzades en la configuració.
 
 **** =cl-lib=                                                       :builtin:
 
@@ -425,10 +427,10 @@ Col·lecció de funcions per manipular cadenes.
     :ensure t)
 #+end_src
 
-** Compatibilitat
+*** Compatibilitat
 
 Aquesta secció defineix funcions que faciliten mantindre la
-compatibilitat entre diferents instal·lacios d'Emacs.
+compatibilitat amb diferents instal·lacios d'Emacs.
 
 - Emacs 24 no defineix =string-greaterp= (ni =string>=), curiosament
   sí defineix =string-lessp= i =string<=.
@@ -451,7 +453,16 @@ compatibilitat entre diferents instal·lacios d'Emacs.
       (defun mouse-wheel-mode (x)))
   #+end_src
 
-* Configuració
+** Informació personal
+
+L'adreça d'e-mail pot variar depenent del sistema. Per defecte
+s'inicialitza a partir de la variable d'entorn =EMAIL=. Probablement
+sigui preferible a definir un valor fix en la configuració.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq user-full-name "Alexis Roda"
+        user-mail-address "alexis.roda.villalonga@gmail.com")
+#+end_src
 ** Interfície d'usuari
 
 #+begin_src emacs-lisp :tangle yes
@@ -465,7 +476,7 @@ compatibilitat entre diferents instal·lacios d'Emacs.
 
 ** Tema
 
-Crec que la millor forma d'organitzar la configuració des les /faces/
+Crec que la millor forma d'organitzar la configuració de les /faces/
 és concentrar-les en una única secció, facilita el canvi de tema.
 
 #+begin_src emacs-lisp :tangle yes
@@ -3350,6 +3361,9 @@ o sobreescriptura.
 #+end_src
 
 ** Comandes
+   :PROPERTIES:
+   :ID:       02df8b30-de79-489f-b4c9-13162d5d2784
+   :END:
 
 Comandes que proveeixen funcionalitat a l'usuari (i poden estar
 lligades a combinacions de tecles).
