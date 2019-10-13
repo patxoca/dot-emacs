@@ -4932,6 +4932,43 @@ Allí on tingui sentit, el nom dels elements haurien de començar amb el
 prefix =x-arv= per identificar que son experimentals. Probablement amb
 la API pública (comandes?) sigui suficient.
 
+** =rotate-windows=
+
+https://github.com/domtronn/emacs/blob/1b0bae5f146c8adb477ac4f7158c063ed45baeea/init/functions.el#L282
+
+Rota els buffers entre les finestres:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun x-arv/rotate-windows ()
+    "Rotate your windows"
+    (interactive)
+    (cond
+     ((not (> (count-windows) 1))
+      (message "You can't rotate a single window!"))
+     (t
+      (let  ((i 1)
+             (numWindows (count-windows)))
+        (while  (< i numWindows)
+          (let* (
+                 (w1 (elt (window-list) i))
+                 (w2 (elt (window-list) (+ (% i numWindows) 1)))
+                 (b1 (window-buffer w1))
+                 (b2 (window-buffer w2))
+                 (s1 (window-start w1))
+                 (s2 (window-start w2)))
+            (set-window-buffer w1  b2)
+            (set-window-buffer w2 b1)
+            (set-window-start w1 s2)
+            (set-window-start w2 s1)
+            (setq i (1+ i))))))))
+#+end_src
+
+S'afegeix la comanda al keymap de finestres:
+
+#+begin_src emacs-lisp :tangle yes
+  (global-set-key (kbd "C-c w r") #'x-arv/rotate-windows)
+#+end_src
+
 ** =winner-mode=
 
 En general no el veig pràctic però hi ha un cas d'ús en que podria ser
