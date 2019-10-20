@@ -2847,6 +2847,8 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     :init
     ;; cal definir-la abans d'activar el mode
     (setq pytest-mode-keymap-prefix "C-c m t")
+    (with-eval-after-load "python"
+      (my/bind-keys python-mode-map '(("C-c m t a" pytest-all))))
 
     :config
     (my/bind-keys pytest-mode-map
