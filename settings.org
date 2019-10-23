@@ -4790,6 +4790,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
   (global-set-key (kbd "C-c j e") 'arv/visit-emacs-config)
   (global-set-key (kbd "C-c j E") 'arv/visit-emacs-config-directory)
+  (global-set-key (kbd "C-c j h n") #'diff-hl-next-hunk)
+  (global-set-key (kbd "C-c j h p") #'diff-hl-previous-hunk)
   (global-set-key (kbd "C-c j l") 'avy-goto-line)
   (global-set-key (kbd "C-c j s") 'imenu)
   (global-set-key (kbd "C-c j w") 'avy-goto-word-1)
