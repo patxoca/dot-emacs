@@ -706,6 +706,18 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   which is that it works well with a multiplicity of object-oriented
   languages.
 
+- [[https://github.com/gonewest818/dimmer.el][dimmer]]: Visually highlight the selected buffer.
+
+  Semblant a la configuració que tinc de terminator, enfosqueix els
+  buffers no actius per facilitar identificar el buffer actiu.
+
+  [[https://github.com/emacsmirror/auto-dim-other-buffers][auto-dim-other-buffers]] sembla que fa el mateix, però sembla
+  abandonat.
+
+- [[https://github.com/akirak/poly-vue][poly-vue]]: Polymode for Vue.js single component files.
+
+  No és gaire descriptiu, imagino que és un mode que permet editar
+  components Vue que messclen HTML i js en un únic arxiu.
 
 * Altres recursos
 
