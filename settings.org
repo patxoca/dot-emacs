@@ -617,8 +617,11 @@ https://github.com/abo-abo/ace-window
     :config
     (if (display-graphic-p)
         (set-face-attribute 'aw-leading-char-face nil
+                            :family "ubuntu mono"
                             :height 4.0
-                            :foreground "green")
+                            :weight 'bold
+                            :background "chartreuse"
+                            :foreground "black")
       (set-face-attribute 'aw-leading-char-face nil
                           :background "white"
                           :foreground "black"))
