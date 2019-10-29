@@ -2724,6 +2724,11 @@ Pel seu funcionament requereix algunes comandes externes:
                            elpy-module-sane-defaults
                            elpy-module-yasnippet))
 
+    (when (boundp 'elpy-rpc-virtualenv-path)
+      ;; Aquesta opció s'ha introduït en una refactorització de elpy amb
+      ;; posterioritat a la versió 1.31.0. Enlloc de comparar versions
+      ;; trobo més robust comprovar si l'opció existeix.
+      (customize-set-value 'elpy-rpc-virtualenv-path 'current))
     (define-key elpy-mode-map (kbd "C-c C-g") nil)
     (define-key elpy-mode-map (kbd "C-c M-g") 'elpy-pdb-map))
 #+end_src
