@@ -198,6 +198,17 @@ El /lexical binding/ permet utilitzar clausures.
   ;; -*- lexical-binding: t -*-
 #+end_src
 
+** Depuració de la configuració
+
+Ocasionalment açò pot ajudar a depurar errors en la configuració.
+
+Per activar-ho cal canviar a =:tangle yes=.
+
+#+begin_src emacs-lisp :tangle no
+  (setq debug-on-error t)
+#+end_src
+
+
 ** Inicialització
 
 Aquesta secció definex la base sobre la que s'implementen la resta de
