@@ -580,32 +580,6 @@ etc). No estic segur de si la forma en que determina l'altra finestra
         (delete-window)))
 #+END_SRC
 
-** TODO Error al obrir arxiu python                           :bug:annoyance:
-   :PROPERTIES:
-   :CREATED: [2019-10-29 dt 16:10]
-   :REFERER: [[file:~/prog/hera/django10/src/hera_registration_empresa/hera_registration_empresa/views/utils.py::# -*- coding: utf-8 -*-]]
-   :END:
-
-Al obrir un arxiu python des de la línia d'ordres Emacs mostra el
-missatge d'error:
-
-#+begin_quote
-File mode specification error: (error There is nothing to repeat)
-#+end_quote
-
-L'error no apareix si l'arxiu s'obre des de Emacs.
-
-Per reproduir-ho:
-
-#+begin_src sh
-  workon hera_impl
-  emacs src/hera_registration_empresa/hera_registration_empresa/views/utils.py &
-#+end_src
-
-Probablement l'error està relacionat amb els últims canvis fets a la
-configuració de =pytest= (o =elpy=). Al no ocórrer quan s'obre des de
-Emacs suposo que algun component encara no s'ha configurat.
-
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1368,3 +1342,31 @@ Aquest podria ser un us per =hydra=? He trobat aquesta definició en un
     (">" smerge-diff-base-other)
     ("q" nil :color blue))
 #+end_src
+** DONE Error al obrir arxiu python                           :bug:annoyance:
+   :PROPERTIES:
+   :CREATED: [2019-10-29 dt 16:10]
+   :REFERER: [[file:~/prog/hera/django10/src/hera_registration_empresa/hera_registration_empresa/views/utils.py::# -*- coding: utf-8 -*-]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2019-10-30 dc 13:25] \\
+     Error en l'especificació del tipus de defcustom
+     =pytest-test-module-name-candidate-functions=.
+Al obrir un arxiu python des de la línia d'ordres Emacs mostra el
+missatge d'error:
+
+#+begin_quote
+File mode specification error: (error There is nothing to repeat)
+#+end_quote
+
+L'error no apareix si l'arxiu s'obre des de Emacs.
+
+Per reproduir-ho:
+
+#+begin_src sh
+  workon hera_impl
+  emacs src/hera_registration_empresa/hera_registration_empresa/views/utils.py &
+#+end_src
+
+Probablement l'error està relacionat amb els últims canvis fets a la
+configuració de =pytest= (o =elpy=). Al no ocórrer quan s'obre des de
+Emacs suposo que algun component encara no s'ha configurat.
