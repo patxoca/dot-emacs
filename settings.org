@@ -4764,6 +4764,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
   (global-set-key (kbd "C-S-s") 'isearch-forward)
 
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (global-set-key (kbd "M-z") 'zap-up-to-char)
 
   (global-set-key (kbd "C-x o") 'ace-window)
