@@ -2454,17 +2454,24 @@ color dels enllaços i marges) i en l'estructura (el primer element és
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "ox-latex"
     (add-to-list 'org-latex-classes
-         '("informe" "\\documentclass[paper=a4, fontsize=10pt]{report}
+                 '("informe"
+                   "\\documentclass[paper=a4, fontsize=10pt]{report}
   \\usepackage{fourier}
   \\usepackage[]{babel}
   \\usepackage[margin=3.5cm]{geometry}
   \\usepackage[colorlinks=true,linkcolor=blue]{hyperref}
   \\linespread{1.5}
   \\setlength{\\parskip}{0.3cm}"
-           ("\\chapter{%s}" . "\\chapter*{%s}")
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+                   ("\\chapter{%s}" . "\\chapter*{%s}")
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+    (add-to-list 'org-latex-classes
+                 '("beamer"
+                   "\\documentclass\[presentation\]\{beamer\}"
+                   ("\\section\{%s\}" . "\\section*\{%s\}")
+                   ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+                   ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}"))))
 #+end_src
 
 **** Configuracions desactivades
