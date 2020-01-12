@@ -16,6 +16,7 @@
 #+TODO: | CANCELED(c)
 
 #+LATEX_CLASS: informe
+#+OPTIONS: ^:nil ':t toc:1
 
 # #+FILETAGS: :foo:bar:
 # #+TAGS: baz spam
