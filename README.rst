@@ -5,6 +5,11 @@ My personal emacs configuration.
 Quickstart
 ==========
 
+Requirements:
+
+- ``install-info``: required by org
+
+
 .. code-block:: bash
 
    mkdir ~/.emacs.d
