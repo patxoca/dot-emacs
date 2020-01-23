@@ -580,6 +580,13 @@ etc). No estic segur de si la forma en que determina l'altra finestra
         (delete-window)))
 #+END_SRC
 
+** TODO estandarditzar una Makefile pels paquets emacs                 :idea:
+
+En aquesta entrada Chris Wellons descriu l'estructura del Makefile que
+utilitza en els seus paquets:
+
+https://nullprogram.com/blog/2020/01/22/
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
