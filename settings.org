@@ -810,6 +810,21 @@ fitxer. Personalment prefereixo evitar la proliferació de buffers.
     (set-face-attribute 'dired-directory nil :foreground "#729fcf"))
 #+end_src
 
+*** =display-line-numbers=
+
+En emacs 26 la numeració de línies ha millorat en quant a rendiment
+respecte a =linum= i similars. Li donaré una segona oportunitat.
+
+Personalment trobo més útil veure valors relatius a absoluts.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (when (version<= "26.0" emacs-version)
+                (display-line-numbers-mode)
+                (setq display-line-numbers 'relative))))
+#+end_src
+
 *** =ediff=                                                         :builtin:
 
 #+begin_src emacs-lisp :tangle yes
