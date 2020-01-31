@@ -831,11 +831,18 @@ respecte a =linum= i similars. Li donaré una segona oportunitat.
 Personalment trobo més útil veure valors relatius a absoluts.
 
 #+begin_src emacs-lisp :tangle yes
+  (defun my/enable-line-numbers-mode ()
+    ;; HACK: en un parell de llocs de la configuració activo
+    ;; display-line-numbers-mode. El problema és que si el desactivo i
+    ;; l'activo utiliza numeració absoluta. Mentre esbrino com
+    ;; configurar-ho, aquesta funció ho centralitza.
+    (display-line-numbers-mode 1)
+    (setq display-line-numbers 'relative))
+
   (add-hook 'prog-mode-hook
             (lambda ()
               (when (version<= "26.0" emacs-version)
-                (display-line-numbers-mode)
-                (setq display-line-numbers 'relative))))
+                (my/enable-line-numbers-mode))))
 #+end_src
 
 *** =ediff=                                                         :builtin:
@@ -3729,6 +3736,25 @@ Visita aquest arxiu de configuració:
     (find-file arv/emacs-conf-dir))
 #+end_src
 
+*** =my/display-line-numbers-mode=
+
+Activa/desactiva la numeració de les línies. Si està disponible
+=display-line-numbers-mode= la utilitza, en cas contrari utilitza
+=linum-mode=.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/display-line-numbers-mode ()
+    "Activa la numeració de les línies."
+    (interactive)
+    (if (fboundp 'display-line-numbers-mode)
+        (if display-line-numbers-mode
+            (display-line-numbers-mode 0)
+          (my/enable-line-numbers-mode))
+      (if linum-mode
+          (linum-mode 0)
+        (linum-mode 1))))
+#+end_src
+
 *** Comentari dins rectangle
 
 http://pragmaticemacs.com/emacs/comment-boxes/
@@ -4896,7 +4922,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c t B") 'arv/alternar-mida-font)
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
-  (global-set-key (kbd "C-c t l") 'linum-mode)
+  (global-set-key (kbd "C-c t l") #'my/display-line-numbers-mode)
   (global-set-key (kbd "C-c t L") 'line-number-mode)
   (global-set-key (kbd "C-c t r") 'read-only-mode)
 
