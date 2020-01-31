@@ -578,6 +578,19 @@ no destaca gaire.
      '(transient-argument ((t (:foreground "green" :weight bold))))))
 #+end_src
 
+Els colors de =display-line-numbers= destaquen massa i em distreuen
+del text que estic editant. Aquesta combinació utilitza un color més
+fosc i ressalta la línia actual.
+
+#+begin_src emacs-lisp :tangle yes
+  (set-face-attribute 'line-number nil
+                      :foreground "grey30"
+                      :background "#242424")
+  (set-face-attribute 'line-number-current-line nil
+                      :foreground "#b2731d"
+                      :background "grey20")
+#+end_src
+
 ** Paquets
 
 Aquesta secció inclou la configuració de paquets d'us general.
