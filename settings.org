@@ -340,7 +340,7 @@ constant =arv/instance-name=.
           ))
 
   (when (my/host-reachable "melpa.home.lan")
-    (push '("private" . "http://melpa.home.lan:8000/packages/")
+    (push '("private" . "http://melpa.home.lan/packages/")
           package-archives))
 #+end_src
 
