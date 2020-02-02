@@ -740,6 +740,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
 - estudiar paquet [[info:elisp#Sequence Functions][seq]]
 
+- estudiar /benchmarks/. S'utilitzen en [[https://irreal.org/blog/?p=8621][aquest post]] de Irreal. Dona la
+  sensació que son part d'emacs. Investigar-ho.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
