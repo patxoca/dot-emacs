@@ -246,6 +246,20 @@ Exemple:
                   ("C-c b" do-bar)))
 #+end_src
 
+**** =my/host-reachable=
+
+Comprova si un host està disponible. La disponibilitat es determina
+fent un ping.
+
+S'utilitza principalment per condicionar parts de la configuració a la
+disponibilitat de serveis en la xarxa local. Per exemple, a casa
+executo un servidor privat de "melpa".
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/host-reachable (host)
+    (= 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" host)))
+#+end_src
+
 **** =arv/generate-lab-faces=
 
 Genera /faces/:
@@ -324,6 +338,10 @@ constant =arv/instance-name=.
           ;; ("melpa"     . "https://melpa.org/packages/")
           ;; ("org"       . "https://orgmode.org/elpa/")
           ))
+
+  (when (my/host-reachable "melpa.home.lan")
+    (push '("private" . "http://melpa.home.lan:8000/packages/")
+          package-archives))
 #+end_src
 
 Utilitzar =M-x package-refresh-contents= per recarregar la llista de
