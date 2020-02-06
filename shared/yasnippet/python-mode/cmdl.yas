@@ -6,7 +6,7 @@
 # type: snippet
 # contributor: Alexis <alexis.roda.villalonga@gmail.com>
 # expand-env: ((yas-indent-line 'fixed))
-# uuid: 25825e45-4ee1-4b68-ab70-f1215760737f
+# uuid: 478eb19b-422d-43b5-b65d-6045988303a3
 # --
 def parse_command_line():
     parser = argparse.ArgumentParser(description="$1")
