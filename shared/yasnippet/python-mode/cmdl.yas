@@ -11,7 +11,7 @@
 def parse_command_line():
     parser = argparse.ArgumentParser(description="$1")
     parser.add_argument("${2:--opt}", dest="${2:$(s-replace "-" "" yas/text)}", action="${3:store$$(yas-choose-value '("append" "append_const" "count" "store" "store_const" "store_true"))}",
-                        default=${4:None}, type=${5:string},
+                        default=${4:None}, type=${5:str},
                         help="$6")
     return parser.parse_args()
 
