@@ -587,11 +587,16 @@ utilitza en els seus paquets:
 
 https://nullprogram.com/blog/2020/01/22/
 
-** TODO ample de la numeració de línees                           :annoyance:
+** DONE ample de la numeració de línees                           :annoyance:
    :PROPERTIES:
    :CREATED: [2020-02-06 dj 19:45]
    :REFERER: [[file:/ssh:alex@wst:/home/alex/prog/arv.mold/src/arv.mold/arv/mold/mold.py::return os.path.relpath(path, self._template_dir)]]
    :END:
+
+   - State "DONE"       from "TODO"       [2020-02-08 ds 20:11] \\
+     No trobo com configurar el valor mostrat per la línia actual. Es
+     configura l'ample a 3 i que mai disminueixi l'amplada una vegada a
+     crescut.
 
 Al fer scroll vertical l'ample ocupat pel número de línia s'ajusta
 quan passa de decenes a centenes etc. En eixe moment es produeix un

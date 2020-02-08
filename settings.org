@@ -848,6 +848,20 @@ respecte a =linum= i similars. Li donaré una segona oportunitat.
 
 Personalment trobo més útil veure valors relatius a absoluts.
 
+Em resulta molest que canviï l'ample per adaptar-se al nombre de
+dígits, més quan utilizo numeració relativa que rarament requereix més
+de dos dígits.
+
+Per minimitzar l'efecte es fixa l'ample i es configura per mai
+disminuir. Amb la pantalla vertical necessito fins 3 dígits (mostra
+poc més de 100 línies). En la majoria d'arxius 3 és suficient
+(rarament utilitzo arxius de més de 1000 línies). En arxius més llargs
+pot creixer si cal.
+
+Preferiria que mostrés el valor zero per la línia actual (estic
+acostumat a consultar la línia actual en la /modeline/) i evitar el
+creixement però no sembla que sigui possible configurar-ho.
+
 #+begin_src emacs-lisp :tangle yes
   (defun my/enable-line-numbers-mode ()
     ;; HACK: en un parell de llocs de la configuració activo
@@ -856,6 +870,9 @@ Personalment trobo més útil veure valors relatius a absoluts.
     ;; configurar-ho, aquesta funció ho centralitza.
     (display-line-numbers-mode 1)
     (setq display-line-numbers 'relative))
+
+  (setq display-line-numbers-grow-only t
+        display-line-numbers-width-start 3)
 
   (add-hook 'prog-mode-hook
             (lambda ()
