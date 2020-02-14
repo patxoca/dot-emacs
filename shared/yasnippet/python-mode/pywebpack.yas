@@ -1,0 +1,85 @@
+# -*- mode: snippet -*-
+# name: pywebpack
+# $Id:$
+# key: pywebpack
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 36cff845-ac41-45ba-9291-add53bcba170
+# --
+import distutils.cmd
+import distutils.errors
+import distutils.log
+import setuptools.command.sdist
+import shutil
+import subprocess
+
+
+class webpack(distutils.cmd.Command):
+    """A custom command to run webpack on a python package."""
+
+    description = "run webpack on a Python package"
+    user_options = [
+        # The format is (long option, short option, description).
+        ("source-dir=", None, "path to webpack's project directory"),
+        ("build-dir=", None, "path to webpack's build directory"),
+        ("dest-dir=", None, "path to django's static bundles directory. Will be erased"),
+    ]
+
+    def initialize_options(self):
+        self.source_dir = ""
+        self.build_dir = ""
+        self.dest_dir = ""
+
+    def finalize_options(self):
+        self.source_dir = self._check_path(self.source_dir, "source_dir", must_exist=True)
+        self.build_dir = self._check_path(self.build_dir, "build_dir")
+        self.dest_dir = self._check_path(self.dest_dir, "dest_dir", local=True)
+
+    def run(self):
+        command = ["npm", "run", "build"]
+        self.announce(
+            "Running command: %s" % " ".join(command),
+            level=distutils.log.INFO
+        )
+        try:
+            subprocess.check_call(command, cwd=self.source_dir)
+            if os.path.isdir(self.dest_dir):
+                shutil.rmtree(self.dest_dir)
+            shutil.copytree(self.build_dir, self.dest_dir)
+        except Exception as e:
+            raise distutils.errors.DistutilsExecError(str(e))
+
+    def _check_path(self, path, label, must_exist=False, local=False):
+        path = path.strip()
+        if not path:
+            raise distutils.errors.DistutilsOptionError(
+                "Missing required option '%s'" % label
+            )
+        if not os.path.isabs(path):
+            path = os.path.join(os.getcwd(), path)
+        path = os.path.normpath(path)
+        if local and not path.startswith(os.getcwd()):
+            raise distutils.errors.DistutilsFileError(
+                "%s requires a package local path" % label
+            )
+        if must_exist and not os.path.exists(path):
+            raise distutils.errors.DistutilsFileError("file does not exists")
+        return path
+
+
+class sdist(setuptools.command.sdist.sdist):
+    """Custom build command."""
+
+    def run(self):
+        self.run_command("webpack")
+        setuptools.command.sdist.sdist.run(self)
+
+
+# afegir a la crida de setup()
+#
+#    cmdclass={
+#        "webpack": webpack,
+#        'sdist': sdist,
+#    },
