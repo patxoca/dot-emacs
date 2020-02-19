@@ -3467,10 +3467,8 @@ cal recuperar-los.
 *** Faces
 
 #+begin_src emacs-lisp :tangle yes
-(set-face-attribute 'cursor  nil
-                    :background "#fce94f")
-(set-face-attribute 'default nil
-                    :height 100)
+  (set-face-attribute 'cursor  nil
+                      :background "#fce94f")
 #+end_src
 
 Canvia el color del cursor per indicar que ens troben en mode inserció

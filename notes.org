@@ -369,7 +369,7 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
-** TODO Agrupar definicions de colors?                                 :idea:
+** TODO Agrupar definicions de colors/faces?                           :idea:
    :PROPERTIES:
    :CREATED: [2019-01-18 dv 08:33]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
