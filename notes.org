@@ -620,6 +620,15 @@ actual es numeri com 0 (i per tant no variï el nombre de dígits) i
 fixar el nombre de dígits per evitar el sacseig (només en cas que
 puguin caldre 2 i 3 dígits).
 
+** TODO accés ràpid a les refcards                                     :idea:
+
+Emacs inclou vàries refcards en format pdf. Mirar de facilitar l'accés
+des de Emacs. Estan guardades en:
+
+/opt/emacs/26.3/share/emacs/26.3/etc/refcards
+
+Hi ha algunes traduccions que caldria ignorar.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
