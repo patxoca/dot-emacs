@@ -603,7 +603,7 @@ fosc i ressalta la línia actual.
 #+begin_src emacs-lisp :tangle yes
   (set-face-attribute 'line-number nil
                       :foreground "grey30"
-                      :background "#242424")
+                      :background "#202020")
   (set-face-attribute 'line-number-current-line nil
                       :foreground "#b2731d"
                       :background "grey20")
