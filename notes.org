@@ -385,6 +385,17 @@ idea agrupar la definició del color al activar el paquet.
 
 Mirar que es pot fer.
 
+*** Comentari 18/03/2020
+
+Vull provar el tema =modus-operandi= i em trobo amb moltes
+re-definicions de /faces/ que no funcionen bé amb ell però que no
+voldria perdre per si decideixo revertir el tema o alternar entre
+temes en funció del estat d'ànim.
+
+Per adreçar-ho sembla bona idea definir funcions
+=my/customize-theme-modus-operandi=, =my/customize-theme-wombat= que
+recullguin tots els canvis.
+
 ** TODO investigar/provar =truncate-lines=                             :idea:
    :PROPERTIES:
    :CREATED:  [2019-04-15 dl 11:31]
