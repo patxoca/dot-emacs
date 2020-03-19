@@ -1,4 +1,4 @@
-;;; -*- encoding: utf-8 -*-
+;;; -*- coding: utf-8 -*-
 
 ;;; init.el --- arxiu de configuracio d'emacs
 ;;; (c) 1998-2018 Alexis Roda
