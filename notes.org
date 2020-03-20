@@ -396,6 +396,21 @@ Per adreçar-ho sembla bona idea definir funcions
 =my/customize-theme-modus-operandi=, =my/customize-theme-wombat= que
 recullguin tots els canvis.
 
+*** Comentari 19/03/2020
+   :PROPERTIES:
+   :CREATED: [2020-03-19 dj 19:54]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*wombat][wombat]]
+   :END:
+
+En =(my/customize-theme-wombat)= la definició de faces de "term" és
+molt compacta, mirar si es pot aplicar a la resta de definicions.
+
+Un altre detall en que no havia caigut: =modus-operandi= aparentment
+configura les faces sense que s'hagi carregat el mòdul/paquet que les
+defineix (té sentit). Jo utilitzo =with-eval-after-load=.
+
+=modus-operandi= utilitza [[help:custom-theme-set-faces][=custom-theme-set-faces=]]. Investigar-ho.
+
 ** TODO investigar/provar =truncate-lines=                             :idea:
    :PROPERTIES:
    :CREATED:  [2019-04-15 dl 11:31]
@@ -690,7 +705,39 @@ des de Emacs. Estan guardades en:
 
 Hi ha algunes traduccions que caldria ignorar.
 
-* Paquets extra
+** TODO revisar configuració de /show trailing whitespace/
+   :PROPERTIES:
+   :CREATED: [2020-03-19 dj 18:20]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*wombat][wombat]]
+   :END:
+
+Si no recordo mal la variable =show-trailing-whitespace- es defineix
+com =t= en els modes de programació (=prog-mode=) i després s'activa
+individualment en la resta.
+
+Potser seria preferible activar-la sempre i desactivar-la cas per cas.
+
+** TODO revisar color del cursor insert/overwrite                       :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-19 dj 18:20]
+   :END:
+
+Al canviar de finestra el color del cursor es manté però el mode
+insert/overwrite pot canviar.
+
+Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
+mateixa finestra, o al canviar de finestra (dins el mateix o un altre
+frame) i afegir una funció que comprovi el mode i ajusti el color.
+
+** TODO Moure secció cpctelera                                          :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-20 dv 08:51]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*cpctelera][cpctelera]]
+   :END:
+
+No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
+
+** Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
 però que ara mateix no puc/vull provar. Ordenats cronològicament
