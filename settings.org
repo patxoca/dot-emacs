@@ -508,105 +508,267 @@ sigui preferible a definir un valor fix en la configuració.
 Crec que la millor forma d'organitzar la configuració de les /faces/
 és concentrar-les en una única secció, facilita el canvi de tema.
 
+*** Variables
+
+Aquesta secció defineix variables relacionades amb les /faces/. Es
+defineixen per garantir que existeixen pero el seu valor s'ha de
+canviar, si escau, dins les funcions que personalitzen els temes, no
+ací.
+
+Color utilitzat en el cursor quan estem en mode /insert/.
+
+#+begin_src emacs-lisp :tangle yes
+  (defvar my/face-cursor-insert-background-color nil)
+#+end_src
+
+Color utilitzat en el cursor quan estem en mode /overwrite/.
+
+#+begin_src emacs-lisp :tangle yes
+  (defvar my/face-cursor-overwrite-background-color "purple")
+#+end_src
+
+*** Noves faces
+
+Aquesta secció defineix noves faces utilitzades en la configuració. Es
+defineixen per garantir que existeixen pero el valor s'ha de canviar,
+si escau, dins les funcions que personalitzen els temes, no ací.
+
+**** =hi-lock=
+
+Faces utilitzades per ressaltar alguns elements. Empra un codi de tres
+colors que ressembla un semàfor per indicar tres nivells de
+/gravetat/, /atenció/ etc.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "hi-lock"
+    (defface arv/hi-green
+      '((((min-colors 88)) (:weight bold :foreground "black" :background "light green"))
+        (t (:weight bold :background "green")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces)
+
+    (defface arv/hi-orange
+      '((((min-colors 88)) (:weight bold :foreground "black" :background "orange"))
+        (t (:weight bold :background "orange")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces)
+
+    (defface arv/hi-red
+      '((((min-colors 88)) (:weight bold :background "red1" :foreground "white"))
+        (t (:weight bold :background "red" :foreground "white")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces))
+#+end_src
+
+*** wombat
+
+Personalització del tema /wombat/. El nom és circumstancial, és
+l'últim tema fosc que he utilitzat abans d'animar-me a provar
+=modus-operandi=. Aquesta configuració ha evolucionat segons he anat
+canviant de tema (/zenburn/, /tango-dark/, /doom-one/ i /wombat/ que
+recordi) i hauria de funcionar més o menys bé amb un tema fosc.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/customize-theme-wombat ()
+    (set-face-attribute 'button nil
+                        :foreground "#8ac6f2"
+                        :underline t)
+
+    ;; cursor
+    (set-face-attribute 'cursor  nil
+                        :background "#fce94f")
+
+    ;; Els colors de =display-line-numbers= destaquen massa i em distreuen
+    ;; del text que estic editant. Aquesta combinació utilitza un color més
+    ;; fosc i ressalta la línia actual.
+
+    (set-face-attribute 'line-number nil
+                        :foreground "grey30"
+                        :background "#202020")
+    (set-face-attribute 'line-number-current-line nil
+                        :foreground "#b2731d"
+                        :background "grey20")
+
+    ;; El color per defecte per la mode-line dificulta diferenciar les
+    ;; finestres. El color que he triat no em convenç però almenys facilita
+    ;; veure el límit de les finestres. Una altra combinació utilitza el
+    ;; mateix groc que utilitzo a i3 per ressaltar la finestra activa, actiu
+    ;; =#ffcc00= i inactiu =#aa8900=.
+
+    (set-face-attribute 'mode-line nil
+                        :box nil
+                        :background "#00ad50"
+                        :foreground "black"
+                        :height 0.85)
+    (set-face-attribute 'mode-line-highlight nil
+                        :box nil
+                        :background "orange"
+                        :foreground "black")
+    (set-face-attribute 'mode-line-inactive nil
+                        :inherit 'mode-line
+                        :box nil
+                        :background "#004f24"
+                        :foreground "#999999"
+                        :weight 'light)
+
+    (with-eval-after-load "ace-window"
+      ;; en ace-window fa que el selector destaqui. Crec que la familia
+      ;; es podria eliminar. Defineix altres aspectes a mes de colors,
+      ;; suposo que és acceptable.
+
+      (if (display-graphic-p)
+          (set-face-attribute 'aw-leading-char-face nil
+                              :family "ubuntu mono"
+                              :height 4.0
+                              :weight 'bold
+                              :background "chartreuse"
+                              :foreground "black")
+        (set-face-attribute 'aw-leading-char-face nil
+                            :background "white"
+                            :foreground "black"))
+      )
+
+    (with-eval-after-load "apropos"
+      (set-face-attribute 'apropos-symbol nil
+                          :foreground "chartreuse"
+                          :bold t)
+      (set-face-attribute 'apropos-keybinding nil
+                          :foreground "medium spring green"
+                          ))
+
+    (with-eval-after-load "compile"
+      (set-face-attribute 'compilation-error nil
+                          :underline nil
+                          :weight 'normal))
+
+    (with-eval-after-load "diff-hl"
+      ;; En alguns temes (detectat en =doom-one=) la definició de les
+      ;; faces de =diff-hl= té problemes quan el frame es parteix en dos
+      ;; verticalment, en la finestra de la dreta no es visualitza
+      ;; correctament. Funciona millor si s'utilitza un color solid
+      ;; enlloc de ressaltar només la vora.
+
+      (set-face-attribute 'diff-hl-change nil
+                          :foreground "blue3"
+                          :background "#333355")
+      (set-face-attribute 'diff-hl-delete nil
+                          :foreground "red3"
+                          :background "#553333")
+      (set-face-attribute 'diff-hl-insert nil
+                          :foreground "green4"
+                          :background "#335533"))
+
+    (with-eval-after-load "dired"
+      (set-face-attribute 'dired-directory nil
+                          :foreground "#729fcf"))
+
+    (with-eval-after-load "eldoc"
+      (set-face-attribute 'eldoc-highlight-function-argument nil
+                          :underline nil
+                          :foreground "yellow"
+                          :weight 'bold))
+
+    (with-eval-after-load "emmet-mode"
+      (set-face-attribute 'emmet-preview-input nil
+                          :box nil)
+      ;; No aconsegueixo redefinir el color, utilitza el de hightlight
+      ;; (del que hereta). Aquesta face únicament s'utilitza, breument,
+      ;; quan es confirma el resultat, en un flash.
+      (set-face-attribute 'emmet-preview-output nil
+                          :background "green"
+                          :box nil))
+
+    (with-eval-after-load "flymake"
+      :commands flymake-mode
+      :config
+      (set-face-attribute 'flymake-errline nil
+                          :underline nil
+                          :background "Firebrick4"))
+
+    (with-eval-after-load "hl-line"
+      (if (display-graphic-p)
+          (set-face-attribute 'hl-line nil
+                              :foreground "white"
+                              :background "black")
+        (set-face-attribute 'hl-line nil
+                            :foreground "black"
+                            :background "yellow"))
+      (set-face-attribute 'hl-line nil
+                          :underline nil))
+
+    (with-eval-after-load "ido"
+      (set-face-attribute 'ido-first-match nil
+                          :background "pale green"
+                          :foreground "black"))
+
+    (with-eval-after-load "org"
+      (set-face-attribute 'org-mode-line-clock nil
+                          :background "green yellow")
+      (set-face-attribute 'org-document-title nil
+                          :foreground "pale turquoise"
+                          :weight 'bold
+                          :height 1.5)
+      (set-face-attribute 'org-level-1 nil
+                          :weight 'bold
+                          :height 1.2)
+      (set-face-attribute 'org-block-begin-line nil
+                          :weight 'normal
+                          :background "#202020")
+      (set-face-attribute 'org-block nil
+                          :background "black")
+      (set-face-attribute 'org-block-end-line nil
+                          :weight 'normal
+                          :background "#202020"))
+
+    (with-eval-after-load "rst"
+      ;; customize-face (suposo) te problemes quan la llista
+      ;; d'atributs esta buida, sembla que ho interpreta com "no
+      ;; canviar res" enlloc de "borrar tots els atributs"
+
+      (set-face-attribute 'rst-level-1 nil :background nil)
+      (set-face-attribute 'rst-level-2 nil :background nil)
+      (set-face-attribute 'rst-level-3 nil :background nil)
+      (set-face-attribute 'rst-level-4 nil :background nil)
+      (set-face-attribute 'rst-level-5 nil :background nil)
+      (set-face-attribute 'rst-level-6 nil :background nil))
+
+    (with-eval-after-load "term"
+      ;; Els colors per defecte de =term= no em convencen. Aquesta
+      ;; combinació m'agrada més:
+
+      (custom-set-faces
+       '(term-color-black ((t (:foreground "#242424" :background "#242424"))))
+       '(term-color-red ((t (:foreground "#ef2929" :background "#ff1313"))))
+       '(term-color-green ((t (:foreground "#8ae234" :background "#4e9a06"))))
+       '(term-color-yellow ((t (:foreground "#fce94f" :background "#c4a000"))))
+       '(term-color-blue ((t (:foreground "#729fcf" :background "#3465a4"))))
+       '(term-color-magenta ((t (:foreground "#ad7fa8" :background "#75507b"))))
+       '(term-color-cyan ((t (:foreground "#34e2e2" :background "#06989a"))))
+       '(term-color-white ((t (:foreground "#eeeeec" :background "#d3d7cf"))))
+
+       '(term-default-fg-color ((t (:inherit term-color-white))))
+       '(term-default-bg-color ((t (:inherit term-color-black))))))
+
+    (with-eval-after-load "transient"
+      ;; El color que utilitza =transient= per ressaltar les opcions
+      ;; /actives/ no destaca gaire.
+
+      (custom-set-faces
+       '(transient-argument ((t (:foreground "green" :weight bold))))))
+    )
+#+end_src
+
+*** modus-operandi
+
+*** Activació i configuració del tema
+
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'wombat)
+  (my/customize-theme-wombat)
 
   (set-face-attribute 'default nil
                       :family "JetBrains Mono"
                       :height 94)
-
-  (set-face-attribute 'button nil
-                      :foreground "#8ac6f2"
-                      :underline t)
-
-  ;; (set-face-attribute 'compilation-error nil
-  ;;                     :underline nil
-  ;;                     :weight 'normal)
-  ;; (set-face-attribute 'cursor  nil
-  ;;                     :background "white")
-
-  ;; (set-face-attribute 'eldoc-highlight-function-argument nil
-  ;;                     :underline t :foreground "green"
-  ;;                     :weight 'bold)
-
-#+end_src
-
-En alguns temes (detectat en =doom-one=) la definició de les faces de
-=diff-hl= té problemes quan el frame es parteix en dos verticalment,
-en la finestra de la dreta no es visualitza correctament. Funciona
-millor si s'utilitza un color solid enlloc de ressaltar només la vora.
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "diff-hl"
-    (set-face-attribute 'diff-hl-change nil :foreground "blue3" :background "#333355")
-    (set-face-attribute 'diff-hl-delete nil :foreground "red3" :background "#553333")
-    (set-face-attribute 'diff-hl-insert nil :foreground "green4" :background "#335533"))
-#+end_src
-
-El color per defecte per la mode-line dificulta diferenciar les
-finestres. El color que he triat no em convenç però almenys facilita
-veure el límit de les finestres. Una altra combinació utilitza el
-mateix groc que utilitzo a i3 per ressaltar la finestra activa, actiu
-=#ffcc00= i inactiu =#aa8900=.
-
-#+begin_src emacs-lisp :tangle yes
-  (set-face-attribute 'mode-line nil
-                      :box nil
-                      :background "#00ad50"
-                      :foreground "black"
-                      :height 0.85)
-  (set-face-attribute 'mode-line-highlight nil
-                      :box nil
-                      :background "orange"
-                      :foreground "black")
-  (set-face-attribute 'mode-line-inactive nil
-                      :inherit 'mode-line
-                      :box nil
-                      :background "#004f24"
-                      :foreground "#999999"
-                      :weight 'light)
-#+end_src
-
-Els colors per defecte de =term= no em convencen. Aquesta combinació
-em convenç més:
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "term"
-    (custom-set-faces
-
-     '(term-color-black ((t (:foreground "#242424" :background "#242424"))))
-     '(term-color-red ((t (:foreground "#ef2929" :background "#ff1313"))))
-     '(term-color-green ((t (:foreground "#8ae234" :background "#4e9a06"))))
-     '(term-color-yellow ((t (:foreground "#fce94f" :background "#c4a000"))))
-     '(term-color-blue ((t (:foreground "#729fcf" :background "#3465a4"))))
-     '(term-color-magenta ((t (:foreground "#ad7fa8" :background "#75507b"))))
-     '(term-color-cyan ((t (:foreground "#34e2e2" :background "#06989a"))))
-     '(term-color-white ((t (:foreground "#eeeeec" :background "#d3d7cf"))))
-
-     '(term-default-fg-color ((t (:inherit term-color-white))))
-     '(term-default-bg-color ((t (:inherit term-color-black))))))
-#+end_src
-
-El color que utilitza =transient= per ressaltar les opcions /actives/
-no destaca gaire.
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "transient"
-    (custom-set-faces
-     '(transient-argument ((t (:foreground "green" :weight bold))))))
-#+end_src
-
-Els colors de =display-line-numbers= destaquen massa i em distreuen
-del text que estic editant. Aquesta combinació utilitza un color més
-fosc i ressalta la línia actual.
-
-#+begin_src emacs-lisp :tangle yes
-  (set-face-attribute 'line-number nil
-                      :foreground "grey30"
-                      :background "#202020")
-  (set-face-attribute 'line-number-current-line nil
-                      :foreground "#b2731d"
-                      :background "grey20")
 #+end_src
 
 ** Paquets
@@ -658,16 +820,6 @@ https://github.com/abo-abo/ace-window
     :ensure t
     :commands ace-window
     :config
-    (if (display-graphic-p)
-        (set-face-attribute 'aw-leading-char-face nil
-                            :family "ubuntu mono"
-                            :height 4.0
-                            :weight 'bold
-                            :background "chartreuse"
-                            :foreground "black")
-      (set-face-attribute 'aw-leading-char-face nil
-                          :background "white"
-                          :foreground "black"))
     (customize-set-value 'aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?ñ))
     (customize-set-value 'aw-scope 'frame))
 #+end_src
@@ -760,9 +912,6 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
   (use-package compile
     :commands compile
     :config
-    (set-face-attribute 'compilation-error nil
-                        :underline nil
-                        :weight 'normal)
     (customize-set-value 'compilation-message-face 'default))
 #+end_src
 
@@ -836,9 +985,7 @@ fitxer. Personalment prefereixo evitar la proliferació de buffers.
     (my/bind-keys dired-mode-map
                   '(("M-<up>" arv/dired-up-directory)
                     ("^" arv/dired-up-directory)
-                    ("C-m" dired-find-alternate-file)))
-
-    (set-face-attribute 'dired-directory nil :foreground "#729fcf"))
+                    ("C-m" dired-find-alternate-file))))
 #+end_src
 
 *** =display-line-numbers=
@@ -893,11 +1040,6 @@ creixement però no sembla que sigui possible configurar-ho.
 #+begin_src emacs-lisp :tangle yes
   (use-package eldoc
     :commands eldoc-mode
-    :config
-    (set-face-attribute 'eldoc-highlight-function-argument nil
-                        :underline nil
-                        :foreground "yellow"
-                        :weight 'bold)
     :diminish "")
 #+end_src
 
@@ -1031,11 +1173,7 @@ millor a =flycheck= però afegeix una dependència externa.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package flymake
-    :commands flymake-mode
-    :config
-    (set-face-attribute 'flymake-errline nil
-                        :underline nil
-                        :background "Firebrick4"))
+    :commands flymake-mode)
 #+end_src
 
 *** =font-lock=                                                     :builtin:
@@ -1084,25 +1222,7 @@ urgència en fer el canvi. Açò és més un recordatori.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package hi-lock
-    :diminish ""
-    :config
-    (defface arv/hi-green
-      '((((min-colors 88)) (:weight bold :foreground "black" :background "light green"))
-        (t (:weight bold :background "green")))
-      "Face for hi-lock mode."
-      :group 'hi-lock-faces)
-
-    (defface arv/hi-orange
-      '((((min-colors 88)) (:weight bold :foreground "black" :background "orange"))
-        (t (:weight bold :background "orange")))
-      "Face for hi-lock mode."
-      :group 'hi-lock-faces)
-
-    (defface arv/hi-red
-      '((((min-colors 88)) (:weight bold :background "red1" :foreground "white"))
-        (t (:weight bold :background "red" :foreground "white")))
-      "Face for hi-lock mode."
-      :group 'hi-lock-faces))
+    :diminish "")
 #+end_src
 
 *** =highlight-indentation=
@@ -1163,17 +1283,7 @@ Ressalta la línia on es troba el cursor actualment.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package hl-line
-    :commands global-hl-line-mode
-    :config
-    (if (display-graphic-p)
-        (set-face-attribute 'hl-line nil
-                            :foreground "white"
-                            :background "black")
-      (set-face-attribute 'hl-line nil
-                          :foreground "black"
-                          :background "yellow"))
-    (set-face-attribute 'hl-line nil
-                        :underline nil))
+    :commands global-hl-line-mode)
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -1217,10 +1327,6 @@ Encara falta provar =buffer-menu=.
   (use-package ido
     :commands (ido-mode ido-everywhere)
     :config
-    (set-face-attribute 'ido-first-match nil
-                        :background "pale green"
-                        :foreground "black")
-
     ;; Inhibit switching to other directory when no matches are found in
     ;; the current directory.
     (customize-set-value 'ido-auto-merge-work-directories-length -1)
@@ -1712,21 +1818,6 @@ Tot i que =use-package= permet definir les tecles emprant la directiva
 secció. Un avantatge de =:bind= és que defineix automàticament
 =autoloads= pels simbols que no son funcions (segons =fboundp=).
 
-*** apropos
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package apropos
-    :commands (apropos-comand
-               apropos-documentation)
-    :config
-    (set-face-attribute 'apropos-symbol nil
-                        :foreground "chartreuse"
-                        :bold t)
-    (set-face-attribute 'apropos-keybinding nil
-                        :foreground "medium spring green"
-                        ))
-#+end_src
-
 *** C
 **** gtk-doc
 
@@ -2054,14 +2145,6 @@ meu cas d'us no aporta res.
     :config
     (setq emmet-indentation 2)
     (define-key emmet-mode-keymap (kbd "C-j") nil)
-    (set-face-attribute 'emmet-preview-input nil
-                        :box nil)
-    ;; No aconsegueixo redefinir el color, utilitza el de hightlight
-    ;; (del que hereta). Aquesta face únicament s'utilitza, breument,
-    ;; quan es confirma el resultat, en un flash.
-    (set-face-attribute 'emmet-preview-output nil
-                        :background "green"
-                        :box nil)
     :diminish "")
 #+end_src
 
@@ -2421,25 +2504,6 @@ que no. En funció d'això s'aplica un estil.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "org"
-
-        (set-face-attribute 'org-mode-line-clock nil
-                            :background "green yellow")
-        (set-face-attribute 'org-document-title nil
-                            :foreground "pale turquoise"
-                            :weight 'bold
-                            :height 1.5)
-        (set-face-attribute 'org-level-1 nil
-                            :weight 'bold
-                            :height 1.2)
-        (set-face-attribute 'org-block-begin-line nil
-                            :weight 'normal
-                            :background "#202020")
-        (set-face-attribute 'org-block nil
-                            :background "black")
-        (set-face-attribute 'org-block-end-line nil
-                            :weight 'normal
-                            :background "#202020")
-
         (setq org-todo-keyword-faces
               '(("TODO" . arv/hi-red)
                 ("STRT" . hi-blue)
@@ -3319,17 +3383,7 @@ Apanyo ràpid per facilitar compilar AGD.
               (auto-fill-mode 1)
               (flyspell-mode 0)
               ;; activa el resaltat d'espai en blanc al final de línia
-              (set-variable 'show-trailing-whitespace t)
-              ;; customize-face (suposo) te problemes quan la llista
-              ;; d'atributs esta buida, sembla que ho interpreta com "no
-              ;; canviar res" enlloc de "borrar tots els atributs"
-              (set-face-attribute 'rst-level-1 nil :background nil)
-              (set-face-attribute 'rst-level-2 nil :background nil)
-              (set-face-attribute 'rst-level-3 nil :background nil)
-              (set-face-attribute 'rst-level-4 nil :background nil)
-              (set-face-attribute 'rst-level-5 nil :background nil)
-              (set-face-attribute 'rst-level-6 nil :background nil)
-              ))
+              (set-variable 'show-trailing-whitespace t)))
 #+end_src
 
 *** vue                                                          :desactivat:
@@ -3464,11 +3518,15 @@ cal recuperar-los.
     (setq backup-directory-alist `(("." . ,backup-dir))))
 #+end_src
 
-*** Faces
+*** Diferenciar modes /insert/ i /overwrite/
+
+Guarda el color del cursor en mode /insert/ per poder restaurar-lo al
+alternar entre /overwrite/ i /insert/.
 
 #+begin_src emacs-lisp :tangle yes
-  (set-face-attribute 'cursor  nil
-                      :background "#fce94f")
+  (when (null my/face-cursor-insert-background-color)
+    (setq my/face-cursor-insert-background-color
+          (face-attribute 'cursor :background)))
 #+end_src
 
 Canvia el color del cursor per indicar que ens troben en mode inserció
@@ -3479,7 +3537,7 @@ o sobreescriptura.
     "Change cursor color when enabling/disabling overwrite mode."
     (set-cursor-color (if overwrite-mode
                           "purple"
-                        "#fce94f")))
+                        my/face-cursor-insert-background-color)))
 #+end_src
 
 ** Comandes
@@ -3510,14 +3568,16 @@ pista de l'esta.
 
 #+begin_src emacs-lisp :tangle yes
   (defvar arv/big-font-enabled nil)
+  (defvar my/face-default-height (face-attribute 'default :height))
+  (defvar my/face-default-big-height (truncate (* my/face-default-height 1.4)))
 
   (defun arv/alternar-mida-font ()
     "Alterna entre font 'normal' i 'gran'."
     (interactive)
     (set-face-attribute 'default nil
                         :height (if arv/big-font-enabled
-                                    98
-                                  140))
+                                    my/face-default-height
+                                  my/face-default-big-height))
     (setq arv/big-font-enabled (not arv/big-font-enabled)))
 #+end_src
 
