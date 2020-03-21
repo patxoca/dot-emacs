@@ -1305,9 +1305,6 @@ Ressalta la línia on es troba el cursor actualment.
 Activar el mode probablement pertany a algun hook, o, al ser global, a
 la configuració de un mode.
 
-La definició de colors probablement pertany a la configuració del
-tema.
-
 *** =hydra=
 
 https://github.com/abo-abo/hydra
