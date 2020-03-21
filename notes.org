@@ -737,7 +737,7 @@ frame) i afegir una funció que comprovi el mode i ajusti el color.
 
 No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
 
-** Paquets extra
+* Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
 però que ara mateix no puc/vull provar. Ordenats cronològicament
