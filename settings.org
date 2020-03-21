@@ -760,11 +760,23 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
 
 *** modus-operandi
 
-*** Activació i configuració del tema
+Personalització de =modus-operandi=.
 
 #+begin_src emacs-lisp :tangle yes
-  (load-theme 'wombat)
-  (my/customize-theme-wombat)
+  (defun my/customize-theme-modus-operandi ()
+  )
+#+end_src
+
+** Activació i configuració del tema
+
+#+begin_src emacs-lisp :tangle yes
+  ;; (load-theme 'wombat)
+  ;; (my/customize-theme-wombat)
+
+  (use-package modus-operandi-theme
+    :ensure t
+    :config
+    (my/customize-theme-modus-operandi))
 
   (set-face-attribute 'default nil
                       :family "JetBrains Mono"
