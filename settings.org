@@ -681,7 +681,7 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
     (with-eval-after-load "flymake"
       :commands flymake-mode
       :config
-      (set-face-attribute 'flymake-errline nil
+      (set-face-attribute 'flymake-error nil
                           :underline nil
                           :background "Firebrick4"))
 
