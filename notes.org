@@ -369,7 +369,7 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
-** TODO Agrupar definicions de colors/faces?                           :idea:
+** TODO [1/1] Agrupar definicions de colors/faces?                     :idea:
    :PROPERTIES:
    :CREATED: [2019-01-18 dv 08:33]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
@@ -385,7 +385,7 @@ idea agrupar la definició del color al activar el paquet.
 
 Mirar que es pot fer.
 
-*** Comentari 18/03/2020
+*** DONE Comentari 18/03/2020
 
 Vull provar el tema =modus-operandi= i em trobo amb moltes
 re-definicions de /faces/ que no funcionen bé amb ell però que no
@@ -737,6 +737,113 @@ frame) i afegir una funció que comprovi el mode i ajusti el color.
 
 No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
 
+** TODO Error en =arv/query-replace=                                    :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-20 dv 19:57]
+   :REFERER: [[file:~/prog/bdfcee.homer/trunk/src/bdfcee.homer/bdfcee/homer/templates/homer/informe_pdi.html::function (InformePDI) {]]
+   :END:
+
+En l'arxiu del =REFERER= intento canviar /InformeOcupacio/ per
+/InformePDI/ amb =M-%= (=arv/query-replace=). En el minibuffer, quan
+demana el text que es vol canviar, al prémer =RET= insereix un return
+enlloc de confirmar-lo.
+
+No passa amb =query-replace=.
+
+** TODO Desactivar =hl-line-mode= en =term=                       :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-03-21 ds 20:15]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=term=][=term=]]
+   :END:
+
+Veure comentaris en la secció referenciada pel =REFERER=.
+
+El problema es qué en la secció [[id:ea3e7059-fedc-44b2-b1d6-55e3326d050e][=hl-line=]] s'activa =hl-line-mode=
+globalment i aparentment no es pot desactivar per buffer.
+
+Indirectament relacionat, la /face/ =hl-line= no acaba de funcionar bé
+en algunes ocasions (veure la nota en la personalització del tema
+=modus-operandi=). La forma en que ho /resolc/ perd colors. No és la
+fi del mon i ho prefereixo a perdre legibilitat però me'n acabo
+d'adonar que el ressaltat de =swiper= sí que preserva els colors i no
+té el problema de =hl-line=.
+
+El comportament sembla diferent entre emacs 27.0.90 (més o menys OK) i
+26.3 (no OK).
+
+** TODO Configurar la posició de les finestres                  :enhancement:
+
+Exemples de com restringir on s'obren les finestres:
+
+- http://juanjose.garciaripoll.com/blog/arranging-emacs-windows/index.html
+
+- https://protesilaos.com/codelog/2020-01-07-emacs-display-buffer/
+
+** TODO fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
+   :PROPERTIES:
+   :CREATED: [2020-03-23 dl 13:02]
+   :REFERER:
+   :END:
+
+M'he acostumat a que =git-status= mostra l'estat des de l'arrel i no
+des de la carpeta en que s'executa la comanda. Ho trobo a faltar an
+subversion.
+
+Definir un /wrapper/ =arv/svn-status= que busqui el /dominant file/
+=.svn=, canvii directori i executi =svn-status=.
+
+** TODO configurar electric-pair en org-mode                    :enhancement:
+   :PROPERTIES:
+   :CREATED: [2020-03-25 dc 17:01]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Configuració de tecles][Configuració de tecles]]
+   :END:
+
+Actualment tinc desactivats els parells-elèctrics en =org-mode=. No
+recordo el motiu.
+
+Con afegir nous parells a =electric-pair-mode=. Permetria eliminar la
+funció =arv/org-emphasize=.
+
+https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode-specific-pairs-for-electric-pair-mode
+
+En resum:
+
+#+begin_src emacs-lisp
+  (defvar org-electric-pairs '((?/ . ?/) (?= . ?=)) "Electric pairs for org-mode.")
+
+  (defun org-add-electric-pairs ()
+    (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))
+    (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+  (add-hook 'org-mode-hook 'org-add-electric-pairs)
+#+end_src
+
+** TODO revisar comandes de compilació                          :enhancement:
+   :PROPERTIES:
+   :CREATED: [2020-03-25 dc 17:12]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Hook][Hook]]
+   :END:
+
+En la configuració he definit varies comandes de compilació (per
+sphinx i typscript que recordi) per lidiar amb els codis ANSI (crec
+que era l'únic motiu).
+
+Aquesta sembla una solució més neta:
+
+https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode
+
+Concretament, la segona respota:
+
+#+begin_src emacs-lisp
+  (ignore-errors
+    (require 'ansi-color)
+    (defun my-colorize-compilation-buffer ()
+      (when (eq major-mode 'compilation-mode)
+        (ansi-color-apply-on-region compilation-filter-start (point-max))))
+    (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
+#+end_src
+
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -892,6 +999,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
 - estudiar /benchmarks/. S'utilitzen en [[https://irreal.org/blog/?p=8621][aquest post]] de Irreal. Dona la
   sensació que son part d'emacs. Investigar-ho.
+
+- [[http://xenodium.com/modern-elisp-libraries/index.html][Modern Emacs lisp libraries]]: enumera algunes biblioteques d'estil
+  modern incloses en emacs i alternatives externes.
+
+  En un comentari al post (en twitter) es citen [[https://github.com/emacs-mirror/emacs/blob/master/lisp/rtree.el][rtree.el]] (builtin) i
+  http://www.dr-qubit.org/emacs_data-structures.html.
 
 * Completat
 
