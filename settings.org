@@ -2723,6 +2723,18 @@ en el meu workflow. Es manté per si de cas.
        (arv/org-sctc-setup)))
 #+end_src
 
+**** Hook
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "org-mode"
+    (add-hook
+     'org-mode-hook
+     (lambda ()
+       ;; electric-pair: insereix parelles ==, // i ~~
+       (let ((org-electric-pairs '((?= . ?=) (?/ . ?/) (?~ . ?~))))
+         (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))))))
+#+end_src
+
 *** perl                                                         :desactivat:
 
 Fa anys que no programo en perl i espero no haver de tornar a fer-ho.
