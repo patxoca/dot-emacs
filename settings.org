@@ -764,7 +764,38 @@ Personalització de =modus-operandi=.
 
 #+begin_src emacs-lisp :tangle yes
   (defun my/customize-theme-modus-operandi ()
-  )
+    (with-eval-after-load "ace-window"
+      ;; en ace-window fa que el selector destaqui.
+
+      (when (display-graphic-p)
+        (set-face-attribute 'aw-leading-char-face nil
+                            :height 4.0
+                            :weight 'bold)))
+
+    (with-eval-after-load "hl-line"
+      ;; la face hl-line definida en modus-operandi no combina bé amb
+      ;; text clar sobre fons de colors (ho he detectat en alguns
+      ;; hi-lock personalitzats amb text blanc sobre fons roig p.e.).
+      ;; Pel momen prefereixo perdre els colors i que tot el text sigui
+      ;; llegible.
+
+      (when (display-graphic-p)
+        (set-face-attribute 'hl-line nil
+                            :foreground "black")))
+
+    (with-eval-after-load "flymake"
+      :commands flymake-mode
+      :config
+      (set-face-attribute 'flymake-warning nil
+                          :underline nil
+                          :foreground "white"
+                          :background "#d56d00")
+      (set-face-attribute 'flymake-error nil
+                          :underline nil
+                          :foreground "white"
+                          :background "#a80000"))
+
+    )
 #+end_src
 
 ** Activació i configuració del tema
