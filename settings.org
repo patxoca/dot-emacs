@@ -3438,6 +3438,56 @@ Apanyo ràpid per facilitar compilar AGD.
               (set-variable 'show-trailing-whitespace t)))
 #+end_src
 
+*** typescript
+
+Configuració de =typescript=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package typescript-mode
+    :ensure t)
+#+end_src
+
+**** Funcions auxiliars
+
+***** compilar
+
+La comanda =compile= no mostra correctament els codis ANSI generants
+durant la compilació. Aquesta comanda supleix la mancança.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/typescript-compile ()
+    "Intenta executar 'tsc'"
+    (interactive)
+    (let ((project-root (locate-dominating-file default-directory "tsconfig.json")))
+      (if project-root
+          (compilation-start (format "cd %s ; tsc" project-root)
+                             t
+                             (lambda (mode) "*tsc*"))
+        (user-error "No es troba 'tsconfig.json'"))))
+#+end_src
+
+**** Combinacions de tecles
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "typescript-mode"
+    (my/bind-keys
+     typescript-mode-map
+     '(("<f9>" my/typescript-compile))))
+#+end_src
+
+**** Hook
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "typescript-mode"
+    (add-hook
+     'typescript-mode-hook
+     (lambda ()
+       ;; electric-pair: insereix <>
+       (let ((ts-electric-pairs '((?< . ?>))))
+         (setq-local electric-pair-pairs (append electric-pair-pairs ts-electric-pairs))
+         ))))
+#+end_src
+
 *** vue                                                          :desactivat:
 
 Actualment no l'utilitzo.
