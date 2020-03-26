@@ -3875,7 +3875,7 @@ https://coderwall.com/p/2vnxaw/beautify-json-in-emacs
     (interactive)
     (if mark-active
         (call-interactively 'kill-ring-save)
-      (kill-new (thing-at-point 'symbol))))
+      (kill-new (thing-at-point 'symbol t))))
 #+end_src
 
 *** =arv/open-line-after-and-indent=, =arv/open-line-before-and-indent=
