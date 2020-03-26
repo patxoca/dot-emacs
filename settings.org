@@ -3625,6 +3625,9 @@ cal recuperar-los.
 
 *** Diferenciar modes /insert/ i /overwrite/
 
+Es aquest apartat es configura el canvi del color del cursor per
+indicar que ens troben en mode inserció o sobreescriptura.
+
 Guarda el color del cursor en mode /insert/ per poder restaurar-lo al
 alternar entre /overwrite/ i /insert/.
 
@@ -3634,16 +3637,34 @@ alternar entre /overwrite/ i /insert/.
           (face-attribute 'cursor :background)))
 #+end_src
 
-Canvia el color del cursor per indicar que ens troben en mode inserció
-o sobreescriptura.
+La solució original té un problema, el color del cursor és global
+mentre que el mode insertar/sobreescriure és local a cada buffer. Al
+cambiar de buffer no s'ajusta el color del cursor.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (defadvice overwrite-mode (after overwrite-mode-adjust-cursor activate)
     "Change cursor color when enabling/disabling overwrite mode."
     (set-cursor-color (if overwrite-mode
                           "purple"
                         my/face-cursor-insert-background-color)))
 #+end_src
+
+No he trobat cap /hook/ que es dispari si es canvia de buffer (=C-x
+b=) o de finestra (=C-x o=). Aquesta solució s'executa després de cada
+comanda amb el que hauria de ser acurada.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/update-cursor-color-for-insert-overwrite-mode ()
+    (set-cursor-color (if overwrite-mode
+                          my/face-cursor-overwrite-background-color
+                        my/face-cursor-insert-background-color)))
+
+  (add-hook 'post-command-hook #'my/update-cursor-color-for-insert-overwrite-mode)
+#+end_src
+
+No espero que suposi un problema pel rendiment. Si ralentitza
+apreciablement l'execució una altra possibilitat (cutre) seria aplicar
+/advice/ també a les funcions que canvien de buffer i de finestra.
 
 ** Comandes
    :PROPERTIES:

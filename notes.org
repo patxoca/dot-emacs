@@ -717,10 +717,16 @@ individualment en la resta.
 
 Potser seria preferible activar-la sempre i desactivar-la cas per cas.
 
-** TODO revisar color del cursor insert/overwrite                       :bug:
+** PAUS revisar color del cursor insert/overwrite                       :bug:
    :PROPERTIES:
    :CREATED: [2020-03-19 dj 18:20]
    :END:
+
+   - State "PAUS"       from "TODO"       [2020-03-26 dj 09:11] \\
+     S'afegeix una funció a =post-command-hook=.
+
+     Es deixa en pausa mentre es comprova si afecta negativament al
+     rendiment.
 
 Al canviar de finestra el color del cursor es manté però el mode
 insert/overwrite pot canviar.
