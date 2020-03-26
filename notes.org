@@ -735,14 +735,6 @@ Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
 
-** TODO Moure secció cpctelera                                          :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-20 dv 08:51]
-   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*cpctelera][cpctelera]]
-   :END:
-
-No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
-
 ** TODO Error en =arv/query-replace=                                    :bug:
    :PROPERTIES:
    :CREATED: [2020-03-20 dv 19:57]
@@ -1649,3 +1641,23 @@ Per reproduir-ho:
 Probablement l'error està relacionat amb els últims canvis fets a la
 configuració de =pytest= (o =elpy=). Al no ocórrer quan s'obre des de
 Emacs suposo que algun component encara no s'ha configurat.
+** DONE Moure secció cpctelera                                          :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-20 dv 08:51]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*cpctelera][cpctelera]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-03-26 dj 09:31] \\
+     Aparentment està dins la secció /sphinx/ perquè utilitza la funció
+     =arv/-sphinx-buid= per compilar el projecte.
+
+     No tinc clar on ficar-ho, no es tracta de la configuració d'un paquet
+     o un mode, és una eina dins un tipus de projecte (que mescla C i
+     ensamblador).
+
+     Com que tinc el tema cpctelera una mica abandonat i és una funció molt
+     senzilla s'elimina de la configuració. Si em fico en serio en el tema
+     de jocs per l'amstrad ja configuraré un entorn de treball apropiat,
+     probablement utilitzant un /minor mode/.
+
+No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
