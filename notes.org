@@ -735,19 +735,6 @@ Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
 
-** TODO Error en =arv/query-replace=                                    :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-20 dv 19:57]
-   :REFERER: [[file:~/prog/bdfcee.homer/trunk/src/bdfcee.homer/bdfcee/homer/templates/homer/informe_pdi.html::function (InformePDI) {]]
-   :END:
-
-En l'arxiu del =REFERER= intento canviar /InformeOcupacio/ per
-/InformePDI/ amb =M-%= (=arv/query-replace=). En el minibuffer, quan
-demana el text que es vol canviar, al prémer =RET= insereix un return
-enlloc de confirmar-lo.
-
-No passa amb =query-replace=.
-
 ** TODO Desactivar =hl-line-mode= en =term=                       :annoyance:
    :PROPERTIES:
    :CREATED: [2020-03-21 ds 20:15]
@@ -1661,3 +1648,35 @@ Emacs suposo que algun component encara no s'ha configurat.
      probablement utilitzant un /minor mode/.
 
 No sé que fa la secció /cpctelera/ dins /rst/. Caldria moure-la.
+** DONE Error en =arv/query-replace=                                    :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-20 dv 19:57]
+   :REFERER: [[file:~/prog/bdfcee.homer/trunk/src/bdfcee.homer/bdfcee/homer/templates/homer/informe_pdi.html::function (InformePDI) {]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-03-26 dj 13:58] \\
+     El problema únicament es manifesta en blocs JS o CSS dins un arxiu
+     HTML no en el contingut HTML.
+
+     Es localitza el problema en l'expressió:
+
+     #+begin_src emacs-lisp
+       (read-string "Replace: " (thing-at-point 'symbol))
+     #+end_src
+
+     =thing-at-point= retorna un =string= amb properties. El valor
+     retornat, la part de les propietats, varia depenent de si el punt està
+     dins un bloc amb un mode /secundari/ (JS o CSS) o en un bloc purament
+     HTML. Aparentment açò confon a =read-string=. Eliminant les propietats
+     el problema desapareix.
+
+     En les properties he vist que havia una mena de definició d'un
+     /keymap/, açò podria explicar el canvi de comportament de la tecla
+     =RET=.
+
+En l'arxiu del =REFERER= intento canviar /InformeOcupacio/ per
+/InformePDI/ amb =M-%= (=arv/query-replace=). En el minibuffer, quan
+demana el text que es vol canviar, al prémer =RET= insereix un return
+enlloc de confirmar-lo.
+
+No passa amb =query-replace=.

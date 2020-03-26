@@ -3915,7 +3915,7 @@ https://coderwall.com/p/2vnxaw/beautify-json-in-emacs
 
   In any case point is preserved."
     (interactive "*P")
-    (let* ((old-string (read-string "Replace: " (thing-at-point 'symbol)))
+    (let* ((old-string (read-string "Replace: " (thing-at-point 'symbol t)))
            (new-string (read-string (concat "Replace " old-string " with: ") ""))
            (start (if mark-active (min (mark) (point)) (point-min)))
            (end   (if mark-active (max (mark) (point)) (point-max))))
