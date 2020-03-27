@@ -811,7 +811,7 @@ Personalització de =modus-operandi=.
 
   (set-face-attribute 'default nil
                       :family "JetBrains Mono"
-                      :height 94)
+                      :height (if (> (x-display-pixel-height) 1080) 105 94))
 #+end_src
 
 ** Paquets
