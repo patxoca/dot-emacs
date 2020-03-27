@@ -2379,10 +2379,6 @@ s'expandeixen les [[info:org#Structure%20templates][plantilles estructurals]].
     (add-to-list 'org-structure-template-alist
                  '("S"
                    "#+begin_src emacs-lisp :tangle yes\n?\n#+end_src"
-                   "</src>\n?\n<src lang=\"emacs-lisp\" tangle=\"yes\">"))
-    (add-to-list 'org-structure-template-alist
-                 '("x"
-                   "#+end_src\n?\n#+begin_src emacs-lisp :tangle yes"
                    "</src>\n?\n<src lang=\"emacs-lisp\" tangle=\"yes\">")))
 #+end_src
 
