@@ -2502,8 +2502,9 @@ elèctric és molest. Resetejo la sintaxi de =<= i =>= als valors per
 defecte.
 
 #+begin_src emacs-lisp :tangle yes
-  (modify-syntax-entry ?< "@")
-  (modify-syntax-entry ?> "@")
+  (defun my/org-reset-<-syntax ()
+    (modify-syntax-entry ?< "@" org-mode-syntax-table)
+    (modify-syntax-entry ?> "@" org-mode-syntax-table))
 #+end_src
 
 **** =org-id=
@@ -2760,10 +2761,11 @@ en el meu workflow. Es manté per si de cas.
 **** Hook
 
 #+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "org-mode"
+  (with-eval-after-load "org"
     (add-hook
      'org-mode-hook
      (lambda ()
+       (my/org-reset-<-syntax)
        ;; electric-pair: insereix parelles ==, // i ~~
        (let ((org-electric-pairs '((?= . ?=) (?/ . ?/) (?~ . ?~))))
          (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))))))
