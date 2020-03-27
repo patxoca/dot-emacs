@@ -828,7 +828,6 @@ Concretament, la segona respota:
     (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 #+end_src
 
-
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1680,3 +1679,19 @@ demana el text que es vol canviar, al prémer =RET= insereix un return
 enlloc de confirmar-lo.
 
 No passa amb =query-replace=.
+** DONE comportament de =<= en =org-mode=                               :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-27 dv 14:39]
+   :REFERER: [[file:~/prog/hera/impl/doc_dev/TODO.org::*Comanda per llistar receivers de signals][Comanda per llistar receivers de signals]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-03-27 dv 18:28] \\
+     El propi =org= defineix entrades en la /syntax table/ per "<" i ">"
+     com parentésis.
+
+     Es reseteja el valor d'aquestes entrades.
+
+En el arxiu =org= del referer al prémer =<= s'insereix =<=. En aquesta
+arxiu en que prenc la nota s'insereix =<>=.
+
+Resulta molest al escriure =<s= per generar un bloc de codi.

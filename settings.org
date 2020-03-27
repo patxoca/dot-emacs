@@ -2483,6 +2483,27 @@ les capçaleres apareguin juntes.
   (setq org-cycle-separator-lines 0)
 #+end_src
 
+Em resulta molest el comportament elèctric de la parella =<>=. El
+comentari que figura en [[https://code.orgmode.org/bzg/org-mode/commit/886ab9c766][el commit de org]] diu:
+
+#+begin_quote
+lisp/org.el (org-mode): Let < and > be recognized as opening and
+ending characters.
+
+These characters are typically used in timestamps where it is useful
+to use C-M-f and C-M-b to manipulate them.
+#+end_quote
+
+No manipulo /timestamps/ i sí que utilitzo =<= per expandir plantilles
+estructurals i com operadors en blocs de codi, on el comportament
+elèctric és molest. Resetejo la sintaxi de =<= i =>= als valors per
+defecte.
+
+#+begin_src emacs-lisp :tangle yes
+  (modify-syntax-entry ?< "@")
+  (modify-syntax-entry ?> "@")
+#+end_src
+
 **** =org-id=
 
 Al emmagatzemar l'enllaç a una secció amb =C-c l= s'utilitza el títol
