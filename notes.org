@@ -663,39 +663,6 @@ utilitza en els seus paquets:
 
 https://nullprogram.com/blog/2020/01/22/
 
-** DONE ample de la numeració de línees                           :annoyance:
-   :PROPERTIES:
-   :CREATED: [2020-02-06 dj 19:45]
-   :REFERER: [[file:/ssh:alex@wst:/home/alex/prog/arv.mold/src/arv.mold/arv/mold/mold.py::return os.path.relpath(path, self._template_dir)]]
-   :END:
-
-   - State "DONE"       from "TODO"       [2020-02-08 ds 20:11] \\
-     No trobo com configurar el valor mostrat per la línia actual. Es
-     configura l'ample a 3 i que mai disminueixi l'amplada una vegada a
-     crescut.
-
-Al fer scroll vertical l'ample ocupat pel número de línia s'ajusta
-quan passa de decenes a centenes etc. En eixe moment es produeix un
-sacseig horitzonal que em resulta molest.
-
-- l'única variació sobre el nombre de dígits necessaris és la que es
-  produeix en la línia actual. La resta de valors son deltes i amb 2
-  (o 3) dígits és suficient, independentment del nombre de línies de
-  l'arxiu.
-
-- utilitzo numeració relativa i no m'interesa el número de la línia
-  actual (el tinc a la modeline si em cal).
-
-- el sacseig es produeix una mica abans de necessitar més dígits. No
-  estic segur de si és un bug.
-
-Amb les pantalles que utilitzo habitualment crec que amd dos dígits és
-suficient per la numeració relativa, potser en calen tres (?). Mirar
-si és possible configurar =display-line-number= de forma que la línia
-actual es numeri com 0 (i per tant no variï el nombre de dígits) i
-fixar el nombre de dígits per evitar el sacseig (només en cas que
-puguin caldre 2 i 3 dígits).
-
 ** TODO accés ràpid a les refcards                                     :idea:
 
 Emacs inclou vàries refcards en format pdf. Mirar de facilitar l'accés
@@ -1695,3 +1662,35 @@ En el arxiu =org= del referer al prémer =<= s'insereix =<=. En aquesta
 arxiu en que prenc la nota s'insereix =<>=.
 
 Resulta molest al escriure =<s= per generar un bloc de codi.
+** DONE ample de la numeració de línees                           :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-02-06 dj 19:45]
+   :REFERER: [[file:/ssh:alex@wst:/home/alex/prog/arv.mold/src/arv.mold/arv/mold/mold.py::return os.path.relpath(path, self._template_dir)]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-02-08 ds 20:11] \\
+     No trobo com configurar el valor mostrat per la línia actual. Es
+     configura l'ample a 3 i que mai disminueixi l'amplada una vegada a
+     crescut.
+
+Al fer scroll vertical l'ample ocupat pel número de línia s'ajusta
+quan passa de decenes a centenes etc. En eixe moment es produeix un
+sacseig horitzonal que em resulta molest.
+
+- l'única variació sobre el nombre de dígits necessaris és la que es
+  produeix en la línia actual. La resta de valors son deltes i amb 2
+  (o 3) dígits és suficient, independentment del nombre de línies de
+  l'arxiu.
+
+- utilitzo numeració relativa i no m'interesa el número de la línia
+  actual (el tinc a la modeline si em cal).
+
+- el sacseig es produeix una mica abans de necessitar més dígits. No
+  estic segur de si és un bug.
+
+Amb les pantalles que utilitzo habitualment crec que amd dos dígits és
+suficient per la numeració relativa, potser en calen tres (?). Mirar
+si és possible configurar =display-line-number= de forma que la línia
+actual es numeri com 0 (i per tant no variï el nombre de dígits) i
+fixar el nombre de dígits per evitar el sacseig (només en cas que
+puguin caldre 2 i 3 dígits).
