@@ -795,6 +795,18 @@ Personalització de =modus-operandi=.
                           :foreground "white"
                           :background "#a80000"))
 
+    (with-eval-after-load "rst"
+      ;; customize-face (suposo) te problemes quan la llista
+      ;; d'atributs esta buida, sembla que ho interpreta com "no
+      ;; canviar res" enlloc de "borrar tots els atributs"
+
+      (set-face-attribute 'rst-level-1 nil :background nil)
+      (set-face-attribute 'rst-level-2 nil :background nil)
+      (set-face-attribute 'rst-level-3 nil :background nil)
+      (set-face-attribute 'rst-level-4 nil :background nil)
+      (set-face-attribute 'rst-level-5 nil :background nil)
+      (set-face-attribute 'rst-level-6 nil :background nil))
+
     )
 #+end_src
 
