@@ -1,7 +1,7 @@
-;;; -*- coding: utf-8 -*-
+;;; -*- coding: utf-8; lexical-binding: t -*-
 
 ;;; init.el --- arxiu de configuracio d'emacs
-;;; (c) 1998-2018 Alexis Roda
+;;; (c) 1998-2020 Alexis Roda
 ;;; $Id$
 
 ;;; Commentary: arxiu de configuracio d'Emacs.
@@ -25,14 +25,16 @@
 
 ;; accelera la càrrega
 
-(setq gc-cons-threshold 402653184
-      gc-cons-percentage 0.6)
-(add-hook 'after-init-hook
-          `(lambda ()
-             (setq gc-cons-threshold 800000
-                   gc-cons-percentage 0.1)
-             (garbage-collect)) t)
-
+(let ((threshold gc-cons-threshold)
+      (percentage gc-cons-percentage))
+  (setq gc-cons-threshold 402653184
+        gc-cons-percentage 0.6)
+  (add-hook 'after-init-hook
+            (lambda ()
+              (setq gc-cons-threshold threshold
+                    gc-cons-percentage percentage)
+              (garbage-collect))
+            t))
 
 (defun arv/path-concat (&rest components)
   (concat
