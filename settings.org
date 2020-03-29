@@ -1357,6 +1357,14 @@ Ressalta la línia on es troba el cursor actualment.
 Activar el mode probablement pertany a algun hook, o, al ser global, a
 la configuració de un mode.
 
+Aquesta funció desactiva =global-hl-line-mode= en el buffer en que
+s'executa. Està pensada per cridar-la des d'un /hook/.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/disable-global-hl-mode-locally ()
+    (setq-local global-hl-line-mode nil))
+#+end_src
+
 *** =hydra=
 
 https://github.com/abo-abo/hydra
@@ -1761,6 +1769,16 @@ l'accés a les comandes utilitzades recentment i a les més freqüents.
     (let ((current-prefix-arg nil))
       (if p (swiper (thing-at-point 'symbol t))
         (swiper))))
+#+end_src
+
+*** =term=                                                          :builtin:
+
+Desactiva =global-hl-line-mode= en la terminal.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'term-mode-hook
+            (lambda ()
+              (my/disable-global-hl-mode-locally)))
 #+end_src
 
 *** =uniquify=                                                      :builtin:

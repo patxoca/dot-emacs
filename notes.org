@@ -712,27 +712,6 @@ Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
 
-** TODO Desactivar =hl-line-mode= en =term=                       :annoyance:
-   :PROPERTIES:
-   :CREATED: [2020-03-21 ds 20:15]
-   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=term=][=term=]]
-   :END:
-
-Veure comentaris en la secció referenciada pel =REFERER=.
-
-El problema es qué en la secció [[id:ea3e7059-fedc-44b2-b1d6-55e3326d050e][=hl-line=]] s'activa =hl-line-mode=
-globalment i aparentment no es pot desactivar per buffer.
-
-Indirectament relacionat, la /face/ =hl-line= no acaba de funcionar bé
-en algunes ocasions (veure la nota en la personalització del tema
-=modus-operandi=). La forma en que ho /resolc/ perd colors. No és la
-fi del mon i ho prefereixo a perdre legibilitat però me'n acabo
-d'adonar que el ressaltat de =swiper= sí que preserva els colors i no
-té el problema de =hl-line=.
-
-El comportament sembla diferent entre emacs 27.0.90 (més o menys OK) i
-26.3 (no OK).
-
 ** TODO Configurar la posició de les finestres                  :enhancement:
 
 Exemples de com restringir on s'obren les finestres:
@@ -1726,3 +1705,29 @@ L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
 
 Crec que vaig renombrar algunes funcions. També és possible que
 =arv-py= no estigui carregat en aquest punt? improbable.
+** DONE Desactivar =hl-line-mode= en =term=                       :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-03-21 ds 20:15]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=term=][=term=]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-03-29 dg 21:12] \\
+     He trobat com descativar =global-hl-line-mode= localment.
+
+     El tema dels colors de =hl-line= no em molesta com per no donar-ho per
+     resolt.
+
+Veure comentaris en la secció referenciada pel =REFERER=.
+
+El problema es qué en la secció [[id:ea3e7059-fedc-44b2-b1d6-55e3326d050e][=hl-line=]] s'activa =hl-line-mode=
+globalment i aparentment no es pot desactivar per buffer.
+
+Indirectament relacionat, la /face/ =hl-line= no acaba de funcionar bé
+en algunes ocasions (veure la nota en la personalització del tema
+=modus-operandi=). La forma en que ho /resolc/ perd colors. No és la
+fi del mon i ho prefereixo a perdre legibilitat però me'n acabo
+d'adonar que el ressaltat de =swiper= sí que preserva els colors i no
+té el problema de =hl-line=.
+
+El comportament sembla diferent entre emacs 27.0.90 (més o menys OK) i
+26.3 (no OK).
