@@ -318,11 +318,39 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
-** TODO error en x-my/camelize                                          :bug:
+** PAUS error en x-my/camelize                                          :bug:
    :PROPERTIES:
    :CREATED: [2018-04-18 dc 08:25]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=arv/camelize=][=arv/camelize=]]
    :END:
+
+   - State "PAUS"       from "TODO"       [2020-03-29 dg 19:19] \\
+     El problema és que en =org-mode= =?'= té la sintaxi =?w=.
+
+     He provat movent el =with-syntax-table (standard-syntax-table)= al
+     principi de la funció de forma que en totes les cerques en que intervé
+     la sintaxi dels caràcters s'apliquin les mateixes regles. Funciona
+     però no tinc clar que sigui la solució. Bé, no tinc clara la semàntica
+     de la funció.
+
+     Pensaments al respecte:
+
+     - Suposo que no hauria de complicar-me la vida i limitar-me a
+       convertir =foo_bar= en =FooBar= i en =foo_bar= un altre cop, és a
+       dir, el mode del buffer no hauria d'influir.
+
+     - En =emacs-lisp= no s'utilitza la majúscula, el separador idiomàtic
+       és =?-= i admet quasi qualsevol caràcter en un identificador. En la
+       resta de llenguatges que utilizo la majúscula és acceptable per
+       alguns identificadors i el separador és =?_=.
+
+     - Potser utilitzar =prog-mode-syntax-table= enlloc de
+       =standard-syntax-table= i utilizar el literal =?_= enlloc de la
+       classe =\s_=.
+
+     Un altre problema que he detectat fent proves és que no té en compte
+     acrònims, com =tutor_URV= que s'hauria de convertir en =TutorURV= i no
+     en =TutorUrv=.
 
 En =org-mode= al intentar convertir "l'xxx" en "L'xxx" prement =M-c=
 s'obté "Lxxx".
