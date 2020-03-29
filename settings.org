@@ -5,6 +5,10 @@
 #+LANGUAGE: ca
 #+LATEX_CLASS: informe
 
+# Afegeix una referència en l'arxiu ".el" que apunta al bloc de codi
+# org. Veure la funció "org-babel-tangle-jumpt-to-org".
+#+PROPERTY: header-args:emacs-lisp    :padline true :comments link
+
 #+begin_abstract
 Aquesta és la tercera encarnació de la configuració d'emacs. Els
 objectius que es volen aconsseguir són:
