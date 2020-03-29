@@ -318,24 +318,6 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
-** TODO revisar snippets                                                :bug:
-   :PROPERTIES:
-   :CREATED: [2018-04-07 ds 13:09]
-   :REFERER: [[file:~/prog/di/project/myapp/models.py::)]]
-   :END:
-
-Al expandir el /snippet/ =djmf= dóna error:
-
-#+begin_src txt
-yas--snippet-parse-create: Wrong type argument: char-or-string-p, (pyx/get-current-package-name)
-#+end_src
-
-L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
-és incorrecta.
-
-Crec que vaig renombrar algunes funcions. També és possible que
-=arv-py= no estigui carregat en aquest punt? improbable.
-
 ** TODO error en x-my/camelize                                          :bug:
    :PROPERTIES:
    :CREATED: [2018-04-18 dc 08:25]
@@ -1694,3 +1676,25 @@ si és possible configurar =display-line-number= de forma que la línia
 actual es numeri com 0 (i per tant no variï el nombre de dígits) i
 fixar el nombre de dígits per evitar el sacseig (només en cas que
 puguin caldre 2 i 3 dígits).
+** DONE revisar snippets                                                :bug:
+   :PROPERTIES:
+   :CREATED: [2018-04-07 ds 13:09]
+   :REFERER: [[file:~/prog/di/project/myapp/models.py::)]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-03-29 dg 18:30] \\
+     Efectivament, el mòdul no estava carregat i la funció
+     =pyx/get-current-package-name= no tenia un autoload. S'afegeix
+     l'autoload.
+
+Al expandir el /snippet/ =djmf= dóna error:
+
+#+begin_src txt
+yas--snippet-parse-create: Wrong type argument: char-or-string-p, (pyx/get-current-package-name)
+#+end_src
+
+L'expansió de =djmodel= no mostra cap error (crec, no m'he fixat) però
+és incorrecta.
+
+Crec que vaig renombrar algunes funcions. També és possible que
+=arv-py= no estigui carregat en aquest punt? improbable.

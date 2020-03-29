@@ -2910,6 +2910,7 @@ Funcions d'utilitat per treballar amb codi python.
     :load-path "site-lisp/arv-py"
     :commands (pyx/add-setup-dependency
                pyx/electric-colon
+               pyx/get-current-package-name
                pyx/insert-current-package-name
                pyx/make
                pyx/nav-goto-first-import
