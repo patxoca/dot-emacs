@@ -324,6 +324,11 @@ A més d'evitar conflictes de noms permet identificar els elements
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=arv/camelize=][=arv/camelize=]]
    :END:
 
+   - State "PAUS"       from "PAUS"       [2020-03-30 dl 09:35] \\
+     Aquest paquet fa el mateix i una mica més:
+
+     https://github.com/akicho8/string-inflection
+
    - State "PAUS"       from "TODO"       [2020-03-29 dg 19:19] \\
      El problema és que en =org-mode= =?'= té la sintaxi =?w=.
 
