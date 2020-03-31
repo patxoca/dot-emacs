@@ -768,6 +768,11 @@ Personalització de =modus-operandi=.
 
 #+begin_src emacs-lisp :tangle yes
   (defun my/customize-theme-modus-operandi ()
+
+    ; redueix la mida del text de la modeline
+    (set-face-attribute 'mode-line nil :height 94)
+    (set-face-attribute 'mode-line-inactive nil :height 94)
+
     (with-eval-after-load "ace-window"
       ;; en ace-window fa que el selector destaqui.
 
