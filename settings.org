@@ -3458,7 +3458,7 @@ l'arxiu del buffer actual) i en els directoris pare.
   (defun arv/sphinx-build-html ()
     "Genera HTML"
     (interactive)
-    (arv/-(setq  )phinx-build "html"))
+    (arv/-sphinx-build "html"))
 
   (defun arv/sphinx-run-doctest ()
     "Executa els doctest"
