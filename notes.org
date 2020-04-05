@@ -703,24 +703,6 @@ individualment en la resta.
 
 Potser seria preferible activar-la sempre i desactivar-la cas per cas.
 
-** PAUS revisar color del cursor insert/overwrite                       :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-19 dj 18:20]
-   :END:
-
-   - State "PAUS"       from "TODO"       [2020-03-26 dj 09:11] \\
-     S'afegeix una funció a =post-command-hook=.
-
-     Es deixa en pausa mentre es comprova si afecta negativament al
-     rendiment.
-
-Al canviar de finestra el color del cursor es manté però el mode
-insert/overwrite pot canviar.
-
-Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
-mateixa finestra, o al canviar de finestra (dins el mateix o un altre
-frame) i afegir una funció que comprovi el mode i ajusti el color.
-
 ** TODO Configurar la posició de les finestres                  :enhancement:
 
 Exemples de com restringir on s'obren les finestres:
@@ -798,20 +780,6 @@ Concretament, la segona respota:
         (ansi-color-apply-on-region compilation-filter-start (point-max))))
     (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 #+end_src
-
-** TODO Revisar < en org-mode                                           :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-31 dt 20:51]
-   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
-   :END:
-
-Al treballar en les notes sobre typescript al escriure =?<= també
-escriu =?>=.
-
-Crec que ha carregat la configuració correcta però sembla que no s'ha
-activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
-
-Revisar que passa.
 
 ** TODO Facilitar l'accés a un REPL                                    :idea:
    :PROPERTIES:
@@ -1814,3 +1782,40 @@ té el problema de =hl-line=.
 
 El comportament sembla diferent entre emacs 27.0.90 (més o menys OK) i
 26.3 (no OK).
+** DONE revisar color del cursor insert/overwrite                       :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-19 dj 18:20]
+   :END:
+
+   - State "DONE"       from "PAUS"       [2020-04-05 dg 20:08] \\
+     Després d'una setmana d'us no he detectat cap problema de rendiment.
+
+   - State "PAUS"       from "TODO"       [2020-03-26 dj 09:11] \\
+     S'afegeix una funció a =post-command-hook=.
+
+     Es deixa en pausa mentre es comprova si afecta negativament al
+     rendiment.
+
+Al canviar de finestra el color del cursor es manté però el mode
+insert/overwrite pot canviar.
+
+Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
+mateixa finestra, o al canviar de finestra (dins el mateix o un altre
+frame) i afegir una funció que comprovi el mode i ajusti el color.
+** CANC Revisar < en org-mode                                           :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-31 dt 20:51]
+   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-04-05 dg 20:15] \\
+     No puc reproduir-ho. Probablement la instància d'emacs en la que
+     treballava tenia carregada la configuració vella.
+
+Al treballar en les notes sobre typescript al escriure =?<= també
+escriu =?>=.
+
+Crec que ha carregat la configuració correcta però sembla que no s'ha
+activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
+
+Revisar que passa.
