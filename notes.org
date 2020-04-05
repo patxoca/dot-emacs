@@ -977,7 +977,7 @@ També falla al moure un ítem d'una llista, només mou la primera línia:
    :END:
 
    - State "CANC"       from "TODO"       [2018-03-31 ds 22:43] \\
-     En les proves en relació a [[*comparar temps de c%C3%A0rrega][comparar temps de càrrega]] he observat que:
+     En les proves en relació a [[id:58adbee8-7425-4d2e-acab-e24ecbca4a6b][comparar temps de càrrega]] he observat que:
 
      - compilar durant l'arranc, quan no tots els paquets estan
        disponibles, és una font assegurada de problemes.
@@ -991,6 +991,9 @@ També falla al moure un ítem d'una llista, només mou la primera línia:
 =org-babel-load-file=]] permet compilar l'arxiu generat abans de
 carregar-lo.
 ** DONE [#C] comparar temps de càrrega                                 :task:
+   :PROPERTIES:
+   :ID:       58adbee8-7425-4d2e-acab-e24ecbca4a6b
+   :END:
 
    - State "DONE"       from "TODO"       [2018-04-01 dg 00:55] \\
      emacs original 2.3s, use-package 0.9s
@@ -1013,7 +1016,7 @@ documentació de la instal·lació.
 ** DONE =rainbow-mode=                                                  :bug:
    :PROPERTIES:
    :CREATED: [2018-04-01 dg 00:49]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :REFERER: [[id:58adbee8-7425-4d2e-acab-e24ecbca4a6b][comparar temps de càrrega]]
    :END:
 
    - State "DONE"       from "TODO"       [2018-04-01 dg 02:43] \\
@@ -1223,7 +1226,7 @@ certs buffers (una llista configurable, una expressió regular ...).
 ** DONE Ajustar face de =ace-jump-mode=                                 :bug:
    :PROPERTIES:
    :CREATED: [2018-03-31 ds 22:07]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :REFERER: [[id:58adbee8-7425-4d2e-acab-e24ecbca4a6b][comparar temps de càrrega]]
    :END:
 
    - State "DONE"       from "TODO"       [2018-04-01 dg 18:11] \\
@@ -1470,7 +1473,7 @@ Probablement no tingui relació però ara no utilitzo =projectile=.
 ** DONE revisar =diminish=                                      :enhancement:
    :PROPERTIES:
    :CREATED: [2018-03-31 ds 22:13]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :REFERER: [[id:58adbee8-7425-4d2e-acab-e24ecbca4a6b][comparar temps de càrrega]]
    :END:
 
    - State "DONE"       from "TODO"       [2018-04-08 dg 22:04] \\
@@ -1491,7 +1494,7 @@ corresponents =use-package=.
 ** DONE gestionar paquets absents durant la instal·lació                :bug:
    :PROPERTIES:
    :CREATED: [2018-04-01 dg 00:48]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*comparar%20temps%20de%20c%C3%A0rrega][comparar temps de càrrega]]
+   :REFERER: [[id:58adbee8-7425-4d2e-acab-e24ecbca4a6b][comparar temps de càrrega]]
    :END:
 
    - State "DONE"       from "TODO"       [2018-08-18 ds 20:09] \\
