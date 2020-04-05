@@ -2,8 +2,12 @@
 #+AUTHOR: Alexis Roda
 #+EMAIL: alexis.roda.villalonga@gmail.com
 
+#+LANGUAGE: ca
+
 #+TODO: TODO(@) PAUS(@) DONE(@)
 #+TODO: | CANC(c@)
+
+#+LATEX_CLASS: informe
 
 
 * Bugs, molèsties, millores etc.
