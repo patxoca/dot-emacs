@@ -774,6 +774,12 @@ En resum:
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Hook][Hook]]
    :END:
 
+   - State "TODO"       from "TODO"       [2020-04-04 ds 20:27] \\
+     Al copilar un document amb sphinx detecto que el buffer de compilació
+     creat no és /read only/.
+
+     No reconeix la tecla =g= (que podria recompilar).
+
 En la configuració he definit varies comandes de compilació (per
 sphinx i typscript que recordi) per lidiar amb els codis ANSI (crec
 que era l'únic motiu).
@@ -792,6 +798,71 @@ Concretament, la segona respota:
         (ansi-color-apply-on-region compilation-filter-start (point-max))))
     (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 #+end_src
+
+** TODO Revisar < en org-mode                                           :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-31 dt 20:51]
+   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
+   :END:
+
+Al treballar en les notes sobre typescript al escriure =?<= també
+escriu =?>=.
+
+Crec que ha carregat la configuració correcta però sembla que no s'ha
+activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
+
+Revisar que passa.
+
+** TODO Facilitar l'accés a un REPL                                    :idea:
+   :PROPERTIES:
+   :CREATED: [2020-04-02 dj 13:33]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*revisar procés d'instal·lació][revisar procés d'instal·lació]]
+   :END:
+
+Actualment =C-z= obre una terminal. Estaria bé poder obrir un REPL en
+funció del mode de buffer actual:
+
+- js: node
+- emacs-list: ielm
+- python: ipython
+- django: python manage.py shell
+
+etc.
+
+Alguns modes ja ofereixen la funcionalitat però mai he estat capaç de
+recordar les tecles. Estandaritzar-ho en =C-z= em sembla que
+funcionaria.
+
+Addicionalment =C-M-z= o =C-u C-z= podrien continuar obrint un shell.
+
+** TODO Error amb =C-c j t=                                             :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-03 dv 10:48]
+   :REFERER: [[file:~/prog/hera/impl/src/bt2_infiprac_core/bt2_infiprac_core/templates/bt2_infiprac_core/email_notificacio_gestor_controls_reclamats.html::{% extends "hera_skin/email_base_extracurri.html" %}]]
+   :END:
+
+En el referer, quan intento saltar a la plantilla base el minibuffer
+mostra el missatge =Point must be over an string=.
+
+No relacionat, quan el cursor estàva sobre la "p" de =point must be
+...= he apretat =M-c= per /capitalitzar-ho/ però ho converteix en
+=MissatgePoint= no en ~missatge =Point~.
+
+** TODO Error amb =embrace-comander= (=C--=)                            :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-04 ds 12:24]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/docs/source/conf.py::"sphinx.ext.autodoc",]]
+   :END:
+
+Al intentar canviar una cometa simple per una doble en la llista
+d'extensions ha agafat com comenta inicia una que havia en un
+comentari anterior.
+
+Al fer proves posteriors, si intento canviar la comenta doble per
+simple es torna boig amb la selecció.
+
+Potser és problema d'aquesta arxiu. Seguir investigant.
+
 
 * Paquets extra
 
