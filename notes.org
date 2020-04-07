@@ -832,6 +832,36 @@ simple es torna boig amb la selecció.
 Potser és problema d'aquesta arxiu. Seguir investigant.
 
 
+** PAUS Revisar < en org-mode                                           :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-31 dt 20:51]
+   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
+   :END:
+
+   - State "PAUS"       from "PAUS"       [2020-04-07 dt 20:37] \\
+     S'afegeix un advice al final de =org-export-dispatch= per revertir el
+     canvi. Resol el problema. Es deixa en pausa per si es detecten més
+     casos.
+
+   - State "PAUS"       from "CANC"       [2020-04-06 dl 18:32] \\
+     El problema s'ha reproduit. En aquest cas estic segur de que
+     s'havia carregat la configuració actualitzada. Ha funcionat
+     correcament, he afegit blocs de codi typescript i de repent ha
+     passat.
+
+     El problema ha aparegut quan he exportat a PDF =C-c C-e l p=.
+
+   - State "CANC"       from "TODO"       [2020-04-05 dg 20:15] \\
+     No puc reproduir-ho. Probablement la instància d'emacs en la que
+     treballava tenia carregada la configuració vella.
+
+Al treballar en les notes sobre typescript al escriure =?<= també
+escriu =?>=.
+
+Crec que ha carregat la configuració correcta però sembla que no s'ha
+activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
+
+Revisar que passa.
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1802,20 +1832,3 @@ insert/overwrite pot canviar.
 Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
-** CANC Revisar < en org-mode                                           :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-31 dt 20:51]
-   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
-   :END:
-
-   - State "CANC"       from "TODO"       [2020-04-05 dg 20:15] \\
-     No puc reproduir-ho. Probablement la instància d'emacs en la que
-     treballava tenia carregada la configuració vella.
-
-Al treballar en les notes sobre typescript al escriure =?<= també
-escriu =?>=.
-
-Crec que ha carregat la configuració correcta però sembla que no s'ha
-activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
-
-Revisar que passa.

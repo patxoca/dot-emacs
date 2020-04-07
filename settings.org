@@ -2534,6 +2534,17 @@ defecte.
     (modify-syntax-entry ?> "@" org-mode-syntax-table))
 #+end_src
 
+La comanda =org-export-dispatch= (=C-c C-e=) reseteja la taula de
+sintaxis (o algo semblant) i =<= recupera el comportament original.
+Afegeixo un /advice/ al final de la comanda per revertir el canvi.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/advice-org-export-dispatch (&optional arg)
+    (my/org-reset-<-syntax))
+
+  (advice-add 'org-export-dispatch :after #'my/advice-org-export-dispatch)
+#+end_src
+
 **** =org-id=
 
 Al emmagatzemar l'enllaç a una secció amb =C-c l= s'utilitza el títol
