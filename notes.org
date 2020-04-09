@@ -862,6 +862,33 @@ Crec que ha carregat la configuració correcta però sembla que no s'ha
 activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
 
 Revisar que passa.
+
+** TODO Revisar =<= en TypeScript                                 :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-04-09 dj 20:10]
+   :REFERER: [[file:~/prog/aprendre/typescript/exercicis/basicTypesLab/diceRolling.ts::for(let i = 0; i <)]]
+   :END:
+
+Al configurar =typescript-mode= vaig definir al sintaxi de =?<= com
+parèntesi de forma que s'insereix un parell =<>=. Ho vaig fer pensant
+en coses com =Array<number>= però no vaig tindre en compte l'us
+natural com operador de comparació.
+
+Acostumo a separar els operadors dels operands amb un espai, açò
+permetria decidir el comportament de =<=:
+
+- si el caràcters de l'esquerra de =<= és un espai considerar-lo un
+  operador i inserir =<=.
+
+- en altre cas inserir =<>=.
+
+Cadria revertir el canvi en la taula de sintaxi (crec que és el que
+vaig fer), definir una comanda i vincular-la a la tecla =<=.
+
+El que no m'agrada és que probablement es perdrà la prestació
+d'esborrar automàticament el =>= al esborrar el =<=.
+
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
