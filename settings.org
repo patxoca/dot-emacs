@@ -339,6 +339,7 @@ constant =arv/instance-name=.
         '(("gnu"          . "https://elpa.gnu.org/packages/")
           ("melpa stable" . "https://melpa-stable.milkbox.net/packages/")
           ("elpy"         . "https://jorgenschaefer.github.io/packages/")
+          ("casa"         . "http://melpa.home.lan/packages/")
           ;; ("melpa"     . "https://melpa.org/packages/")
           ;; ("org"       . "https://orgmode.org/elpa/")
           ))
