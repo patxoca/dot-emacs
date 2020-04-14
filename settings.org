@@ -1903,6 +1903,59 @@ Tot i que =use-package= permet definir les tecles emprant la directiva
 secció. Un avantatge de =:bind= és que defineix automàticament
 =autoloads= pels simbols que no son funcions (segons =fboundp=).
 
+*** ensamblador Z80
+
+Recull de paquets i configuracions relacionades amb la programació en
+ensamblador del Z80 i [[https://github.com/lronaldo/cpctelera][cpctelera]].
+
+**** =sdz80-mode=
+
+Amplia la funcionalitat de =asm-mode= afegint elements relacionats amb
+el z80.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package sdz80-mode
+    :ensure t)
+#+end_src
+
+**** =z80count=
+
+Comptabilitza els cicles requererits per cada instrucció. Requereix la
+comanda externa [[https://github.com/reidrac/z80count][=z80count=]].
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package z80count
+    :ensure t)
+#+end_src
+
+**** Funcions auxiliars
+
+***** compilar
+
+La comanda =compile= no mostra correctament els codis ANSI generants
+durant la compilació. Aquesta comanda supleix la mancança.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/cpctelera-make ()
+    "Intenta executar make"
+    (interactive)
+    (let ((project-root (locate-dominating-file default-directory "Makefile")))
+      (if project-root
+          (compilation-start (format "cd %s ; make" project-root)
+                             t
+                             (lambda (mode) "*cpctlera*"))
+        (user-error "No es troba 'Makefile'"))))
+#+end_src
+
+**** Combinacions de tecles
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "asm-mode"
+    (my/bind-keys
+     asm-mode-map
+     '(("<f9>" my/cpctelera-make))))
+#+end_src
+
 *** C
 **** gtk-doc
 
