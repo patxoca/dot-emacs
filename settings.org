@@ -1915,7 +1915,20 @@ el z80.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package sdz80-mode
-    :ensure t)
+    :ensure t
+    :commands sdz80-mode)
+#+end_src
+
+L'activo per tots els arxius =.s=.
+
+He provat de configurar-ho via =.dir_locals.el= associant a =asm-mode=
+l'execució de =sdz80-mode= però sembla que entra en un bucle infinit
+(=sdz80-mode= es deriva de =asm-mode=). Pel moment no tinc previst
+programar en altres ensambladors apart del Z80 així que pel moment no
+és un problema.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'auto-mode-alist '("\\.s\\'" . sdz80-mode))
 #+end_src
 
 **** =z80count=
