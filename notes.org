@@ -888,6 +888,29 @@ vaig fer), definir una comanda i vincular-la a la tecla =<=.
 El que no m'agrada és que probablement es perdrà la prestació
 d'esborrar automàticament el =>= al esborrar el =<=.
 
+** TODO Error amb =M-q= en comentaris en =asm-mode=                     :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-15 dc 14:35]
+   :REFERER: [[file:~/prog/z80/exercicis/project/src/main.s::prova_fill_screen3:]]
+   :END:
+
+=fill-paragraph= (=M-q=) fa coses rares quan estic en un comentari en
+=asm-mode=.
+
+Per exemple:
+
+#+begin_src asm
+      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la (*)pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
+#+end_src
+
+Amb el punt on està el =(*)= ho converteix en:
+
+#+begin_src asm
+      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la
+      pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
+#+end_src
+
+Té altres rareses.
 
 * Paquets extra
 
