@@ -561,6 +561,45 @@ colors que ressembla un semàfor per indicar tres nivells de
       :group 'hi-lock-faces))
 #+end_src
 
+*** doom-one
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/customize-theme-doom-one ()
+    ;; Els colors de =display-line-numbers= destaquen massa i em distreuen
+    ;; del text que estic editant. Aquesta combinació utilitza un color més
+    ;; fosc i ressalta la línia actual.
+
+    (set-face-attribute 'line-number nil
+                        :foreground "grey30"
+                        :background "#202020")
+    (set-face-attribute 'line-number-current-line nil
+                        :foreground "#b2731d"
+                        :background "grey20")
+
+    (with-eval-after-load "ace-window"
+      ;; en ace-window fa que el selector destaqui.
+
+      (when (display-graphic-p)
+        (set-face-attribute 'aw-leading-char-face nil
+                            :height 4.0
+                            :weight 'bold)))
+
+    (with-eval-after-load "magit"
+      (set-face-attribute 'magit-diff-added nil
+                          :foreground "#98be65"
+                          :background "#21242b")
+      ;; (set-face-attribute 'magit-diff-added-highlight nil
+      ;;                     :foreground "#98be65"
+      ;;                     :background "#21242b")
+      (set-face-attribute 'magit-diff-removed nil
+                          :foreground "#ff6c6b"
+                          :background "#23272e")
+      ;; (set-face-attribute 'magit-diff-removed-highlight nil
+      ;;                     :foreground "#ff6c6b"
+      ;;                     :background "#23272e"))
+      ))
+#+end_src
+
 *** wombat
 
 Personalització del tema /wombat/. El nom és circumstancial, és
@@ -822,10 +861,13 @@ Personalització de =modus-operandi=.
   ;; (load-theme 'wombat)
   ;; (my/customize-theme-wombat)
 
-  (use-package modus-operandi-theme
-    :ensure t
-    :config
-    (my/customize-theme-modus-operandi))
+  ;; (use-package modus-operandi-theme
+  ;;   :ensure t
+  ;;   :config
+  ;;   (my/customize-theme-modus-operandi))
+
+  (load-theme 'doom-one)
+  (my/customize-theme-doom-one)
 
   (when (display-graphic-p)
     ; x-display-pixel-height necessita un entorn graphic
