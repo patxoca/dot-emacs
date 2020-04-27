@@ -1979,6 +1979,15 @@ comanda externa [[https://github.com/reidrac/z80count][=z80count=]].
     :ensure t)
 #+end_src
 
+**** Associació d'arxius
+
+Els arxius =.lst= generats per =asz80= s'obren per defecte en
+=conf-mode=. Prefereixo utilitzar =fundamental-mode=.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'auto-mode-alist '("\\.lst\\'" . fundamental-mode))
+#+end_src
+
 **** Funcions auxiliars
 
 ***** compilar
