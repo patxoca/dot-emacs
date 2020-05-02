@@ -719,8 +719,6 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
                           :box nil))
 
     (with-eval-after-load "flymake"
-      :commands flymake-mode
-      :config
       (set-face-attribute 'flymake-error nil
                           :underline nil
                           :background "Firebrick4"))
@@ -829,8 +827,6 @@ Personalització de =modus-operandi=.
                             :foreground "black")))
 
     (with-eval-after-load "flymake"
-      :commands flymake-mode
-      :config
       (set-face-attribute 'flymake-warning nil
                           :underline nil
                           :foreground "white"
