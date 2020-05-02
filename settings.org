@@ -574,7 +574,7 @@ colors que ressembla un semàfor per indicar tres nivells de
                         :background "#202020")
     (set-face-attribute 'line-number-current-line nil
                         :foreground "#b2731d"
-                        :background "grey20")
+                        :background "#21242b")
 
     (with-eval-after-load "ace-window"
       ;; en ace-window fa que el selector destaqui.
@@ -583,6 +583,16 @@ colors que ressembla un semàfor per indicar tres nivells de
         (set-face-attribute 'aw-leading-char-face nil
                             :height 4.0
                             :weight 'bold)))
+
+    (with-eval-after-load "flymake"
+      (set-face-attribute 'flymake-warning nil
+                          :underline nil
+                          :foreground "white"
+                          :background "#d56d00")
+      (set-face-attribute 'flymake-error nil
+                          :underline nil
+                          :foreground "white"
+                          :background "#a80000"))
 
     (with-eval-after-load "magit"
       (set-face-attribute 'magit-diff-added nil
