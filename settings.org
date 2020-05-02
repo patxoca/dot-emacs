@@ -929,6 +929,20 @@ https://github.com/abo-abo/ace-window
     (customize-set-value 'aw-scope 'frame))
 #+end_src
 
+*** =apropos=                                                       :builtin:
+
+Mai l'he incorporat al meu workflow però sembla una bona forma de
+trobar informació.
+
+Per eficiència =apropos= únicament busca en un subconjunt de les
+possibilitats. L'opció [[help:apropos-do-all][apropos-do-all]] controla l'espai de cerca i pot
+ralentitzar-la. Si esdevé un problema caldrà restaurar el valor per
+defecte (=nil=) i acostumar-se a utilitzar la comanda prefix (=C-u=).
+
+#+begin_src emacs-lisp :tangle yes
+  (customize-set-value 'apropos-do-all t)
+#+end_src
+
 *** =avy=
 
 https://github.com/abo-abo/avy
