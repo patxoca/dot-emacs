@@ -565,6 +565,12 @@ colors que ressembla un semàfor per indicar tres nivells de
 
 #+begin_src emacs-lisp :tangle yes
   (defun my/customize-theme-doom-one ()
+    ;; El color dels comentaris contrasta poc amb el color de fons i
+    ;; dificulta la lectura.
+
+    (set-face-attribute 'font-lock-comment-face nil
+                        :foreground "#83898d")
+
     ;; Els colors de =display-line-numbers= destaquen massa i em distreuen
     ;; del text que estic editant. Aquesta combinació utilitza un color més
     ;; fosc i ressalta la línia actual.
