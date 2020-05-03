@@ -1541,6 +1541,26 @@ hagi de canviar/millorar en el futur així que es clona:
     :commands magit-status)
 #+end_src
 
+*** =minions=
+
+https://github.com/tarsius/minions
+
+Agrupa tots els /indicadors/ dels /minor-modes/ en un menú. La
+/modeline/ queda molt més neta.
+
+No m'agrada que no es puga deixar indicadors en la /modeline/, tots
+van al menú. Pel meu us afecta a =flymake= que mostra el nombre
+d'errors en la modeline.
+
+Llevat d'aquest detall m'agrada que no requreixi configuració, al
+contrari que =diminish=. Li donaré una oportunitat.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package minions
+    :ensure t
+    :config (minions-mode 1))
+#+end_src
+
 *** =modeline=                                                      :builtin:
 
 #+begin_src emacs-lisp :tangle yes

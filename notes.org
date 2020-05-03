@@ -1051,13 +1051,6 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   No és gaire descriptiu, imagino que és un mode que permet editar
   components Vue que messclen HTML i js en un únic arxiu.
 
-- [[https://github.com/tarsius/minions][minions]]: This package implements a menu that lists enabled
-  minor-modes, as well as commonly but not currently enabled
-  minor-modes.
-
-  Redueix la sobrecàrrega de la /modeline/ agrupant els /minor modes/
-  en un menú.
-
 - [[https://github.com/tarsius/moody][moody]]: This package provides utilities for displaying elements of
   the mode line as tabs and ribbons. It also provides replacements for
   a few built-in elements.
