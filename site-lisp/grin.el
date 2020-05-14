@@ -71,7 +71,7 @@
 (defun grin--run (regex directory &optional args)
   "Run the grin command on DIRECTORY looking for REGEX."
   (interactive (list
-                (ido-completing-read "Regex: " nil)
+                (read-string "Regex: ")
                 (ido-read-directory-name "Directory: " nil nil t)
                 (transient-args 'arv/grin)))
   (let ((cmd (concat grin-cmd " --emacs " (mapconcat #'identity args " ") " " regex))
