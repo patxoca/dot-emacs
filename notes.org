@@ -912,6 +912,98 @@ Amb el punt on està el =(*)= ho converteix en:
 
 Té altres rareses.
 
+** TODO hydra per canviar la mida de les finestres                     :idea:
+   :PROPERTIES:
+   :CREATED: [2020-05-05 dt 09:48]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
+   :END:
+
+Mirar si aconssegueixo acostumar-me a utilitzar el teclat per canviar
+la mida de les finestres.
+
+Us esporàdic, probablement mai aconsseguiré recordar les tecles. Una
+hydra podria ser útil.
+
+** TODO /boilerplate/ al crear nous arxius
+   :PROPERTIES:
+   :CREATED: [2020-05-12 dc 13:37]
+   :END:
+
+La solució casolana actual no funciona amb =org-mode= (de vegades
+funciona, funcionava?).
+
+En aquest article Howard Abrams explora el problema.
+
+http://www.howardism.org/Technical/Emacs/templates-tutorial.html
+
+** TODO Revisa faces de =svn-diff=                                :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-12 dt 17:32]
+   :REFERER:
+   :END:
+
+Tinc al sensació que abans el separador dels hunks al visualitzar els
+diff en svn destacava més.
+
+Dificulta veure on comencem i acaben els hunks.
+
+Per consistència, mirar de replicar l'esquema de colors que utilitza
+magit.
+
+2020-05-13: avui surten en foreground blau i backgroun estàndard.
+Algun altre paquet (màgit?) ho desconfigura?
+
+** TODO Resaltar /heading/ en =org-mode=                          :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-13 dc 21:59]
+   :REFERER: [[file:~/prog/hera/impl/doc_dev/TODO.org::*revisar etiquetes TODO del codi][revisar etiquetes TODO del codi]]
+   :END:
+
+Abans de canviar al tema =modus-operandi= les capçaleres en =org-mode=
+utilitzaven mides diferents.
+
+Quan està col·lapsat em resulta difícil distingir els nivells.
+
+En algun lloc he vist que es canvien els asteriscs per vinyetes,
+diferents en funció del nivell.
+
+** TODO Coniguració de =C-w=                                      :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-14 dj 11:36]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
+   :END:
+
+De vegades, per proximitat, teclejo =C-w= enlloc =C-e= i esborro un
+bloc.
+
+Mirar si és possible que =C-w= retalli únicament si la selecció està
+activa.
+
+** TODO centrar buffer després de =imenu=                         :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-17 dg 23:24]
+   :REFERER: [[file:~/prog/sdl/worley-noise/main.cpp::void WorleyApp::handle_events() {]]
+   :END:
+
+En =C++= estic tirant bastant de =imenu= per navegar entre els mètodes
+de les classes. És pràctic. El que no m'agrada és que el punt on salta
+sempre queda en la part de baix del buffer i he de prèmer =C-l= per
+centrar-lo.
+
+Mirar si amb un advice es pot centrar (=recenter-top-bottom=).
+
+El mateix seria útil per =goto-line=. Si la línia cau dins el /rang/
+visible actualment potser millor no centrar.
+
+** TODO Revisar highlight dels breakpoints en python              :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-21 dj 10:40]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_django/hera_django/forms/widgets.py::import pdb]]
+   :END:
+
+El color utilitzat pels breakpoint (=pdb.set_trace()=) dificulta
+llegir el text.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1031,6 +1123,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   estructurada.
 
   Anotat per fer un seguiment de la seva evolució.
+
+  Actualització 20200609, nom sembla gaire actiu.
+
+  Un [[https://ubolonton.github.io/emacs-tree-sitter/installation/][wrapper alternatiu]]. Requereix suport de càrrega dinàmica de
+  mòduls i aparentment no ho vaig compilar. En l'anunci postejat en la
+  llista d'Emacs diu /Advanced highlighting for Rust and Python/ que
+  és el que el podria fer atractiu.
 
 - [[https://savannah.gnu.org/projects/oo-browser/][oo-browser]]: The OO-Browser is a multi-windowed, interactive
   object-oriented class browser similar in use to the well-known
