@@ -337,7 +337,7 @@ constant =arv/instance-name=.
 
   (setq package-archives
         '(("gnu"          . "https://elpa.gnu.org/packages/")
-          ("melpa stable" . "https://melpa-stable.milkbox.net/packages/")
+          ("melpa stable" . "https://stable.melpa.org/packages/")
           ("elpy"         . "https://jorgenschaefer.github.io/packages/")
           ("casa"         . "https://a13x15.noip.me/melpa/packages/")
           ;; ("melpa"     . "https://melpa.org/packages/")
