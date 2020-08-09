@@ -878,8 +878,11 @@ Personalització de =modus-operandi=.
   ;;   :config
   ;;   (my/customize-theme-modus-operandi))
 
-  (load-theme 'doom-one)
-  (my/customize-theme-doom-one)
+  (use-package doom-themes
+    :ensure t
+    :config
+    (load-theme 'doom-one)
+    (my/customize-theme-doom-one))
 
   (when (display-graphic-p)
     ; x-display-pixel-height necessita un entorn graphic
