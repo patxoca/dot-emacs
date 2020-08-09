@@ -1154,11 +1154,6 @@ creixement però no sembla que sigui possible configurar-ho.
 
   (setq display-line-numbers-grow-only t
         display-line-numbers-width-start 3)
-
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (when (version<= "26.0" emacs-version)
-                (my/enable-line-numbers-mode))))
 #+end_src
 
 *** =ediff=                                                         :builtin:
