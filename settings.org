@@ -1114,12 +1114,35 @@ fitxer. Personalment prefereixo evitar la proliferació de buffers.
     "Visita el directori pare, en el mateix buffer."
     (interactive)
     (find-alternate-file ".."))
+#+end_src
 
+Permet crear un arxiu buid (quasi buid, conté un salt de línia) des de
+=dired=. L'alternativa actual és obrir amb =C-x C-f=, modificar,
+guardar i tancar un arxiu.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "dired"
+    (require 'f)
+
+    (defun my/dired-create-empty-file ()
+      "Crea un arxiu buid en un buffer dired."
+      (interactive)
+      (let* ((arxiu (read-string "File name: "))
+             (ruta (f-join (dired-current-directory) arxiu)))
+        (unless (file-exists-p ruta)
+          (shell-command  (format "touch '%s'" ruta) nil)
+          (revert-buffer)))))
+#+end_src
+
+Afegim les comandes al /keymap/.
+
+#+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "dired"
     (my/bind-keys dired-mode-map
                   '(("M-<up>" arv/dired-up-directory)
                     ("^" arv/dired-up-directory)
-                    ("C-m" dired-find-alternate-file))))
+                    ("C-m" dired-find-alternate-file)
+                    ("c" my/dired-create-empty-file))))
 #+end_src
 
 *** =display-line-numbers=
