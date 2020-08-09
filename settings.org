@@ -2070,6 +2070,16 @@ durant la compilació. Aquesta comanda supleix la mancança.
 #+end_src
 
 *** C
+
+Idees per mirar:
+
+- https://cestlaz.github.io/posts/using-emacs-32-cpp/
+
+- https://www.youtube.com/watch?v=5FQwQ0QWBTU
+
+- https://www.youtube.com/watch?v=GuEqRmCjy6E
+
+
 **** gtk-doc
 
 https://github.com/federicomenaquintero/gnome-emacs-utils
@@ -2103,6 +2113,9 @@ Configuració del c-mode.
                 (setq indent-tabs-mode nil)
                 (setq c-default-style "k&r")
                 (setq c-basic-offset 4)
+                ;; alineació dels arguments d'una funció
+                (c-set-offset 'arglist-intro '+)
+                (c-set-offset 'arglist-close nil)
                 ;; company-mode
                 (company-mode t))))
 #+end_src
