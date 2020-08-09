@@ -1242,6 +1242,10 @@ https://github.com/hrs/engine-mode
       "https://stackoverflow.com/search?q=%s"
       :keybinding "s")
 
+    (defengine sdl
+      "http://wiki.libsdl.org/%s"
+      :keybinding "S")
+
     (defengine wikipedia
       "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
       :keybinding "w")
