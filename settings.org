@@ -3483,15 +3483,9 @@ https://github.com/patxoca/django-el.git
 Biblioteca que implementa funcions que faciliten la navegació dins un
 projecte django.
 
-#+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/patxoca/django-el.git
-  ./scripts/compile_package django-el
-#+end_src
-
 #+begin_src emacs-lisp :tangle yes
   (use-package django-el
-    :ensure nil
-    :load-path "site-lisp/django-el"
+    :ensure t
     :init (setq django-el-prefix-key "C-c d")
     :commands (django-el-mode
                django-el-jump-to-javascript-controller
@@ -3509,16 +3503,9 @@ Aquest paquet substitueix a =python-django=, que ja no és mantingut.
 Pel seu funcionament requereix que django estigui executant-se i que
 tingui instal·lada l'aplicació =djira=.
 
-
-#+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/patxoca/djira-el.git
-  ./scripts/compile_package djira-el
-#+end_src
-
 #+begin_src emacs-lisp :tangle yes
-  (use-package djira
-    :ensure nil
-    :load-path "site-lisp/djira-el"
+  (use-package djira-el
+    :ensure t
     :commands (djira-buffer-belongs-in-app-p))
 #+end_src
 
