@@ -2059,34 +2059,6 @@ Els arxius =.lst= generats per =asz80= s'obren per defecte en
   (add-to-list 'auto-mode-alist '("\\.lst\\'" . fundamental-mode))
 #+end_src
 
-**** Funcions auxiliars
-
-***** compilar
-
-La comanda =compile= no mostra correctament els codis ANSI generants
-durant la compilació. Aquesta comanda supleix la mancança.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun my/cpctelera-make ()
-    "Intenta executar make"
-    (interactive)
-    (let ((project-root (locate-dominating-file default-directory "Makefile")))
-      (if project-root
-          (compilation-start (format "cd %s ; make" project-root)
-                             t
-                             (lambda (mode) "*cpctlera*"))
-        (user-error "No es troba 'Makefile'"))))
-#+end_src
-
-**** Combinacions de tecles
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "asm-mode"
-    (my/bind-keys
-     asm-mode-map
-     '(("<f9>" my/cpctelera-make))))
-#+end_src
-
 *** C
 
 Idees per mirar:
@@ -4201,6 +4173,35 @@ Visita aquest arxiu de configuració:
     (find-file arv/emacs-conf-dir))
 #+end_src
 
+*** =my/compile-with-comint-enabled=
+
+cpctelera inclou color en la sortida de les comandes, específicament
+en la compilació. La comanda =compile= per defecte mostra els codis
+ANSI i la sortida resulta difícil de llegir. Es pot invocar amb =C-u=
+per activar =comint-mode= però mai hi penso i requereix dos tecles.
+Addicionalment cal escriure/confirmar la comanda de compilació.
+
+Aquesta funció és la contraria de =compile=, per defecte activa
+=comint-mode= i amb =C-u= el desactiva. No pregunta per la comanda de
+compilació, utilitza el valor de la variable =compile-command= (cal
+assignar-li un valor en la configuració d'Emacs o en un arxiu
+=.dir-locals.el=).
+
+Té dos detalls que caldria polir:
+
+- el buffer s'obre en mode escriptura
+
+- no reconneix la comanda =q= per tancar el buffer (insereix una =q=
+  o, si es canvia a =read-only-mode=, dóna un error /buffer de sols
+  lectura/).
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/compile-with-comint-enabled (&optional no-comint)
+    ""
+    (interactive "P")
+    (compile (eval compile-command) (not no-comint)))
+#+end_src
+
 *** =my/display-line-numbers-mode=
 
 Activa/desactiva la numeració de les línies. Si està disponible
@@ -5314,7 +5315,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-<f1>") (lambda () (interactive) (info "emacs")))
   (global-set-key (kbd "<f7>") 'next-error)
   (global-set-key (kbd "<f8>") 'previous-error)
-  (global-set-key (kbd "<f9>") 'compile)
+  (global-set-key (kbd "<f9>") #'my/compile-with-comint-enabled)
+  (global-set-key (kbd "C-<f9>") 'compile)
 
   (global-set-key (kbd "s-g") 'arv/goto-line)
   ;;; es un incordio tener que teclear yes para confirmar
