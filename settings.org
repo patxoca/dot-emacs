@@ -1886,6 +1886,26 @@ l'accés a les comandes utilitzades recentment i a les més freqüents.
         (swiper))))
 #+end_src
 
+*** =tab-mode=                                                      :builtin:
+
+Suport per múltiples pestanyes on cada pestanya té el seu propi layout
+de finestres.
+
+#+begin_src emacs-lisp :tangle yes
+  (when (version<= "27" emacs-version)
+    (use-package tab-bar
+      :config
+      ;; TODO: aquesta configuració amaga la barra de pestanyes. Per
+      ;; tindre una referència estaria be mostrar el nom de la pestanya
+      ;; activa en la modeline.
+      ;; (customize-set-value 'tab-bar-show nil)
+
+      ;; mentre m'acostumo al funcionament es mostren les pestanyes
+      (customize-set-value 'tab-bar-show t)
+      (customize-set-variable 'tab-bar-new-tab-choice #'ido-switch-buffer)
+      (tab-bar-history-mode)))
+#+end_src
+
 *** =term=                                                          :builtin:
 
 Desactiva =global-hl-line-mode= en la terminal.
@@ -5291,6 +5311,13 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "C-o") #'arv/open-line-before-and-indent)
   (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
+
+  ;; tab-bar
+  (when (fboundp 'tab-bar-mode)
+    (global-set-key (kbd "C-x t h <left>") #'tab-bar-history-back)
+    (global-set-key (kbd "C-x t h p") #'tab-bar-history-back)
+    (global-set-key (kbd "C-x t h <right>") #'tab-bar-history-forward)
+    (global-set-key (kbd "C-x t h n") #'tab-bar-history-forward))
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
