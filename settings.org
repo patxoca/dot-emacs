@@ -885,7 +885,7 @@ Personalització de =modus-operandi=.
     (my/customize-theme-doom-one))
 
   (when (display-graphic-p)
-    ; x-display-pixel-height necessita un entorn graphic
+    ;; x-display-pixel-height necessita un entorn graphic
     (set-face-attribute 'default nil
                         :family "JetBrains Mono"
                         :height (if (> (x-display-pixel-height) 1080) 100 88)))
