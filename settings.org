@@ -4110,6 +4110,20 @@ https://coderwall.com/p/2vnxaw/beautify-json-in-emacs
        (current-buffer) t)))
 #+end_src
 
+*** =my/kill-region=
+
+De vegades premo =C-w= per error i esborro la regió quan no està
+marcada, resulta molest. Aquesta comanda executa =kill-region=
+únicament si la regió està activa.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/kill-region (beg end &optional region)
+    "kill-region només si la regió està activa."
+    (interactive (list (mark) (point) 'region))
+    (when (region-active-p)
+      (kill-region beg end region)))
+#+end_src
+
 *** =arv/kill-ring-save-word-at-point=
 
 #+begin_src emacs-lisp :tangle yes
@@ -5311,6 +5325,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "C-o") #'arv/open-line-before-and-indent)
   (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
+
+  (global-set-key (kbd "C-w") #'my/kill-region)
 
   ;; tab-bar
   (when (fboundp 'tab-bar-mode)
