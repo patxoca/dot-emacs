@@ -581,6 +581,12 @@ colors que ressembla un semàfor per indicar tres nivells de
     (set-face-attribute 'line-number-current-line nil
                         :foreground "#b2731d"
                         :background "#21242b")
+    (set-face-attribute 'mode-line nil
+                        :foreground "#f4f4f4"
+                        :background "#68217a")
+    (set-face-attribute 'mode-line-inactive nil
+                        :foreground "#f4f4f4"
+                        :background "#3d1347")
 
     (with-eval-after-load "ace-window"
       ;; en ace-window fa que el selector destaqui.
