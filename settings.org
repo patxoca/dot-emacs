@@ -3192,6 +3192,12 @@ Pel seu funcionament requereix algunes comandes externes:
                     ("C-<right>" nil)
                     ("C-c m d" elpy-doc)))
 
+    ;; Arxius de menys de 8K es transfereixen al backend via RPC, els
+    ;; majors via un arxiu temporal. En la documentació diu que enviar
+    ;; arxius "grans" per RPC pot ser lent però no defineix que és
+    ;; "gran". Espero que 8K no qualifiqui com gran.
+    (customize-set-value 'elpy-rpc-large-buffer-size 8192)
+
     (customize-set-value 'elpy-syntax-check-command "flake8")
 
     (customize-set-value 'elpy-modules
