@@ -606,6 +606,17 @@ colors que ressembla un semàfor per indicar tres nivells de
                           :foreground "white"
                           :background "#a80000"))
 
+    (with-eval-after-load "diff-hl"
+      (set-face-attribute 'diff-hl-change nil
+                          :foreground "blue3"
+                          :background "#333355")
+      (set-face-attribute 'diff-hl-delete nil
+                          :foreground "red3"
+                          :background "#553333")
+      (set-face-attribute 'diff-hl-insert nil
+                          :foreground "green4"
+                          :background "#335533"))
+
     (with-eval-after-load "magit"
       (set-face-attribute 'magit-diff-added nil
                           :foreground "#98be65"
