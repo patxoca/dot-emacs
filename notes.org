@@ -203,8 +203,11 @@ Integrar un interpret (nodejs?) en la configuració.
 
 - [[https://github.com/ananthakumaran/tide][TypeScript Interactive Development Environment for Emacs]]
 
-- [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][Setting up Emacs for JavaScript (part #1)]] i [[https://emacs.cafe/emacs/javascript/setup/2017/05/09/emacs-setup-javascript-2.html][Setting up Emacs for
-  JavaScript (part #2)]]
+- [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][Setting up Emacs for JavaScript (part #1)]] i [[https://emacs.cafe/emacs/javascript/setup/2017/05/09/emacs-setup-javascript-2.html][Setting up Emacs for JavaScript (part #2)]]
+
+- [[https://www.npmjs.com/package/tern][Tern]] is a stand-alone, editor-independent JavaScript analyzer that
+  can be used to improve the JavaScript integration of existing
+  editors.
 
 ** TODO Investigar /rope/                                              :task:
    :PROPERTIES:
