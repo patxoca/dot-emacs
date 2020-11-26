@@ -4278,6 +4278,19 @@ Activa/desactiva la numeració de les línies. Si està disponible
         (linum-mode 1))))
 #+end_src
 
+*** =my/xml-prettify-buffer=
+
+De vegades em cal formatejar un document XML que ve en una única
+línia. Aquesta funció formateja un buffer amb contingut XML (o HTML).
+
+#+begin_src emacs-lisp
+  (defun my/xml-prettify-buffer ()
+    "Formateja (pretty print) un buffer xml."
+    (interactive)
+    (save-mark-and-excursion
+      (sgml-pretty-print (point-min) (point-max))))
+#+end_src
+
 *** Comentari dins rectangle
 
 http://pragmaticemacs.com/emacs/comment-boxes/
