@@ -996,6 +996,24 @@ grans. Per aquest motiu ho restringeixo a salts dins el buffer actiu.
     (setq avy-all-windows nil))
 #+end_src
 
+*** =beacon=
+
+https://github.com/Malabarba/beacon
+
+Whenever the window scrolls a light will shine on top of your cursor
+so you know where it is.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package beacon
+    :ensure t
+    :config
+    (customize-set-value 'beacon-color
+                         (face-attribute 'cursor :background))
+    (customize-set-value 'beacon-size 60)
+    (customize-set-value 'beacon-blink-duration 0.5)
+    (beacon-mode 1))
+#+end_src
+
 *** =browse-url=                                                    :builtin:
 
 Integració d'emacs amb un navegador web extern.
