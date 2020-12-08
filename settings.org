@@ -1131,6 +1131,14 @@ Açò anirà en algun /hook/ o configuració global:
     (diff-hl-margin-mode))
 #+end_src
 
+Aquesta paquet defineix algunes comandes interessants:
+
+- =diff-hl-revert-hunk= (=C-x v n=)
+
+- =diff-hl-prev-hunk= (=C-x v [=)
+
+- =diff-hl-next-hunk= (=C-x v ]=)
+
 *** =diminish=
 
 #+begin_src emacs-lisp :tangle yes
