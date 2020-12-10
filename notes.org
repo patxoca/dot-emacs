@@ -1021,6 +1021,13 @@ perjudicar el temps de càrrega.
 La solució seria moure aquesta funcionaliat a un paquet extern i
 carregar-lo sota demanda.
 
+** TODO Revisar primer arranc de emacs amb la configuració              :bug:
+
+La clonar la configuració en /spacemacs@turing/ =use-package= m'ha
+donat dos error amb =dash= i =f= i no s'han instal·lat. Executant
+manualment (=C-x C-e=) =use-package= des de l'arxiu de configuració
+s'han instal·lat.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
