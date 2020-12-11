@@ -1028,6 +1028,13 @@ donat dos error amb =dash= i =f= i no s'han instal·lat. Executant
 manualment (=C-x C-e=) =use-package= des de l'arxiu de configuració
 s'han instal·lat.
 
+** TODO bug en =pyx/electric-colon=?                                    :bug:
+
+En =python-mode=, en un comentari, overwrite-mode activat, al escriure
+=:= l'insereix, no sobreescriu.
+
+Imagino que la culpa és de la implementació de =pyx/electric-colon=.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
