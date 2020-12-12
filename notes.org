@@ -170,16 +170,6 @@ possible). L'execució depèn d'elements definits en el document i no
 tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
 el bloc de codi en el context del document sembla bastant diferent.
 
-** TODO Revisar configuració backends de company                :enhancement:
-   :PROPERTIES:
-   :CREATED: [2018-03-30 dv 00:28]
-   :REFERER: [[file:settings.org::*=company=][=company=]]
-   :END:
-
-Revisar si ha hagut cap canvi en la configuració dels /backends/. No
-m'agrada activar-los globalment, seria millor activar els rellevants
-per cada mode en el corresponent /hook/.
-
 ** TODO Revisar estructura                                             :idea:
    :PROPERTIES:
    :CREATED: [2018-03-30 dv 03:37]
@@ -2018,3 +2008,15 @@ insert/overwrite pot canviar.
 Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
+** CANC Revisar configuració backends de company                :enhancement:
+   :PROPERTIES:
+   :CREATED: [2018-03-30 dv 00:28]
+   :REFERER: [[file:settings.org::*=company=][=company=]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-12 ds. 20:19] \\
+     He eliminat la definició de =company-backends= de la configuració i no
+     observo cap problema utilitzant el valor per defecte.
+Revisar si ha hagut cap canvi en la configuració dels /backends/. No
+m'agrada activar-los globalment, seria millor activar els rellevants
+per cada mode en el corresponent /hook/.
