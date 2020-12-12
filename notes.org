@@ -123,14 +123,6 @@ lents. La resta estan per baix de 0.1 segons.
 Mirar que és carrega durant l'arranc per veure si alguna cosa sobra
 etc.
 
-** TODO abreviatures en =abbrev=                                       :idea:
-
-Actualment les abreviatures es guarden en un arxiu. Per la forma en
-que les utilitzo (molt poc) probablement sigui preferible definir-les
-directament en la configuració.
-
-20180417: en [[file:Sacha.org::*Define%20more%20abbreviations][la configuració de Sacha Chua]] s'utilitza una taula /org/
-per definir les abreviatures.
 
 ** TODO normalitzar rutes de fitxers                            :enhancement:
 
@@ -2008,6 +2000,15 @@ insert/overwrite pot canviar.
 Caldria buscar un /hook/ que es dispari al canviar el buffer dins la
 mateixa finestra, o al canviar de finestra (dins el mateix o un altre
 frame) i afegir una funció que comprovi el mode i ajusti el color.
+** CANC abreviatures en =abbrev=                                       :idea:
+
+   - State "CANC"       from "TODO"       [2020-12-12 ds. 19:05]
+Actualment les abreviatures es guarden en un arxiu. Per la forma en
+que les utilitzo (molt poc) probablement sigui preferible definir-les
+directament en la configuració.
+
+20180417: en [[file:Sacha.org::* Define more abbreviations][la configuració de Sacha Chua]] s'utilitza una taula /org/
+per definir les abreviatures.
 ** CANC Revisar configuració backends de company                :enhancement:
    :PROPERTIES:
    :CREATED: [2018-03-30 dv 00:28]
