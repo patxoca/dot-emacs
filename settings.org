@@ -2243,7 +2243,8 @@ de directori.
 #+begin_src emacs-lisp :tangle yes
   (add-hook 'css-mode-hook
             (lambda ()
-              (rainbow-mode t)))
+              (rainbow-mode t)
+              (company-mode t)))
   (add-hook 'after-save-hook 'arv/sass-compile-on-save)
 #+end_src
 
