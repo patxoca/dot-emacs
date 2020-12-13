@@ -4,7 +4,7 @@
 
 #+LANGUAGE: ca
 
-#+TODO: TODO(@) PAUS(@) DONE(@)
+#+TODO: TODO(@) PAUS(@) WAIT(@) DONE(@)
 #+TODO: | CANC(c@)
 
 #+LATEX_CLASS: informe
@@ -162,15 +162,6 @@ possible). L'execució depèn d'elements definits en el document i no
 tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
 el bloc de codi en el context del document sembla bastant diferent.
 
-** TODO Revisar estructura                                             :idea:
-   :PROPERTIES:
-   :CREATED: [2018-03-30 dv 03:37]
-   :REFERER: [[file:settings.org::*=xref-js2=][=xref-js2=]]
-   :END:
-
-No tinc clar si és bona idea tindre paquets en dos seccions separades
-(/paquets/ i /modes/).
-
 ** TODO Entorn per desenvolupar en javascript                   :enhancement:
    :PROPERTIES:
    :CREATED: [2018-03-31 ds 01:34]
@@ -190,16 +181,6 @@ Integrar un interpret (nodejs?) en la configuració.
 - [[https://www.npmjs.com/package/tern][Tern]] is a stand-alone, editor-independent JavaScript analyzer that
   can be used to improve the JavaScript integration of existing
   editors.
-
-** TODO Investigar /rope/                                              :task:
-   :PROPERTIES:
-   :CREATED: [2018-03-31 ds 01:37]
-   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=python=][=python=]]
-   :END:
-
-Sembla que /rope/ te un nou mantenidor. Fer un seguiment:
-
-https://github.com/python-rope/rope
 
 ** TODO Patró de cerca/revisió                                         :idea:
    :PROPERTIES:
@@ -266,32 +247,6 @@ Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-u
                        :repo "mkjunker/abc-mode")
              :upgrade t))
 #+end_src
-
-** TODO highlight-thing-at-point                                       :idea:
-   :PROPERTIES:
-   :CREATED: [2018-04-03 dt 14:15]
-   :REFERER: [[file:~/.bashrc::export%20INFOPATH="~/.local/share/info:$INFOPATH"]]
-   :END:
-
-Bastant habitualment vull comprovar que he escrit un nom de variable
-correctament (especialment en scripts sh) i el que acabo fent és un
-buscar.
-
-He trobat la funció =highlight-symbol-at-point= (=M-s h .=) però en sh
-sembla que no acaba de funcionar com vull. Investigar-ho.
-
-** TODO ressaltar finestra activa                                      :idea:
-   :PROPERTIES:
-   :CREATED: [2018-04-04 dc 14:17]
-   :REFERER:
-   :END:
-
-   - State "TODO"       from "TODO"       [2018-08-18 ds 20:13] \\
-     Ho vaig investigar fa algun temps, de memòria: no és possible
-     tindre finestres amb color de fons diferent dins el mateix frame.
-
-Mirar si és possible ressaltar la finestra activa (o des-ressaltar la
-resta, amb un fons lleugerament més fosc p.e.).
 
 ** TODO renombrar comandes de =settings.org= ?                         :idea:
    :PROPERTIES:
@@ -373,7 +328,7 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
-** TODO [1/1] Agrupar definicions de colors/faces?                     :idea:
+** PAUS [1/1] Agrupar definicions de colors/faces?                     :idea:
    :PROPERTIES:
    :CREATED: [2019-01-18 dv 08:33]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
@@ -873,11 +828,16 @@ vaig fer), definir una comanda i vincular-la a la tecla =<=.
 El que no m'agrada és que probablement es perdrà la prestació
 d'esborrar automàticament el =>= al esborrar el =<=.
 
-** TODO Error amb =M-q= en comentaris en =asm-mode=                     :bug:
+** WAIT Error amb =M-q= en comentaris en =asm-mode=                     :bug:
    :PROPERTIES:
    :CREATED: [2020-04-15 dc 14:35]
    :REFERER: [[file:~/prog/z80/exercicis/project/src/main.s::prova_fill_screen3:]]
    :END:
+
+   - State "WAIT"       from "TODO"       [2020-12-13 dg. 12:48] \\
+     Hi ha obert un bugreport al respecte:
+
+     http://debbugs.gnu.org/cgi/bugreport.cgi?bug=41064
 
 =fill-paragraph= (=M-q=) fa coses rares quan estic en un comentari en
 =asm-mode=.
@@ -2021,3 +1981,60 @@ per definir les abreviatures.
 Revisar si ha hagut cap canvi en la configuració dels /backends/. No
 m'agrada activar-los globalment, seria millor activar els rellevants
 per cada mode en el corresponent /hook/.
+** CANC Revisar estructura                                             :idea:
+   :PROPERTIES:
+   :CREATED: [2018-03-30 dv 03:37]
+   :REFERER: [[file:settings.org::*=xref-js2=][=xref-js2=]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-12 ds. 20:32] \\
+     És bona idea. Els modes poden incorporar varis paquets relacionats i
+     prefereixo tindre'ls junts.
+
+No tinc clar si és bona idea tindre paquets en dos seccions separades
+(/paquets/ i /modes/).
+** CANC Investigar /rope/                                              :task:
+   :PROPERTIES:
+   :CREATED: [2018-03-31 ds 01:37]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=python=][=python=]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-13 dg. 11:34] \\
+     [[https://github.com/python-rope/rope][rope]] segueix mantingut el problema és que [[https://github.com/python-rope/ropemacs][ropemacs]] sembla abandonat.
+
+     He trobat altres projectes ([[https://github.com/PyCQA/redbaron/][redbaron]], [[https://github.com/Wilfred/emacs-refactor][emacs-refactor]]) però semblen
+     abandonats.
+
+     No crec que l'us que li donaria justifiqui invertir temps en açò.
+
+Sembla que /rope/ te un nou mantenidor. Fer un seguiment:
+
+https://github.com/python-rope/rope
+** CANC highlight-thing-at-point                                       :idea:
+   :PROPERTIES:
+   :CREATED: [2018-04-03 dt 14:15]
+   :REFERER: [[file:~/.bashrc::export%20INFOPATH="~/.local/share/info:$INFOPATH"]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-13 dg. 12:35] \\
+     No he tornat a utilizar la comanda des de que la vaig descobrir.
+
+Bastant habitualment vull comprovar que he escrit un nom de variable
+correctament (especialment en scripts sh) i el que acabo fent és un
+buscar.
+
+He trobat la funció =highlight-symbol-at-point= (=M-s h .=) però en sh
+sembla que no acaba de funcionar com vull. Investigar-ho.
+** CANC ressaltar finestra activa                                      :idea:
+   :PROPERTIES:
+   :CREATED: [2018-04-04 dc 14:17]
+   :REFERER:
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-13 dg. 12:39]
+   - State "TODO"       from "TODO"       [2018-08-18 ds 20:13] \\
+     Ho vaig investigar fa algun temps, de memòria: no és possible
+     tindre finestres amb color de fons diferent dins el mateix frame.
+
+Mirar si és possible ressaltar la finestra activa (o des-ressaltar la
+resta, amb un fons lleugerament més fosc p.e.).
