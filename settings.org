@@ -1523,6 +1523,24 @@ Encara falta provar =buffer-menu=.
     :commands ibuffer)
 #+end_src
 
+*** =ibuffer-vc=
+
+https://github.com/purcell/ibuffer-vc
+
+Permet agrupar els buffers en =ibuffer= pel repositori de control de
+revisions al que pertanyen.
+
+S'activa amb la comanda =ibuffer-vc-set-filter-groups-by-vc-root=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ibuffer-vc
+    :ensure t)
+#+end_src
+
+He detectat un comportament estrany en que els buffers =*Help*=,
+=*Buffer List*= i =*Flymake log*= apareixen dins un grup vc quan
+sembla més lògic que apareguin en el grup =[ Default ]=.
+
 *** =ido=                                                           :builtin:
 
 #+begin_src emacs-lisp :tangle yes

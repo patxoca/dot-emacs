@@ -465,9 +465,14 @@ sofisticat.
 
 Emacs inclou el paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
 
+** PAUS estudiar =ibuffer-vc=                                   :enhancement:
    :PROPERTIES:
    :CREATED: [2019-08-07 dc 11:35]
    :END:
+
+   - State "PAUS"       from "TODO"       [2020-12-14 dl. 00:18] \\
+     Instal·lat. El provaré una temporada a veure si l'incorporo al
+     workflow.
 
 https://github.com/purcell/ibuffer-vc
 
