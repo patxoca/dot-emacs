@@ -377,42 +377,6 @@ defineix (té sentit). Jo utilitzo =with-eval-after-load=.
 
 =modus-operandi= utilitza [[help:custom-theme-set-faces][=custom-theme-set-faces=]]. Investigar-ho.
 
-** TODO investigar/provar =truncate-lines=                             :idea:
-   :PROPERTIES:
-   :CREATED:  [2019-04-15 dl 11:31]
-   :END:
-
-https://www.emacswiki.org/emacs/TruncateLines
-
-En alguns buffer preferiria truncar les línies llargues. No tinc un
-criteri clar d'on sí. Tinc clar que en modes de programació no, però
-normalment les línies ja son curtes.
-
-** PAUS Definir =arv/ffap-ffip-dwin=                                   :idea:
-   :PROPERTIES:
-   :CREATED: [2019-04-22 dl 16:28]
-   :REFERER: [[file:~/.emacs.d/conf.d/customize/turing.el::(require]]
-   :END:
-
-   - State "PAUS"       from "TODO"       [2019-04-28 dg 22:09] \\
-     La funció [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20ffap-guesser%20()][ffap-guesser]] obté la ruta en el punt i la retorna o
-     retorna =nil=. A partir d'ací sembla fàcil.
-
-De vegades (normalment en org) vull visitar un arxiu que el nom
-apareix en el buffer (normalment en el resultat d'avaluar un bloc de
-codi), =find-file-at-point= és perfecte.
-
-=C-x f= és un bon binding però el tinc assignat a
-=find-file-in-project= (que no utilitzo en django però pot ser útil en
-altres projectes).
-
-Potser seria útil una comanda que primer intenta =ffap= i si no
-correspon a un arxiu (no existeix) executa =ffip=.
-
-- [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20find-file-at-point%20(&optional%20filename)][=find-file-at-point=]]
-
-- [[file:~/.emacs.d/elpa/find-file-in-project-20190408.325/find-file-in-project.el::(defun%20find-file-in-project%20(&optional%20open-another-window)][=find-file-in-project=]]
-
 ** TODO sortir del minibuffer                                     :annoyance:
 *** TODO Investigar paquet =delsel=                             :enhancement:
    :PROPERTIES:
@@ -501,18 +465,6 @@ sofisticat.
 
 Emacs inclou el paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
 
-** TODO estudiar "notifications"                                       :idea:
-   :PROPERTIES:
-   :CREATED: [2019-07-21 dg 10:53]
-   :END:
-
-El paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/notifications.el.gz::;;;%20notifications.el%20---%20Client%20interface%20to%20desktop%20notifications.][notifications.el]] defineix una interfície que permet
-interactuar amb les notificacions de l'entorn (gràfic).
-
-Es podria utilizar per mostrar el resultat d'executar els tests,
-compilar ...
-
-** TODO estudiar =ibuffer-vc=                                   :enhancement:
    :PROPERTIES:
    :CREATED: [2019-08-07 dc 11:35]
    :END:
@@ -918,18 +870,6 @@ Quan està col·lapsat em resulta difícil distingir els nivells.
 
 En algun lloc he vist que es canvien els asteriscs per vinyetes,
 diferents en funció del nivell.
-
-** TODO Coniguració de =C-w=                                      :annoyance:
-   :PROPERTIES:
-   :CREATED: [2020-05-14 dj 11:36]
-   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
-   :END:
-
-De vegades, per proximitat, teclejo =C-w= enlloc =C-e= i esborro un
-bloc.
-
-Mirar si és possible que =C-w= retalli únicament si la selecció està
-activa.
 
 ** TODO centrar buffer després de =imenu=                         :annoyance:
    :PROPERTIES:
@@ -2045,3 +1985,66 @@ sembla que no acaba de funcionar com vull. Investigar-ho.
 
 Mirar si és possible ressaltar la finestra activa (o des-ressaltar la
 resta, amb un fons lleugerament més fosc p.e.).
+** DONE Coniguració de =C-w=                                      :annoyance:
+   :PROPERTIES:
+   :CREATED: [2020-05-14 dj 11:36]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-12-13 dg. 19:48] \\
+     Aparentment ho vaig fer en el commit d1ec939.
+
+De vegades, per proximitat, teclejo =C-w= enlloc =C-e= i esborro un
+bloc.
+
+Mirar si és possible que =C-w= retalli únicament si la selecció està
+activa.
+** CANC Definir =arv/ffap-ffip-dwin=                                   :idea:
+   :PROPERTIES:
+   :CREATED: [2019-04-22 dl 16:28]
+   :REFERER: [[file:~/.emacs.d/conf.d/customize/turing.el::(require]]
+   :END:
+
+   - State "CANC"       from "PAUS"       [2020-12-13 dg. 20:08] \\
+     L'esforç per implementar-ho probablement no compensi un simple =M-x
+     ffap=.
+   - State "PAUS"       from "TODO"       [2019-04-28 dg 22:09] \\
+     La funció [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20ffap-guesser%20()][ffap-guesser]] obté la ruta en el punt i la retorna o
+     retorna =nil=. A partir d'ací sembla fàcil.
+
+De vegades (normalment en org) vull visitar un arxiu que el nom
+apareix en el buffer (normalment en el resultat d'avaluar un bloc de
+codi), =find-file-at-point= és perfecte.
+
+=C-x f= és un bon binding però el tinc assignat a
+=find-file-in-project= (que no utilitzo en django però pot ser útil en
+altres projectes).
+
+Potser seria útil una comanda que primer intenta =ffap= i si no
+correspon a un arxiu (no existeix) executa =ffip=.
+
+- [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/ffap.el.gz::(defun%20find-file-at-point%20(&optional%20filename)][=find-file-at-point=]]
+
+- [[file:~/.emacs.d/elpa/find-file-in-project-20190408.325/find-file-in-project.el::(defun%20find-file-in-project%20(&optional%20open-another-window)][=find-file-in-project=]]
+** CANC investigar/provar =truncate-lines=                             :idea:
+   :PROPERTIES:
+   :CREATED:  [2019-04-15 dl 11:31]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-13 dg. 20:12]
+https://www.emacswiki.org/emacs/TruncateLines
+
+En alguns buffer preferiria truncar les línies llargues. No tinc un
+criteri clar d'on sí. Tinc clar que en modes de programació no, però
+normalment les línies ja son curtes.
+** CANC estudiar "notifications"                                       :idea:
+   :PROPERTIES:
+   :CREATED: [2019-07-21 dg 10:53]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-13 dg. 20:13]
+El paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/notifications.el.gz::;;;%20notifications.el%20---%20Client%20interface%20to%20desktop%20notifications.][notifications.el]] defineix una interfície que permet
+interactuar amb les notificacions de l'entorn (gràfic).
+
+Es podria utilizar per mostrar el resultat d'executar els tests,
+compilar ...
