@@ -123,6 +123,13 @@ lents. La resta estan per baix de 0.1 segons.
 Mirar que és carrega durant l'arranc per veure si alguna cosa sobra
 etc.
 
+#+begin_quote
+When a package is loaded, and if you have =use-package-verbose= set to
+=t=, or if the package takes longer than 0.1s to load, you will see a
+message to indicate this loading activity in the =*Messages*= buffer.
+The same will happen for configuration, or =:config= blocks that take
+longer than 0.1s to execute.
+#+end_quote
 
 ** TODO normalitzar rutes de fitxers                            :enhancement:
 
