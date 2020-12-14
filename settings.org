@@ -3180,21 +3180,16 @@ https://github.com/patxoca/arv-py
 
 Funcions d'utilitat per treballar amb codi python.
 
-#+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/patxoca/arv-py.git
-  ./scripts/compile_package arv-py
-#+end_src
-
 #+begin_src emacs-lisp :tangle yes
-  (use-package pyx
-    :ensure nil
-    :load-path "site-lisp/arv-py"
+  (use-package arv-py
+    :ensure t
     :commands (pyx/add-setup-dependency
                pyx/electric-colon
                pyx/get-current-package-name
                pyx/insert-current-package-name
                pyx/make
                pyx/nav-goto-first-import
+               pyx/nav-up-list
                pyx/refactor-wrap-for
                pyx/refactor-wrap-if-else
                pyx/refactor-wrap-try-except
