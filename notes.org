@@ -929,6 +929,23 @@ En =python-mode=, en un comentari, overwrite-mode activat, al escriure
 
 Imagino que la culpa és de la implementació de =pyx/electric-colon=.
 
+** TODO bug en =ibuffer-vc=?                                            :bug:
+   :PROPERTIES:
+   :CREATED: [2020-12-15 dt. 10:05]
+   :REFERER:
+   :END:
+
+A la feina, treballant en Hera. Al intentar agrupar els buffers per VC
+apareix l'error:
+
+#+begin_src text
+ibuffer-current-state-list: Args out of range: #<buffer *Ibuffer*>, 3957, 4009
+tramp-error: Method ‘archive’ is not known.
+#+end_src
+
+Després d'instal·lar-lo ha funcionat. L'error ha aparegut a
+posteriori. No recordo haver fer res que ho expliqui.
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
