@@ -3472,7 +3472,7 @@ per the requirement of the Sphinx documentation generator.
     (my/bind-keys
      elpy-mode-map
      '(("M-<up>" pyx/nav-up-list)
-       ("M-<down>" nil)
+       ("M-<down>" pyx/nav-down-list)
        ("M-S-<down>" elpy-nav-move-line-or-region-down)
        ("M-S-<up>" elpy-nav-move-line-or-region-up)
        ))
