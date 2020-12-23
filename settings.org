@@ -3881,6 +3881,14 @@ desactivades. A aquestes alçades crec que puc activar-les totes:
   (setq disabled-command-function nil)
 #+end_src
 
+Ignora majúscules/minúscules al ordenar línies. Normalment ordeno per
+facilitar-me la vida buscant elements. Segons açò sembla lògic ignorar
+les diferències de majúscules/minúscules.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq sort-fold-case t)
+#+end_src
+
 Per classificar:
 
 #+begin_src emacs-lisp :tangle yes
