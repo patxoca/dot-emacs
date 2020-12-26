@@ -4197,6 +4197,42 @@ marcada, resulta molest. Aquesta comanda executa =kill-region=
       (kill-region beg end region)))
 #+end_src
 
+*** =my/kill-to-beginning-of-line= i =my/kill-to-indentation=
+
+Moltes vegades vull esborrar cap al principi de la línia enlloc de cap
+al final. =kill-line= permet esborrar cap enrere especificant un
+prefix negatiu però al especificar -1 esborra fins la línia anterior.
+No he trobat com fer el que vull.
+
+Aquestes comandes implementen variants d'aquesta idea, esborren fins
+el començament de la línia, fins al sagnat o combinen les dos.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/kill-to-beginning-of-line ()
+    "Esborra enrere fins el començament de la línia."
+    (interactive)
+    (kill-region (line-beginning-position) (point)))
+
+  (defun my/kill-to-indentation ()
+    "Esborra enrere fins el sagnat."
+    (interactive)
+    (let ((position (save-excursion
+                      (back-to-indentation)
+                      (point))))
+      (kill-region position (point))))
+
+  (defun my/kill-to-indentation-or-beginning-of-line ()
+    "Esborra enrere fins el sagnat i si el punt ja està en el
+  sagnat esborra fins al començament de la linia."
+    (interactive)
+    (let ((indentation (save-excursion
+                         (back-to-indentation)
+                         (point))))
+      (if (= indentation (point))
+          (kill-region (line-beginning-position) indentation)
+        (kill-region indentation (point)))))
+#+end_src
+
 *** =arv/kill-ring-save-word-at-point=
 
 #+begin_src emacs-lisp :tangle yes
@@ -5416,6 +5452,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-x 2") #'arv/split-windows-bellow)
   (global-set-key (kbd "C-x 3") #'arv/split-windows-right)
 
+  (global-set-key (kbd "C-S-k") #'my/kill-to-indentation-or-beginning-of-line)
   (global-set-key (kbd "C-o") #'arv/open-line-before-and-indent)
   (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
 
