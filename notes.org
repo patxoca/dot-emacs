@@ -290,11 +290,33 @@ independent dels mòduls.
 A més d'evitar conflictes de noms permet identificar els elements
 /privats/. No sé si cap d'aquestes consideracions és molt realista.
 
-** PAUS error en x-my/camelize                                          :bug:
+** PAUS error en =x-my/camelize=                                        :bug:
    :PROPERTIES:
    :CREATED: [2018-04-18 dc 08:25]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=arv/camelize=][=arv/camelize=]]
    :END:
+
+   - State "PAUS"       from "PAUS"       [2020-12-27 dg. 14:44] \\
+     En la secció [[id:7551e3e2-4f91-488c-b4bd-8ca97d2e1c67][Error amb =C-c j t=]] s'explica un altre error.
+
+     En =org-mode=, en el text:
+
+     #+begin_src org
+     mostra el missatge =point must be over an string=.
+     #+end_src
+
+     quan el punt està sobre la =p= de ~=point ...~, =M-c= ho converteix
+     en:
+
+     #+begin_src org
+     mostra el MissatgePoint must be over an string=.
+     #+end_src
+
+     enlloc de en:
+
+     #+begin_src org
+     mostra el missatge =Point must be over an string=.
+     #+end_src
 
    - State "PAUS"       from "PAUS"       [2020-03-30 dl 09:35] \\
      Aquest paquet fa el mateix i una mica més:
