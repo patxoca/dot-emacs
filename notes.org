@@ -440,6 +440,16 @@ buffer en que estic treballant.
 #+end_src
 
 
+*** Discussió en /emacs-devel/
+
+Ha hagut una discussió en la llista de correu emacs-devel on es parla
+sobre algo relacionat:
+
+https://lists.gnu.org/archive/html/emacs-devel/2020-12/msg01497.html
+
+Es plantejen solucions que no acabo d'entendre quin impacte tenen i es
+parla de la comanda =C-]= (=abort-recursive-edit=).
+
 ** TODO Revisar vídeo                                                  :idea:
    :PROPERTIES:
    :CREATED: [2019-04-28 dg 21:42]
