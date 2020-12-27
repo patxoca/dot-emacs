@@ -15,7 +15,28 @@
 # Aquesta secció és el target d'una plantilla de captura. Si es canvia
 # el text del títol caldrà ajustar la plantilla.
 
-** TODO moure funcionalitat                                     :enhancement:
+Els tags utilitzats per classificar les entrades tenen el significat
+següent:
+
+- =annoyance=: molèstia, no impedeix treballar, puc conviure amb ella
+  però caldria adreçar-la.
+
+- =bug=: error, comportament inesperat o sospita d'error, ja sigui en
+  la configuració o en un paquet extern.
+
+- =enhancement=: millora en l'entorn de treball.
+
+- =idea=: idea que cal deixar reposar i valorar.
+
+- =note=: nota genèrica.
+
+- =refactor=: millores en l'estructura/claredat/organització de la
+  configuració. No aporta noves funcionalitats.
+
+- =task=: tasca genèrica.
+
+
+** TODO moure funcionalitat                                        :refactor:
 
 Algunes configuracions activen funcionalitats o fan canvis /globals/
 que no els corresponen.
@@ -131,7 +152,7 @@ The same will happen for configuration, or =:config= blocks that take
 longer than 0.1s to execute.
 #+end_quote
 
-** TODO normalitzar rutes de fitxers                            :enhancement:
+** TODO normalitzar rutes de fitxers                               :refactor:
 
 En alguns llocs utilitzo rutes calculades dinàmicament i en d'altres
 literals. Problemes:
@@ -232,7 +253,7 @@ Per no oblidar-ho:
   libraries. Most of the following packages are available in MELPA. We
   recommend installing packages with it.
 
-** TODO elimina blocs sh?                                              :idea:
+** TODO elimina blocs sh?                                          :refactor:
    :PROPERTIES:
    :CREATED: [2018-04-02 dl 18:09]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Blocs%20de%20codi%20sh][Blocs de codi sh]]
@@ -255,7 +276,7 @@ Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-u
              :upgrade t))
 #+end_src
 
-** TODO renombrar comandes de =settings.org= ?                         :idea:
+** TODO renombrar comandes de =settings.org= ?                     :refactor:
    :PROPERTIES:
    :CREATED: [2018-04-04 dc 21:34]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
@@ -553,42 +574,6 @@ allargat la instal·lació més del desitjable:
   disponible arranca emacs sense fer cap processament? Val la pena
   complicar-se tant la vida si habitualment faig servir Emacs 26.x?
 
-** PAUS provar /close and kill buffer in pane/                  :enhancement:
-   :PROPERTIES:
-   :CREATED:  [2019-10-10 dj 09:13]
-   :END:
-
-   - State "PAUS"       from "PAUS"       [2019-10-11 dv 11:49] \\
-     Si es crida =ace-window= amb el prefix 16 (C-u C-u) es tanca la
-     finestra seleccionat.
-
-     Suposo que podré incorporar-ho als meus hàbits.
-   - State "PAUS"       from "TODO"       [2019-10-10 dj 19:31] \\
-     Es confirma que no és gaire fiable al triar la finestra que tancarà.
-     Alternatives:
-
-     - utilitzar alguna cosa semblant a la funció [[help:ace-window][=ace-window=]] per
-       seleccionar la finestra manualment i tancar-la.
-
-     - definir una opció personalitzable que emmagatzemi una llista de
-       noms de buffer que es segur tancar.
-
-https://www.emacswiki.org/emacs/KillingBuffers
-
-Aparentment permet tancar una finestra temporal (=Help=, =Completions=
-etc). No estic segur de si la forma en que determina l'altra finestra
-és suficientement robusta.
-
-#+BEGIN_SRC emacs-lisp
-  (defun close-and-kill-next-pane ()
-    "If there are multiple windows, then close the other pane and kill the buffer in it also."
-    (interactive)
-    (other-window 1)
-    (kill-this-buffer)
-    (if (not (one-window-p))
-        (delete-window)))
-#+END_SRC
-
 ** TODO estandarditzar una Makefile pels paquets emacs                 :idea:
 
 En aquesta entrada Chris Wellons descriu l'estructura del Makefile que
@@ -605,7 +590,7 @@ des de Emacs. Estan guardades en:
 
 Hi ha algunes traduccions que caldria ignorar.
 
-** TODO revisar configuració de /show trailing whitespace/
+** TODO revisar configuració de /show trailing whitespace/      :enhancement:
    :PROPERTIES:
    :CREATED: [2020-03-19 dj 18:20]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*wombat][wombat]]
@@ -834,19 +819,7 @@ Amb el punt on està el =(*)= ho converteix en:
 
 Té altres rareses.
 
-** TODO hydra per canviar la mida de les finestres                     :idea:
-   :PROPERTIES:
-   :CREATED: [2020-05-05 dt 09:48]
-   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
-   :END:
-
-Mirar si aconssegueixo acostumar-me a utilitzar el teclat per canviar
-la mida de les finestres.
-
-Us esporàdic, probablement mai aconsseguiré recordar les tecles. Una
-hydra podria ser útil.
-
-** TODO /boilerplate/ al crear nous arxius
+** TODO /boilerplate/ al crear nous arxius                              :bug:
    :PROPERTIES:
    :CREATED: [2020-05-12 dc 13:37]
    :END:
@@ -914,7 +887,7 @@ visible actualment potser millor no centrar.
 El color utilitzat pels breakpoint (=pdb.set_trace()=) dificulta
 llegir el text.
 
-** TODO Extreue =arv/template= al seu propi mòdul               :enhancement:
+** TODO Extreue =arv/template= al seu propi mòdul                  :refactor:
    :PROPERTIES:
    :CREATED: [2020-12-08 dt. 17:14]
    :REFERER: [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][Codi]]
@@ -2111,3 +2084,56 @@ interactuar amb les notificacions de l'entorn (gràfic).
 
 Es podria utilizar per mostrar el resultat d'executar els tests,
 compilar ...
+** DONE provar /close and kill buffer in pane/                  :enhancement:
+   :PROPERTIES:
+   :CREATED:  [2019-10-10 dj 09:13]
+   :END:
+
+   - State "DONE"       from "PAUS"       [2020-12-27 dg. 11:17] \\
+     =ace-windows= és acceptable i tendeixo a utilitzar-lo. Aquesta solució
+     no em suposa una molèstica.
+   - State "PAUS"       from "PAUS"       [2019-10-11 dv 11:49] \\
+     Si es crida =ace-window= amb el prefix 16 (C-u C-u) es tanca la
+     finestra seleccionat.
+
+     Suposo que podré incorporar-ho als meus hàbits.
+   - State "PAUS"       from "TODO"       [2019-10-10 dj 19:31] \\
+     Es confirma que no és gaire fiable al triar la finestra que tancarà.
+     Alternatives:
+
+     - utilitzar alguna cosa semblant a la funció [[help:ace-window][=ace-window=]] per
+       seleccionar la finestra manualment i tancar-la.
+
+     - definir una opció personalitzable que emmagatzemi una llista de
+       noms de buffer que es segur tancar.
+
+https://www.emacswiki.org/emacs/KillingBuffers
+
+Aparentment permet tancar una finestra temporal (=Help=, =Completions=
+etc). No estic segur de si la forma en que determina l'altra finestra
+és suficientement robusta.
+
+#+BEGIN_SRC emacs-lisp
+  (defun close-and-kill-next-pane ()
+    "If there are multiple windows, then close the other pane and kill the buffer in it also."
+    (interactive)
+    (other-window 1)
+    (kill-this-buffer)
+    (if (not (one-window-p))
+        (delete-window)))
+#+END_SRC
+** CANC hydra per canviar la mida de les finestres                     :idea:
+   :PROPERTIES:
+   :CREATED: [2020-05-05 dt 09:48]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py][file:~/prog/hera/impl/src/hera_enquesta_core/hera_enquesta_core/lib/utils.py]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-27 dg. 12:10] \\
+     No he tornat a pensar en el tema, probablement estic massa acostumat a
+     utilitzar el ratolí i no crec que canvii la costum.
+
+Mirar si aconssegueixo acostumar-me a utilitzar el teclat per canviar
+la mida de les finestres.
+
+Us esporàdic, probablement mai aconsseguiré recordar les tecles. Una
+hydra podria ser útil.
