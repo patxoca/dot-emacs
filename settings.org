@@ -1852,6 +1852,23 @@ Configura el mode.
        ("u" my/diff-undo-hunk))))
 #+end_src
 
+Amb =magit= al executar la comanda =status= es fa des de l'arrel (el
+directori que conté =.git=) mentre que amb =psvn= es fa des del
+directori actual. No tinc clar quin enfoc és preferible.
+
+Aquesta comanda implementa l'enfoc de git en subversion per veure si
+el prefereixo.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun x-my/svn-status ()
+    ""
+    (interactive)
+    (let ((root (locate-dominating-file default-directory ".svn")))
+      (if root
+          (svn-status root)
+        (user-error "No s'ha trobat '.svn'."))))
+#+end_src
+
 *** =rainbow=
 
 https://elpa.gnu.org/packages/rainbow-mode.html
@@ -5533,7 +5550,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; keybindings per subversion: C-c s
   (global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
   (global-set-key (kbd "C-c s l") 'svn-status-show-svn-log)
-  (global-set-key (kbd "C-c s s") 'svn-status)
+  (global-set-key (kbd "C-c s s") 'x-my/svn-status)
 
   ;; keybindings per magit: C-c g
   (global-set-key (kbd "C-c g s") 'magit-status)

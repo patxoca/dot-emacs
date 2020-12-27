@@ -625,11 +625,14 @@ Exemples de com restringir on s'obren les finestres:
 
 - https://protesilaos.com/codelog/2020-01-07-emacs-display-buffer/
 
-** TODO fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
+** PAUS fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
    :PROPERTIES:
    :CREATED: [2020-03-23 dl 13:02]
    :REFERER:
    :END:
+
+   - State "PAUS"       from "TODO"       [2020-12-27 dg. 11:32] \\
+     Implementada comanda "x-my/svn-status".
 
 M'he acostumat a que =git-status= mostra l'estat des de l'arrel i no
 des de la carpeta en que s'executa la comanda. Ho trobo a faltar an
