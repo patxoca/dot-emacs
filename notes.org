@@ -236,23 +236,6 @@ Crec que el que vull és algo tipus =swiper= (que al moure el cursor
 mostri la linea seleccionada en el buffer) però que sigui persistent:
 cerco, trobo, modifico, torno a la cerca.
 
-** TODO descobrir paquets                                              :note:
-   :PROPERTIES:
-   :CREATED: [2018-04-02 dl 13:01]
-   :REFERER:
-   :END:
-
-Per no oblidar-ho:
-
-- https://emacsmirror.net/: The Emacsmirror is a growing collection of
-  Emacs Lisp packages. All mirrored packages are available as Git
-  repositories.
-
-- https://github.com/emacs-tw/awesome-emacs: Awesome Emacs, a
-  community driven list of useful Emacs packages, utilities and
-  libraries. Most of the following packages are available in MELPA. We
-  recommend installing packages with it.
-
 ** TODO elimina blocs sh?                                          :refactor:
    :PROPERTIES:
    :CREATED: [2018-04-02 dl 18:09]
@@ -281,6 +264,13 @@ Una possibilitat seria [[https://github.com/quelpa/quelpa-use-package][=quelpa-u
    :CREATED: [2018-04-04 dc 21:34]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
    :END:
+
+   - State "TODO"       from "TODO"       [2020-12-27 dg. 20:20] \\
+     He fet un buscar/reemplaçar en =settings.org= i =init.el=. He detectat
+     que algunes funcions s'utilitzen en snippets. No tinc clar si en algun
+     lloc més.
+
+     Em preocupa trencar alguna cosa i he preferit revertir el canvi.
 
 En algunes configuracions he vist funcions prefixades amb =my/=. No
 segueixo eixa convenció però potser seria bona idea pels simbols
@@ -378,7 +368,7 @@ http://emacsninja.com/posts/fixing-my-annoyance-with-emacs-lisp.html
 treballar: definir una variable local al buffer + algun automatisme
 (yasnippet, tecla?).
 
-** PAUS [1/1] Agrupar definicions de colors/faces?                     :idea:
+** PAUS [1/2] Agrupar definicions de colors/faces?                     :idea:
    :PROPERTIES:
    :CREATED: [2019-01-18 dv 08:33]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=hi-lock=][=hi-lock=]]
@@ -405,7 +395,7 @@ Per adreçar-ho sembla bona idea definir funcions
 =my/customize-theme-modus-operandi=, =my/customize-theme-wombat= que
 recullguin tots els canvis.
 
-*** Comentari 19/03/2020
+*** TODO Comentari 19/03/2020
    :PROPERTIES:
    :CREATED: [2020-03-19 dj 19:54]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*wombat][wombat]]
@@ -957,6 +947,20 @@ Provat en el portàtil.
 
 
 * Paquets extra
+** Col·leccions de paquets
+
+Per no oblidar-ho:
+
+- https://emacsmirror.net/: The Emacsmirror is a growing collection of
+  Emacs Lisp packages. All mirrored packages are available as Git
+  repositories.
+
+- https://github.com/emacs-tw/awesome-emacs: Awesome Emacs, a
+  community driven list of useful Emacs packages, utilities and
+  libraries. Most of the following packages are available in MELPA. We
+  recommend installing packages with it.
+
+** Llista de paquets
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
 però que ara mateix no puc/vull provar. Ordenats cronològicament
@@ -1113,6 +1117,14 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   Ho he trobat en [[https://www.rousette.org.uk/archives/switching-to-selectrum-for-incremental-narrowing-in-emacs/][aquest blog]]. Aparentment =selectrum= és modular. El
   bloc enumera /plugins/. M'agrada el plantejament.
+
+- [[https://github.com/bbatsov/crux][crux]]: A Collection of Ridiculously Useful eXtensions for Emacs. crux
+  bundles many useful interactive commands to enhance your overall
+  Emacs experience.
+
+  No soc amic d'aquest tipus de col·leccions i algunes de les comandes
+  que trobo més útils ja les tinc implementades. Ho apunto per veure
+  si puc agafar prestada cap idea i per estudiar les implementacions.
 
 * Altres recursos
 
