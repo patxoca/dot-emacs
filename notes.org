@@ -946,6 +946,28 @@ tramp-error: Method ‘archive’ is not known.
 Després d'instal·lar-lo ha funcionat. L'error ha aparegut a
 posteriori. No recordo haver fer res que ho expliqui.
 
+** TODO Revisar missatge d'error en term
+   :PROPERTIES:
+   :CREATED: [2020-12-19 ds. 08:45]
+   :REFERER:
+   :END:
+
+Al obrir una terminal amb =C-z= (=my/bash-terminal=) apareix aquest
+missatge:
+
+#+begin_src text
+  /home/aroda/pyvenv/hera_impl/bin/python: No module named virtualenvwrapper
+  virtualenvwrapper.sh: There was a problem running the initialization hooks.
+
+  If Python could not import the module virtualenvwrapper.hook_loader,
+  check that virtualenvwrapper has been installed for
+  VIRTUALENVWRAPPER_PYTHON=/home/aroda/pyvenv/hera_impl/bin/python and that PATH is
+  set properly.
+#+end_src
+
+Provat en el portàtil.
+
+
 * Paquets extra
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1097,6 +1119,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   a few built-in elements.
 
   Canvis estètics a la /modeline/.
+
+- [[https://github.com/raxod502/selectrum][selectrum]]: Selectrum is a better solution for incremental narrowing
+  in Emacs, replacing Helm, Ivy, and Ido.
+
+  Ho he trobat en [[https://www.rousette.org.uk/archives/switching-to-selectrum-for-incremental-narrowing-in-emacs/][aquest blog]]. Aparentment =selectrum= és modular. El
+  bloc enumera /plugins/. M'agrada el plantejament.
 
 * Altres recursos
 
