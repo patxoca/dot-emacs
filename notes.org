@@ -705,19 +705,6 @@ funcionaria.
 
 Addicionalment =C-M-z= o =C-u C-z= podrien continuar obrint un shell.
 
-** TODO Error amb =C-c j t=                                             :bug:
-   :PROPERTIES:
-   :CREATED: [2020-04-03 dv 10:48]
-   :REFERER: [[file:~/prog/hera/impl/src/bt2_infiprac_core/bt2_infiprac_core/templates/bt2_infiprac_core/email_notificacio_gestor_controls_reclamats.html::{% extends "hera_skin/email_base_extracurri.html" %}]]
-   :END:
-
-En el referer, quan intento saltar a la plantilla base el minibuffer
-mostra el missatge =Point must be over an string=.
-
-No relacionat, quan el cursor estàva sobre la "p" de =point must be
-...= he apretat =M-c= per /capitalitzar-ho/ però ho converteix en
-=MissatgePoint= no en ~missatge =Point~.
-
 ** TODO Error amb =embrace-comander= (=C--=)                            :bug:
    :PROPERTIES:
    :CREATED: [2020-04-04 ds 12:24]
@@ -907,13 +894,6 @@ La clonar la configuració en /spacemacs@turing/ =use-package= m'ha
 donat dos error amb =dash= i =f= i no s'han instal·lat. Executant
 manualment (=C-x C-e=) =use-package= des de l'arxiu de configuració
 s'han instal·lat.
-
-** TODO bug en =pyx/electric-colon=?                                    :bug:
-
-En =python-mode=, en un comentari, overwrite-mode activat, al escriure
-=:= l'insereix, no sobreescriu.
-
-Imagino que la culpa és de la implementació de =pyx/electric-colon=.
 
 ** TODO bug en =ibuffer-vc=?                                            :bug:
    :PROPERTIES:
@@ -2137,3 +2117,35 @@ la mida de les finestres.
 
 Us esporàdic, probablement mai aconsseguiré recordar les tecles. Una
 hydra podria ser útil.
+** CANC Error amb =C-c j t=                                             :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-03 dv 10:48]
+   :REFERER: [[file:~/prog/hera/impl/src/bt2_infiprac_core/bt2_infiprac_core/templates/bt2_infiprac_core/email_notificacio_gestor_controls_reclamats.html::{% extends "hera_skin/email_base_extracurri.html" %}]]
+   :ID:       7551e3e2-4f91-488c-b4bd-8ca97d2e1c67
+   :END:
+
+   - State "CANC"       from "TODO"       [2020-12-27 dg. 14:35] \\
+     Soc incapaç de reproduir-ho. Per si influeix, he provat arrancant
+     emacs dins i fora del virtualenv de Hera i amb djira executant-se i
+     no.
+
+     En les 4 combinacions =C-c j t= em porta a la plantilla base.
+
+     Suposo que l'actualització d'algun paquet o passar d'Emacs 26.3 a 27.1
+     ha resolt el problema.
+
+En el referer, quan intento saltar a la plantilla base el minibuffer
+mostra el missatge =Point must be over an string=.
+
+No relacionat, quan el cursor estàva sobre la "p" de =point must be
+...= he apretat =M-c= per /capitalitzar-ho/ però ho converteix en
+=MissatgePoint= no en ~missatge =Point~.
+** DONE bug en =pyx/electric-colon=?                                    :bug:
+
+   - State "DONE"       from "TODO"       [2020-12-27 dg. 19:30] \\
+     Resolt en commit c406fe1 de =arv-py=.
+
+En =python-mode=, en un comentari, overwrite-mode activat, al escriure
+=:= l'insereix, no sobreescriu.
+
+Imagino que la culpa és de la implementació de =pyx/electric-colon=.
