@@ -4316,23 +4316,6 @@ el començament de la línia, fins al sagnat o combinen les dos.
             (replace-match new-string))))))
 #+end_src
 
-*** =arv/visit-emacs-config=
-
-Visita aquest arxiu de configuració:
-
-#+begin_src emacs-lisp :tangle yes
-  (defun arv/visit-emacs-config ()
-    "Visita l'arxiu de configuració d'emacs."
-    (interactive)
-    (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org")))
-      (find-file settings-org)))
-
-  (defun arv/visit-emacs-config-directory ()
-    "Visita el directori de configuració d'emacs."
-    (interactive)
-    (find-file arv/emacs-conf-dir))
-#+end_src
-
 *** =my/compile-with-comint-enabled=
 
 cpctelera inclou color en la sortida de les comandes, específicament
@@ -4379,6 +4362,30 @@ Activa/desactiva la numeració de les línies. Si està disponible
       (if linum-mode
           (linum-mode 0)
         (linum-mode 1))))
+#+end_src
+
+*** =my/visit-emacs-config= etc.
+
+Comandes per visitar arxius i directoris relacionats amb la
+configuració d'emacs:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/visit-emacs-config ()
+    "Visita l'arxiu de configuració d'emacs."
+    (interactive)
+    (let ((settings-org (arv/path-concat arv/emacs-conf-dir "settings.org")))
+      (find-file settings-org)))
+
+  (defun my/visit-emacs-notes ()
+    "Visita l'arxiu de configuració d'emacs."
+    (interactive)
+    (let ((settings-org (arv/path-concat arv/emacs-conf-dir "notes.org")))
+      (find-file settings-org)))
+
+  (defun my/visit-emacs-config-directory ()
+    "Visita el directori de configuració d'emacs."
+    (interactive)
+    (find-file arv/emacs-conf-dir))
 #+end_src
 
 *** =my/xml-prettify-buffer=
@@ -5533,8 +5540,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; jump map
 
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
-  (global-set-key (kbd "C-c j e") 'arv/visit-emacs-config)
-  (global-set-key (kbd "C-c j E") 'arv/visit-emacs-config-directory)
+  (global-set-key (kbd "C-c j e c") #'my/visit-emacs-config)
+  (global-set-key (kbd "C-c j e d") #'my/visit-emacs-config-directory)
+  (global-set-key (kbd "C-c j e n") #'my/visit-emacs-notes)
   (global-set-key (kbd "C-c j h n") #'diff-hl-next-hunk)
   (global-set-key (kbd "C-c j h p") #'diff-hl-previous-hunk)
   (global-set-key (kbd "C-c j l") 'avy-goto-line)
