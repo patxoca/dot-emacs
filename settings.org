@@ -5561,7 +5561,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c s s") 'x-my/svn-status)
 
   ;; keybindings per magit: C-c g
-  (global-set-key (kbd "C-c g s") 'magit-status)
+  (global-set-key (kbd "C-c g s") #'magit-status)
+  (global-set-key (kbd "C-c g d") #'magit-dispatch)
+  (global-set-key (kbd "C-c g f") #'magit-file-dispatch)
 
   ;; expand-region
   (global-set-key (kbd "C-.") 'er/expand-region)
