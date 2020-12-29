@@ -9,6 +9,36 @@
 
 #+LATEX_CLASS: informe
 
+* Xuletari
+** xuletes
+*** ordenar línies
+
+Ordenar línies extraient la clau d'ordenació amb un regexp.
+help:sort-regexp-fields.
+
+*** squash commits amb magit
+
+http://www.howardism.org/Technical/Emacs/magit-squashing.html
+
+Cal que la copia de treball estigui neta. Si no ho està es pot fer un
+/stash/ dels canvis (=z z= per crear-lo i =z p= per recuperar-lo).
+
+1. en =magit-status= prémer =l l= per accedir a la història.
+
+2. moure el cursor a la línia que conté l'últim commit que es vol
+   messclar.
+
+3. prémer =r i= per iniciar el /rebase/ interactiu.
+
+4. en el nou buffer es poden reordenar els commits (inclou una ajuda
+   amb les tecles disponibles). Interpreto que la idea és que els
+   commits que es volen fussionar apareguin junts al principi.
+
+5. moure el cursor a l'últim commit del grup que es vol fussionar,
+   prémer =s= (=squash=) i =C-c C-c= per confirmar.
+
+6. finalment apareix un buffer per fer el commit que mostra tots els
+   missatges. Editar com convingui i confirmar amb =C-c C-c=.
 
 * Bugs, molèsties, millores etc.
 
