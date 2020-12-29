@@ -4364,6 +4364,28 @@ Activa/desactiva la numeració de les línies. Si està disponible
         (linum-mode 1))))
 #+end_src
 
+*** =my/rename-file-and-buffer=
+
+Renombrar l'arxiu actual des d'Emacs requereix obrir un buffer
+=dired=, localitzar l'arxiu i renombrar-lo. No és especialment àgil.
+Aquesta comanda ho simplifica.
+
+Basat en http://steve.yegge.googlepages.com/my-dot-emacs-file
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/rename-file-and-buffer ()
+    "Renames both current buffer and file it's visiting."
+    (interactive)
+    (if (not (buffer-file-name))
+        (message "Buffer '%s' is not visiting a file!" (buffer-name))
+      (let ((new-name (read-shell-command "New name: ")))
+        (if (get-buffer new-name)
+            (message "A buffer named '%s' already exists!" new-name)
+          (rename-file (buffer-file-name) new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)))))
+#+end_src
+
 *** =my/visit-emacs-config= etc.
 
 Comandes per visitar arxius i directoris relacionats amb la
