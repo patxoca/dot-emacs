@@ -1225,6 +1225,22 @@ creixement però no sembla que sigui possible configurar-ho.
     (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 #+end_src
 
+*** =eglot=
+
+Client =lsp= (/language server protocol/). Aquesta secció conté
+configuració global. La configuració de cada llenguatge es fa en la
+secció /mode/ corresponent.
+
+Una alternativa és =lsp-mode=. No he pogut fer-lo funcionar amb la
+cpctelera (crec que el problema és de =clangd= no de =lsp-mode=). M'ha
+semblat una mica intrusiu.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package eglot
+    :ensure t
+    :commands eglot)
+#+end_src
+
 *** =eldoc=                                                         :builtin:
 
 #+begin_src emacs-lisp :tangle yes
@@ -2201,6 +2217,35 @@ Configuració del c-mode.
                 (c-set-offset 'arglist-close nil)
                 ;; company-mode
                 (company-mode t))))
+#+end_src
+
+**** lsp
+
+=eglot= recomana(?) utilitzar [[https://github.com/MaskRay/ccls][ccls]] com /language server/:
+
+#+begin_src sh :tangle no
+  sudo apt install ccls
+#+end_src
+
+Es pot configurar per /projecte/ creant [[https://github.com/MaskRay/ccls/wiki/Project-Setup#ccls-file][l'arxiu .ccls]] en /l'arrel del
+projecte/ (on està el directori =.git= o =.svn= imagino). Per la
+cpctelera utilitzo:
+
+#+begin_src text
+aroda@turing:assault$ cat .ccls
+clang
+-I/home/aroda/.local/src/cpctelera/cpctelera/src/
+#+end_src
+
+A menys que s'utilitzin /includes/ en rutes no estàndards crec que no
+cal configurar res. No tinc clar si cal que existeixi l'arxiu encara
+que estigui buid.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "cc-mode"
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (eglot-ensure))))
 #+end_src
 
 **** Combinacions de tecles
