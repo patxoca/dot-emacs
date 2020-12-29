@@ -5540,7 +5540,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; jump map
 
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
-  (global-set-key (kbd "C-c j e c") #'my/visit-emacs-config)
+  (global-set-key (kbd "C-c j e e") #'my/visit-emacs-config)
   (global-set-key (kbd "C-c j e d") #'my/visit-emacs-config-directory)
   (global-set-key (kbd "C-c j e n") #'my/visit-emacs-notes)
   (global-set-key (kbd "C-c j h n") #'diff-hl-next-hunk)
