@@ -975,6 +975,16 @@ missatge:
 
 Provat en el portàtil.
 
+** TODO Canviar keybinding comandes de desplaçament?                   :idea:
+   :PROPERTIES:
+   :CREATED: [2020-12-29 dt. 16:37]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*cc-mode][cc-mode]]
+   :END:
+
+He descovert que el keymap =goto-map= (=M-g=) conté comandes per
+dsplaçar-se.
+
+No sé si val la pena moure comandes de =C-c j= cap a =M-g=.
 
 * Paquets extra
 ** Col·leccions de paquets
