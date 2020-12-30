@@ -16,6 +16,19 @@
 Ordenar línies extraient la clau d'ordenació amb un regexp.
 help:sort-regexp-fields.
 
+*** profiling en Emacs
+
+https://christiantietze.de/posts/2020/12/emacs-scroll-performance-projectile/
+
+En resum:
+
+- =M-x profiler-start=, select CPU usage
+- scroll in the big file for a while
+- =M-x profiler-stop=
+- =M-x profiler-report= to show the measurements
+
+[[info:elisp#Profiling][info:elisp#Profiling]]
+
 *** squash commits amb magit
 
 http://www.howardism.org/Technical/Emacs/magit-squashing.html
