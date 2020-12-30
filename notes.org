@@ -1181,6 +1181,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   que trobo més útils ja les tinc implementades. Ho apunto per veure
   si puc agafar prestada cap idea i per estudiar les implementacions.
 
+- [[https://github.com/twada/coverlay.el][converlay]]: Test coverage overlay for Emacs.
+
+  Podria ser una alternativa pràctica a visualitzar els resultats del
+  coverage en una pàgina HTML. Pel que sembla, aquest paquet únicament
+  mostra les línies testejades i no testejades. No mostra
+  estadístiques com la pàgina HTML.
+
 * Altres recursos
 
 ** elisp
