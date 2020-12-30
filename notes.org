@@ -1,6 +1,8 @@
 #+TITLE: Notes
 #+AUTHOR: Alexis Roda
 #+EMAIL: alexis.roda.villalonga@gmail.com
+#+OPTIONS: toc:4 h:4
+#+STARTUP: overview
 
 #+LANGUAGE: ca
 
