@@ -569,6 +569,12 @@ colors que ressembla un semàfor per indicar tres nivells de
       "Face for hi-lock mode."
       :group 'hi-lock-faces)
 
+    (defface arv/hi-pink
+      '((((min-colors 88)) (:weight bold :foreground "white" :background "magenta"))
+        (t (:weight bold :background "magenta")))
+      "Face for hi-lock mode."
+      :group 'hi-lock-faces)
+
     (defface arv/hi-red
       '((((min-colors 88)) (:weight bold :background "red1" :foreground "white"))
         (t (:weight bold :background "red" :foreground "white")))
@@ -2953,7 +2959,7 @@ que no. En funció d'això s'aplica un estil.
               '(("TODO" . arv/hi-red)
                 ("STRT" . hi-blue)
                 ("PAUS" . arv/hi-orange)
-                ("WAIT" . hi-pink)
+                ("WAIT" . arv/hi-pink)
                 ("DONE" . arv/hi-green)
                 ("CANC" . hi-green-b))))
 #+end_src
