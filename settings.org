@@ -883,6 +883,25 @@ Personalització de =modus-operandi=.
     )
 #+end_src
 
+*** Elements independents del tema
+
+En aquesta secció es configuren elements independents del tema. Açò
+exclou colors.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/customize-faces-common ()
+    (with-eval-after-load "org"
+      (custom-set-faces
+       '(org-document-title ((t (:height 1.5 :weight bold))))
+       '(org-level-1 ((t (:inherit outline-1 :height 1.25 :weight bold))))
+       '(org-level-2 ((t (:inherit outline-2 :height 1.188 :weight bold))))
+       '(org-level-3 ((t (:inherit outline-3 :height 1.125 :weight bold))))
+       '(org-level-4 ((t (:inherit outline-4 :height 1.063 :weight bold))))
+       '(org-level-5 ((t (:inherit outline-5 :height 1.0 :weight bold)))))
+      )
+    )
+#+end_src
+
 *** Activació del tema
 
 #+begin_src emacs-lisp :tangle yes
@@ -898,7 +917,8 @@ Personalització de =modus-operandi=.
     :ensure t
     :config
     (load-theme 'doom-one)
-    (my/customize-theme-doom-one))
+    (my/customize-theme-doom-one)
+    (my/customize-faces-common))
 
   (when (display-graphic-p)
     ;; x-display-pixel-height necessita un entorn graphic
