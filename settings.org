@@ -445,6 +445,24 @@ Implementa funcionalitats de /common lisp/ en emacs.
   (use-package cl-lib)
 #+end_src
 
+**** =f=
+     :PROPERTIES:
+     :ID:       22d6bbbb-d859-4388-8bdd-36df7c6cff48
+     :END:
+
+https://github.com/rejeep/f.el
+
+Una API moderna per treballar amb arxius i directoris des d'emacs.
+
+Pel tipus de paquet (biblioteca de funcions) s'hauria d'instal·lar
+automàticament com una dependència i no directament, però alguns dels
+meus paquets (no en elpa) la utilitzen.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package f
+    :ensure t)
+#+end_src
+
 **** =s=
 
 https://github.com/magnars/s.el
@@ -1359,21 +1377,6 @@ https://github.com/magnars/expand-region.el
   (use-package expand-region
     :ensure t
     :commands er/expand-region)
-#+end_src
-
-*** =f=
-
-https://github.com/rejeep/f.el
-
-Una API moderna per treballar amb arxius i directoris des d'emacs.
-
-Pel tipus de paquet (biblioteca de funcions) s'hauria d'instal·lar com
-una dependència i no directament, però alguns dels meus paquets (no en
-elpa) la utilitzen.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package f
-    :ensure t)
 #+end_src
 
 *** =figlet=                                                         :manual:

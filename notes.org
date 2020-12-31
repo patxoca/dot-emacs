@@ -945,7 +945,19 @@ perjudicar el temps de càrrega.
 La solució seria moure aquesta funcionaliat a un paquet extern i
 carregar-lo sota demanda.
 
-** TODO Revisar primer arranc de emacs amb la configuració              :bug:
+** PAUS Revisar primer arranc de emacs amb la configuració              :bug:
+
+   - State "PAUS"       from "TODO"       [2020-12-31 dj. 19:23] \\
+     Sembla que l'error està relacionat amb el paquet =f=.
+
+     He mogut el =use-package f= de la secció /Paquets/ al principi de la
+     configuració. Amb aquest canvi l'error desapareix i sembla que
+     s'instal·len tots els paquets.
+
+     No he investigat la causa, imagino que algun paquet en depen però no
+     declara la dependència. Caldria veure si la configuració o algun dels
+     meus paquets (veure el comentari que faig en [[id:22d6bbbb-d859-4388-8bdd-36df7c6cff48][=f=]] sobre els meus
+     paquets no en elpa) en fan ús.
 
 La clonar la configuració en /spacemacs@turing/ =use-package= m'ha
 donat dos error amb =dash= i =f= i no s'han instal·lat. Executant
