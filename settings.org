@@ -1662,7 +1662,9 @@ hagi de canviar/millorar en el futur així que es clona:
 #+begin_src emacs-lisp :tangle yes
   (use-package magit
     :ensure t
-    :commands magit-status)
+    :commands (magit-status
+               magit-dispatch
+               magit-file-dispatch))
 #+end_src
 
 *** =minions=
