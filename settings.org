@@ -4489,7 +4489,7 @@ configuració d'emacs:
 De vegades em cal formatejar un document XML que ve en una única
 línia. Aquesta funció formateja un buffer amb contingut XML (o HTML).
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
   (defun my/xml-prettify-buffer ()
     "Formateja (pretty print) un buffer xml."
     (interactive)

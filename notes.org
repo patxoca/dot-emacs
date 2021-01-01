@@ -2257,3 +2257,58 @@ En =python-mode=, en un comentari, overwrite-mode activat, al escriure
 =:= l'insereix, no sobreescriu.
 
 Imagino que la culpa és de la implementació de =pyx/electric-colon=.
+** DONE Problema amb l'arranc després de fer un canvi                   :bug:
+   :PROPERTIES:
+   :CREATED: [2020-12-31 dj. 23:00]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2021-01-01 dv. 14:18] \\
+     Després de vàries proves sembla que el problema és que falta el
+     =:tangle yes= en el bloc de codi que defineix la comanda
+     =my/xml-prettify-buffer=.
+
+     Afegint-lo el problema desapareix i eliminant-lo d'un altre bloc
+     reprodueix el problema.
+
+     Observo que, si no s'especifica, l'arxiu =setting.el= generat comença
+     amb la definició de =my/xml-prettify-buffer=, açò explica que no
+     activi el tema (està abans) però si les tecles (van després).
+
+     No ho acabo d'entendre, el valor per defecte és =:tangle no=. No
+     exportar el bloc no hauria de tindre cap impacte en l'arranc (la
+     comanda no s'utilitza enlloc en la configuració). Però el que passa és
+     que el bloc *sí* que s'exporta i els blocs anteriors es perden.
+
+     Intento reproduir-ho sense èxit en un arxiu org amb varis blocs:
+
+     #+begin_src org :tangle no
+       ,#+begin_src emacs-lisp :tangle yes
+       ;; bloc 1
+       ,#+end_src
+
+       ,#+begin_src sh :tangle yes
+       # prova block bash
+       ,#+end_src
+
+       ,#+begin_src emacs-lisp
+       ;; bloc 2
+       ,#+end_src
+
+       ,#+begin_src emacs-lisp :tangle yes
+       ;; bloc 3
+       ,#+end_src
+     #+end_src
+
+Si modifico =settings.org= al tornar a obrir Emacs aquest no carrega
+el tema ni activa altres configuracions. Ficant un =message= al final
+de l'arxiu aquest apareix en el buffer de missatges.
+
+Si executo el script =~/.emacs.d/conf.d/scripts/update_conf_from_git=
+llavors si que funciona.
+
+Després d'algunes proves sembla que el problema està relacionat amb el
+/tangling/ de =settings.org=. Desactivar les altres funcionalitats del
+script no tenen cap efecte.
+
+Tinc que tornar a provar-ho quan estiga més despert.
