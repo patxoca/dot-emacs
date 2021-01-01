@@ -4460,6 +4460,51 @@ Basat en http://steve.yegge.googlepages.com/my-dot-emacs-file
           (set-visited-file-name new-name)))))
 #+end_src
 
+*** =my/unfill-paragraph=
+    :PROPERTIES:
+    :ID:       3ec64e49-8906-49c2-9377-8c9b44ae6e61
+    :END:
+
+De vegades, al enganxar un paràgraf, =M-q= no fal el que vull i l'he
+de convertir en una única línia (a base de =C-e SUPR SPC=) o corregir
+el sagnat manualment per tornar a ajustar-lo. Per exemple:
+
+#+begin_example
+  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec
+  facilisis facilisis, est dui fermentum leo, quis tempor ligula erat
+  quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede.
+  Sed bibendum.
+#+end_example
+
+Aquesta comanda, copiada de la configuració de Sacha Chua, automatitza
+aquesta transformació:
+
+#+begin_example
+  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum.
+#+end_example
+
+i el paràgraf resultat ara es pot ajustar satisfactoriament amb =M-q=:
+
+#+begin_example
+  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec
+    facilisis facilisis, est dui fermentum leo, quis tempor ligula erat
+    quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede.
+    Sed bibendum.
+#+end_example
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun my/unfill-paragraph (&optional region)
+    "Takes a multi-line paragraph and makes it into a single line of text."
+    (interactive (progn
+                   (barf-if-buffer-read-only)
+                   (list t)))
+    (let ((fill-column (point-max)))
+      (fill-paragraph nil region)))
+#+end_src
+
+En funció de l'ús que en fàci potser valdria la pena definir una
+comanda equivalment a =M-Q M-q=.
+
 *** =my/visit-emacs-config= etc.
 
 Comandes per visitar arxius i directoris relacionats amb la
@@ -5597,6 +5642,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "M-l") 'arv/downcase-word)
   (global-set-key (kbd "M-;") 'endless/comment-line-or-region)
 
+  (global-set-key (kbd "M-Q") #'my/unfill-paragraph)
 
   (global-set-key (kbd "s-y") 'arv/duplicate-line-or-region-dwim)
   (global-set-key (kbd "C-M-y") 'arv/duplicate-line-or-region-and-comment-dwim)
@@ -5990,52 +6036,6 @@ Pot resultar pràctic però no acabo de trobar un ús.
             (funcall func arg))
           (set-transient-map keymap t))))
   #+end_src
-
-** /Unfill/ paràgraf
-
-De vegades, al enganxar un paràgraf, =M-q= no fal el que vull i l'he
-de convertir en una única línia (a base de =C-e SUPR SPC=) o corregir
-el sagnat manualment per tornar a ajustar-lo. Per exemple:
-
-#+begin_example
-  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec
-  facilisis facilisis, est dui fermentum leo, quis tempor ligula erat
-  quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede.
-  Sed bibendum.
-#+end_example
-
-Aquesta comanda, copiada de la configuració de Sacha Chua, automatitza
-aquesta transformació:
-
-#+begin_example
-  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum.
-#+end_example
-
-i el paràgraf resultat ara es pot ajustar satisfactoriament amb =M-q=:
-
-#+begin_example
-  - Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec
-    facilisis facilisis, est dui fermentum leo, quis tempor ligula erat
-    quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede.
-    Sed bibendum.
-#+end_example
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defun my/unfill-paragraph (&optional region)
-    "Takes a multi-line paragraph and makes it into a single line of text."
-    (interactive (progn
-                   (barf-if-buffer-read-only)
-                   (list t)))
-    (let ((fill-column (point-max)))
-      (fill-paragraph nil region)))
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-  (bind-key "M-Q" 'my/unfill-paragraph)
-#+END_SRC
-
-En funció de l'ús que en fàci potser valdria la pena definir una
-comanda equivalment a =M-Q M-q=.
 
 * Descartat
 

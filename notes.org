@@ -904,6 +904,30 @@ dsplaçar-se.
 
 No sé si val la pena moure comandes de =C-c j= cap a =M-g=.
 
+** TODO error de =my/unfill-paragraph= en =org-mode=                    :bug:
+   :PROPERTIES:
+   :CREATED: [2021-01-01 dv. 22:28]
+   :REFERER: [[id:3ec64e49-8906-49c2-9377-8c9b44ae6e61][=my/unfill-paragraph=]]
+   :END:
+
+Per reproduir-lo:
+
+1. obrir un buffer =org-mode=
+
+2. inserir un paragraf amb =lorem-ipsum-insert-paragraphs= i
+   ajustar-lo amb =M-q=
+
+3. inserir un guió al començament de la línia
+
+4. executar =my/unfill-paragraph=
+
+El resultat és que només s'ajusta a partir de la segona línia.
+
+#+begin_src text
+  - Pellentesque dapibus suscipit ligula. Donec posuere augue in quam.
+  Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo.
+#+end_src
+
 * Paquets extra
 ** Col·leccions de paquets
 
