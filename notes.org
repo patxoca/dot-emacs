@@ -569,68 +569,6 @@ repositori de control de revisions al que pertanyen i operar sobre un
 grup com un tot (per tancar-los p.e.). Podría ser útil al treballar en
 /Hera/.
 
-** TODO revisar procés d'instal·lació                                   :bug:
-   :PROPERTIES:
-   :CREATED: [2019-09-25 dc 20:32]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
-   :END:
-
-Al instal·lar emacs 26.3 des de codi font en un entorn minimalista
-(una VM per fer unes proves) s'han detectat alguns detalls que han
-allargat la instal·lació més del desitjable:
-
-- al instal·lar el paquet emacs (24.x) des del repositori d'ubuntu el
-  paquet =transient= es queixava de la versió. Sobre açò no es pot fer
-  gran cosa (?).
-
-- s'ha compilat emacs amb un conjunt mínim de dependències i algunes
-  funcions no estan disponibles.
-
-  Resolt definint funcions /dummy/.
-
-- revisar el procés de instal·lació de org. Instal·lar-lo clonat el
-  repositori git requereix instal·lar =texinfo=. La versió d'org
-  (9.1.9) inclosa amb Emacs 26.3 sembla suficient per processar la
-  configuració.
-
-  S'ha instal·lat org des de ELPA. =org-version= diu 9.1.9 però indica
-  la ruta de =elpa=. A veure com es comporta.
-
-  Un altre detall que s'ha detectat i que potser caldria revisar és
-  que org s'instal·la des de el script =settings.sh= que, si no
-  m'equivoco, s'executa després de =settings.el=.
-
-- errors variats durant l'arranc.
-
-  #+begin_src text
-    Starting new Ispell process ispell with default dictionary...
-    Error enabling Flyspell mode:
-    (Searching for program El fitxer o directori no existeix ispell)
-    Configuring package company...done
-    For information about GNU Emacs and the GNU system, type C-h C-a.
-    File mode specification error: (void-function org--check-org-structure-template-alist)
-    Setting up indent for shell type bash
-    Indentation variables are now local.
-    Indentation setup for shell type bash
-    Starting new Ispell process ispell with default dictionary...
-    Error enabling Flyspell mode:
-    (Searching for program El fitxer o directori no existeix ispell)
-    Starting new Ispell process ispell with default dictionary...
-    Error enabling Flyspell mode:
-    (Searching for program El fitxer o directori no existeix ispell)
-  #+end_src
-
-- el script =update-from-git= descarrega i instal·la org si no està
-  instal·lat localment.
-
-  Pel que respecta a org la solució més elegant probablement seria
-  comprovar la versió mínima requerida (9 probablement) i si no està
-  disponible mostrar un error i avortar (?). Açò impediria arrancar
-  emacs per instal·lar org?. És complicat instal·lar-lo amb =emacs
-  -Q=? Potser =init.el= comprova la versió mínima i si no està
-  disponible arranca emacs sense fer cap processament? Val la pena
-  complicar-se tant la vida si habitualment faig servir Emacs 26.x?
-
 ** TODO estandarditzar una Makefile pels paquets emacs                 :idea:
 
 En aquesta entrada Chris Wellons descriu l'estructura del Makefile que
@@ -761,53 +699,6 @@ recordar les tecles. Estandaritzar-ho en =C-z= em sembla que
 funcionaria.
 
 Addicionalment =C-M-z= o =C-u C-z= podrien continuar obrint un shell.
-
-** TODO Error amb =embrace-comander= (=C--=)                            :bug:
-   :PROPERTIES:
-   :CREATED: [2020-04-04 ds 12:24]
-   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/docs/source/conf.py::"sphinx.ext.autodoc",]]
-   :END:
-
-Al intentar canviar una cometa simple per una doble en la llista
-d'extensions ha agafat com comenta inicia una que havia en un
-comentari anterior.
-
-Al fer proves posteriors, si intento canviar la comenta doble per
-simple es torna boig amb la selecció.
-
-Potser és problema d'aquesta arxiu. Seguir investigant.
-
-
-** PAUS Revisar < en org-mode                                           :bug:
-   :PROPERTIES:
-   :CREATED: [2020-03-31 dt 20:51]
-   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
-   :END:
-
-   - State "PAUS"       from "PAUS"       [2020-04-07 dt 20:37] \\
-     S'afegeix un advice al final de =org-export-dispatch= per revertir el
-     canvi. Resol el problema. Es deixa en pausa per si es detecten més
-     casos.
-
-   - State "PAUS"       from "CANC"       [2020-04-06 dl 18:32] \\
-     El problema s'ha reproduit. En aquest cas estic segur de que
-     s'havia carregat la configuració actualitzada. Ha funcionat
-     correcament, he afegit blocs de codi typescript i de repent ha
-     passat.
-
-     El problema ha aparegut quan he exportat a PDF =C-c C-e l p=.
-
-   - State "CANC"       from "TODO"       [2020-04-05 dg 20:15] \\
-     No puc reproduir-ho. Probablement la instància d'emacs en la que
-     treballava tenia carregada la configuració vella.
-
-Al treballar en les notes sobre typescript al escriure =?<= també
-escriu =?>=.
-
-Crec que ha carregat la configuració correcta però sembla que no s'ha
-activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
-
-Revisar que passa.
 
 ** TODO Revisar =<= en TypeScript                                 :annoyance:
    :PROPERTIES:
@@ -2312,3 +2203,136 @@ Després d'algunes proves sembla que el problema està relacionat amb el
 script no tenen cap efecte.
 
 Tinc que tornar a provar-ho quan estiga més despert.
+** CANC Error amb =embrace-comander= (=C--=)                            :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-04 ds 12:24]
+   :REFERER: [[file:~/prog/hera/impl/src/hera_enquesta_core/docs/source/conf.py::"sphinx.ext.autodoc",]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2021-01-01 dv. 19:43] \\
+     Al intentar reproduir-ho:
+
+     - si el punt està sobre la comenta que obre la cadena s'emparella amb
+       la comenta que tanca la cadena anterior. Comportament erròni.
+
+     - si el punt està dins la cadena o en la cometa que tanca la cadena
+       s'emparella amb al cometa que obre la cadena. Comportament correcte.
+
+     =embrace-commander= sembla que funciona sobre =expand-region=.
+     Expandint la regió s'observa un comportament compatible amb
+     l'error. L'error es manifesta en =python-mode= no en =c-mode=.
+
+     =expand-region= no accepta /issues/ ni /PRs/ així que difícilment
+     es resoldrà.
+
+     No utilitzo massa cap dels dos paquets i sabent quan es produeix
+     l'error crec que podré conviure amb ell.
+
+Al intentar canviar una cometa simple per una doble en la llista
+d'extensions ha agafat com cometa inicial una que havia en un
+comentari anterior.
+
+Al fer proves posteriors, si intento canviar la comenta doble per
+simple es torna boig amb la selecció.
+
+Potser és problema d'aquesta arxiu. Seguir investigant.
+** CANC revisar procés d'instal·lació                                   :bug:
+   :PROPERTIES:
+   :CREATED: [2019-09-25 dc 20:32]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2021-01-01 dv. 21:03] \\
+     La configuració no està pensada per entorns minimalistes i no he
+     tingut més la necessitat. No val la pena dedicar-li més temps.
+
+Al instal·lar emacs 26.3 des de codi font en un entorn minimalista
+(una VM per fer unes proves) s'han detectat alguns detalls que han
+allargat la instal·lació més del desitjable:
+
+- al instal·lar el paquet emacs (24.x) des del repositori d'ubuntu el
+  paquet =transient= es queixava de la versió. Sobre açò no es pot fer
+  gran cosa (?).
+
+- s'ha compilat emacs amb un conjunt mínim de dependències i algunes
+  funcions no estan disponibles.
+
+  Resolt definint funcions /dummy/.
+
+- revisar el procés de instal·lació de org. Instal·lar-lo clonat el
+  repositori git requereix instal·lar =texinfo=. La versió d'org
+  (9.1.9) inclosa amb Emacs 26.3 sembla suficient per processar la
+  configuració.
+
+  S'ha instal·lat org des de ELPA. =org-version= diu 9.1.9 però indica
+  la ruta de =elpa=. A veure com es comporta.
+
+  Un altre detall que s'ha detectat i que potser caldria revisar és
+  que org s'instal·la des de el script =settings.sh= que, si no
+  m'equivoco, s'executa després de =settings.el=.
+
+- errors variats durant l'arranc.
+
+  #+begin_src text
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+    Configuring package company...done
+    For information about GNU Emacs and the GNU system, type C-h C-a.
+    File mode specification error: (void-function org--check-org-structure-template-alist)
+    Setting up indent for shell type bash
+    Indentation variables are now local.
+    Indentation setup for shell type bash
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+    Starting new Ispell process ispell with default dictionary...
+    Error enabling Flyspell mode:
+    (Searching for program El fitxer o directori no existeix ispell)
+  #+end_src
+
+- el script =update-from-git= descarrega i instal·la org si no està
+  instal·lat localment.
+
+  Pel que respecta a org la solució més elegant probablement seria
+  comprovar la versió mínima requerida (9 probablement) i si no està
+  disponible mostrar un error i avortar (?). Açò impediria arrancar
+  emacs per instal·lar org?. És complicat instal·lar-lo amb =emacs
+  -Q=? Potser =init.el= comprova la versió mínima i si no està
+  disponible arranca emacs sense fer cap processament? Val la pena
+  complicar-se tant la vida si habitualment faig servir Emacs 26.x?
+** DONE Revisar < en org-mode                                           :bug:
+   :PROPERTIES:
+   :CREATED: [2020-03-31 dt 20:51]
+   :REFERER: [[file:~/prog/aprendre/typescript/notes.org::*Declaració][Declaració]]
+   :END:
+
+   - State "DONE"       from "PAUS"       [2021-01-01 dv. 21:23] \\
+     Després d'un temps no s'han detectat problemes amb aquesta "solució".
+
+     Es dóna per resolt.
+
+   - State "PAUS"       from "PAUS"       [2020-04-07 dt 20:37] \\
+     S'afegeix un advice al final de =org-export-dispatch= per revertir el
+     canvi. Resol el problema. Es deixa en pausa per si es detecten més
+     casos.
+
+   - State "PAUS"       from "CANC"       [2020-04-06 dl 18:32] \\
+     El problema s'ha reproduit. En aquest cas estic segur de que
+     s'havia carregat la configuració actualitzada. Ha funcionat
+     correcament, he afegit blocs de codi typescript i de repent ha
+     passat.
+
+     El problema ha aparegut quan he exportat a PDF =C-c C-e l p=.
+
+   - State "CANC"       from "TODO"       [2020-04-05 dg 20:15] \\
+     No puc reproduir-ho. Probablement la instància d'emacs en la que
+     treballava tenia carregada la configuració vella.
+
+Al treballar en les notes sobre typescript al escriure =?<= també
+escriu =?>=.
+
+Crec que ha carregat la configuració correcta però sembla que no s'ha
+activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
+
+Revisar que passa.
