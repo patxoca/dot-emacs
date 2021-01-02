@@ -1914,6 +1914,23 @@ aplicar el /hunk/ a la inversa.
     (diff-apply-hunk t))
 #+end_src
 
+=svn-status-show-svn-diff= no modifica la finestra activa. Aquesta
+funció executa =svn-status-show-svn-diff= i després activa la finestra
+que mostra el buffer =*svn diff*=.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/svn-status-show-svn-diff (arg)
+    "Consultar `svn-status-show-svn-diff'."
+    (interactive "P")
+    (svn-status-show-svn-diff arg)
+    (when (get-buffer-window "*svn-diff*")
+      (switch-to-buffer-other-window "*svn-diff*")))
+#+end_src
+
+No estic segur de si prefereixo aquest comportament, l'anterior o els
+dos. El temps dirà. Pel moment assignaré el nou comportament a ~=~ i
+l'original a ~M-==~.
+
 Configura el mode.
 
 #+begin_src emacs-lisp :tangle yes
@@ -1930,7 +1947,11 @@ Configura el mode.
     (my/bind-keys
      svn-status-diff-mode-map
      '(("a" diff-apply-hunk)
-       ("u" my/diff-undo-hunk))))
+       ("u" my/diff-undo-hunk)))
+    (my/bind-keys
+     svn-status-mode-map
+     '(("=" my/svn-status-show-svn-diff)
+       ("M-=" svn-status-show-svn-diff))))
 #+end_src
 
 Amb =magit= al executar la comanda =status= es fa des de l'arrel (el
