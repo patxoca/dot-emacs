@@ -1196,6 +1196,24 @@ Aquesta paquet defineix algunes comandes interessants:
 
 - =diff-hl-next-hunk= (=C-x v ]=)
 
+*** =diff-mode=                                                     :builtin:
+
+Per defecte al accedir a un /hunk/ amb les comandes =diff-hunk-next=
+(=<tab>=) o =diff-hunk-prev= (=s-<tab>=) es refina la diferència
+ressaltant els canvis individuals.
+
+Tindre-ho activat per defecte em distreu, en general trobo que afegeix
+massa soroll. Ho desactivo. Es pot activar en el /hunk/ actual amb la
+comanda =diff-refine-hunk= (=C-r=).
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package diff-mode
+    :config
+    (add-hook 'diff-mode-hook (lambda () (diff-auto-refine-mode 0)))
+    :bind (:map diff-mode-map
+                ("C-r" . diff-refine-hunk)))
+#+end_src
+
 *** =diminish=
 
 #+begin_src emacs-lisp :tangle yes
@@ -1909,8 +1927,6 @@ Configura el mode.
                          '("-v" "--stop-on-copy"))
     (customize-set-value 'svn-status-verbose t)
     (customize-set-value 'svn-status-hide-unmodified t)
-    (add-hook 'svn-status-diff-mode-hook
-              #'(lambda () (diff-auto-refine-mode t)))
     (my/bind-keys
      svn-status-diff-mode-map
      '(("a" diff-apply-hunk)
