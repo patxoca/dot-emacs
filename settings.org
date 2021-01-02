@@ -3440,6 +3440,28 @@ Pel seu funcionament requereix algunes comandes externes:
 La comanda =flake8= es pot configurar des de l'arxiu
 =~/.config/flake8=.
 
+***** snippets
+
+El snippet =super= definit per =elpy= adapta la sintaxi del codi
+generat a la versió de l'interpret python /actiu/. Açò resulta
+inconvenient quan es desenvolupa amb python 3 però el codi ha de
+funcionar amb python 2 i 3.
+
+Per resoldre-ho he redefinit localment el snippet i he introduït la
+variable =my/elpy-python-6= per controlar el comportament del snippet:
+
+- si el valor és /cert/ genera codi que funciona en python 2 i 3.
+
+- si és /fals/ genera codi específic
+
+El valor per defecte és =nil= i es pot canviar per projecte en
+=.dir-locals.el=.
+
+#+begin_warning
+Perquè açò funcioni cal que el directori dels snippets aparegui en
+=yas-snippet-dirs= abans del directori de snippets de =elpy=.
+#+end_warning
+
 **** =pep8=                                                          :manual:
 
 https://gist.github.com/ieure/302847
