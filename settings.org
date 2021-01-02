@@ -651,7 +651,27 @@ colors que ressembla un semàfor per indicar tres nivells de
       ;; (set-face-attribute 'magit-diff-removed-highlight nil
       ;;                     :foreground "#ff6c6b"
       ;;                     :background "#23272e"))
-      ))
+      )
+
+    (with-eval-after-load "diff-mode"
+      (set-face-attribute 'diff-hunk-header nil
+                          :weight 'bold
+                          :foreground "#282c34"
+                          :background "#a9a1e1"
+                          ;; extend no funciona, crec que degut a que la
+                          ;; face no inclou el salt de línia. Ho deixo
+                          ;; com una intenció.
+                          :extend t)
+      (set-face-attribute 'diff-added nil
+                          :weight 'bold
+                          :foreground "#98be65"
+                          :background "#3e493d"
+                          :extend t)
+      (set-face-attribute 'diff-removed nil
+                          :weight 'bold
+                          :foreground "#ff6c6b"
+                          :background "#4f343a"
+                          :extend t)))
 #+end_src
 
 *** wombat
