@@ -671,6 +671,10 @@ colors que ressembla un semàfor per indicar tres nivells de
                           :weight 'bold
                           :foreground "#ff6c6b"
                           :background "#4f343a"
+                          :extend t)
+      (set-face-attribute 'diff-header nil
+                          :background "royalblue4"
+                          :weight 'bold
                           :extend t)))
 #+end_src
 
