@@ -2883,6 +2883,26 @@ Afegeixo un /advice/ al final de la comanda per revertir el canvi.
   (advice-add 'org-export-dispatch :after #'my/advice-org-export-dispatch)
 #+end_src
 
+Prefereixo que els documents org s'obrin amb totes les capçaleres
+plegades, em dona una visió general del document.
+
+#+begin_src emacs-lisp :tangle yes
+  (setq org-startup-folded t)
+#+end_src
+
+Açò es pot canviar document a document especificant una de les
+opcions:
+
+#+begin_src org
+  ,#+STARTUP: overview
+  ,#+STARTUP: content
+  ,#+STARTUP: showall
+  ,#+STARTUP: showeverything
+#+end_src
+
+Aquesta opció es pot afegir amb la comanda =C-u C-u TAB=
+(=org-set-startup-visibility=).
+
 **** =org-id=
 
 Al emmagatzemar l'enllaç a una secció amb =C-c l= s'utilitza el títol
