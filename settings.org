@@ -4522,6 +4522,38 @@ Té dos detalls que caldria polir:
     (compile (eval compile-command) (not no-comint)))
 #+end_src
 
+*** =my/dedent-to-point=
+    :PROPERTIES:
+    :CREATED:  <2021-01-05 dt. 10:18>
+    :END:
+
+Una necessitat habitual és esborrar els espais des del punt fins el
+començament del text situat a la dreta del punt. Les funcions
+=just-one-space= i similars afecten als espais als dos costats del
+punt. =zap-up-to-char= valdria però requereix massa atenció.
+
+=my/dedent-to-point= implementa aquesta funcionalitat. També permet
+fussionar línies de forma més àgil que amb la combinació =M-d C-_= que
+utilitzo actualment.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/dedent-to-point (arg)
+    "Si el punt està sobre un espai o al final de la línia esborra
+  tots els espais situats a la dreta fins trobar el primer caràcter
+  que no és un espai o arribar al final de línia.
+
+  Si es crida amb un prefix (C-u) la cerca continua fins el final
+  del buffer."
+    (interactive "p")
+    (when (or (eolp) (looking-at-p "\s"))
+      (let* ((begin (point))
+             (limit (if (= arg 1) (point-at-eol) (point-max)))
+             (end (save-excursion
+                    (skip-syntax-forward " " limit)
+                    (point))))
+        (delete-region begin end))))
+#+end_src
+
 *** =my/display-line-numbers-mode=
 
 Activa/desactiva la numeració de les línies. Si està disponible
@@ -5725,6 +5757,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
 
   (global-set-key (kbd "C-w") #'my/kill-region)
+
+  (global-set-key (kbd "M-D") #'my/dedent-to-point)
 
   ;; tab-bar
   (when (fboundp 'tab-bar-mode)
