@@ -1975,6 +1975,24 @@ el prefereixo.
         (user-error "No s'ha trobat '.svn'."))))
 #+end_src
 
+El buffer per editar els missatge de commit defineix comandes útils
+que mai recordo. Aquest és un intent de recordar-les.
+
+#+begin_src emacs-lisp :tangle yes
+  (customize-set-value
+   'svn-log-edit-header
+   (concat "## Lines starting with '## ' will be removed from the log message.\n"
+           "##\n"
+           "## Partial list of commands\n"
+           "## C-c C-d    svn-log-edit-svn-diff\n"
+           "## C-c TAB    svn-log-edit-svn-status\n"
+           "## C-c C-l    svn-log-edit-svn-log\n"
+           "## C-c C-z    svn-log-edit-erase-edit-buffer\n"
+           "## C-c C-c    log-edit-done\n"
+           "## C-c C-k    log-edit-kill-buffer\n"
+           "##\n"))
+#+end_src
+
 *** =rainbow=
 
 https://elpa.gnu.org/packages/rainbow-mode.html
