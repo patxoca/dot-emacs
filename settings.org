@@ -1935,6 +1935,19 @@ No estic segur de si prefereixo aquest comportament, l'anterior o els
 dos. El temps dirà. Pel moment assignaré el nou comportament a ~=~ i
 l'original a ~M-==~.
 
+La comanda =svn-log-edit-erase-edit-buffer= esborra tot el contingut
+del buffer, incloent els comentaris amb la llist d'arxius modificats.
+Aquesta comanda és mens agressiva i manté els comentaris.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/svn-log-edit-erase-edit-buffer ()
+    (interactive)
+    (set-buffer svn-log-edit-buffer-name)
+    (save-excursion
+      (goto-char (point-min))
+      (keep-lines "^##.*")))
+#+end_src
+
 Configura el mode.
 
 #+begin_src emacs-lisp :tangle yes
@@ -1955,7 +1968,10 @@ Configura el mode.
     (my/bind-keys
      svn-status-mode-map
      '(("=" my/svn-status-show-svn-diff)
-       ("M-=" svn-status-show-svn-diff))))
+       ("M-=" svn-status-show-svn-diff)))
+    (my/bind-keys
+     svn-log-edit-mode-map
+     '(("C-c C-z" my/svn-log-edit-erase-edit-buffer))))
 #+end_src
 
 Amb =magit= al executar la comanda =status= es fa des de l'arrel (el

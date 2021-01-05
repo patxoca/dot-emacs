@@ -2360,3 +2360,26 @@ Crec que ha carregat la configuració correcta però sembla que no s'ha
 activat. Executant =(my/org-reset-<-syntax)= manualment es resol.
 
 Revisar que passa.
+** DONE idees per psvn                                                 :idea:
+   :PROPERTIES:
+   :CREATED: [2021-01-05 dt. 12:09]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "TODO"       [2021-01-05 dt. 12:50]
+
+El buffer =*svn-log-edit*= té comandes útils que no havia investigat
+mai:
+
+- esborrar el missatge (d'un commit previ)
+
+- veure les diferències
+
+I probablement altres.
+
+La comanda per esborrar el missatge esborra tot el contingut del
+buffer. M'agradaria conservar les línies del principi que ha inserit
+=psvn=.
+
+Trobo que podria ser útil que el missatge que apareix contingui una
+xuleta amb les combinacions de tecles més útils.
