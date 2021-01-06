@@ -4676,8 +4676,10 @@ comanda equivalment a =M-Q M-q=.
 
 *** =my/visit-emacs-config= etc.
 
-Comandes per visitar arxius i directoris relacionats amb la
-configuració d'emacs:
+Comandes per agilitzar visitar arxius i directoris que utilitzo
+sovint.
+
+**** Configuració d'Emacs
 
 #+begin_src emacs-lisp :tangle yes
   (defun my/visit-emacs-config ()
@@ -4696,6 +4698,33 @@ configuració d'emacs:
     "Visita el directori de configuració d'emacs."
     (interactive)
     (find-file arv/emacs-conf-dir))
+#+end_src
+
+**** Arxiu TODO.org del projecte
+
+Darrerament acostumo a crar un arxiu =TODO.org= en l'arrel de cada
+/projecte/. Aquesta comanda permer visitar-lo des de dins del
+projecte.
+
+En Hera utilitzo un arxiu TODO global que guardo dins un directori.
+Això no encaixa amb aquesta comanda. Una possibilitat seria definir
+una variable (entorn? dir-locals?) que especifica la ubicació. Queda
+per definir l'ordre de prioritat si hi ha conflicte. Crec que el
+millor es buscar i si no el troba consultar la variable. Un prefix pot
+invertir l'ordre?
+
+Açò està relacionat amb una altra idea que no sé si tinc apuntada,
+implementar un sistema de captura genèric que entengui el condepte de
+/projecte actual/.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/visit-current-project-TODO ()
+    "Visita l'arxiu 'TODO.org' del projecte actual, per una
+  definició relaxada de 'projecte."
+    (interactive)
+    (let ((directori (locate-dominating-file default-directory "TODO.org")))
+      (when directori
+        (find-file (f-join directori "TODO.org")))))
 #+end_src
 
 *** =my/xml-prettify-buffer=
@@ -5852,6 +5881,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; jump map
 
+  (global-set-key (kbd "C-c j C-t") #'my/visit-current-project-TODO)
   (global-set-key (kbd "C-c j c") 'avy-goto-char-2)
   (global-set-key (kbd "C-c j e e") #'my/visit-emacs-config)
   (global-set-key (kbd "C-c j e d") #'my/visit-emacs-config-directory)
