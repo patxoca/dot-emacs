@@ -1994,19 +1994,24 @@ el prefereixo.
 El buffer per editar els missatge de commit defineix comandes útils
 que mai recordo. Aquest és un intent de recordar-les.
 
+*Important*: =psvn= elimina les linies que comencen per /almohadilla,
+almohadilla espai/. Si es vol separar les línies crec que és millor
+utilitzar algo com =## .= o =## _= abans que =##<espai>=. Açò evita
+efectes inesperats com que un hook esborri el /trailing whitespace/
+abans de fer el commit i =psvn= deixi de considerar la línia com un
+comentari.
+
 #+begin_src emacs-lisp :tangle yes
   (customize-set-value
    'svn-log-edit-header
    (concat "## Lines starting with '## ' will be removed from the log message.\n"
-           "##\n"
            "## Partial list of commands\n"
            "## C-c C-d    svn-log-edit-svn-diff\n"
            "## C-c TAB    svn-log-edit-svn-status\n"
            "## C-c C-l    svn-log-edit-svn-log\n"
            "## C-c C-z    svn-log-edit-erase-edit-buffer\n"
            "## C-c C-c    log-edit-done\n"
-           "## C-c C-k    log-edit-kill-buffer\n"
-           "##\n"))
+           "## C-c C-k    log-edit-kill-buffer\n"))
 #+end_src
 
 *** =rainbow=
