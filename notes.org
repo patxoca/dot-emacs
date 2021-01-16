@@ -928,6 +928,40 @@ El resultat és que només s'ajusta a partir de la segona línia.
   Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo.
 #+end_src
 
+** TODO al crear un arxiu python no s'utilitzen les plantilles          :bug:
+   :PROPERTIES:
+   :CREATED: [2021-01-04 dl. 23:34]
+   :REFERER: [[file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py][file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py]]
+   :END:
+
+Al crear un nou mòdul python no s'ofereix la possibilitat de triar una
+plantilla per crear l'esquelet.
+
+Provat dins el virtualenv =hera_py3=, treballant en =dja.layout=.
+Confirmat també dins el virtualenv =hera_impl= (python 2).
+
+Escrivint a ma =header= i provant d'expandir-lo tampoc te cap efecte.
+Altres /snippets/ sí funcionen.
+
+No ho he provat amb altres tipus d'arxius.
+
+** PAUS =pyx/visit-test-module= no funciona amb /namespace packages/    :bug:
+   :PROPERTIES:
+   :CREATED: [2021-01-05 dt. 13:40]
+   :REFERER: [[file:~/.emacs.d/elpa/arv-py-20201227.1807/pyx.el::defun pyx/visit-test-module (]]
+   :END:
+
+   - State "PAUS"       from "TODO"       [2021-01-06 dc. 12:04] \\
+     He simplificat la implementació. Enlloc d'intentar ser intel·ligent i
+     barallar-me amb l'estructura del projecte ara utilitza
+     =locate-dominating-file= per localitzar el directori de tests.
+
+Quan s'executa =pyx/visit-test-module= des d'un mòduls en un
+/namespace package/ no troba el directori de tests.
+
+Si no m'equivoco el problema és que busca el directori de tests en
+=<ARREL>/tests= no en =<ARREL>/<SUBPAQUET>/tests=.
+
 * Paquets extra
 ** Col·leccions de paquets
 
