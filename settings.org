@@ -3977,6 +3977,26 @@ l'arxiu del buffer actual) i en els directoris pare.
               (set-variable 'show-trailing-whitespace t)))
 #+end_src
 
+*** scheme
+
+**** =geiser=
+
+Sembla que =geiser= és el paquet recomanat per treballar amb scheme:
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package geiser
+    :ensure t
+    :init (setq geiser-active-implementations '(guile)))
+#+end_src
+
+**** /Hooks/
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'scheme-mode
+            (lambda ()
+               (paredit-mode 1)))
+#+end_src
+
 *** typescript
 
 Configuració de =typescript=.
