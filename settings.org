@@ -3005,6 +3005,14 @@ opcions:
 Aquesta opció es pot afegir amb la comanda =C-u C-u TAB=
 (=org-set-startup-visibility=).
 
+M'he acostumat a que el text no estigui sagnat i el nou comportament
+de sagnar el text al mateix nivell que les capçaleres en prémer return
+em resulta molest:
+
+#+begin_src emacs-lisp :tangle yes
+  (customize-set-value 'org-adapt-indentation nil)
+#+end_src
+
 **** =org-id=
 
 Al emmagatzemar l'enllaç a una secció amb =C-c l= s'utilitza el títol
