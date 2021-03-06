@@ -962,6 +962,36 @@ Quan s'executa =pyx/visit-test-module= des d'un mòduls en un
 Si no m'equivoco el problema és que busca el directori de tests en
 =<ARREL>/tests= no en =<ARREL>/<SUBPAQUET>/tests=.
 
+** TODO tangle configuració asincronament al guardar                   :idea:
+   :PROPERTIES:
+   :CREATED: [2021-03-06 ds. 19:33]
+   :REFERER:
+   :END:
+
+Executar el /tangle/ de la configuració al arrancar emacs ho
+ralentitza i resulta una mica molest.
+
+Per la xarxa hi ha receptes per executar el /tangle/ al guardar
+l'arxiu, asincronament:
+
+https://emacs.stackexchange.com/questions/22722/tangle-init-file-async
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'load-path "~/.emacs.d/emacs-async/")
+  (require 'async)
+  (defun tangle-init-async ()
+    "If the current buffer is 'emacs-init.org' the code-blocks are tangled."
+    (when (equal (buffer-file-name) (expand-file-name (concat user-emacs-directory "init.org")))
+      (async-start
+       `(lambda ()
+          (require 'org)
+          (org-babel-tangle-file (expand-file-name (concat user-emacs-directory "init.org")) (expand-file-name (concat user-emacs-directory "init.el") "emacs-lisp"))
+          )
+       (lambda (result)
+         (byte-compile-file (expand-file-name (concat user-emacs-directory "init.el")))
+         (message "Tangled file compiled.")))))
+  (add-hook 'after-save-hook 'tangle-init-async)
+#+end_src
 * Paquets extra
 ** Col·leccions de paquets
 
