@@ -1515,10 +1515,7 @@ much more contextual information.
                helpful-command
                helpful-key
                helpful-variable
-               helpful-at-point)
-    :bind (("C-h f" . helpful-callable)
-           ("C-h v" . helpful-variable)
-           ("C-h k" . helpful-key)))
+               helpful-at-point))
 #+end_src
 
 *** =hi-lock=                                                       :builtin:
@@ -5886,6 +5883,10 @@ redundants o mai les he arribat a incorporar en el /workflow/.
     (global-set-key (kbd "C-x t h p") #'tab-bar-history-back)
     (global-set-key (kbd "C-x t h <right>") #'tab-bar-history-forward)
     (global-set-key (kbd "C-x t h n") #'tab-bar-history-forward))
+
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)
