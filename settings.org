@@ -1499,6 +1499,28 @@ comandes.
 El problema amb =grin= és anecdòtic en el meu cas d'us i no hi ha
 urgència en fer el canvi. Açò és més un recordatori.
 
+*** =helpful=
+
+https://github.com/Wilfred/helpful
+
+Helpful is an alternative to the built-in Emacs help that provides
+much more contextual information.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package helpful
+    :ensure t
+    :commands (helpful-callable
+               helpful-function
+               helpful-macro
+               helpful-command
+               helpful-key
+               helpful-variable
+               helpful-at-point)
+    :bind (("C-h f" . helpful-callable)
+           ("C-h v" . helpful-variable)
+           ("C-h k" . helpful-key)))
+#+end_src
+
 *** =hi-lock=                                                       :builtin:
 
 #+begin_src emacs-lisp :tangle yes
