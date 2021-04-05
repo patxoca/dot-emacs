@@ -992,6 +992,16 @@ https://emacs.stackexchange.com/questions/22722/tangle-init-file-async
          (message "Tangled file compiled.")))))
   (add-hook 'after-save-hook 'tangle-init-async)
 #+end_src
+** TODO implementar comanda =my/http-live-server=                      :idea:
+   :PROPERTIES:
+   :CREATED: [2021-04-05 dl. 20:50]
+   :REFERER:
+   :END:
+
+Estaria bé poder llançar el live server des de Emacs. Hauria de
+preguntar pel directori, oferint per defecte el directori del buffer
+actual o el directori actual.
+
 * Paquets extra
 ** Col·leccions de paquets
 
