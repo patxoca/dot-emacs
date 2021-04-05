@@ -4794,6 +4794,21 @@ línia. Aquesta funció formateja un buffer amb contingut XML (o HTML).
       (sgml-pretty-print (point-min) (point-max))))
 #+end_src
 
+*** =my/cd-directory-at-point=
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/cd-directory-at-point ()
+    "Canvia al directori que hi ha al punt."
+    (interactive)
+    (let ((path (thing-at-point 'filename)))
+      (if (not (null path))
+          (if (file-directory-p path)
+              (cd path)
+            (if (file-directory-p (substring path 0 (1- (length path))))
+                (cd (substring path 0 (1- (length path))))))
+        (user-error "Point is not over a filename."))))
+#+end_src
+
 *** Comentari dins rectangle
 
 http://pragmaticemacs.com/emacs/comment-boxes/
