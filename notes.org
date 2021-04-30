@@ -992,6 +992,40 @@ https://emacs.stackexchange.com/questions/22722/tangle-init-file-async
          (message "Tangled file compiled.")))))
   (add-hook 'after-save-hook 'tangle-init-async)
 #+end_src
+
+** TODO error =djira=                                                   :bug:
+   :PROPERTIES:
+   :CREATED: [2021-03-29 dl. 01:39]
+   :REFERER: [[file:~/prog/proves-vue/complet/src/App.vue][file:~/prog/proves-vue/complet/src/App.vue]]
+   :END:
+
+Al activar =vue-mode= apareix l'error:
+
+#+begin_src text
+  if: Cannot open load file: El fitxer o directori no existeix, djira-el
+#+end_src
+
+i s'avorta la inicialització del mode.
+
+Sembla que el problema és que en algun lloc es requereix =djira-el=
+quan el paquet proveeix =djira=. Requerir manualment =djira= sembla
+resoldre el problema.
+
+Per una altra banda, en aquest context =djira-el= no aporta res i no
+és necessari.
+
+** TODO molestia en =html-mode=                                   :annoyance:
+   :PROPERTIES:
+   :CREATED: [2021-03-29 dl. 02:38]
+   :REFERER: [[file:~/prog/proves-vue/complet/src/components/Task.vue::<p>{{task.day}}</p>]]
+   :END:
+
+Estic acostumat a que al tancar un paréntesi/clau etc. el punt avanci
+sense inserir el caràcter (=smartparens=?).
+
+Amb HTML esperaria un comportament semblant al escriure =>= però no és
+així i acabo amb =>= duplicats.
+
 * Paquets extra
 ** Col·leccions de paquets
 
