@@ -757,6 +757,7 @@ Té altres rareses.
 ** TODO /boilerplate/ al crear nous arxius                              :bug:
    :PROPERTIES:
    :CREATED: [2020-05-12 dc 13:37]
+   :ID:       d41aabf6-1c31-4c3d-b13b-283ee3541977
    :END:
 
 La solució casolana actual no funciona amb =org-mode= (de vegades
@@ -765,6 +766,35 @@ funciona, funcionava?).
 En aquest article Howard Abrams explora el problema.
 
 http://www.howardism.org/Technical/Emacs/templates-tutorial.html
+
+*** =auto-insert=
+
+=auto-insert= és un paquet nadiu de emacs:
+
+#+begin_quote
+Auto-insert is instead intended to be used when a new file is created:
+Create an empty HTML buffer, and then run M-x auto-insert – after
+querying the title a skeleton of a HTML file is generated.
+
+This can even be added to a mode hook:
+
+  (add-hook 'html-mode-hook #'auto-insert)
+
+Emacs will make sure that you actual want auto-insertion to take
+place, and then proceed like above.
+#+end_quote
+
+No crec que =auto-insert= sigui el que busco però per no perdre-li la
+pista afegeixo aquesta entrada.
+
+*** relacionat amb:
+
+Aquestes altres entrades estan relacionades.
+
+- [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][extreue =arv/template= al seu propi mòdul]]
+
+- [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]
+
 
 ** TODO Revisa faces de =svn-diff=                                :annoyance:
    :PROPERTIES:
@@ -826,6 +856,7 @@ llegir el text.
    :PROPERTIES:
    :CREATED: [2020-12-08 dt. 17:14]
    :REFERER: [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][Codi]]
+   :ID:       b120699e-2c0b-4c18-9114-38081cbf3c81
    :END:
 
 Les funcions de [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][arv/template]] requereixen que s'hagi carregat
@@ -932,6 +963,7 @@ El resultat és que només s'ajusta a partir de la segona línia.
    :PROPERTIES:
    :CREATED: [2021-01-04 dl. 23:34]
    :REFERER: [[file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py][file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py]]
+   :ID:       de550750-d9c4-4c3f-a186-58a4d065181f
    :END:
 
 Al crear un nou mòdul python no s'ofereix la possibilitat de triar una
