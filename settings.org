@@ -4610,6 +4610,21 @@ Té dos detalls que caldria polir:
     (compile (eval compile-command) (not no-comint)))
 #+end_src
 
+*** =my/copy-buffer-path-to-clipboard/=
+
+De vegades em cal escriure el nom d'un buffer (al escriure una comanda
+o perquè utilitzo alguan convenció per anomenar arxius relacionats).
+El problema apareix quan el nom de l'arxiu és llarg (i estic espés).
+
+Aquesta comanda copia la ruta del buffer actual en el portaretalls.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/copy-buffer-path-to-clipboard ()
+    "Copia el nom del buffer actual al portaretalls."
+    (interactive)
+    (let ((x-select-enable-clipboard t))
+      (kill-new buffer-file-name)))
+#+end_src
 *** =my/dedent-to-point=
     :PROPERTIES:
     :CREATED:  <2021-01-05 dt. 10:18>
