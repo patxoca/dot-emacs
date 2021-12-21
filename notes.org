@@ -1078,6 +1078,15 @@ https://lucidmanager.org/productivity/ricing-org-mode/
 
 Aquest blog explica unes configuracions de =org-mode=.
 
+** TODO Simple folding with hideshow
+
+https://karthinks.com/software/simple-folding-with-hideshow/
+
+Article que comenta varies opcions per implementar /code folding/.
+Proposa una solució pròpia però crec que el més interesssant és que
+parla de diferents paquets/enfocs. Un punt de partida per triar una
+solució.
+
 * Paquets extra
 ** Col·leccions de paquets
 
