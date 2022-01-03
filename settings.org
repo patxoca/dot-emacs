@@ -2795,7 +2795,7 @@ Per instal·lar:
   pushd ~/.local/src
   if [ ! -d org-mode ] ; then
       echo "Descarregant i instal·lant 'org-mode'."
-      git clone --quiet https://code.orgmode.org/bzg/org-mode.git
+      git clone --quiet https://git.savannah.gnu.org/git/emacs/org-mode.git
       cd org-mode
       make local.mk
       sed -i -r -e 's!^prefix\s+=.*$!prefix = $(HOME)/.local/share!' local.mk
@@ -2813,6 +2813,16 @@ Per actualitzar la versió instal·lada:
   make
   make install
 #+end_src
+
+#+begin_warning
+Al actualitzar a emacs 28.0.90 també he actualitzat =org-mode= a la
+versió 9.5.2 i el procediment anterior sembla que no ha funcionat.
+Després d'executar-lo =org-version= seguia mostrant la versió
+anterior. He esborrat manualment la instal·lació de =org-mode= i he
+repetit el =make install=. Ara mostra la versió correcta, no tinc clar
+si cal esborrar-ho o és una altra cosa. Verificar-lo la pròxima vegada
+que s'actualitzi.
+#+end_warning
 
 **** Ajuda
 
