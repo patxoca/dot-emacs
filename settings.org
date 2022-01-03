@@ -1484,17 +1484,16 @@ els =import= que fa =grin=. Ho vaig detectar, crec recordar, intentant
 executar-lo dins el =site-packages= d'un /virtualenv/, no recordo els
 detalls concrets.
 
-=ag=[[[https://github.com/ggreer/the_silver_searcher][enllaç]]] és una alternativa semblant, escrita en C, per tant més
+=ag= ([[https://github.com/ggreer/the_silver_searcher][enllaç]]) és una alternativa semblant, escrita en C, per tant més
 ràpida i que no té conflictes amb arbres de codi python.
 
-El que em tira enrere per canviar és la interfície del mòdul
-=ag.el=[[[https://github.com/Wilfred/ag.el][enllaç]]], defineix moltes comandes per fer diferents tipus de
-cerques (text en directori, text en directori només en certs arxius,
-regex en directori, text en projecte, text en certs arxius del
-projecte, regex en projecte ...). Massa comandes/combinacions de
-tecles que recordar i poca flexibilitat. M'agrada més l'enfoc de
-=grin.el=, una única comanda que demana el directori i la línia de
-comandes.
+El que em tira enrere per canviar és la interfície del mòdul =ag.el=
+([[https://github.com/Wilfred/ag.el][enllaç]]), defineix moltes comandes per fer diferents tipus de cerques
+(text en directori, text en directori només en certs arxius, regex en
+directori, text en projecte, text en certs arxius del projecte, regex
+en projecte ...). Massa comandes/combinacions de tecles que recordar i
+poca flexibilitat. M'agrada més l'enfoc de =grin.el=, una única
+comanda que demana el directori i la línia de comandes.
 
 El problema amb =grin= és anecdòtic en el meu cas d'us i no hi ha
 urgència en fer el canvi. Açò és més un recordatori.
