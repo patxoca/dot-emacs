@@ -2959,7 +2959,7 @@ versió 8.0.131.
   (with-eval-after-load "ob-plantuml"
     (customize-set-value
      'org-plantuml-jar-path
-     (expand-file-name "~/.local/lib/plantuml/plantuml.jar")))
+     (expand-file-name "~/.local/opt/plantuml/plantuml.jar")))
 #+end_src
 
 **** =org=
