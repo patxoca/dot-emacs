@@ -3433,6 +3433,7 @@ Funcions d'utilitat per treballar amb codi python.
   (use-package arv-py
     :ensure t
     :commands (pyx/add-setup-dependency
+               pyx/api-export-symbol-at-point
                pyx/electric-colon
                pyx/get-current-package-name
                pyx/insert-current-package-name
@@ -3720,6 +3721,7 @@ per the requirement of the Sphinx documentation generator.
        ("C-c m w t" pyx/refactor-wrap-try-except)
        ("C-c m w w" pyx/refactor-wrap-while)
        ("C-c m i s d " pyx/add-setup-dependency)
+       ("C-c m i a e" pyx/api-export-symbol-at-point)
        ("C-c m i p n" pyx/insert-current-package-name)
 
        ;; pytest
