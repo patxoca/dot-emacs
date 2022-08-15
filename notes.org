@@ -803,6 +803,24 @@ Aquestes altres entrades estan relacionades.
 - [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]
 
 
+*** problema
+
+Al obrir un nou arxiu python no s'ofereix l'opció de triar la
+plantilla inicial. Imagino que passarà amb altres modes.
+
+El problema sembla ser que es carreguen els snippets abans d'haver
+afegit la ruta de les plantilles a =yas-snippet-dirs= i en el moment
+de crear l'arxiu =yasnippet= encara no coneix de l'existència del
+snippet =header=.
+
+Es /resol/ recarregant els snippets, des del menú o amb
+=yas-reload-all=.
+
+Vull jubilar =arv/template= així que no crec que dediqui temps a
+resoldre-ho.
+
+Relacionat amb [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][Extreue =arv/template= al seu propi mòdul]].
+
 ** TODO Revisa faces de =svn-diff=                                :annoyance:
    :PROPERTIES:
    :CREATED: [2020-05-12 dt 17:32]
