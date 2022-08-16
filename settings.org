@@ -534,13 +534,13 @@ ací.
 Color utilitzat en el cursor quan estem en mode /insert/.
 
 #+begin_src emacs-lisp :tangle yes
-  (defvar my/face-cursor-insert-background-color nil)
+  (defvar my/theme-face-cursor-insert-background-color nil)
 #+end_src
 
 Color utilitzat en el cursor quan estem en mode /overwrite/.
 
 #+begin_src emacs-lisp :tangle yes
-  (defvar my/face-cursor-overwrite-background-color "purple")
+  (defvar my/theme-face-cursor-overwrite-background-color "purple")
 #+end_src
 
 *** Noves faces
@@ -585,7 +585,10 @@ colors que ressembla un semàfor per indicar tres nivells de
 *** doom-one
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/customize-theme-doom-one ()
+  (use-package doom-themes
+    :ensure t)
+
+  (defun my/theme-customize-theme-doom-one ()
     ;; El color dels comentaris contrasta poc amb el color de fons i
     ;; dificulta la lectura.
 
@@ -676,6 +679,11 @@ colors que ressembla un semàfor per indicar tres nivells de
                           :background "royalblue4"
                           :weight 'bold
                           :extend t)))
+
+  (defun my/theme-enable-theme-doom-one ()
+    (load-theme 'doom-one t)
+    (my/theme-customize-theme-doom-one)
+    (my/theme-customize-faces-common))
 #+end_src
 
 *** wombat
@@ -687,7 +695,7 @@ canviant de tema (/zenburn/, /tango-dark/, /doom-one/ i /wombat/ que
 recordi) i hauria de funcionar més o menys bé amb un tema fosc.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/customize-theme-wombat ()
+  (defun my/theme-customize-theme-wombat ()
     (set-face-attribute 'button nil
                         :foreground "#8ac6f2"
                         :underline t)
@@ -872,16 +880,34 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
       (custom-set-faces
        '(transient-argument ((t (:foreground "green" :weight bold))))))
     )
+
+  (defun my/theme-enable-theme-wombat ()
+    (load-theme 'wombat t)
+    (my/theme-customize-theme-wombat))
 #+end_src
 
 *** modus-operandi
 
-Personalització de =modus-operandi=.
-
 #+begin_src emacs-lisp :tangle yes
-  (defun my/customize-theme-modus-operandi ()
+  (use-package modus-themes
+    :ensure t)
 
-    ; redueix la mida del text de la modeline
+  (defun my/theme-customize-modus-operandi-variables ()
+    ;; personalitza les variables utilizades per inicialitzar el tema
+    ;; modus-operandi.
+    ;;
+    ;; cal avaluar aquest codi abans de carregar el tema.
+
+    (setq modus-themes-bold-constructs t
+          modus-themes-italic-constructs t
+          modus-themes-hl-line '(accented)
+          modus-themes-paren-match '(bold intense)
+          modus-themes-region '(bg-only accented)
+          modus-themes-diffs '(desaturated)
+          modus-themes-org-blocks 'gray-background))
+
+  (defun my/theme-customize-faces-modus-operandi ()
+    ;; personalitza les faces una vegada carregat el tema
     (set-face-attribute 'mode-line nil :height 94)
     (set-face-attribute 'mode-line-inactive nil :height 94)
 
@@ -927,15 +953,59 @@ Personalització de =modus-operandi=.
       (set-face-attribute 'rst-level-6 nil :background nil))
 
     )
+
+  (defun my/theme-enable-theme-modus-operandi ()
+    (require 'modus-themes)
+    (modus-themes-load-themes)
+    (my/theme-customize-modus-operandi-variables)
+    (modus-themes-load-operandi)
+    (my/theme-customize-faces-modus-operandi)
+    (my/theme-customize-faces-common))
 #+end_src
 
+*** modus-vivendi
+
+Configuració inicial del tema =modus-vivendi=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package modus-themes
+    :ensure t)
+
+  (defun my/theme-customize-modus-vivendi-variables ()
+    ;; personalitza les variables utilizades per inicialitzar el tema
+    ;; modus-vivendi.
+    ;;
+    ;; cal avaluar aquest codi abans de carregar el tema.
+
+    (setq modus-themes-bold-constructs t
+          modus-themes-italic-constructs t
+          modus-themes-syntax '(yellow-comments green-strings)
+          modus-themes-mode-line '(accented)
+          modus-themes-hl-line '(intense accented)
+          modus-themes-paren-match '(bold intense)
+          modus-themes-region '(bg-only )
+          modus-themes-diffs '(desaturated)
+          modus-themes-org-blocks 'gray-background))
+
+  (defun my/theme-customize-faces-modus-vivendi ()
+    ;; personalitza les faces una vegada carregat el tema
+    )
+
+  (defun my/theme-enable-theme-modus-vivendi ()
+    (require 'modus-themes)
+    (modus-themes-load-themes)
+    (my/theme-customize-modus-vivendi-variables)
+    (modus-themes-load-vivendi)
+    (my/theme-customize-faces-modus-vivendi)
+    (my/theme-customize-faces-common))
+#+end_src
 *** Elements independents del tema
 
 En aquesta secció es configuren elements independents del tema. Açò
 exclou colors.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/customize-faces-common ()
+  (defun my/theme-customize-faces-common ()
     (with-eval-after-load "org"
       (custom-set-faces
        '(org-document-title ((t (:height 1.5 :weight bold))))
@@ -951,26 +1021,15 @@ exclou colors.
 *** Activació del tema
 
 #+begin_src emacs-lisp :tangle yes
-  ;; (load-theme 'wombat)
-  ;; (my/customize-theme-wombat)
-
-  ;; (use-package modus-operandi-theme
-  ;;   :ensure t
-  ;;   :config
-  ;;   (my/customize-theme-modus-operandi))
-
-  (use-package doom-themes
-    :ensure t
-    :config
-    (load-theme 'doom-one)
-    (my/customize-theme-doom-one)
-    (my/customize-faces-common))
+  ;; (my/theme-enable-theme-wombat)
+  (my/theme-enable-theme-modus-operandi)
+  ;; (my/theme-enable-theme-doom-one)
 
   (when (display-graphic-p)
     ;; x-display-pixel-height necessita un entorn graphic
     (set-face-attribute 'default nil
-                        :family "JetBrains Mono"
-                        :height (if (> (x-display-pixel-height) 1080) 94 88)))
+            :family "JetBrainsMono"
+            :height (if (> (x-display-pixel-height) 1080) 94 88)))
 #+end_src
 
 ** Paquets
@@ -4230,45 +4289,41 @@ cal recuperar-los.
 *** Diferenciar modes /insert/ i /overwrite/
 
 Es aquest apartat es configura el canvi del color del cursor per
-indicar que ens troben en mode inserció o sobreescriptura.
+diferencia quan ens troben en mode inserció o sobreescriptura.
 
-Guarda el color del cursor en mode /insert/ per poder restaurar-lo al
-alternar entre /overwrite/ i /insert/.
+Guarda el color actual del cursor en mode /insert/ per poder
+restaurar-lo al alternar entre /overwrite/ i /insert/.
 
 #+begin_src emacs-lisp :tangle yes
-  (when (null my/face-cursor-insert-background-color)
-    (setq my/face-cursor-insert-background-color
+  (when (null my/theme-face-cursor-insert-background-color)
+    (setq my/theme-face-cursor-insert-background-color
           (face-attribute 'cursor :background)))
 #+end_src
 
-La solució original té un problema, el color del cursor és global
-mentre que el mode insertar/sobreescriure és local a cada buffer. Al
-cambiar de buffer no s'ajusta el color del cursor.
-
-#+begin_src emacs-lisp :tangle no
-  (defadvice overwrite-mode (after overwrite-mode-adjust-cursor activate)
-    "Change cursor color when enabling/disabling overwrite mode."
-    (set-cursor-color (if overwrite-mode
-                          "purple"
-                        my/face-cursor-insert-background-color)))
-#+end_src
-
-No he trobat cap /hook/ que es dispari si es canvia de buffer (=C-x
-b=) o de finestra (=C-x o=). Aquesta solució s'executa després de cada
-comanda amb el que hauria de ser acurada.
+Aquesta funció ajusta el color del cursor depenent de si estem en mode
+inserció o sobreescriptura:
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/update-cursor-color-for-insert-overwrite-mode ()
+  (defun my/theme-update-cursor-color-for-insert-overwrite-mode ()
     (set-cursor-color (if overwrite-mode
-                          my/face-cursor-overwrite-background-color
-                        my/face-cursor-insert-background-color)))
-
-  (add-hook 'post-command-hook #'my/update-cursor-color-for-insert-overwrite-mode)
+                          my/theme-face-cursor-overwrite-background-color
+                        my/theme-face-cursor-insert-background-color)))
 #+end_src
 
-No espero que suposi un problema pel rendiment. Si ralentitza
-apreciablement l'execució una altra possibilitat (cutre) seria aplicar
-/advice/ també a les funcions que canvien de buffer i de finestra.
+La solució original (definir un /advice/ per =overwrite-mode=) tenia
+el problema de que al cambiar de buffer no s'ajustava el color del
+cursor. Una possible solució seria utilitzar un /hook/ que s'activi al
+canviar de buffer, finestra o frame, malauradament no he trobat cap
+/hook/ que es dispari si es canvia de buffer (=C-x b=) o de finestra
+(=C-x o=). Aquesta solució ajusta el color del cursor *després de cada
+comanda* amb el que hauria de ser acurada. No espero que suposi un
+problema pel rendiment. Si ralentitza apreciablement l'execució una
+altra possibilitat (cutre) seria aplicar /advice/ també a les funcions
+que canvien de buffer i de finestra.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'post-command-hook #'my/theme-update-cursor-color-for-insert-overwrite-mode)
+#+end_src
 
 ** Comandes
    :PROPERTIES:
