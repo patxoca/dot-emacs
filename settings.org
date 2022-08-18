@@ -910,6 +910,18 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
                           :foreground "white"
                           :background "#a80000"))
 
+    ;; modus-operandi utilitza un color blau pels afegits, el meu
+    ;; cervell interpreta millor el verd
+    (with-eval-after-load "magit"
+      (set-face-attribute 'magit-diff-added-highlight nil
+                          :underline nil
+                          :foreground "#004E00"
+                          :background "#d6ebc3")
+      (set-face-attribute 'magit-diff-added nil
+                          :underline nil
+                          :foreground "#004E00"
+                          :background "#e6f8d1"))
+
     (with-eval-after-load "rst"
       ;; customize-face (suposo) te problemes quan la llista
       ;; d'atributs esta buida, sembla que ho interpreta com "no
