@@ -922,6 +922,16 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
       (set-face-attribute 'rst-level-5 nil :background nil)
       (set-face-attribute 'rst-level-6 nil :background nil))
 
+    (with-eval-after-load "diff-hl"
+      (set-face-attribute 'diff-hl-change nil
+                          :foreground "#daefff"
+                          :background "#daefff")
+      (set-face-attribute 'diff-hl-delete nil
+                          :foreground "#ffe8ef"
+                          :background "#ffe8ef")
+      (set-face-attribute 'diff-hl-insert nil
+                          :foreground "#ddf0c7"
+                          :background "#ddf0c7"))
     )
 
   (defun my/theme-enable-theme-modus-operandi ()
