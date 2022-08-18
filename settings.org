@@ -524,25 +524,6 @@ sigui preferible a definir un valor fix en la configuració.
 Crec que la millor forma d'organitzar la configuració de les /faces/
 és concentrar-les en una única secció, facilita el canvi de tema.
 
-*** Variables
-
-Aquesta secció defineix variables relacionades amb les /faces/. Es
-defineixen per garantir que existeixen pero el seu valor s'ha de
-canviar, si escau, dins les funcions que personalitzen els temes, no
-ací.
-
-Color utilitzat en el cursor quan estem en mode /insert/.
-
-#+begin_src emacs-lisp :tangle yes
-  (defvar my/theme-face-cursor-insert-background-color nil)
-#+end_src
-
-Color utilitzat en el cursor quan estem en mode /overwrite/.
-
-#+begin_src emacs-lisp :tangle yes
-  (defvar my/theme-face-cursor-overwrite-background-color "purple")
-#+end_src
-
 *** Noves faces
 
 Aquesta secció defineix noves faces utilitzades en la configuració. Es
@@ -1018,6 +999,57 @@ exclou colors.
     )
 #+end_src
 
+*** Diferenciar modes /insert/ i /overwrite/
+
+Es aquest apartat es configura el canvi del color del cursor per
+diferenciar quan ens troben en mode inserció/sobreescriptura.
+
+Variables que guarden el color utilitzat en el cursor quan estem en
+mode /insert/ o /overwrite/. El valor inicial de la variable
+=my/theme-face-cursor-insert-background-color= és irrellevant, la
+funció =my/theme-insert-overwrite-init= li assignarà un valor en
+funció del color del cursor del tema actiu.
+
+#+begin_src emacs-lisp :tangle yes
+  (defvar my/theme-face-cursor-insert-background-color nil)
+  (defvar my/theme-face-cursor-overwrite-background-color "purple")
+#+end_src
+
+Aquesta funció guarda el color actual del cursor en mode /insert/ per
+poder restaurar-lo al alternar entre /overwrite/ i /insert/. Cal
+cridar-la després de canviar el tema:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/theme-insert-overwrite-init ()
+    (setq my/theme-face-cursor-insert-background-color
+          (face-attribute 'cursor :background)))
+#+end_src
+
+Aquesta funció ajusta el color del cursor depenent de si estem en mode
+inserció o sobreescriptura:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/theme-insert-overwrite-update-cursor-color ()
+    (set-cursor-color (if overwrite-mode
+                          my/theme-face-cursor-overwrite-background-color
+                        my/theme-face-cursor-insert-background-color)))
+#+end_src
+
+La solució original (definir un /advice/ per =overwrite-mode=) tenia
+el problema de que al cambiar de buffer no s'ajustava el color del
+cursor. Una possible solució seria utilitzar un /hook/ que s'activi al
+canviar de buffer, finestra o frame, malauradament no he trobat cap
+/hook/ que es dispari si es canvia de buffer (=C-x b=) o de finestra
+(=C-x o=). Aquesta solució ajusta el color del cursor *després de cada
+comanda* amb el que hauria de ser acurada. No espero que suposi un
+problema pel rendiment. Si ralentitza apreciablement l'execució una
+altra possibilitat (cutre) seria aplicar /advice/ també a les funcions
+que canvien de buffer i de finestra.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'post-command-hook #'my/theme-insert-overwrite-update-cursor-color)
+#+end_src
+
 *** Activació del tema
 
 #+begin_src emacs-lisp :tangle yes
@@ -1030,6 +1062,8 @@ exclou colors.
     (set-face-attribute 'default nil
             :family "JetBrainsMono"
             :height (if (> (x-display-pixel-height) 1080) 94 88)))
+
+  (my/theme-insert-overwrite-init)
 #+end_src
 
 ** Paquets
@@ -4284,45 +4318,6 @@ cal recuperar-los.
     (unless (file-directory-p backup-dir)
       (make-directory backup-dir t))
     (setq backup-directory-alist `(("." . ,backup-dir))))
-#+end_src
-
-*** Diferenciar modes /insert/ i /overwrite/
-
-Es aquest apartat es configura el canvi del color del cursor per
-diferencia quan ens troben en mode inserció o sobreescriptura.
-
-Guarda el color actual del cursor en mode /insert/ per poder
-restaurar-lo al alternar entre /overwrite/ i /insert/.
-
-#+begin_src emacs-lisp :tangle yes
-  (when (null my/theme-face-cursor-insert-background-color)
-    (setq my/theme-face-cursor-insert-background-color
-          (face-attribute 'cursor :background)))
-#+end_src
-
-Aquesta funció ajusta el color del cursor depenent de si estem en mode
-inserció o sobreescriptura:
-
-#+begin_src emacs-lisp :tangle yes
-  (defun my/theme-update-cursor-color-for-insert-overwrite-mode ()
-    (set-cursor-color (if overwrite-mode
-                          my/theme-face-cursor-overwrite-background-color
-                        my/theme-face-cursor-insert-background-color)))
-#+end_src
-
-La solució original (definir un /advice/ per =overwrite-mode=) tenia
-el problema de que al cambiar de buffer no s'ajustava el color del
-cursor. Una possible solució seria utilitzar un /hook/ que s'activi al
-canviar de buffer, finestra o frame, malauradament no he trobat cap
-/hook/ que es dispari si es canvia de buffer (=C-x b=) o de finestra
-(=C-x o=). Aquesta solució ajusta el color del cursor *després de cada
-comanda* amb el que hauria de ser acurada. No espero que suposi un
-problema pel rendiment. Si ralentitza apreciablement l'execució una
-altra possibilitat (cutre) seria aplicar /advice/ també a les funcions
-que canvien de buffer i de finestra.
-
-#+begin_src emacs-lisp :tangle yes
-  (add-hook 'post-command-hook #'my/theme-update-cursor-color-for-insert-overwrite-mode)
 #+end_src
 
 ** Comandes
