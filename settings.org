@@ -1036,7 +1036,7 @@ inserció o sobreescriptura:
 #+end_src
 
 La solució original (definir un /advice/ per =overwrite-mode=) tenia
-el problema de que al cambiar de buffer no s'ajustava el color del
+el problema de que al canviar de buffer no s'ajustava el color del
 cursor. Una possible solució seria utilitzar un /hook/ que s'activi al
 canviar de buffer, finestra o frame, malauradament no he trobat cap
 /hook/ que es dispari si es canvia de buffer (=C-x b=) o de finestra
