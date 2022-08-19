@@ -706,42 +706,6 @@ vaig fer), definir una comanda i vincular-la a la tecla =<=.
 El que no m'agrada és que probablement es perdrà la prestació
 d'esborrar automàticament el =>= al esborrar el =<=.
 
-** PAUS Error amb =M-q= en comentaris en =asm-mode=                     :bug:
-   :PROPERTIES:
-   :CREATED: [2020-04-15 dc 14:35]
-   :REFERER: [[file:~/prog/z80/exercicis/project/src/main.s::prova_fill_screen3:]]
-   :END:
-
-   - State "PAUS"       from "WAIT"       [2021-12-21 dt. 08:15] \\
-     Resolt en Emacs 28.
-
-     Estic en procés de migrar a Emacs 28, sembla bona idea revertir el
-     canvi que vaig fer a la configuració que resoldre el problema
-     localment i verificar que ja no tinc problemes.
-
-   - State "WAIT"       from "TODO"       [2020-12-13 dg. 12:48] \\
-     Hi ha obert un bugreport al respecte:
-
-     http://debbugs.gnu.org/cgi/bugreport.cgi?bug=41064
-
-=fill-paragraph= (=M-q=) fa coses rares quan estic en un comentari en
-=asm-mode=.
-
-Per exemple:
-
-#+begin_src asm
-      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la (*)pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
-#+end_src
-
-Amb el punt on està el =(*)= ho converteix en:
-
-#+begin_src asm
-      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la
-      pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
-#+end_src
-
-Té altres rareses.
-
 ** TODO Revisa faces de =svn-diff=                                :annoyance:
    :PROPERTIES:
    :CREATED: [2020-05-12 dt 17:32]
@@ -2607,3 +2571,42 @@ subversion.
 
 Definir un /wrapper/ =arv/svn-status= que busqui el /dominant file/
 =.svn=, canvii directori i executi =svn-status=.
+** DONE Error amb =M-q= en comentaris en =asm-mode=                     :bug:
+   :PROPERTIES:
+   :CREATED: [2020-04-15 dc 14:35]
+   :REFERER: [[file:~/prog/z80/exercicis/project/src/main.s::prova_fill_screen3:]]
+   :END:
+
+   - State "DONE"       from "PAUS"       [2022-08-19 dv. 19:21] \\
+     Sembla funcionar. No trobo la configuració que cal revertir, suposo
+     que ho vaig fer en el seu moment.
+
+   - State "PAUS"       from "WAIT"       [2021-12-21 dt. 08:15] \\
+     Resolt en Emacs 28.
+
+     Estic en procés de migrar a Emacs 28, sembla bona idea revertir el
+     canvi que vaig fer a la configuració que resoldre el problema
+     localment i verificar que ja no tinc problemes.
+
+   - State "WAIT"       from "TODO"       [2020-12-13 dg. 12:48] \\
+     Hi ha obert un bugreport al respecte:
+
+     http://debbugs.gnu.org/cgi/bugreport.cgi?bug=41064
+
+=fill-paragraph= (=M-q=) fa coses rares quan estic en un comentari en
+=asm-mode=.
+
+Per exemple:
+
+#+begin_src asm
+      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la (*)pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
+#+end_src
+
+Amb el punt on està el =(*)= ho converteix en:
+
+#+begin_src asm
+      ;; Les dos funcions anteriors emplenen 16384 bytes tot i que la
+      pantalla únicament utilitza 16000 bytes, malbaratant 384 bytes
+#+end_src
+
+Té altres rareses.
