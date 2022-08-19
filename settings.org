@@ -991,6 +991,42 @@ Configuració inicial del tema =modus-vivendi=.
     (my/theme-customize-faces-modus-vivendi)
     (my/theme-customize-faces-common))
 #+end_src
+
+*** ef-themes
+
+Configuració inicial dels =ef-themes= que em resulten més agradables.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ef-themes
+    :ensure t)
+#+end_src
+
+**** autumn
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/theme-customize-faces-ef-autumn ()
+    ;; personalitza les faces una vegada carregat el tema
+    )
+
+  (defun my/theme-enable-theme-ef-autumn ()
+    (load-theme 'ef-autumn t)
+    (my/theme-customize-faces-ef-autumn)
+    (my/theme-customize-faces-common))
+#+end_src
+
+**** light
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/theme-customize-faces-ef-light ()
+    ;; personalitza les faces una vegada carregat el tema
+    )
+
+  (defun my/theme-enable-theme-ef-light ()
+    (load-theme 'ef-light t)
+    (my/theme-customize-faces-ef-light)
+    (my/theme-customize-faces-common))
+#+end_src
+
 *** Elements independents del tema
 
 En aquesta secció es configuren elements independents del tema. Açò
