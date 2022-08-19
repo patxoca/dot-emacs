@@ -609,22 +609,6 @@ Exemples de com restringir on s'obren les finestres:
 
 - https://protesilaos.com/codelog/2020-01-07-emacs-display-buffer/
 
-** PAUS fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
-   :PROPERTIES:
-   :CREATED: [2020-03-23 dl 13:02]
-   :REFERER:
-   :END:
-
-   - State "PAUS"       from "TODO"       [2020-12-27 dg. 11:32] \\
-     Implementada comanda "x-my/svn-status".
-
-M'he acostumat a que =git-status= mostra l'estat des de l'arrel i no
-des de la carpeta en que s'executa la comanda. Ho trobo a faltar an
-subversion.
-
-Definir un /wrapper/ =arv/svn-status= que busqui el /dominant file/
-=.svn=, canvii directori i executi =svn-status=.
-
 ** TODO configurar electric-pair en org-mode                    :enhancement:
    :PROPERTIES:
    :CREATED: [2020-03-25 dc 17:01]
@@ -2603,3 +2587,22 @@ perjudicar el temps de càrrega.
 
 La solució seria moure aquesta funcionaliat a un paquet extern i
 carregar-lo sota demanda.
+** DONE fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
+   :PROPERTIES:
+   :CREATED: [2020-03-23 dl 13:02]
+   :REFERER:
+   :END:
+
+   - State "DONE"       from "PAUS"       [2022-08-19 dv. 18:55] \\
+     Després d'un temps utilitzan-ho no he trobat cap motiu per tornar al
+     comportament anterior.
+
+   - State "PAUS"       from "TODO"       [2020-12-27 dg. 11:32] \\
+     Implementada comanda "x-my/svn-status".
+
+M'he acostumat a que =git-status= mostra l'estat des de l'arrel i no
+des de la carpeta en que s'executa la comanda. Ho trobo a faltar an
+subversion.
+
+Definir un /wrapper/ =arv/svn-status= que busqui el /dominant file/
+=.svn=, canvii directori i executi =svn-status=.
