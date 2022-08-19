@@ -469,11 +469,15 @@ haver una solució millor.
 
 https://www.emacswiki.org/emacs/delsel.el
 
-*** TODO sortir del minibuffer                                    :annoyance:
+*** PAUS sortir del minibuffer                                    :annoyance:
    :PROPERTIES:
    :CREATED: [2020-03-08 dg 18:38]
    :REFERER:
    :END:
+
+   - State "PAUS"       from "TODO"       [2022-08-19 dv. 18:48] \\
+     S'implementat la comanda experimental =arv/abort-recursive-edit=
+     i s'assigna a la tecla =C-G= (=g= majúscula).
 
 De vegades =C-g= no avorta el que s'estigui fent en el minibuffer i
 resulta frustrant, cal canviar al minibufer, cancelar i tornar al

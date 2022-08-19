@@ -6461,6 +6461,29 @@ Pot resultar pràctic però no acabo de trobar un ús.
           (set-transient-map keymap t))))
   #+end_src
 
+** =arv/abort-recursive-edit=
+
+De vegades =C-g= no avorta el que s'estigui fent en el minibuffer i
+resulta frustrant, cal canviar al minibufer, cancelar i tornar al
+buffer en que estic treballant.
+
+Aquesta comanda és un experiment per veure si puc millorar la
+situació:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun x-arv/abort-recursive-edit ()
+    ""
+    (interactive)
+    (when (active-minibuffer-window)
+     (when (get-buffer-window "*Completions*")
+       ;; hide completions first so point stays in active window when
+       ;; outside the minibuffer
+       (minibuffer-hide-completions))
+     (abort-recursive-edit)))
+
+  (global-set-key (kbd "C-S-g") #'x-arv/abort-recursive-edit)
+#+end_src
+
 * Descartat
 
 Funcionalitats experimental que no he acosseguit /interioritzar/.
