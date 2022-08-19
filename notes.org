@@ -550,13 +550,6 @@ on es guarden les estadístiques; generar un nom basat en el PID del
 procés sembla que eliminaria el problema. Caldria estudiar el format i
 veure si després es poden fusioar fàcilment.
 
-** TODO estudiar =project=                                             :idea:
-
-Aniria be disposar del concepte de /projecte/ en emacs. No em cal res
-sofisticat.
-
-Emacs inclou el paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
-
 ** PAUS estudiar =ibuffer-vc=                                   :enhancement:
    :PROPERTIES:
    :CREATED: [2019-08-07 dc 11:35]
@@ -2587,6 +2580,14 @@ perjudicar el temps de càrrega.
 
 La solució seria moure aquesta funcionaliat a un paquet extern i
 carregar-lo sota demanda.
+** DONE estudiar =project=                                             :idea:
+
+- State "DONE"       from "TODO"       [2022-08-19 dv. 18:53]
+
+Aniria be disposar del concepte de /projecte/ en emacs. No em cal res
+sofisticat.
+
+Emacs inclou el paquet [[file:/opt/emacs/26.2/share/emacs/26.2/lisp/progmodes/project.el.gz::;;;%20project.el%20---%20Operations%20on%20the%20current%20project%20-*-%20lexical-binding:%20t;%20-*-][project.el]], estudiar-lo.
 ** DONE fer =svn-status= de l'arrel, no de la carpeta actual           :idea:
    :PROPERTIES:
    :CREATED: [2020-03-23 dl 13:02]
