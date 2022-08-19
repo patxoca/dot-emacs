@@ -5631,10 +5631,9 @@ information" so I decided to explicitly delete the key.
 
   (defun arv/template-insert-header ()
     (when (and (not buffer-read-only)
+               (zerop (buffer-size))
                (not (eq major-mode 'fundamental-mode))
                (buffer-file-name)
-               (save-excursion (goto-char (point-min))
-                               (eobp)) ; empty buffer?
                (not (file-exists-p (buffer-file-name))))
       (let ((pos (point)))
         (insert arv/template-snippet-key)
