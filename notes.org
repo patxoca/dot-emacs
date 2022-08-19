@@ -817,21 +817,6 @@ visible actualment potser millor no centrar.
 El color utilitzat pels breakpoint (=pdb.set_trace()=) dificulta
 llegir el text.
 
-** TODO Extreue =arv/template= al seu propi mòdul                  :refactor:
-   :PROPERTIES:
-   :CREATED: [2020-12-08 dt. 17:14]
-   :REFERER: [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][Codi]]
-   :ID:       b120699e-2c0b-4c18-9114-38081cbf3c81
-   :END:
-
-Les funcions de [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][arv/template]] requereixen que s'hagi carregat
-=yasnippet=. Per evitar un error /yas-snippet-directory variable
-indefinida/ (o algo semblant) es requereix expícitament. Açò pot
-perjudicar el temps de càrrega.
-
-La solució seria moure aquesta funcionaliat a un paquet extern i
-carregar-lo sota demanda.
-
 ** PAUS Revisar primer arranc de emacs amb la configuració              :bug:
 
    - State "PAUS"       from "TODO"       [2020-12-31 dj. 19:23] \\
@@ -2593,3 +2578,24 @@ resoldre-ho.
 Relacionat amb [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][Extreue =arv/template= al seu propi mòdul]].
 
 Duplicat de [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]
+** CANC Extreue =arv/template= al seu propi mòdul                  :refactor:
+   :PROPERTIES:
+   :CREATED: [2020-12-08 dt. 17:14]
+   :REFERER: [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][Codi]]
+   :ID:       b120699e-2c0b-4c18-9114-38081cbf3c81
+   :END:
+
+   - State "CANC"       from "TODO"       [2022-08-19 dv. 18:31] \\
+     No crec que requerir =yasnippet= afecti al rendiment de l'arranc,
+     eventualment es requerirà (quan s'activi yasnippet), no importa si es
+     fa abans o després, el cost hauria de ser el mateix.
+
+     El codi és tan poca cosa que no es justifica crear un paquet a banda.
+
+Les funcions de [[id:57ae3e72-5e9d-4d4c-ada6-c6a93594a458][arv/template]] requereixen que s'hagi carregat
+=yasnippet=. Per evitar un error /yas-snippet-directory variable
+indefinida/ (o algo semblant) es requereix expícitament. Açò pot
+perjudicar el temps de càrrega.
+
+La solució seria moure aquesta funcionaliat a un paquet extern i
+carregar-lo sota demanda.
