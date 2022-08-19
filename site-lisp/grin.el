@@ -44,25 +44,25 @@
   :group 'grin)
 
 
-(define-infix-argument grin:--skip-exts ()
+(transient-define-argument grin:--skip-exts ()
   :description "list of extensions to skip"
   :class 'transient-option
   :shortarg "-e"
   :argument "--skip-exts=")
 
-(define-infix-argument grin:--skip-dirs ()
+(transient-define-argument grin:--skip-dirs ()
   :description "list of directories to skip"
   :class 'transient-option
   :shortarg "-d"
   :argument "--skip-dirs=")
 
-(define-infix-argument grin:--include ()
+(transient-define-argument grin:--include ()
   :description "find in files matching glob"
   :class 'transient-option
   :shortarg "-I"
   :argument "--include=")
 
-(define-infix-argument grin:--files-from-file ()
+(transient-define-argument grin:--files-from-file ()
   :description "file to read filenames from"
   :class 'transient-option
   :shortarg "-f"
@@ -80,7 +80,7 @@
     (grep cmd)))
 
 ;;;###autoload (autoload 'arv/grin "grin" nil t)
-(define-transient-command arv/grin ()
+(transient-define-prefix arv/grin ()
   "Run grin."
   :value '("-i")
   ["Arguments (C-x l for extra options)"
