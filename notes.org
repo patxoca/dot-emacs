@@ -761,66 +761,6 @@ Amb el punt on està el =(*)= ho converteix en:
 
 Té altres rareses.
 
-** TODO /boilerplate/ al crear nous arxius                              :bug:
-   :PROPERTIES:
-   :CREATED: [2020-05-12 dc 13:37]
-   :ID:       d41aabf6-1c31-4c3d-b13b-283ee3541977
-   :END:
-
-La solució casolana actual no funciona amb =org-mode= (de vegades
-funciona, funcionava?).
-
-En aquest article Howard Abrams explora el problema.
-
-http://www.howardism.org/Technical/Emacs/templates-tutorial.html
-
-*** =auto-insert=
-
-=auto-insert= és un paquet nadiu de emacs:
-
-#+begin_quote
-Auto-insert is instead intended to be used when a new file is created:
-Create an empty HTML buffer, and then run M-x auto-insert – after
-querying the title a skeleton of a HTML file is generated.
-
-This can even be added to a mode hook:
-
-  (add-hook 'html-mode-hook #'auto-insert)
-
-Emacs will make sure that you actual want auto-insertion to take
-place, and then proceed like above.
-#+end_quote
-
-No crec que =auto-insert= sigui el que busco però per no perdre-li la
-pista afegeixo aquesta entrada.
-
-*** relacionat amb:
-
-Aquestes altres entrades estan relacionades.
-
-- [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][extreue =arv/template= al seu propi mòdul]]
-
-- [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]
-
-
-*** problema
-
-Al obrir un nou arxiu python no s'ofereix l'opció de triar la
-plantilla inicial. Imagino que passarà amb altres modes.
-
-El problema sembla ser que es carreguen els snippets abans d'haver
-afegit la ruta de les plantilles a =yas-snippet-dirs= i en el moment
-de crear l'arxiu =yasnippet= encara no coneix de l'existència del
-snippet =header=.
-
-Es /resol/ recarregant els snippets, des del menú o amb
-=yas-reload-all=.
-
-Vull jubilar =arv/template= així que no crec que dediqui temps a
-resoldre-ho.
-
-Relacionat amb [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][Extreue =arv/template= al seu propi mòdul]].
-
 ** TODO Revisa faces de =svn-diff=                                :annoyance:
    :PROPERTIES:
    :CREATED: [2020-05-12 dt 17:32]
@@ -983,24 +923,6 @@ El resultat és que només s'ajusta a partir de la segona línia.
   - Pellentesque dapibus suscipit ligula. Donec posuere augue in quam.
   Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo.
 #+end_src
-
-** TODO al crear un arxiu python no s'utilitzen les plantilles          :bug:
-   :PROPERTIES:
-   :CREATED: [2021-01-04 dl. 23:34]
-   :REFERER: [[file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py][file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py]]
-   :ID:       de550750-d9c4-4c3f-a186-58a4d065181f
-   :END:
-
-Al crear un nou mòdul python no s'ofereix la possibilitat de triar una
-plantilla per crear l'esquelet.
-
-Provat dins el virtualenv =hera_py3=, treballant en =dja.layout=.
-Confirmat també dins el virtualenv =hera_impl= (python 2).
-
-Escrivint a ma =header= i provant d'expandir-lo tampoc te cap efecte.
-Altres /snippets/ sí funcionen.
-
-No ho he provat amb altres tipus d'arxius.
 
 ** PAUS =pyx/visit-test-module= no funciona amb /namespace packages/    :bug:
    :PROPERTIES:
@@ -2567,3 +2489,107 @@ buffer. M'agradaria conservar les línies del principi que ha inserit
 
 Trobo que podria ser útil que el missatge que apareix contingui una
 xuleta amb les combinacions de tecles més útils.
+** CANC al crear un arxiu python no s'utilitzen les plantilles          :bug:
+   :PROPERTIES:
+   :CREATED: [2021-01-04 dl. 23:34]
+   :REFERER: [[file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py][file:~/prog/hera/python3/tercers/dja.layout/dja/layout/tests/test_containers.py]]
+   :ID:       de550750-d9c4-4c3f-a186-58a4d065181f
+   :END:
+
+   - State "CANC"       from "TODO"       [2022-08-19 dv. 08:49] \\
+     Es cancel·la per duplicitat amb [[id:d24977dd-71e4-47c8-9a15-fd9c431582da][problema]]. No recordava que ja ho havia
+     documentat. Tot i que la secció cancel·lada és anterior
+     cronològicament prefereixo que totes les notes estiguin agrupades.
+
+Al crear un nou mòdul python no s'ofereix la possibilitat de triar una
+plantilla per crear l'esquelet.
+
+Provat dins el virtualenv =hera_py3=, treballant en =dja.layout=.
+Confirmat també dins el virtualenv =hera_impl= (python 2).
+
+Escrivint a ma =header= i provant d'expandir-lo tampoc te cap efecte.
+Altres /snippets/ sí funcionen.
+
+No ho he provat amb altres tipus d'arxius.
+
+** DONE /boilerplate/ al crear nous arxius                              :bug:
+   :PROPERTIES:
+   :CREATED: [2020-05-12 dc 13:37]
+   :ID:       d41aabf6-1c31-4c3d-b13b-283ee3541977
+   :END:
+
+   - State "DONE"       from "TODO"       [2022-08-19 dv. 08:55] \\
+     El problema sembla ser que al activar =yasnippet= (=yas-global-mode=)
+     es carreguen els snippets. En eixe punt =arv/template= encara no ha
+     afegit la ruta de les capçaleres.
+
+     Es mou l'activació de =yasnippet= al /hook/ =after-init-hook=. Si ho
+     he entés correctament aquest /hook/ s'executa abans d'obrir cap arxiu.
+     Més detalls de l'arranc d'Emacs en:
+
+     https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html#Startup-Summary
+
+     L'article de Howard Abrams explica com integrar =yasnippet= amb
+     =auto-insert=. La integració és senzilla i gran part de l'article es
+     centra en explicar com crear /snippets/. No veig que la seva solució
+     tingui cap avantatge motiu pel que m'he decidit a investigar el
+     problema amb =arv/template=.
+
+La solució casolana actual no funciona amb =org-mode= (de vegades
+funciona, funcionava?).
+
+En aquest article Howard Abrams explora el problema.
+
+http://www.howardism.org/Technical/Emacs/templates-tutorial.html
+
+*** =auto-insert=
+
+=auto-insert= és un paquet nadiu de emacs:
+
+#+begin_quote
+Auto-insert is instead intended to be used when a new file is created:
+Create an empty HTML buffer, and then run M-x auto-insert – after
+querying the title a skeleton of a HTML file is generated.
+
+This can even be added to a mode hook:
+
+  (add-hook 'html-mode-hook #'auto-insert)
+
+Emacs will make sure that you actual want auto-insertion to take
+place, and then proceed like above.
+#+end_quote
+
+No crec que =auto-insert= sigui el que busco però per no perdre-li la
+pista afegeixo aquesta entrada.
+
+*** relacionat amb:
+
+Aquestes altres entrades estan relacionades.
+
+- [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][extreue =arv/template= al seu propi mòdul]]
+
+- [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]
+
+
+*** problema
+    :PROPERTIES:
+    :ID:       d24977dd-71e4-47c8-9a15-fd9c431582da
+    :END:
+
+Al obrir un nou arxiu python no s'ofereix l'opció de triar la
+plantilla inicial. Imagino que passarà amb altres modes.
+
+El problema sembla ser que es carreguen els snippets abans d'haver
+afegit la ruta de les plantilles a =yas-snippet-dirs= i en el moment
+de crear l'arxiu =yasnippet= encara no coneix de l'existència del
+snippet =header=.
+
+Es /resol/ recarregant els snippets, des del menú o amb
+=yas-reload-all=.
+
+Vull jubilar =arv/template= així que no crec que dediqui temps a
+resoldre-ho.
+
+Relacionat amb [[id:b120699e-2c0b-4c18-9114-38081cbf3c81][Extreue =arv/template= al seu propi mòdul]].
+
+Duplicat de [[id:de550750-d9c4-4c3f-a186-58a4d065181f][al crear un arxiu python no s'utilitzen les plantilles]]

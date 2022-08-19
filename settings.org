@@ -2338,8 +2338,17 @@ possibilitat que oferix X de seleccionar amb el ratoli.
     :diminish yas-minor-mode)
 #+end_src
 
+Activar =yasnippet= en aquest punt sembla que provoca que es carreguin
+els snippets i les modificacions posteriors de la variable
+=yas-snippet-dirs= son ignorades (fins que es cridi a la funció
+=yas-reload-all=). Per aquest motiu es mou l'activació al /hook/
+=after-init-hook=.
+
 #+begin_src emacs-lisp :tangle yes
-    (yas-global-mode 1)
+  (defun my/yas-activar-globalment ()
+    (yas-global-mode 1))
+
+  (add-hook 'after-init-hook #'my/yas-activar-globalment)
 #+end_src
 
 En la [[https://github.com/joaotavora/yasnippet/blob/5a29fe67d70de3749e30ebb37206395b4d1a51a8/NEWS][release 0.13]] es van eliminar tots els snippets del paquet, s'han
