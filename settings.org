@@ -25,9 +25,8 @@ Però la veritat és que és divertit 😊.
 
 * Instal·lació
 
-En teoria aquesta configuració hauria de funcionar amb emacs 24.4 o
-posterior. En la pràctica només està provada amb emacs 25.2.1 i
-25.3.1.
+Aquesta configuració funciona amb les versions d'Emacs que utilitzo.
+Normalment la darrera versió estable o les /candidate release/.
 
 Dependències: =git=, =make= i =makeinfo= (per instal·lar org). En
 ubuntu el paquet /texinfo/ proveeix la comanda =makeinfo=.
@@ -84,22 +83,20 @@ arrancs subseqüents s'utilitzarà la nova versió.
 
 ** Configuració de paquets
 
+Els paquets es configuren dins la secció [[id:47472a36-1084-4b5a-ad2a-f80622dbfe0d][Paquets]].
+
 La configuració dels paquets només pot incloure modificació d'elements
 definits pel propi paquet. No pot definir tecles globals, no pot
-activar cap funcionalitat etc.
-
-La idea és mantindre la localitat separant responsabilitats.
+activar cap funcionalitat etc. La idea és mantindre la localitat i
+separar responsabilitats.
 
 Actualment alguns paquets no ho compleixen.
 
-** Configuració de modes
-
-Un mode en essència és un paquet però en aquest punt encara no he
-decidit com organitzar-ho.
-
-Tampoc he decidit si tots paquets han d'anar a la mateixa secció o
-poden apareixer en la secció del mode en que s'utilitzen (com està
-ara).
+Els modes majors també son paquets però es tracten de manera especial
+i es configuren en una secció separada [[id:57bddd18-b2e9-475e-be24-9fc63290d311][Modes]]. El motiu és que al
+configurar un mode major és habitual configurar altres paquets
+auxiliars i trobo preferible que els paquets relacionats estiguin
+agrupats dins una mateixa secció.
 
 ** Blocs de codi sh
 
@@ -161,13 +158,10 @@ tasques més habituals:
 
 ** Tecles i /keymaps/ personalitzats
 
-Cal definir els keymaps i regles generals per organitzar les
-definicions de tecles globals i per modes.
-
-Agrupar les tecles globals tenia sentit quan la configuració estava
-repartida entre varis mòduls. Al agrupar-la tota en un únic document
-=org= potser resulta més clar moure les assignacions de tecles al
-corresponent =use-package=. No m'acaba d'agradar.
+Les definicions de tecles global es defineixen en la secció
+[[id:320f22b8-8eaa-41b0-b282-0fc95cb99ed0][Combinacions de tecles globals]], el motiu és tindre-les agrupades,
+facilitar localitzar-les i evitar conflictes quan dos parts de la
+configuració defineixen la mateixa tecla amb comandes diferents.
 
 Pel que fa als keymaps /locals/ hi ha varies opcions:
 
@@ -189,9 +183,17 @@ conveni de que els moduls que escric defineixen el seu propi
 
 ** Directori =site-lisp=
 
-Desenvolupar.
+Actualment s'utilitzen dos directoris =site-lisp=:
 
-Dos directoris =site-lisp=, que ficar en cadascun, no abusar. Gestió.
+- =.emacs.d/site-lisp=: aquest directori està pensat per ficar paquets
+  externs que no estan disponibles en elpa o dels que es vol disposar
+  de la última versió clonant el repositori.
+
+- =.emacs.d/conf.d/site-lisp=: aquest directori està pensat per
+  incloure paquets propis que, per la seva mida/simplicitat, no
+  justifiquen crear un paquet extern però que són massa complexes per
+  incloure'ls dins aquesta configuració. També pot incloure paquets de
+  tercers no mantinguts i que he adoptat.
 
 * Configuració
 ** /Lexical binding/
@@ -1114,6 +1116,9 @@ que canvien de buffer i de finestra.
 #+end_src
 
 ** Paquets
+    :PROPERTIES:
+    :ID:       47472a36-1084-4b5a-ad2a-f80622dbfe0d
+    :END:
 
 Aquesta secció inclou la configuració de paquets d'us general.
 
@@ -2439,6 +2444,9 @@ mogut al paquet =yasnippet-snippets=.
 #+end_src
 
 ** Modes
+   :PROPERTIES:
+   :ID:       57bddd18-b2e9-475e-be24-9fc63290d311
+   :END:
 
 Aquesta secció inclou la configuració dels /modes/ que utilitzo
 habitualment.
@@ -5379,6 +5387,9 @@ biblioteca que proveeixi aquesta funcionalitat.
 #+end_src
 
 ** Combinacions de tecles globals
+   :PROPERTIES:
+   :ID:       320f22b8-8eaa-41b0-b282-0fc95cb99ed0
+   :END:
 
 Aquest apartat és un copiar/enganxar de la configuració original. En
 aquest punt moltes de les comandes no estan definides, d'altres són
