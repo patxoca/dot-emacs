@@ -1546,9 +1546,9 @@ https://github.com/hrs/engine-mode
     ;; els conflictes al definir les tecles
 
     (defengine diec2
-      "dlc.iec.cat/results.asp?txtEntrada=%s"
+      "https://dlc.iec.cat/Results?DecEntradaText=%s"
       :keybinding "c"
-      :term-transformation-hook (lambda (term) (encode-coding-string term latin-1)))
+      :term-transformation-hook (lambda (term) (encode-coding-string term 'latin-1)))
 
     (defengine django
       "https://docs.djangoproject.com/search/?q=%s&release=11"
