@@ -372,22 +372,7 @@ respecte al repositori a utilitzar i preveig problemes si el fixo
   (require 'use-package)
 #+end_src
 
-*** =auto-compile=                                               :desactivat:
-
-No acava de funcionar (provat amb =psvn.el=), probablement per la meva
-ignorancia, i ralentitza l'arranc. El desactivo fins que pugar
-mirar-m'ho.
-
-https://github.com/emacscollective/auto-compile
-
-Intenta garantir que els arxius compilats (=.elc=) no estan desfasats
-repecte del corresponent arxiu font (=.el=).
-
-#+begin_src emacs-lisp :tangle no
-  (use-package auto-compile
-    :ensure t
-    :config (auto-compile-on-load-mode))
-#+end_src
+*** Carregar arxiu lisp més recent
 
 En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
 
@@ -6243,6 +6228,26 @@ integrar-ho en el workflow.
       (org-id-goto arv/org-interrupt--last-active-task)
       (setq arv/org-interrupt--last-active-task nil)
       (org-todo arv/org-interrupt-resumed-state)))
+#+end_src
+
+** =auto-compile=                                                :desactivat:
+
+Funcionalitat que porta anys desactivada. Amb la compilació nativa de
+emacs 28 sembla que encara té menys sentit.
+
+No acava de funcionar (provat amb =psvn.el=), probablement per la meva
+ignorancia, i ralentitza l'arranc. El desactivo fins que pugar
+mirar-m'ho.
+
+https://github.com/emacscollective/auto-compile
+
+Intenta garantir que els arxius compilats (=.elc=) no estan desfasats
+repecte del corresponent arxiu font (=.el=).
+
+#+begin_src emacs-lisp :tangle no
+  (use-package auto-compile
+    :ensure t
+    :config (auto-compile-on-load-mode))
 #+end_src
 
 * Per mirar
