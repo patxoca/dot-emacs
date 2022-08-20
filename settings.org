@@ -380,18 +380,6 @@ En cas que l'arxiu =.elc= estigui desfasat carrega el =.el=.
   (setq load-prefer-newer t)
 #+end_src
 
-*** =transient=
-
-https://github.com/magit/transient
-
-Facilita contruir línies de comandes interactivament (s'utilitza en
-=magit=).
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package transient
-    :ensure t)
-#+end_src
-
 *** Directori =site-lisp= local
 
 El subdirectori =site-lisp= de la configuració s'utilitza per guardar
@@ -420,7 +408,8 @@ apreciable.
 
 *** Biblioteques addicionals
 
-Biblioteques de funcions utilitzades en la configuració.
+Biblioteques de funcions utilitzades en la configuració, ja sigui en
+aquest arxiu o en els paquets que hi ha dins =conf.d/site-lisp=.
 
 **** =cl-lib=                                                       :builtin:
 
@@ -456,6 +445,18 @@ Col·lecció de funcions per manipular cadenes.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package s
+    :ensure t)
+#+end_src
+
+**** =transient=
+
+https://github.com/magit/transient
+
+Facilita contruir línies de comandes interactivament (s'utilitza en
+=magit=).
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package transient
     :ensure t)
 #+end_src
 
