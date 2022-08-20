@@ -5344,6 +5344,11 @@ Goes backward if ARG is negative; error if CHAR not found."
 
 ** Mini paquets
 
+#+begin_warning
+No s'haurien de definir nous paquets ací. És preferible crear un nou
+paquet dins el directori =site-lisp= de la configuració.
+#+end_warning
+
 Implementació de funcionalitat que requereix més que una funció però
 no té un paquet pròpi.
 
