@@ -1180,6 +1180,38 @@ defecte (=nil=) i acostumar-se a utilitzar la comanda prefix (=C-u=).
   (customize-set-value 'apropos-do-all t)
 #+end_src
 
+*** =arv-boilerplate=
+    :PROPERTIES:
+    :ID:       30256c4c-c666-4aff-8f5e-313d4854c6a9
+    :END:
+
+#+begin_warning
+Si es mou la inicialització de =arv-boilerplate= abans de inicialitzar
+=yasnippet=, =use-package= es queixa de que no pot carregar
+=arv-boilerplate=.
+#+end_warning
+
+=arv-boilerplate= aprofita =yasnippet= per oferir plantilles amb
+contingut inicial al crear nous arxius.
+
+El funcionament es basa en que quan es crea un nou buffer, si compleix
+certes condicions (estar buid, tindre associat un fitxer etc.),
+s'insereix el text =header= (configurable en la variable
+=arv/template-snippet-key=) i s'utilitza =yasnippet= per expandir-lo.
+
+Per utilitzar-lo només cal crear /snippets/ amb la clau (=key=)
+=header=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package arv-boilerplate
+    :ensure nil
+    :load-path "conf.d/site-lisp"
+    :config
+    (add-to-list 'yas-snippet-dirs
+                 (arv/path-concat arv/emacs-conf-dir "shared" "templates"))
+    (arv/boilerplate-setup))
+#+end_src
+
 *** =avy=
 
 https://github.com/abo-abo/avy
@@ -5599,96 +5631,6 @@ integrar-ho en el workflow.
       (org-id-goto arv/org-interrupt--last-active-task)
       (setq arv/org-interrupt--last-active-task nil)
       (org-todo arv/org-interrupt-resumed-state)))
-#+end_src
-
-*** =arv-template=
-
-=arv-template= aprofita =yasnippet= per oferir plantilles amb
-contingut inicial al crear nous arxius.
-
-El funcionament es basa en que quan es crea un nou buffer, si compleix
-certes condicions (estar buid, tindre associat un fitxer etc.),
-s'insereix el text =header= (configurable en la variable
-=arv/template-snippet-key=) i s'utilitza =yasnippet= per expandir-lo.
-
-Per utilitzar-lo només cal crear /snippets/ amb la clau (=key=)
-=header=.
-
-**** Codi
-     :PROPERTIES:
-     :ID:       57ae3e72-5e9d-4d4c-ada6-c6a93594a458
-     :END:
-
-This works by letting =yasnippet= expand the value of the customizable
-variable =arv/template-snippet-key= (=header= by default) whenever
-visiting a new file.
-
-Two questions arise:
-
-- when to insert/expand the key?
-
-- what to do if the expansion fails?
-
-In order to find the right snippet the buffer must be already in the
-right major mode. My first attempt was hooking a function to
-=find-file-not-found-functions=, but this didn't work because at that
-point the buffer is still in =fundamental-mode=.
-
-So I have decided to track the mode changes using
-=after-change-major-mode-hook=, this has a couple of drawbacks:
-
-- apparently a newly created buffer is put in =fundamental-mode= and
-  then switched to its final mode, so the functions hooked to
-  =after-change-major-mode-hook= should account for being called at
-  least twice.
-
-- the function must determine by itself if the buffer is visiting a
-  new file or an existing one.
-
-Finally, if the expansion fails the key ("header") must be removed. At
-first I tried with =undo= but emacs complained "no further undo
-information" so I decided to explicitly delete the key.
-
-#+begin_src emacs-lisp :tangle yes
-  ;;; HACK: no s'hauria de requerir yasnippet. El problema és que açò no
-  ;;; és un mòdul que es pot carregar sota demanda.
-
-  (require 'yasnippet)
-  (defgroup arv/template nil
-    "Insert documentation here."
-    :group 'arv)
-
-  (defcustom arv/template-snippet-key "header"
-    "Name of the snippet."
-    :group 'arv/template
-    :type  'string
-    :safe  'stringp)
-
-
-  (defun arv/template-insert-header ()
-    (when (and (not buffer-read-only)
-               (zerop (buffer-size))
-               (not (eq major-mode 'fundamental-mode))
-               (buffer-file-name)
-               (not (file-exists-p (buffer-file-name))))
-      (let ((pos (point)))
-        (insert arv/template-snippet-key)
-        (unless (yas-expand-from-trigger-key)
-          (goto-char pos)
-          (delete-char (length arv/template-snippet-key) nil)
-          (set-buffer-modified-p nil)))))
-
-
-  (defun arv/template-setup ()
-    (add-hook 'after-change-major-mode-hook 'arv/template-insert-header))
-#+end_src
-
-**** Instal·lació/activació
-
-#+begin_src emacs-lisp :tangle yes
-  (add-to-list 'yas-snippet-dirs
-               (arv/path-concat arv/emacs-conf-dir "shared" "templates"))
-  (arv/template-setup)
 #+end_src
 
 *** =arv-test=
