@@ -2288,6 +2288,16 @@ l'accés a les comandes utilitzades recentment i a les més freqüents.
     :commands swiper)
 #+end_src
 
+Al prèmer =C-o= en =swiper= apareix una hydra amb comandes extra. Per
+algun motiu que se m'escapa està definida en un paquet separat =~:-?=.
+És curios que la versió de =swiper= de github sí que conté la hydra
+però la versió de melpa no.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ivy-hydra
+    :ensure t)
+#+end_src
+
 #+begin_src emacs-lisp :tangle yes
   (defun arv/swiper-symbol-with-prefix (p)
     "Like swiper, unless prefix argument is provided.
@@ -4852,6 +4862,21 @@ Basat en http://steve.yegge.googlepages.com/my-dot-emacs-file
           (set-visited-file-name new-name)))))
 #+end_src
 
+*** =my/toggle-case-sensitivity-in-isearch=
+
+Mai recordo el nom de la variable que cal canviar per fer que
+/isearch/ (no) sigui sensible a majúscules/minúscules en les cerques.
+
+Espero recordar que tinc aquesta comanda que alterna entre els dos
+modes de cerca.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/toggle-case-sensitivity-in-isearch ()
+    ""
+    (interactive)
+    (setq case-fold-search (not case-fold-search)))
+#+end_src
+
 *** =my/unfill-paragraph=
     :PROPERTIES:
     :ID:       3ec64e49-8906-49c2-9377-8c9b44ae6e61
@@ -5545,6 +5570,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c t l") #'my/display-line-numbers-mode)
   (global-set-key (kbd "C-c t L") 'line-number-mode)
   (global-set-key (kbd "C-c t r") 'read-only-mode)
+  (global-set-key (kbd "C-c t s") #'my/toggle-case-sensitivity-in-isearch)
 
   ;; word-mode
   (global-set-key (kbd"C-,") 'arv/wm-cycle)
