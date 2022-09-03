@@ -1862,8 +1862,12 @@ enlloc d'horitzontalment:
                 (my/bind-keys ido-completion-map
                               '(("<down>" ido-next-match)
                                 ("<up>" ido-prev-match)
+                                ("C-n" ido-next-match)
+                                ("C-p" ido-prev-match)
                                 ("<left>" ido-prev-match-dir)
                                 ("<right>" ido-next-match-dir)
+                                ("M-n" ido-next-match-dir)
+                                ("M-p" ido-prev-match-dir)
                                 ("M-<left>" ido-prev-work-directory)
                                 ("M-<right>" ido-next-work-directory))))))
 #+end_src
