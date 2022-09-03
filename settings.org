@@ -2221,6 +2221,29 @@ Afegeix un fons de color als noms dels colors.
     :diminish "")
 #+end_src
 
+*** =rg=
+
+https://github.com/dajva/rg.el
+
+Vaig a provar =ripgrep= una temporada enlloc de =grin=, a veure que
+tal. Clarament la velocitat de resposta és molt superior i sembla que
+cobreix el meu cas d'us.
+
+El prefix =C-c s= el tinc assignat a comandes de =psvn= així que li
+assigno =C-c C-s=. He optat per utilitzar per defecte la interfície
+amb =transient= i assignar específicament la comanda =rg= a =C-ç= que
+fins ara tenia assignada la comanda =arv/grin=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package rg
+    :ensure t
+    :config
+    (customize-set-value 'rg-use-transient-menu t)
+    (customize-set-value 'rg-keymap-prefix (kbd "C-c C-s"))
+    (customize-set-value 'rg-ignore-case nil)
+    (rg-enable-default-bindings))
+#+end_src
+
 *** =smex=
 
 https://github.com/nonsequitur/smex
@@ -3682,6 +3705,7 @@ Pel seu funcionament requereix algunes comandes externes:
                     ("C-<up>" arv/elpy-nav-backward_block)
                     ("C-<left>" nil)
                     ("C-<right>" nil)
+                    ("C-c C-s" nil)
                     ("C-c m d" elpy-doc)))
 
     ;; Arxius de menys de 8K es transfereixen al backend via RPC, els
@@ -3885,6 +3909,12 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     ;; activates source tracking when debugging with pdb from a shell
     ;; buffer
     (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
+
+    ;; C-c C-s (comanda python-shell-send-string en python-mode) entra
+    ;; en conflicte amb el prefix definit globalment per les comandes de
+    ;; ripgrep. No utilitzo la comanda python-xxx.
+    (my/bind-keys python-mode-map
+                  '(("C-c C-s" nil)))
 
     (elpy-enable))
 #+end_src
@@ -5531,7 +5561,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C--") 'embrace-commander)
 
   ;; grin
-  (global-set-key (kbd "C-ç") 'arv/grin)
+  (global-set-key (kbd "C-ç") #'rg)
 
   ;; keybindings per subversion: C-c s
   (global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
