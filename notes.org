@@ -196,44 +196,6 @@ The same will happen for configuration, or =:config= blocks that take
 longer than 0.1s to execute.
 #+end_quote
 
-** TODO normalitzar rutes de fitxers                               :refactor:
-
-En alguns llocs utilitzo rutes calculades dinàmicament i en d'altres
-literals. Problemes:
-
-- dificulta moure la configuració a un altre directori. Probablement
-  no té importància ja que únicament limita el directori utilitzat
-  dins =~/.emacs.d= i =conf.d= sembla perfectament vàlid.
-
-- més important és que al fixar els separadors en la ruta no
-  funcionarà en windows. Tampoc és que utilitzi molt emacs en windows
-  ni que necessiti un entorn completament configurat, però estaria bé.
-
-Pot ser tot dinàmic?
-
-Definir /helpers/ per simplificar i /dotar de significat/ a les rutes,
-per exemple:
-
-#+begin_src emacs-lisp :tangle no
-  (defun arv/path-emacs-conf (&rest components)
-    (apply arv/path-concat (cons arv/emacs-conf dir components)))
-#+end_src
-
-El lloc on és més dificil (incòmode) utilitzar rutes calculades és en
-la clausula =:load-path= de =use-package=. Hi ha algunes limitacions,
-[[https://github.com/jwiegley/use-package#extending-the-load-path][revisar la documentació]].
-
-[[http://howardism.org/Technical/Emacs/literate-devops.html][Ací]] hi ha un exemple interessant: defineix una variable a nivell de
-document /org/ que després s'utilitza en un bloc de codi. Em queda el
-dubte si es pot generalitzar o està limitat a blocs /sh/. La idea
-seria definir variables per =conf.d= i =emacs.d= i escriure
-=:load-path "$CONFD/foobar". Falta per resoldre el tema del separador.
-
-Pensant-ho millor, no sé si açò funcionaria (suposant que sigui
-possible). L'execució depèn d'elements definits en el document i no
-tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
-el bloc de codi en el context del document sembla bastant diferent.
-
 ** TODO Entorn per desenvolupar en javascript                   :enhancement:
    :PROPERTIES:
    :CREATED: [2018-03-31 ds 01:34]
@@ -254,37 +216,20 @@ Integrar un interpret (nodejs?) en la configuració.
   can be used to improve the JavaScript integration of existing
   editors.
 
-** TODO Patró de cerca/revisió                                         :idea:
-   :PROPERTIES:
-   :CREATED: [2018-03-31 ds 03:00]
-   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*apropos][apropos]]
-   :END:
-
-Mirar si =occur= + =list-matching-lines-default-context-lines= podria
-ser una alternativa a la forma (poc pràctica) en que utilitzo /swiper/
-per buscar i revisar en el codi.
-
-Es podria definir una nova comanda que demani el nombre de línies de
-context.
-
-Crec que no és necessari afegir context. És suficient amb seleccionar
-automàticament el buffer =*occur*=. Una vegada en el buffer =*occur*=
-les comandes =o= i =C-o= funcionen com és habitual i permeten veure el
-context que es necessiti.
-
-Depenent de l'ús principal de la comanda, el prefix =C-u= poc
-activar/inhibir el canvi de buffer. En la comanda =occur= original el
-significat de =C-u= no sembla gaire pràctic.
-
-Crec que el que vull és algo tipus =swiper= (que al moure el cursor
-mostri la linea seleccionada en el buffer) però que sigui persistent:
-cerco, trobo, modifico, torno a la cerca.
-
-** TODO elimina blocs sh?                                          :refactor:
+** PAUS elimina blocs sh?                                          :refactor:
    :PROPERTIES:
    :CREATED: [2018-04-02 dl 18:09]
    :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*Blocs%20de%20codi%20sh][Blocs de codi sh]]
    :END:
+
+   - State "PAUS"       from "TODO"       [2022-09-04 dg. 18:04] \\
+     Després d'un temps amb aquesta configuració l'únic problema que he
+     detectat amb els blocs =sh= és que no son portables a windows però no
+     és l'únic problema amb windows ;-).
+
+     Minimitzo l'us de blocs =sh=, no recordo haver-ne afegit cap de nou.
+
+     Crec que en la pràctica no és cap problema.
 
 Si estic configurant emacs perquè collons utilitzo sh?!
 
@@ -388,11 +333,45 @@ A més d'evitar conflictes de noms permet identificar els elements
 En =org-mode= al intentar convertir "l'xxx" en "L'xxx" prement =M-c=
 s'obté "Lxxx".
 
-** TODO molestia en els canvis d'estat en =org-mode=              :annoyance:
+** PAUS molestia en els canvis d'estat en =org-mode=              :annoyance:
    :PROPERTIES:
    :CREATED: [2018-08-18 ds 20:15]
    :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*revisar%20snippets][revisar snippets]]
    :END:
+
+   - State "PAUS"       from "PAUS"       [2022-09-04 dg. 19:46] \\
+     Provisionalment he modificat el codi de la funció:
+
+     #+begin_src diff
+     diff --git a/lisp/org.el b/lisp/org.el
+     index 913842bf3..998c48385 100644
+     --- a/lisp/org.el
+     +++ b/lisp/org.el
+     @@ -11129,6 +11129,7 @@ EXTRA is additional text that will be inserted into the notes buffer."
+                  (insert "\n")
+                  (indent-line-to ind)
+                  (insert line)))
+     +         (insert "\n")
+              (message "Note stored")
+              (org-back-to-heading t)))))
+        ;; Don't add undo information when called from `org-agenda-todo'.
+     #+end_src
+
+   - State "PAUS"       from "TODO"       [2022-09-04 dg. 19:27] \\
+     Revisant el codi sembla que la nota s'insereix en la funció
+     =org-store-log-note= definida en =org.el=.
+
+     [[file:~/.local/share/emacs/site-lisp/org/org.el::defun org-store-log-note (]]
+
+     Estudiant-la per sobre no sembla que consulti cap variable per decidir
+     si inserir o no línies en blanc, el comportament sembla fixat. Tampoc
+     sembla senzill aplicar /advise/ o alguna altra tècnica per modificar
+     el seu comportament.
+
+     El que se m'acut ara mateix és definir un /advise around/ que preserva
+     el valor de =org-log-note-marker=, executa =org-store-log-note= i
+     finalment localitza la nota i insereix la línia en blanc. Hauria
+     d'entendre millor les possibles variacions de format de les notes.
 
 Al fer un canvi d'estat que requereix un missatge aquest s'insereix
 separat per una línia de la capçalera i enganxat al text principal,
@@ -2609,3 +2588,78 @@ Amb el punt on està el =(*)= ho converteix en:
 #+end_src
 
 Té altres rareses.
+** CANC normalitzar rutes de fitxers                               :refactor:
+
+- State "CANC"       from "TODO"       [2022-09-04 dg. 17:21] \\
+  Les rutes funcionen perfectament en windows sense necessitat de
+  canviar el separador.
+
+  No tinc intenció de moure la configuració ni ganes de resoldre un
+  problema que no tinc. Es cancel·la.
+
+En alguns llocs utilitzo rutes calculades dinàmicament i en d'altres
+literals. Problemes:
+
+- dificulta moure la configuració a un altre directori. Probablement
+  no té importància ja que únicament limita el directori utilitzat
+  dins =~/.emacs.d= i =conf.d= sembla perfectament vàlid.
+
+- més important és que al fixar els separadors en la ruta no
+  funcionarà en windows. Tampoc és que utilitzi molt emacs en windows
+  ni que necessiti un entorn completament configurat, però estaria bé.
+
+Pot ser tot dinàmic?
+
+Definir /helpers/ per simplificar i /dotar de significat/ a les rutes,
+per exemple:
+
+#+begin_src emacs-lisp :tangle no
+  (defun arv/path-emacs-conf (&rest components)
+    (apply arv/path-concat (cons arv/emacs-conf dir components)))
+#+end_src
+
+El lloc on és més dificil (incòmode) utilitzar rutes calculades és en
+la clausula =:load-path= de =use-package=. Hi ha algunes limitacions,
+[[https://github.com/jwiegley/use-package#extending-the-load-path][revisar la documentació]].
+
+[[http://howardism.org/Technical/Emacs/literate-devops.html][Ací]] hi ha un exemple interessant: defineix una variable a nivell de
+document /org/ que després s'utilitza en un bloc de codi. Em queda el
+dubte si es pot generalitzar o està limitat a blocs /sh/. La idea
+seria definir variables per =conf.d= i =emacs.d= i escriure
+=:load-path "$CONFD/foobar". Falta per resoldre el tema del separador.
+
+Pensant-ho millor, no sé si açò funcionaria (suposant que sigui
+possible). L'execució depèn d'elements definits en el document i no
+tinc clar si /tangle/ serà prou intel·ligent per detectar-ho. Executar
+el bloc de codi en el context del document sembla bastant diferent.
+
+** CANC Patró de cerca/revisió                                         :idea:
+   :PROPERTIES:
+   :CREATED: [2018-03-31 ds 03:00]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*apropos][apropos]]
+   :END:
+
+   - State "CANC"       from "TODO"       [2022-09-04 dg. 18:01] \\
+     No és necessari. Les comandes =next-error= i =previous-error= (=F7= i
+     =F8= respectivament) permeten visitar les aparicions del text buscat
+     sense necessitat d'activar el buffer =occur=.
+
+Mirar si =occur= + =list-matching-lines-default-context-lines= podria
+ser una alternativa a la forma (poc pràctica) en que utilitzo /swiper/
+per buscar i revisar en el codi.
+
+Es podria definir una nova comanda que demani el nombre de línies de
+context.
+
+Crec que no és necessari afegir context. És suficient amb seleccionar
+automàticament el buffer =*occur*=. Una vegada en el buffer =*occur*=
+les comandes =o= i =C-o= funcionen com és habitual i permeten veure el
+context que es necessiti.
+
+Depenent de l'ús principal de la comanda, el prefix =C-u= poc
+activar/inhibir el canvi de buffer. En la comanda =occur= original el
+significat de =C-u= no sembla gaire pràctic.
+
+Crec que el que vull és algo tipus =swiper= (que al moure el cursor
+mostri la linea seleccionada en el buffer) però que sigui persistent:
+cerco, trobo, modifico, torno a la cerca.
