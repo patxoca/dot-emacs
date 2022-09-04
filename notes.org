@@ -90,7 +90,6 @@ Si realment són globals mirar de moure-les al /hook/ d'un mode tipus
 =fundamental-mode=.
 
 - [ ] [[file:settings.org::*=abbrev=][=abbrev=]]: activa el mode globalment
-- [ ] [[file:settings.org::*=dired=][=dired=]]: modifica el /keymap/ local
 - [ ] [[file:settings.org::*=electric-pair=][=electric-pair=]]: activa el mode globalment
 - [ ] [[file:settings.org::*=engine-mode=][=engine-mode=]]: activa el mode globalment
 - [ ] [[file:settings.org::*=font-lock=][=font-lock=]]: activa el mode globalment
