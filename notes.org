@@ -942,6 +942,55 @@ Proposa una solució pròpia però crec que el més interesssant és que
 parla de diferents paquets/enfocs. Un punt de partida per triar una
 solució.
 
+** TODO Estudiar integració de =imenu= i =org=
+   :PROPERTIES:
+   :CREATED: [2022-09-03 ds. 10:44]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=rg=][=rg=]]
+   :END:
+
+=C-c j s= (=imenu=) en =org-mode= permet seleccinar capçaleres, útil
+en principi. El que no m'agrada és que mostra totes/moltes les
+capçaleres i això li resta eficiència.
+
+Si no m'equivoco, en python primer mostra elements de /primer nivell/
+(funcions, classes etc.). Si es selecciona una classe llavos permet
+seleccionar elements de la classe (mètodes etc.).
+
+Una altra possibilitat és mirar de restringir el nombre de nivells que
+inclou =imenu=.
+
+** TODO Revisar us de =customize-set-{variable,value}=
+   :PROPERTIES:
+   :CREATED: [2022-09-03 ds. 12:31]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::*=rg=][=rg=]]
+   :END:
+
+=customize-set-variable= assigna el valor per defecte mentre que
+=customize-set-value= assigna el valor a la variable.
+
+No tinc clar que en la configuració ho utilitzi correctament.
+
+** TODO Arxivar configuració de =grin=
+   :PROPERTIES:
+   :CREATED: [2022-09-03 ds. 21:21]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Bugs, molèsties, millores etc.][Bugs, molèsties, millores etc.]]
+   :END:
+
+Si =ripgrep= fa el paper es pot eliminar tot el relacionat amb =grin=.
+
+** TODO Racionalitzar /completion/
+   :PROPERTIES:
+   :CREATED: [2022-09-03 ds. 21:44]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org::+TITLE: Configuració d'emacs d'Alexis Roda]]
+   :END:
+
+De memòria, per diferents formes de /completion/ utilitzo =abbrev=,
+=company=, =hippie-expand= i =yasnippet=.
+
+De vegades interfereixen entre ells i és possible que es sol·lapin.
+Revisar-ho i, en cas de mantindre els paquets, agrupar-los dins una
+secció =Completion= per facilitar el manteniment.
+
 * Paquets extra
 ** Col·leccions de paquets
 
