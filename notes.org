@@ -553,6 +553,26 @@ https://nullprogram.com/blog/2020/01/22/
 
 ** TODO accés ràpid a les refcards                                     :idea:
 
+- State "TODO"       from "TODO"       [2022-09-06 dt. 07:48] \\
+  Idea: definir comanda que recorre el directori buscant arxius PDF i
+  construeix una llista. Es presenta la llista a l'usuari i pot triar un
+  valor.
+
+  Una altra possibilitat és crear una hydra.
+
+  La primera aproximació és dinàmica i si en un futur
+  s'afegeixen/eliminen /refcards/ la llista estarà actualitzada. La
+  hydra imagino que permet associar descripcions a les /refcards/ per
+  identificar-les però és estàtica i obliga a un manteniment/revisió
+  en cada nova versió d'Emacs.
+
+  Pel que fa a les traduccions, sembla que totes comencen per un codi
+  de pais de dos lletres seguit d'un guió. Una opció més robusta seria
+  definir una llista negra.
+
+  Per fer-ho portable entre versions d'Emacs cal esbrinar la ruta
+  d'instal·lació.
+
 Emacs inclou vàries refcards en format pdf. Mirar de facilitar l'accés
 des de Emacs. Estan guardades en:
 
