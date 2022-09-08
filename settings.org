@@ -1205,6 +1205,27 @@ Per utilitzar-lo només cal crear /snippets/ amb la clau (=key=)
     (arv/boilerplate-setup))
 #+end_src
 
+*** =arv-refcards=
+
+Agilitza l'accés a les /refcards/.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package arv-refcards
+    :ensure nil
+    :load-path "conf.d/site-lisp"
+    :config
+    ;; inclou les refcards locals
+    (add-to-list 'arv-refcards-path
+                 (f-join user-emacs-directory "conf.d" "etc"))
+
+    ;; exclou les traduccions
+    (setq arv-refcards-black-list
+          '("cs-dired-ref" "cs-refcard" "cs-survival" "de-refcard"
+            "fr-dired-ref" "fr-refcard" "fr-survival" "pl-refcard"
+            "pt-br-refcard" "ru-refcard" "sk-dired-ref" "sk-refcard"
+            "sk-survival")))
+#+end_src
+
 *** =arv-yas-helpers=
 
 Colecció caòtica de funcions (i una variable) que faciliten la
@@ -5500,6 +5521,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-h f") #'helpful-callable)
   (global-set-key (kbd "C-h v") #'helpful-variable)
   (global-set-key (kbd "C-h k") #'helpful-key)
+  (global-set-key (kbd "C-h C-r") #'arv-refcards-display-refcard)
 
   ;; let's give a try to swiper
   (global-set-key (kbd "C-s") 'arv/swiper-symbol-with-prefix)

@@ -551,40 +551,6 @@ utilitza en els seus paquets:
 
 https://nullprogram.com/blog/2020/01/22/
 
-** TODO accés ràpid a les refcards                                     :idea:
-
-- State "TODO"       from "TODO"       [2022-09-08 dj. 17:56] \\
-  Revisant la implementació d'algunes comandes del menú /Help/ d'Emacs
-  he trobat la variable [[help:data-directory][=data-directory=]]: Directory of
-  machine-independent files that come with GNU Emacs.
-
-- State "TODO"       from "TODO"       [2022-09-06 dt. 07:48] \\
-  Idea: definir comanda que recorre el directori buscant arxius PDF i
-  construeix una llista. Es presenta la llista a l'usuari i pot triar un
-  valor.
-
-  Una altra possibilitat és crear una hydra.
-
-  La primera aproximació és dinàmica i si en un futur
-  s'afegeixen/eliminen /refcards/ la llista estarà actualitzada. La
-  hydra imagino que permet associar descripcions a les /refcards/ per
-  identificar-les però és estàtica i obliga a un manteniment/revisió
-  en cada nova versió d'Emacs.
-
-  Pel que fa a les traduccions, sembla que totes comencen per un codi
-  de pais de dos lletres seguit d'un guió. Una opció més robusta seria
-  definir una llista negra.
-
-  Per fer-ho portable entre versions d'Emacs cal esbrinar la ruta
-  d'instal·lació.
-
-Emacs inclou vàries refcards en format pdf. Mirar de facilitar l'accés
-des de Emacs. Estan guardades en:
-
-/opt/emacs/26.3/share/emacs/26.3/etc/refcards
-
-Hi ha algunes traduccions que caldria ignorar.
-
 ** TODO revisar configuració de /show trailing whitespace/      :enhancement:
    :PROPERTIES:
    :CREATED: [2020-03-19 dj 18:20]
@@ -2732,3 +2698,39 @@ significat de =C-u= no sembla gaire pràctic.
 Crec que el que vull és algo tipus =swiper= (que al moure el cursor
 mostri la linea seleccionada en el buffer) però que sigui persistent:
 cerco, trobo, modifico, torno a la cerca.
+** DONE accés ràpid a les refcards                                     :idea:
+
+- State "DONE"       from "TODO"       [2022-09-08 dj. 22:47] \\
+  Implementat en el paquet =site-lisp/arv-refcards.el=.
+
+- State "TODO"       from "TODO"       [2022-09-08 dj. 17:56] \\
+  Revisant la implementació d'algunes comandes del menú /Help/ d'Emacs
+  he trobat la variable [[help:data-directory][=data-directory=]]: Directory of
+  machine-independent files that come with GNU Emacs.
+
+- State "TODO"       from "TODO"       [2022-09-06 dt. 07:48] \\
+  Idea: definir comanda que recorre el directori buscant arxius PDF i
+  construeix una llista. Es presenta la llista a l'usuari i pot triar un
+  valor.
+
+  Una altra possibilitat és crear una hydra.
+
+  La primera aproximació és dinàmica i si en un futur
+  s'afegeixen/eliminen /refcards/ la llista estarà actualitzada. La
+  hydra imagino que permet associar descripcions a les /refcards/ per
+  identificar-les però és estàtica i obliga a un manteniment/revisió
+  en cada nova versió d'Emacs.
+
+  Pel que fa a les traduccions, sembla que totes comencen per un codi
+  de pais de dos lletres seguit d'un guió. Una opció més robusta seria
+  definir una llista negra.
+
+  Per fer-ho portable entre versions d'Emacs cal esbrinar la ruta
+  d'instal·lació.
+
+Emacs inclou vàries refcards en format pdf. Mirar de facilitar l'accés
+des de Emacs. Estan guardades en:
+
+/opt/emacs/26.3/share/emacs/26.3/etc/refcards
+
+Hi ha algunes traduccions que caldria ignorar.
