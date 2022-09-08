@@ -553,6 +553,11 @@ https://nullprogram.com/blog/2020/01/22/
 
 ** TODO accés ràpid a les refcards                                     :idea:
 
+- State "TODO"       from "TODO"       [2022-09-08 dj. 17:56] \\
+  Revisant la implementació d'algunes comandes del menú /Help/ d'Emacs
+  he trobat la variable [[help:data-directory][=data-directory=]]: Directory of
+  machine-independent files that come with GNU Emacs.
+
 - State "TODO"       from "TODO"       [2022-09-06 dt. 07:48] \\
   Idea: definir comanda que recorre el directori buscant arxius PDF i
   construeix una llista. Es presenta la llista a l'usuari i pot triar un
