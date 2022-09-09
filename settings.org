@@ -1663,38 +1663,6 @@ millor a =flycheck= però afegeix una dependència externa.
 
 No tinc clar si activar-lo ací és preferible a fer-ho en algun hook.
 
-*** =grin=
-
-=grin= és una utilitat tipus =grep=, escrita en python. Es pot
-descarregar des de https://pypi.python.org/pypi/grin.
-
-La integració amb emacs està basada en [[https://bitbucket.org/dariusp686/emacs-grin/src][emacs-grin]].
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package grin
-    :load-path "site-lisp")
-#+end_src
-
-Al estar escrita en python pot donar problemes si s'executa dins un
-directori amb codi python que conté mòduls que poden interferir amb
-els =import= que fa =grin=. Ho vaig detectar, crec recordar, intentant
-executar-lo dins el =site-packages= d'un /virtualenv/, no recordo els
-detalls concrets.
-
-=ag= ([[https://github.com/ggreer/the_silver_searcher][enllaç]]) és una alternativa semblant, escrita en C, per tant més
-ràpida i que no té conflictes amb arbres de codi python.
-
-El que em tira enrere per canviar és la interfície del mòdul =ag.el=
-([[https://github.com/Wilfred/ag.el][enllaç]]), defineix moltes comandes per fer diferents tipus de cerques
-(text en directori, text en directori només en certs arxius, regex en
-directori, text en projecte, text en certs arxius del projecte, regex
-en projecte ...). Massa comandes/combinacions de tecles que recordar i
-poca flexibilitat. M'agrada més l'enfoc de =grin.el=, una única
-comanda que demana el directori i la línia de comandes.
-
-El problema amb =grin= és anecdòtic en el meu cas d'us i no hi ha
-urgència en fer el canvi. Açò és més un recordatori.
-
 *** =helpful=
 
 https://github.com/Wilfred/helpful
@@ -2252,14 +2220,9 @@ Afegeix un fons de color als noms dels colors.
 
 https://github.com/dajva/rg.el
 
-Vaig a provar =ripgrep= una temporada enlloc de =grin=, a veure que
-tal. Clarament la velocitat de resposta és molt superior i sembla que
-cobreix el meu cas d'us.
-
 El prefix =C-c s= el tinc assignat a comandes de =psvn= així que li
 assigno =C-c C-s=. He optat per utilitzar per defecte la interfície
-amb =transient= i assignar específicament la comanda =rg= a =C-ç= que
-fins ara tenia assignada la comanda =arv/grin=.
+amb =transient= i assignar específicament la comanda =rg= a =C-ç=.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package rg
@@ -5576,7 +5539,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   ;; embrace
   (global-set-key (kbd "C--") 'embrace-commander)
 
-  ;; grin
+  ;; ripgrep
   (global-set-key (kbd "C-ç") #'rg)
 
   ;; keybindings per subversion: C-c s
@@ -6322,6 +6285,41 @@ repecte del corresponent arxiu font (=.el=).
     :ensure t
     :config (auto-compile-on-load-mode))
 #+end_src
+
+** =grin=
+
+Tot i els anys que porto utilitzant =grin= he decidit jubilar-lo en
+favor de =ripgrep=.
+
+=grin= és una utilitat tipus =grep=, escrita en python. Es pot
+descarregar des de https://pypi.python.org/pypi/grin.
+
+La integració amb emacs està basada en [[https://bitbucket.org/dariusp686/emacs-grin/src][emacs-grin]].
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package grin
+    :load-path "site-lisp")
+#+end_src
+
+Al estar escrita en python pot donar problemes si s'executa dins un
+directori amb codi python que conté mòduls que poden interferir amb
+els =import= que fa =grin=. Ho vaig detectar, crec recordar, intentant
+executar-lo dins el =site-packages= d'un /virtualenv/, no recordo els
+detalls concrets.
+
+=ag= ([[https://github.com/ggreer/the_silver_searcher][enllaç]]) és una alternativa semblant, escrita en C, per tant més
+ràpida i que no té conflictes amb arbres de codi python.
+
+El que em tira enrere per canviar és la interfície del mòdul =ag.el=
+([[https://github.com/Wilfred/ag.el][enllaç]]), defineix moltes comandes per fer diferents tipus de cerques
+(text en directori, text en directori només en certs arxius, regex en
+directori, text en projecte, text en certs arxius del projecte, regex
+en projecte ...). Massa comandes/combinacions de tecles que recordar i
+poca flexibilitat. M'agrada més l'enfoc de =grin.el=, una única
+comanda que demana el directori i la línia de comandes.
+
+El problema amb =grin= és anecdòtic en el meu cas d'us i no hi ha
+urgència en fer el canvi. Açò és més un recordatori.
 
 * Per mirar
 ** =define-compilation-mode=

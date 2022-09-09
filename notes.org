@@ -961,14 +961,6 @@ inclou =imenu=.
 
 No tinc clar que en la configuració ho utilitzi correctament.
 
-** TODO Arxivar configuració de =grin=
-   :PROPERTIES:
-   :CREATED: [2022-09-03 ds. 21:21]
-   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Bugs, molèsties, millores etc.][Bugs, molèsties, millores etc.]]
-   :END:
-
-Si =ripgrep= fa el paper es pot eliminar tot el relacionat amb =grin=.
-
 ** TODO Racionalitzar /completion/
    :PROPERTIES:
    :CREATED: [2022-09-03 ds. 21:44]
@@ -2734,3 +2726,12 @@ des de Emacs. Estan guardades en:
 /opt/emacs/26.3/share/emacs/26.3/etc/refcards
 
 Hi ha algunes traduccions que caldria ignorar.
+** DONE Arxivar configuració de =grin=
+   :PROPERTIES:
+   :CREATED: [2022-09-03 ds. 21:21]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Bugs, molèsties, millores etc.][Bugs, molèsties, millores etc.]]
+   :END:
+
+   - State "DONE"       from "TODO"       [2022-09-09 dv. 19:58]
+
+Si =ripgrep= fa el paper es pot eliminar tot el relacionat amb =grin=.
