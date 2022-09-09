@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: python3 empty module
+# $Id: header.python-simple.yas 436 2014-08-19 19:35:35Z alex $
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 1f823f35-8565-475b-b365-2339b7b390e4
+# --
+# -*- coding: utf-8 -*-
+
+$0
