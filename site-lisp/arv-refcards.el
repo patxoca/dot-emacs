@@ -55,13 +55,13 @@ un directori. Els directoris que no existeixen son ignorats.
 Retorna una llista de parelles amb punt on el primer element és
 el nom de l'arxiu sense extensió i el segon element és la ruta
 absoluta de l'arxiu."
-
-  (let ((res nil))
-    (dolist (dir dir-list)
-      (when (file-directory-p dir)
-        (dolist (file (directory-files dir nil "\\.pdf$"))
-          (setq res (cons (cons (file-name-sans-extension file) (f-join dir file)) res)))))
-    res))
+  (apply #'nconc
+         (mapcar (lambda (dir)
+                   (when (file-directory-p dir)
+                     (mapcar (lambda (file)
+                               (cons (file-name-sans-extension file) (f-join dir file)))
+                             (directory-files dir nil "\\.pdf$"))))
+                 dir-list)))
 
 (defun arv-refcards--exlude-refcards (cards black-list)
   "Exclou refcards.
