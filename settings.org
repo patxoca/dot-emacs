@@ -3023,6 +3023,14 @@ utilitzat. =tern= sembla prometedor.
                                (company-mode))))
 #+end_src
 
+*** nim
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package nim-mode
+    :ensure t
+    :commands nim-mode)
+#+end_src
+
 *** org
 **** Instal·lació
 
