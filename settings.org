@@ -3070,20 +3070,6 @@ si cal esborrar-ho o és una altra cosa. Verificar-lo la pròxima vegada
 que s'actualitzi.
 #+end_warning
 
-**** Ajuda
-
-Mostra la referència ràpida de =org-mode= (=orgcard.pdf=) si està
-disponible (dins el subdirectori =etc=).
-
-#+begin_src emacs-lisp :tangle yes
-  (defun my/org-refcard ()
-    "Mostra la referència ràpida de org-mode."
-    (interactive)
-    (let ((org-refcard (arv/path-concat arv/emacs-conf-dir "etc" "orgcard.pdf")))
-      (when (file-readable-p org-refcard)
-        (find-file org-refcard))))
-#+end_src
-
 **** Mòduls extra
 
 /org/ no carrega tots els mòduls disponibles. Segons la documentació
@@ -3369,12 +3355,6 @@ que no. En funció d'això s'aplica un estil.
 #+end_src
 
 **** Configuració de tecles                                      :desactivat:
-
-#+begin_src emacs-lisp :tangle yes
-  (with-eval-after-load "org"
-    (my/bind-keys org-mode-map
-                  '(("M-<f1>" my/org-refcard))))
-#+end_src
 
 Cal revisar el paquet =arv/org=. Fins aleshores es desactiva.
 
