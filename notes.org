@@ -1169,6 +1169,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   mostra les línies testejades i no testejades. No mostra
   estadístiques com la pàgina HTML.
 
+- [[https://codeberg.org/ideasman42/emacs-sidecar-locals][sidecar-locals]]: esperit semblant a =dir-locals= però més potent.
+
+  Les meves necessitats actuals estan covertes amb =dir-locals= encara
+  que és cert que és una mica limitat i de vegades utilitzo solucions
+  /creatives/ que no m'agraden (però funcionen).
+
 * Altres recursos
 
 ** elisp
