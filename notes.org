@@ -974,6 +974,19 @@ De vegades interfereixen entre ells i és possible que es sol·lapin.
 Revisar-ho i, en cas de mantindre els paquets, agrupar-los dins una
 secció =Completion= per facilitar el manteniment.
 
+** TODO org-mode no s'activa al visitar un arxiu existent               :bug:
+   :PROPERTIES:
+   :CREATED: [2022-09-20 dt. 07:40]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Racionalitzar /completion/][Racionalitzar /completion/]]
+   :END:
+
+Des de fa uns dies quan visito un arxiu org existent sembla que no
+s'activa =org-mode=. Potser sí s'activa però no es fontifica el
+buffer.
+
+Aparentment només afecta al primer arxiu org que es carrega, obrint un
+segon arxiu tot sembla funcionar.
+
 * Paquets extra
 ** Col·leccions de paquets
 
