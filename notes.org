@@ -987,6 +987,19 @@ buffer.
 Aparentment només afecta al primer arxiu org que es carrega, obrint un
 segon arxiu tot sembla funcionar.
 
+** TODO Facilitar repetició de C-r m                                   :idea:
+   :PROPERTIES:
+   :CREATED: [2022-09-21 dc. 10:37]
+   :REFERER: [[file:~/projectes/hera/trunk/src/pr3_infiprac_core/pr3_infiprac_core/tests/test_pr3_generar_infiprac.py::crear_conveni(self.factoria_conveni, self.avui, tipus, estudiant_nif=nif)]]
+   :END:
+
+De vegades utilitzo C-r m per canviar el format de llistes. La comanda
+fa un cicle entre diferents distribucions (un per línia, emplenar
+línia ...) i resulta incómode haver de premer C-r m cada vegada.
+
+Mirar si és possible fer C-r m m m.
+
+
 * Paquets extra
 ** Col·leccions de paquets
 
