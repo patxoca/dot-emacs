@@ -999,6 +999,17 @@ línia ...) i resulta incómode haver de premer C-r m cada vegada.
 
 Mirar si és possible fer C-r m m m.
 
+** TODO Integració de =imenu= i =rst-mode=                             :idea:
+   :PROPERTIES:
+   :CREATED: [2022-09-22 dj. 09:15]
+   :REFERER: [[file:~/projectes/hera/trunk/src/pr3_infiprac_core/docs/source/disseny.rst::Creació dels registres de control]]
+   :END:
+
+Editant la documentació de Hera veig que podria ser útil poder saltar
+fàcilment a les capçaleres de les seccions.
+
+Mirar si és posible generar la llista de capçaleres (linies
+subtratllades amb certs caràcters) i fer que =imenu= les utilitzi.
 
 * Paquets extra
 ** Col·leccions de paquets
