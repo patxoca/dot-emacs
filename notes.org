@@ -1011,6 +1011,27 @@ fàcilment a les capçaleres de les seccions.
 Mirar si és posible generar la llista de capçaleres (linies
 subtratllades amb certs caràcters) i fer que =imenu= les utilitzi.
 
+** TODO Revisar configuració de flyspell
+   :PROPERTIES:
+   :CREATED: [2022-09-24 ds. 20:05]
+   :REFERER: [[file:~/Documents/sistema/source/devpi.rst][file:~/Documents/sistema/source/devpi.rst]]
+   :END:
+
+Investigant com afegir una paraula a la llista de paraules acceptades
+en el buffer veig que existeix la comanda =flyspell-prog-mode= que
+activa =flyspell= per comentaris i /strings/.
+
+Recordo que fa temps vaig intentar utilitzar =flyspell= per corregir i
+vaig desistir, no recordo si perque em distraia molt o perquè
+l'activava per tot el text i assenyalava errors en els /keywords/ del
+llenguatge de programació.
+
+Potser ho vaig explicar en el comentari d'algun commit del repositori
+=git= de la configuració.
+
+Es pot provar d'activar =flyspell= en =org-mode= i =rst-mode= i
+=flyspell-prog-mode= en =prog-mode=.
+
 * Paquets extra
 ** Col·leccions de paquets
 
