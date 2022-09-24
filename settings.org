@@ -3386,6 +3386,24 @@ es podria generalitzar a notes per projecte.
           org-capture-templates))
 #+end_src
 
+Aquesta serveix per capturar notes no vinculades a un projecte
+concret:
+
+#+begin_src emacs-lisp :tangle yes
+  (push `("x"
+          "TODO general"
+          entry
+           (file+headline "~/ownCloud/Documents/TODO.org" "TODOs")
+          ,(concat "** TODO %^{Heading} %^g\n"
+                   "   :PROPERTIES:\n"
+                   "   :CREATED: %U\n"
+                   "   :END:\n\n"
+                   "%?")
+          :prepend t
+          :empty-lines 1)
+        org-capture-templates)
+#+end_src
+
 **** LaTeX
 
 Classe basada en =report=. Defineix canvis en la presentació (font,
