@@ -1873,6 +1873,18 @@ buffers i arxius.
     (ido-ubiquitous-mode 1))
 #+end_src
 
+*** =iedit=
+
+Edit multiple occurrences in the same way simultaneously.
+
+05-12-2022: Vaig a donar-li una oportunitat a veure que tal.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package iedit
+    :ensure t
+    :commands (iedit-mode))
+#+end_src
+
 *** =lorem-ipsum=                                                    :manual:
 
 https://github.com/jschaf/emacs-lorem-ipsum
@@ -5570,6 +5582,9 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   ;; ripgrep
   (global-set-key (kbd "C-ç") #'rg)
+
+  ;; iedit
+  (global-set-key (kbd "C-ñ") #'iedit-mode)
 
   ;; keybindings per subversion: C-c s
   (global-set-key (kbd "C-c s =") 'svn-file-show-svn-diff)
