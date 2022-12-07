@@ -1168,6 +1168,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   llista d'Emacs diu /Advanced highlighting for Rust and Python/ que
   és el que el podria fer atractiu.
 
+  [[https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/][Aquest post]] explica com configurar emacs 28.2 per utilitzar
+  tree-sitter. No tinc clar quina de les implementacions.
+
 - [[https://savannah.gnu.org/projects/oo-browser/][oo-browser]]: The OO-Browser is a multi-windowed, interactive
   object-oriented class browser similar in use to the well-known
   Smalltalk browsers. It is unique in a number of respects foremost of
