@@ -5054,8 +5054,8 @@ implementar un sistema de captura genèric que entengui el condepte de
   "
     "Plantilla emprada per generar l'arxiu de notes si no existeix.")
 
-  (defun my/visit-current-project-TODO ()
-    "Visita l'arxiu de notes del projecte actual.
+  (defun my/get-current-project-TODO-path ()
+    "Retorna la ruta de l'arxiu de notes del projecte actual.
 
   Si estem dins un projecte (segons 'project.el') i la variable
   `my/current-project-TODO-path' està definida s'obté la ruta de
@@ -5063,20 +5063,28 @@ implementar un sistema de captura genèric que entengui el condepte de
   `my/current-project-TODO-path'. En cas contrari es busca l'arxiu
   especificat en la variable
   `my/current-project-TODO-path-fallback' en el directori actual i
-  en els directories pare, si no es troba es pregunta a l'usuari.
-
-  En qualsevol cas, si l'arxiu és nou (buid) s'insereix el valor de
-  la variable `my/current-project-TODO-template'."
-    (interactive)
+  en els directories pare, si no es troba es pregunta a l'usuari."
     (let ((current-project (project-current)))
       (if (or (null current-project)
               (null my/current-project-TODO-path))
           (let ((directori (or (locate-dominating-file default-directory my/current-project-TODO-path-fallback)
                                (read-directory-name "Directori de l'arxiu de notes"))))
-            (find-file (f-join directori my/current-project-TODO-path-fallback)))
-        (find-file (f-join (project-root current-project) my/current-project-TODO-path)))
-      (when (zerop (buffer-size))
-        (insert my/current-project-TODO-template))))
+            (f-join directori my/current-project-TODO-path-fallback))
+        (f-join (project-root current-project) my/current-project-TODO-path))))
+
+  (defun my/visit-current-project-TODO ()
+    "Visita l'arxiu de notes del projecte actual.
+
+  Consultar la documentació de la funció
+  `my/get-current-project-TODO-path' pels detalls de com es
+  localitza l'arxiu de notes del projecte.
+
+  Si l'arxiu és nou (buid) s'insereix el valor de la variable
+  `my/current-project-TODO-template'."
+    (interactive)
+    (find-file (my/get-current-project-TODO-path))
+    (when (zerop (buffer-size))
+      (insert my/current-project-TODO-template)))
 #+end_src
 
 *** =my/xml-prettify-buffer=

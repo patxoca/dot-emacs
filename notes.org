@@ -1032,6 +1032,33 @@ Potser ho vaig explicar en el comentari d'algun commit del repositori
 Es pot provar d'activar =flyspell= en =org-mode= i =rst-mode= i
 =flyspell-prog-mode= en =prog-mode=.
 
+** TODO Millorar la presa de notes del projecte                 :enhancement:
+   :PROPERTIES:
+   :CREATED: [2022-12-10 ds. 21:08]
+   :REFERER: [[file:~/.emacs.d/conf.d/settings.org]]
+   :END:
+
+Al treballar al mateix temps en =agame= i =gel= m'interessa poder
+prendre notes de cada projecte.
+
+La meva idea originalment era utilitzar la (nova) funció
+=my/get-current-project-TODO-path= per calcular la ruta de l'arxiu al
+vol en la plantilla de captura, malauradament no he tingut en compte
+que la plantilla s'avalua al carregar Emacs i aquest enfoc no
+funciona.
+
+Mirant la documentació de =org-mode= per veure si es podia especificar
+la ruta d'una altra forma:
+
+- he estat incapaç de trobar la documentació on s'explica el format de
+  les plantilles.
+
+- he trobat la variable =org-default-notes-file=
+  (https://orgmode.org/manual/Setting-up-capture.html) que podria
+  valdre si es defineix per projecte en =.dir-locals=. No m'agrada
+  aquesta solució, prefereixo un únic =dir-locals= per
+  /meta-projecte/, però és millor que res.
+
 * Paquets extra
 ** Col·leccions de paquets
 
