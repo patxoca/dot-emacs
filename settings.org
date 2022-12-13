@@ -1097,8 +1097,9 @@ que canvien de buffer i de finestra.
   (when (display-graphic-p)
     ;; x-display-pixel-height necessita un entorn graphic
     (set-face-attribute 'default nil
-            :family "Iosevka Fixed"
-            :height (if (>= (x-display-pixel-height) 1080) 113 106)))
+            :family "Roboto Mono"
+            :weight 'light
+            :height (if (>= (x-display-pixel-height) 1080) 85 80)))
 
   (my/theme-insert-overwrite-init)
 #+end_src
