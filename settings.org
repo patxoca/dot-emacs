@@ -1099,7 +1099,9 @@ que canvien de buffer i de finestra.
     (set-face-attribute 'default nil
             :family "Roboto Mono"
             :weight 'light
-            :height (if (>= (x-display-pixel-height) 1080) 85 80)))
+            :height (pcase system-name
+                      ("turing" 115)
+                      (_ 95))))
 
   (my/theme-insert-overwrite-init)
 #+end_src
