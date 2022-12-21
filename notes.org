@@ -1059,6 +1059,20 @@ la ruta d'una altra forma:
   aquesta solució, prefereixo un únic =dir-locals= per
   /meta-projecte/, però és millor que res.
 
+** TODO Provar el tema brutalist                                :enhancement:
+   :PROPERTIES:
+   :CREATED: [2022-12-14 dc. 09:28]
+   :REFERER: [[file:~/.emacs.d/conf.d/notes.org::*Estudiar integració de =imenu= i =org=][Estudiar integració de =imenu= i =org=]]
+   :END:
+
+L'aspecte és semblant a =modus-operandi= però encara amb menys colors.
+Té el seu punt.
+
+L'he probat 5 minuts i en python i org està bé, no m'agrada el color
+dels diff en magit.
+
+Valorar si val la pena dedicar el temps per personalitzar-lo.
+
 * Paquets extra
 ** Col·leccions de paquets
 
