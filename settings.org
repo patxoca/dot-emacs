@@ -4433,7 +4433,7 @@ user option can be also customized to keep highlighting on all visited
 errors, so you can have an overview what errors were already visited.
 
 #+begin_src emacs-lisp :tangle yes
-  (customize-set-value next-error-message-highlight t)
+  (customize-set-value 'next-error-message-highlight t)
 #+end_src
 
 Per classificar:
