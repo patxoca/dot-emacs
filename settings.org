@@ -4421,6 +4421,21 @@ les diferències de majúscules/minúscules.
   (setq sort-fold-case t)
 #+end_src
 
+Provaré amb prompts =y/n= enlloc de =yes/no=:
+
+#+begin_src emacs-lisp :tangle yes
+  (setq use-short-answers t)
+#+end_src
+
+In addition to a fringe arrow, =next-error= error may now optionally
+highlight the current error message in the =next-error= buffer. This
+user option can be also customized to keep highlighting on all visited
+errors, so you can have an overview what errors were already visited.
+
+#+begin_src emacs-lisp :tangle yes
+  (customize-set-value next-error-message-highlight t)
+#+end_src
+
 Per classificar:
 
 #+begin_src emacs-lisp :tangle yes
