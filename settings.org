@@ -939,13 +939,23 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
                           :background "#ddf0c7"))
     )
 
-  (defun my/theme-enable-theme-modus-operandi ()
-    (require 'modus-themes)
+  (defun my/theme-enable-theme-modus-operandi3 ()
     (modus-themes-load-themes)
     (my/theme-customize-modus-operandi-variables)
     (modus-themes-load-operandi)
     (my/theme-customize-faces-modus-operandi)
     (my/theme-customize-faces-common))
+
+  (defun my/theme-enable-theme-modus-operandi4 ()
+    (my/theme-customize-modus-operandi-variables)
+    (load-theme 'modus-operandi :no-confirm)
+    (my/theme-customize-faces-modus-operandi)
+    (my/theme-customize-faces-common))
+
+  (defun my/theme-enable-theme-modus-operandi ()
+    (if (fboundp 'modus-themes-version)
+        (my/theme-enable-theme-modus-operandi3)
+      (my/theme-enable-theme-modus-operandi4)))
 #+end_src
 
 **** modus-vivendi
@@ -973,13 +983,23 @@ Configuració inicial del tema =modus-vivendi=.
     ;; personalitza les faces una vegada carregat el tema
     )
 
-  (defun my/theme-enable-theme-modus-vivendi ()
-    (require 'modus-themes)
+  (defun my/theme-enable-theme-modus-vivendi3 ()
     (modus-themes-load-themes)
     (my/theme-customize-modus-vivendi-variables)
     (modus-themes-load-vivendi)
     (my/theme-customize-faces-modus-vivendi)
     (my/theme-customize-faces-common))
+
+  (defun my/theme-enable-theme-modus-vivendi4 ()
+    (my/theme-customize-modus-vivendi-variables)
+    (load-theme 'modus-vivendi :no-confirm)
+    (my/theme-customize-faces-modus-vivendi)
+    (my/theme-customize-faces-common))
+
+  (defun my/theme-enable-theme-modus-vivendi ()
+    (if (fboundp 'modus-themes-version)
+        (my/theme-enable-theme-modus-vivendi3)
+      (my/theme-enable-theme-modus-vivendi4)))
 #+end_src
 
 *** ef-themes
