@@ -39,6 +39,9 @@
 
 ;;; Code:
 
+(require 'f)
+
+
 (defvar arv-refcards-path
   (list (f-join data-directory "refcards"))
   "Llista amb rutes de directoris que contenen refcards.")
