@@ -856,12 +856,16 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
     (my/theme-customize-theme-wombat))
 #+end_src
 
-*** modus-operandi
+*** modus themes
 
 #+begin_src emacs-lisp :tangle yes
   (use-package modus-themes
     :ensure t)
+#+end_src
 
+**** modus-operandi
+
+#+begin_src emacs-lisp :tangle yes
   (defun my/theme-customize-modus-operandi-variables ()
     ;; personalitza les variables utilizades per inicialitzar el tema
     ;; modus-operandi.
@@ -944,14 +948,11 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
     (my/theme-customize-faces-common))
 #+end_src
 
-*** modus-vivendi
+**** modus-vivendi
 
 Configuració inicial del tema =modus-vivendi=.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package modus-themes
-    :ensure t)
-
   (defun my/theme-customize-modus-vivendi-variables ()
     ;; personalitza les variables utilizades per inicialitzar el tema
     ;; modus-vivendi.
