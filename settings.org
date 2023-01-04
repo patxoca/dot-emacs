@@ -948,6 +948,11 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
 
   (defun my/theme-enable-theme-modus-operandi4 ()
     (my/theme-customize-modus-operandi-variables)
+    (setq modus-operandi-palette-overrides
+          '((builtin blue-warmer)
+            (fnname blue)
+            (keyword blue-cooler)
+            (type blue-intense)))
     (load-theme 'modus-operandi :no-confirm)
     (my/theme-customize-faces-modus-operandi)
     (my/theme-customize-faces-common))
