@@ -1127,6 +1127,7 @@ que canvien de buffer i de finestra.
             :family "Roboto Mono"
             :weight 'light
             :height (pcase system-name
+                      ("mc" 120)
                       ("ritic23" 90)
                       ("turing" 115)
                       (_ 95))))
