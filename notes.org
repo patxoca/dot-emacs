@@ -1264,6 +1264,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   que és cert que és una mica limitat i de vegades utilitzo solucions
   /creatives/ que no m'agraden (però funcionen).
 
+- [[https://gitlab.com/maurooaranda/emacs-webdriver][emacs-webdriver]]: controla el navegador des d'Emacs.
+
+  Aparentment hi ha un estàndard del W3C per controlar el navegador
+  externament: [[https://www.w3.org/TR/webdriver/]]
+
 * Altres recursos
 
 ** elisp
