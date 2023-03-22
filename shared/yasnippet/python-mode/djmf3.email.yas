@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: django Model EmailField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: fd4d10f7-aa18-420a-83c6-3b2ba5a25964
+# --
+${1:name} = models.EmailField(
+    verbose_name=_("$1"),
+    max_length=${2:75},
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

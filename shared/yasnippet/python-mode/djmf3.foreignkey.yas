@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: django Model ForeignKey
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 35d1725e-699e-422a-a97d-21893b3f6fcf
+# --
+${1:name} = models.ForeignKey(
+    "${2:ForeignTable}",
+    verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    null=${False},
+    blank=${False},
+    related_name="${}",
+    help_text=_("${doc}"),
+)
+$0

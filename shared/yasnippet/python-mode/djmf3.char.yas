@@ -1,0 +1,15 @@
+# -*- Mode: snippet -*-
+# name: django Model CharField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 6435ad88-8469-4f4c-b397-5b9022c0c364
+# --
+${1:name} = models.CharField(
+    verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    max_length=${2:100},
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

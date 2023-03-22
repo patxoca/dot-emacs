@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: django Model TextField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 7f67a8af-1436-41e7-927d-8d3ff128cc88
+# --
+${1:name} = models.TextField(
+    verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

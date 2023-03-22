@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: django Model DateTimeField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: d4ee3af0-d16b-44a8-aa13-de153c85c428
+# --
+${1:name} = models.DateTimeField(
+    verbose_name=_("$1"),
+    auto_now=${False},
+    auto_now_add=${False},
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

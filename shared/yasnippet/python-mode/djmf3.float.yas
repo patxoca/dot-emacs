@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: django Model FloatField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: cb36bad9-f65e-4cb5-b726-5ef1c973c340
+# --
+${1:name} = models.FloatField(
+    verbose_name=_("$1"),
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

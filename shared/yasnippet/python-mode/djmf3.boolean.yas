@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: django Model BooleanField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 2b20e7c8-b7c2-4dd1-b1bf-3b4f2ef79212
+# --
+${1:name} = models.BooleanField(
+    verbose_name=_("$1"),
+    null=${True},
+    blank=${True},
+    help_text=_("${doc}"),
+)
+$0

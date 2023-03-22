@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: django Model NullBooleanField
+# group: django
+# key: djmf3
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 00faed29-2f0a-42b7-b711-7d6481c5d1c4
+# --
+${1:name} = models.NullBooleanField(
+    verbose_name=_("$1"),
+    help_text=_("${doc}"),
+)
+$0
