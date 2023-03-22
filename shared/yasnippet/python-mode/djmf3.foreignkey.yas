@@ -8,7 +8,7 @@
 ${1:name} = models.ForeignKey(
     "${2:ForeignTable}",
     verbose_name=_("${1:$(subst-char-in-string ?_ ?\s (capitalize yas-text))}"),
-    on_delete=Models.${3:$$(yas-choose-value '("CASCADE" "DO_NOTHING" "PROTECT" "RESTRICT" "SET()" "SET_DEFAULT" "SET_NULL"))},
+    on_delete=models.${3:$$(yas-choose-value '("CASCADE" "DO_NOTHING" "PROTECT" "RESTRICT" "SET()" "SET_DEFAULT" "SET_NULL"))},
     null=${False},
     blank=${False},
     related_name="${}",
