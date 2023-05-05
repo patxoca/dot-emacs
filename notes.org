@@ -1333,6 +1333,10 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   En un comentari al post (en twitter) es citen [[https://github.com/emacs-mirror/emacs/blob/master/lisp/rtree.el][rtree.el]] (builtin) i
   http://www.dr-qubit.org/emacs_data-structures.html.
 
+- [[https://macowners.club/posts/custom-functions-5-navigation/][Custom functions No. 5 - Navigation]]: hi ha algunes funcions
+  interessant. Comcretament m'han cridat l'atenció la que /transposa/
+  dos finestres i la que parteix la finestra arrel.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
