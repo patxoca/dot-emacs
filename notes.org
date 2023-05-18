@@ -1114,6 +1114,22 @@ fàcil de recordar.
       (error "No recently-killed files to reopen")))
 #+end_src
 
+** TODO Millora en commits svn/git                                     :idea:
+   :PROPERTIES:
+   :CREATED: [2023-05-18 dj. 10:22]
+   :REFERER: [[file:~/projectes/hera/trunk/project/grup_perms.json::"becari_bt": \[]]
+   :END:
+
+Inspirat en [[https://takeonrules.com/2023/05/17/unfurling-of-issue-reference-abbreviations-in-github-and-other-git-forge-issues/][Unfurling of Issue Reference Abbreviations in Github and
+other Git Forge Issues]] se m'acut que es podria fer algo semblant per
+referenciar commits anteriors.
+
+La idea seria que al escriure =r<TAB>= aparegui una llista per triar
+la revisió, amb la primera línia del commit.
+
+És algo que faig rarament i que probablement requereix algo més de
+context que la primera línia, però com idea està bé.
+
 * Paquets extra
 ** Col·leccions de paquets
 
