@@ -487,6 +487,14 @@ compatibilitat amb diferents instal·lacios d'Emacs.
       (defun mouse-wheel-mode (x)))
   #+end_src
 
+- En Emacs 29.1 el paquet =linum= està marcat com obsolet i no es
+  carrega per defecte. Mentre trobo una solució millor es carrega:
+
+  #+begin_src emacs-lisp :tangle yes
+    (unless (fboundp 'linum-mode)
+      (require 'linum))
+  #+end_src
+
 ** Informació personal
 
 L'adreça d'e-mail pot variar depenent del sistema. Per defecte
