@@ -1130,6 +1130,14 @@ la revisió, amb la primera línia del commit.
 És algo que faig rarament i que probablement requereix algo més de
 context que la primera línia, però com idea està bé.
 
+** TODO Configurar =tree-sitter=                                :enhancement:
+
+Ja tinc instal·lat Emacs 29.1, amb suport per =tree-sitter=.
+Aparentment cal instal·lar les gramàtices de manera independent.
+
+En [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][Mastering Emacs]] ho explica, secció *Installing the Language
+Grammars*.
+
 * Paquets extra
 ** Col·leccions de paquets
 
@@ -1236,38 +1244,6 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   using it inside your lovely editor.
 
   No tinc clares les avantages respecte a executar =ert= directament.
-
-- [[https://github.com/karlotness/tree-sitter.el][tree-sitter]]: An Emacs dynamic module exposing [[https://github.com/tree-sitter/tree-sitter][tree-sitter]].
-
-  Tree-sitter is a parser generator tool and an incremental parsing
-  library. It can build a concrete syntax tree for a source file and
-  efficiently update the syntax tree as the source file is edited.
-  Tree-sitter aims to be:
-
-  - General enough to parse any programming language
-
-  - Fast enough to parse on every keystroke in a text editor
-
-  - Robust enough to provide useful results even in the presence of
-    syntax errors
-
-  - Dependency-free so that the runtime library (which is written in
-    pure C) can be embedded in any application
-
-  No tinc previst un ús però podria valdre per implementar edició
-  estructurada.
-
-  Anotat per fer un seguiment de la seva evolució.
-
-  Actualització 20200609, nom sembla gaire actiu.
-
-  Un [[https://ubolonton.github.io/emacs-tree-sitter/installation/][wrapper alternatiu]]. Requereix suport de càrrega dinàmica de
-  mòduls i aparentment no ho vaig compilar. En l'anunci postejat en la
-  llista d'Emacs diu /Advanced highlighting for Rust and Python/ que
-  és el que el podria fer atractiu.
-
-  [[https://olddeuteronomy.github.io/post/a-tree-sitter-config-that-works/][Aquest post]] explica com configurar emacs 28.2 per utilitzar
-  tree-sitter. No tinc clar quina de les implementacions.
 
 - [[https://savannah.gnu.org/projects/oo-browser/][oo-browser]]: The OO-Browser is a multi-windowed, interactive
   object-oriented class browser similar in use to the well-known
