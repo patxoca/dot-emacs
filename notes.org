@@ -1138,6 +1138,16 @@ Aparentment cal instal·lar les gramàtices de manera independent.
 En [[https://www.masteringemacs.org/article/how-to-get-started-tree-sitter][Mastering Emacs]] ho explica, secció *Installing the Language
 Grammars*.
 
+** TODO Utilitzar =transient= per recordar comandes             :enhancement:
+
+En [[http://yummymelon.com/devnull/improving-emacs-isearch-usability-with-transient.html][Improving Emacs isearch Usability with Transient]] expica com
+utilitzar transient per mostrar les comandes disponibles en =isearch=.
+
+Mai he utilitzat les comandes perquè no soc capaç de recordar-les. Açò
+es podria aplicar en altres contextos en que diposar puntualment de
+les comandes pot ser útil però es tan poc freqüent que no val la pena
+memoritzar-es.
+
 * Paquets extra
 ** Col·leccions de paquets
 
