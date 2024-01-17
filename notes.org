@@ -1148,6 +1148,10 @@ es podria aplicar en altres contextos en que diposar puntualment de
 les comandes pot ser útil però es tan poc freqüent que no val la pena
 memoritzar-es.
 
+*Actualització 17/01/2024*: El mateix autor ha publica un altre post
+on explica com utilitzar-ho per ordenar en /dired/ ([[http://yummymelon.com/devnull/enhancing-dired-sorting-with-transient.html][Enhancing Dired
+Sorting With Transient]]).
+
 * Paquets extra
 ** Col·leccions de paquets
 
