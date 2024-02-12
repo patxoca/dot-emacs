@@ -1351,6 +1351,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   interessant. Comcretament m'han cridat l'atenció la que /transposa/
   dos finestres i la que parteix la finestra arrel.
 
+** Vídeos
+
+- [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
+  aquest vídeo Protesilaos explica com controlar la forma en que emacs
+  selecciona/crea la finestra on mostrar els buffers.
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
