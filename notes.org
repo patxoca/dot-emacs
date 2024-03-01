@@ -1351,6 +1351,14 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   interessant. Comcretament m'han cridat l'atenció la que /transposa/
   dos finestres i la que parteix la finestra arrel.
 
+- [[https://www.masteringemacs.org/article/combobulate-intuitive-structured-navigation-treesitter][Combobulate: Intuitive, Structured Navigation with Tree-Sitter]]:
+  Tree-sitter's promise of simplifying code navigation can seem like a
+  dream, but in reality, it introduces its own set of challenges that
+  complicate the process. In this article, I delve into the intricate
+  nature of crafting intuitive navigation within a tree-sitter
+  environment, shedding light on the complexities that can confound
+  our expectations of how code exploration should flow seamlessly.
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
