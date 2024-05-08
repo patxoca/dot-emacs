@@ -1359,6 +1359,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   environment, shedding light on the complexities that can confound
   our expectations of how code exploration should flow seamlessly.
 
+- [[http://yummymelon.com/devnull/announcing-casual-dired---an-opinionated-porcelain-for-the-emacs-file-manager.html][Casual Dired]]: an opinionated porcelain for the Emacs file manager.
+
+  Pel que veig és un menu transient que facilita utilitzar dired al
+  usuari ocasional (com jo).
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
