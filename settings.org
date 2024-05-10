@@ -171,6 +171,11 @@ Pel que fa als keymaps /locals/ hi ha varies opcions:
 - en =use-package= es pot modificar el /keymap/ local, sempre que el
   comandes siguin locals.
 
+- on tingui sentit, com que no utilitzo la tecla =F10= per mostrar el
+  menú, es pot utilitzar per mostrar /menús/ locals en cada mode. Per
+  exemple, en =dired= utilitzo =casual-dired= per mostrar un menú
+  =transient= amb comandes que soc incapaç de recordar.
+
 - altres?
 
 
@@ -1362,6 +1367,23 @@ Facilita manipular (afegir, modificar, eliminar) parelles de
                           "Juny" "Juliol" "Agost" "Setembre"
                           "Octubre" "Novembre" "Desembre"])
     (customize-set-value 'calendar-week-start-day 1))
+#+end_src
+
+*** =casual-dired=
+
+Utilitzo =dired= a un nivell molt bàsic perquè soc incapaç de recordar
+les comandes i al final em resulta més cómode/àgil utilitzar el shell
+o un gestor d'arxius gràfic.
+
+El paquet =casual-dired= defineix un menú =transient= que espero em
+facilitarà l'ús de =dired=.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package casual-dired
+    :ensure t
+    :bind (:map dired-mode-map
+                ("<f10>" . casual-dired-tmenu))
+    :commands casual-dired-tmenu)
 #+end_src
 
 *** =company=
