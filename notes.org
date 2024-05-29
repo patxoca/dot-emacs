@@ -1364,6 +1364,8 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   Pel que veig és un menu transient que facilita utilitzar dired al
   usuari ocasional (com jo).
 
+- [[http://yummymelon.com/devnull/announcing-casual-avy.html][Casual Avy]]: an opinionated menu for the brilliant Avy package.
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
