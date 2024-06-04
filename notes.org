@@ -1366,6 +1366,8 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
 - [[http://yummymelon.com/devnull/announcing-casual-avy.html][Casual Avy]]: an opinionated menu for the brilliant Avy package.
 
+- [[http://yummymelon.com/devnull/announcing-casual-info.html][Casual Info]]: an opinionated porcelain for the Emacs Info reader.
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
