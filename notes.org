@@ -1324,6 +1324,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   unique accent color to its fringes, mode line, header line, and
   margins.
 
+- [[https://lambdaland.org/posts/2024-05-30_top_emacs_packages/][My Top Emacs Packages]]: blog post amb una llista de paquets que
+  potser val la pena revisar.
+
 * Altres recursos
 
 ** elisp
