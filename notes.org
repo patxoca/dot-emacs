@@ -1371,6 +1371,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
 - [[http://yummymelon.com/devnull/announcing-casual-info.html][Casual Info]]: an opinionated porcelain for the Emacs Info reader.
 
+- [[http://yummymelon.com/devnull/announcing-casual-ibuffer.html][Casual ibuffer]]: Casual IBuffer endeavors to address the above by
+  overlaying a keyboard-driven menu system on IBuffer to organize and
+  facilitate discovery of its commands. Casual IBuffer is now
+  available on MELPA as part of the Casual Suite set of porcelains.
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
