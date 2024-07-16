@@ -1351,6 +1351,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   - [[https://www.emacs.dyerdwelling.family/emacs/20240712082430-emacs--spelling-powerthesaurus/][Spelling transient]]: aquest és un blog post/idea, no un paquet.
 
+  - [[http://yummymelon.com/devnull/announcing-casual-re-builder.html][Casual re-builder]]: Emacs has a built-in tool called RE-Builder
+    that makes it easier to learn and construct regexps. Invoked by
+    the command re-builder, this creates a small editable window where
+    you can interactively enter a regexp and see matches (if any)
+    highlighted in a target buffer, typically the last one you were
+    working on. While it’s nice to have around, recalling its command
+    set can be a chore which makes it an ideal candidate for Casual.
 
 * Altres recursos
 
