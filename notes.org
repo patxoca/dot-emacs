@@ -1327,6 +1327,14 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 - [[https://lambdaland.org/posts/2024-05-30_top_emacs_packages/][My Top Emacs Packages]]: blog post amb una llista de paquets que
   potser val la pena revisar.
 
+- [[https://github.com/wolray/symbol-overlay][symbol overlay]]:Highlight symbols with overlays while providing a
+  keymap for various operations about highlighted symbols.
+
+  Per la descripció és semblant a =highlight-symbol-at-point=, que no
+  sap de l'estructura del codi. El que busco és una comanda que mostri
+  els simbols locals al context actual.
+
+
 * Altres recursos
 
 ** elisp
