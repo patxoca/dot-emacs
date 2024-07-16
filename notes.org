@@ -1349,6 +1349,8 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
     and facilitate discovery of its commands. Casual IBuffer is now
     available on MELPA as part of the Casual Suite set of porcelains.
 
+  - [[https://www.emacs.dyerdwelling.family/emacs/20240712082430-emacs--spelling-powerthesaurus/][Spelling transient]]: aquest és un blog post/idea, no un paquet.
+
 
 * Altres recursos
 
