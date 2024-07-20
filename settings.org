@@ -2622,20 +2622,13 @@ Idees per mirar:
 
 **** gtk-doc
 
-https://github.com/federicomenaquintero/gnome-emacs-utils
-
 Funcions variades per facilitar el desenvolupament de/amb gnome.
 M'interessa la funcionalitat per generar comentaris de les funcions.
-
-#+begin_src sh :tangle yes
-  ./scripts/clone_git https://github.com/federicomenaquintero/gnome-emacs-utils
-  ./scripts/compile_package gnome-emacs-utils
-#+end_src
 
 #+begin_src emacs-lisp :tangle yes
   (use-package gtk-doc
     :ensure nil
-    :load-path "site-lisp/gnome-emacs-utils"
+    :load-path "conf.d/site-lisp/gnome-emacs-utils"
     :commands (gtk-doc-insert
                gtk-doc-insert-section))
 #+end_src
