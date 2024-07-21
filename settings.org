@@ -4244,7 +4244,9 @@ l'arxiu del buffer actual) i en els directoris pare.
        ("<f9>" arv/sphinx-build-latexpdf)
        ("C-<f9>" arv/sphinx-run-doctest)
        ("M-<f9>" arv/sphinx-build-html)
-       ("C-=" arv/rst-underline-header))))
+       ("C-=" arv/rst-underline-header)
+       ("C-c +" arv/rst-promote-header-at-point)
+       ("C-c -" arv/rst-demote-header-at-point))))
 #+end_src
 
 **** /Hook/
