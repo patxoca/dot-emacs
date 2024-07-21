@@ -22,6 +22,15 @@
 
 ;;; Code:
 
+(require 'rst)
+
+
+(defun arv/-rst-after-role-p ()
+  "Return t if point is after a role."
+  (looking-back ":\\w+:" (line-beginning-position)))
+
+
+;;;###autoload
 (defun arv/rst-underline-header (caracter)
   (interactive "cCaracter: ")
   (let ((l (length (buffer-substring-no-properties (progn
@@ -41,10 +50,7 @@
       (insert "\n\n")
       (insert (make-string indentation-level ?\s)))))
 
-(defun arv/-rst-after-role-p ()
-  "Return t if point is after a role."
-  (looking-back ":\\w+:" (line-beginning-position)))
-
+;;;###autoload
 (defun arv/rst-smart-grave ()
   "Tries to be smart about common ` usage patterns.
 
@@ -71,6 +77,7 @@ end."
     (unless active
       (backward-char (length delimiter)))))
 
+;;;###autoload
 (defun arv/rst-smart-asterisk ()
   "Tries to be smart about * usage.
 
@@ -83,6 +90,7 @@ leaves point in the middle."
       (insert "* ")
     (insert "**")
     (backward-char 1)))
+
 
 (provide 'arv-rst)
 
