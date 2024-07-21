@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: elisp simple module
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 61298f92-943e-47c2-b85b-9c958afddc7f
+# --
+;;; `(arv/yas-buffer-name)` --- ${1:Your text here}  -*- lexical-binding: t; -*-
+
+;; Author: Alexis Roda <alexis.roda.villalonga@gmail.com>
+;; Maintainer: Alexis Roda <alexis.roda.villalonga@gmail.com>
+;; Version: ${2:0,1,0}
+;; Created: `(arv/yas-today)`
+;; Package-Requires:
+
+;;; Install:
+
+;; Afegir a l'arxiu de configuració d'Emacs:
+;;
+;;   (use-package `(arv/yas-buffer-name-sans)`
+;;     :ensure nil
+;;     :load-path "conf.d/site-lisp"
+;;   )
+
+;;; Commentary:
+
+;;
+;;
+
+;;; Code:
+
+$0
+
+;;; `(arv/yas-buffer-name)` ends here
