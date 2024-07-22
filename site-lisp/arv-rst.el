@@ -122,7 +122,7 @@ Si HEADER no es pot degradar retorna HEADER."
                                         ; es pot degradar més
      (t (nth level arv/rst-header-recommended-adornments)))))
 
-(defun arv/-rst-header-is-header-adornment (text)
+(defun arv/-rst-header-is-header-adornment-p (text)
   "Comprova si TEXT és una decoració en potència.
 
 TEXT es considera una decoració en potència si és una cadena no
@@ -146,17 +146,17 @@ en la decoració."
         (underline-char " "))
     (when (> curr-line-length 0)
       (if (and (>= (length prev-line) curr-line-length)
-               (arv/-rst-header-is-header-adornment prev-line))
+               (arv/-rst-header-is-header-adornment-p prev-line))
           (setq overline-char (substring prev-line 0 1)))
       (if (and (>= (length next-line) curr-line-length)
-               (arv/-rst-header-is-header-adornment next-line))
+               (arv/-rst-header-is-header-adornment-p next-line))
           (setq underline-char (substring next-line 0 1))))
     (if (or (string= overline-char " ")
             (string= overline-char underline-char))
         (concat overline-char underline-char)
       arv/-rst-null-header)))
 
-(defun arv/-rst-header-empty-overline (header)
+(defun arv/-rst-header-empty-overline-p (header)
   (string= (substring header 0 1) " "))
 
 (defun arv/-rst-null-header-p (header)
@@ -173,14 +173,14 @@ s'insereix de cap de nou."
     ;; overline.
     ;; la overline és una mica més complicada ja que la decoració pot
     ;; apareixer quan es promou i desapareixer quan es degrada.
-    (if (arv/-rst-header-empty-overline old-header)
-        (unless (arv/-rst-header-empty-overline new-header)
+    (if (arv/-rst-header-empty-overline-p old-header)
+        (unless (arv/-rst-header-empty-overline-p new-header)
           ;; abans no tenia overline i ara sí, cal inserir-la
           (save-excursion
             (previous-line)
             (newline)
             (insert (make-string header-length (aref new-header 0)))))
-      (if (arv/-rst-header-empty-overline new-header)
+      (if (arv/-rst-header-empty-overline-p new-header)
           ;; abans tenia capçalera i ara no, cal esborrar-la
           (save-excursion
             (previous-line)
