@@ -22,8 +22,7 @@
 ;; Manipulació de capçaleres:
 ;;
 ;; - arv/rst-underline-header
-;; - arv/rst-promote-header-at-point
-;; - arv/rst-demote-header-at-point
+;; - arv/rst-header-adjust-header-at-point
 ;;
 ;; Caràcters intel·ligents:
 ;;
@@ -51,6 +50,16 @@ la underline. En el cas de la overline un espai en blanc indica
 que no hi ha overline.")
 
 (defconst arv/-rst-null-header "  ")
+
+(defvar arv/-rst-header-adjust-header-keymap
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-+") #'arv/rst-header-adjust-header-at-point)
+    (define-key map (kbd "C--") #'arv/rst-header-adjust-header-at-point)
+    (define-key map (kbd "+") #'arv/rst-header-adjust-header-at-point)
+    (define-key map (kbd "-") #'arv/rst-header-adjust-header-at-point)
+    map)
+  "transient keymap utilitzat per la comanda
+arv/rst-header-adjust-header-at-point")
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -200,6 +209,28 @@ s'insereix de cap de nou."
       (insert (make-string header-length (aref new-header 1)))
       )))
 
+(defun arv/-rst-promote-header-at-point ()
+  "Promou la capçalera actual.
+
+Espera que el cursor estigui sobre el text de la capçalera. Si no
+estem sobre una capçalera o ya està en el nivell màxim, no fa
+res."
+  (let* ((header-length (arv/-rst-current-line-length))
+         (old-header (arv/-rst-header-get-header-at-point))
+         (new-header (arv/-rst-header-get-promoted-header old-header)))
+    (arv/-rst-header-update-header header-length old-header new-header)))
+
+(defun arv/-rst-demote-header-at-point ()
+  "Degrada la capçalera actual.
+
+Espera que el cursor estigui sobre el text de la capçalera. Si no
+estem sobre una capçalera o ya està en el nivell mínim, no fa
+res."
+  (let* ((header-length (arv/-rst-current-line-length))
+         (old-header (arv/-rst-header-get-header-at-point))
+         (new-header (arv/-rst-header-get-demoted-header old-header)))
+    (arv/-rst-header-update-header header-length old-header new-header)))
+
 ;;; ----------------------------------------------------------------------
 ;;;
 ;;; Manipulació de capçaleres de seccions
@@ -225,30 +256,16 @@ s'insereix de cap de nou."
       (insert (make-string indentation-level ?\s)))))
 
 ;;;###autoload
-(defun arv/rst-promote-header-at-point ()
-  "Promou la capçalera actual.
-
-Espera que el cursor estigui sobre el text de la capçalera. Si no
-estem sobre una capçalera o ya està en el nivell màxim, no fa
-res."
+(defun arv/rst-header-adjust-header-at-point ()
   (interactive)
-  (let* ((header-length (arv/-rst-current-line-length))
-         (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (arv/-rst-header-get-promoted-header old-header)))
-    (arv/-rst-header-update-header header-length old-header new-header)))
-
-;;;###autoload
-(defun arv/rst-demote-header-at-point ()
-  "Degrada la capçalera actual.
-
-Espera que el cursor estigui sobre el text de la capçalera. Si no
-estem sobre una capçalera o ya està en el nivell mínim, no fa
-res."
-  (interactive)
-  (let* ((header-length (arv/-rst-current-line-length))
-         (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (arv/-rst-header-get-demoted-header old-header)))
-    (arv/-rst-header-update-header header-length old-header new-header)))
+  (let* ((ev last-command-event)
+         (echo-keystrokes nil)
+         (base (event-basic-type ev)))
+    (if (= base ?+)
+        (arv/-rst-promote-header-at-point)
+      (arv/-rst-demote-header-at-point))
+    (set-transient-map arv/-rst-header-adjust-header-keymap)
+    ))
 
 ;;; ----------------------------------------------------------------------
 ;;;
