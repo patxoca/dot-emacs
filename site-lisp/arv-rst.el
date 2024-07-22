@@ -171,65 +171,47 @@ en la decoració."
 (defun arv/-rst-null-header-p (header)
   (string= header arv/-rst-null-header))
 
-(defun arv/-rst-header-update-header-at-point (header-length old-header new-header)
-  "Actualitza la capçalera de OLD-HEADER a NEW-HEADER.
+(defun arv/-rst-header-update-header-at-point (updater)
+  "Actualitza la capçalera actual utilizant UPDATER.
 
-HEADER-LENGTH determina la longitud de la capçalera quan
-s'insereix de cap de nou."
-  (unless (or (arv/-rst-null-header-p new-header)
-              (string= old-header new-header))
+UPDATER és una funció que rep una capçalera (la capçalera actual)
+i calcula una nova capçalera (la promoguda o degradada), que
+s'utiliza com nova capçalera."
+  (let* ((header-length (arv/-rst-current-line-length))
+         (old-header (arv/-rst-header-get-header-at-point))
+         (new-header (funcall updater old-header)))
+    (unless (or (arv/-rst-null-header-p new-header)
+                (string= old-header new-header))
 
-    ;; overline.
-    ;; la overline és una mica més complicada ja que la decoració pot
-    ;; apareixer quan es promou i desapareixer quan es degrada.
-    (if (arv/-rst-header-empty-overline-p old-header)
-        (unless (arv/-rst-header-empty-overline-p new-header)
-          ;; abans no tenia overline i ara sí, cal inserir-la
-          (save-excursion
-            (previous-line)
-            (newline)
-            (insert (make-string header-length (aref new-header 0)))))
-      (if (arv/-rst-header-empty-overline-p new-header)
-          ;; abans tenia capçalera i ara no, cal esborrar-la
+      ;; overline.
+      ;; la overline és una mica més complicada ja que la decoració pot
+      ;; apareixer quan es promou i desapareixer quan es degrada.
+      (if (arv/-rst-header-empty-overline-p old-header)
+          (unless (arv/-rst-header-empty-overline-p new-header)
+            ;; abans no tenia overline i ara sí, cal inserir-la
+            (save-excursion
+              (previous-line)
+              (newline)
+              (insert (make-string header-length (aref new-header 0)))))
+        (if (arv/-rst-header-empty-overline-p new-header)
+            ;; abans tenia capçalera i ara no, cal esborrar-la
+            (save-excursion
+              (previous-line)
+              (delete-region (pos-bol) (pos-eol))
+              (delete-char 1))
+          ;; abans tenia overline i ara també, cal actualitzar-la
           (save-excursion
             (previous-line)
             (delete-region (pos-bol) (pos-eol))
-            (delete-char 1))
-        ;; abans tenia overline i ara també, cal actualitzar-la
-        (save-excursion
-          (previous-line)
-          (delete-region (pos-bol) (pos-eol))
-          (insert (make-string header-length (aref new-header 0))))))
+            (insert (make-string header-length (aref new-header 0))))))
 
-    ;; underline
-    ;; la underline sempre s'actualitza, no desapareix mai
-    (save-excursion
-      (next-line)
-      (delete-region (pos-bol) (pos-eol))
-      (insert (make-string header-length (aref new-header 1)))
-      )))
-
-(defun arv/-rst-header-promote-header-at-point ()
-  "Promou la capçalera actual.
-
-Espera que el cursor estigui sobre el text de la capçalera. Si no
-estem sobre una capçalera o ya està en el nivell màxim, no fa
-res."
-  (let* ((header-length (arv/-rst-current-line-length))
-         (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (arv/-rst-header-get-promoted-header old-header)))
-    (arv/-rst-header-update-header-at-point header-length old-header new-header)))
-
-(defun arv/-rst-header-demote-header-at-point ()
-  "Degrada la capçalera actual.
-
-Espera que el cursor estigui sobre el text de la capçalera. Si no
-estem sobre una capçalera o ya està en el nivell mínim, no fa
-res."
-  (let* ((header-length (arv/-rst-current-line-length))
-         (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (arv/-rst-header-get-demoted-header old-header)))
-    (arv/-rst-header-update-header-at-point header-length old-header new-header)))
+      ;; underline
+      ;; la underline sempre s'actualitza, no desapareix mai
+      (save-excursion
+        (next-line)
+        (delete-region (pos-bol) (pos-eol))
+        (insert (make-string header-length (aref new-header 1)))
+        ))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -261,9 +243,10 @@ res."
   (let* ((ev last-command-event)
          (echo-keystrokes nil)
          (base (event-basic-type ev)))
-    (if (= base ?+)
-        (arv/-rst-header-promote-header-at-point)
-      (arv/-rst-header-demote-header-at-point))
+    (arv/-rst-header-update-header-at-point
+     (if (= base ?+)
+         #'arv/-rst-header-get-promoted-header
+       #'arv/-rst-header-get-demoted-header))
     (set-transient-map arv/-rst-header-adjust-header-keymap)
     ))
 
