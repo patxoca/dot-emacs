@@ -54,7 +54,7 @@ que no hi ha overline.")
 
 ;;; ----------------------------------------------------------------------
 ;;;
-;;; Funcions auxiliars generals
+;;; Funcions auxiliars
 
 (defun arv/-rst-current-line-length ()
   (- (pos-eol) (pos-bol)))
