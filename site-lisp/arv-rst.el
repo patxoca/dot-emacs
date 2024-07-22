@@ -171,7 +171,7 @@ en la decoració."
 (defun arv/-rst-null-header-p (header)
   (string= header arv/-rst-null-header))
 
-(defun arv/-rst-header-update-header (header-length old-header new-header)
+(defun arv/-rst-header-update-header-at-point (header-length old-header new-header)
   "Actualitza la capçalera de OLD-HEADER a NEW-HEADER.
 
 HEADER-LENGTH determina la longitud de la capçalera quan
@@ -209,7 +209,7 @@ s'insereix de cap de nou."
       (insert (make-string header-length (aref new-header 1)))
       )))
 
-(defun arv/-rst-promote-header-at-point ()
+(defun arv/-rst-header-promote-header-at-point ()
   "Promou la capçalera actual.
 
 Espera que el cursor estigui sobre el text de la capçalera. Si no
@@ -218,9 +218,9 @@ res."
   (let* ((header-length (arv/-rst-current-line-length))
          (old-header (arv/-rst-header-get-header-at-point))
          (new-header (arv/-rst-header-get-promoted-header old-header)))
-    (arv/-rst-header-update-header header-length old-header new-header)))
+    (arv/-rst-header-update-header-at-point header-length old-header new-header)))
 
-(defun arv/-rst-demote-header-at-point ()
+(defun arv/-rst-header-demote-header-at-point ()
   "Degrada la capçalera actual.
 
 Espera que el cursor estigui sobre el text de la capçalera. Si no
@@ -229,7 +229,7 @@ res."
   (let* ((header-length (arv/-rst-current-line-length))
          (old-header (arv/-rst-header-get-header-at-point))
          (new-header (arv/-rst-header-get-demoted-header old-header)))
-    (arv/-rst-header-update-header header-length old-header new-header)))
+    (arv/-rst-header-update-header-at-point header-length old-header new-header)))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -262,8 +262,8 @@ res."
          (echo-keystrokes nil)
          (base (event-basic-type ev)))
     (if (= base ?+)
-        (arv/-rst-promote-header-at-point)
-      (arv/-rst-demote-header-at-point))
+        (arv/-rst-header-promote-header-at-point)
+      (arv/-rst-header-demote-header-at-point))
     (set-transient-map arv/-rst-header-adjust-header-keymap)
     ))
 
