@@ -72,14 +72,14 @@ arv/rst-header-adjust-header-at-point")
   (if (= (pos-bol) (point-min))
       ""
     (save-excursion
-      (previous-line)
+      (forward-line -1)
       (buffer-substring-no-properties (pos-bol) (pos-eol)))))
 
 (defun arv/-rst-get-next-line ()
   (if (= (pos-eol) (point-max))
       ""
     (save-excursion
-      (next-line)
+      (forward-line 1)
       (buffer-substring-no-properties (pos-bol) (pos-eol)))))
 
 (defun arv/-rst-after-role-p ()
@@ -190,25 +190,25 @@ s'utiliza com nova capçalera."
           (unless (arv/-rst-header-empty-overline-p new-header)
             ;; abans no tenia overline i ara sí, cal inserir-la
             (save-excursion
-              (previous-line)
+              (forward-line -1)
               (newline)
               (insert (make-string header-length (aref new-header 0)))))
         (if (arv/-rst-header-empty-overline-p new-header)
             ;; abans tenia capçalera i ara no, cal esborrar-la
             (save-excursion
-              (previous-line)
+              (forward-line -1)
               (delete-region (pos-bol) (pos-eol))
               (delete-char 1))
           ;; abans tenia overline i ara també, cal actualitzar-la
           (save-excursion
-            (previous-line)
+            (forward-line -1)
             (delete-region (pos-bol) (pos-eol))
             (insert (make-string header-length (aref new-header 0))))))
 
       ;; underline
       ;; la underline sempre s'actualitza, no desapareix mai
       (save-excursion
-        (next-line)
+        (forward-line 1)
         (delete-region (pos-bol) (pos-eol))
         (insert (make-string header-length (aref new-header 1)))
         ))))
