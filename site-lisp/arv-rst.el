@@ -179,7 +179,8 @@ i calcula una nova capçalera (la promoguda o degradada), que
 s'utiliza com nova capçalera."
   (let* ((header-length (arv/-rst-current-line-length))
          (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (funcall updater old-header)))
+         (new-header (funcall updater old-header))
+         (saved-column (- (point) (pos-bol))))
     (unless (or (arv/-rst-null-header-p new-header)
                 (string= old-header new-header))
 
@@ -209,8 +210,9 @@ s'utiliza com nova capçalera."
       (save-excursion
         (forward-line 1)
         (delete-region (pos-bol) (pos-eol))
-        (insert (make-string header-length (aref new-header 1)))
-        ))))
+        (insert (make-string header-length (aref new-header 1))))
+      (beginning-of-line)
+      (forward-char saved-column))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
