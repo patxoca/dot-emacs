@@ -189,10 +189,9 @@ s'utiliza com nova capçalera."
       (if (arv/-rst-header-empty-overline-p old-header)
           (unless (arv/-rst-header-empty-overline-p new-header)
             ;; abans no tenia overline i ara sí, cal inserir-la
-            (save-excursion
-              (forward-line -1)
-              (newline)
-              (insert (make-string header-length (aref new-header 0)))))
+            (beginning-of-line)
+            (insert (make-string header-length (aref new-header 0)))
+            (newline))
         (if (arv/-rst-header-empty-overline-p new-header)
             ;; abans tenia capçalera i ara no, cal esborrar-la
             (save-excursion
