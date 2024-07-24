@@ -168,7 +168,7 @@ en la decoració."
 (defun arv/-rst-header-empty-overline-p (header)
   (string= (substring header 0 1) " "))
 
-(defun arv/-rst-null-header-p (header)
+(defun arv/-rst-header-null-header-p (header)
   (string= header arv/-rst-null-header))
 
 (defun arv/-rst-header-update-header-at-point (updater)
@@ -181,7 +181,7 @@ s'utiliza com nova capçalera."
          (old-header (arv/-rst-header-get-header-at-point))
          (new-header (funcall updater old-header))
          (saved-column (- (point) (pos-bol))))
-    (unless (or (arv/-rst-null-header-p new-header)
+    (unless (or (arv/-rst-header-null-header-p new-header)
                 (string= old-header new-header))
 
       ;; overline.
