@@ -194,7 +194,7 @@ s'utiliza com nova capçalera."
             (newline))
         (if (arv/-rst-header-empty-overline-p new-header)
             ;; abans tenia capçalera i ara no, cal esborrar-la
-            (save-excursion
+            (progn
               (forward-line -1)
               (delete-region (pos-bol) (pos-eol))
               (delete-char 1))
