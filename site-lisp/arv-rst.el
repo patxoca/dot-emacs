@@ -42,15 +42,6 @@
 
 (require 'rst)
 
-(defvar arv/rst-header-recommended-adornments
-  '("##" "**" " =" " -" " ^" " ~" " \"" " #" " *" " +")
-  "Parelles de caràcters que es poden utilitzar per adornar les
-seccions. El primer és l'utilitzat en la overline i el segon en
-la underline. En el cas de la overline un espai en blanc indica
-que no hi ha overline.")
-
-(defconst arv/-rst-null-header "  ")
-
 (defvar arv/-rst-header-adjust-header-keymap
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-+") #'arv/rst-header-adjust-header-at-point)
@@ -65,154 +56,9 @@ arv/rst-header-adjust-header-at-point")
 ;;;
 ;;; Funcions auxiliars
 
-(defun arv/-rst-current-line-length ()
-  (- (pos-eol) (pos-bol)))
-
-(defun arv/-rst-get-previous-line ()
-  (if (= (pos-bol) (point-min))
-      ""
-    (save-excursion
-      (forward-line -1)
-      (buffer-substring-no-properties (pos-bol) (pos-eol)))))
-
-(defun arv/-rst-get-next-line ()
-  (if (= (pos-eol) (point-max))
-      ""
-    (save-excursion
-      (forward-line 1)
-      (buffer-substring-no-properties (pos-bol) (pos-eol)))))
-
 (defun arv/-rst-after-role-p ()
   "Return t if point is after a role."
   (looking-back ":\\w+:" (line-beginning-position)))
-
-(defun arv/-rst-header-get-header-level (header)
-  "Retorna el valor numèric de la capçalera HEADER.
-
-Retorna el nivell de la capçalera, comença a comptar en 1.
-Retorna -1 si HEADER no correspon a cap de les capçaleres
-enumerades en la variable arv/rst-header-recommended-adornments."
-  (let ((level (cl-position header arv/rst-header-recommended-adornments :test #'equal)))
-    (if (null level)
-        -1
-      (1+ level))))
-
-(defun arv/-rst-header-get-promoted-header (header)
-  "Retorna la capçalera resultant de promoure HEADER.
-
-Retorna la capçalera prèvia a HEADER, segons l'ordre definit per
-arv/rst-header-recommended-adornments.
-
-Si HEADER no és una capçalera declarada en
-arv/rst-header-recommended-adornments retorna la capçalera nula.
-
-Si HEADER no es pot promoure retorna HEADER."
-  (let ((level (arv/-rst-header-get-header-level header)))
-    (cond
-     ((= level -1) arv/-rst-null-header) ; capçalera no reconeguda
-     ((= level 1) header)  ; capçalera de nivel màxim, no es pot promoure més
-     (t (nth (- level 2) arv/rst-header-recommended-adornments)))))
-
-(defun arv/-rst-header-get-demoted-header (header)
-  "Retorna la capçalera resultant de degradar HEADER.
-
-Retorna la capçalera posterior a HEADER, segons l'ordre definit
-per arv/rst-header-recommended-adornments.
-
-Si HEADER no és una capçalera declarada en
-arv/rst-header-recommended-adornments retorna la capçalera nula.
-
-Si HEADER no es pot degradar retorna HEADER."
-  (let ((level (arv/-rst-header-get-header-level header)))
-    (cond
-     ((= level -1) arv/-rst-null-header) ; capçalera no reconeguda
-     ((= level (length arv/rst-header-recommended-adornments)) header)
-                                        ; capçalera de nivel mínim, no
-                                        ; es pot degradar més
-     (t (nth level arv/rst-header-recommended-adornments)))))
-
-(defun arv/-rst-header-is-header-adornment-p (text)
-  "Comprova si TEXT és una decoració en potència.
-
-TEXT es considera una decoració en potència si és una cadena no
-buida en que tots els caràcters son iguals."
-  (if (string-empty-p text)
-      nil
-    (string= text (make-string (length text) (string-to-char text)))))
-
-(defun arv/-rst-header-get-header-at-point ()
-  "Retorna la capçalera actual.
-
-Retorna la capçalera sobre la que es troba el cursor o la
-capçalera nula si no estem en una capçalera.
-
-Espera que el cursor estigui en la línia del text del títol, no
-en la decoració."
-  (let ((curr-line-length (arv/-rst-current-line-length))
-        (prev-line (arv/-rst-get-previous-line))
-        (next-line (arv/-rst-get-next-line))
-        (overline-char " ")
-        (underline-char " "))
-    (when (> curr-line-length 0)
-      (if (and (>= (length prev-line) curr-line-length)
-               (arv/-rst-header-is-header-adornment-p prev-line))
-          (setq overline-char (substring prev-line 0 1)))
-      (if (and (>= (length next-line) curr-line-length)
-               (arv/-rst-header-is-header-adornment-p next-line))
-          (setq underline-char (substring next-line 0 1))))
-    (if (or (string= overline-char " ")
-            (string= overline-char underline-char))
-        (concat overline-char underline-char)
-      arv/-rst-null-header)))
-
-(defun arv/-rst-header-empty-overline-p (header)
-  (string= (substring header 0 1) " "))
-
-(defun arv/-rst-header-null-header-p (header)
-  (string= header arv/-rst-null-header))
-
-(defun arv/-rst-header-update-header-at-point (updater)
-  "Actualitza la capçalera actual utilizant UPDATER.
-
-UPDATER és una funció que rep una capçalera (la capçalera actual)
-i calcula una nova capçalera (la promoguda o degradada), que
-s'utiliza com nova capçalera."
-  (let* ((header-length (arv/-rst-current-line-length))
-         (old-header (arv/-rst-header-get-header-at-point))
-         (new-header (funcall updater old-header))
-         (saved-column (- (point) (pos-bol))))
-    (unless (or (arv/-rst-header-null-header-p new-header)
-                (string= old-header new-header))
-
-      ;; overline.
-      ;; la overline és una mica més complicada ja que la decoració pot
-      ;; apareixer quan es promou i desapareixer quan es degrada.
-      (if (arv/-rst-header-empty-overline-p old-header)
-          (unless (arv/-rst-header-empty-overline-p new-header)
-            ;; abans no tenia overline i ara sí, cal inserir-la
-            (beginning-of-line)
-            (insert (make-string header-length (aref new-header 0)))
-            (newline))
-        (if (arv/-rst-header-empty-overline-p new-header)
-            ;; abans tenia capçalera i ara no, cal esborrar-la
-            (progn
-              (forward-line -1)
-              (delete-region (pos-bol) (pos-eol))
-              (delete-char 1))
-          ;; abans tenia overline i ara també, cal actualitzar-la
-          (save-excursion
-            (forward-line -1)
-            (delete-region (pos-bol) (pos-eol))
-            (insert (make-string header-length (aref new-header 0))))))
-
-      ;; underline
-      ;; la underline sempre s'actualitza, no desapareix mai
-      (save-excursion
-        (forward-line 1)
-        (delete-region (pos-bol) (pos-eol))
-        (insert (make-string header-length (aref new-header 1))))
-      (beginning-of-line)
-      (forward-char saved-column))))
 
 ;;; ----------------------------------------------------------------------
 ;;;
@@ -240,16 +86,16 @@ s'utiliza com nova capçalera."
 
 ;;;###autoload
 (defun arv/rst-header-adjust-header-at-point ()
+  "Invoca `rst-adjust-section' i activa un menú transient que permet
+repetir la comanda."
   (interactive)
   (let* ((ev last-command-event)
          (echo-keystrokes nil)
          (base (event-basic-type ev)))
-    (arv/-rst-header-update-header-at-point
-     (if (= base ?+)
-         #'arv/-rst-header-get-promoted-header
-       #'arv/-rst-header-get-demoted-header))
-    (set-transient-map arv/-rst-header-adjust-header-keymap)
-    ))
+    (if (= base ?+)
+        (rst-adjust-section nil nil)
+      (rst-adjust-section nil t))
+    (set-transient-map arv/-rst-header-adjust-header-keymap)))
 
 ;;; ----------------------------------------------------------------------
 ;;;
