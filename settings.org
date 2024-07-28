@@ -4173,6 +4173,23 @@ configuració en la que s'han eliminat les dependències de =pony-mode=.
 #+end_src
 
 *** rst
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package rst
+    :config (customize-set-value 'rst-preferred-adornments
+                                 '((?# over-and-under 2)
+                                   (?* over-and-under 1)
+                                   (?= simple 0)
+                                   (?- simple 0)
+                                   (?^ simple 0)
+                                   (?\" simple 0)
+                                   (?+ simple 0)
+                                   (?~ simple 0)))
+    :hook (rst-mode . which-function-model)
+    :bind (:map rst-mode-map
+                ("M-<down>" . #'rst-forward-section)
+                ("M-<up>" . #'rst-backward-section)))
+#+end_src
 **** Funcions auxiliars
 ***** Documents =rst=
 
