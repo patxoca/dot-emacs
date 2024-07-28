@@ -1,0 +1,1584 @@
+This is rst.info, produced by makeinfo version 6.7 from rst.texi.
+
+INFO-DIR-SECTION Emacs editing modes
+START-INFO-DIR-ENTRY
+* rst: (rst.info).  reStructuredText mode for Emacs.
+END-INFO-DIR-ENTRY
+
+
+File: rst.info,  Node: Top,  Next: Introduction,  Up: (dir)
+
+rst Documentation
+*****************
+
+This manual is for rst version 1.4.1.
+
+Authors: Stefan Merten <<stefan@merten-home.de>>, Martin Blais
+<<blais@furius.ca>>
+
+Abstract: High-level description of the existing Emacs(1) support for
+editing reStructuredText(2) text documents.  Suggested setup code and
+usage instructions are provided.
+
+* Menu:
+
+* Introduction::
+* Installation::
+* Key bindings::
+* Section Adornments::
+* Movement and Selection::
+* Indenting and Filling::
+* Operating on Lists::
+* Operating on Other Text Blocks::
+* Converting Documents from Emacs::
+* Imenu Support::
+* Using the Table of Contents::
+* Syntax Highlighting via Font-Lock::
+* Customization::
+* Related aspects::
+* Credits::
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Introduction,  Next: Installation,  Prev: Top,  Up: Top
+
+1 Introduction
+**************
+
+reStructuredText(1) is a syntax for simple text files that allows a tool
+set - docutils(2) - to extract generic document structure.  For people
+who use Emacs(3), there is a package that adds a major mode that
+supports editing the syntax of reStructuredText(4): ‘rst.el’.  This
+document describes the features it provides, and how to setup your
+Emacs(5) to use them and how to invoke them.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://docutils.sourceforge.io/
+
+   (3) https://www.gnu.org/software/emacs/emacs.html
+
+   (4) https://docutils.sourceforge.io/rst.html
+
+   (5) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Installation,  Next: Key bindings,  Prev: Introduction,  Up: Top
+
+2 Installation
+**************
+
+Emacs(1) support for reStructuredText(2) is implemented as an Emacs(3)
+major mode (‘rst-mode’) provided by the ‘rst.el’ Emacs(4) package.
+
+Emacs(5) distributions contain ‘rst.el’ since version V23.1.  However, a
+significantly updated version of ‘rst.el’ is contained in Emacs(6)
+V24.3.  This document describes the version of ‘rst.el’ contained in
+Emacs(7) V24.3 and later versions.  This version of ‘rst.el’ has the
+internal version V1.4.1.
+
+If you have Emacs(8) V24.3 or later you do not need to install anything
+to get reST support.  If you have an Emacs(9) between V23.1 and V24.2
+you may use the version of ‘rst.el’ installed with Emacs(10) or install
+a more recent one *note locally: 4. (recommended).  In other cases you
+need to install ‘rst.el’ *note locally: 4. to get reST support.
+
+* Menu:
+
+* Checking situation::
+* Local installation::
+* Switching rst-mode on::
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+   (3) https://www.gnu.org/software/emacs/emacs.html
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+   (5) https://www.gnu.org/software/emacs/emacs.html
+
+   (6) https://www.gnu.org/software/emacs/emacs.html
+
+   (7) https://www.gnu.org/software/emacs/emacs.html
+
+   (8) https://www.gnu.org/software/emacs/emacs.html
+
+   (9) https://www.gnu.org/software/emacs/emacs.html
+
+   (10) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Checking situation,  Next: Local installation,  Up: Installation
+
+2.1 Checking situation
+======================
+
+Here are some steps to check your situation:
+
+  1. In Emacs(1) switch to an empty buffer and try
+
+          M-x rst-mode
+
+     If this works you have ‘rst.el’ installed somewhere.  You can see
+     that it works if you find a string ‘ReST’ in Emacs’ modeline of the
+     current buffer.  If this doesn’t work you need to install ‘rst.el’
+     yourself *note locally: 4.
+
+  2. In the buffer you just switched to ‘rst-mode’ try
+
+          C-h v rst-version
+
+     If this fails you have a version of ‘rst.el’ older than V1.1.0.
+     Either you have an old ‘rst.el’ locally or you are using an
+     Emacs(2) between V23.1 and V24.2.  In this case it is recommended
+     that you install a more recent version of ‘rst.el’ *note locally:
+     4.
+
+     You may also try
+
+          C-h v emacs-version
+
+     to find out your Emacs(3) version.
+
+  3. Check the version of ‘rst.el’
+
+     The content of ‘rst-version’ gives you the internal version of
+     ‘rst.el’.  The version contained in Emacs(4) V24.3 and described
+     here is V1.4.0.  If you have an older version you may or may not
+     install a more recent version of ‘rst.el’ *note locally: 4.
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://www.gnu.org/software/emacs/emacs.html
+
+   (3) https://www.gnu.org/software/emacs/emacs.html
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Local installation,  Next: Switching rst-mode on,  Prev: Checking situation,  Up: Installation
+
+2.2 Local installation
+======================
+
+If you decided to install locally please follow these steps.
+
+  1. Download ‘rst.el’
+
+     Download the most recent published version of ‘rst.el’ from
+     ‘https://sourceforge.net/p/docutils/code/HEAD/tree/trunk/docutils/tools/editors/emacs/rst.el’
+
+  2. Put ‘rst.el’ to a directory in ‘load-path’
+
+     Use
+
+          C-h v load-path
+
+     If in the resulting list you find a directory in your home
+     directory put ‘rst.el’ in this directory.
+
+     Make sure the directory is one of the first entries in ‘load-path’.
+     Otherwise a version of ‘rst.el’ which came with Emacs(1) may be
+     found before your local version.
+
+     In Emacs(2) see the info node ‘Init File Examples’ for more
+     information on how to set up your Emacs(3) initialization
+     machinery.  Try
+
+          C-h i
+          mEmacs<Return>
+          sInit File Examples<Return>
+
+  3. Enable ‘rst-mode’
+
+     Add the following to your Emacs(4) initialization setup
+
+          (require 'rst)
+
+     After you restarted Emacs(5) ‘rst.el’ is loaded and ready to be
+     used.
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://www.gnu.org/software/emacs/emacs.html
+
+   (3) https://www.gnu.org/software/emacs/emacs.html
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+   (5) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Switching rst-mode on,  Prev: Local installation,  Up: Installation
+
+2.3 Switching ‘rst-mode’ on
+===========================
+
+By default ‘rst-mode’ is switched on for files ending in ‘.rst’ or
+‘.rest’.  If in a buffer you want to switch ‘rst-mode’ on manually use
+
+     M-x rst-mode
+
+If you want to use ‘rst-mode’ in files with other extensions modify
+‘auto-mode-alist’ to automatically turn it on whenever you visit
+reStructuredText(1) documents:
+
+     (setq auto-mode-alist
+           (append '(("\\.txt\\'" . rst-mode)
+                     ("\\.rst\\'" . rst-mode)
+                     ("\\.rest\\'" . rst-mode)) auto-mode-alist))
+
+Put the extensions you want in the correct place in the example above.
+Add more lines if needed.
+
+If have local variables enabled (try ‘C-h v enable-local-variables’ to
+find out), you can also add the following at the top of your documents
+to trigger rst-mode:
+
+     .. -*- mode: rst -*-
+
+Or this at the end of your documents:
+
+     ..
+        Local Variables:
+        mode: rst
+        End:
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Key bindings,  Next: Section Adornments,  Prev: Installation,  Up: Top
+
+3 Key bindings
+**************
+
+‘rst-mode’ automatically binds several keys for invoking special
+functions for editing reStructuredText(1).  Since ‘rst-mode’ contains a
+lot of functionality most key bindings consist of three keystrokes.
+
+Following the Emacs(2) conventions for major modes the key bindings of
+‘rst-mode’ start with ‘C-c C-<letter>’.  The second key stroke selects a
+group of key bindings:
+
+C-c C-a
+
+     Commands to adjust the section headers and work with the hierarchy
+     they build.
+
+C-c C-c
+
+     Commands to compile the current reStructuredText(3) document to
+     various output formats.
+
+C-c C-l
+
+     Commands to work with lists of various kinds.
+
+C-c C-r
+
+     Commands to manipulate the current region.
+
+C-c C-t
+
+     Commands to create and manipulate a table of contents.
+
+At any stage of typing you may use ‘C-h’ to get help on the available
+key bindings.  I.e.  ‘C-c C-h’ gives you help on all key bindings while
+‘C-c C-r C-h’ gives you help on the commands for regions.  This is handy
+if you forgot a certain key binding.
+
+Additional key bindings which have a certain meaning in other Emacs(4)
+modes are reused in ‘rst-mode’ so you don’t have to learn a different
+set of key bindings for editing reStructuredText(5).
+
+In ‘rst-mode’ try
+
+     C-h m
+
+to list all mode specific key bindings.  Most of the key bindings are
+described in this tutorial.
+
+     Note: The key bindings have been completely revamped in ‘rst.el’
+     V1.0.0.  This was necessary to make room for new functionality.
+     Some of the old bindings still work but give a warning to use the
+     new binding.  In the output of ‘C-h m’ these bindings show up as
+     ‘rst-deprecated-...’.  The old bindings will be removed completely
+     in a later version.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://www.gnu.org/software/emacs/emacs.html
+
+   (3) https://docutils.sourceforge.io/rst.html
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+   (5) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Section Adornments,  Next: Movement and Selection,  Prev: Key bindings,  Up: Top
+
+4 Section Adornments
+********************
+
+‘rst-mode’ recognizes the section adornments building the section
+hierarchy of the document.  Section adornments are the underlines or
+under- and overlines used to mark a section title.  There are a couple
+of commands to work with section adornments.  These commands are bound
+to key bindings starting with ‘C-c C-a’.
+
+* Menu:
+
+* Adjusting a Section Title::
+* Promoting and Demoting Many Sections::
+* Redoing All the Adornments to Your Taste::
+* Customizations for Adornments::
+* Viewing the Hierarchy of Section Adornments::
+
+
+File: rst.info,  Node: Adjusting a Section Title,  Next: Promoting and Demoting Many Sections,  Up: Section Adornments
+
+4.1 Adjusting a Section Title
+=============================
+
+There is a function that helps a great deal to maintain these
+adornments: ‘rst-adjust’ (bound to ‘C-c C-a C-a’, ‘C-c C-=’, and ‘C-=’).
+This function is a Swiss army knife that can be invoked repeatedly and
+whose behavior depends on context:
+
+  1. If there is an incomplete adornment, e.g.
+
+          My Section Title
+          ==
+
+     invocation will complete the adornment.  It can also be used to
+     adjust the length of the existing adornment when you need to edit
+     the title.
+
+  2. If there is no section adornment at all, by default an adornment of
+     the same level as the last encountered section level is added.  You
+     can simply enter a few characters of the title and invoke the
+     function to create the section adornment.
+
+     The variable ‘rst-new-adornment-down’ can be customized to create
+     one level lower adornments than the previous section title instead
+     of keeping the level.
+
+  3. If there is already a section adornment, it is promoted one level
+     up.  You can invoke it like this repeatedly to cycle the title
+     through the hierarchy of existing adornments.
+
+Invoking the function with a negative prefix argument, e.g.  ‘C-- C-=’,
+will effectively reverse the direction of adornment cycling.  To
+alternate between underline-only and over-and-under styles, you can use
+a regular prefix argument, e.g.  ‘C-u C-=’.  See the documentation of
+‘rst-adjust’ for more description of the prefix arguments to alter the
+behavior of the function.
+
+
+File: rst.info,  Node: Promoting and Demoting Many Sections,  Next: Redoing All the Adornments to Your Taste,  Prev: Adjusting a Section Title,  Up: Section Adornments
+
+4.2 Promoting and Demoting Many Sections
+========================================
+
+When you are re-organizing the structure of a document, it can be useful
+to change the level of a number of section titles.  The same key binding
+can be used to do that: if the region is active when the binding is
+invoked, all the section titles that are within the region are promoted
+accordingly (or demoted, with negative prefix argument).
+
+
+File: rst.info,  Node: Redoing All the Adornments to Your Taste,  Next: Customizations for Adornments,  Prev: Promoting and Demoting Many Sections,  Up: Section Adornments
+
+4.3 Redoing All the Adornments to Your Taste
+============================================
+
+If you open someone else’s file and the adornments it contains are
+unfamiliar, you may want to readjust them to fit your own preferred
+hierarchy of adornments.  This can be difficult to perform by hand.
+However, you can do this easily by invoking ‘rst-straighten-adornments’
+(‘C-c C-a C-s’), which operates on the entire buffer.
+
+
+File: rst.info,  Node: Customizations for Adornments,  Next: Viewing the Hierarchy of Section Adornments,  Prev: Redoing All the Adornments to Your Taste,  Up: Section Adornments
+
+4.4 Customizations for Adornments
+=================================
+
+You can customize the variable ‘rst-preferred-adornments’ to a list of
+the adornments that you like to use for documents.
+
+If you prefer adornments according to
+‘http://sphinx-doc.org/rest.html#sections’ you may customize it to end
+up with a value like this:
+
+     ((35 over-and-under 0) ; ?#
+      (42 over-and-under 0) ; ?*
+      (61 simple 0) ; ?=
+      (45 simple 0) ; ?-
+      (94 simple 0) ; ?^
+      (34 simple 0)) ; ?"
+
+This will become the default in a later version of ‘rst.el’.
+
+If you set ‘rst-preferred-adornments’ to nil resembling the empty list
+only the section adornment found in the buffer will be used.
+
+
+File: rst.info,  Node: Viewing the Hierarchy of Section Adornments,  Prev: Customizations for Adornments,  Up: Section Adornments
+
+4.5 Viewing the Hierarchy of Section Adornments
+===============================================
+
+You can visualize the hierarchy of the section adornments in the current
+buffer by invoking ‘rst-display-adornments-hierarchy’, bound on ‘C-c C-a
+C-d’.  A temporary buffer will appear with fake section titles rendered
+in the style of the current document.  This can be useful when editing
+other people’s documents to find out which section adornments correspond
+to which levels.
+
+
+File: rst.info,  Node: Movement and Selection,  Next: Indenting and Filling,  Prev: Section Adornments,  Up: Top
+
+5 Movement and Selection
+************************
+
+* Menu:
+
+* Movement and Selection for Sections::
+* Movements and Selection for Text Blocks::
+
+
+File: rst.info,  Node: Movement and Selection for Sections,  Next: Movements and Selection for Text Blocks,  Up: Movement and Selection
+
+5.1 Movement and Selection for Sections
+=======================================
+
+You can move the cursor between the different section titles by using
+the ‘rst-backward-section’ (‘C-M-a’) and ‘rst-forward-section’
+(‘C-M-e’).  To mark the section that cursor lies in, use
+‘rst-mark-section’ (‘C-M-h’).
+
+The key bindings are modeled after other modes with similar
+functionality.
+
+
+File: rst.info,  Node: Movements and Selection for Text Blocks,  Prev: Movement and Selection for Sections,  Up: Movement and Selection
+
+5.2 Movements and Selection for Text Blocks
+===========================================
+
+The understanding of reStructuredText(1) of ‘rst-mode’ is used to set
+all the variables influencing Emacs’ understanding of paragraphs.  Thus
+all operations on paragraphs work as usual.  For instance
+‘forward-paragraph’ (‘M-}’) works as usual.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Indenting and Filling,  Next: Operating on Lists,  Prev: Movement and Selection,  Up: Top
+
+6 Indenting and Filling
+***********************
+
+Indentation of text plays a major role in the syntax of
+reStructuredText(1).  It is tedious to maintain the indentation
+manually.  ‘rst-mode’ understands most of the structure of
+reStructuredText(2) allowing for sophisticated indentation and filling
+support described in this section.
+
+* Menu:
+
+* Indenting Text Blocks::
+* Indenting Lines While Typing::
+* Filling::
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Indenting Text Blocks,  Next: Indenting Lines While Typing,  Up: Indenting and Filling
+
+6.1 Indenting Text Blocks
+=========================
+
+‘rst-mode’ supports indentation of text blocks by the command
+‘rst-shift-region’ (‘C-c C-r TAB’).  Mark a region and use ‘C-c C-r TAB’
+to indent all blocks one tab to the right.  Use ‘M-- C-c C-r TAB’ to
+indent the region one tab to the left.
+
+You may use arbitrary prefix arguments such as ‘M-2’ or ‘M-- 2’ to
+determine the number of tabs you want to indent.  A prefix of ‘M-0’
+removes all indentation in the active region.
+
+A tab is an indentation making sense for the block at hand in
+reStructuredText(1) syntax.  In some cases the exact indentation depends
+on personal taste.  You may customize a couple of variables ‘M-x
+customize-group<RET> rst-indent<RET>’ to match your taste.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Indenting Lines While Typing,  Next: Filling,  Prev: Indenting Text Blocks,  Up: Indenting and Filling
+
+6.2 Indenting Lines While Typing
+================================
+
+In Emacs(1) the ‘TAB’ key is often used for indenting the current line.
+‘rst-mode’ implements this for the sophisticated indentation rules of
+reStructuredText(2).  Pressing ‘TAB’ cycles through the possible tabs
+for the current line.  In the same manner ‘newline-and-indent’ (‘C-j’)
+indents the new line properly.
+
+This is very handy while writing lists.  Consider this
+reStructuredText(3) bullet list with the cursor at ‘@’:
+
+     * Level 1
+
+       * Level 2@
+
+Type ‘C-j’ twice to get this:
+
+     * Level 1
+
+       * Level 2
+
+         @
+
+Now you an enter text at this level, or start a new list item by typing
+another ‘*’.  Or you may type ‘TAB’ to reduce the indentation once:
+
+     * Level 1
+
+       * Level 2
+
+       @
+
+Typing another ‘TAB’ gets you to the first level:
+
+     * Level 1
+
+       * Level 2
+
+     @
+
+     Note: Since Emacs(4) V24.4 ‘electric-indent-mode’ is globally on.
+     This breaks indentation in ‘rst-mode’ and renders ‘rst-mode’ mostly
+     useless.  This is fixed in V1.4.1 of ‘rst-mode’.
+
+     A quick fix for older versions of ‘rst.el’ is to add the following
+     line at the end of the ‘(define-derived-mode rst-mode ...’ block in
+     your copy of ‘rst.el’:
+
+          (setq electric-indent-inhibit t)
+
+     You may also install V1.4.1 or newer *note locally: 4.
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+   (3) https://docutils.sourceforge.io/rst.html
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Filling,  Prev: Indenting Lines While Typing,  Up: Indenting and Filling
+
+6.3 Filling
+===========
+
+‘rst-mode’ understanding the indentation rules of reStructuredText(1)
+also supports filling paragraphs.  Just use ‘fill-paragraph’ (‘M-q’) as
+you do in other modes.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Operating on Lists,  Next: Operating on Other Text Blocks,  Prev: Indenting and Filling,  Up: Top
+
+7 Operating on Lists
+********************
+
+Lists are supported in various flavors in reStructuredText(1).
+‘rst-mode’ understands reStructuredText(2) lists and offers some support
+for operating on lists.  Key bindings for commands for operating on
+lists start with ‘C-c C-l’.
+
+Please note that so far definition lists are not explicitly supported by
+‘rst-mode’.
+
+* Menu:
+
+* Bulleted and Enumerated Lists::
+* Straightening Existing Bullet List Hierarchies::
+* Inserting a List Item::
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Bulleted and Enumerated Lists,  Next: Straightening Existing Bullet List Hierarchies,  Up: Operating on Lists
+
+7.1 Bulleted and Enumerated Lists
+=================================
+
+If you have a couple of plain lines you want to turn into an enumerated
+list you can invoke ‘rst-enumerate-region’ (‘C-c C-l C-e’).  For
+example, the following region
+
+     Apples
+
+     Oranges
+
+     Bananas
+
+becomes
+
+     1. Apples
+
+     2. Oranges
+
+     3. Bananas
+
+‘rst-bullet-list-region’ (‘C-c C-l C-b’) does the same, but results in a
+bullet list
+
+     * Apples
+
+     * Oranges
+
+     * Bananas
+
+By default, each paragraph starting on the leftmost line in the
+highlighted region will be taken to be a single list or enumeration
+item, for example, enumerating the following:
+
+     An apple a day
+     keeps the doctor away.
+
+     But oranges
+     are tastier than apples.
+
+     If you preferred bananas
+     you may be
+     a monkey.
+
+Will result in:
+
+     1. An apple a day
+        keeps the doctor away.
+
+     2. But oranges
+        are tastier than apples.
+
+     3. If you preferred bananas
+        you may be
+        a monkey.
+
+If you would like to enumerate each of the lines, use a prefix argument
+on the preceding commands, e.g.:
+
+     Apples
+     Oranges
+     Bananas
+
+becomes:
+
+     * Apples
+     * Oranges
+     * Bananas
+
+
+File: rst.info,  Node: Straightening Existing Bullet List Hierarchies,  Next: Inserting a List Item,  Prev: Bulleted and Enumerated Lists,  Up: Operating on Lists
+
+7.2 Straightening Existing Bullet List Hierarchies
+==================================================
+
+If you invoke ‘rst-straighten-bullets-region’ (‘C-c C-l C-s’), the
+existing bullets in the active region will be replaced to reflect their
+respective level.  This does not make a difference in the document
+structure that reStructuredText(1) defines, but looks better in, for
+example, if all of the top-level bullet items use the character ‘-’, and
+all of the 2nd level items use ‘*’, etc.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Inserting a List Item,  Prev: Straightening Existing Bullet List Hierarchies,  Up: Operating on Lists
+
+7.3 Inserting a List Item
+=========================
+
+To start a new list you may invoke ‘rst-insert-list’ (‘C-c C-l C-i’).
+You may choose from an item style supported by reStructuredText(1).
+
+You may also invoke ‘rst-insert-list’ at the end of a list item.  In
+this case it inserts a new line containing the markup for the a list
+item on the same level.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Operating on Other Text Blocks,  Next: Converting Documents from Emacs,  Prev: Operating on Lists,  Up: Top
+
+8 Operating on Other Text Blocks
+********************************
+
+* Menu:
+
+* Creating and Removing Line Blocks::
+* Commenting a Region of Text::
+
+
+File: rst.info,  Node: Creating and Removing Line Blocks,  Next: Commenting a Region of Text,  Up: Operating on Other Text Blocks
+
+8.1 Creating and Removing Line Blocks
+=====================================
+
+To create line blocks, first select the region to convert and invoke
+‘rst-line-block-region’ ‘C-c C-r C-l’.  For example, the following
+
+     Apples
+     Oranges
+     Bananas
+
+becomes
+
+     | Apples
+     | Oranges
+     | Bananas
+
+This works even if the region is indented.  To remove line blocks,
+select a region and invoke with a prefix argument.
+
+
+File: rst.info,  Node: Commenting a Region of Text,  Prev: Creating and Removing Line Blocks,  Up: Operating on Other Text Blocks
+
+8.2 Commenting a Region of Text
+===============================
+
+‘rst-mode’ understands reStructuredText(1) comments.  Use ‘comment-dwim’
+(‘M-;’) to work on comments as usual:
+
+     Apples
+     Oranges
+     Bananas
+
+becomes:
+
+     ..
+        Apples
+        Oranges
+        Bananas
+
+To remove a comment you have to tell this to ‘comment-dwim’ explicitly
+by using a prefix argument (‘C-u M-;’).
+
+Please note that only indented comments are supported properly by the
+parts of ‘comment-dwim’ working on regions.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Converting Documents from Emacs,  Next: Imenu Support,  Prev: Operating on Other Text Blocks,  Up: Top
+
+9 Converting Documents from Emacs
+*********************************
+
+‘rst-mode’ provides a number of functions for running documents being
+edited through the docutils tools.  The key bindings for these commands
+start with ‘C-c C-c’.
+
+The main generic function is ‘rst-compile’ (‘C-c C-c C-c’).  It invokes
+a compilation command with the correct output name for the current
+buffer and then invokes Emacs’ compile function.  It also looks for the
+presence of a ‘docutils.conf’ configuration file in the parent
+directories and adds it to the command line options.  There is also
+‘rst-compile-alt-toolset’ (‘C-c C-c C-a’) in case you often need run
+your document in a second toolset.
+
+You can customize the commands being used by setting
+‘rst-compile-primary-toolset’ and ‘rst-compile-secondary-toolset’.
+
+Other commands are available for other formats:
+
+   * ‘rst-compile-pseudo-region’ (‘C-c C-c C-x’)
+
+     When crafting documents, it is often convenient to view which data
+     structures docutils will parse them into.  You can use to run the
+     active region through ‘rst2pseudoxml’ and have the output
+     automatically be displayed in a new buffer.
+
+   * ‘rst-compile-pdf-preview’ (‘C-c C-c C-p’)
+
+     Convert the current document to PDF and launch a viewer on the
+     results.
+
+   * ‘rst-compile-slides-preview’ (‘C-c C-c C-s’): Convert the current
+     document to S5 slides and view in a web browser.
+
+
+File: rst.info,  Node: Imenu Support,  Next: Using the Table of Contents,  Prev: Converting Documents from Emacs,  Up: Top
+
+10 Imenu Support
+****************
+
+* Menu:
+
+* Using Imenu::
+* Using which function::
+
+
+File: rst.info,  Node: Using Imenu,  Next: Using which function,  Up: Imenu Support
+
+10.1 Using Imenu
+================
+
+Emacs(1) has a package called ‘imenu’.  ‘rst-mode’ supports Imenu by
+adding a function to convert the structure of a reStructuredText(2)
+buffer to an Imenu index.  Thus you can use invoke ‘imenu’ (‘M-x imenu’)
+to navigate through the section index or invoke ‘imenu-add-to-menubar’
+(‘M-x imenu-add-to-menubar’) to add an Imenu menu entry to Emacs’ menu
+bar.
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Using which function,  Prev: Using Imenu,  Up: Imenu Support
+
+10.2 Using which function
+=========================
+
+As a side effect of Imenu support the ‘which-func’ package is also
+supported.  Invoke ‘which-function-mode’ (‘M-x which-function-mode’) to
+add the name of the current section to the mode line.  This is
+especially useful if you navigate through documents with long sections
+which do not fit on a single screen.
+
+
+File: rst.info,  Node: Using the Table of Contents,  Next: Syntax Highlighting via Font-Lock,  Prev: Imenu Support,  Up: Top
+
+11 Using the Table of Contents
+******************************
+
+The sections in a reStructuredText(1) document can be used to form a
+table of contents.  ‘rst-mode’ can work with such a table of contents in
+various forms.  Key bindings for these commands start with ‘C-c C-t’.
+
+* Menu:
+
+* Navigating Using the Table of Contents::
+* Inserting a Table of Contents::
+* Maintaining the Table of Contents Up-to-date::
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Navigating Using the Table of Contents,  Next: Inserting a Table of Contents,  Up: Using the Table of Contents
+
+11.1 Navigating Using the Table of Contents
+===========================================
+
+When you are editing long documents, it can be a bit difficult to orient
+yourself in the structure of your text.  To that effect, a function is
+provided that presents a hierarchically indented table of contents of
+the document in a temporary buffer, in which you can navigate and press
+‘Return’ to go to a specific section.
+
+Invoke ‘rst-toc’ (‘C-c C-t C-t’).  It presents a temporary buffer that
+looks something like this:
+
+     Table of Contents:
+     Debugging Meta-Techniques
+       Introduction
+       Debugging Solution Patterns
+         Recognize That a Bug Exists
+         Subdivide and Isolate
+         Identify and Verify Assumptions
+         Use a Tool for Introspection
+         Change one thing at a time
+         Learn about the System
+       Understanding a bug
+       The Basic Steps in Debugging
+       Attitude
+         Bad Feelings
+         Good Feelings
+       References
+
+When you move the cursor to a section title and press ‘RET’ or ‘f’ or
+click with ‘button1’ on a section title, the temporary buffer disappears
+and you are left with the cursor positioned at the chosen section.
+Clicking with ‘button2’ jumps to the respective section but keeps the
+toc buffer.  You can use this to look at the various section headers
+quickly.  Use ‘q’ in this buffer to just quit it without moving the
+cursor in the original document.  Use ‘z’ to zap the buffer altogether.
+
+
+File: rst.info,  Node: Inserting a Table of Contents,  Next: Maintaining the Table of Contents Up-to-date,  Prev: Navigating Using the Table of Contents,  Up: Using the Table of Contents
+
+11.2 Inserting a Table of Contents
+==================================
+
+Oftentimes in long text documents that are meant to be read directly, a
+table of contents is inserted at the beginning of the text.  In
+reStructuredText(1) documents, since the table of contents is
+automatically generated by the parser with the ‘.. contents::’
+directive, people generally have not been adding an explicit table of
+contents to their source documents, and partly because it is too much
+trouble to edit and maintain.
+
+The Emacs(2) support for reStructuredText(3) provides a function to
+insert such a table of contents in your document.  Since it is not meant
+to be part of the document text, you should place such a table of
+contents within a comment, so that it is ignored by the parser.  This is
+the favored usage:
+
+     .. contents::
+     ..
+         1  Introduction
+         2  Debugging Solution Patterns
+           2.1  Recognize That a Bug Exists
+           2.2  Subdivide and Isolate
+           2.3  Identify and Verify Assumptions
+           2.4  Use a Tool for Introspection
+           2.5  Change one thing at a time
+           2.6  Learn about the System
+         3  Understanding a bug
+         4  The Basic Steps in Debugging
+         5  Attitude
+           5.1  Bad Feelings
+           5.2  Good Feelings
+         6  References
+
+Just place the cursor at the top-left corner where you want to insert
+the TOC and invoke the function ‘rst-toc-insert’ with ‘C-c C-t C-i’.
+The table of contents will display all the section titles that are under
+the location where the insertion occurs.  This way you can insert local
+table of contents by placing them in the appropriate location.
+
+You can use a numeric prefix argument to limit the depth of rendering of
+the TOC.
+
+You can customize the look of the TOC by setting the values of the
+following variables: ‘rst-toc-indent’, ‘rst-toc-insert-style’,
+‘rst-toc-insert-max-level’.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://www.gnu.org/software/emacs/emacs.html
+
+   (3) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Maintaining the Table of Contents Up-to-date,  Prev: Inserting a Table of Contents,  Up: Using the Table of Contents
+
+11.3 Maintaining the Table of Contents Up-to-date
+=================================================
+
+One issue is that you will probably want to maintain the inserted table
+of contents up-to-date.  ‘rst-toc-update’ (‘C-c C-t C-u’) will
+automatically update an inserted table of contents following a ‘..
+contents::’ directive laid out like the example above.
+
+
+File: rst.info,  Node: Syntax Highlighting via Font-Lock,  Next: Customization,  Prev: Using the Table of Contents,  Up: Top
+
+12 Syntax Highlighting via Font-Lock
+************************************
+
+‘rst-mode’ provides syntax highlighting for nearly all to
+reStructuredText(1) constructs.
+
+Use ‘customize-group rst-faces’ to customize the faces used for
+font-locking.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Customization,  Next: Related aspects,  Prev: Syntax Highlighting via Font-Lock,  Up: Top
+
+13 Customization
+****************
+
+Some aspects of ‘rst-mode’ can be configured through the customization
+feature of Emacs(1).  Try
+
+     M-x customize-group<RETURN>rst
+
+for all customizations or use the respective menu entry.  Those
+customizations which are useful for many people are described in this
+section.
+
+* Menu:
+
+* Customizing Section Title Formatting::
+* Customizing Indentation::
+* Customizing Faces::
+* Customizing Conversion::
+* Other Customizations::
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Customizing Section Title Formatting,  Next: Customizing Indentation,  Up: Customization
+
+13.1 Customizing Section Title Formatting
+=========================================
+
+For a couple of things the reStructuredText(1) syntax offers a choice of
+options on how to do things exactly.  Some of these choices influence
+the operation of ‘rst.el’ and thus can be configured.  The
+customizations are contained in the ‘rst-adjust’ group.
+
+Among these things is the exact layout of section adornments.  In fact
+reStructuredText(2) prescribes only the characters and how these
+characters must be used but the exact use of concrete adornments may be
+different in every source file.  Using the customization option
+‘rst-preferred-adornments’ you can tell ‘rst-mode’ on the exact sequence
+of adornments you prefer to markup the different levels of sections
+headers.
+
+Finally the title text of over-and-under adornments may be indented in
+reStructuredText(3).  ‘rst-default-indent’ tells ‘rst-mode’ how many
+positions a over-and-under adornment should be indented when toggling
+from simple adornment and in case a consistent indentation throughout
+the whole buffer for such adornment is needed.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+   (3) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Customizing Indentation,  Next: Customizing Faces,  Prev: Customizing Section Title Formatting,  Up: Customization
+
+13.2 Customizing Indentation
+============================
+
+reStructuredText(1) uses indentation a lot to signify a certain meaning.
+In some cases the exact amount of indentation is prescribed by the
+syntax while in some cases the exact indentation is not fixed.  The
+customization group ‘rst-indent’ allows to customize the amount of
+indentation in these cases.
+
+In field lists the content of a field needs to be indented relative to
+the field label.  ‘rst-indent-field’ tells ‘rst-mode’ the amount of
+indentation to use for field content.  A value of zero always indents
+according to the content after the field label.
+
+The indentation of literal blocks is controlled by
+‘rst-indent-literal-normal’ and ‘rst-indent-literal-minimized’.  The
+first is used when the leading literal tag (‘::’) appears alone on a
+line.  The second is used when the minimized style is used where the
+literal tag follows some text.
+
+The indentation of comments is controlled by ‘rst-indent-comment’.  Of
+course this makes only sense for the indented comments of
+reStructuredText(2).
+
+Customization option ‘rst-indent-width’ gives the default indentation
+when there are no other hints on what amount of indentation to use.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Customizing Faces,  Next: Customizing Conversion,  Prev: Customizing Indentation,  Up: Customization
+
+13.3 Customizing Faces
+======================
+
+The faces used for font-locking can be defined in the ‘rst-faces’
+customization group.  The customization options ending in ‘-face’ are
+only there for backward compatibility so please leave them as they are.
+
+reStructuredText(1) sets no limit on the nesting of sections.  By
+default there are six levels of fontification defined.  Section titles
+deeper than six level have no special fontification - only the
+adornments are fontified.  The exact mapping from a level to a face is
+done by by ‘rst-adornment-faces-alist’, however.  So if you need
+fontification deeper than six levels you may want to customize this
+option.  You may also want to customize it if you like the general idea
+of section title fontification in ‘rst-mode’ but for instance prefer a
+reversed order.
+
+   ---------- Footnotes ----------
+
+   (1) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Customizing Conversion,  Next: Other Customizations,  Prev: Customizing Faces,  Up: Customization
+
+13.4 Customizing Conversion
+===========================
+
+*note Conversion: 1d. can be customized by the customization options in
+the customization group ‘rst-compile’.
+
+If some conversion does not work as expected please check the variable
+‘rst-compile-toolsets’
+
+     M-x customize-option<RETURN>rst-compile-toolsets
+
+This variable defines the commands and other details used for
+conversion.  In case of problems please check that the commands are
+either available or customize them to what is available in your
+environment.
+
+     Note: There are some options in V1.4.1 of ‘rst.el’ which should be
+     customization options but are not yet.  Customization support will
+     be added in a later version.
+
+     Note: Please note that there is a package ‘rst2pdf’ based on the
+     ReportLab library.  Please note that the command of this package
+     requires an additional ‘-o’ for naming the output file.  This
+     breaks the usual conventions employed by Docutils tools.
+     ‘rst-mode’ V1.4.1 does not support this directly.
+
+
+File: rst.info,  Node: Other Customizations,  Prev: Customizing Conversion,  Up: Customization
+
+13.5 Other Customizations
+=========================
+
+‘rst-preferred-bullets’ can be customized to hold your preferred set of
+bullets to use for bulleted lists.
+
+‘rst-mode-hook’ is a normal major mode hook which may be customized.  It
+is run if you enter ‘rst-mode’.
+
+
+File: rst.info,  Node: Related aspects,  Next: Credits,  Prev: Customization,  Up: Top
+
+14 Related aspects
+******************
+
+This section covers some general aspects using Emacs(1) for editing
+reStructuredText(2) source.  They are not directly related to ‘rst-mode’
+but may enhance your experience.
+
+* Menu:
+
+* text-mode Settings::
+* Editing Tables; Emacs table mode: Editing Tables Emacs table mode.
+* Character Processing::
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: text-mode Settings,  Next: Editing Tables Emacs table mode,  Up: Related aspects
+
+14.1 ‘text-mode’ Settings
+=========================
+
+Consult the Emacs(1) manual for more ‘text-mode’ customizations.  In
+particular, you may be interested in setting the following variables,
+functions and modes that pertain somewhat to ‘text-mode’:
+
+   * ‘indent-tabs-mode’
+
+   * ‘colon-double-space’
+
+   * ‘sentence-end-double-space’
+
+   * ‘auto-fill-mode’
+
+   * ‘auto-mode-alist’
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+
+File: rst.info,  Node: Editing Tables Emacs table mode,  Next: Character Processing,  Prev: text-mode Settings,  Up: Related aspects
+
+14.2 Editing Tables: Emacs table mode
+=====================================
+
+You may want to check out Emacs table mode(1) to create an edit tables,
+it allows creating ASCII tables compatible with reStructuredText(2).
+
+   ---------- Footnotes ----------
+
+   (1) http://table.sourceforge.net/
+
+   (2) https://docutils.sourceforge.io/rst.html
+
+
+File: rst.info,  Node: Character Processing,  Prev: Editing Tables Emacs table mode,  Up: Related aspects
+
+14.3 Character Processing
+=========================
+
+Since reStructuredText punts on the issue of character processing, here
+are some useful resources for Emacs(1) users in the Unicode world:
+
+   * xmlunicode.el and unichars.el from Norman Walsh(2)
+
+   * An essay by Tim Bray, with example code(3)
+
+   * For Emacs(4) users on Mac OS X, here are some useful useful
+     additions to your .emacs file.
+
+        - To get direct keyboard input of non-ASCII characters (like
+          “option-e e” resulting in “é” [eacute]), first enable the
+          option key by setting the command key as your meta key:
+
+               (setq mac-command-key-is-meta t) ;; nil for option key
+
+          Next, use one of these lines:
+
+               (set-keyboard-coding-system 'mac-roman)
+               (setq mac-keyboard-text-encoding kTextEncodingISOLatin1)
+
+          I prefer the first line, because it enables non-Latin-1
+          characters as well (em-dash, curly quotes, etc.).
+
+        - To enable the display of all characters in the Mac-Roman
+          charset, first create a fontset listing the fonts to use for
+          each range of characters using charsets that Emacs(5)
+          understands:
+
+               (create-fontset-from-fontset-spec
+                "-apple-monaco-medium-r-normal--10-*-*-*-*-*-fontset-monaco,
+                 ascii:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman,
+                 latin-iso8859-1:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman,
+                 mule-unicode-0100-24ff:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman")
+
+          Latin-1 doesn’t cover characters like em-dash and curly
+          quotes, so “mule-unicode-0100-24ff” is needed.
+
+          Next, use that fontset:
+
+               (set-frame-font "fontset-monaco")
+
+        - To enable cooperation between the system clipboard and the
+          Emacs(6) kill ring, add this line:
+
+               (set-clipboard-coding-system 'mac-roman)
+
+     Other useful resources are in Andrew Choi’s Emacs 21 for Mac OS X
+     FAQ(7).
+
+   ---------- Footnotes ----------
+
+   (1) https://www.gnu.org/software/emacs/emacs.html
+
+   (2) http://nwalsh.com/emacs/xmlchars/index.html
+
+   (3) http://www.tbray.org/ongoing/When/200x/2003/09/27/UniEmacs
+
+   (4) https://www.gnu.org/software/emacs/emacs.html
+
+   (5) https://www.gnu.org/software/emacs/emacs.html
+
+   (6) https://www.gnu.org/software/emacs/emacs.html
+
+   (7) http://members.shaw.ca/akochoi-emacs/stories/faq.html
+
+
+File: rst.info,  Node: Credits,  Prev: Related aspects,  Up: Top
+
+15 Credits
+**********
+
+Part of the original code of ‘rst.el’ has been written by Martin Blais
+and David Goodger and Wei-Wei Guo.  The font-locking came from Stefan
+Merten.
+
+Most of the code has been modified, enhanced and extended by Stefan
+Merten who also is the current maintainer of ‘rst.el’.
+
+
+
+Tag Table:
+Node: Top303
+Ref: index doc483
+Ref: 0483
+Ref: Top-Footnote-11179
+Ref: Top-Footnote-21233
+Node: Introduction1282
+Ref: index emacs-support-for-restructuredtext1364
+Ref: 11364
+Ref: index introduction1364
+Ref: 21364
+Ref: Introduction-Footnote-11825
+Ref: Introduction-Footnote-21874
+Ref: Introduction-Footnote-31915
+Ref: Introduction-Footnote-41969
+Ref: Introduction-Footnote-52018
+Node: Installation2072
+Ref: index installation2163
+Ref: 32163
+Ref: Installation-Footnote-13137
+Ref: Installation-Footnote-23191
+Ref: Installation-Footnote-33240
+Ref: Installation-Footnote-43294
+Ref: Installation-Footnote-53348
+Ref: Installation-Footnote-63402
+Ref: Installation-Footnote-73456
+Ref: Installation-Footnote-83510
+Ref: Installation-Footnote-93564
+Ref: Installation-Footnote-103618
+Node: Checking situation3673
+Ref: index checking-situation3764
+Ref: 53764
+Ref: Checking situation-Footnote-15041
+Ref: Checking situation-Footnote-25095
+Ref: Checking situation-Footnote-35149
+Ref: Checking situation-Footnote-45203
+Node: Local installation5257
+Ref: index local-installation5378
+Ref: 65378
+Ref: index locally5378
+Ref: 45378
+Ref: Local installation-Footnote-16558
+Ref: Local installation-Footnote-26612
+Ref: Local installation-Footnote-36666
+Ref: Local installation-Footnote-46720
+Ref: Local installation-Footnote-56774
+Node: Switching rst-mode on6828
+Ref: index switching-rst-mode-on6922
+Ref: 76922
+Ref: Switching rst-mode on-Footnote-17949
+Node: Key bindings7998
+Ref: index key-bindings8095
+Ref: 88095
+Ref: Key bindings-Footnote-19938
+Ref: Key bindings-Footnote-29987
+Ref: Key bindings-Footnote-310041
+Ref: Key bindings-Footnote-410090
+Ref: Key bindings-Footnote-510144
+Node: Section Adornments10193
+Ref: index section-adornments10300
+Ref: 910300
+Node: Adjusting a Section Title10878
+Ref: index adjusting-a-section-title11000
+Ref: a11000
+Node: Promoting and Demoting Many Sections12581
+Ref: index promoting-and-demoting-many-sections12752
+Ref: b12752
+Node: Redoing All the Adornments to Your Taste13179
+Ref: index redoing-all-the-adornments-to-your-taste13354
+Ref: c13354
+Node: Customizations for Adornments13785
+Ref: index customizations-for-adornments13967
+Ref: d13967
+Node: Viewing the Hierarchy of Section Adornments14675
+Ref: index viewing-the-hierarchy-of-section-adornments14808
+Ref: e14808
+Node: Movement and Selection15295
+Ref: index movement-and-selection15411
+Ref: f15411
+Node: Movement and Selection for Sections15556
+Ref: index movement-and-selection-for-sections15695
+Ref: 1015695
+Node: Movements and Selection for Text Blocks16097
+Ref: index movements-and-selection-for-text-blocks16236
+Ref: 1116236
+Ref: Movements and Selection for Text Blocks-Footnote-116620
+Node: Indenting and Filling16669
+Ref: index indenting-and-filling16785
+Ref: 1216785
+Ref: Indenting and Filling-Footnote-117241
+Ref: Indenting and Filling-Footnote-217290
+Node: Indenting Text Blocks17339
+Ref: index indenting-text-blocks17452
+Ref: 1317452
+Ref: Indenting Text Blocks-Footnote-118263
+Node: Indenting Lines While Typing18312
+Ref: index indenting-lines-while-typing18441
+Ref: 1418441
+Ref: Indenting Lines While Typing-Footnote-119907
+Ref: Indenting Lines While Typing-Footnote-219961
+Ref: Indenting Lines While Typing-Footnote-320010
+Ref: Indenting Lines While Typing-Footnote-420059
+Node: Filling20113
+Ref: index filling20212
+Ref: 1520212
+Ref: Filling-Footnote-120451
+Node: Operating on Lists20500
+Ref: index operating-on-lists20624
+Ref: 1620624
+Ref: Operating on Lists-Footnote-121155
+Ref: Operating on Lists-Footnote-221204
+Node: Bulleted and Enumerated Lists21253
+Ref: index bulleted-and-enumerated-lists21389
+Ref: 1721389
+Node: Straightening Existing Bullet List Hierarchies22610
+Ref: index straightening-existing-bullet-list-hierarchies22776
+Ref: 1822776
+Ref: Straightening Existing Bullet List Hierarchies-Footnote-123321
+Node: Inserting a List Item23370
+Ref: index inserting-a-list-item23498
+Ref: 1923498
+Ref: Inserting a List Item-Footnote-123901
+Node: Operating on Other Text Blocks23950
+Ref: index operating-on-other-text-blocks24084
+Ref: 1a24084
+Node: Creating and Removing Line Blocks24231
+Ref: index creating-and-removing-line-blocks24364
+Ref: 1b24364
+Node: Commenting a Region of Text24798
+Ref: index commenting-a-region-of-text24931
+Ref: 1c24931
+Ref: Commenting a Region of Text-Footnote-125500
+Node: Converting Documents from Emacs25549
+Ref: index conversion25678
+Ref: 1d25678
+Ref: index converting-documents-from-emacs25678
+Ref: 1e25678
+Node: Imenu Support27158
+Ref: index imenu-support27284
+Ref: 1f27284
+Node: Using Imenu27370
+Ref: index using-imenu27457
+Ref: 2027457
+Ref: Using Imenu-Footnote-127912
+Ref: Using Imenu-Footnote-227966
+Node: Using which function28015
+Ref: index using-which-function28102
+Ref: 2128102
+Node: Using the Table of Contents28478
+Ref: index using-the-table-of-contents28606
+Ref: 2228606
+Ref: Using the Table of Contents-Footnote-129062
+Node: Navigating Using the Table of Contents29111
+Ref: index navigating-using-the-table-of-contents29248
+Ref: 2329248
+Node: Inserting a Table of Contents30755
+Ref: index inserting-a-table-of-contents30945
+Ref: 2430945
+Ref: Inserting a Table of Contents-Footnote-132924
+Ref: Inserting a Table of Contents-Footnote-232973
+Ref: Inserting a Table of Contents-Footnote-333027
+Node: Maintaining the Table of Contents Up-to-date33076
+Ref: index maintaining-the-table-of-contents-up-to-date33219
+Ref: 2533219
+Node: Syntax Highlighting via Font-Lock33590
+Ref: index syntax-highlighting-via-font-lock33718
+Ref: 2633718
+Ref: Syntax Highlighting via Font-Lock-Footnote-134007
+Node: Customization34056
+Ref: index customization34172
+Ref: 2734172
+Ref: Customization-Footnote-134679
+Node: Customizing Section Title Formatting34733
+Ref: index customizing-section-title-formatting34848
+Ref: 2834848
+Ref: Customizing Section Title Formatting-Footnote-136003
+Ref: Customizing Section Title Formatting-Footnote-236052
+Ref: Customizing Section Title Formatting-Footnote-336101
+Node: Customizing Indentation36150
+Ref: index customizing-indentation36291
+Ref: 2936291
+Ref: Customizing Indentation-Footnote-137560
+Ref: Customizing Indentation-Footnote-237609
+Node: Customizing Faces37658
+Ref: index customizing-faces37785
+Ref: 2a37785
+Ref: Customizing Faces-Footnote-138657
+Node: Customizing Conversion38706
+Ref: index customizing-conversion38830
+Ref: 2b38830
+Node: Other Customizations39885
+Ref: index other-customizations39983
+Ref: 2c39983
+Node: Related aspects40262
+Ref: index related-aspects40352
+Ref: 2d40352
+Ref: Related aspects-Footnote-140733
+Ref: Related aspects-Footnote-240787
+Node: text-mode Settings40836
+Ref: index text-mode-settings40943
+Ref: 2e40943
+Ref: text-mode Settings-Footnote-141395
+Node: Editing Tables Emacs table mode41449
+Ref: index editing-tables-emacs-table-mode41585
+Ref: 2f41585
+Ref: Editing Tables Emacs table mode-Footnote-141840
+Ref: Editing Tables Emacs table mode-Footnote-241878
+Node: Character Processing41927
+Ref: index character-processing42036
+Ref: 3042036
+Ref: index emacs-table-mode42036
+Ref: 3142036
+Ref: Character Processing-Footnote-144160
+Ref: Character Processing-Footnote-244214
+Ref: Character Processing-Footnote-344266
+Ref: Character Processing-Footnote-444333
+Ref: Character Processing-Footnote-544387
+Ref: Character Processing-Footnote-644441
+Ref: Character Processing-Footnote-744495
+Node: Credits44557
+Ref: index credits44625
+Ref: 3244625
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+End:
