@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: bootstrap button
-# $Id:$
 # key: bb
 # group: django
 # type: snippet

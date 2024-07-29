@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: xfail test stub
-# $Id:$
 # key: dtf
 # group: testing
 # type: snippet

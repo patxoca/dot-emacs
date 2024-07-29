@@ -1,6 +1,5 @@
 # -*- mode: snippet; encoding: utf-8 -*-
 # name: .. function::
-# $Id: func.desc.yas 547 2014-10-18 17:15:01Z alex $
 # group: sphinx
 # key: func
 # expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))

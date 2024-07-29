@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: with self.assertRaises
-# $Id:$
 # key: war
 # group: testing
 # type: snippet

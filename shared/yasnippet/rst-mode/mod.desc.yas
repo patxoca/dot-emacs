@@ -1,6 +1,5 @@
 # -*- mode: snippet; encoding: utf-8 -*-
 # name: .. module::
-# $Id: mod.desc.yas 436 2014-08-19 19:35:35Z alex $
 # group: sphinx
 # key: mod
 # expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))

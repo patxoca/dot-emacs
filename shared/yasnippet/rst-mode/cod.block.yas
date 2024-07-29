@@ -1,6 +1,5 @@
 # -*- mode: snippet; encoding: utf-8 -*-
 # name: bloc de codi
-# $Id: cod.block.yas 746 2017-03-05 11:33:52Z alex $
 # group: sphinx
 # key: cod
 # expand-env: ((yas/indent-line 'fixed))

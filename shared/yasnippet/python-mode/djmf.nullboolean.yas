@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: django Model NullBooleanField
-# $Id: djmf.nullboolean.yas 760 2017-07-02 16:18:16Z alex $
 # group: django
 # key: djmf
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>

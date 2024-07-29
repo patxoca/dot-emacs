@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: defineix un mètode de estàtic
-# $Id: defm.staticmethod.yas 547 2014-10-18 17:15:01Z alex $
 # key: defm
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
 # uuid: 4a357afe-e4f6-4714-b8d0-5ef5f6f5d28b

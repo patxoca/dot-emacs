@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: :py:class:
-# $Id:$
 # key: sclass
 # type: snippet
 # group: sphinx

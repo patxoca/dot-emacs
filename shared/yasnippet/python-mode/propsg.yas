@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: propietat (getter i setter)
-# $Id: propsg.yas 436 2014-08-19 19:35:35Z alex $
 # key: prop
 # expand-env: ((yas/indent-line 'fixed))
 # contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>

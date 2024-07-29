@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: with self.assertRaisesRegexp
-# $Id:$
 # key: warr
 # group: testing
 # type: snippet

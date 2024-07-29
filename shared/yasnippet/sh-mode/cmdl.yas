@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: command line parser
-# $Id:$
 # key: cmdl
 # contributor: Alexis <alexis.roda.villalonga@gmail.com>
 # expand-env: ((yas-indent-line 'fixed))
