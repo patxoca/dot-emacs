@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: django form view (class based)
-# $Id: header.django-form-view.yas 547 2014-10-18 17:15:01Z alex $
 # key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))

@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: python with GPL licencse
-# $Id: header.python.yas 436 2014-08-19 19:35:35Z alex $
 # key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))

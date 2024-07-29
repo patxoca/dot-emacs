@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: elisp module
-# $Id: header.module.yas 445 2014-08-20 11:55:23Z alex $
 # key:  header
 # type: snippet
 # contributor:Alexis Roda <alexis.roda.villalonga@gmail.com>

@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: django test suite
-# $Id: header.django-test-suite.yas 754 2017-05-14 10:22:34Z alex $
 # key: header
 # type: snippet
 # expand-env: ((yas-indent-line 'fixed))
