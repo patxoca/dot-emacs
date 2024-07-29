@@ -1359,6 +1359,11 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
     working on. While it’s nice to have around, recalling its command
     set can be a chore which makes it an ideal candidate for Casual.
 
+  - [[http://yummymelon.com/devnull/announcing-casual-bookmarks.html][Casual bookmarks]]: facilita la gestió ocasional de bookmarks.
+
+    Mai he utilitzat els bookmark en Emacs, però qui sap si en un
+    futur.
+
 * Altres recursos
 
 ** elisp
