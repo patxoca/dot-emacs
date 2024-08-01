@@ -1383,11 +1383,9 @@ facilitarà l'ús de =dired=.
     :ensure t
     :bind (:map dired-mode-map
                 ("<f10>" . casual-dired-tmenu))
-    :commands casual-dired-tmenu)
+    :commands casual-dired-tmenu
+    :after (dired))
 
-  ;; HACK: no tinc clar el motiu, però sense el require de sota F10
-  ;; mostra el menú contextual de'Emacs
-  (require 'casual-dired)
 #+end_src
 
 *** =company=
