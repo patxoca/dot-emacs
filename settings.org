@@ -3919,30 +3919,6 @@ Perquè açò funcioni cal que el directori dels snippets aparegui en
 =yas-snippet-dirs= abans del directori de snippets de =elpy=.
 #+end_warning
 
-**** =pep8=                                                          :manual:
-
-https://gist.github.com/ieure/302847
-
-Pel seu funcionament requereix una comanda externa:
-
-#+begin_src sh :tangle no
-  pip install pycodestyle
-#+end_src
-
-La configuració detecta si =pycodestyle= està disponible. En cas
-negatiu utiliza la comanda =pep8=.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package python-pep8
-    :ensure nil
-    :load-path "conf.d/site-lisp"
-    :commands (python-pep8 pep8)
-    :config
-    (when (executable-find "pycodestyle")
-      (customize-set-value 'python-pep8-command "pycodestyle"))
-    (customize-set-value 'python-pep8-options '("--repeat" "--max-line-length=150")))
-#+end_src
-
 **** =pylookup=                                                  :desactivat:
 
 https://github.com/tsgates/pylookup
@@ -4098,8 +4074,7 @@ per the requirement of the Sphinx documentation generator.
   (with-eval-after-load "python"
     (my/bind-keys
      python-mode-map
-     '(("C-c m 8" python-pep8)
-       ("C-c m m" pyx/make)
+     '(("C-c m m" pyx/make)
        ("C-c m p" pylint)
        ("C-c m w f" pyx/refactor-wrap-for)
        ("C-c m w i" pyx/refactor-wrap-if-else)
