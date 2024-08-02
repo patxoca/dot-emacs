@@ -1334,36 +1334,6 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   sap de l'estructura del codi. El que busco és una comanda que mostri
   els simbols locals al context actual.
 
-- /Casual/ son paquets basats en /transient/ que mostren menús de
-  comandes útils que s'utilitzarien esporadicament i que mai
-  s'utilitzen perqué no es recorda com invocar-les o que existeixen.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-dired---an-opinionated-porcelain-for-the-emacs-file-manager.html][Casual Dired]]: an opinionated porcelain for the Emacs file manager.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-avy.html][Casual Avy]]: an opinionated menu for the brilliant Avy package.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-info.html][Casual Info]]: an opinionated porcelain for the Emacs Info reader.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-ibuffer.html][Casual ibuffer]]: Casual IBuffer endeavors to address the above by
-    overlaying a keyboard-driven menu system on IBuffer to organize
-    and facilitate discovery of its commands. Casual IBuffer is now
-    available on MELPA as part of the Casual Suite set of porcelains.
-
-  - [[https://www.emacs.dyerdwelling.family/emacs/20240712082430-emacs--spelling-powerthesaurus/][Spelling transient]]: aquest és un blog post/idea, no un paquet.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-re-builder.html][Casual re-builder]]: Emacs has a built-in tool called RE-Builder
-    that makes it easier to learn and construct regexps. Invoked by
-    the command re-builder, this creates a small editable window where
-    you can interactively enter a regexp and see matches (if any)
-    highlighted in a target buffer, typically the last one you were
-    working on. While it’s nice to have around, recalling its command
-    set can be a chore which makes it an ideal candidate for Casual.
-
-  - [[http://yummymelon.com/devnull/announcing-casual-bookmarks.html][Casual bookmarks]]: facilita la gestió ocasional de bookmarks.
-
-    Mai he utilitzat els bookmark en Emacs, però qui sap si en un
-    futur.
-
 - [[https://github.com/bling/fzf.el][fzf]]: fins ara no m'havia plantejat algo tant bàsic com poder buscar
   un arxiu des de dins d'Emacs. L'opció =find-name-dired= funciona,
   però és molt cutre i no em deixa obrir l'arxiu, que seria l'objectiu
