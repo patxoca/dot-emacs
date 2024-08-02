@@ -1364,6 +1364,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
     Mai he utilitzat els bookmark en Emacs, però qui sap si en un
     futur.
 
+- [[https://github.com/bling/fzf.el][fzf]]: fins ara no m'havia plantejat algo tant bàsic com poder buscar
+  un arxiu des de dins d'Emacs. L'opció =find-name-dired= funciona,
+  però és molt cutre i no em deixa obrir l'arxiu, que seria l'objectiu
+  principal.
+
+  No és exactament el que busco, però =fzf= sembla interessant.
+
 * Altres recursos
 
 ** elisp
