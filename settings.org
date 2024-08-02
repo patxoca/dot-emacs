@@ -1375,6 +1375,21 @@ Els paquets de la serie /casual/ defineixen menus transient que
 faciliten utilitzar/recordar les comandes de modes que utilitzo
 ocasionalment.
 
+**** =casual-bookmarks=
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package bookmark
+    :ensure nil
+    :defer t)
+  (use-package casual-bookmarks
+    :ensure t
+    :bind (:map bookmark-bmenu-mode-map
+                ("<f10>" . casual-bookmarks-tmenu)
+                ("S" . casual-bookmarks-sortby-tmenu)
+                ("J" . bookmark-jump))
+    :after (bookmark))
+#+end_src
+
 **** =casual-calc=
 
 #+begin_src emacs-lisp :tangle yes
