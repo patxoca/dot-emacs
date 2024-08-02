@@ -4984,7 +4984,8 @@ Activa/desactiva la numeració de les línies. Si està disponible
     "Activa la numeració de les línies."
     (interactive)
     (if (fboundp 'display-line-numbers-mode)
-        (if display-line-numbers-mode
+        (if (and (boundp 'display-line-numbers-mode)
+                 display-line-numbers-mode)
             (display-line-numbers-mode 0)
           (my/enable-line-numbers-mode))
       (if linum-mode
