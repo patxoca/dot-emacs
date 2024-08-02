@@ -39,9 +39,9 @@ function compile_directory {
     echo "Compilant '$1'"
 
     emacs --batch \
-          --eval "(if (fboundp 'loaddefs-generate)
-                      (loaddefs-generate \"$pkg_dir\" \"$loaddefs\")
-                    (let ((generated-autoload-file \"$loaddefs\")) \
+          --eval "(if (fboundp 'loaddefs-generate)                   \
+                      (loaddefs-generate \"$pkg_dir\" \"$loaddefs\") \
+                    (let ((generated-autoload-file \"$loaddefs\"))   \
                          (update-directory-autoloads \"$pkg_dir\")))"
 
     EMACSLOADPATH=$load_path emacs --batch \
