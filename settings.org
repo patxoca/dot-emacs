@@ -4247,7 +4247,7 @@ configuració en la que s'han eliminat les dependències de =pony-mode=.
                                    (?\" simple 0)
                                    (?+ simple 0)
                                    (?~ simple 0)))
-    :hook (rst-mode . which-function-model)
+    :hook (rst-mode . which-function-mode)
     :bind (:map rst-mode-map
                 ("M-<down>" . #'rst-forward-section)
                 ("M-<up>" . #'rst-backward-section)))
