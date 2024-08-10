@@ -1,22 +1,30 @@
 # -*- mode: snippet -*-
-# name: function + comment
+# name: funció + comentari
 # key: f
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 27d024e8-cfd1-4b97-8d77-e7c4c8a0f323
 # --
-##########################################################################
+#### FUNCTION BEGIN ######################################################
 #
-# $1
+# ${1:nom_funcio}
 #
-# ${2:Place you comments here.}
+#   ${2:Descripció de la funció}
 #
-# Globals:
-#   None
-# Arguments:
-#   None
-# Returns:
-#   None
+# GLOBALS:
+#   - ${3:Cap}
+# ARGUMENTS:
+#   - ${4:Cap}
+# OUTPUTS:
+#   STDOUT: ${5:Res}
+#   STDERR: ${6:Res}
+# RETURN:
+#   ${7:0 si tè èxit, diferent de 0 en altre cas.}
 #
-##########################################################################
+### FUNCTION END #########################################################
 
-${1:name} () {
-    $0
+$1() {
+    ${0:return 0}
 }
