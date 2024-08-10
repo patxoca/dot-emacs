@@ -55,6 +55,54 @@ Cal que la copia de treball estigui neta. Si no ho està es pot fer un
 6. finalment apareix un buffer per fer el commit que mostra tots els
    missatges. Editar com convingui i confirmar amb =C-c C-c=.
 
+*** =rst-mode=
+
+Tinc que acabar d'aprendre com funciona, mentre tant ací hi ha un
+resum de les comandes que em semblen més útils:
+
+- =rst-adjust= (=C-c C-a C-a=): fa diferents ajustament sobre la
+  decoració de les capçaleres:
+
+  - afegeix la decoració si no en té, la tria de manera intel·ligent
+    en funció del context.
+
+  - ajusta longitud de la decoració si es curta
+
+  - promou (degrada amb prefix) la capçalera en funció del valor de
+    =rst-preferred-adornments=.
+
+- =rst-adjust-region=: promou o degrada (amb prefix) les seccions dins
+  la regió.
+
+- =rst-display-hdr-hierarchy= (=C-c C-a C-d=): mostra la decoració
+  utilitzad en cada nivell de capçaleres.
+
+- =rst-straighten-sections= (=C-c C-a C-s=): actualitza (normalitza)
+  la decoració de les capçaleres d'un document utilitzant els valors
+  especificats en =rst-preferred-adornments=.
+
+- =rst-toc= (=C-c C-t C-t=): crea un buffer que mostra la taula de
+  continguts i permet navegar entre seccions, a la =imenu=.
+
+- =rst-insert-list=: insereix una llista nova o un element dins la
+  llista. Pregunta el tipus. Inserir un nou element sembla que només
+  funciona si estem en la primera línia.
+
+- =rst-forward-section= (=C-M-e=): personalitzat com =M-<down>=
+
+- =rst-backward-section= (=C-M-a=): personalitzat com =M-<up>=. La
+  combinació de tecles predefinida no funciona en el portàtil. No tinc
+  clar qui la intercepta, imagino que i3 però no aconsegueixo entendre
+  que fa ni on es defineix.
+
+- =rst-enumerate-region= (=C-c C-l C-e=),
+  =rst-bullet-list-region= (=C-c C-l C-b=): converteixen els paràgrafs
+  de la regió en element d'una llista numerada i normal
+  respectivament. Amb prefix converteixen totes les línies.
+
+- =rst-convert-bullets-to-enumeration= (=C-c C-l C-c=): converteix els
+  elements dins la regió d'una llista normal en enumerats.
+
 * Bugs, molèsties, millores etc.
 
 # Aquesta secció és el target d'una plantilla de captura. Si es canvia
