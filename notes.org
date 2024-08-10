@@ -1236,20 +1236,6 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   typechecking extension for javascript, to js2-mode, a popular
   javascript editing mode for Emacs.
 
-- [[https://github.com/victorhge/iedit][iedit]]: This package includes Emacs minor modes (iedit-mode and
-  iedit-rectangle-mode) based on a API library (iedit-lib) and allows
-  you to edit one occurrence of some text in a buffer (possibly
-  narrowed) or region, and simultaneously have other occurrences
-  edited in the same way, with visual feedback as you type.
-
-  Pel que he vist en [[https://www.youtube.com/watch?v=XAHVwhTsF-g][aquest vídeo]] sembla més potent del que penssava
-  (crec que ja el vaig trobar fa temps i el vaig descartar).
-
-- [[https://github.com/magit/transient/blob/master/docs/transient.org][transient]]: no acabo d'entendre la descripció, imagino que és
-  l'element de =magit= que facilita construir les comandes. Estic
-  pensant en utilitzar-ho en =djira-el= per interactuar amb
-  =manage.py=.
-
 - [[https://github.com/Fuco1/smartparens][smartparens]]: Smartparens is a minor mode for dealing with pairs in
   Emacs.
 
