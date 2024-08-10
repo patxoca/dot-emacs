@@ -1151,7 +1151,7 @@ que canvien de buffer i de finestra.
             :height (pcase system-name
                       ("mc" 120)
                       ("ritic23" 90)
-                      ("turing" 115)
+                      ("turing" 125)
                       (_ 95))))
 
   (my/theme-insert-overwrite-init)
