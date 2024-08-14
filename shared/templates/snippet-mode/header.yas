@@ -7,7 +7,6 @@
 # --
 # -*- mode: snippet -*-
 # name: $1
-# $Id:\$
 # key: ${2:`(car (split-string (arv/yas-buffer-name-sans) "\\\\."))`}
 # group: $3
 # type: ${4:$$(yas-choose-value '("command" "snippet"))}
