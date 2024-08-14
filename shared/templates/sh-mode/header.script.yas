@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: script sh
+# key: header
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: c9c9bc13-a735-4c54-9b4f-92e13926602e
+# --
+#!/bin/bash
+
+read -r -d "" USAGE <<- EOF
+Sinopsi:
+
+  `(arv/yas-buffer-name)`  [-h]
+
+Descripció:
+
+  ${1:Descripció breu.}
+
+Opcions:
+
+  -h  Mostra aquesta ajuda.
+
+Variables de entorn:
+
+  Cap
+
+.
+EOF
+
+set -euo pipefail
+
+$0
