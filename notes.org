@@ -1416,6 +1416,53 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   aquest vídeo Protesilaos explica com controlar la forma en que emacs
   selecciona/crea la finestra on mostrar els buffers.
 
+* Varis desordenats
+
+** Neteja google keep
+
+Açò és una nota que tenia en google keep i que vull arxivar, però
+potser hi ha algo interessant, que probablemente mai miraré 😺.
+
+- https://www.youtube.com/watch?v=Oqn56p2cGQ4
+
+- https://gitlab.com/ambrevar/emacs-windower
+
+- dired, comanda &
+
+- eglot i lsp-mode
+
+- This is the command:
+
+  #+begin_src sh
+    xset r rate 200 60
+  #+end_src
+
+  You can read more about it here:
+
+  https://www.x.org/releases/X11R7.7/doc/man/man1/xset.1.xhtml
+
+- systmem crafters:
+
+  - https://github.com/daviwil/emacs-from-scratch
+  - https://discord.com/invite/yVD8Gx6
+
+- auto-package-update-before-hook: sembla que s''executa abans
+  d''actualitzar els paquets. Es podria utilitzar per fer un backup.
+  És un paquet extern.
+
+- https://karthinks.com/software/bridging-islands-in-emacs-1/ integra
+  re-builder dins *-replace-regex. No especialment útil per si mateix
+  però interessant com integra funcionalitats existents.
+
+- https://www.emacswiki.org/emacs/TransposeWindows
+
+Vídeos emacs conf:
+
+- https://emacsconf.org/2020/talks
+- https://toobnix.org/videos/watch/playlist/c3ac2f22-6434-4e22-8792-b6422402c3c9
+- https://toobnix.org/videos/watch/playlist/f6d9bb86-da35-461c-b109-c2daa414b848
+- https://toobnix.org/videos/watch/playlist/10d71a32-3a00-417a-a24e-47928d3611f2
+
 * Completat
 
 ** DONE [#A] =S-M-up/down= no funciona en /org/                         :bug:
