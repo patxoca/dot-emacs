@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Link extern
+# key: link
+# group: rst
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: f239e6c9-eac3-40fb-9205-05fb9e8a1783
+# --
+\`${1:Text del link}\`_ $0
+
+.. _$1: ${2:URL del link}
