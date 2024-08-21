@@ -8,7 +8,7 @@
 ${1:$(arv/yas-sh-getopt-var-declaration yas-text)}
 CMD_ARGS=
 
-function parse_command_line {
+parse_command_line () {
     local opt
     local OPTIND
     while getopts "${1:opcions}" opt; do
