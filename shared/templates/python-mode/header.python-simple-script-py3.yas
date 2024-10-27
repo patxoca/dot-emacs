@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: python3 empty script
+# key: header
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# uuid: 25d90bbb-cdee-4ab1-af73-a821aa7dd2fb
+# --
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+$0
