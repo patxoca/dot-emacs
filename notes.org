@@ -1375,6 +1375,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   No és exactament el que busco, però =fzf= sembla interessant.
 
+- [[https://www.jamescherti.com/essential-emacs-packages/][Essential Emacs Packages for Efficient Software Development and Text
+  Editing]]: post que llista una serie de paquets.
+
 * Altres recursos
 
 ** elisp
