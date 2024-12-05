@@ -1219,6 +1219,9 @@ Per no oblidar-ho:
 
 - [[https://lmno.lol/alvaro/modern-elisp-libraries][Modern Emacs lisp libraries]]: enumera algunes llibreries.
 
+- [[https://www.jamescherti.com/essential-emacs-packages/][Essential Emacs Packages for Efficient Software Development and Text
+  Editing]]: post que llista una serie de paquets.
+
 ** Llista de paquets
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
@@ -1379,9 +1382,6 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   principal.
 
   No és exactament el que busco, però =fzf= sembla interessant.
-
-- [[https://www.jamescherti.com/essential-emacs-packages/][Essential Emacs Packages for Efficient Software Development and Text
-  Editing]]: post que llista una serie de paquets.
 
 * Altres recursos
 
