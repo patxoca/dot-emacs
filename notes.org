@@ -1214,6 +1214,11 @@ Per no oblidar-ho:
   libraries. Most of the following packages are available in MELPA. We
   recommend installing packages with it.
 
+- [[https://github.com/p3r7/awesome-elisp][Awesome Elisp]]: a list of resources linked to Emacs Lisp (Elisp)
+  development.
+
+- [[https://lmno.lol/alvaro/modern-elisp-libraries][Modern Emacs lisp libraries]]: enumera algunes llibreries.
+
 ** Llista de paquets
 
 Llista de paquets que he anat trobant i que m'han cridat l'atenció
