@@ -36,6 +36,21 @@
   :type '(repeat (string :tag "option")))
 
 
+(defcustom py-isort-executable "isort"
+  "Executable used for isort."
+  :group 'py-isort
+  :type 'string)
+
+
+(defun py-isort--command (errbuf file default-directory)
+(let ((command   `(,py-isort-executable nil ,errbuf nil
+                         ,@py-isort-options
+                         ,(concat "--settings-path=" default-directory)
+                         ,file)))
+  (message (format "%s" command))
+  command))
+
+
 (defun py-isort--find-settings-path ()
   (expand-file-name
    (or (locate-dominating-file buffer-file-name ".isort.cfg")
@@ -44,10 +59,7 @@
 
 (defun py-isort--call-executable (errbuf file)
   (let ((default-directory (py-isort--find-settings-path)))
-    (zerop (apply 'call-process "isort" nil errbuf nil
-                  (append `(" " , file, " ",
-                            (concat "--settings-path=" default-directory))
-                          py-isort-options)))))
+    (zerop (apply 'call-process (py-isort--command errbuf file default-directory)))))
 
 
 (defun py-isort--call (only-on-region)
