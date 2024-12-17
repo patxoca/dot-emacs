@@ -3971,6 +3971,32 @@ en el workflow.
           ("(django14)Index" pydoc-info-lookup-transform-entry)))))
 #+end_src
 
+**** =py-isort=
+
+https://github.com/paetzke/py-isort.el
+
+=isort= és una utilitat que reorganitza els import d'un programa
+python. =py-isort= integra =isort= en Emacs.
+
+La última versió de =py-isort= és de 2016. A melpa hi dos ha
+alternatives, una més vella i l'altra més actual però que sembla menys
+funcional. Per aquest motiu he optat per incloure =py-isort= dins
+=site-lisp= i adaptar-la en cas de necessitat.
+
+#+begin_src sh :tangle no
+  pip install isort
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package py-isort
+    :ensure nil
+    :load-path "conf.d/site-lisp"
+    :commands 'py-isort-before-save
+    :config
+    (add-hook 'before-save-hook 'py-isort-before-save)
+    (setq py-isort-options '("--sl")))
+#+end_src
+
 **** =pylint=                                                        :manual:
 
 https://github.com/PyCQA/pylint/tree/master/elisp
