@@ -4,6 +4,7 @@
 # calgui.
 
 HERE=$(dirname $0)
+HERE=$(realpath $HERE)
 . $HERE/config
 
 cd $EMACS_CONF_DIR
