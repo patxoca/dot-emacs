@@ -3678,6 +3678,7 @@ en el meu workflow. Es manté per si de cas.
      'org-mode-hook
      (lambda ()
        (my/org-reset-<-syntax)
+       (auto-fill-mode)
        ;; electric-pair: insereix parelles ==, // i ~~
        (let ((org-electric-pairs '((?= . ?=) (?/ . ?/) (?~ . ?~))))
          (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))))))
