@@ -151,7 +151,7 @@ inserts '**' and leaves point in the middle otherwise."
       (goto-char (1+ end))
       (insert "*")
       (unless active
-        (backward-char (length delimiter))))))
+        (backward-char 1)))))
 
 
 (provide 'arv-rst)
