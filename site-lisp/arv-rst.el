@@ -133,14 +133,25 @@ end."
   "Tries to be smart about * usage.
 
 If there's only withespace before point it assumes that it's a
-list bullet and inserts '* ', otherwise it inserts '**' and
-leaves point in the middle."
+list bullet and inserts '* ', otherwise it surrounds the region
+and leaves the point at the end, if the region is active, or
+inserts '**' and leaves point in the middle otherwise."
   (interactive)
   (if (string-match-p "^\s*$"
                       (buffer-substring-no-properties (line-beginning-position) (point)))
       (insert "* ")
-    (insert "**")
-    (backward-char 1)))
+    (let ((begin (point))
+          (end   (point))
+          (active (region-active-p)))
+      (when active
+        (setq begin (min (region-beginning) (region-end)))
+        (setq end   (max (region-beginning) (region-end))))
+      (goto-char begin)
+      (insert "*")
+      (goto-char (1+ end))
+      (insert "*")
+      (unless active
+        (backward-char (length delimiter))))))
 
 
 (provide 'arv-rst)
