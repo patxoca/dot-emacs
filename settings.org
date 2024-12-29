@@ -3993,7 +3993,7 @@ funcional. Per aquest motiu he optat per incloure =py-isort= dins
     :ensure nil
     :load-path "conf.d/site-lisp"
     :commands 'py-isort-before-save
-    :config
+    :init
     (add-hook 'before-save-hook 'py-isort-before-save)
     (setq py-isort-options '("--sl")))
 #+end_src
