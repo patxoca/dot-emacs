@@ -2649,6 +2649,29 @@ Tot i que =use-package= permet definir les tecles emprant la directiva
 secció. Un avantatge de =:bind= és que defineix automàticament
 =autoloads= pels simbols que no son funcions (segons =fboundp=).
 
+*** ensamblador
+
+En ensamblador =imenu= resulta especialment útil per saltar a les
+etiquetes. Aquesta configuració integra les dos funcionalitats.
+
+Una etiqueta ve identificada per l'expressió regular:
+
+#+begin_src text
+  ^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:
+#+end_src
+
+El =.?= s'inclou perquè en NASM una etiqueta es pot prefixar amb un
+punt per indicar que és local.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package asm-mode
+    :ensure nil
+    :init
+    (add-hook 'asm-mode-hook (lambda ()
+                               (setq imenu-generic-expression
+                                     '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1))))))
+#+end_src
+
 *** ensamblador Z80
 
 Recull de paquets i configuracions relacionades amb la programació en
