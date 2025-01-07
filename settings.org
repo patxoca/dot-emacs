@@ -2672,6 +2672,21 @@ punt per indicar que és local.
                                      '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1))))))
 #+end_src
 
+**** Referència d'instruccions x86
+
+La pàgina https://www.felixcloutier.com/x86/ conté una referència de
+les instruccions de x86 en un format eww /friendly/.
+
+Es defineix una comanda que mostra la referència. Es podria millorar
+per buscar una instrucció al índex i mostrar una pàgina específica.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/asm-x86-reference ()
+    "Mostra la referencia de les instruccions del x86."
+    (interactive)
+    (eww "https://www.felixcloutier.com/x86/" t))
+#+end_src
+
 *** ensamblador Z80
 
 Recull de paquets i configuracions relacionades amb la programació en
