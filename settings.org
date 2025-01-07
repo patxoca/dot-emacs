@@ -2669,7 +2669,8 @@ punt per indicar que és local.
     :init
     (add-hook 'asm-mode-hook (lambda ()
                                (setq imenu-generic-expression
-                                     '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1))))))
+                                     '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1)))))
+    (add-hook 'asm-mode-hook #'my/asm-x86-ref-init))
 #+end_src
 
 **** Referència d'instruccions x86
@@ -2677,14 +2678,50 @@ punt per indicar que és local.
 La pàgina https://www.felixcloutier.com/x86/ conté una referència de
 les instruccions de x86 en un format eww /friendly/.
 
-Es defineix una comanda que mostra la referència. Es podria millorar
-per buscar una instrucció al índex i mostrar una pàgina específica.
+A continuació es defineix la comanda =my/asm-x86-reference= que mostra
+la referència de l'instrucció llegida des del minibuffer. Abans de
+poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/asm-x86-reference ()
-    "Mostra la referencia de les instruccions del x86."
-    (interactive)
-    (eww "https://www.felixcloutier.com/x86/" t))
+  (defconst my/asm-x86-ref--base-url "https://www.felixcloutier.com"
+    "Adreça del servidor web.")
+  (defvar my/asm-x86-ref--index nil
+    "Taula associativa (INSTR . URL).")
+  (defvar my/asm-x86-ref--mnemonics nil
+    "Llista de mnemonics utilitzada amb `ido-completing-read'")
+
+  (defun my/asm-x86-ref--process-index (s)
+    "Processa l'índex per extreure els mnemònics i la URL
+  corresponent. Amb el resultat inicialitzat les variables
+  `my/asm-x86-ref--index' i `my/asm-x86-ref--mnemonics'."
+    (setq my/asm-x86-ref--index
+          (seq-filter
+           ;; els enllaços a instruccions son de la forma /x86/INSTR
+           (lambda (x) (s-starts-with-p "/x86/" (cdr x)))
+           (mapcar
+            ;; el valor retornat per dom-by-tag és de la forma:
+            ;;
+            ;; ((a ((href . "https://www.felixcloutier.com/x86/aaa"))
+            ;; "AAA") ...)
+            (lambda (x) (cons (caddr x) (cdr (assoc 'href (cadr x)))))
+            (dom-by-tag (libxml-parse-html-region (point-min) (point-max)) 'a))))
+    (setq my/asm-x86-ref--mnemonics
+          (mapcar #'car my/asm-x86-ref--index)))
+
+  (defun my/asm-x86-ref-init ()
+    "Descarrega l'index d'instruccions asíncronament i inicialitza les
+  variables."
+    (url-retrieve (concat my/asm-x86-ref--base-url "/x86/")
+                  #'my/asm-x86-ref--process-index))
+
+
+  (defun my/asm-x86-reference (instr)
+    "Demana una instrucció i mostra la referència."
+    (interactive (list (ido-completing-read "Instrucció: " my/asm-x86-ref--mnemonics)))
+    (let ((url (cdr (assoc instr my/asm-x86-ref--index))))
+      (message (format ">>>> %s" url))
+      (when url
+        (eww (concat "https://www.felixcloutier.com" url) t))))
 #+end_src
 
 *** ensamblador Z80
