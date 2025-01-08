@@ -2714,10 +2714,16 @@ poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
     (url-retrieve (concat my/asm-x86-ref--base-url "/x86/")
                   #'my/asm-x86-ref--process-index))
 
+  (defun my/asm-x86-ref--read-mnemonic ()
+    (let* ((s (upcase (symbol-name (symbol-at-point))))
+           (default (if (seq-contains-p my/asm-x86-ref--mnemonics s)
+                        s
+                      nil)))
+      (ido-completing-read "Instrucció: " my/asm-x86-ref--mnemonics nil nil default)))
 
   (defun my/asm-x86-reference (instr)
     "Demana una instrucció i mostra la referència."
-    (interactive (list (ido-completing-read "Instrucció: " my/asm-x86-ref--mnemonics)))
+    (interactive (list (my/asm-x86-ref--read-mnemonic)))
     (let ((url (cdr (assoc instr my/asm-x86-ref--index))))
       (message (format ">>>> %s" url))
       (when url
