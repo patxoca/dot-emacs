@@ -2730,6 +2730,15 @@ poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
         (eww (concat "https://www.felixcloutier.com" url) t))))
 #+end_src
 
+**** Combinacions de tecles
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load 'asm-mode
+    (my/bind-keys
+     asm-mode-map
+     '(("C-c C-d" my/asm-x86-reference))))
+#+end_src
+
 *** ensamblador Z80
 
 Recull de paquets i configuracions relacionades amb la programació en
