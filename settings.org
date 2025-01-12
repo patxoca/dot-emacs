@@ -951,14 +951,14 @@ recordi) i hauria de funcionar més o menys bé amb un tema fosc.
 
     (with-eval-after-load "diff-hl"
       (set-face-attribute 'diff-hl-change nil
-                          :foreground "#daefff"
-                          :background "#daefff")
+                          :foreground "#aabfff"
+                          :background "#aabfff")
       (set-face-attribute 'diff-hl-delete nil
-                          :foreground "#ffe8ef"
-                          :background "#ffe8ef")
+                          :foreground "#ffa8af"
+                          :background "#ffa8af")
       (set-face-attribute 'diff-hl-insert nil
-                          :foreground "#ddf0c7"
-                          :background "#ddf0c7"))
+                          :foreground "#9df087"
+                          :background "#9df087"))
     )
 
   (defun my/theme-enable-theme-modus-operandi3 ()
