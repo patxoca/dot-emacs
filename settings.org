@@ -2670,7 +2670,22 @@ punt per indicar que és local.
     (add-hook 'asm-mode-hook (lambda ()
                                (setq imenu-generic-expression
                                      '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1)))))
-    (add-hook 'asm-mode-hook #'my/asm-x86-ref-init))
+    (add-hook 'asm-mode-hook #'my/asm-x86-ref-init)
+    (advice-add 'asm-calculate-indentation
+                :before-until #'my/asm-calculate-indentation))
+#+end_src
+
+El problema és que =asm-mode= no reconeix les etiquetes amb un punt i
+les sagna com una instrucció. El codi següent és un advice de la
+funció =asm-calculate-indentation=, que reconeix les etiquetes que
+comencen per un punt i les sagna 2 espais. Cal afegir l'advice amb
+=:before-until= de forma que es cridi la funció original si l'etiqueta
+no comença amb un punt.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/asm-calculate-indentation ()
+    (when (looking-at "\\.\\(\\sw\\|\\s_\\)+:")
+      2))
 #+end_src
 
 **** Referència d'instruccions x86
