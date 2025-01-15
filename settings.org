@@ -2651,41 +2651,53 @@ secció. Un avantatge de =:bind= és que defineix automàticament
 
 *** ensamblador
 
+#+begin_src emacs-lisp :tangle yes
+  (use-package asm-mode
+    :ensure nil)
+#+end_src
+
+**** Integració amb =imenu=
+
 En ensamblador =imenu= resulta especialment útil per saltar a les
 etiquetes. Aquesta configuració integra les dos funcionalitats.
 
 Una etiqueta ve identificada per l'expressió regular:
 
-#+begin_src text
-  ^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:
+#+begin_src emacs-lisp :tangle yes
+  (defvar my/asm-generic-label-regex "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:"
+    "Regex per identificar etiquetes locals")
 #+end_src
 
 El =.?= s'inclou perquè en NASM una etiqueta es pot prefixar amb un
 punt per indicar que és local.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package asm-mode
-    :ensure nil
-    :init
+  (with-eval-after-load "asm-mode"
     (add-hook 'asm-mode-hook (lambda ()
                                (setq imenu-generic-expression
-                                     '((nil "^\s*\\(.?[A-Za-z0-9_$]+\\)\s*:" 1)))))
-    (add-hook 'asm-mode-hook #'my/asm-x86-ref-init)
-    (advice-add 'asm-calculate-indentation
-                :before-until #'my/asm-calculate-indentation))
+                                     `((nil ,my/asm-generic-label-regex 1))))))
 #+end_src
 
-El problema és que =asm-mode= no reconeix les etiquetes amb un punt i
-les sagna com una instrucció. El codi següent és un advice de la
-funció =asm-calculate-indentation=, que reconeix les etiquetes que
-comencen per un punt i les sagna 2 espais. Cal afegir l'advice amb
+**** Sagnat
+
+=asm-mode= no reconeix les etiquetes amb un punt i les sagna com una
+instrucció. El codi següent és un advice de la funció
+=asm-calculate-indentation=, que reconeix les etiquetes locals i les
+sagna =my/asm-local-label-indent= espais. Cal afegir l'advice amb
 =:before-until= de forma que es cridi la funció original si l'etiqueta
 no comença amb un punt.
 
 #+begin_src emacs-lisp :tangle yes
+  (defvar my/asm-local-label-indent 2
+    "Nivell al que es sagna una etiqueta local.")
+
   (defun my/asm-calculate-indentation ()
     (when (looking-at "\\.\\(\\sw\\|\\s_\\)+:")
-      2))
+      my/asm-local-label-indent))
+
+  (with-eval-after-load "asm-mode"
+    (advice-add 'asm-calculate-indentation
+                :before-until #'my/asm-calculate-indentation))
 #+end_src
 
 **** Referència d'instruccions x86
@@ -2743,6 +2755,9 @@ poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
       (message (format ">>>> %s" url))
       (when url
         (eww (concat "https://www.felixcloutier.com" url) t))))
+
+  (with-eval-after-load "asm-mode"
+    (add-hook 'asm-mode-hook #'my/asm-x86-ref-init))
 #+end_src
 
 **** Combinacions de tecles
