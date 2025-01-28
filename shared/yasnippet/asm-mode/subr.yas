@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: subrutina
+# key: subr
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 2c9edfa0-7573-4655-ac99-4e7631addb6c
+# --
+
+    ;; ============================================================
+    ;;
+    ;; ${1:Name}: ${2:Short desc}
+    ;;
+    ;;   ${3:Long description}
+    ;;
+    ;; Paràmetres:
+    ;;
+    ;;   Cap.
+    ;;
+    ;; Resultat:
+    ;;
+    ;;   Cap.
+    ;;
+    ;; Modifica:
+    ;;
+    ;;   Res.
+
+$1:
+    $0
+    ret
