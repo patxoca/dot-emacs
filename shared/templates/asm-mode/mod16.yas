@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Mòdul NASM de 16 bits
+# key: header
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 7c3160dd-48bb-4e99-a8dd-3d0dbbe0a1fc
+# --
+[BITS 16]
+
+
+;;; %include "vga.asm.h"
+
+
+    global $1
+
+
+    SECTION .text
+
+
+${1:symbol}:
+    $0
+    ret
+
+
+    SECTION .data
+
+
+;; SOME_VAR:
+;;     dw 0000h
