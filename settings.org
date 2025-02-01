@@ -4040,6 +4040,22 @@ Perquè açò funcioni cal que el directori dels snippets aparegui en
 =yas-snippet-dirs= abans del directori de snippets de =elpy=.
 #+end_warning
 
+***** =company-mode=
+
+=elpy= configura la tecla =C-d= per mostrar la documentació quan
+s'activa =company=, em resulta molt molest. Ho reverteixo:
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "elpy"
+    (advice-add 'elpy-module-company
+                :around
+                (lambda (oldfunc command &rest _args)
+                  (let ((res (apply oldfunc command _args)))
+                    (when (string-equal command "global-init")
+                      (define-key company-active-map (kbd "C-d") nil))
+                    res))))
+#+end_src
+
 **** =pylookup=                                                  :desactivat:
 
 https://github.com/tsgates/pylookup
