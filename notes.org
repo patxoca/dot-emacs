@@ -1200,36 +1200,6 @@ memoritzar-es.
 on explica com utilitzar-ho per ordenar en /dired/ ([[http://yummymelon.com/devnull/enhancing-dired-sorting-with-transient.html][Enhancing Dired
 Sorting With Transient]]).
 
-** TODO Comportament de =:= en les etiquetes locals            :bug:asm:mode:
-
-La funció [[file:/opt/emacs/29.4.1/share/emacs/29.4/lisp/progmodes/asm-mode.el.gz::defun asm-colon (][asm-colon]] assumeix que una etiqueta està formada per
-lletres, dígits i subratllat (sintaxi =w=) i no gestiona correctament
-les etiquetes locals =NASM= (comencen amb un punt).
-
-He tingut un problema semblat al sagnar les etiquetes i l'he resolt
-afegint una comprovació per identificar les etiquetes locals. Es
-podria aplicar una solució semblant, però estic pensant que també es
-podria ampliar la taula de sintaxi de =w= afegint el punt. Açò podria
-fer innecessari el canvi per sangar.
-
-Les etiquetes locals es sagnen a nivell 2, no 0, per mostrar el
-nidament. Caldria valorar si ho vull mantindre.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun asm-colon ()
-    "Insert a colon; if it follows a label, delete the label's indentation."
-    (interactive)
-    (let ((labelp nil))
-      (save-excursion
-        (skip-syntax-backward "w_")
-        (skip-syntax-backward " ")
-        (if (setq labelp (bolp)) (delete-horizontal-space)))
-      (call-interactively 'self-insert-command)
-      (when labelp
-        (delete-horizontal-space)
-        (tab-to-tab-stop))))
-#+end_src
-
 * Paquets extra
 ** Col·leccions de paquets
 
@@ -3057,3 +3027,34 @@ Hi ha algunes traduccions que caldria ignorar.
    - State "DONE"       from "TODO"       [2022-09-09 dv. 19:58]
 
 Si =ripgrep= fa el paper es pot eliminar tot el relacionat amb =grin=.
+** DONE Comportament de =:= en les etiquetes locals             :bug:asmmode:
+
+- State "DONE"       from "TODO"       [2025-02-07 dv. 10:44]
+
+La funció [[file:/opt/emacs/29.4.1/share/emacs/29.4/lisp/progmodes/asm-mode.el.gz::defun asm-colon (][asm-colon]] assumeix que una etiqueta està formada per
+lletres, dígits i subratllat (sintaxi =w=) i no gestiona correctament
+les etiquetes locals =NASM= (comencen amb un punt).
+
+He tingut un problema semblat al sagnar les etiquetes i l'he resolt
+afegint una comprovació per identificar les etiquetes locals. Es
+podria aplicar una solució semblant, però estic pensant que també es
+podria ampliar la taula de sintaxi de =w= afegint el punt. Açò podria
+fer innecessari el canvi per sangar.
+
+Les etiquetes locals es sagnen a nivell 2, no 0, per mostrar el
+nidament. Caldria valorar si ho vull mantindre.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun asm-colon ()
+    "Insert a colon; if it follows a label, delete the label's indentation."
+    (interactive)
+    (let ((labelp nil))
+      (save-excursion
+        (skip-syntax-backward "w_")
+        (skip-syntax-backward " ")
+        (if (setq labelp (bolp)) (delete-horizontal-space)))
+      (call-interactively 'self-insert-command)
+      (when labelp
+        (delete-horizontal-space)
+        (tab-to-tab-stop))))
+#+end_src

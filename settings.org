@@ -2700,6 +2700,30 @@ no comença amb un punt.
                 :before-until #'my/asm-calculate-indentation))
 #+end_src
 
+Tenim un problema semblant amb =:=, que sagna la línia si s'identifica
+una etiqueta. La funció =asm-colon= original no identifica les
+etiquetes locals i les sagna com instruccions.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun asm-colon ()
+    "Insert a colon; if it follows a label, delete the label's indentation."
+    (interactive)
+    (let ((labelp nil)
+          (is-local nil))
+      (save-excursion
+        (skip-syntax-backward "w_")
+        (setq is-local (skip-chars-backward "."))
+        (skip-syntax-backward " ")
+        (when (setq labelp (bolp))
+          (delete-horizontal-space)
+          (unless (= is-local 0)
+            (insert (make-string my/asm-local-label-indent ? )))))
+      (call-interactively 'self-insert-command)
+      (when labelp
+        (delete-horizontal-space)
+        (tab-to-tab-stop))))
+#+end_src
+
 **** Referència d'instruccions x86
 
 La pàgina https://www.felixcloutier.com/x86/ conté una referència de
