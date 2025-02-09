@@ -5202,6 +5202,37 @@ Basat en http://steve.yegge.googlepages.com/my-dot-emacs-file
           (set-visited-file-name new-name)))))
 #+end_src
 
+*** =my/sort-words=
+
+Ordena alfabéticament les paraules que apareixen dins la regió.
+
+La idea de la comanda sorgeix de la necessitat d'ordenar
+alfabèticament el nom dels arxius que apareixen en els prerequisits
+d'un =Makefile= (en una variable utilitzada en la posició dels
+prerequisits, per ser precís). En aquest context les paraules estan
+separades per espais, però es pot especificar el separador en una
+variable local (probablement depenent del mode).
+
+#+begin_src emacs-lisp :tangle yes
+  (defvar my/sw-separator " +"
+    "Expressió regular utilitzada com separador de les paraules.")
+
+  (defvar my/sw-joiner " "
+    "Separador utilitzat al ajuntar les paraules una vegada ordenades.")
+
+  (defun my/sort-words (start end)
+    "Ordena les paraules de la regió. El comportament es pot
+  configurar canviant el valor de les variables `my/sw-separator' i
+  `my/sw-joiner'. El més habitual és configurar el seu valor
+  depenet del mode."
+    (interactive "r")
+    (when (use-region-p)
+      (let ((words (s-split my/sw-separator
+                            (buffer-substring-no-properties start end))))
+        (delete-region start end)
+        (insert (s-join my/sw-joiner (sort words #'string<))))))
+#+end_src
+
 *** =my/toggle-case-sensitivity-in-isearch=
 
 Mai recordo el nom de la variable que cal canviar per fer que
