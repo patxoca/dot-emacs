@@ -2734,6 +2734,8 @@ la referència de l'instrucció llegida des del minibuffer. Abans de
 poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
 
 #+begin_src emacs-lisp :tangle yes
+  (require 'dom)
+
   (defconst my/asm-x86-ref--base-url "https://www.felixcloutier.com"
     "Adreça del servidor web.")
   (defvar my/asm-x86-ref--index nil
