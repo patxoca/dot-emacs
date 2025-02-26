@@ -5204,6 +5204,29 @@ Basat en http://steve.yegge.googlepages.com/my-dot-emacs-file
           (set-visited-file-name new-name)))))
 #+end_src
 
+*** =my/simple-toggle-highlight-symbol-at-point=
+
+https://www.jamescherti.com/emacs-symbol-highlighting-built-in-functions/
+
+Ressalta el symbol sota punt. Habitualment utilitzo alguna variant de
+cerca incremental per locaitzar els símbols però el ressaltat no és
+permanent. Provaré aquesta solució a veure si em va bé i soc capaç
+d'interioritzar-la.
+
+#+begin_src emacs-lisp :tangle yes
+  (require 'hi-lock)
+
+  (defun my/simple-toggle-highlight-symbol-at-point ()
+    "Toggle highlighting for the symbol at point."
+    (interactive)
+    (when-let* ((regexp (find-tag-default-as-symbol-regexp)))
+      (if (member regexp (hi-lock--regexps-at-point))
+          ;; Unhighlight symbol at point
+          (hi-lock-unface-buffer regexp)
+        ;; Highlight symbol at point
+        (hi-lock-face-symbol-at-point))))
+#+end_src
+
 *** =my/sort-words=
 
 Ordena alfabéticament les paraules que apareixen dins la regió.
@@ -5952,6 +5975,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c t B") 'arv/alternar-mida-font)
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
+  (global-set-key (kbd "C-c t h") #'my/simple-toggle-highlight-symbol-at-point)
   (global-set-key (kbd "C-c t l") #'my/display-line-numbers-mode)
   (global-set-key (kbd "C-c t L") 'line-number-mode)
   (global-set-key (kbd "C-c t r") 'read-only-mode)
