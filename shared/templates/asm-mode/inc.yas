@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Arxiu include NASM
+# key: header
+# group:
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 9e7691bf-d97c-4286-ac20-b5dcd06db826
+# --
+%ifndef __`(arv/yas-buffer-name-sans-upcase)`_INC__
+    %define __`(arv/yas-buffer-name-sans-upcase)`_INC__
+    %ifdef __`(arv/yas-buffer-name-sans-upcase)`_ASM__
+        %define DECL global
+    %else
+        %define DECL extern
+    %endif
+
+    $0;; DECL INT8_SETUP
+
+%endif
+
+;; Local Variables:
+;; mode: asm
+;; End:

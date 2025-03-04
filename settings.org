@@ -2656,6 +2656,16 @@ secció. Un avantatge de =:bind= és que defineix automàticament
     :ensure nil)
 #+end_src
 
+**** Associació d'arxius
+
+Els arxius =.inc= que utilitzo pels include en ensamblador s'obren per
+ defecte en =fundamental-mode=.
+
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'auto-mode-alist '("\\.inc\\'" . asm-mode))
+#+end_src
+
+
 **** Integració amb =imenu=
 
 En ensamblador =imenu= resulta especialment útil per saltar a les
