@@ -2702,8 +2702,11 @@ no comença amb un punt.
     "Nivell al que es sagna una etiqueta local.")
 
   (defun my/asm-calculate-indentation ()
-    (when (looking-at "\\.\\(\\sw\\|\\s_\\)+:")
-      my/asm-local-label-indent))
+    (cond
+     ((looking-at "\\.\\(\\sw\\|\\s_\\)+:")
+      my/asm-local-label-indent)
+     ((looking-at "%\\sw+")
+      0)))
 
   (with-eval-after-load "asm-mode"
     (advice-add 'asm-calculate-indentation
