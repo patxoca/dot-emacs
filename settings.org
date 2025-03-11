@@ -2737,7 +2737,13 @@ etiquetes locals i les sagna com instruccions.
         (tab-to-tab-stop))))
 #+end_src
 
-**** Referència d'instruccions x86
+**** Referència detallada d'instruccions x86                     :desactivat:
+
+#+begin_note
+Aquesta referència de ensamblador x86 està extreta de la documentació
+original de Intel, és molt detallada, pel meu cas d'us massa. La
+mantinc per si en un futur em cal, però es desactiva.
+#+end_note
 
 La pàgina https://www.felixcloutier.com/x86/ conté una referència de
 les instruccions de x86 en un format eww /friendly/.
@@ -2746,7 +2752,7 @@ A continuació es defineix la comanda =my/asm-x86-reference= que mostra
 la referència de l'instrucció llegida des del minibuffer. Abans de
 poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (require 'dom)
 
   (defconst my/asm-x86-ref--base-url "https://www.felixcloutier.com"
@@ -2799,13 +2805,26 @@ poder utilitzar-la cal haver cridat a =my/asm-x86-ref-init=.
     (add-hook 'asm-mode-hook #'my/asm-x86-ref-init))
 #+end_src
 
+**** Referència abreujada d'instruccions x86
+
+Aquesta referència és menys detallada i m'agrada més:
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package x86ref
+    :ensure nil
+    :load-path "conf.d/site-lisp"
+    :commands 'x86qr
+    :init
+    (add-hook 'asm-mode-hook (lambda () (local-set-key (kbd "C-c C-d") #'x86qr))))
+#+end_src
+
 **** Combinacions de tecles
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load 'asm-mode
     (my/bind-keys
      asm-mode-map
-     '(("C-c C-d" my/asm-x86-reference))))
+     '(("C-c C-d" x86qr))))
 #+end_src
 
 *** ensamblador Z80
