@@ -284,10 +284,15 @@
                     nil)))
     (ido-completing-read "Instrucció: " x86qr--mnemonic-names nil nil default)))
 
+(defun x86qr--open-file (path)
+  (if (version< emacs-version "30")
+      (eww-open-file path)
+    (eww-open-file path t)))
+
 ;;;###autoload
 (defun x86qr (instr)
   "Demana una instrucció i mostra la referència."
   (interactive (list (x86qr--read-mnemonic)))
   (let ((file (cdr (assoc instr x86qr--mnemonic-index))))
     (when file
-      (eww-open-file (f-join arv/emacs-conf-dir "shared/helppc/" file) t))))
+      (x86qr--open-file (f-join arv/emacs-conf-dir "shared/helppc/" file)))))
