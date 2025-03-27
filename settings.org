@@ -528,6 +528,7 @@ sigui preferible a definir un valor fix en la configuració.
   (customize-set-value 'inhibit-startup-screen t)
   ;; cursor blinks forever
   (customize-set-value 'blink-cursor-blinks -1)
+  (tooltip-mode 1)
 #+end_src
 
 ** Tema
@@ -4657,11 +4658,15 @@ Associa modes als arxius relacionats amb zope:
 
 ** Variat
 
+*** Ressaltar parèntesis coincidents
+
 Ressalta el parèntesi corresponent a l'actual.
 
 #+begin_src emacs-lisp :tangle yes
   (show-paren-mode 1)
 #+end_src
+
+*** Espais en blanc al final de línia
 
 Esborra els espais en blanc al final de les línies en el moment de
 guardar l'arxiu.
@@ -4670,6 +4675,8 @@ guardar l'arxiu.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+end_src
 
+*** Títol de la finestra en mode gràfic
+
 Si estem en un GUI canvia el títol de la finestra per mostrar el nom
 del buffer actiu i la ruta de l'arxiu.
 
@@ -4677,6 +4684,8 @@ del buffer actiu i la ruta de l'arxiu.
 (when window-system
   (setq frame-title-format '("emacs %b (%f)")))
 #+end_src
+
+*** La marca
 
 De vegades es guarda repetidament la mateixa marca. Aquest /advice/
 elimina les repeticions, accelerant la navegació.
@@ -4697,11 +4706,15 @@ marca, poc àgil. Aquest canvi permet utilitzar =C-u C-SPC C-SPC ...=
   (setq set-mark-command-repeat-pop t)
 #+end_src
 
+*** Limit de frases
+
 En el meu mon les frases es separen amb un espai, no dos.
 
 #+begin_src emacs-lisp :tangle yes
   (customize-set-value 'sentence-end-double-space nil)
 #+end_src
+
+*** Configuració del sagnat
 
 Prefereixo utilitzar espais pel sagnat, conserven el format.
 
@@ -4710,12 +4723,16 @@ Prefereixo utilitzar espais pel sagnat, conserven el format.
   (customize-set-variable 'tab-width 4)
 #+end_src
 
+*** Activar comandes perilloses
+
 Algunes comandes, que es consideren /perilloses/ pels /novatos/, estan
 desactivades. A aquestes alçades crec que puc activar-les totes:
 
 #+begin_src emacs-lisp :tangle yes
   (setq disabled-command-function nil)
 #+end_src
+
+*** Comportament de majúcules/minúscules al ordenar
 
 Ignora majúscules/minúscules al ordenar línies. Normalment ordeno per
 facilitar-me la vida buscant elements. Segons açò sembla lògic ignorar
@@ -4725,11 +4742,15 @@ les diferències de majúscules/minúscules.
   (setq sort-fold-case t)
 #+end_src
 
+*** Prompt =yes/no=
+
 Provaré amb prompts =y/n= enlloc de =yes/no=:
 
 #+begin_src emacs-lisp :tangle yes
   (setq use-short-answers t)
 #+end_src
+
+*** Ressaltar errors visitats
 
 In addition to a fringe arrow, =next-error= error may now optionally
 highlight the current error message in the =next-error= buffer. This
@@ -4740,7 +4761,20 @@ errors, so you can have an overview what errors were already visited.
   (customize-set-value 'next-error-message-highlight t)
 #+end_src
 
-Per classificar:
+*** Scroll vertical
+
+Configuració del /scroll/ vertical:
+
+#+begin_src emacs-lisp :tangle yes
+  (setq scroll-preserve-screen-position t)
+  (customize-set-value 'scroll-step 1)
+  (customize-set-value 'scroll-conservatively 10)
+  (customize-set-value 'scroll-margin 5)
+#+end_src
+
+*** Per classificar
+
+Opcions pendents de classificar en una secció:
 
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-eol-conversion nil)
@@ -4764,10 +4798,6 @@ Per classificar:
   (setq display-buffer-reuse-frames t)
 
   (setq next-line-add-newlines nil)
-  (setq scroll-preserve-screen-position t)
-  (customize-set-value 'scroll-step 1)
-  (customize-set-value 'scroll-conservatively 10000)
-  (setq tooltip-mode t)
   (setq transient-mark-mode t)
   (setq visible-bell nil)
 #+end_src
