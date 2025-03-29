@@ -1372,106 +1372,122 @@ Facilita manipular (afegir, modificar, eliminar) parelles de
 
 *** Casual
 
-Els paquets de la serie /casual/ defineixen menus transient que
-faciliten utilitzar/recordar les comandes de modes que utilitzo
-ocasionalment.
+https://github.com/kickingvegas/casual
+
+El paquet /casual/ defineix menus /transient/ que faciliten
+utilitzar/recordar les comandes de modes que utilitzo ocasionalment.
+
+Per facilitar-ne l'us intentaré assignar a la tecla =F10= la comanda
+=casual-xxx-tmenu= rellevant en cada cas.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package casual
+    :ensure t)
+#+end_src
 
 **** =casual-bookmarks=
 
+https://github.com/kickingvegas/casual/blob/main/docs/bookmarks.org
+
 #+begin_src emacs-lisp :tangle yes
-  (use-package bookmark
-    :ensure nil
-    :defer t)
-  (use-package casual-bookmarks
-    :ensure t
-    :bind (:map bookmark-bmenu-mode-map
-                ("<f10>" . casual-bookmarks-tmenu)
-                ("S" . casual-bookmarks-sortby-tmenu)
-                ("J" . bookmark-jump))
-    :after (bookmark))
+  (with-eval-after-load 'bookmark
+    (my/bind-keys bookmark-bmenu-mode-map
+                  '(("<f10>" casual-bookmarks-tmenu)
+                    ("S" casual-bookmarks-sortby-tmenu)
+                    ("J" bookmark-jump))))
 #+end_src
 
 **** =casual-calc=
 
+https://github.com/kickingvegas/casual/blob/main/docs/calc.org
+
 #+begin_src emacs-lisp :tangle yes
-  (use-package casual-calc
-    :ensure t
-    :bind (:map calc-mode-map
-                ("<f10>" . #'casual-calc-tmenu)))
+  (with-eval-after-load 'calc
+    (my/bind-keys calc-mode-map
+                  '(("<f10>" casual-calc-tmenu)))
+    (my/bind-keys calc-alg-map
+                  '(("<f10>" casual-calc-tmenu))))
 #+end_src
 
 **** =casual-dired=
 
-Utilitzo =dired= a un nivell molt bàsic perquè soc incapaç de recordar
-les comandes i al final em resulta més cómode/àgil utilitzar el shell
-o un gestor d'arxius gràfic.
-
-El paquet =casual-dired= defineix un menú =transient= que espero em
-facilitarà l'ús de =dired=.
+https://github.com/kickingvegas/casual/blob/main/docs/dired.org
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package casual-dired
-    :ensure t
-    :bind (:map dired-mode-map
-                ("<f10>" . casual-dired-tmenu))
-    :commands casual-dired-tmenu
-    :after (dired))
+  (with-eval-after-load 'dired
+    (my/bind-keys dired-mode-map
+                  '(("<f10>" casual-dired-tmenu)
+                    ("s" casual-dired-sort-by-tmenu)
+                    ("/" casual-dired-search-replace-tmenu))))
 #+end_src
 
 **** =casual-ibuffer=
 
+https://github.com/kickingvegas/casual/blob/main/docs/ibuffer.org
+
 #+begin_src emacs-lisp :tangle yes
-  ;; (use-package ibuffer
-  ;;   :hook (ibuffer-mode . ibuffer-auto-mode)
-  ;;   :defer t)
-  (use-package casual-ibuffer
-    :ensure t
-    :bind (:map
-           ibuffer-mode-map
-           ("<f10>" . casual-ibuffer-tmenu)
-           ("F" . casual-ibuffer-filter-tmenu)
-           ("s" . casual-ibuffer-sortby-tmenu)
-           ("<double-mouse-1>" . ibuffer-visit-buffer) ; optional
-           ("M-<double-mouse-1>" . ibuffer-visit-buffer-other-window) ; optional
-           ("{" . ibuffer-backwards-next-marked) ; optional
-           ("}" . ibuffer-forward-next-marked)   ; optional
-           ("[" . ibuffer-backward-filter-group) ; optional
-           ("]" . ibuffer-forward-filter-group)  ; optional
-           ("$" . ibuffer-toggle-filter-group))  ; optional
-    :after (ibuffer))
+  (with-eval-after-load 'ibuffer
+    (my/bind-keys ibuffer-mode-map
+                  '(("<f10>" casual-ibuffer-tmenu)
+                    ("F" casual-ibuffer-filter-tmenu)
+                    ("s" casual-ibuffer-sortby-tmenu)
+                    ("{" ibuffer-backwards-next-marked)
+                    ("}" ibuffer-forward-next-marked)
+                    ("[" ibuffer-backward-filter-group)
+                    ("]" ibuffer-forward-filter-group)
+                    ("$" ibuffer-toggle-filter-group))))
 #+end_src
 
 **** =casual-info=
 
+https://github.com/kickingvegas/casual/blob/main/docs/info.org
+
 #+begin_src emacs-lisp :tangle yes
-  (use-package casual-info
-    :ensure t
-    :bind (:map Info-mode-map
-                ("<f10>" . casual-info-tmenu)))
+  (with-eval-after-load 'info
+    (my/bind-keys Info-mode-map
+                  '(("<f10>" casual-info-tmenu)
+                    ("M-[" Info-history-back)
+                    ("M-]" Info-history-forward)
+                    ("p" casual-info-browse-backward-paragraph)
+                    ("n" casual-info-browse-forward-paragraph)
+                    ("h" Info-prev)
+                    ("j" Info-next-reference)
+                    ("k" Info-prev-reference)
+                    ("l" Info-next)
+                    ("/" Info-search)
+                    ("B" bookmark-set))))
 #+end_src
 
 **** =casual-isearch=
 
+https://github.com/kickingvegas/casual/blob/main/docs/isearch.org
+
 #+begin_src emacs-lisp :tangle yes
-  (use-package casual-isearch
-    :ensure t
-    :bind (:map isearch-mode-map
-                ("<f10>" . #'casual-isearch-tmenu)))
+  (with-eval-after-load 'isearch
+    (my/bind-keys isearch-mode-map
+                  '(("<f10>" casual-isearch-tmenu))))
+#+end_src
+
+**** =casual-make=
+
+https://github.com/kickingvegas/casual/blob/main/docs/make-mode.org
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load 'make-mode
+    (my/bind-keys makefile-mode-map
+                  '(("<f10>" casual-make-tmenu))))
 #+end_src
 
 **** =casual-re-builder=
 
-#+begin_src emacs-lisp :tangle yes
-  (use-package re-builder
-    :defer t)
+https://github.com/kickingvegas/casual/blob/main/docs/re-builder.org
 
-  (use-package casual-re-builder
-    :ensure t
-    :bind (:map reb-mode-map
-                ("<f0>" . #'casual-re-builder-tmenu)
-                :map reb-lisp-mode-map
-                ("<f10>" . #'casual-re-builder-tmenu))
-    :after (re-builder))
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load 're-builder
+    (my/bind-keys reb-mode-map
+                  '(("<f10>" casual-re-builder-tmenu)))
+    (my/bind-keys reb-lisp-mode-map
+                  '(("<f10>" casual-re-builder-tmenu))))
 #+end_src
 
 *** =company=
