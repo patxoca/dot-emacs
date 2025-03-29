@@ -1149,7 +1149,7 @@ que canvien de buffer i de finestra.
     (set-face-attribute 'default nil
             :family "Roboto Mono"
             :weight 'light
-            :height (pcase system-name
+            :height (pcase (system-name)
                       ("mc" 120)
                       ("ritic23" 90)
                       ("turing" 125)
