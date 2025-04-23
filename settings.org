@@ -492,14 +492,6 @@ compatibilitat amb diferents instal·lacios d'Emacs.
       (defun mouse-wheel-mode (x)))
   #+end_src
 
-- En Emacs 29.1 el paquet =linum= està marcat com obsolet i no es
-  carrega per defecte. Mentre trobo una solució millor es carrega:
-
-  #+begin_src emacs-lisp :tangle yes
-    (unless (fboundp 'linum-mode)
-      (require 'linum))
-  #+end_src
-
 - En Emacs 29.1 la funció =toggle-read-only= s'ha eliminat. Alguns
   paquets vells (=psvn.el= que tinga constància) utilitzen aquesta
   funció. Es defineix un alias per resoldre el problema.
@@ -1643,9 +1635,6 @@ Afegim les comandes al /keymap/.
 
 *** =display-line-numbers=
 
-En emacs 26 la numeració de línies ha millorat en quant a rendiment
-respecte a =linum= i similars. Li donaré una segona oportunitat.
-
 Personalment trobo més útil veure valors relatius a absoluts.
 
 Em resulta molest que canviï l'ample per adaptar-se al nombre de
@@ -1663,14 +1652,6 @@ acostumat a consultar la línia actual en la /modeline/) i evitar el
 creixement però no sembla que sigui possible configurar-ho.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/enable-line-numbers-mode ()
-    ;; HACK: en un parell de llocs de la configuració activo
-    ;; display-line-numbers-mode. El problema és que si el desactivo i
-    ;; l'activo utiliza numeració absoluta. Mentre esbrino com
-    ;; configurar-ho, aquesta funció ho centralitza.
-    (display-line-numbers-mode 1)
-    (setq display-line-numbers 'relative))
-
   (setq display-line-numbers-grow-only t
         display-line-numbers-width-start 3)
 #+end_src
@@ -3951,13 +3932,9 @@ Cap tecla definida.
 
 #+name: target-prog-mode-hook
 #+begin_src emacs-lisp :tangle yes
-  ;; (eval-after-load "linum"
-  ;;   '(progn
-  ;;      (require 'relative-linum)))
-
   (add-hook 'prog-mode-hook
             (lambda ()
-              (linum-mode 0)
+              (display-line-numbers-mode 0)
               (show-paren-mode 1)
               (set-variable 'show-trailing-whitespace t)
 
@@ -5003,8 +4980,8 @@ començament de la paraula.
 
 *** =arv/goto-line=
 
-Com =goto-line= però activa =linum-mode= per facilitar identificar la
-línia.
+Com =goto-line= però activa =display-line-numbers= per facilitar
+identificar la línia.
 
 No ho utilitzo gaire.
 
@@ -5013,13 +4990,17 @@ No ho utilitzo gaire.
     "Like `goto-line' but temporarily display absolute line
   numbers."
     (interactive)
-    (let ((linum-enabled linum-mode))
+    (let ((saved-display-line-numbers-mode display-line-numbers-mode)
+          (saved-display-line-numbers-type display-line-numbers-type))
       (unwind-protect
-          (let ((relative-linum-enabled nil))
-            (linum-mode 1)
+          (let ((display-line-numbers-type t))
+            (display-line-numbers-mode 1)
             (call-interactively 'goto-line))
-        (unless linum-enabled
-          (linum-mode -1)))))
+        (if saved-display-line-numbers-mode
+            (progn
+              (customize-set-value 'display-line-numbers-type saved-display-line-numbers-type)
+              (display-line-numbers-mode t))
+          (display-line-numbers-mode -1)))))
 #+end_src
 
 *** =my/json-prettify=
@@ -5240,24 +5221,19 @@ utilitzo actualment.
         (delete-region begin end))))
 #+end_src
 
-*** =my/display-line-numbers-mode=
+*** =my/toggle-line-numbers-mode=
 
-Activa/desactiva la numeració de les línies. Si està disponible
-=display-line-numbers-mode= la utilitza, en cas contrari utilitza
-=linum-mode=.
+Activa/desactiva la numeració relativa de les línies.
 
 #+begin_src emacs-lisp :tangle yes
-  (defun my/display-line-numbers-mode ()
+  (defun my/toggle-line-numbers-mode ()
     "Activa la numeració de les línies."
     (interactive)
-    (if (fboundp 'display-line-numbers-mode)
-        (if (and (boundp 'display-line-numbers-mode)
-                 display-line-numbers-mode)
-            (display-line-numbers-mode 0)
-          (my/enable-line-numbers-mode))
-      (if linum-mode
-          (linum-mode 0)
-        (linum-mode 1))))
+    (if (and (boundp 'display-line-numbers-mode)
+             display-line-numbers-mode)
+        (display-line-numbers-mode 0)
+      (customize-set-value 'display-line-numbers-type 'relative)
+      (display-line-numbers-mode 1)))
 #+end_src
 
 *** =my/rename-file-and-buffer=
@@ -6054,7 +6030,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-c t f") 'auto-fill-mode)
   (global-set-key (kbd "C-c t F") 'toggle-fullscreen)
   (global-set-key (kbd "C-c t h") #'my/simple-toggle-highlight-symbol-at-point)
-  (global-set-key (kbd "C-c t l") #'my/display-line-numbers-mode)
+  (global-set-key (kbd "C-c t l") #'my/toggle-line-numbers-mode)
   (global-set-key (kbd "C-c t L") 'line-number-mode)
   (global-set-key (kbd "C-c t r") 'read-only-mode)
   (global-set-key (kbd "C-c t s") #'my/toggle-case-sensitivity-in-isearch)
