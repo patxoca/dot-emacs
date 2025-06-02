@@ -5913,6 +5913,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
 
   (global-set-key (kbd "M-D") #'my/dedent-to-point)
 
+  (global-set-key (kbd "C-g") #'x-arv/keyboard-quit-dwim)
+
   ;; tab-bar
   (when (fboundp 'tab-bar-mode)
     (global-set-key (kbd "C-x t h <left>") #'tab-bar-history-back)
@@ -6359,6 +6361,39 @@ situació:
      (abort-recursive-edit)))
 
   (global-set-key (kbd "C-S-g") #'x-arv/abort-recursive-edit)
+#+end_src
+
+** =x-arv/keyboard-quit-dwim=
+
+https://emacsredux.com/blog/2025/06/01/let-s-make-keyboard-quit-smarter/
+
+Aquesta és una versió millorada de =arv/abort-recursive-edit= que
+adreça altres casos.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun x-arv/keyboard-quit-dwim ()
+    "Do-What-I-Mean behaviour for a general `keyboard-quit'.
+
+  The generic `keyboard-quit' does not do the expected thing when
+  the minibuffer is open.  Whereas we want it to close the
+  minibuffer, even without explicitly focusing it.
+
+  The DWIM behaviour of this command is as follows:
+
+  - When the region is active, disable it.
+  - When a minibuffer is open, but not focused, close the minibuffer.
+  - When the Completions buffer is selected, close it.
+  - In every other case use the regular `keyboard-quit'."
+    (interactive)
+    (cond
+     ((region-active-p)
+      (keyboard-quit))
+     ((derived-mode-p 'completion-list-mode)
+      (delete-completion-window))
+     ((> (minibuffer-depth) 0)
+      (abort-recursive-edit))
+     (t
+      (keyboard-quit))))
 #+end_src
 
 * Descartat
