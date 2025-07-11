@@ -1383,6 +1383,12 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
 
   No és exactament el que busco, però =fzf= sembla interessant.
 
+- [[https://github.com/konrad1977/flyover][flyover]]: A modern, aesthetic overlay display for Flycheck and
+  Flymake in Emacs.
+
+  Interpreto que mostra informació d'errors de flycheck/flymake en
+  línea enlloc de en un buffer separat o el minibuffer.
+
 * Altres recursos
 
 ** elisp
