@@ -1424,6 +1424,9 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   environment, shedding light on the complexities that can confound
   our expectations of how code exploration should flow seamlessly.
 
+- [[https://emacs.dyerdwelling.family/emacs/20250719094720-emacs--building-an-emacs-cursor-heatmap-pt1/][Building a New Package From Scratch]]: serie de posts on explica com
+  crear un paquet elisp.
+
 ** Vídeos
 
 - [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed (the 'display-buffer-alist')]]: en
