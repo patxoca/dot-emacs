@@ -2042,6 +2042,19 @@ Edit multiple occurrences in the same way simultaneously.
     :commands (iedit-mode))
 #+end_src
 
+*** =just-mode=
+
+Mode per treballar amb arxius =justfile=.
+
+- https://github.com/casey/just
+- https://just.systems/man/en/
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package just-mode
+    :ensure t
+    :commands (just-mode))
+#+end_src
+
 *** =lorem-ipsum=                                                    :manual:
 
 https://github.com/jschaf/emacs-lorem-ipsum
