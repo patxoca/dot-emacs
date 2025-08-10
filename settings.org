@@ -1398,8 +1398,11 @@ https://github.com/kickingvegas/casual/blob/main/docs/calc.org
   (with-eval-after-load 'calc
     (my/bind-keys calc-mode-map
                   '(("<f10>" casual-calc-tmenu)))
+    )
+  (with-eval-after-load 'calc-ext
     (my/bind-keys calc-alg-map
-                  '(("<f10>" casual-calc-tmenu))))
+                  '(("<f10>" casual-calc-tmenu)))
+    )
 #+end_src
 
 **** =casual-dired=
