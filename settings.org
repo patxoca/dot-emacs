@@ -6875,3 +6875,9 @@ and e.g. the "e" can be used for evaluating the current statement.
 But, for instance, if you wanted to edit "print" into "printe", you
 could do that in a straightforward way, just like you would with
 `lpy-mode' off : with "C-b e".
+
+* Local variables                                                  :noexport:
+
+# Local Variables:
+# org-imenu-depth: 3
+# End:
