@@ -1306,14 +1306,21 @@ grans. Per aquest motiu ho restringeixo a salts dins el buffer actiu.
     (setq avy-all-windows nil))
 #+end_src
 
-*** =beacon=
+*** =beacon=                                                     :desactivat:
+:LOGBOOK:
+- Note taken on [2025-08-16 ds. 12:04] \\
+  En algun moment, després d'alguna actualització d'Emacs, =beacon= va
+  començar a ser molest; sembla que provoca efectes estranys quan
+  s'activa al mateix temps que =company=. A més, no m'aporta gaire
+  cosa, així que he optat per desactivar-lo.
+:END:
 
 https://github.com/Malabarba/beacon
 
 Whenever the window scrolls a light will shine on top of your cursor
 so you know where it is.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (use-package beacon
     :ensure t
     :config
@@ -6880,4 +6887,5 @@ could do that in a straightforward way, just like you would with
 
 # Local Variables:
 # org-imenu-depth: 3
+# org-log-into-drawer: t
 # End:
