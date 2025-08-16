@@ -1389,6 +1389,13 @@ però que ara mateix no puc/vull provar. Ordenats cronològicament
   Interpreto que mostra informació d'errors de flycheck/flymake en
   línea enlloc de en un buffer separat o el minibuffer.
 
+- [[https://github.com/karthink/gptel][gptel]]: gptel is a simple Large Language Model chat client for Emacs,
+  with  support for  multiple models  and  backends. It  works in  the
+  spirit of Emacs, available at any time and uniformly in any buffer.
+
+  Em permetria, per exemple, crear una comanda per automatizar la
+  revisió dels missatges de commit.
+
 * Altres recursos
 
 ** elisp
