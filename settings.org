@@ -4574,6 +4574,8 @@ l'arxiu del buffer actual) i en els directoris pare.
             (lambda ()
               (auto-fill-mode 1)
               (flyspell-mode 0)
+              ;; desactiva l'expansió de "con" -> ".. content::"
+              (define-abbrev rst-mode-abbrev-table "con" "con" nil)
               ;; activa el resaltat d'espai en blanc al final de línia
               (set-variable 'show-trailing-whitespace t)))
 #+end_src
