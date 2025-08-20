@@ -257,7 +257,11 @@ Exemple:
                   ("C-c b" do-bar)))
 #+end_src
 
-**** =my/host-reachable=
+**** =my/host-reachable=                                         :deprecated:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 07:38] \\
+  No sembla que aquesta funció s'utilitzi enlloc. S'exclou del /tangle/.
+:END:
 
 Comprova si un host està disponible. La disponibilitat es determina
 fent un ping.
@@ -266,16 +270,20 @@ S'utilitza principalment per condicionar parts de la configuració a la
 disponibilitat de serveis en la xarxa local. Per exemple, a casa
 executo un servidor privat de "melpa".
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (defun my/host-reachable (host)
     (= 0 (call-process "ping" nil nil nil "-c" "1" "-W" "1" host)))
 #+end_src
 
-**** =arv/generate-lab-faces=
+**** =arv/generate-lab-faces=                                    :deprecated:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 07:40] \\
+  No sembla que aquesta funció s'utilitzi enlloc. S'exclou del /tangle/.
+:END:
 
 Genera /faces/:
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (require 'color)
 
   (defun arv/generate-lab-faces (name count &optional lightness saturation group-name)
@@ -1675,7 +1683,11 @@ creixement però no sembla que sigui possible configurar-ho.
     (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 #+end_src
 
-*** =eglot=
+*** =eglot=                                                         :builtin:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 08:12] \\
+  =eglot= forma part del core d'Emacs des de la versió 29.=
+:END:
 
 Client =lsp= (/language server protocol/). Aquesta secció conté
 configuració global. La configuració de cada llenguatge es fa en la
@@ -1686,9 +1698,10 @@ cpctelera (crec que el problema és de =clangd= no de =lsp-mode=). M'ha
 semblat una mica intrusiu.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package eglot
-    :ensure t
-    :commands eglot)
+  (when (< emacs-major-version 29)
+    (use-package eglot
+      :ensure nil
+      :commands eglot))
 #+end_src
 
 *** =eldoc=                                                         :builtin:
@@ -1935,7 +1948,19 @@ s'executa. Està pensada per cridar-la des d'un /hook/.
     (setq-local global-hl-line-mode nil))
 #+end_src
 
-*** =hydra=
+*** =hydra=                                                      :deprecated:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 08:37] \\
+  =hydra= no sembla mantingut i mai l'he incorporat al meu workflow.
+  Probablement es pugui aconseguir el mateix amb =transient=.
+
+  Revisant la configuració he vist que defineixo algunes /hidres/, que
+  mai he utilitzat. Es podrien esborrar o convertir a /transients/.
+  També es parla de =hydra= en la configuració de =swiper=.
+
+  Pel momento només el marco com /deprecated/, a l'espera de poder
+  investigar una mica i veure que decideixo.
+:END:
 
 https://github.com/abo-abo/hydra
 
@@ -4025,7 +4050,15 @@ Funcions d'utilitat per treballar amb codi python.
                pyx/visit-test-module))
 #+end_src
 
-**** =elpy=
+**** =elpy=                                                      :desactivat:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 08:58] \\
+  Darrerament tinc la sensació de que =elpy= és molt intrussiu, que no
+  evoluciona i hi ha altres alternatives que poden donar millor
+  resultats.
+
+  Per començar el desactivo, amb l'objectiu de veure que trobo a faltar.
+:END:
 
 https://github.com/jorgenschaefer/elpy
 
@@ -4039,7 +4072,7 @@ Pel seu funcionament requereix algunes comandes externes:
 
 =M-x elpy-config= per veure si estan instal·lades.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (use-package elpy
     :ensure t
     :commands elpy-enable
@@ -4293,7 +4326,12 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     (elpy-enable))
 #+end_src
 
-**** =sphinx-doc=
+**** =sphinx-doc=                                                :desactivat:
+:LOGBOOK:
+- Note taken on [2025-08-20 dc. 09:15] \\
+  No tinc memòria d'haver-ho utilitzat mai. Probablement no sigui
+  compatible amb els /type hints/. Ho desactivo.
+:END:
 
 https://github.com/naiquevin/sphinx-doc.el
 
@@ -4301,7 +4339,7 @@ https://github.com/naiquevin/sphinx-doc.el
 for Python functions and methods. The structure of the docstring is as
 per the requirement of the Sphinx documentation generator.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (use-package sphinx-doc
     :ensure t
     :commands sphinx-doc-mode)
