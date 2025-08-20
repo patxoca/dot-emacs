@@ -1684,10 +1684,6 @@ creixement però no sembla que sigui possible configurar-ho.
 #+end_src
 
 *** =eglot=                                                         :builtin:
-:LOGBOOK:
-- Note taken on [2025-08-20 dc. 08:12] \\
-  =eglot= forma part del core d'Emacs des de la versió 29.=
-:END:
 
 Client =lsp= (/language server protocol/). Aquesta secció conté
 configuració global. La configuració de cada llenguatge es fa en la
@@ -1695,13 +1691,13 @@ secció /mode/ corresponent.
 
 Una alternativa és =lsp-mode=. No he pogut fer-lo funcionar amb la
 cpctelera (crec que el problema és de =clangd= no de =lsp-mode=). M'ha
-semblat una mica intrusiu.
+semblat una mica intrusiu. Per altra banda, =eglot= forma part d'Emacs
+des de la versió 29. Començaré provant-lo i després decidiré.
 
 #+begin_src emacs-lisp :tangle yes
-  (when (< emacs-major-version 29)
-    (use-package eglot
-      :ensure nil
-      :commands eglot))
+  (use-package eglot
+    :ensure t
+    :commands eglot-rename)
 #+end_src
 
 *** =eldoc=                                                         :builtin:
@@ -2989,9 +2985,8 @@ que estigui buid.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "cc-mode"
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (eglot-ensure))))
+    (with-eval-after-load 'eglot
+      (add-hook 'c-mode-common-hook #'eglot-ensure)))
 #+end_src
 
 **** Combinacions de tecles
