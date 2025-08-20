@@ -208,7 +208,7 @@ buida per completar, si cal"
 (defun arv/yas-py-parse-parameters (text)
   "Parseja els arguments d'una funcií/mètode.
 
-'foo, bar=value' -> (('foo') ('bar' 'value'))"
+'foo: int, bar=value' -> (('foo' 'int' '') ('bar' '' value'))"
   (mapcar (lambda (x) (mapcar #'s-trim x))
           (mapcar (lambda (x) ;; x = "bar: str = value" -> ("bar" "str " " value")
                     (let ((parts (arv/yas--ensure-two-elements (split-string x "="))))
