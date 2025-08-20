@@ -1139,18 +1139,18 @@ que canvien de buffer i de finestra.
 
 #+begin_src emacs-lisp :tangle yes
   ;; (my/theme-enable-theme-wombat)
-  (if (display-graphic-p)
-      (my/theme-enable-theme-modus-operandi)
-    (my/theme-enable-theme-modus-vivendi))
-  ;; (my/theme-enable-theme-doom-one)
+  ;; (if (display-graphic-p)
+  ;;     (my/theme-enable-theme-modus-operandi)
+  ;;   (my/theme-enable-theme-modus-vivendi))
+  (my/theme-enable-theme-doom-one)
 
   (when (display-graphic-p)
     ;; x-display-pixel-height necessita un entorn graphic
     (set-face-attribute 'default nil
-            :family "Roboto Mono"
+            :family "GoogleSansCode"
             :weight 'light
             :height (pcase (system-name)
-                      ("wst" 100)
+                      ("wst" 95)
                       ("mc" 120)
                       ("ritic23" 90)
                       ("turing" 125)
