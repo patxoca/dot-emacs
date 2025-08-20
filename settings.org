@@ -4323,7 +4323,8 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     (my/bind-keys python-mode-map
                   '(("C-c C-s" nil)))
 
-    (elpy-enable))
+    ;; (elpy-enable)
+    )
 #+end_src
 
 **** =sphinx-doc=                                                :desactivat:
@@ -4379,13 +4380,13 @@ per the requirement of the Sphinx documentation generator.
        ("C->" indent-rigidly-right-to-tab-stop)
        ("C-<" indent-rigidly-left-to-tab-stop)
        ))
-    (my/bind-keys
-     elpy-mode-map
-     '(("M-<up>" pyx/nav-up-list)
-       ("M-<down>" pyx/nav-down-list)
-       ("M-S-<down>" elpy-nav-move-line-or-region-down)
-       ("M-S-<up>" elpy-nav-move-line-or-region-up)
-       ))
+    ;; (my/bind-keys
+    ;;  elpy-mode-map
+    ;;  '(("M-<up>" pyx/nav-up-list)
+    ;;    ("M-<down>" pyx/nav-down-list)
+    ;;    ("M-S-<down>" elpy-nav-move-line-or-region-down)
+    ;;    ("M-S-<up>" elpy-nav-move-line-or-region-up)
+    ;;    ))
     (define-key python-mode-map (kbd "C-<tab>")
       (make-hippie-expand-function
        '(try-expand-dabbrev
