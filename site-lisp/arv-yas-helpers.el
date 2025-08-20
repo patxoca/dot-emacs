@@ -36,6 +36,7 @@
 ;;; Code:
 
 (require 's)
+(require 'seq)
 
 ;;; Aquesta variable és una mica forçada però pel moment no tinc un
 ;;; lloc millor on ficar-la.
@@ -196,14 +197,24 @@ the corresponding function parametres.
 ;;;
 ;;; python
 
+(defun arv/yas--ensure-two-elements (l)
+  "Garanteix que la llista L té 2 elements.
+
+Garanteix que la llista L té una longitud 2, afegint la cadena
+buida per completar, si cal"
+  (seq-subseq (append l '("" "")) 0 2))
+
 ;;;###autoload
 (defun arv/yas-py-parse-parameters (text)
   "Parseja els arguments d'una funcií/mètode.
 
 'foo, bar=value' -> (('foo') ('bar' 'value'))"
-  (mapcar (lambda (x)
-            (mapcar 's-trim (split-string x "=")))
-          (split-string text ",")))
+  (mapcar (lambda (x) (mapcar #'s-trim x))
+          (mapcar (lambda (x) ;; x = "bar: str = value" -> ("bar" "str " " value")
+                    (let ((parts (arv/yas--ensure-two-elements (split-string x "="))))
+                      (append (arv/yas--ensure-two-elements (split-string (car parts) ":"))
+                              (cdr parts))))
+                  (split-string text ","))))
 
 ;;;###autoload
 (defalias 'arv-yas-py-parse-parameters 'arv/yas-py-parse-parameters)
