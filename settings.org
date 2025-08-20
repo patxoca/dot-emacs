@@ -3899,6 +3899,8 @@ en el meu workflow. Es manté per si de cas.
      (lambda ()
        (my/org-reset-<-syntax)
        (auto-fill-mode)
+       (setq org-imenu-depth 3
+             org-log-into-drawer t)
        ;; electric-pair: insereix parelles ==, // i ~~
        (let ((org-electric-pairs '((?= . ?=) (?/ . ?/) (?~ . ?~))))
          (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))))))
@@ -6925,10 +6927,3 @@ and e.g. the "e" can be used for evaluating the current statement.
 But, for instance, if you wanted to edit "print" into "printe", you
 could do that in a straightforward way, just like you would with
 `lpy-mode' off : with "C-b e".
-
-* Local variables                                                  :noexport:
-
-# Local Variables:
-# org-imenu-depth: 3
-# org-log-into-drawer: t
-# End:
