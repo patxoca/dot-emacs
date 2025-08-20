@@ -4217,7 +4217,7 @@ en el workflow.
           ("(django14)Index" pydoc-info-lookup-transform-entry)))))
 #+end_src
 
-**** =py-isort=
+**** =py-isort=                                                      :manual:
 
 https://github.com/paetzke/py-isort.el
 
