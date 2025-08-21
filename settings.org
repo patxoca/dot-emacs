@@ -4430,7 +4430,7 @@ per the requirement of the Sphinx documentation generator.
                 ;; (flymake-mode 1)
 
                 ;; sphinx-doc
-                (sphinx-doc-mode t)
+                ;; (sphinx-doc-mode t)
 
                 (superword-mode 1)
                 (pytest-mode-enable-if-test-module)
