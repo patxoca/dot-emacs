@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: comment -
+# key: #
+# group: comment
+# type: snippet
+# contributor: Alexis Roda <alexis.roda.villalonga@gmail.com>
+# expand-env: ((yas-indent-line 'fixed))
+# uuid: 3b11c7de-a90c-4e22-b6be-ef7ef559abdd
+# --
+# ------------------------------
+#  $1
+# ------------------------------
+
+$0
