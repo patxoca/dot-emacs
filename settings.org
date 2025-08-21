@@ -4159,6 +4159,20 @@ Perquè açò funcioni cal que el directori dels snippets aparegui en
 =yas-snippet-dirs= abans del directori de snippets de =elpy=.
 #+end_warning
 
+**** =inferior-python-mode=                                         :builtin:
+
+Configura alguns aspectes del mode utilizat pel REPL de python.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "python"
+    ;; defineix l'interpret
+    (customize-set-value 'python-shell-interpreter "ipython")
+    (customize-set-value 'python-shell-interpreter-args "-i --simple-prompt")
+
+    (add-hook 'inferior-python-mode-hook #'company-mode)
+    )
+#+end_src
+
 **** =pylookup=                                                  :desactivat:
 
 https://github.com/tsgates/pylookup
@@ -4296,7 +4310,7 @@ original és de [[https://github.com/ionrock/pytest-el][ionrock]] però utilitzo
     (put 'pytest-cmd-flags 'safe-local-variable 'stringp))
 #+end_src
 
-**** =python=                                                       :builtin:
+**** =python-ts-mode=                                               :builtin:
 
 Remapeja =python-mode= per activar =python-ts-mode=.
 
@@ -4311,11 +4325,6 @@ Configura alguns aspectes de =python=.
   (with-eval-after-load "python"
     (setq python-shell-virtualenv-path (getenv "VIRTUAL_ENV"))
     (setq python-indent-guess-indent-offset nil)
-
-    ;; defineix l'interpret
-    (customize-set-value 'python-shell-interpreter "ipython")
-    (customize-set-value 'python-shell-interpreter-args "-i --simple-prompt")
-
 
     ;; activates source tracking when debugging with pdb from a shell
     ;; buffer
