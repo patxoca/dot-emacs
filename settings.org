@@ -3155,6 +3155,8 @@ which are intended to be packages.
                     ("C-c m ?" elisp-slime-nav-describe-elisp-thing-at-point)
                     ("C-h e V" apropos-value)
                     ("C-c m z" byte-recompile-directory)
+                    ("C-z" ielm)
+                    ("C-S-z" my/bash-terminal)
                     ("C-c C-z" ielm)))
 
     (let ((keywords '(("\\<ert-deftest\\>" . font-lock-keyword-face)
@@ -4435,6 +4437,11 @@ navegació disponibles en python.
        ;; en conflicte amb el prefix definit globalment per les comandes de
        ;; ripgrep. No utilitzo la comanda python-xxx.
        ("C-c C-s" nil)
+
+       ;; Redefineixo C-z (que normalment obre una shell) per obrir
+       ;; l'interpret python.
+       ("C-z" run-python)
+       ("C-S-z" my/bash-terminal)
        ))
 
     (define-key python-ts-mode-map (kbd "C-<tab>")
