@@ -4331,8 +4331,6 @@ Configura alguns aspectes de =python=.
     ;; activates source tracking when debugging with pdb from a shell
     ;; buffer
     (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
-
-    (add-hook 'python-ts-mode-hook #'company-mode)
     )
 #+end_src
 
@@ -4460,7 +4458,7 @@ navegació disponibles en python.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load 'python
-    (add-hook 'python-mode-hook
+    (add-hook 'python-ts-mode-hook
               (lambda ()
                 ;; outline
                 (outline-minor-mode t)
