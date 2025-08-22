@@ -1200,6 +1200,70 @@ memoritzar-es.
 on explica com utilitzar-ho per ordenar en /dired/ ([[http://yummymelon.com/devnull/enhancing-dired-sorting-with-transient.html][Enhancing Dired
 Sorting With Transient]]).
 
+** TODO =imenu= en =settings.org=                                 :annoyance:
+:PROPERTIES:
+:ID:       1119f95b-e995-4328-837b-b6b2929c97a4
+:END:
+
+He començat (agost 2025) a utilitzar =imenu= (=C-c j s=) per saltar
+directament a seccions de documents org. Darrerament estic revisant la
+configuracó d'Emacs i em cal accedir sovint a la secció /Configuració/
+> /Modes/. He detectat que =imenu= no mostra aquesta secció. Alguna
+vegada, seleccionant =*Rescan*=, crec que ha aparegut, potser he
+accedit manualment a la secció abans del =*Rescan*=. No és un tema de
+límit de profunditat, /Tema/ i /Paquets/ son dos seccions al mateix
+nivell (2) que /Modes/, i apareixen.
+
+Una altra cosa estranya és que, de vegades, el comportament de =imenu=
+és motrar les capçaleres de primer nivell, en seleccionar-ne una
+mostra les subcapçaleres etc., mentre que altres vegades (la majoria)
+mostra una llista plana amb totes les capçaleres. El primer és el
+comportament que voldria sempre, en el segon (l'habitual) és on es
+manifesta l'error.
+
+El cas és que resulta molest. Com que he començat a utilitzar-ho fa
+poc no sé si és un error /normal/ o està relacionat amb els últims
+canvis que he fet a la configuració.
+
+*** TODO cerca =fuzzy= en =company=                               :annoyance:
+
+Al completar en python (no provat en altres), =company= utiliza /fuzzy
+matching/. Està bé quan no sé el que busco, però la gran majoria de
+vegades el que estic escribint és el prefix. No seria un gran problema
+si no fos perqué al premer =TAB= per completar el que fa es ciclar
+entres les opciones, no completar/filtrar pel prefix comú.
+
+Crec que la solució ideal seria utilizar /matching/ per préfix per
+defecte i definir una combinació de tecles per activar el mode
+/fuzzy/. Una altra possibilitat seria que =company= mostrés les
+coincidències per prefix al principi i les /fuzzy/ al final.
+
+No ho havia detectat fins ara (agost 2025). Abans, potser =elpy=
+configurava alguna cosa de =company= i al canviar a =eglot= s'utilitza
+el comportament per defecte, o simplement és cosa de com el /backend/
+(=jedi=, =python-lsp-server=) fa la cerca. El segon sembla que té més
+sentit.
+
+** TODO Warnings en =pyx.el=
+
+Revisar aquests warnings:
+
+#+begin_src text
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:514:26: Warning: the function ‘subseq’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:220:16: Warning: the function ‘python-syntax-comment-or-string-p’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:193:4: Warning: the function ‘python-nav-up-list’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:178:6: Warning: the function ‘python-nav-beginning-of-defun’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:95:5: Warning: the function ‘python-info-looking-at-beginning-of-defun’ is not known to be defined.
+#+end_src
+
+** TODO Actualitzar =pyx.el=
+
+Definir =pyx/just=, semblant a =pyx/make=, però per =just=.
+
+Crec recordar qué, algunes implementacions de funcionalitats
+relacionades amb descobrir l'estructura del programa eren fràgils.
+Mirar si es poden millorar utilitzant funcionalitats de =tree-sitter=.
+
 * Paquets extra
 ** Col·leccions de paquets
 
@@ -3073,4 +3137,153 @@ nidament. Caldria valorar si ho vull mantindre.
       (when labelp
         (delete-horizontal-space)
         (tab-to-tab-stop))))
+#+end_src
+** [7/7] Varis noves funcionalitats en =python-ts-mode= + =eglot=
+*** DONE [#A] Activació del REPL python
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 19:26] \\
+  Es canvia. S'aplica el mateix canvi a =lisp-mode= per obrir =ielm=.
+:END:
+
+Crec que mai seré capaç d'interioritzar la combinació =C-c C-p= per
+obrir l'interpret de python. Trobo més natural utilizar =C-z= (que per
+defecte obre una terminal) i, potser, relegar la terminal a =C-Z= en
+els modes que obren un REPL.
+
+*** DONE [#C] Comportament estrany de =imenu=
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 20:43] \\
+  No el faig servir tant com per a que sigui una molèstia, i de fet, no
+  sé si és una molèstia. Si l'afegeixo al workflow i no m'agrada, ja em
+  barallaré.
+:END:
+
+Abans, demanava triar un objecte de nivell superior i permetia saltar
+a l'objecte o seleccionar un subobjecte. Ara, mostra algun(s)
+objecte(s) de nivel superior (no tinc clar si l'actual o altres
+també), i categories d'objectes (classe, métode, funció ...).
+
+Crec que el comportament original s'adapta millor a la meva forma de
+pensar.
+
+Veure [[id:1119f95b-e995-4328-837b-b6b2929c97a4][=imenu= en =settings.org=]].
+
+*** DONE [#B] Gestió d'imports
+:LOGBOOK:
+- State "DONE"       from "PAUS"       [2025-08-22 dv. 22:58] \\
+  Hauré d'investigar com afegir =import= automàticament al codi, a una
+  mala puc utilizar la meva comanda =pyimport=.
+
+  Respecte a que els imports no s'ordenin al guardar l'arxiu, el
+  problema és de la pròpia funció =py-isort-before-save=. Com que
+  s'afegeix a un /hook/ global, abans de fer res comprova que el mode
+  del buffer sigui =python-mode=. Com que ara utilitzo =python-ts-mode=,
+  ha deixat de funcionar.
+
+  Tinc =py-isort.el= en local, així que l'he modificat.
+
+  Hi ha un problema semblant en =pylint.el=, no es té en compte
+  =python-ts-mode=. Crec que no utilitzo les funcions afectades, però ja
+  que hi soc, les corregeixo.
+- State "PAUS"       from "TODO"       [2025-08-22 dv. 21:21] \\
+  La funcionalitat dels import oferida per =python-mode= es molt bàsica,
+  no és el que busco.
+
+  Respecte a que =isort= no ordena els imports al guardar, el problema
+  és que =eglot= fa que =before-save-hook= sigui buffer local,
+  instal·lant la seva funció, amb el que les funcions instal·lades
+  globalment no s'executen, =py-isort-before-save= entre elles.
+
+  He d'acabar de confirma que el culpable és =eglot=. Desactivant el
+  bloc de codi que l'activa en la configuració de python, el problema
+  desapareix. Si l'activo manualment, el problema apareix. El que em
+  despista és que al codi de =eglot= només hi ha dos referències a
+  =before-save-hook=, en cap es fa local.
+:END:
+
+Alguna de la funcionalitat seguent de python-ts-mode no funciona.
+
+#+begin_src text
+  C-c TAB a		python-add-import
+  C-c TAB f		python-fix-imports
+  C-c TAB r		python-remove-import
+  C-c TAB s		python-sort-imports
+#+end_src
+
+Al guardar l'arxiu no es reordenen el emports amb =isort=.
+
+*** DONE [#B] Estudiar funcionalitat per navegar pel codi
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 18:54] \\
+  Es defineix un transient. Açò facilita recordar les comandes i permet
+  repetir les comandes prement una tecla.
+:END:
+
+#+begin_src text
+  <remap> <backward-sentence>		python-nav-backward-block
+  <remap> <backward-up-list>		python-nav-backward-up-list
+  <remap> <beginning-of-defun>	treesit-beginning-of-defun
+  <remap> <end-of-defun>			treesit-end-of-defun
+  <remap> <forward-sentence>		python-nav-forward-block
+  <remap> <mark-defun>			python-mark-defun
+  <remap> <up-list>				python-nav-up-list
+#+end_src
+
+Les comandes següents no estan assignades a cap tecla, no crec que
+siguin d'us freqüent, per tant no cal assignar-les a combinacions
+curtes. Valorar si afegir-les al mapa de salt (=C-m j=):
+
+#+begin_src text
+  python-nav-backward-defun
+  python-nav-backward-sexp
+  python-nav-backward-sexp-safe
+  python-nav-backward-statement
+  python-nav-beginning-of-block
+  python-nav-beginning-of-statement
+  python-nav-end-of-block
+  python-nav-end-of-defun
+  python-nav-end-of-statement
+  python-nav-forward-defun
+  python-nav-forward-sexp
+  python-nav-forward-sexp-safe
+  python-nav-forward-statement
+  python-nav-if-name-main
+  python-nav-up-list
+#+end_src
+
+*** DONE [#A] =word-mode= i =python-ts-mode=
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 20:21] \\
+  L'activació de =superword-mode= (i altres coses) s'afegia al hook
+  =python-mode-hook=, amb el que no s'executava. S'afegeix al hook
+  =python-ts-mode-hook=.
+:END:
+*** DONE [#A] =eglot= no s'ha activar al carregar =ecs.py=
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 20:22] \\
+  El problema ací era que l'activació d'eglot (=eglot-ensure=) estava
+  protegida per un =with-eval-aftere-load 'eglot=, amb el que mai
+  s'executava (fins que no es carrega =eglot= no s'activa, pero si no
+  s'activa no es carrega).
+:END:
+
+Al obrir =ecs.py= no s'ha activat =eglot= automàticament.
+
+*** DONE [#C] Desplaçar codi
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-22 dv. 23:43] \\
+  Les dos comandes únicament utilitzen dos funcions auxiliars.
+  S'incorporen les 4 a la configuració.
+:END:
+
+Ocasionalment utilitzava =elpy-nav-move-line-or-region-down= i
+=elpy-nav-move-line-or-region-up= per moure codi amunt i avall.
+
+Mirar si és complicat de portar a la nova configuració. Açò es pot
+considerar /edició estructurada/, potser =tree-sitter= ofereix
+funcionalitats.
+
+#+begin_src emacs-lisp
+  ("M-S-<down>" elpy-nav-move-line-or-region-down)
+  ("M-S-<up>" elpy-nav-move-line-or-region-up)
 #+end_src
