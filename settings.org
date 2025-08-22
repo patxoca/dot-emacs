@@ -6091,8 +6091,8 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-x 3") #'arv/split-windows-right)
 
   (global-set-key (kbd "C-S-k") #'my/kill-entire-line)
-  (global-set-key (kbd "C-o") #'arv/open-line-before-and-indent)
-  (global-set-key (kbd "C-S-o") #'arv/open-line-after-and-indent)
+  (global-set-key (kbd "C-o") #'arv/open-line-after-and-indent)
+  (global-set-key (kbd "C-S-o") #'arv/open-line-before-and-indent)
 
   (global-set-key (kbd "C-w") #'my/kill-region)
 
