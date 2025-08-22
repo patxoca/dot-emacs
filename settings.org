@@ -4197,7 +4197,7 @@ codi font, accedeixo a la documentació online o tiro de google.
     '(progn
        (define-key python-ts-mode-map (kbd "C-c h") 'pylookup-lookup)))
 
-  (add-hook 'python-mode-hook
+  (add-hook 'python-ts-mode-hook
             (lambda()
               (let ((pylookup-dir (arv/startup-get-absolute-path "site-lisp/pylookup")))
                 (setq pylookup-program (arv/path-join pylookup-dir "pylookup.py"))
@@ -4221,7 +4221,7 @@ en el workflow.
   (eval-after-load "python"
     '(progn
        (info-lookup-add-help
-        :mode 'python-mode
+        :mode 'python-ts-mode
         :parse-rule 'pydoc-info-python-symbol-at-point
         :doc-spec
         '(("(python)Index" pydoc-info-lookup-transform-entry)
@@ -4768,8 +4768,8 @@ Associa modes als arxius relacionats amb zope:
   (add-to-list 'auto-mode-alist '("\\.cpt$" . html-mode))
   (add-to-list 'auto-mode-alist '("\\.zpt$" . html-mode))
 
-  (add-to-list 'auto-mode-alist '("\\.vpy$" . python-mode))
-  (add-to-list 'auto-mode-alist '("\\.cpy$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.vpy$" . python-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.cpy$" . python-ts-mode))
 
   (add-to-list 'auto-mode-alist '("\\.css.dtml$" . css-mode))
 #+end_src
