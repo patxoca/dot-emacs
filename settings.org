@@ -4058,8 +4058,7 @@ Configuració de =eglot= per =python=.
     (require 'eglot)
 
     (add-to-list 'eglot-server-programs
-                 '((python-ts-mode python-mode) .
-                   ("pylsp")))
+                 '((python-ts-mode python-mode) . ("pylsp")))
     (add-hook 'python-ts-mode-hook #'eglot-ensure))
 #+end_src
 
