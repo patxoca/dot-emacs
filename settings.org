@@ -4353,6 +4353,68 @@ per the requirement of the Sphinx documentation generator.
     :commands sphinx-doc-mode)
 #+end_src
 
+**** Comandes
+
+Les comandes següents s'ha copiat de =elpy=. Es renombren afegint el
+prefix =my/=:
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/elpy-nav-move-line-or-region-down (&optional beg end)
+    "Move the current line or active region down."
+    (interactive
+     (if (use-region-p)
+         (list (region-beginning) (region-end))
+       (list nil nil)))
+    (if beg
+        (my/elpy--nav-move-region-vertically beg end 1)
+      (my/elpy--nav-move-line-vertically 1)))
+
+  (defun my/elpy-nav-move-line-or-region-up (&optional beg end)
+    "Move the current line or active region down."
+    (interactive
+     (if (use-region-p)
+         (list (region-beginning) (region-end))
+       (list nil nil)))
+    (if beg
+        (my/elpy--nav-move-region-vertically beg end -1)
+      (my/elpy--nav-move-line-vertically -1)))
+
+  (defun my/elpy--nav-move-line-vertically (dir)
+    "Move the current line vertically in direction DIR."
+    (let* ((beg (point-at-bol))
+           (end (point-at-bol 2))
+           (col (current-column))
+           (region (delete-and-extract-region beg end)))
+      (forward-line dir)
+      (save-excursion
+        (insert region))
+      (goto-char (+ (point) col))))
+
+  (defun my/elpy--nav-move-region-vertically (beg end dir)
+    "Move the current region vertically in direction DIR."
+    (let* ((point-before-mark (< (point) (mark)))
+           (beg (save-excursion
+                  (goto-char beg)
+                  (point-at-bol)))
+           (end (save-excursion
+                  (goto-char end)
+                  (if (bolp)
+                      (point)
+                    (point-at-bol 2))))
+           (region (delete-and-extract-region beg end)))
+      (goto-char beg)
+      (forward-line dir)
+      (save-excursion
+        (insert region))
+      (if point-before-mark
+          (set-mark (+ (point)
+                       (length region)))
+        (set-mark (point))
+        (goto-char (+ (point)
+                      (length region))))
+      (setq deactivate-mark nil)))
+#+end_src
+
 **** Combinacions de tecles
 
 Defineix un /transient/ per facilitar-me recordar les comandes de
@@ -4427,9 +4489,9 @@ navegació disponibles en python.
        ("C-<" indent-rigidly-left-to-tab-stop)
        ("M-<up>" pyx/nav-up-list)
        ("M-<down>" pyx/nav-down-list)
-       ;; TODO: aquestes dos potser sí que les trobaré a faltar
-       ;; ("M-S-<down>" elpy-nav-move-line-or-region-down)
-       ;; ("M-S-<up>" elpy-nav-move-line-or-region-up)
+
+       ("M-S-<down>" my/elpy-nav-move-line-or-region-down)
+       ("M-S-<up>" my/elpy-nav-move-line-or-region-up)
 
        ;; C-c C-s (comanda python-shell-send-string en python-mode) entra
        ;; en conflicte amb el prefix definit globalment per les comandes de
