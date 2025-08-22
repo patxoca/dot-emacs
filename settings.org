@@ -4438,11 +4438,11 @@ navegació disponibles en python.
        ))
 
     (define-key python-ts-mode-map (kbd "C-<tab>")
-      (make-hippie-expand-function
-       '(try-expand-dabbrev
-         ;; try-expand-tags
-         try-expand-dabbrev-all-buffers)
-       t)))
+                (make-hippie-expand-function
+                 '(try-expand-dabbrev
+                   ;; try-expand-tags
+                   try-expand-dabbrev-all-buffers)
+                 t))
 
     ;; Prefíx "C-c m n" per les comandes de navegació estructural
     (define-key python-ts-mode-map (kbd "C-c m n") 'my/python-nav-transient)
