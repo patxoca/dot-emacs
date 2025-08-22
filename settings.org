@@ -4055,11 +4055,12 @@ Configuració de =eglot= per =python=.
 
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load 'python
-    (with-eval-after-load 'eglot
-      (add-to-list 'eglot-server-programs
-                   '((python-ts-mode python-mode) .
-                     ("pylsp")))
-          (add-hook 'python-ts-mode-hook #'eglot-ensure)))
+    (require 'eglot)
+
+    (add-to-list 'eglot-server-programs
+                 '((python-ts-mode python-mode) .
+                   ("pylsp")))
+    (add-hook 'python-ts-mode-hook #'eglot-ensure))
 #+end_src
 
 **** =elpy=                                                      :desactivat:
