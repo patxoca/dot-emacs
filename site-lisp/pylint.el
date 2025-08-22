@@ -224,7 +224,8 @@ output buffer, to go to the lines where pylint found matches.
 (defun pylint-add-key-bindings ()
   (let ((map (cond
               ((boundp 'py-mode-map) py-mode-map)
-              ((boundp 'python-mode-map) python-mode-map))))
+              ((boundp 'python-mode-map) python-mode-map)
+              ((boundp 'python-ts-mode-map) python-ts-mode-map))))
 
     ;; shortcuts in the tradition of python-mode and ropemacs
     (define-key map (kbd "C-c m l") 'pylint)
@@ -237,8 +238,9 @@ output buffer, to go to the lines where pylint found matches.
 (defun pylint-add-menu-items ()
   (let ((map (cond
               ((boundp 'py-mode-map) py-mode-map)
-              ((boundp 'python-mode-map) python-mode-map))))
-  
+              ((boundp 'python-mode-map) python-mode-map)
+              ((boundp 'python-ts-mode-map) python-ts-mode-map))))
+
     (define-key map [menu-bar Python pylint-separator]
       '("--" . pylint-separator))
     (define-key map [menu-bar Python next-error]

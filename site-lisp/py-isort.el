@@ -86,7 +86,7 @@
 ;;;###autoload
 (defun py-isort-before-save ()
   (interactive)
-  (when (eq major-mode 'python-mode)
+  (when (derived-mode-p 'python-base-mode)
     (condition-case err (py-isort-buffer)
       (error (message "%s" (error-message-string err))))))
 
