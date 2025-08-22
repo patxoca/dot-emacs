@@ -4355,6 +4355,42 @@ per the requirement of the Sphinx documentation generator.
 
 **** Combinacions de tecles
 
+Defineix un /transient/ per facilitar-me recordar les comandes de
+navegació disponibles en python.
+
+#+begin_src emacs-lisp :tangle yes
+  (with-eval-after-load "python"
+    (require 'transient)
+
+    (transient-define-prefix my/python-nav-transient ()
+      "Navegación estructural en Python."
+      [["Defun"
+        ("d" "Backward defun" python-nav-backward-defun :transient t)
+        ("D" "Forward defun" python-nav-forward-defun :transient t)
+        ("M-d" "Beginning of defun" treesit-beginning-of-defun)
+        ("M-D" "End of defun" treesit-end-of-defun)]
+       ["Block"
+        ("b" "Backward block" python-nav-backward-block :transient t)
+        ("B" "Forward block" python-nav-forward-block :transient t)
+        ("M-b" "Beginning of block" python-nav-beginning-of-block)
+        ("M-B" "End of block" python-nav-end-of-block)]
+       ["Statement"
+        ("s" "Backward statement" python-nav-backward-statement :transient t)
+        ("S" "Forward statement" python-nav-forward-statement :transient t)
+        ("M-s" "Beginning of statement" python-nav-beginning-of-statement)
+        ("M-S" "End of statement" python-nav-end-of-statement)]
+       ["Sexp"
+        ("x" "Backward sexp safe" python-nav-backward-sexp-safe :transient t)
+        ("X" "Forward sexp safe" python-nav-forward-sexp-safe :transient t)
+        ("M-x" "Backward sexp" python-nav-backward-sexp :transient t)
+        ("M-X" "Forward sexp" python-nav-forward-sexp :transient t)]
+       ["List"
+        ("l" "Backward up-list" python-nav-backward-up-list :transient t)
+        ("L" "Up-list" python-nav-up-list :transient t)]]
+      ))
+#+end_src
+
+
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load "python"
     (my/bind-keys
@@ -4400,12 +4436,17 @@ per the requirement of the Sphinx documentation generator.
        ;; ripgrep. No utilitzo la comanda python-xxx.
        ("C-c C-s" nil)
        ))
+
     (define-key python-ts-mode-map (kbd "C-<tab>")
       (make-hippie-expand-function
        '(try-expand-dabbrev
          ;; try-expand-tags
          try-expand-dabbrev-all-buffers)
        t)))
+
+    ;; Prefíx "C-c m n" per les comandes de navegació estructural
+    (define-key python-ts-mode-map (kbd "C-c m n") 'my/python-nav-transient)
+    )
 #+end_src
 
 **** /Hook/
