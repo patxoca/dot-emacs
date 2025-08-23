@@ -1244,18 +1244,6 @@ el comportament per defecte, o simplement és cosa de com el /backend/
 (=jedi=, =python-lsp-server=) fa la cerca. El segon sembla que té més
 sentit.
 
-** TODO Warnings en =pyx.el=
-
-Revisar aquests warnings:
-
-#+begin_src text
-  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:514:26: Warning: the function ‘subseq’ is not known to be defined.
-  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:220:16: Warning: the function ‘python-syntax-comment-or-string-p’ is not known to be defined.
-  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:193:4: Warning: the function ‘python-nav-up-list’ is not known to be defined.
-  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:178:6: Warning: the function ‘python-nav-beginning-of-defun’ is not known to be defined.
-  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:95:5: Warning: the function ‘python-info-looking-at-beginning-of-defun’ is not known to be defined.
-#+end_src
-
 ** TODO Actualitzar =pyx.el=
 
 Definir =pyx/just=, semblant a =pyx/make=, però per =just=.
