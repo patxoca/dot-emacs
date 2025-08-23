@@ -1225,7 +1225,23 @@ El cas és que resulta molest. Com que he començat a utilitzar-ho fa
 poc no sé si és un error /normal/ o està relacionat amb els últims
 canvis que he fet a la configuració.
 
-*** TODO cerca =fuzzy= en =company=                               :annoyance:
+** PAUS cerca =fuzzy= en =company=                                :annoyance:
+:LOGBOOK:
+- State "PAUS"       from "TODO"       [2025-08-23 ds. 21:17] \\
+  La meva comprensió del funcionament de =company= és limitada. Dit açò,
+  aparentment el problema està causat pel /backend/ =company-capf=. No
+  he trobat cap manera de configurar aquest /backend/ per influir en la
+  seva sortida. La solució que he trobat és aplicar el /transformer/
+  =company-sort-prefer-same-case-prefix=. Aquest /transformer/ mou al
+  principi de la llista els candidats que el nom comença pel prefix i
+  deixa al final els que encaixen de manera /fuzzy/.
+
+  No és perfecta, té comportament estranys, però és molt millor que el
+  comportament original.
+
+  Pel moment deixo el TODO pausat, a l'espera de veure si la solució és
+  suficientment satisfactòria o si trobo algo millor.
+:END:
 
 Al completar en python (no provat en altres), =company= utiliza /fuzzy
 matching/. Està bé quan no sé el que busco, però la gran majoria de

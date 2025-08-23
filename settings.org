@@ -1498,6 +1498,19 @@ https://github.com/company-mode/company-mode
 /Complete anything/ és un /framework/ per completar text en emacs. Té
 una arquitectura de /plugins/ i inclou múltiples /backends/.
 
+Des que vaig cambiar de =elpy= a =eglot= tinc la sensació que el
+comportament de =company= ha canviat. Abans feia concordances per
+prefix i ara sembla /fuzzy/.
+
+En utilitzar el /transformer/ =company-sort-prefer-same-case-prefix=,
+es col·loquen al principi de la lista els candidats que el nom comença
+pel prefix. No m'acaba de convèncer, però és millor que el
+comportament per defecte.
+
+Imagino que aquest comportament afecta tots els modes on s'activa
+=eglot=, no la resta. De moment ho configuro ací i, en funció del que
+vegi, el mouré als /hooks/ dels modes afectats.
+
 #+begin_src emacs-lisp :tangle yes
   (use-package company
     :ensure t
@@ -1508,6 +1521,8 @@ una arquitectura de /plugins/ i inclou múltiples /backends/.
     (setq company-minimum-prefix-length 1)
     (setq company-idle-delay 0.1)
     (setq company-tooltip-align-annotations t)
+
+    (setq company-transformers '(company-sort-prefer-same-case-prefix))
     :diminish "")
 #+end_src
 
