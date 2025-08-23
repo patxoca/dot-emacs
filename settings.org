@@ -1516,13 +1516,18 @@ vegi, el mouré als /hooks/ dels modes afectats.
     :ensure t
     :commands company-mode
     :config
-    (setq company-tooltip-limit 20)
-    (setq company-show-numbers nil)
-    (setq company-minimum-prefix-length 1)
-    (setq company-idle-delay 0.1)
-    (setq company-tooltip-align-annotations t)
-
-    (setq company-transformers '(company-sort-prefer-same-case-prefix))
+    (setq company-tooltip-limit 20
+          company-show-numbers nil
+          company-minimum-prefix-length 1
+          company-idle-delay 0.1
+          company-tooltip-align-annotations t
+          company-tooltip-annotation-padding 5
+          company-tooltip-width-grow-only t
+          company-format-margin-function 'company-text-icons-margin
+          company-frontends '(company-pseudo-tooltip-frontend
+                              company-echo-metadata-frontend)
+          company-transformers '(company-sort-prefer-same-case-prefix)
+          )
     :diminish "")
 #+end_src
 
