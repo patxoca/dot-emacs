@@ -3527,6 +3527,31 @@ L'exportació a HTML en org 9.1.8 requereix que estigui instal·lat
     :load-path "site-lisp/emacs-htmlize")
 #+end_src
 
+**** =imenu=
+
+Per defecte, quan =imenu= salta a una secció dins un buffer =org= es
+mostren les capçaleres mínimes necessàries: la de destí i els pares,
+no els germans. Em resulta confús i complica les coses si vull accedir
+a seccions adjacents. Podria recordar que =C-u C-c C-r= les expandeix,
+però prefereixo que ho recordi Emacs.
+
+El codi següent instal·la la funció =my/org-fold-reveal-siblings= en
+el hook =imenu-after-jump-hook=, localment en el buffer =org=, de
+forma que no interfereix en altres modes.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/org-fold-reveal-siblings ()
+    (org-fold-show-set-visibility 'canonical)
+    (org-fold-heading nil t))
+
+  (with-eval-after-load 'org
+    (add-hook 'org-mode-hook
+              (lambda () (with-eval-after-load 'imenu
+                      (add-hook 'imenu-after-jump-hook
+                                #'my/org-fold-reveal-siblings
+                                nil t)))))
+#+end_src
+
 **** =ob-plantuml=
 
 =ob-plantuml= permet integrar diagrames /plantuml/ dins els documents
