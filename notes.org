@@ -1252,6 +1252,42 @@ Crec recordar qué, algunes implementacions de funcionalitats
 relacionades amb descobrir l'estructura del programa eren fràgils.
 Mirar si es poden millorar utilitzant funcionalitats de =tree-sitter=.
 
+** TODO =rg= i buffer =org-mode= col·lapsat                       :annoyance:
+
+Quan es visita una ocurrències del resultat d'una cerca =rg= i el
+destí es troba en una secció col·lapsada d'un buffer =org=, el cursor
+es queda a la capçalera de la secció, no l'expandeix de la mateixa
+forma que fa =occur=.
+
+La solució proposada per =occur= (pensava que passava el mateix i li
+he preguntat) per ChatGPT és:
+
+#+begin_src emacs-lisp
+  (defun my-occur-reveal-in-org ()
+    "Tras saltar a una ocurrencia en org, revelar la entrada."
+    (when (derived-mode-p 'org-mode)
+      (org-reveal)))
+
+  (add-hook 'occur-hook
+            (lambda ()
+              (add-hook 'occur-mode-find-occurrence-hook
+                        #'my-occur-reveal-in-org)))
+#+end_src
+
+Investigant el /hook/ =occur-mode-find-occurrence-hook=, veig que
+apareix la funció =org-fold-reveal=.
+
+Mirant el codi de =rg.el=, sembla que utilitza un buffer de compilació
+normal i corrent, no defineix cap /hook/ que s'activa al saltar a un
+resultat de la cerca. S'utilitzen les comandes
+=compilation-next-error= i =compilation-previous-error= per visitar
+les coincidències.
+
+No veig una forma neta de resoldre-ho. El que se m'acut es afegir
+advice a les comandes, que s'executi al final (quan el cursor està en
+la posició de destí), comprovi si és un buffer =org= i, en cas
+afirmatiu, executi =org-fold-reveal= (=org-reveal= és un àlias).
+
 * Paquets extra
 ** Col·leccions de paquets
 
