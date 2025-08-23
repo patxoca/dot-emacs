@@ -1456,17 +1456,7 @@ https://github.com/kickingvegas/casual/blob/main/docs/info.org
 #+begin_src emacs-lisp :tangle yes
   (with-eval-after-load 'info
     (my/bind-keys Info-mode-map
-                  '(("<f10>" casual-info-tmenu)
-                    ("M-[" Info-history-back)
-                    ("M-]" Info-history-forward)
-                    ("p" casual-info-browse-backward-paragraph)
-                    ("n" casual-info-browse-forward-paragraph)
-                    ("h" Info-prev)
-                    ("j" Info-next-reference)
-                    ("k" Info-prev-reference)
-                    ("l" Info-next)
-                    ("/" Info-search)
-                    ("B" bookmark-set))))
+                  '(("<f10>" casual-info-tmenu))))
 #+end_src
 
 **** =casual-isearch=
