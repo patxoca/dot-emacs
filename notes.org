@@ -3275,3 +3275,19 @@ funcionalitats.
   ("M-S-<down>" elpy-nav-move-line-or-region-down)
   ("M-S-<up>" elpy-nav-move-line-or-region-up)
 #+end_src
+** DONE Warnings en =pyx.el=
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-08-23 ds. 01:06] \\
+  La funció =subseq= s'ha renombrat com =cl-subseq=, es corregeix. La
+  resta de warnings estan causats perqué no requereixo ='python=.
+:END:
+
+Revisar aquests warnings:
+
+#+begin_src text
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:514:26: Warning: the function ‘subseq’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:220:16: Warning: the function ‘python-syntax-comment-or-string-p’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:193:4: Warning: the function ‘python-nav-up-list’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:178:6: Warning: the function ‘python-nav-beginning-of-defun’ is not known to be defined.
+  ⛔ Warning (native-compiler): ~/.emacs.d/elpa/arv-py-20220206.1743/pyx.el:95:5: Warning: the function ‘python-info-looking-at-beginning-of-defun’ is not known to be defined.
+#+end_src
