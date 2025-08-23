@@ -1200,9 +1200,21 @@ memoritzar-es.
 on explica com utilitzar-ho per ordenar en /dired/ ([[http://yummymelon.com/devnull/enhancing-dired-sorting-with-transient.html][Enhancing Dired
 Sorting With Transient]]).
 
-** TODO =imenu= en =settings.org=                                 :annoyance:
+** PAUS =imenu= en =settings.org=                                 :annoyance:
 :PROPERTIES:
 :ID:       1119f95b-e995-4328-837b-b6b2929c97a4
+:END:
+:LOGBOOK:
+- State "PAUS"       from "TODO"       [2025-08-23 ds. 21:52] \\
+  Des d'un temps cap ací el comportament a revertit màgicament al que
+  vull. He estat tocant la configuració de =org=, però no soc conscient
+  d'haver tocat res que pugui influir en aquest canvi.
+
+  La única cosa és que vaig treure les variables /buffer local/ de
+  =settings.org=, i una estava relacionada amb la profonditat que visita
+  =imenu=.
+
+  Pel moment ho deixo pausat a l'espera de confirmar que és estable.
 :END:
 
 He començat (agost 2025) a utilitzar =imenu= (=C-c j s=) per saltar
