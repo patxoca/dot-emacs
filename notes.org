@@ -1316,6 +1316,15 @@ advice a les comandes, que s'executi al final (quan el cursor està en
 la posició de destí), comprovi si és un buffer =org= i, en cas
 afirmatiu, executi =org-fold-reveal= (=org-reveal= és un àlias).
 
+** TODO Revisar /keybindings/ de =paredit=                        :annoyance:
+
+Fa temps que no programa en elisp, i potser ho recordo mal, però diria
+que =C-<left>= i =C-<righ>= eren comandes de navegació. Ara son
+comandes d'edició estructural.
+
+Una altra molèstia és que m'estic acostumant a utilitzar el /keymap/
+=M-s= (=occur= i =highlight=), i =paredit= el segresta.
+
 * Paquets extra
 ** Col·leccions de paquets
 
