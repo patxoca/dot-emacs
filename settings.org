@@ -6271,7 +6271,7 @@ redundants o mai les he arribat a incorporar en el /workflow/.
   (global-set-key (kbd "C-.") 'er/expand-region)
 
   ;; multi-line
-  (global-set-key (kbd "C-c r m") 'multi-line)
+  (global-set-key (kbd "C-c r m") (my/define-repeatable-command (kbd "m") 'multi-line))
 
   ;; find-file-in-project
   (global-set-key (kbd "C-x f") 'find-file-in-project)
