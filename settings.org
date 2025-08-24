@@ -4983,7 +4983,7 @@ Configuració del /scroll/ vertical:
   (setq scroll-preserve-screen-position t)
   (customize-set-value 'scroll-step 1)
   (customize-set-value 'scroll-conservatively 10)
-  (customize-set-value 'scroll-margin 5)
+  (customize-set-value 'scroll-margin 0)
 #+end_src
 
 *** Per classificar
