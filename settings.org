@@ -238,23 +238,62 @@ No tinc clar quin /keymap/ es afectat per la clausula =:bind= de
 =use-package=, la qüestió és que en alguns casos (configuració de
 =paredit= p.e.) no acaba de funcionar com espero.
 
-La funció =my/bind-keys= intenta fer menys verbosa la definició de
-les tecles quan no queda més remei que fer-ho manualment.
-
-#+begin_src emacs-lisp :tangle yes
-  (defun my/bind-keys (map key-definitions)
-    (dolist (item key-definitions)
-      (let ((key (car item))
-            (command (cadr item)))
-        (define-key map (kbd key) command))))
-#+end_src
+Originalment =my/bind-keys= es va definir per intentar fer menys
+verbosa la definició de les tecles, però amb el temps ha esdevingut la
+manera canònica de definir-les dins la configuració. Ha guanyat
+funcionalitat: suporta la repetició de les comandes especificant el
+/keyword/ =:repeat=.
 
 Exemple:
 
 #+begin_src emacs-lisp :tangle no
   (my/bind-keys some-mode-map
                 '(("C-c f" do-foo)
-                  ("C-c b" do-bar)))
+                  ("C-c b" do-bar :repeat)
+                  ("C-c s" do-spam :repeat "z")))
+#+end_src
+
+En aquest exemple:
+
+- =C-c f= executarà la comanda =do-foo=
+
+- =C-c b= executarà =do-bar=, que es pot repetir prement la tecla =b=.
+
+- En el tercer cas s'especifica explícitament la tecla utilizada per
+  repetir.
+
+La funció =my/definie-repeatable-command= pot ser útil per crear
+comandes que es poden repetir, i assignar-les a una tecla amb
+=define-key= i companyia.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/define-repeatable-command (key command)
+    (let ((keymap (make-sparse-keymap))
+          (fname (intern (concat (symbol-name command) "<repeat>"))))
+      (fset fname
+            `(lambda ()
+  		     (interactive)
+               (call-interactively (quote ,command))
+  		     (set-transient-map (quote ,keymap) t)))
+  	(define-key keymap key fname)
+      fname))
+#+end_src
+
+Finalment =my/bind-keys=.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun my/bind-keys (map key-definitions)
+    (dolist (item key-definitions)
+      (pcase item
+        (`(,key ,command :repeat)
+         (let ((vkey (kbd key)))  ;; vector de caràcters
+           (define-key map vkey (my/define-repeatable-command (seq-subseq vkey -1) command))))
+        (`(,key ,command :repeat ,repkey)
+         (define-key map (kbd key) (my/define-repeatable-command (kbd repkey) command)))
+        (`(,key ,command)
+         (define-key map (kbd key) command))
+  	  (_
+         (warn "my/bind-key: format no suportat %s" item)))))
 #+end_src
 
 **** =my/host-reachable=                                         :deprecated:
